@@ -34,3 +34,8 @@ offset_top = -66.0
 offset_right = 28.0
 offset_bottom = -42.0
 text = "Siya"
+
+[node name="DashExhaust" type="Polygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-12, -30, -48, -20, -12, -10)
+color = Color(1, 0.45, 0.15, 0.85)

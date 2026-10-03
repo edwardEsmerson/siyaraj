@@ -29,14 +29,14 @@ offset_left = 32.0
 offset_top = 76.0
 offset_right = 928.0
 offset_bottom = 106.0
-text = "A/D or arrows: move    Space: tap or hold to jump    R: restart"
+text = "A/D or arrows: move    Space: tap/hold jump    Shift: rocket dash    R: restart"
 
 [node name="Milestone" type="Label" parent="HUD"]
 offset_left = 32.0
 offset_top = 116.0
 offset_right = 928.0
 offset_bottom = 170.0
-text = "Run, stop, reverse, and try each test station.\nDash and player combat come next."
+text = "Jump, then dash across the long gaps. Dash stops at walls.\nOne air dash, restored on landing. Falling restarts the course."
 
 [node name="InputStatus" type="Label" parent="HUD"]
 offset_left = 32.0
@@ -44,3 +44,10 @@ offset_top = 188.0
 offset_right = 928.0
 offset_bottom = 218.0
 text = "Input received: none"
+
+[node name="DashStatus" type="Label" parent="HUD"]
+offset_left = 32.0
+offset_top = 224.0
+offset_right = 928.0
+offset_bottom = 254.0
+text = "Rocket dash: READY"
