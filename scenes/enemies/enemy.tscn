@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="RectangleShape2D" id="EnemyShape"]
+size = Vector2(32, 40)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+
+[node name="Body" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-16, -40, 16, -40, 16, 0, -16, 0)
+color = Color(0.42, 0.44, 0.48, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20)
+shape = SubResource("EnemyShape")
+
+[node name="Name" type="Label" parent="."]
+offset_left = -24.0
+offset_top = -66.0
+offset_right = 40.0
+offset_bottom = -42.0
+text = "Enemy"
