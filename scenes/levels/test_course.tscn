@@ -1,0 +1,307 @@
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="1_enemy"]
+
+[sub_resource type="RectangleShape2D" id="RunFloorShape"]
+size = Vector2(520, 48)
+
+[sub_resource type="RectangleShape2D" id="StepBaseShape"]
+size = Vector2(480, 48)
+
+[sub_resource type="RectangleShape2D" id="Step40Shape"]
+size = Vector2(110, 40)
+
+[sub_resource type="RectangleShape2D" id="Step80Shape"]
+size = Vector2(110, 80)
+
+[sub_resource type="RectangleShape2D" id="Step120Shape"]
+size = Vector2(110, 120)
+
+[sub_resource type="RectangleShape2D" id="GapStartShape"]
+size = Vector2(180, 24)
+
+[sub_resource type="RectangleShape2D" id="SmallGapLandingShape"]
+size = Vector2(150, 24)
+
+[sub_resource type="RectangleShape2D" id="MediumGapLandingShape"]
+size = Vector2(200, 24)
+
+[sub_resource type="RectangleShape2D" id="CeilingFloorShape"]
+size = Vector2(380, 48)
+
+[sub_resource type="RectangleShape2D" id="LowCeilingShape"]
+size = Vector2(180, 20)
+
+[sub_resource type="RectangleShape2D" id="BufferBaseShape"]
+size = Vector2(350, 48)
+
+[sub_resource type="RectangleShape2D" id="BufferLedgeShape"]
+size = Vector2(140, 80)
+
+[sub_resource type="RectangleShape2D" id="EndFloorShape"]
+size = Vector2(580, 48)
+
+[sub_resource type="RectangleShape2D" id="SafetyFloorShape"]
+size = Vector2(3310, 30)
+
+[sub_resource type="RectangleShape2D" id="LeftBoundaryShape"]
+size = Vector2(24, 330)
+
+[sub_resource type="RectangleShape2D" id="RightBoundaryShape"]
+size = Vector2(24, 330)
+
+[node name="TestCourse" type="Node2D"]
+
+[node name="RunFloor" type="StaticBody2D" parent="."]
+position = Vector2(300.0, 454.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="RunFloor"]
+polygon = PackedVector2Array(-260.0, -24.0, 260.0, -24.0, 260.0, 24.0, -260.0, 24.0)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RunFloor"]
+shape = SubResource("RunFloorShape")
+
+[node name="StepBase" type="StaticBody2D" parent="."]
+position = Vector2(800.0, 454.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="StepBase"]
+polygon = PackedVector2Array(-240.0, -24.0, 240.0, -24.0, 240.0, 24.0, -240.0, 24.0)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepBase"]
+shape = SubResource("StepBaseShape")
+
+[node name="Step40" type="StaticBody2D" parent="."]
+position = Vector2(675.0, 410.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="Step40"]
+polygon = PackedVector2Array(-55.0, -20.0, 55.0, -20.0, 55.0, 20.0, -55.0, 20.0)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Step40"]
+shape = SubResource("Step40Shape")
+
+[node name="Step80" type="StaticBody2D" parent="."]
+position = Vector2(785.0, 390.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="Step80"]
+polygon = PackedVector2Array(-55.0, -40.0, 55.0, -40.0, 55.0, 40.0, -55.0, 40.0)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Step80"]
+shape = SubResource("Step80Shape")
+
+[node name="Step120" type="StaticBody2D" parent="."]
+position = Vector2(895.0, 370.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="Step120"]
+polygon = PackedVector2Array(-55.0, -60.0, 55.0, -60.0, 55.0, 60.0, -55.0, 60.0)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Step120"]
+shape = SubResource("Step120Shape")
+
+[node name="GapStart" type="StaticBody2D" parent="."]
+position = Vector2(1170.0, 442.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="GapStart"]
+polygon = PackedVector2Array(-90.0, -12.0, 90.0, -12.0, 90.0, 12.0, -90.0, 12.0)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GapStart"]
+shape = SubResource("GapStartShape")
+
+[node name="SmallGapLanding" type="StaticBody2D" parent="."]
+position = Vector2(1405.0, 442.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="SmallGapLanding"]
+polygon = PackedVector2Array(-75.0, -12.0, 75.0, -12.0, 75.0, 12.0, -75.0, 12.0)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallGapLanding"]
+shape = SubResource("SmallGapLandingShape")
+
+[node name="MediumGapLanding" type="StaticBody2D" parent="."]
+position = Vector2(1700.0, 442.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="MediumGapLanding"]
+polygon = PackedVector2Array(-100.0, -12.0, 100.0, -12.0, 100.0, 12.0, -100.0, 12.0)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MediumGapLanding"]
+shape = SubResource("MediumGapLandingShape")
+
+[node name="CeilingFloor" type="StaticBody2D" parent="."]
+position = Vector2(2070.0, 454.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="CeilingFloor"]
+polygon = PackedVector2Array(-190.0, -24.0, 190.0, -24.0, 190.0, 24.0, -190.0, 24.0)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CeilingFloor"]
+shape = SubResource("CeilingFloorShape")
+
+[node name="LowCeiling" type="StaticBody2D" parent="."]
+position = Vector2(2030.0, 360.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="LowCeiling"]
+polygon = PackedVector2Array(-90.0, -10.0, 90.0, -10.0, 90.0, 10.0, -90.0, 10.0)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LowCeiling"]
+shape = SubResource("LowCeilingShape")
+
+[node name="BufferBase" type="StaticBody2D" parent="."]
+position = Vector2(2505.0, 454.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="BufferBase"]
+polygon = PackedVector2Array(-175.0, -24.0, 175.0, -24.0, 175.0, 24.0, -175.0, 24.0)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BufferBase"]
+shape = SubResource("BufferBaseShape")
+
+[node name="BufferLedge" type="StaticBody2D" parent="."]
+position = Vector2(2400.0, 390.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="BufferLedge"]
+polygon = PackedVector2Array(-70.0, -40.0, 70.0, -40.0, 70.0, 40.0, -70.0, 40.0)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BufferLedge"]
+shape = SubResource("BufferLedgeShape")
+
+[node name="EndFloor" type="StaticBody2D" parent="."]
+position = Vector2(3060.0, 454.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="EndFloor"]
+polygon = PackedVector2Array(-290.0, -24.0, 290.0, -24.0, 290.0, 24.0, -290.0, 24.0)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndFloor"]
+shape = SubResource("EndFloorShape")
+
+[node name="SafetyFloor" type="StaticBody2D" parent="."]
+position = Vector2(1695.0, 525.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="SafetyFloor"]
+polygon = PackedVector2Array(-1655.0, -15.0, 1655.0, -15.0, 1655.0, 15.0, -1655.0, 15.0)
+color = Color(0.19, 0.21, 0.24, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SafetyFloor"]
+shape = SubResource("SafetyFloorShape")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="."]
+position = Vector2(28.0, 375.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="LeftBoundary"]
+polygon = PackedVector2Array(-12.0, -165.0, 12.0, -165.0, 12.0, 165.0, -12.0, 165.0)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
+shape = SubResource("LeftBoundaryShape")
+
+[node name="RightBoundary" type="StaticBody2D" parent="."]
+position = Vector2(3362.0, 375.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="RightBoundary"]
+polygon = PackedVector2Array(-12.0, -165.0, 12.0, -165.0, 12.0, 165.0, -12.0, 165.0)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
+shape = SubResource("RightBoundaryShape")
+
+[node name="RunHint" type="Label" parent="."]
+offset_left = 60.0
+offset_top = 310.0
+offset_right = 560.0
+offset_bottom = 380.0
+text = "1 / RUN
+Stop, reverse, then jump."
+
+[node name="StepHint" type="Label" parent="."]
+offset_left = 620.0
+offset_top = 235.0
+offset_right = 1120.0
+offset_bottom = 305.0
+text = "2 / STEPS
+40 px rises. Hold Space to climb."
+
+[node name="GapHint" type="Label" parent="."]
+offset_left = 1090.0
+offset_top = 310.0
+offset_right = 1590.0
+offset_bottom = 380.0
+text = "3 / GAPS
+70 px then 120 px. Jump near the edge."
+
+[node name="CeilingHint" type="Label" parent="."]
+offset_left = 1890.0
+offset_top = 270.0
+offset_right = 2390.0
+offset_bottom = 340.0
+text = "4 / LOW CEILING
+Tap jump. Check head collisions."
+
+[node name="BufferHint" type="Label" parent="."]
+offset_left = 2330.0
+offset_top = 240.0
+offset_right = 2830.0
+offset_bottom = 310.0
+text = "5 / BUFFER + COYOTE
+Walk off the ledge and jump just after.
+Press jump just before landing."
+
+[node name="FinishHint" type="Label" parent="."]
+offset_left = 2800.0
+offset_top = 300.0
+offset_right = 3300.0
+offset_bottom = 370.0
+text = "6 / FINISH
+Enemy placeholder. Combat comes later."
+
+[node name="SafetyHint" type="Label" parent="."]
+offset_left = 1080.0
+offset_top = 475.0
+offset_right = 1580.0
+offset_bottom = 545.0
+text = "Missed a platform? This lower floor catches you. R restarts."
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(160, 430)
+
+[node name="Enemy" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(3040, 430)

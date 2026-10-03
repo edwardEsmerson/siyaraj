@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="1_enemy"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="2_enemy_script"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy_test.gd" id="3_test"]
+
+[sub_resource type="RectangleShape2D" id="FloorShape"]
+size = Vector2(880, 48)
+
+[node name="EnemyTest" type="Node2D"]
+script = ExtResource("3_test")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(480, 454)
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="Ground"]
+polygon = PackedVector2Array(-440, -24, 440, -24, 440, 24, -440, 24)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("FloorShape")
+
+[node name="Enemy" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(480, 430)
+script = ExtResource("2_enemy_script")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Instructions" type="Label" parent="HUD"]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 928.0
+offset_bottom = 110.0
+text = "Isolated enemy test\nWatch patrol reversals. Apply three hits to test damage, knockback and death.\nThis button is a development tool, not the player's sparkler attack."
+
+[node name="Health" type="Label" parent="HUD"]
+offset_left = 32.0
+offset_top = 124.0
+offset_right = 800.0
+offset_bottom = 156.0
+
+[node name="TestHit" type="Button" parent="HUD"]
+offset_left = 32.0
+offset_top = 174.0
+offset_right = 190.0
+offset_bottom = 214.0
+text = "Apply test hit"
+
+[node name="Reset" type="Button" parent="HUD"]
+offset_left = 210.0
+offset_top = 174.0
+offset_right = 320.0
+offset_bottom = 214.0
+text = "Reset"

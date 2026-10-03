@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_player"]
+[ext_resource type="Resource" path="res://resources/player/default_movement.tres" id="2_settings"]
+
+[sub_resource type="RectangleShape2D" id="PlayerShape"]
+size = Vector2(24, 40)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_player")
+movement_settings = ExtResource("2_settings")
+
+[node name="Body" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-12, -40, 12, -40, 12, 0, -12, 0)
+color = Color(0.76, 0.78, 0.82, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20)
+shape = SubResource("PlayerShape")
+
+[node name="AttackOrigin" type="Marker2D" parent="."]
+position = Vector2(18, -20)
+
+[node name="FacingMarker" type="Polygon2D" parent="."]
+position = Vector2(7, -29)
+polygon = PackedVector2Array(-2, -3, 2, -3, 2, 3, -2, 3)
+color = Color(0.1, 0.12, 0.15, 1)
+
+[node name="Name" type="Label" parent="."]
+offset_left = -16.0
+offset_top = -66.0
+offset_right = 28.0
+offset_bottom = -42.0
+text = "Siya"
