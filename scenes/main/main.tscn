@@ -22,21 +22,21 @@ offset_top = 24.0
 offset_right = 920.0
 offset_bottom = 62.0
 theme_override_font_sizes/font_size = 28
-text = "SIYARAJ / prototype setup"
+text = "SIYARAJ / movement playground"
 
 [node name="Controls" type="Label" parent="HUD"]
 offset_left = 32.0
 offset_top = 76.0
 offset_right = 928.0
 offset_bottom = 106.0
-text = "A/D or arrows: move    Space: jump    Shift: dash    J: attack    R: restart"
+text = "A/D or arrows: move    Space: tap or hold to jump    R: restart"
 
 [node name="Milestone" type="Label" parent="HUD"]
 offset_left = 32.0
 offset_top = 116.0
 offset_right = 928.0
 offset_bottom = 170.0
-text = "Setup only. Movement and combat come next.\nPress a gameplay key to verify its input mapping."
+text = "Run, stop, reverse, and try each test station.\nDash and player combat come next."
 
 [node name="InputStatus" type="Label" parent="HUD"]
 offset_left = 32.0

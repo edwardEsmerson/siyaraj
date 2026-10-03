@@ -11,8 +11,8 @@
 - Taking damage briefly protects Siya from further hits.
 - Movement programmer A owns player velocity and movement state.
 
-These rules are agreed design requirements. Movement and combat implementation
-begins after this setup milestone.
+Running, variable-height jumps, coyote time and jump buffering are implemented.
+Dash and player combat remain agreed requirements for subsequent milestones.
 
 ## Ownership
 
@@ -94,7 +94,7 @@ pass condition. Review movement together before integrating combat.
 
 ## Setup acceptance
 
-- F5 opens the grey-box floor, Siya, enemy, and control reminder.
+- F5 opens the movement playground, Siya, enemy placeholder and control reminder.
 - Gameplay keys report their named input action on screen.
 - R reloads the scene and resets the input reminder.
 - All scenes open independently without missing resources.
@@ -103,3 +103,19 @@ pass condition. Review movement together before integrating combat.
 
 Full level art, combos, extra moves, Robin, boss, audio and story remain later
 milestones. Stop adding features during today's final hour.
+
+## Hours 0.5 to 2 handoff
+
+- A's run/jump controller is implemented in `scripts/player/player.gd`.
+- C's playground has a run lane, 40 px steps, 70/120 px gaps, a low ceiling,
+  a ledge for coyote/buffer testing and a lower safety floor.
+- B's patrol/damage foundation is implemented in `scripts/enemies/enemy.gd`.
+  Open `scenes/enemies/enemy_test.tscn` with F6 to test it separately. Main-course
+  enemy behaviour and player combat are deliberately not connected yet.
+- D's grey placeholders remain readable; Siya's eye indicates facing direction.
+- E added horizontal camera follow to make the extended course playable.
+  Camera feel, fall boundaries and automatic restart remain in the next block.
+- `tests/movement_check.gd` checks actual physics, jump timing and enemy damage.
+
+Next: rocket dash, camera tuning, automatic fall recovery, then the team movement
+playtest before integrating the sparkler attack.
