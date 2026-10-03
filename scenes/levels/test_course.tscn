@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3]
+[gd_scene load_steps=20 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="1_enemy"]
 
@@ -41,14 +41,20 @@ size = Vector2(140, 80)
 [sub_resource type="RectangleShape2D" id="EndFloorShape"]
 size = Vector2(580, 48)
 
-[sub_resource type="RectangleShape2D" id="SafetyFloorShape"]
-size = Vector2(3310, 30)
-
 [sub_resource type="RectangleShape2D" id="LeftBoundaryShape"]
 size = Vector2(24, 330)
 
 [sub_resource type="RectangleShape2D" id="RightBoundaryShape"]
 size = Vector2(24, 330)
+
+[sub_resource type="RectangleShape2D" id="DashLandingShape"]
+size = Vector2(170, 48)
+
+[sub_resource type="RectangleShape2D" id="DashFinishShape"]
+size = Vector2(160, 48)
+
+[sub_resource type="RectangleShape2D" id="ThinWallShape"]
+size = Vector2(8, 120)
 
 [node name="TestCourse" type="Node2D"]
 
@@ -208,18 +214,6 @@ color = Color(0.27, 0.29, 0.33, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EndFloor"]
 shape = SubResource("EndFloorShape")
 
-[node name="SafetyFloor" type="StaticBody2D" parent="."]
-position = Vector2(1695.0, 525.0)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Body" type="Polygon2D" parent="SafetyFloor"]
-polygon = PackedVector2Array(-1655.0, -15.0, 1655.0, -15.0, 1655.0, 15.0, -1655.0, 15.0)
-color = Color(0.19, 0.21, 0.24, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SafetyFloor"]
-shape = SubResource("SafetyFloorShape")
-
 [node name="LeftBoundary" type="StaticBody2D" parent="."]
 position = Vector2(28.0, 375.0)
 collision_layer = 1
@@ -233,7 +227,7 @@ color = Color(0.27, 0.29, 0.33, 1)
 shape = SubResource("LeftBoundaryShape")
 
 [node name="RightBoundary" type="StaticBody2D" parent="."]
-position = Vector2(3362.0, 375.0)
+position = Vector2(4162.0, 375.0)
 collision_layer = 1
 collision_mask = 0
 
@@ -293,15 +287,65 @@ offset_bottom = 370.0
 text = "6 / FINISH
 Enemy placeholder. Combat comes later."
 
-[node name="SafetyHint" type="Label" parent="."]
-offset_left = 1080.0
-offset_top = 475.0
-offset_right = 1580.0
-offset_bottom = 545.0
-text = "Missed a platform? This lower floor catches you. R restarts."
-
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 position = Vector2(160, 430)
 
 [node name="Enemy" parent="." instance=ExtResource("1_enemy")]
 position = Vector2(3040, 430)
+
+[node name="DashLanding" type="StaticBody2D" parent="."]
+position = Vector2(3655, 454)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="DashLanding"]
+polygon = PackedVector2Array(-85, -24, 85, -24, 85, 24, -85, 24)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DashLanding"]
+shape = SubResource("DashLandingShape")
+
+[node name="DashFinish" type="StaticBody2D" parent="."]
+position = Vector2(4070, 454)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="DashFinish"]
+polygon = PackedVector2Array(-80, -24, 80, -24, 80, 24, -80, 24)
+color = Color(0.27, 0.29, 0.33, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DashFinish"]
+shape = SubResource("DashFinishShape")
+
+[node name="ThinWall" type="StaticBody2D" parent="."]
+position = Vector2(4130, 370)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="ThinWall"]
+polygon = PackedVector2Array(-4, -60, 4, -60, 4, 60, -4, 60)
+color = Color(0.45, 0.47, 0.51, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ThinWall"]
+shape = SubResource("ThinWallShape")
+
+[node name="DashHint" type="Label" parent="."]
+offset_left = 3220.0
+offset_top = 265.0
+offset_right = 3750.0
+offset_bottom = 325.0
+text = "7 / ROCKET DASH\n220 px gap. Jump + Shift near the edge."
+
+[node name="HardDashHint" type="Label" parent="."]
+offset_left = 3590.0
+offset_top = 270.0
+offset_right = 4060.0
+offset_bottom = 330.0
+text = "8 / PRECISION DASH\n250 px gap. Hold jump; dash near the apex."
+
+[node name="WallHint" type="Label" parent="."]
+offset_left = 3950.0
+offset_top = 280.0
+offset_right = 4200.0
+offset_bottom = 345.0
+text = "9 / WALL TEST\nDash at the thin wall.\nR to replay."

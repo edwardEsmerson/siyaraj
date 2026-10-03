@@ -12,7 +12,8 @@
 - Movement programmer A owns player velocity and movement state.
 
 Running, variable-height jumps, coyote time and jump buffering are implemented.
-Dash and player combat remain agreed requirements for subsequent milestones.
+Rocket dash, camera look-ahead and automatic fall recovery are implemented.
+Player combat remains the next milestone.
 
 ## Ownership
 
@@ -60,14 +61,17 @@ Contact damage and body blocking are not part of this setup.
 
 ## Controller and combat handoff
 
-The following is the agreed integration plan, not an implemented API yet:
+Movement states and the knockback/death hooks below are implemented. The attack
+component and player health/damage API remain the combat integration plan:
 
-- A adds NORMAL, DASH, HURT, and DEAD states in `player.gd`.
+- `player.gd` owns NORMAL, DASH, HURT, and DEAD states.
 - A handles movement and jump/dash timing using the movement resource.
 - B creates an attack component that accepts a facing direction when triggered.
 - The player routes the `attack` input to that component.
 - Damage targets expose `take_damage(amount: int, knockback: Vector2)`.
-- A implements player knockback, protection timing, and death in that method.
+- `apply_knockback(impulse, duration)` interrupts dash and controls hurt recovery.
+- `die()` emits `died`; main reloads the course.
+- Player `take_damage`, health and protection timing remain for combat integration.
 - B implements enemy damage and prevents multiple hits per swing.
 - Combat never writes player velocity directly.
 - `AttackOrigin` is the placeholder marker for positioning the melee hit area.
@@ -119,3 +123,41 @@ milestones. Stop adding features during today's final hour.
 
 Next: rocket dash, camera tuning, automatic fall recovery, then the team movement
 playtest before integrating the sparkler attack.
+
+
+## Hours 2 to 3.25 handoff
+
+- Shift starts a horizontal rocket dash in the current facing direction.
+- Dash speed is 720 px/s for 0.15 s, covering 108 px. Tune both values in
+  `resources/player/default_movement.tres` through the Inspector.
+- Dash suspends gravity, locks its direction, consumes one air charge, and
+  restores the charge on landing. Holding Shift does not automatically dash again.
+- Solid walls end the dash immediately. Normal dash completion returns to running
+  speed; releasing movement then uses the existing deceleration.
+- Siya turns gold with an orange exhaust during dash and dims when its charge
+  is spent. The HUD also shows whether dash is ready.
+- The camera eases toward 140 px of facing-direction look-ahead. Vertical framing
+  stays fixed so platforms do not move during a jump. Limits cover the full course.
+- The lower safety floor is removed. Falling below Y=580 or pressing R reloads
+  the course, resetting the player, enemy, camera and input reminder.
+- After the existing run/jump stations, a 220 px gap tests comfortable jump/dash
+  traversal. A 250 px gap tests a jump very close to the edge with a dash near
+  the apex. An 8 px wall tests high-speed collision at the end.
+- Combat still comes next; dash grants no damage protection.
+
+Validation commands, with the Godot executable on PATH or its full path substituted:
+
+```bash
+godot --headless --path . --script tests/movement_check.gd
+godot --headless --path . --script tests/dash_check.gd
+GODOT_BIN=godot tools/smoke_build.sh
+GODOT_BIN=godot tools/run_smoke_build.sh --headless --quit-after 120
+```
+
+The dash checks cover distance and direction, mid-dash opposite input, air-charge
+limits, gravity recovery, landing recharge, thin walls, low ceilings, both gaps,
+knockback interruption, automatic fall recovery and manual restart.
+
+Next team checkpoint: play the entire course and tune movement together before
+integrating sparkler combat. Automated checks verify behaviour; they do not decide
+whether the controller feels enjoyable.
