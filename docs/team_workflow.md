@@ -3,16 +3,17 @@
 ## Agreed rules
 
 - Dash moves horizontally in Siya's facing direction.
-- One air dash, restored on landing.
+- Dash can only start while airborne. One air dash, restored on landing.
 - Dash stops at solid walls and gives no invulnerability.
-- Holding jump produces a higher jump than tapping it.
+- Tapping and holding jump produce the same fixed jump height.
 - Jumping supports coyote time and jump buffering.
 - One sparkler swing damages each enemy at most once.
 - Taking damage briefly protects Siya from further hits.
 - Movement programmer A owns player velocity and movement state.
 
-Running, variable-height jumps, coyote time and jump buffering are implemented.
-Dash and player combat remain agreed requirements for subsequent milestones.
+Running, fixed-height jumps, coyote time and jump buffering are implemented.
+Rocket dash, camera look-ahead and automatic fall recovery are implemented.
+Player combat and the guard encounter are implemented.
 
 ## Ownership
 
@@ -21,7 +22,7 @@ the proposal lists members but does not specify their technical roles.
 
 | Role | Owned files and work | First deliverable |
 | --- | --- | --- |
-| A, movement | `scripts/player/`, `resources/player/`, `scenes/player/` | Run and variable jump |
+| A, movement | `scripts/player/`, `resources/player/`, `scenes/player/` | Run and fixed-height jump |
 | B, combat | `scripts/combat/`, `scripts/enemies/`, `scenes/enemies/`, `scenes/combat/` | Standalone melee and enemy encounter |
 | C, levels | `scenes/levels/` | Movement playground with measured gaps |
 | D, art | `assets/` | Readable placeholders and temporary effects |
@@ -54,20 +55,23 @@ The current player collider is 24 x 40; enemy collider is 32 x 40.
 | 4 | 8 | Player attack |
 | 5 | 16 | Enemy attack |
 
-B adds attack Area2D nodes next. Player attacks detect enemy bodies; enemy
-attacks detect the player body. Bodies currently collide only with the world.
+The shared melee component queries enemy bodies for player attacks and the
+player body for enemy attacks during each active physics tick. Bodies currently collide only with the world.
 Contact damage and body blocking are not part of this setup.
 
 ## Controller and combat handoff
 
-The following is the agreed integration plan, not an implemented API yet:
+Movement states, knockback/death hooks, attack components and damage APIs below
+are implemented:
 
-- A adds NORMAL, DASH, HURT, and DEAD states in `player.gd`.
+- `player.gd` owns NORMAL, DASH, HURT, and DEAD states.
 - A handles movement and jump/dash timing using the movement resource.
 - B creates an attack component that accepts a facing direction when triggered.
 - The player routes the `attack` input to that component.
 - Damage targets expose `take_damage(amount: int, knockback: Vector2)`.
-- A implements player knockback, protection timing, and death in that method.
+- `apply_knockback(impulse, duration)` interrupts dash and controls hurt recovery.
+- `die()` emits `died`; main reloads the course.
+- Player `take_damage` implements health, 0.8 s protection and lethal death.
 - B implements enemy damage and prevents multiple hits per swing.
 - Combat never writes player velocity directly.
 - `AttackOrigin` is the placeholder marker for positioning the melee hit area.
@@ -81,7 +85,7 @@ are saved in the resource. Initial values are hypotheses, not final balance.
 | Owner | Task | Dependency | Pass condition |
 | --- | --- | --- | --- |
 | A | Running and grounded collision | Setup | Accelerate, stop, reverse without corner sticking |
-| A | Variable jump, coyote time, buffer | Running | Tap/hold differ; edge and landing jumps work |
+| A | Fixed jump, coyote time, buffer | Running | Tap/hold match; edge and landing jumps work |
 | C | Movement playground | Setup | Flat floor, steps, gaps, ceiling and safe spawn |
 | B | Enemy patrol and damage in isolated scene | Setup | Enemy reverses, takes a hit and dies |
 | B | Single sparkler swing | Attack contract with A | Visible active window; one hit per target per swing |
@@ -119,3 +123,73 @@ milestones. Stop adding features during today's final hour.
 
 Next: rocket dash, camera tuning, automatic fall recovery, then the team movement
 playtest before integrating the sparkler attack.
+
+
+## Hours 2 to 3.25 handoff
+
+- Shift starts a horizontal rocket dash in the current facing direction.
+- Dash speed is 720 px/s for 0.15 s, covering 108 px. Tune both values in
+  `resources/player/default_movement.tres` through the Inspector.
+- Dash suspends gravity, locks its direction, consumes one air charge, and
+  restores the charge on landing. Holding Shift does not automatically dash again.
+- Solid walls end the dash immediately. Normal dash completion returns to running
+  speed; releasing movement then uses the existing deceleration.
+- Siya turns gold with an orange exhaust during dash and dims when its charge
+  is spent. The HUD also shows whether dash is ready.
+- The camera eases toward 140 px of facing-direction look-ahead. Vertical framing
+  stays fixed so platforms do not move during a jump. Limits cover the full course.
+- The lower safety floor is removed. Falling below Y=580 or pressing R reloads
+  the course, resetting the player, enemy, camera and input reminder.
+- After the existing run/jump stations, a 220 px gap tests comfortable jump/dash
+  traversal. A 250 px gap tests a jump very close to the edge with a dash near
+  the apex. An 8 px wall tests high-speed collision at the end.
+- Combat still comes next; dash grants no damage protection.
+
+Validation commands, with the Godot executable on PATH or its full path substituted:
+
+```bash
+godot --headless --path . --script tests/movement_check.gd
+godot --headless --path . --script tests/dash_check.gd
+GODOT_BIN=godot tools/smoke_build.sh
+GODOT_BIN=godot tools/run_smoke_build.sh --headless --quit-after 120
+```
+
+The dash checks cover distance and direction, mid-dash opposite input, air-charge
+limits, gravity recovery, landing recharge, thin walls, low ceilings, both gaps,
+knockback interruption, automatic fall recovery and manual restart.
+
+Next team checkpoint: play the entire course and tune movement together before
+integrating sparkler combat. Automated checks verify behaviour; they do not decide
+whether the controller feels enjoyable.
+
+## Hours 3.75 to 5.25 handoff
+
+- Step 4 decision: jump height is fixed. Space release no longer cuts upward
+  velocity, including buffered jumps. Coyote time and buffering remain intact.
+- `scripts/combat/melee_attack.gd` is shared by Siya and the guard. A swing locks
+  its facing direction, queries bodies only while active, and records each
+  target to prevent repeated damage during one swing.
+- Siya's sparkler uses 0.08 s wind-up, 0.10 s active and 0.36 s recovery.
+  Run and jump remain available; dash, hurt and death cancel the swing.
+- Both combatants have three health. Damage goes through `take_damage`;
+  player movement still owns knockback. Siya gets 0.8 s damage protection,
+  including while dashing. Dash itself grants no protection.
+- Guard states are patrol, chase, attack, hurt and dead. Its strike has
+  0.45 s wind-up, 0.12 s active and 0.65 s recovery. Orange signals wind-up;
+  a red forward hitbox signals the active attack. Hits interrupt its swing.
+- Guards stop at unsupported platform edges. Bodies do not block one another;
+  only timed attack hitboxes deal damage.
+- Main course station 6 now includes a working guard. The separate
+  `scenes/combat/combat_arena.tscn` offers immediate combat testing with F6.
+- HUD shows Siya's health and guard defeat. Lethal damage, falling and R reload
+  the scene, restoring both characters. The existing camera tuning is preserved.
+- Run `tests/combat_check.gd` alongside the movement and dash checks.
+
+The earlier handoff sections record previous milestones. The fixed jump and
+combat behaviour described here replace their variable-jump and placeholder
+notes. Next: team combat playtest, then tune feedback and difficulty before
+starting production art or additional attacks.
+
+The buffer/coyote course obstacle is removed because its 80 px ledge exceeds
+the current 45 px jump. A flat floor now connects the ceiling section to combat.
+Coyote time and jump buffering remain in the controller. Combat is station 5.

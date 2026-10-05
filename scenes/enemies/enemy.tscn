@@ -1,4 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_enemy"]
+[ext_resource type="Script" path="res://scripts/combat/melee_attack.gd" id="2_attack"]
 
 [sub_resource type="RectangleShape2D" id="EnemyShape"]
 size = Vector2(32, 40)
@@ -6,6 +9,7 @@ size = Vector2(32, 40)
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 1
+script = ExtResource("1_enemy")
 
 [node name="Body" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-16, -40, 16, -40, 16, 0, -16, 0)
@@ -17,7 +21,17 @@ shape = SubResource("EnemyShape")
 
 [node name="Name" type="Label" parent="."]
 offset_left = -24.0
-offset_top = -66.0
+offset_top = -88.0
 offset_right = 40.0
 offset_bottom = -42.0
 text = "Enemy"
+
+[node name="MeleeAttack" type="Node2D" parent="."]
+position = Vector2(0, -20)
+script = ExtResource("2_attack")
+target_mask = 2
+windup_time = 0.45
+active_time = 0.12
+recovery_time = 0.65
+knockback = Vector2(210, -150)
+swing_color = Color(1, 0.2, 0.15, 1)
