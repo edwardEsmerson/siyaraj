@@ -33,8 +33,9 @@ func _ready() -> void:
 	camera.limit_bottom = 540
 	camera.reset_smoothing()
 	var enemy := $TestCourse/Enemy
+	var encounter_name: String = enemy.enemy_name
 	enemy.died.connect(func() -> void:
-		combat_status.text = "Guard defeated! Exit open; reach the flag." if course.has_signal("finished") else "Guard defeated! R to replay."
+		combat_status.text = "%s defeated! Exit open; reach the flag." % encounter_name if course.has_signal("finished") else "%s defeated! R to replay." % encounter_name
 	)
 
 

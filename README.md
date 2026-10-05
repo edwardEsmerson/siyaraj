@@ -27,10 +27,17 @@ Shots stop at the player or solid world, respect Siya's damage protection, and
 expire after three seconds. Shots already fired remain active after defeat.
 The main course includes a flyer before the guard; only the guard opens the exit.
 
+The Brute is a larger, muscular melee enemy after the guard. It has six health,
+deals two damage with a wider strike, and resists knockback. It moves more slowly
+and signals its attack with a 0.7-second orange wind-up, followed by a long
+recovery. Step back, then counterattack; hits still interrupt its swing.
+It uses ordinary enemy health and defeat feedback and has no boss phases.
+
 For isolated tuning, open `scenes/main/movement_playground.tscn` or
 `scenes/combat/combat_arena.tscn` and press F6. The original
 `scenes/enemies/enemy_test.tscn` remains a separate button-driven damage test.
 Open `scenes/combat/flying_enemy_arena.tscn` with F6 to test just the flyer.
+Open `scenes/combat/brute_arena.tscn` with F6 to fight just the Brute.
 
 Controls: A/D or arrows to move, Space to jump, Shift to dash, J to attack,
 and R to restart. Holding J does not automatically repeat attacks.
@@ -50,6 +57,7 @@ godot --headless --path . --script res://tests/dash_check.gd
 godot --headless --path . --script res://tests/combat_check.gd
 godot --headless --path . --script res://tests/course_check.gd
 godot --headless --path . --script res://tests/flying_enemy_check.gd
+godot --headless --path . --script res://tests/brute_check.gd
 ```
 
 See [the team workflow](docs/team_workflow.md) for ownership, agreed rules,
@@ -70,7 +78,7 @@ GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh
 The smoke build exports a PCK and runs it with the installed Godot executable,
 outside the editor. It is not a standalone distributable executable.
 Generated files go in the ignored `builds/linux/` directory. The export preset
-packs the main scene, movement playground, both combat arenas, isolated enemy test,
+packs the main scene, movement playground, all three combat arenas, isolated enemy test,
 burst effect and their dependencies, excluding the
 proposal, regression checks and team docs. To run the enemy test from the pack:
 
@@ -88,6 +96,12 @@ To run the flying enemy arena from the pack:
 
 ```sh
 GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh res://scenes/combat/flying_enemy_arena.tscn
+```
+
+To run the Brute arena from the pack:
+
+```sh
+GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh res://scenes/combat/brute_arena.tscn
 ```
 
 For a standalone Linux build, install the matching 4.7.2 export templates via
