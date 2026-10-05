@@ -1,20 +1,26 @@
 extends CharacterBody2D
-## Isolated combat foundation. Player detection and attacks come later.
 
 signal health_changed(remaining: int)
 signal died
 
 @export var max_health: int = 3
 @export var patrol_speed: float = 60.0
+@export var chase_speed: float = 95.0
 @export var patrol_radius: float = 100.0
+@export var detection_range: float = 200.0
+@export var attack_range: float = 52.0
 @export var gravity: float = 1800.0
 
+enum State { PATROL, CHASE, ATTACK, HURT, DEAD }
+var state: State = State.PATROL
 var health: int
 var _home_x: float
 var _direction: int = 1
 var _hurt_remaining: float = 0.0
 
 @onready var body: Polygon2D = $Body
+@onready var attack: Node2D = $MeleeAttack
+@onready var status: Label = $Name
 
 
 func _ready() -> void:
@@ -23,20 +29,57 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if state == State.DEAD:
+		return
 	_hurt_remaining = maxf(_hurt_remaining - delta, 0.0)
+	var player := get_tree().get_first_node_in_group("players") as CharacterBody2D
+	var can_see := is_instance_valid(player) and absf(player.global_position.x - global_position.x) <= detection_range and absf(player.global_position.y - global_position.y) < 64.0
 	if _hurt_remaining > 0.0:
+		state = State.HURT
 		velocity.x = move_toward(velocity.x, 0.0, 400.0 * delta)
+	elif attack.is_busy():
+		state = State.ATTACK
+		velocity.x = 0.0
+	elif can_see:
+		_direction = 1 if player.global_position.x >= global_position.x else -1
+		if absf(player.global_position.x - global_position.x) <= attack_range:
+			state = State.ATTACK
+			velocity.x = 0.0
+			attack.start(_direction)
+		else:
+			state = State.CHASE
+			velocity.x = _direction * chase_speed
 	else:
-		body.modulate = Color.WHITE
+		state = State.PATROL
 		if global_position.x >= _home_x + patrol_radius:
 			_direction = -1
 		elif global_position.x <= _home_x - patrol_radius:
 			_direction = 1
 		velocity.x = _direction * patrol_speed
+	# Stop at unsupported edges instead of chasing the player into a pit.
+	if is_on_floor() and not is_zero_approx(velocity.x):
+		var ahead := global_position + Vector2(signf(velocity.x) * 24.0, -12.0)
+		var query := PhysicsRayQueryParameters2D.create(ahead, ahead + Vector2(0, 40), 1)
+		if get_world_2d().direct_space_state.intersect_ray(query).is_empty():
+			velocity.x = 0.0
+			_direction *= -1
 	velocity.y = minf(velocity.y + gravity * delta, 900.0)
 	move_and_slide()
 	if is_on_wall():
 		_direction *= -1
+	_update_feedback()
+
+
+func _update_feedback() -> void:
+	body.modulate = Color.WHITE
+	match state:
+		State.HURT:
+			body.modulate = Color(2.0, 2.0, 2.0)
+		State.ATTACK:
+			body.modulate = Color(1.0, 0.5, 0.25) if attack.phase == attack.Phase.WINDUP else Color(1.5, 0.3, 0.3)
+		State.CHASE:
+			body.modulate = Color(1.4, 1.1, 0.7)
+	status.text = "Guard %d/%d\n%s" % [health, max_health, State.keys()[state]]
 
 
 func take_damage(amount: int, knockback: Vector2) -> void:
@@ -44,10 +87,13 @@ func take_damage(amount: int, knockback: Vector2) -> void:
 		return
 	health = maxi(health - amount, 0)
 	health_changed.emit(health)
+	attack.cancel()
 	if health == 0:
+		state = State.DEAD
 		died.emit()
 		queue_free()
 		return
+	state = State.HURT
 	velocity = knockback
 	_hurt_remaining = 0.20
-	body.modulate = Color(2.0, 2.0, 2.0, 1.0)
+	_update_feedback()

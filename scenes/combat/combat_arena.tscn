@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/main/main.gd" id="1_main"]
-[ext_resource type="PackedScene" path="res://scenes/levels/test_course.tscn" id="2_course"]
+[ext_resource type="PackedScene" path="res://scenes/combat/combat_course.tscn" id="2_course"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
 
 [node name="Main" type="Node2D"]
@@ -22,7 +22,7 @@ offset_top = 24.0
 offset_right = 920.0
 offset_bottom = 62.0
 theme_override_font_sizes/font_size = 28
-text = "SIYARAJ / movement + combat"
+text = "SIYARAJ / combat arena"
 
 [node name="Controls" type="Label" parent="HUD"]
 offset_left = 32.0
@@ -36,7 +36,7 @@ offset_left = 32.0
 offset_top = 116.0
 offset_right = 928.0
 offset_bottom = 170.0
-text = "Jump, then dash across the long gaps. Dash stops at walls.\nOne air dash, restored on landing. Falling restarts the course."
+text = "Land three sparkler hits. Move or dash away during the orange tell.\nThree hits defeat Siya. Damage briefly protects her; dash does not."
 
 [node name="InputStatus" type="Label" parent="HUD"]
 offset_left = 32.0

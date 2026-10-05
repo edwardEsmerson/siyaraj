@@ -252,7 +252,7 @@ offset_top = 235.0
 offset_right = 1120.0
 offset_bottom = 305.0
 text = "2 / STEPS
-40 px rises. Hold Space to climb."
+40 px rises. Space to climb."
 
 [node name="GapHint" type="Label" parent="."]
 offset_left = 1090.0
@@ -268,7 +268,7 @@ offset_top = 270.0
 offset_right = 2390.0
 offset_bottom = 340.0
 text = "4 / LOW CEILING
-Tap jump. Check head collisions."
+Jump. Check head collisions."
 
 [node name="BufferHint" type="Label" parent="."]
 offset_left = 2330.0
@@ -284,8 +284,8 @@ offset_left = 2800.0
 offset_top = 300.0
 offset_right = 3300.0
 offset_bottom = 370.0
-text = "6 / FINISH
-Enemy placeholder. Combat comes later."
+text = "6 / COMBAT
+J: sparkler. Dodge the orange attack tell."
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 position = Vector2(160, 430)
@@ -341,7 +341,7 @@ offset_left = 3590.0
 offset_top = 270.0
 offset_right = 4060.0
 offset_bottom = 330.0
-text = "8 / PRECISION DASH\n250 px gap. Hold jump; dash near the apex."
+text = "8 / PRECISION DASH\n250 px gap. Jump; dash near the apex."
 
 [node name="WallHint" type="Label" parent="."]
 offset_left = 3950.0

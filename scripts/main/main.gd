@@ -1,13 +1,15 @@
 extends Node2D
 
 @export var fall_boundary: float = 580.0
-@export var camera_look_ahead: float = 140.0
+@export var camera_look_ahead: float = 20.0
 @export var camera_follow_speed: float = 8.0
 
 @onready var player: CharacterBody2D = $Player
 @onready var player_spawn: Marker2D = $TestCourse/PlayerSpawn
 @onready var input_status: Label = $HUD/InputStatus
 @onready var dash_status: Label = $HUD/DashStatus
+@onready var health_status: Label = $HUD/HealthStatus
+@onready var combat_status: Label = $HUD/CombatStatus
 @onready var camera: Camera2D = $Camera2D
 
 var _restarting: bool = false
@@ -22,6 +24,10 @@ func _ready() -> void:
 	camera.limit_top = 0
 	camera.limit_bottom = 540
 	camera.reset_smoothing()
+	var enemy := $TestCourse/Enemy
+	enemy.died.connect(func() -> void:
+		combat_status.text = "Guard defeated! R to replay."
+	)
 
 
 func _process(delta: float) -> void:
@@ -29,6 +35,7 @@ func _process(delta: float) -> void:
 	# Ease horizontal look-ahead when turning so the camera does not snap.
 	var target_x := clampf(player.global_position.x + player.facing_direction * camera_look_ahead, 480.0, 3720.0)
 	camera.position.x = lerpf(camera.position.x, target_x, 1.0 - exp(-camera_follow_speed * delta))
+	health_status.text = "Siya health: %d/%d" % [player.health, player.max_health]
 	dash_status.text = "Rocket dash: READY" if player.dash_available else "Rocket dash: land to recharge"
 	dash_status.modulate = Color(1.0, 0.72, 0.2) if player.dash_available else Color(0.65, 0.68, 0.74)
 	if player.global_position.y > fall_boundary:

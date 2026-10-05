@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_player"]
 [ext_resource type="Resource" path="res://resources/player/default_movement.tres" id="2_settings"]
+
+[ext_resource type="Script" path="res://scripts/combat/melee_attack.gd" id="3_attack"]
 
 [sub_resource type="RectangleShape2D" id="PlayerShape"]
 size = Vector2(24, 40)
@@ -39,3 +41,7 @@ text = "Siya"
 visible = false
 polygon = PackedVector2Array(-12, -30, -48, -20, -12, -10)
 color = Color(1, 0.45, 0.15, 0.85)
+
+[node name="Sparkler" type="Node2D" parent="."]
+position = Vector2(0, -20)
+script = ExtResource("3_attack")

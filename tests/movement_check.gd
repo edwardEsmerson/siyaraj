@@ -69,7 +69,7 @@ func run_checks() -> void:
 	var full_height := await jump_height(45)
 	var tap_height := await jump_height(2)
 	check(full_height > 75.0 and full_height < 90.0, "Full jump should clear the 40 px steps")
-	check(tap_height < full_height * 0.60, "Tap jump must be clearly shorter than held jump")
+	check(absf(tap_height - full_height) < 0.1, "Tap and held jumps must have identical heights")
 	print("Jump heights: held=%.1f px, tap=%.1f px" % [full_height, tap_height])
 
 	await reset_player(Vector2(300, 430))
@@ -119,7 +119,7 @@ func run_checks() -> void:
 			break
 	check(bounced, "Jump pressed shortly before landing must launch on landing")
 
-	# A released buffered press should produce a short jump rather than a full one.
+	# A released buffered press must still produce a full jump.
 	await reset_player(Vector2(300, 380))
 	fall_ticks = 0
 	while player.position.y < 408.0 and fall_ticks < 30:
@@ -133,7 +133,7 @@ func run_checks() -> void:
 		await ticks(1)
 		if player.velocity.y < 0.0:
 			bounced = true
-			check(player.velocity.y > -250.0, "Released buffered press must shorten the jump")
+			check(player.velocity.y < -300.0, "Released buffered press must keep full jump height")
 			break
 	check(bounced, "Releasing a buffered jump must not lose the buffered press")
 

@@ -9,7 +9,6 @@ extends Resource
 @export var rise_gravity: float = 1200.0
 @export var fall_gravity: float = 1800.0
 @export var max_fall_speed: float = 900.0
-@export_range(0.0, 1.0) var jump_release_multiplier: float = 0.45
 @export var coyote_time: float = 0.10
 @export var jump_buffer_time: float = 0.12
 @export var dash_speed: float = 720.0
