@@ -4,7 +4,7 @@ A Godot 4.7.2 2D platformer prototype. Open `project.godot` and press F6 to run
 the current scene or F5 to run the main scene.
 
 Running, fixed-height jumping, coyote time, jump buffering, and rocket dash are
-implemented. Tapping or holding Space produces the same jump height. Dash stops
+implemented. Tapping or holding Space produces the same jump height. Dash can only start while airborne, stops
 at walls, grants no invulnerability, and restores its air charge on landing.
 
 Siya has a single sparkler melee swing with wind-up, an active hit window, and
@@ -15,7 +15,8 @@ falling reloads the encounter immediately; R also restarts.
 
 The guard patrols, approaches Siya, signals an attack with an orange wind-up,
 strikes, and recovers. Getting hit cancels its attack. The course includes this
-encounter at station 6. For a roomy combat test without traversing the course,
+encounter at station 5. The former buffer/coyote ledge is removed, leaving a
+flat connection from the low-ceiling section to combat. For a roomy combat test without traversing the course,
 open `scenes/combat/combat_arena.tscn` and press F6. The original
 `scenes/enemies/enemy_test.tscn` remains a separate button-driven damage test.
 

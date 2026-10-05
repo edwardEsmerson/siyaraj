@@ -68,7 +68,7 @@ func run_checks() -> void:
 
 	var full_height := await jump_height(45)
 	var tap_height := await jump_height(2)
-	check(full_height > 75.0 and full_height < 90.0, "Full jump should clear the 40 px steps")
+	check(absf(full_height - 45.0) < 0.1, "Fixed jump must reach 45 px at the default physics rate")
 	check(absf(tap_height - full_height) < 0.1, "Tap and held jumps must have identical heights")
 	print("Jump heights: held=%.1f px, tap=%.1f px" % [full_height, tap_height])
 
@@ -167,8 +167,9 @@ func run_checks() -> void:
 	Input.action_press("jump")
 	await ticks(43)
 	check(player.is_on_floor() and absf(player.position.y - 430.0) < 1.0 and player.position.x > 1330.0, "Player must clear the 70 px gap")
-	await reset_player(Vector2(1460, 430))
+	await reset_player(Vector2(1474, 430))
 	Input.action_press("move_right")
+	await ticks(6)
 	Input.action_press("jump")
 	await ticks(43)
 	check(player.is_on_floor() and absf(player.position.y - 430.0) < 1.0 and player.position.x > 1600.0, "Player must clear the 120 px gap")

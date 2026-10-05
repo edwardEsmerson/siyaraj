@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
 		sparkler.start(facing_direction)
 
-	if Input.is_action_just_pressed("dash") and dash_available:
+	if Input.is_action_just_pressed("dash") and dash_available and not is_on_floor():
 		sparkler.cancel()
 		state = State.DASH
 		dash_available = false

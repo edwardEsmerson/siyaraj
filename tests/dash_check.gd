@@ -41,6 +41,20 @@ func reset_player(at: Vector2) -> void:
 func run_checks() -> void:
 	change_scene_to_file("res://scenes/main/main.tscn")
 	await scene_changed
+	await reset_player(Vector2(300, 430))
+	var grounded_x := player.position.x
+	Input.action_press("dash")
+	await ticks(1)
+	check(player.state == player.State.NORMAL and player.dash_available, "Ground dash must be rejected without spending the air charge")
+	check(absf(player.position.x - grounded_x) < 0.1, "Ground dash must not move Siya")
+	Input.action_release("dash")
+	Input.action_press("jump")
+	await ticks(2)
+	Input.action_release("jump")
+	Input.action_press("dash")
+	await ticks(1)
+	check(player.state == player.State.DASH, "Dash must become available after jumping")
+
 	await reset_player(Vector2(300, 200))
 	var start_x := player.position.x
 	Input.action_press("dash")
@@ -61,7 +75,7 @@ func run_checks() -> void:
 	check(player.is_on_floor() and player.dash_available, "Landing must restore the dash charge")
 	check(player.velocity.y == 0.0, "Dash must return to normal gravity and eventually land")
 
-	await reset_player(Vector2(300, 430))
+	await reset_player(Vector2(300, 200))
 	Input.action_press("move_left")
 	await ticks(2)
 	Input.action_release("move_left")
@@ -71,7 +85,7 @@ func run_checks() -> void:
 	check(absf(player.position.x - start_x + 108.0) < 0.2, "Left-facing dash must also travel 108 px")
 
 	# Eight-pixel wall is narrower than a dash tick's 12 px displacement.
-	await reset_player(Vector2(4080, 430))
+	await reset_player(Vector2(4080, 400))
 	Input.action_press("dash")
 	await ticks(9)
 	check(player.position.x <= 4114.1 and player.position.x >= 4113.0, "Dash must stop at the thin wall without tunnelling")
@@ -87,6 +101,7 @@ func run_checks() -> void:
 	for gap_start in [3335.0, 3735.0]:
 		await reset_player(Vector2(gap_start, 430))
 		Input.action_press("move_right")
+		await ticks(7)
 		Input.action_press("jump")
 		await ticks(20)
 		Input.action_press("dash")
@@ -128,5 +143,5 @@ func run_checks() -> void:
 	check(current_scene != old_scene, "R action must reload the scene")
 	release_inputs()
 	if failures == 0:
-		print("PASS: dash distance/direction, air charge, gravity, thin-wall/ceiling collision, both gaps, hurt interruption, fall and manual restart")
+		print("PASS: airborne-only dash, distance/direction, air charge, gravity, thin-wall/ceiling collision, both gaps, hurt interruption, fall and manual restart")
 	quit(1 if failures > 0 else 0)

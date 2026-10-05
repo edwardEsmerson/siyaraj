@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=19 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="1_enemy"]
 
@@ -32,11 +32,8 @@ size = Vector2(380, 48)
 [sub_resource type="RectangleShape2D" id="LowCeilingShape"]
 size = Vector2(180, 20)
 
-[sub_resource type="RectangleShape2D" id="BufferBaseShape"]
-size = Vector2(350, 48)
-
-[sub_resource type="RectangleShape2D" id="BufferLedgeShape"]
-size = Vector2(140, 80)
+[sub_resource type="RectangleShape2D" id="TransitFloorShape"]
+size = Vector2(510, 48)
 
 [sub_resource type="RectangleShape2D" id="EndFloorShape"]
 size = Vector2(580, 48)
@@ -178,29 +175,17 @@ color = Color(0.27, 0.29, 0.33, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LowCeiling"]
 shape = SubResource("LowCeilingShape")
 
-[node name="BufferBase" type="StaticBody2D" parent="."]
-position = Vector2(2505.0, 454.0)
+[node name="TransitFloor" type="StaticBody2D" parent="."]
+position = Vector2(2515.0, 454.0)
 collision_layer = 1
 collision_mask = 0
 
-[node name="Body" type="Polygon2D" parent="BufferBase"]
-polygon = PackedVector2Array(-175.0, -24.0, 175.0, -24.0, 175.0, 24.0, -175.0, 24.0)
+[node name="Body" type="Polygon2D" parent="TransitFloor"]
+polygon = PackedVector2Array(-255.0, -24.0, 255.0, -24.0, 255.0, 24.0, -255.0, 24.0)
 color = Color(0.27, 0.29, 0.33, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BufferBase"]
-shape = SubResource("BufferBaseShape")
-
-[node name="BufferLedge" type="StaticBody2D" parent="."]
-position = Vector2(2400.0, 390.0)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Body" type="Polygon2D" parent="BufferLedge"]
-polygon = PackedVector2Array(-70.0, -40.0, 70.0, -40.0, 70.0, 40.0, -70.0, 40.0)
-color = Color(0.27, 0.29, 0.33, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BufferLedge"]
-shape = SubResource("BufferLedgeShape")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitFloor"]
+shape = SubResource("TransitFloorShape")
 
 [node name="EndFloor" type="StaticBody2D" parent="."]
 position = Vector2(3060.0, 454.0)
@@ -270,21 +255,12 @@ offset_bottom = 340.0
 text = "4 / LOW CEILING
 Jump. Check head collisions."
 
-[node name="BufferHint" type="Label" parent="."]
-offset_left = 2330.0
-offset_top = 240.0
-offset_right = 2830.0
-offset_bottom = 310.0
-text = "5 / BUFFER + COYOTE
-Walk off the ledge and jump just after.
-Press jump just before landing."
-
 [node name="FinishHint" type="Label" parent="."]
 offset_left = 2800.0
 offset_top = 300.0
 offset_right = 3300.0
 offset_bottom = 370.0
-text = "6 / COMBAT
+text = "5 / COMBAT
 J: sparkler. Dodge the orange attack tell."
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
@@ -334,18 +310,18 @@ offset_left = 3220.0
 offset_top = 265.0
 offset_right = 3750.0
 offset_bottom = 325.0
-text = "7 / ROCKET DASH\n220 px gap. Jump + Shift near the edge."
+text = "6 / ROCKET DASH\n220 px gap. Jump + Shift near the edge."
 
 [node name="HardDashHint" type="Label" parent="."]
 offset_left = 3590.0
 offset_top = 270.0
 offset_right = 4060.0
 offset_bottom = 330.0
-text = "8 / PRECISION DASH\n250 px gap. Jump; dash near the apex."
+text = "7 / PRECISION DASH\n250 px gap. Jump; dash near the apex."
 
 [node name="WallHint" type="Label" parent="."]
 offset_left = 3950.0
 offset_top = 280.0
 offset_right = 4200.0
 offset_bottom = 345.0
-text = "9 / WALL TEST\nDash at the thin wall.\nR to replay."
+text = "8 / WALL TEST\nDash at the thin wall.\nR to replay."

@@ -3,7 +3,7 @@
 ## Agreed rules
 
 - Dash moves horizontally in Siya's facing direction.
-- One air dash, restored on landing.
+- Dash can only start while airborne. One air dash, restored on landing.
 - Dash stops at solid walls and gives no invulnerability.
 - Tapping and holding jump produce the same fixed jump height.
 - Jumping supports coyote time and jump buffering.
@@ -169,7 +169,7 @@ whether the controller feels enjoyable.
 - `scripts/combat/melee_attack.gd` is shared by Siya and the guard. A swing locks
   its facing direction, queries bodies only while active, and records each
   target to prevent repeated damage during one swing.
-- Siya's sparkler uses 0.08 s wind-up, 0.10 s active and 0.18 s recovery.
+- Siya's sparkler uses 0.08 s wind-up, 0.10 s active and 0.36 s recovery.
   Run and jump remain available; dash, hurt and death cancel the swing.
 - Both combatants have three health. Damage goes through `take_damage`;
   player movement still owns knockback. Siya gets 0.8 s damage protection,
@@ -189,3 +189,7 @@ The earlier handoff sections record previous milestones. The fixed jump and
 combat behaviour described here replace their variable-jump and placeholder
 notes. Next: team combat playtest, then tune feedback and difficulty before
 starting production art or additional attacks.
+
+The buffer/coyote course obstacle is removed because its 80 px ledge exceeds
+the current 45 px jump. A flat floor now connects the ceiling section to combat.
+Coyote time and jump buffering remain in the controller. Combat is station 5.

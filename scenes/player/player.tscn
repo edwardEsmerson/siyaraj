@@ -45,3 +45,4 @@ color = Color(1, 0.45, 0.15, 0.85)
 [node name="Sparkler" type="Node2D" parent="."]
 position = Vector2(0, -20)
 script = ExtResource("3_attack")
+recovery_time = 0.36

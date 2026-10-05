@@ -36,7 +36,10 @@ func _process(delta: float) -> void:
 	var target_x := clampf(player.global_position.x + player.facing_direction * camera_look_ahead, 480.0, 3720.0)
 	camera.position.x = lerpf(camera.position.x, target_x, 1.0 - exp(-camera_follow_speed * delta))
 	health_status.text = "Siya health: %d/%d" % [player.health, player.max_health]
-	dash_status.text = "Rocket dash: READY" if player.dash_available else "Rocket dash: land to recharge"
+	if player.is_on_floor():
+		dash_status.text = "Rocket dash: jump to dash"
+	else:
+		dash_status.text = "Rocket dash: READY" if player.dash_available else "Rocket dash: land to recharge"
 	dash_status.modulate = Color(1.0, 0.72, 0.2) if player.dash_available else Color(0.65, 0.68, 0.74)
 	if player.global_position.y > fall_boundary:
 		player.die()
