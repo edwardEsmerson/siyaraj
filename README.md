@@ -19,9 +19,18 @@ Defeat the guard to open the exit, jump the last gap and reach the turquoise fla
 The finish shows elapsed time and a replay prompt. Dash trails, sparkler arcs,
 hit flashes and short spark bursts make actions easier to read.
 
+The flying enemy patrols left and right at a fixed altitude, including while
+charging a shot. Its orange charge locks aim at Siya's current position; move
+away to dodge the straight projectile, then jump and press J to strike it.
+Three hits defeat it. Hits interrupt charging without changing its altitude.
+Shots stop at the player or solid world, respect Siya's damage protection, and
+expire after three seconds. Shots already fired remain active after defeat.
+The main course includes a flyer before the guard; only the guard opens the exit.
+
 For isolated tuning, open `scenes/main/movement_playground.tscn` or
 `scenes/combat/combat_arena.tscn` and press F6. The original
 `scenes/enemies/enemy_test.tscn` remains a separate button-driven damage test.
+Open `scenes/combat/flying_enemy_arena.tscn` with F6 to test just the flyer.
 
 Controls: A/D or arrows to move, Space to jump, Shift to dash, J to attack,
 and R to restart. Holding J does not automatically repeat attacks.
@@ -30,6 +39,8 @@ Movement tuning lives in `resources/player/default_movement.tres`.
 Player health/protection can be tuned on the player root; attack timing, reach,
 and knockback on its Sparkler child. Enemy detection and speed live on the enemy
 root; enemy attack timing lives on its MeleeAttack child.
+The flying enemy root exposes patrol speed/radius, detection range, charge and
+recovery timing, and projectile speed, damage, lifetime, and knockback.
 
 Run the physics regression checks with:
 
@@ -38,6 +49,7 @@ godot --headless --path . --script res://tests/movement_check.gd
 godot --headless --path . --script res://tests/dash_check.gd
 godot --headless --path . --script res://tests/combat_check.gd
 godot --headless --path . --script res://tests/course_check.gd
+godot --headless --path . --script res://tests/flying_enemy_check.gd
 ```
 
 See [the team workflow](docs/team_workflow.md) for ownership, agreed rules,
@@ -58,7 +70,7 @@ GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh
 The smoke build exports a PCK and runs it with the installed Godot executable,
 outside the editor. It is not a standalone distributable executable.
 Generated files go in the ignored `builds/linux/` directory. The export preset
-packs the main scene, movement playground, combat arena, isolated enemy test,
+packs the main scene, movement playground, both combat arenas, isolated enemy test,
 burst effect and their dependencies, excluding the
 proposal, regression checks and team docs. To run the enemy test from the pack:
 
@@ -70,6 +82,12 @@ To run the combat arena from the pack:
 
 ```sh
 GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh res://scenes/combat/combat_arena.tscn
+```
+
+To run the flying enemy arena from the pack:
+
+```sh
+GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh res://scenes/combat/flying_enemy_arena.tscn
 ```
 
 For a standalone Linux build, install the matching 4.7.2 export templates via
