@@ -1,11 +1,20 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/main/main.gd" id="1_main"]
-[ext_resource type="PackedScene" path="res://scenes/levels/test_course.tscn" id="2_course"]
+[ext_resource type="PackedScene" path="res://scenes/levels/prototype_course.tscn" id="2_course"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+
+[sub_resource type="StyleBoxFlat" id="CompletionStyle"]
+bg_color = Color(0.06, 0.09, 0.11, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.9, 0.85, 1)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_main")
+restart_delay = 0.35
 
 [node name="TestCourse" parent="." instance=ExtResource("2_course")]
 
@@ -16,52 +25,75 @@ position = Vector2(480, 270)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
+[node name="Backdrop" type="ColorRect" parent="HUD"]
+offset_right = 960.0
+offset_bottom = 116.0
+mouse_filter = 2
+color = Color(0.05, 0.06, 0.08, 0.93)
+
 [node name="Title" type="Label" parent="HUD"]
-offset_left = 32.0
-offset_top = 24.0
-offset_right = 920.0
-offset_bottom = 62.0
-theme_override_font_sizes/font_size = 28
-text = "SIYARAJ / movement + combat"
+offset_left = 24.0
+offset_top = 12.0
+theme_override_font_sizes/font_size = 24
+text = "SIYARAJ / prototype course"
 
 [node name="Controls" type="Label" parent="HUD"]
-offset_left = 32.0
-offset_top = 76.0
-offset_right = 928.0
-offset_bottom = 106.0
-text = "A/D or arrows: move    Space: jump    Shift: dash    J: sparkler    R: restart"
+offset_left = 24.0
+offset_top = 48.0
+theme_override_colors/font_color = Color(0.75, 0.78, 0.83, 1)
+text = "A/D or arrows: move    Space: jump    Shift: air dash    J: sparkler    R: restart"
 
 [node name="Milestone" type="Label" parent="HUD"]
-offset_left = 32.0
-offset_top = 116.0
-offset_right = 928.0
-offset_bottom = 170.0
-text = "Jump, then dash across the long gaps. Dash stops at walls.\nOne air dash, restored on landing. Falling restarts the course."
+offset_left = 24.0
+offset_top = 82.0
+theme_override_colors/font_color = Color(1, 0.75, 0.3, 1)
+text = "1 / Run, stop, reverse."
 
 [node name="InputStatus" type="Label" parent="HUD"]
-offset_left = 32.0
-offset_top = 188.0
-offset_right = 928.0
-offset_bottom = 218.0
-text = "Input received: none"
+offset_left = 870.0
+offset_top = 82.0
+text = "0.0 s"
 
 [node name="DashStatus" type="Label" parent="HUD"]
-offset_left = 32.0
-offset_top = 224.0
-offset_right = 928.0
-offset_bottom = 254.0
-text = "Rocket dash: READY"
+offset_left = 660.0
+offset_top = 12.0
+text = "Rocket dash: jump to dash"
 
 [node name="HealthStatus" type="Label" parent="HUD"]
-offset_left = 32.0
-offset_top = 258.0
-offset_right = 928.0
-offset_bottom = 288.0
+offset_left = 490.0
+offset_top = 12.0
 text = "Siya health: 3/3"
 
 [node name="CombatStatus" type="Label" parent="HUD"]
-offset_left = 32.0
-offset_top = 292.0
-offset_right = 928.0
-offset_bottom = 322.0
-text = "J: sparkler. Dodge the guard's orange wind-up."
+offset_left = 24.0
+offset_top = 503.0
+theme_override_colors/font_color = Color(0.75, 0.78, 0.83, 1)
+text = "Reach the flag beyond the guard. Falling restarts the course."
+
+[node name="DeathMessage" type="Label" parent="HUD"]
+visible = false
+offset_left = 300.0
+offset_top = 185.0
+offset_right = 660.0
+offset_bottom = 250.0
+theme_override_font_sizes/font_size = 28
+text = "SIYA DOWN\nRestarting..."
+horizontal_alignment = 1
+
+[node name="Completion" type="Panel" parent="HUD"]
+visible = false
+offset_left = 250.0
+offset_top = 160.0
+offset_right = 710.0
+offset_bottom = 285.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("CompletionStyle")
+
+[node name="Message" type="Label" parent="HUD/Completion"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 444.0
+offset_bottom = 109.0
+theme_override_font_sizes/font_size = 24
+text = "COURSE COMPLETE\nR to replay"
+horizontal_alignment = 1

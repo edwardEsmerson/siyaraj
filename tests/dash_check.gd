@@ -39,7 +39,7 @@ func reset_player(at: Vector2) -> void:
 
 
 func run_checks() -> void:
-	change_scene_to_file("res://scenes/main/main.tscn")
+	change_scene_to_file("res://scenes/main/movement_playground.tscn")
 	await scene_changed
 	await reset_player(Vector2(300, 430))
 	var grounded_x := player.position.x

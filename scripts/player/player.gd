@@ -1,5 +1,6 @@
 extends CharacterBody2D
 ## Player movement has one owner. Combat must request knockback through this controller.
+const Burst = preload("res://scripts/effects/burst.gd")
 
 @export var movement_settings: PlayerMovementSettings
 
@@ -22,6 +23,7 @@ signal health_changed(remaining: int)
 
 var health: int
 var _protection_remaining: float = 0.0
+var _hit_flash_remaining: float = 0.0
 
 @onready var attack_origin: Marker2D = $AttackOrigin
 @onready var facing_marker: Polygon2D = $FacingMarker
@@ -37,6 +39,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	_protection_remaining = maxf(_protection_remaining - delta, 0.0)
+	_hit_flash_remaining = maxf(_hit_flash_remaining - delta, 0.0)
 	if state == State.DEAD:
 		return
 	if state == State.DASH:
@@ -74,6 +77,7 @@ func _physics_process(delta: float) -> void:
 		dash_available = false
 		_dash_direction = facing_direction
 		_dash_remaining = movement_settings.dash_duration
+		Burst.spawn(get_tree().current_scene, global_position + Vector2(0, -20), Color(1.0, 0.7, 0.2), "", 18.0)
 		_coyote_remaining = 0.0
 		_jump_buffer_remaining = 0.0
 		_process_dash(delta)
@@ -124,10 +128,16 @@ func _process_dash(delta: float) -> void:
 
 
 func _update_feedback() -> void:
-	body.modulate = Color(1.0, 0.45, 0.45) if _protection_remaining > 0.0 else Color.WHITE
+	body.modulate = Color.WHITE
+	if _hit_flash_remaining > 0.0:
+		body.modulate = Color(2.0, 0.65, 0.65)
+	elif _protection_remaining > 0.0:
+		body.modulate.a = 0.4 if int(_protection_remaining * 15.0) % 2 == 0 else 1.0
 	exhaust.visible = state == State.DASH
 	exhaust.scale.x = float(_dash_direction)
-	if state == State.DASH:
+	if state == State.DEAD:
+		body.color = Color(0.7, 0.2, 0.2)
+	elif state == State.DASH:
 		body.color = Color(1.0, 0.72, 0.2)
 	elif dash_available:
 		body.color = Color(0.76, 0.78, 0.82)
@@ -153,6 +163,7 @@ func take_damage(amount: int, knockback: Vector2) -> void:
 		return
 	health = maxi(health - amount, 0)
 	_protection_remaining = damage_protection_time
+	_hit_flash_remaining = 0.09
 	health_changed.emit(health)
 	if health == 0:
 		die()
@@ -166,5 +177,6 @@ func die() -> void:
 	sparkler.cancel()
 	state = State.DEAD
 	velocity = Vector2.ZERO
+	Burst.spawn(get_tree().current_scene, global_position + Vector2(0, -20), Color(1.0, 0.35, 0.3), "DOWN", 38.0)
 	_update_feedback()
 	died.emit()

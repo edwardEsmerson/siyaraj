@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_player"]
 [ext_resource type="Resource" path="res://resources/player/default_movement.tres" id="2_settings"]
 
 [ext_resource type="Script" path="res://scripts/combat/melee_attack.gd" id="3_attack"]
+[ext_resource type="Script" path="res://scripts/effects/dash_trail.gd" id="4_trail"]
 
 [sub_resource type="RectangleShape2D" id="PlayerShape"]
 size = Vector2(24, 40)
@@ -31,11 +32,12 @@ polygon = PackedVector2Array(-2, -3, 2, -3, 2, 3, -2, 3)
 color = Color(0.1, 0.12, 0.15, 1)
 
 [node name="Name" type="Label" parent="."]
-offset_left = -16.0
+offset_left = -22.0
 offset_top = -66.0
-offset_right = 28.0
+offset_right = 22.0
 offset_bottom = -42.0
 text = "Siya"
+horizontal_alignment = 1
 
 [node name="DashExhaust" type="Polygon2D" parent="."]
 visible = false
@@ -46,3 +48,6 @@ color = Color(1, 0.45, 0.15, 0.85)
 position = Vector2(0, -20)
 script = ExtResource("3_attack")
 recovery_time = 0.36
+
+[node name="DashTrail" type="Node2D" parent="."]
+script = ExtResource("4_trail")
