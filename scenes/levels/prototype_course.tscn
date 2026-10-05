@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=23 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/prototype_course.gd" id="2_course"]
 
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="1_enemy"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/flying_enemy.tscn" id="3_flyer"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/ground_shooter.tscn" id="4_shooter"]
 
 [sub_resource type="RectangleShape2D" id="RunFloorShape"]
 size = Vector2(520, 48)
@@ -254,6 +255,9 @@ position = Vector2(3770, 430)
 [node name="FlyingEnemy" parent="." instance=ExtResource("3_flyer")]
 position = Vector2(3500, 385)
 
+[node name="GroundShooter" parent="." instance=ExtResource("4_shooter")]
+position = Vector2(3970, 430)
+
 
 [node name="DashLanding" type="StaticBody2D" parent="."]
 position = Vector2(2970, 454)
@@ -329,7 +333,7 @@ offset_left = 3990.0
 offset_top = 235.0
 offset_right = 4490.0
 offset_bottom = 295.0
-text = "EXIT LOCKED\nDefeat the guard to open the way."
+text = "EXIT LOCKED\nDefeat the guard to open the way.\nShooter: jump or dash past\npurple homing bolts."
 
 [node name="FinishHint2" type="Label" parent="."]
 offset_left = 4340.0

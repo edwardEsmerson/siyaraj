@@ -18,6 +18,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var step := minf(delta, _remaining)
+	_update_direction(step)
 	velocity = direction * speed
 	var collision := move_and_collide(velocity * step)
 	_remaining -= delta
@@ -33,3 +34,7 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 	elif _remaining <= 0.0:
 		queue_free()
+
+
+func _update_direction(_delta: float) -> void:
+	pass

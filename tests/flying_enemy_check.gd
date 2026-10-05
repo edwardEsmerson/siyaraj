@@ -268,6 +268,7 @@ func check_course_integration() -> void:
 	flyer = course.get_node("FlyingEnemy")
 	var guard: CharacterBody2D = course.get_node("Enemy")
 	guard.set_physics_process(false)
+	course.get_node("GroundShooter").set_physics_process(false)
 	check(flyer.position == Vector2(3500, 385), "Main course must place a flyer within jumping melee reach")
 	check(course.hint_at(3500).contains("Flyer"), "Main course must explain the new encounter")
 	player.position = Vector2(3360, 430)

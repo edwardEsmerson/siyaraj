@@ -265,3 +265,29 @@ movement feel or a two-minute first-play completion time.
 Manual checkpoint: play the flying arena with F6, then the whole course with F5.
 Check that the orange charge and shot are readable, jumping hits feel reachable,
 and the flyer/guard encounter is fair with the existing three-health player.
+
+## Ground shooter handoff
+
+- Combat owns `ground_shooter.gd`, its reusable enemy scene, the homing projectile
+  script/scene and `scenes/combat/ground_shooter_arena.tscn`. Level integration
+  places a shooter after the guard at (3970, 430) without changing player movement
+  or the main scene. The guard still controls the exit gate.
+- The shooter has three health, patrols at 45 px/s within 70 px of spawn, uses
+  gravity and reverses at walls and unsupported edges. It stops during a 0.65 s
+  purple charge and patrols during its 1.6 s reload. Detection requires a living
+  player within 260 px and a clear world-only ray. Hits, loss of sight, leaving
+  range or losing ground contact cancel a pending charge.
+- Purple comet-shaped bolts track the player's body center at 170 px/s with a
+  maximum turn rate of 2.4 radians/s. They use the straight projectile's shared
+  swept collision/damage handling, deal one damage, and expire after 2.8 s.
+  Missing or dead targets leave them flying along their last heading. Shots
+  survive their shooter's defeat and are cleared on restart. Flyer shots remain
+  straight and orange. There is still no contact damage or dash invulnerability.
+- `tests/ground_shooter_check.gd` covers gravity, patrol bounds, walls/ledges,
+  charge/reload, interruption, bounded homing and moving/deleted/dead targets,
+  swept impacts, protection, melee, death/restart and the guard-controlled gate.
+  The export preset includes the isolated arena and homing dependencies.
+
+Manual checkpoint: play the ground shooter arena with F6, then the course with
+F5. Check that the purple charge and steering are readable, jumping/dashing past
+bolts is fair, and the three-enemy encounter works with Siya's three health.

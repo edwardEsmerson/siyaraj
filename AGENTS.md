@@ -14,6 +14,13 @@ Siyaraj is a Godot 4.7.2 2D platformer using the Compatibility renderer. Open `p
 
 Use Godot 4.7.2. Run `godot --path . --editor`, then F5 for the main course or F6 for the current scene.
 
+Godot 4.7.2 is installed persistently on this workstation at
+`/home/solan/.local/share/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64`.
+The `/home/solan/.local/bin/godot` launcher is on the login-shell PATH. If
+`godot` is unavailable in a non-login shell, use that launcher's absolute path
+and set `GODOT_BIN=/home/solan/.local/bin/godot` for the smoke-build helpers.
+Reuse this installation; do not download Godot into a temporary directory.
+
 Run all regression checks from the repository root:
 
 ```sh
@@ -21,6 +28,8 @@ godot --headless --path . --script res://tests/movement_check.gd
 godot --headless --path . --script res://tests/dash_check.gd
 godot --headless --path . --script res://tests/combat_check.gd
 godot --headless --path . --script res://tests/course_check.gd
+godot --headless --path . --script res://tests/flying_enemy_check.gd
+godot --headless --path . --script res://tests/ground_shooter_check.gd
 ```
 
 `GODOT_BIN=godot ./tools/smoke_build.sh` imports resources and exports `builds/linux/siyaraj.pck`. `GODOT_BIN=godot ./tools/run_smoke_build.sh --headless --quit-after 120` launches that pack outside the editor. Substitute the executable path when needed. Standalone Linux exports require matching export templates.
@@ -33,7 +42,7 @@ Use named input actions. Player movement owns velocity; combat requests knockbac
 
 ## Testing Guidelines
 
-Tests are custom `SceneTree` scripts, named `<feature>_check.gd`, exercising real physics and collisions. Failures exit nonzero. Extend relevant checks for changed behavior, run all four before integration, and manually playtest movement/combat readability. No numeric coverage threshold is configured.
+Tests are custom `SceneTree` scripts, named `<feature>_check.gd`, exercising real physics and collisions. Failures exit nonzero. Extend relevant checks for changed behavior, run all six before integration, and manually playtest movement/combat readability. No numeric coverage threshold is configured.
 
 ## Commit & Pull Request Guidelines
 

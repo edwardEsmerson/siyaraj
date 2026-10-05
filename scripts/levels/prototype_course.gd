@@ -47,4 +47,6 @@ func hint_at(x: float) -> String:
 		return "6 / Flyer: dodge the orange charge, then jump + J to strike."
 	if not guard_defeated:
 		return "6 / J to strike. Orange wind-up: step away or jump past."
+	if x < 4210.0 and is_instance_valid(get_node_or_null("GroundShooter")):
+		return "6 / Shooter: purple bolts follow you. Jump or dash past; J interrupts its charge."
 	return "7 / Exit open. Jump the last gap and reach the flag."
