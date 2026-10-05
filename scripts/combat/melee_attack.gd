@@ -1,5 +1,6 @@
 extends Node2D
 ## Shared timed melee swing. Movement remains owned by the character controller.
+const Burst = preload("res://scripts/effects/burst.gd")
 
 @export var target_mask: int = 4
 @export var damage: int = 1
@@ -57,6 +58,7 @@ func _physics_process(delta: float) -> void:
 		queue_redraw()
 	if phase == Phase.ACTIVE:
 		_hit_overlaps()
+	queue_redraw()
 
 
 func _hit_overlaps() -> void:
@@ -72,18 +74,34 @@ func _hit_overlaps() -> void:
 		if _hit_targets.has(id) or not target.has_method("take_damage"):
 			continue
 		_hit_targets[id] = true
+		var health_before: int = target.health
+		var impact_at: Vector2 = target.global_position + Vector2(0, -20)
 		target.take_damage(damage, Vector2(knockback.x * direction, knockback.y))
+		if target.health < health_before:
+			Burst.spawn(get_tree().current_scene, impact_at, swing_color, "ZAP!" if target_mask == 4 else "HIT!")
 
 
 func _draw() -> void:
 	if not is_busy():
 		return
-	var rectangle := Rect2(Vector2(reach * direction, 0) - hitbox_size / 2, hitbox_size)
 	var color := swing_color
-	color.a = 0.85 if phase == Phase.ACTIVE else 0.25
-	if phase == Phase.ACTIVE:
-		draw_rect(rectangle, color)
-	else:
-		draw_rect(rectangle, color, false, 2.0)
-	if phase == Phase.ACTIVE:
-		draw_line(Vector2.ZERO, Vector2((reach + hitbox_size.x / 2) * direction, -8), Color.WHITE, 3.0)
+	var forward := Vector2(float(direction), 0)
+	match phase:
+		Phase.WINDUP:
+			color.a = 0.6
+			draw_line(Vector2.ZERO, forward * 24 + Vector2(0, -12), color, 2.0)
+			draw_circle(forward * 24 + Vector2(0, -12), 3.0, color)
+		Phase.ACTIVE:
+			var progress := clampf(1.0 - _remaining / active_time, 0.0, 1.0)
+			var angle := lerpf(-0.65, 0.65, progress)
+			var tip := Vector2(cos(angle) * (reach + hitbox_size.x * 0.5) * direction, sin(angle) * 28)
+			# The bright arc spans the same forward region as the damage query.
+			var start_angle := -0.65 if direction == 1 else PI - 0.65
+			draw_arc(Vector2.ZERO, reach + 10, start_angle, start_angle + 1.3, 18, color, 5.0)
+			draw_line(Vector2.ZERO, tip, Color.WHITE, 2.0)
+			for index in range(5):
+				var spark_at := tip + Vector2(cos(index * 1.7 + progress * 4), sin(index * 1.7 + progress * 4)) * 7
+				draw_circle(spark_at, 2.0, color)
+		Phase.RECOVERY:
+			color.a = 0.2 * clampf(_remaining / recovery_time, 0.0, 1.0)
+			draw_line(Vector2.ZERO, forward * 25 + Vector2(0, 10), color, 2.0)

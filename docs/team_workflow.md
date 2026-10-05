@@ -193,3 +193,44 @@ starting production art or additional attacks.
 The buffer/coyote course obstacle is removed because its 80 px ledge exceeds
 the current 45 px jump. A flat floor now connects the ceiling section to combat.
 Coyote time and jump buffering remain in the controller. Combat is station 5.
+
+
+## Hours 5.25 to 6.25 handoff
+
+- F5 opens the combined prototype course. It teaches running, the agreed fixed-height
+  jump, short gaps, low ceilings, air dash, sparkler combat and a final jump to a flag.
+- The 220 and 250 px dash gaps come before the guard. The existing movement tuning
+  and combat timings are preserved. No hit pause is added.
+- The arena has safe floor around the guard. Defeating it opens a solid exit gate.
+  The finish rejects completion while the guard is alive.
+- Reaching the flag displays elapsed time and a replay prompt. Time freezes while
+  movement stays available. R immediately resets the entire course.
+- The compact HUD shows controls, health, dash availability, contextual hints and
+  elapsed time. World hints leave landing platforms visible.
+- Dash leaves fading world-space afterimages and a launch burst. Sparkler attacks
+  show an animated arc; confirmed damage produces sparks and a hit word.
+- Guards show orange wind-up, red strike and dim recovery with matching labels.
+  Damage briefly flashes the guard; defeat produces a BOOM burst.
+- Siya flashes on damage and blinks during her existing protection. Death shows
+  a DOWN burst and a 0.35 s restart cue in the combined course.
+- Open `scenes/main/movement_playground.tscn` with F6 for the original tuning
+  course. Existing movement and dash checks target that scene. The isolated
+  combat arena remains available with F6.
+- `tests/course_check.gd` checks new gap traversal, trail expiry, gate collision,
+  real sparkler combat, exit unlock, final jump, completion, replay and death recovery.
+- The export preset explicitly includes the burst script and movement playground.
+
+Run all four checks, then export and run the pack outside the editor:
+
+```bash
+godot --headless --path . --script tests/movement_check.gd
+godot --headless --path . --script tests/dash_check.gd
+godot --headless --path . --script tests/combat_check.gd
+godot --headless --path . --script tests/course_check.gd
+GODOT_BIN=godot tools/smoke_build.sh
+GODOT_BIN=godot tools/run_smoke_build.sh --headless --quit-after 120
+```
+
+Next is the fresh-player test. Record first-play duration, misunderstood controls,
+missed jumps and unreadable attacks. Automated traversal checks do not establish
+movement feel or a two-minute first-play completion time.

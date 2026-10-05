@@ -49,7 +49,7 @@ func jump_height(hold_ticks: int) -> float:
 
 
 func run_checks() -> void:
-	change_scene_to_file("res://scenes/main/main.tscn")
+	change_scene_to_file("res://scenes/main/movement_playground.tscn")
 	await scene_changed
 	player = current_scene.get_node("Player")
 	await ticks(3)
