@@ -71,11 +71,14 @@ func _process(delta: float) -> void:
 	if weapon_status != null:
 		var cooldown: String = "READY" if player.chakri_cooldown_remaining <= 0.0 else "%ds" % ceili(player.chakri_cooldown_remaining)
 		weapon_status.text = "Skyshot: %d/5    Chakri: %s    %s" % [player.skyshot_ammo, cooldown, "Hold K to charge; release to spin." if player.attack_status == "Ready" else player.attack_status]
-	if player.is_on_floor():
-		dash_status.text = "Rocket dash: jump to dash"
+	var dash_ready: bool = player.can_dash()
+	if dash_ready:
+		dash_status.text = "Rocket dash: READY"
+	elif player.dash_available or player.is_on_floor():
+		dash_status.text = "Rocket dash: cooling"
 	else:
-		dash_status.text = "Rocket dash: READY" if player.dash_available else "Rocket dash: land to recharge"
-	dash_status.modulate = Color(1.0, 0.72, 0.2) if player.dash_available else Color(0.65, 0.68, 0.74)
+		dash_status.text = "Rocket dash: land to recharge"
+	dash_status.modulate = Color(1.0, 0.72, 0.2) if dash_ready else Color(0.65, 0.68, 0.74)
 	if _restarting:
 		return
 	var death_y: float = course.death_boundary() if course.has_method("death_boundary") else fall_boundary

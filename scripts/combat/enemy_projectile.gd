@@ -21,6 +21,8 @@ func _physics_process(delta: float) -> void:
 	_update_direction(step)
 	velocity = direction * speed
 	var collision := move_and_collide(velocity * step)
+	if collision != null and _is_dodged_by(collision.get_collider()):
+		collision = move_and_collide(collision.get_remainder())
 	_remaining -= delta
 	if collision != null:
 		var target := collision.get_collider() as Node2D
@@ -34,6 +36,22 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 	elif _remaining <= 0.0:
 		queue_free()
+
+
+## A dashing player passes through the shot, which then ignores them and flies on.
+func _is_dodged_by(collider: Object) -> bool:
+	var player := collider as Node2D
+	if not is_instance_valid(player) or not player.is_in_group("players") or not player.has_method("is_invulnerable"):
+		return false
+	if not player.is_invulnerable():
+		return false
+	add_collision_exception_with(player)
+	_on_dodged()
+	return true
+
+
+func _on_dodged() -> void:
+	pass
 
 
 func _update_direction(_delta: float) -> void:

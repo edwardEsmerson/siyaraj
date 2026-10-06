@@ -41,7 +41,7 @@ text = "SIYARAJ / prototype course"
 offset_left = 24.0
 offset_top = 48.0
 theme_override_colors/font_color = Color(0.75, 0.78, 0.83, 1)
-text = "A/D or arrows: move    Space: jump    Shift: air dash    J: sparkler    R: restart"
+text = "A/D or arrows: move    Space: jump    Shift: dash    J: sparkler    R: restart"
 
 [node name="Milestone" type="Label" parent="HUD"]
 offset_left = 24.0
@@ -57,7 +57,7 @@ text = "0.0 s"
 [node name="DashStatus" type="Label" parent="HUD"]
 offset_left = 660.0
 offset_top = 12.0
-text = "Rocket dash: jump to dash"
+text = "Rocket dash: READY"
 
 [node name="HealthStatus" type="Label" parent="HUD"]
 offset_left = 490.0

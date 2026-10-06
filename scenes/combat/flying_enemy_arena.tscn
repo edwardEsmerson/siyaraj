@@ -63,7 +63,7 @@ text = "SIYARAJ / flying enemy arena"
 [node name="Controls" type="Label" parent="HUD"]
 offset_left = 32.0
 offset_top = 76.0
-text = "A/D or arrows: move    Space: jump    Shift: air dash    J: sparkler    R: restart"
+text = "A/D or arrows: move    Space: jump    Shift: dash    J: sparkler    R: restart"
 
 [node name="Hint" type="Label" parent="HUD"]
 offset_left = 32.0

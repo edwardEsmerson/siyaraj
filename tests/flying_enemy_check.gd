@@ -216,6 +216,19 @@ func check_projectiles() -> void:
 	await ticks(9)
 	check(not is_instance_valid(projectile) and shots().is_empty(), "Unobstructed projectiles must expire at their lifetime")
 
+	# A dashing player passes through an incoming shot, which flies on and ignores her.
+	await reset_arena()
+	projectile = spawn_shot(player.global_position + Vector2(70, -20), Vector2.LEFT, 400.0)
+	Input.action_press("dash")
+	await ticks(1)
+	Input.action_release("dash")
+	check(player.state == player.State.DASH, "Shot dodge must start a grounded dash")
+	await ticks(12)
+	check(player.health == 3, "Dash i-frames must let a shot pass through without damage")
+	check(is_instance_valid(projectile) and projectile.global_position.x < player.global_position.x, "Dodged shot must continue past the player")
+	await ticks(20)
+	check(player.health == 3, "Dodged shot must not hit the player after i-frames end")
+
 
 func check_melee_and_restart() -> void:
 	await reset_arena()

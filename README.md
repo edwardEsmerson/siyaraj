@@ -31,8 +31,13 @@ A Godot 4.7.2 2D platformer prototype. Open `project.godot` and press F6 to run
 the current scene or F5 to run the main scene.
 
 Running, fixed-height jumping, coyote time, jump buffering, and rocket dash are
-implemented. Tapping or holding Space produces the same jump height. Dash can only start while airborne, stops
-at walls, grants no invulnerability, and restores its air charge on landing.
+implemented. Tapping or holding Space produces the same jump height. Dash works on the ground
+and in the air and stops at walls. One air dash is allowed, restored on landing;
+a ground dash keeps that charge but starts a 0.25-second cooldown after it ends.
+Dashing grants brief invulnerability (the dash plus 0.05 seconds): enemy swings
+and shots pass through Siya, and a dodged shot ignores her afterwards. Dash
+cancels any sparkler phase, including recovery. J pressed during a dash is held
+and swings as the dash ends.
 
 Siya has a single sparkler melee swing with wind-up, an active hit window, and
 recovery. She can run and jump while swinging; dash, hurt, and death cancel it.
@@ -61,7 +66,7 @@ recovery. Step back, then counterattack; hits still interrupt its swing.
 It uses ordinary enemy health and defeat feedback and has no boss phases.
 The ground shooter patrols with gravity and turns at walls and platform edges.
 It stops for a purple charge, then fires a slower purple homing bolt that curves
-toward Siya. Its limited turning speed lets you jump or air dash past it; bolts
+toward Siya. Its limited turning speed lets you jump past it or dash through it; bolts
 stop at solid world and expire after 2.8 seconds. J interrupts the charge and
 three hits defeat the shooter. The main course places it after the guard.
 
