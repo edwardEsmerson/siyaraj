@@ -4,6 +4,7 @@ const Burst = preload("res://scripts/effects/burst.gd")
 signal health_changed(remaining: int)
 signal died
 
+@export var enemy_name: String = "Guard"
 @export var max_health: int = 3
 @export var patrol_speed: float = 60.0
 @export var chase_speed: float = 95.0
@@ -11,6 +12,8 @@ signal died
 @export var detection_range: float = 200.0
 @export var attack_range: float = 52.0
 @export var gravity: float = 1800.0
+@export var edge_probe_distance: float = 24.0
+@export_range(0.0, 1.0) var knockback_multiplier: float = 1.0
 
 enum State { PATROL, CHASE, ATTACK, HURT, DEAD }
 var state: State = State.PATROL
@@ -28,6 +31,7 @@ var _hit_flash_remaining: float = 0.0
 func _ready() -> void:
 	health = max_health
 	_home_x = global_position.x
+	_update_feedback()
 
 
 func _physics_process(delta: float) -> void:
@@ -61,7 +65,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = _direction * patrol_speed
 	# Stop at unsupported edges instead of chasing the player into a pit.
 	if is_on_floor() and not is_zero_approx(velocity.x):
-		var ahead := global_position + Vector2(signf(velocity.x) * 24.0, -12.0)
+		var ahead := global_position + Vector2(signf(velocity.x) * edge_probe_distance, -12.0)
 		var query := PhysicsRayQueryParameters2D.create(ahead, ahead + Vector2(0, 40), 1)
 		if get_world_2d().direct_space_state.intersect_ray(query).is_empty():
 			velocity.x = 0.0
@@ -94,7 +98,7 @@ func _update_feedback() -> void:
 		State.CHASE:
 			body.modulate = Color(1.4, 1.1, 0.7)
 			action_hint = "APPROACHING"
-	status.text = "Guard %d/%d\n%s" % [health, max_health, action_hint]
+	status.text = "%s %d/%d\n%s" % [enemy_name, health, max_health, action_hint]
 
 
 func take_damage(amount: int, knockback: Vector2) -> void:
@@ -110,7 +114,7 @@ func take_damage(amount: int, knockback: Vector2) -> void:
 		queue_free()
 		return
 	state = State.HURT
-	velocity = knockback
+	velocity = knockback * knockback_multiplier
 	_hurt_remaining = 0.20
 	_hit_flash_remaining = 0.09
 	_update_feedback()

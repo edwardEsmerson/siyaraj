@@ -45,6 +45,7 @@ func run_checks() -> void:
 	enemy.set_physics_process(false)
 	# Guard/gate regression stays isolated from the independently tested flyer.
 	course.get_node("FlyingEnemy").set_physics_process(false)
+	course.get_node("Brute").set_physics_process(false)
 	await ticks(3)
 	check(player.is_on_floor(), "Combined course must spawn Siya on solid ground")
 	check(current_scene.get_node("Camera2D").limit_right == 4800, "Camera must cover the finish platform")
@@ -120,6 +121,7 @@ func run_checks() -> void:
 	course = current_scene.get_node("TestCourse")
 	check(not course.completed and not course.guard_defeated and player.health == 3, "Replay must reset health, guard, gate, and completion")
 	check(course.get_node("FlyingEnemy").health == 3, "Replay must restore the flying enemy")
+	check(course.get_node("Brute").health == 6, "Replay must restore the brute")
 
 	old_scene = current_scene
 	player.take_damage(3, Vector2.ZERO)

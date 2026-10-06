@@ -265,3 +265,32 @@ movement feel or a two-minute first-play completion time.
 Manual checkpoint: play the flying arena with F6, then the whole course with F5.
 Check that the orange charge and shot are readable, jumping hits feel reachable,
 and the flyer/guard encounter is fair with the existing three-health player.
+
+## Brute enemy handoff
+
+- Combat owns `scenes/enemies/brute.tscn` and the isolated
+  `scenes/combat/brute_arena.tscn` / `brute_course.tscn` encounter. The Brute reuses
+  the guard controller and shared melee component as an ordinary enemy.
+- The collider is 48 x 64, compared with the guard's 32 x 40. Its broad shoulders,
+  brown body, dark bracers and belt distinguish it at gameplay size.
+- Six health, two damage per swing, 300/-180 knockback and a wider 64 x 48 hitbox
+  make it stronger than a guard. Patrol/chase speeds are 40/70 px/s. Wind-up is
+  0.7 s, active time 0.16 s and recovery 0.95 s. Facing locks for each swing.
+- Hits interrupt its attack; incoming knockback is multiplied by 0.55. A 32 px
+  ground probe keeps the wider body away from unsupported edges. Existing guard
+  defaults and the player movement/damage APIs are preserved.
+- Level integration places it at (4020, 430), after the regular guard. It has
+  ordinary floating health/status feedback, with no boss phases or boss UI.
+  The regular guard still owns the exit gate. The isolated arena shares main
+  restart/HUD handling; integration now derives its defeat label from enemy name.
+- `tests/brute_check.gd` covers size and strength, bounded patrol, edges and walls,
+  chase, wind-up/dodging/recovery, hit reach and facing, one hit per swing without
+  damage protection, interruptions, knockback resistance, six real sparkler hits,
+  defeat/restart and course gate ownership. Course regression isolates the Brute
+  while checking the existing guard encounter and verifies replay restores it.
+- Run the new check alongside all five existing checks. The smoke export includes
+  the Brute arena and its dependencies.
+
+Manual checkpoint: play the Brute arena with F6, then the whole course with F5.
+Check that its heavy swing is readable and the long recovery offers a fair
+counterattack window with Siya's existing three health.

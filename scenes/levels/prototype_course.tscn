@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=23 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/prototype_course.gd" id="2_course"]
 
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="1_enemy"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/flying_enemy.tscn" id="3_flyer"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/brute.tscn" id="4_brute"]
 
 [sub_resource type="RectangleShape2D" id="RunFloorShape"]
 size = Vector2(520, 48)
@@ -253,6 +254,16 @@ position = Vector2(3770, 430)
 
 [node name="FlyingEnemy" parent="." instance=ExtResource("3_flyer")]
 position = Vector2(3500, 385)
+
+[node name="Brute" parent="." instance=ExtResource("4_brute")]
+position = Vector2(4020, 430)
+
+[node name="BruteHint" type="Label" parent="."]
+offset_left = 3910.0
+offset_top = 170.0
+offset_right = 4290.0
+offset_bottom = 230.0
+text = "BRUTE / HEAVY MELEE\nSix hits to defeat. Its strike deals two damage.\nStep back during orange; counter in recovery."
 
 
 [node name="DashLanding" type="StaticBody2D" parent="."]
