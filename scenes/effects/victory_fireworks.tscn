@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/effects/fireworks.gd" id="1"]
+
+[node name="VictoryFireworks" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="LeftSky" type="Control" parent="."]
+clip_contents = true
+layout_mode = 1
+offset_top = 120.0
+offset_right = 130.0
+offset_bottom = 330.0
+mouse_filter = 2
+
+[node name="Fireworks" type="Node2D" parent="LeftSky"]
+modulate = Color(1, 1, 1, 0.8)
+scale = Vector2(0.65, 0.65)
+script = ExtResource("1")
+width = 200.0
+launch_y = 320.0
+burst_y = Vector2(20, 90)
+interval = Vector2(1.2, 1.8)
+
+[node name="RightSky" type="Control" parent="."]
+clip_contents = true
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_top = 120.0
+offset_bottom = 330.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="Fireworks" type="Node2D" parent="RightSky"]
+modulate = Color(1, 1, 1, 0.8)
+scale = Vector2(0.65, 0.65)
+script = ExtResource("1")
+width = 200.0
+launch_y = 320.0
+burst_y = Vector2(20, 90)
+interval = Vector2(1.4, 2.0)

@@ -19,6 +19,29 @@ var _wait: float = 0.2
 var _rng := RandomNumberGenerator.new()
 
 
+func _ready() -> void:
+	visibility_changed.connect(_sync_visibility)
+	_sync_visibility()
+
+
+func _sync_visibility() -> void:
+	set_process(is_visible_in_tree())
+	if not is_visible_in_tree():
+		_clear()
+
+
+func _exit_tree() -> void:
+	_clear()
+
+
+func _clear() -> void:
+	_rockets.clear()
+	_sparks.clear()
+	_flashes.clear()
+	_wait = 0.2
+	queue_redraw()
+
+
 func _process(delta: float) -> void:
 	_wait -= delta
 	if _wait <= 0.0:
