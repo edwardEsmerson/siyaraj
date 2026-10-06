@@ -38,7 +38,6 @@ func _draw() -> void:
 		glow.bg_color = Color(1.0, 0.75, 0.25, 0.075 * pulse)
 		glow.set_corner_radius_all(24)
 		draw_style_box(glow, Rect2(-10 - ring * 4, -110 - ring * 2, 20 + ring * 8, 110 + ring * 2))
-	draw_line(Vector2(0, -96), Vector2(0, -8), Color(1.0, 0.95, 0.65, 0.95 * pulse), 6.0, true)
 	for spark: int in 8:
 		var progress := fmod(_elapsed * 0.3 + spark / 8.0, 1.0)
 		var point := Vector2(sin(spark * 2.4 + _elapsed) * 20, -progress * 110)

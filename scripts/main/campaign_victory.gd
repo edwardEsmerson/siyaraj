@@ -87,7 +87,9 @@ func _unlock_exit() -> void:
 		escape.open()
 	exit_zone = preload("res://scripts/main/boss_exit.gd").new()
 	exit_zone.name = "BossExit"
-	exit_zone.position = Vector2(862 if story_key == "palace" else 900, 430)
+	var wall: StaticBody2D = get_parent().get_node("RightWall" if story_key == "palace" else "TestCourse/RightWall")
+	var wall_shape: CollisionShape2D = wall.get_node("CollisionShape2D")
+	exit_zone.position = Vector2(wall.position.x - wall_shape.shape.size.x * 0.5, 430)
 	exit_zone.player_entered.connect(finish_escape)
 	get_parent().add_child(exit_zone)
 	var prompt := Label.new()

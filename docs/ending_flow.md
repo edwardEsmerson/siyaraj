@@ -2,7 +2,8 @@
 
 All three campaign showdowns keep their existing introductions, death animations
 and aftermath dialogue. Defeating Khara, Dhoomketu or Swaminathan unlocks a pulsing
-golden exit on the right and leaves Siya free to move. The palace gates open and
+golden glow flush with the right wall and leaves Siya free to move. The marker
+uses a soft glow and sparks, with no solid bar. The palace gates open and
 Raj joins Siya immediately after Swaminathan's defeat.
 
 Walk into the glow to freeze the arena and close the existing curtain fabric.
