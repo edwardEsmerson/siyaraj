@@ -47,6 +47,7 @@ mouse_filter = 2
 color = Color(0.45, 0, 0.02, 0)
 
 [node name="Banner" type="Label" parent="BossUI"]
+texture_filter = 2
 visible = false
 offset_top = 196.0
 offset_right = 960.0
@@ -63,8 +64,8 @@ horizontal_alignment = 1
 layout_mode = 3
 anchors_preset = 0
 offset_left = 180.0
-offset_top = 438.0
+offset_top = 138.0
 offset_right = 780.0
-offset_bottom = 476.0
+offset_bottom = 176.0
 mouse_filter = 2
 script = ExtResource("5_heads")

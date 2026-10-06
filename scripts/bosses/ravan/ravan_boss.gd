@@ -622,7 +622,7 @@ func _player_alive() -> bool:
 
 
 func _draw_overlay() -> void:
-	var font := ThemeDB.fallback_font
+	var font := preload("res://assets/fonts/YatraOne-Regular.ttf")
 	for head in heads:
 		if not head.alive:
 			continue

@@ -12,6 +12,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="Header" type="Label" parent="Column"]
+texture_filter = 2
 layout_mode = 2
 theme_type_variation = &"HeaderLabel"
 text = "Controls"
@@ -24,10 +25,12 @@ stretch_mode = 3
 
 [node name="Grid" type="GridContainer" parent="Column"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 14
 theme_override_constants/h_separation = 18
 theme_override_constants/v_separation = 4
 columns = 3
 
 [node name="Back" type="Button" parent="Column"]
+texture_filter = 2
 layout_mode = 2
 text = "Back"

@@ -84,6 +84,7 @@ func _make_ui() -> void:
 	var column := VBoxContainer.new()
 	margin.add_child(column)
 	var title := Label.new()
+	title.theme_type_variation = &"HUDTitle"
 	title.text = "SIYARAJ  /  CAST LIBRARY"
 	column.add_child(title)
 	var row := HBoxContainer.new()
@@ -137,6 +138,7 @@ func _make_ui() -> void:
 	head_action_select.item_selected.connect(func(i: int) -> void: select_head_action(head_action_select.get_item_text(i)))
 	head_row.add_child(head_action_select)
 	info = Label.new()
+	info.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	info.position = Vector2(24, 466)
 	info.size = Vector2(912, 64)
 	info.theme = panel.theme

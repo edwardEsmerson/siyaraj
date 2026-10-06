@@ -10,8 +10,11 @@ var comic: CanvasLayer
 var _arena_process_mode: ProcessMode
 
 func _ready() -> void:
+	$Victory.continued.connect(_continue_campaign)
+	$Victory.replayed.connect(PlaytestNavigation._restart)
+	$Victory.menu_requested.connect(PlaytestNavigation.show_title)
 	if not PlaytestNavigation.snapshot.is_empty():
-		destination_name = "level select"
+		destination_name = "the developer menu"
 	get_node(boss_path).died.connect(_on_defeated)
 	if not introduction.is_empty() and not PlaytestNavigation.boss_introduction_seen:
 		comic = preload("res://scenes/ui/comic_cutscene.tscn").instantiate()
@@ -27,12 +30,16 @@ func _finish_introduction() -> void:
 
 func _on_defeated() -> void:
 	won = true
-	$Victory.show()
-	$Victory/Message.text = "BOSS DEFEATED\nEnter: %s\nR: fight again / Esc: menu" % destination_name
+	var boss: Node = get_node(boss_path)
+	var boss_name: String = boss.get("boss_name") if boss.get("boss_name") != null else boss.name
+	$Victory.present("Boss defeated", "%s has fallen.\nThe path to %s is open." % [boss_name, destination_name], "Continue")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not won or not event.is_action_pressed("ui_accept"):
 		return
+	_continue_campaign()
+
+func _continue_campaign() -> void:
 	var player: CharacterBody2D = get_parent().get_node("Player")
 	if player.state == player.State.DEAD:
 		return

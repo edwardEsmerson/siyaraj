@@ -41,4 +41,4 @@ func _draw() -> void:
 		draw_line(start, start + direction * (8.0 * (1.0 - progress)), color, 2.0)
 	draw_arc(Vector2.ZERO, 3.0 + progress * spread * 0.6, 0.0, TAU, 20, color, 1.5)
 	if not label.is_empty():
-		draw_string(ThemeDB.fallback_font, Vector2(-18, -26 - progress * 14), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
+		draw_string(preload("res://assets/fonts/YatraOne-Regular.ttf"), Vector2(-18, -26 - progress * 14), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
