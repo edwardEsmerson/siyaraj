@@ -13,6 +13,8 @@ func run_checks() -> void:
 	var course: Node2D = current_scene.course
 	check(course.level_width() == 14400, "River must retain a full-length route")
 	var route: Array[Node] = course.get_node("Terrain").get_children()
+	await repair_river_bridge()
+	route.insert(route.find(course.get_node("Terrain/BridgeGap1")), course.get_node("BridgePlanks").placed_planks[-1])
 	for index in range(route.size() - 1):
 		var passed := await traverse(route[index], route[index + 1])
 		check(passed, "River unreachable: %s -> %s" % [route[index].name, route[index + 1].name])
@@ -56,13 +58,35 @@ func run_checks() -> void:
 	await ticks(4)
 	course = current_scene.course
 	var encounters := course.get_node("Encounters")
-	check(encounters.get_child_count() == 8, "River must include eight staged encounters")
+	check(encounters.get_child_count() == 10, "River must include ten staged encounters")
 	for enemy in encounters.get_children():
 		if enemy.name != &"BridgeFlyer":
 			check(enemy.is_on_floor(), "%s must spawn on a broad combat landing" % enemy.name)
 		for checkpoint in course.get_node("Checkpoints").get_children():
 			check(absf(enemy.position.x - checkpoint.position.x) > enemy.detection_range + enemy.patrol_radius, "Diya must sit outside %s patrol and detection" % enemy.name)
 	freeze_encounters()
+	# The repair run crosses two melee patrols, and carrying a board keeps combat usable.
+	var bridge: Node2D = course.get_node("BridgePlanks")
+	var approach_guard: CharacterBody2D = encounters.get_node("BridgeApproachGuard")
+	var deck_guard: CharacterBody2D = encounters.get_node("BridgeDeckGuard")
+	check(approach_guard.position.x > bridge.supply_position(3).x and deck_guard.position.x < bridge.build_edge().x, "Both new guards must occupy the supply-to-bridge route")
+	for guard: CharacterBody2D in [approach_guard, deck_guard]:
+		check(guard._home_x == course.get_node("EncounterSpawns").get_node(NodePath(guard.name)).position.x, "Repair guards must retain their authored spawn markers")
+	await place(bridge.supply_position(0))
+	approach_guard.set_physics_process(true)
+	await press_interact()
+	check(bridge.carried_index == 0, "Planks must remain usable with bridge enemies enabled")
+	check(approach_guard.state == approach_guard.State.CHASE, "The approach guard must notice Siya collecting a plank")
+	approach_guard.set_physics_process(false)
+	await place(Vector2(deck_guard.position.x - 43, 350))
+	player.skyshot_ammo = 0
+	player.facing_direction = 1
+	player.attack_origin.position.x = 18
+	Input.action_press("attack")
+	await ticks(15)
+	Input.action_release("attack")
+	check(deck_guard.health < deck_guard.max_health and bridge.carried_index == 0, "Siya must be able to lash the deck guard while carrying a plank")
+	player.skyshot_ammo = 5
 	var shooter: CharacterBody2D = encounters.get_node("BridgeShooter")
 	await place(Vector2(7330, 430))
 	check(not shooter._can_see(player), "Bridge crate must block shooter sight")
@@ -103,5 +127,3 @@ func run_checks() -> void:
 	release_inputs()
 	print("River design checks: %s" % ("PASS" if failures == 0 else "FAIL (%d)" % failures))
 	quit(0 if failures == 0 else 1)
-
-
