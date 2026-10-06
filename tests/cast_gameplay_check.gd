@@ -130,9 +130,9 @@ func run_checks() -> void:
 	await scene_changed
 	await ticks(4)
 	var raj: AnimatedSprite2D = current_scene.get_node("Center/Content/RajStage/Raj")
-	check(raj.animation == &"sulk" and raj.scale == Vector2(0.5, 0.5), "Ending must introduce Raj at native scale")
+	check(raj.animation == &"freed" and raj.scale == Vector2(0.5, 0.5), "Ending must show rescued Raj at native scale")
 	await ticks(80)
-	check(raj.animation == &"dramatic", "Ending must show Raj's dramatic reaction")
+	check(raj.animation == &"freed", "Ending must keep Raj freed after the palace rescue")
 	await ticks(65)
 	check(raj.animation == &"freed", "Ending must complete with Raj freed")
 	check(current_scene.get_node("Center/Content/ReturnButton").has_focus(), "Rescue animation must preserve menu controls")

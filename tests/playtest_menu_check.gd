@@ -139,7 +139,12 @@ func run_checks() -> void:
 	for panel in flow.comic._panels.size():
 		flow.comic._unhandled_input(accept)
 	flow._unhandled_input(accept)
-	await scene_changed
+	check(current_scene == arena and arena.get_node("PalaceEscape").unlocked, "Final dialogue must unlock the palace escape")
+	arena.player.position = Vector2(800, 430)
+	arena.player.velocity = Vector2.ZERO
+	Input.action_press("move_right")
+	await ticks(90)
+	Input.action_release("move_right")
 	check(current_scene.scene_file_path == "res://scenes/main/ending.tscn", "Ravan victory must advance to the ending")
 	var return_button: Button = current_scene.get_node("Center/Content/ReturnButton")
 	check(return_button.has_focus(), "Ending return button must support keyboard navigation")

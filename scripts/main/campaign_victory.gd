@@ -14,6 +14,7 @@ var comic: CanvasLayer
 var _arena_process_mode: ProcessMode
 var _showing_aftermath: bool = false
 var _boss_name: String
+var _escape_ready: bool = false
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -63,14 +64,30 @@ func _on_defeated() -> void:
 		_show_victory()
 
 func _show_victory() -> void:
+	var escape: Node = get_parent().get_node_or_null("PalaceEscape")
+	if escape != null and PlaytestNavigation.snapshot.is_empty():
+		_escape_ready = true
+		escape.open()
+		return
 	$Victory.present("Boss defeated", "%s has fallen.\nThe path to %s is open." % [_boss_name, destination_name], "Continue")
 
 func _unhandled_input(event: InputEvent) -> void:
-	if get_tree().paused or (comic != null and comic.visible) or not won or not event.is_action_pressed("ui_accept"):
+	if _escape_ready or get_tree().paused or (comic != null and comic.visible) or not won or not event.is_action_pressed("ui_accept"):
 		return
 	_continue_campaign()
 
 func _continue_campaign() -> void:
+	if _escape_ready:
+		return
+	_change_destination()
+
+## Only the unlocked palace gate can finish the campaign escape.
+func finish_escape() -> void:
+	if not _escape_ready:
+		return
+	_change_destination()
+
+func _change_destination() -> void:
 	if get_tree().paused or (comic != null and comic.visible) or not won:
 		return
 	var player: CharacterBody2D = get_parent().get_node("Player")
