@@ -52,6 +52,8 @@ func _on_defeated() -> void:
 	if won:
 		return
 	won = true
+	if not next_level.is_empty():
+		CampaignSave.enter_stage(next_level)
 	var cage: Node = get_parent().get_node_or_null("RajCage")
 	if cage != null:
 		cage.release()

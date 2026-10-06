@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+CampaignSave="*res://scripts/main/campaign_save.gd"
 AudioDirector="*res://scripts/main/audio_director.gd"
 GameSettings="*res://scripts/main/game_settings.gd"
 PlaytestNavigation="*res://scripts/main/playtest_navigation.gd"

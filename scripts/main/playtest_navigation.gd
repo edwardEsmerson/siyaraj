@@ -41,6 +41,7 @@ func _restart() -> void:
 	var course := get_tree().current_scene.get_node_or_null("TestCourse")
 	if course != null and course.has_method("reset_progress"):
 		course.reset_progress()
+	CampaignSave.capture()
 	_resume()
 	get_tree().reload_current_scene()
 
@@ -54,18 +55,23 @@ func respawn(source: Node, death_delay: float = 0.0) -> void:
 	respawn_transition.respawn(source, death_delay)
 
 func show_menu() -> void:
+	CampaignSave.suspend()
 	respawn_transition.cancel()
 	snapshot.clear()
 	_resume()
 	get_tree().change_scene_to_file(MENU)
 
 func show_title() -> void:
+	CampaignSave.suspend()
 	respawn_transition.cancel()
 	snapshot.clear()
 	_resume()
 	get_tree().change_scene_to_file(TITLE)
 
 func start_level(path: String, section: int = 0, room: StringName = &"", as_snapshot: bool = false) -> void:
+	if as_snapshot:
+		CampaignSave.suspend()
+	CampaignSave.enter_stage(path)
 	respawn_transition.cancel()
 	boss_introduction_seen = false
 	snapshot = {"path": path, "section": section, "room": room} if as_snapshot else {}
