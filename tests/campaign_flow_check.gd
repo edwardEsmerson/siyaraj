@@ -10,7 +10,7 @@ func accept() -> InputEventAction:
 func run_checks() -> void:
 	var navigation: Node = root.get_node("PlaytestNavigation")
 	navigation.enemies_enabled = true
-	for level in ["forest", "palace"]:
+	for level in ["forest", "river", "palace"]:
 		navigation.start_level("res://scenes/main/%s.tscn" % level)
 		await scene_changed
 		current_scene._finish_course()
@@ -34,7 +34,7 @@ func run_checks() -> void:
 		player = current_scene.get_node("Player")
 		await ticks(4)
 		check(not flow.won and boss.health == boss.max_health and player.health == player.max_health, "Retry must reset boss and player")
-		if level == "forest":
+		if level != "palace":
 			boss.take_damage(boss.max_health, Vector2.ZERO)
 		else:
 			boss.phase = 3
@@ -45,14 +45,16 @@ func run_checks() -> void:
 		check(flow.won and flow.get_node("Victory").visible, "Boss's real death signal must unlock victory")
 		flow._unhandled_input(accept())
 		await scene_changed
-		check(current_scene.scene_file_path.ends_with("river.tscn") if level == "forest" else current_scene.scene_file_path == "res://scenes/main/ending.tscn", "Boss victory must advance to river or the ending")
+		var destination: String = {"forest": "river.tscn", "river": "palace.tscn", "palace": "ending.tscn"}[level]
+		check(current_scene.scene_file_path.ends_with(destination), "Boss victory must advance to the next campaign stage")
 	# Terrain-only launches deliberately bypass encounters and boss fights.
 	navigation.enemies_enabled = false
-	navigation.start_level("res://scenes/main/forest.tscn")
-	await scene_changed
-	current_scene._finish_course()
-	current_scene._unhandled_input(accept())
-	await scene_changed
-	check(current_scene.scene_file_path.ends_with("river.tscn"), "Terrain-only forest must bypass Khara")
+	for level in ["forest", "river"]:
+		navigation.start_level("res://scenes/main/%s.tscn" % level)
+		await scene_changed
+		current_scene._finish_course()
+		current_scene._unhandled_input(accept())
+		await scene_changed
+		check(current_scene.scene_file_path.ends_with("river.tscn" if level == "forest" else "palace.tscn"), "Terrain-only levels must bypass bosses")
 	print("Campaign flow: %s" % ("PASS" if failures == 0 else "FAIL (%d)" % failures))
 	quit(0 if failures == 0 else 1)
