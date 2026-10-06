@@ -103,12 +103,24 @@ func check_structure() -> void:
 	check(lead.size() == 5, "The five leftmost heads, the last to fall, must cover every attack type")
 	var body: Node2D = boss.get_node("Body")
 	check(body.has_node("Art") and body.head_count == 10, "Body must own the art slot and show ten heads")
-	check(body.has_art() and body.art.scale == Vector2(0.5, 0.5), "Swaminathan must render the committed art at gameplay scale")
+	check(body.has_art() and body.art is AnimatedSprite2D and body.art.scale == Vector2(0.5, 0.5), "Swaminathan must render the animated body art at gameplay scale")
+	for anim in [&"intro", &"idle", &"exposed", &"roar", &"fury", &"dying", &"dead"]:
+		check(body.art.sprite_frames.has_animation(anim), "The body must have its %s animation" % anim)
+	check(body.art.offset == Vector2(-235, -345) and not body.art.centered, "The body's feet must sit on the boss origin")
+	check(body.heads.size() == 10 and body.necks.size() == 10, "Ten head sprites on ten necks must sit on the body")
 	for count in range(11):
 		body.head_count = count
-		check(body.art.texture != null and body.art.texture.get_size() == Vector2(464, 384), "Every remaining-head state must have the aligned body artwork")
-		check(body.art.texture == body._textures[count] and body.art.offset == Vector2(0, -192), "Head loss must swap the correct sprite without moving the feet")
+		var shown := 0
+		for index in range(10):
+			if body.heads[index].visible:
+				shown += 1
+				check(index < count and body.heads[index].scale == Vector2(0.5, 0.5), "Only the leftmost living heads show, at gameplay scale")
+		check(shown == count, "Every remaining-head count must show that many heads")
 	body.head_count = 10
+	body.set_pose(&"idle")
+	for index in range(10):
+		check(body.head_position(index).distance_to(offsets[index]) < 0.5, "In the idle pose each head must sit on its attack origin")
+	check(body.heads[3].animation == &"faces" and body.heads[3].frame == 3, "Idle heads must show their own faces")
 	check(hurtbox().collision_layer == 4 and hurtbox().get_child_count() >= 2, "One enemy-body hurtbox must cover body and head row")
 	var bar: Control = boss.get_node("BossUI/HealthBar")
 	check(bar.boss == boss and bar.visible, "Boss health bar must bind to Ravan")

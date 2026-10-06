@@ -1,0 +1,29 @@
+[gd_resource type="SpriteFrames" load_steps=17 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/fire-splash/01.png" id="fire-splash_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/fire-splash/02.png" id="fire-splash_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/homing-orb/01.png" id="homing-orb_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/homing-orb/02.png" id="homing-orb_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/spread-shot/01.png" id="spread-shot_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/spread-shot/02.png" id="spread-shot_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/roar-ring/01.png" id="roar-ring_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/roar-ring/02.png" id="roar-ring_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/roar-ring/03.png" id="roar-ring_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/shockwave/01.png" id="shockwave_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/lightning-bolt/01.png" id="lightning-bolt_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/lightning-bolt/02.png" id="lightning-bolt_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/lightning-flash/01.png" id="lightning-flash_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/lightning-flash/02.png" id="lightning-flash_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/lightning-mark/01.png" id="lightning-mark_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/effects/lightning-mark/02.png" id="lightning-mark_02"]
+
+[resource]
+animations = [{"frames": [{"duration": 1.0, "texture": ExtResource("fire-splash_01")}, {"duration": 1.0, "texture": ExtResource("fire-splash_02")}], "loop": false, "name": &"fire-splash", "speed": 10.0},
+{"frames": [{"duration": 1.0, "texture": ExtResource("homing-orb_01")}, {"duration": 1.0, "texture": ExtResource("homing-orb_02")}], "loop": true, "name": &"homing-orb", "speed": 10.0},
+{"frames": [{"duration": 1.0, "texture": ExtResource("spread-shot_01")}, {"duration": 1.0, "texture": ExtResource("spread-shot_02")}], "loop": true, "name": &"spread-shot", "speed": 10.0},
+{"frames": [{"duration": 1.0, "texture": ExtResource("roar-ring_01")}, {"duration": 1.0, "texture": ExtResource("roar-ring_02")}, {"duration": 1.0, "texture": ExtResource("roar-ring_03")}], "loop": false, "name": &"roar-ring", "speed": 10.0},
+{"frames": [{"duration": 1.0, "texture": ExtResource("shockwave_01")}], "loop": true, "name": &"shockwave", "speed": 10.0},
+{"frames": [{"duration": 1.0, "texture": ExtResource("lightning-bolt_01")}, {"duration": 1.0, "texture": ExtResource("lightning-bolt_02")}], "loop": true, "name": &"lightning-bolt", "speed": 16.0},
+{"frames": [{"duration": 1.0, "texture": ExtResource("lightning-flash_01")}, {"duration": 1.0, "texture": ExtResource("lightning-flash_02")}], "loop": false, "name": &"lightning-flash", "speed": 12.0},
+{"frames": [{"duration": 1.0, "texture": ExtResource("lightning-mark_01")}, {"duration": 1.0, "texture": ExtResource("lightning-mark_02")}], "loop": true, "name": &"lightning-mark", "speed": 8.0}]
+metadata/pivots = {"fire-splash": Vector2(62, 79), "homing-orb": Vector2(23, 20), "spread-shot": Vector2(15, 11), "roar-ring": Vector2(50, 50), "shockwave": Vector2(34, 30), "lightning-bolt": Vector2(113, 885), "lightning-flash": Vector2(57, 72), "lightning-mark": Vector2(58, 54)}

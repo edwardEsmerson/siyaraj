@@ -6,6 +6,7 @@ const Burst = preload("res://scripts/effects/burst.gd")
 const RavanBody = preload("res://scripts/bosses/ravan/ravan_body.gd")
 const Hazard = preload("res://scripts/bosses/ravan/ravan_hazard.gd")
 const Shockwave = preload("res://scripts/bosses/ravan/ravan_shockwave.gd")
+const RavanFx = preload("res://scripts/bosses/ravan/ravan_fx.gd")
 const HOMING_SCENE = preload("res://scenes/combat/homing_projectile.tscn")
 const STRAIGHT_SCENE = preload("res://scenes/combat/enemy_projectile.tscn")
 
@@ -62,8 +63,11 @@ const FURY_REST: float = 0.3
 const FURY_OUTRO: float = 0.6
 const FURY_COLOR: Color = Color(1.0, 0.3, 0.12)
 const SAFE_COLOR: Color = Color(0.35, 1.0, 0.85)
-const POP_TIME: float = 0.45
 const SHAKE_TIME: float = 0.35
+## Body animation speeds (scales of the authored 8 FPS): slow breathing and swaying.
+const IDLE_SPEED: float = 0.3
+const EXPOSED_SPEED: float = 0.4
+const FURY_SPEED: float = 0.75
 
 
 ## One head: a fixed attack origin on the body sprite, not a separate entity.
@@ -132,7 +136,6 @@ var _shake_remaining: float = 0.0
 var _guard_feedback_cooldown: float = 0.0
 var _tint: float = 0.0
 var _banner_remaining: float = 0.0
-var _pops: Array[Dictionary] = []
 var _rng := RandomNumberGenerator.new()
 var _overlay := Node2D.new()
 
@@ -317,6 +320,63 @@ func _physics_process(delta: float) -> void:
 				state = State.DEAD
 				died.emit()
 	_update_feedback(delta)
+	_update_poses()
+	# Homing orbs turn as they fly; their art follows.
+	for orb in get_tree().get_nodes_in_group("ravan_orbs"):
+		var art := orb.get_node_or_null("RavanArt") as Node2D
+		if art != null:
+			art.rotation = orb.direction.angle()
+
+
+## Picks the body animation and every head's face for the current state.
+func _update_poses() -> void:
+	match state:
+		State.INTRO:
+			# Seated, rising, standing tall: spread over most of the intro.
+			body.set_pose(&"intro", 3.0 / maxf(intro_time * 0.8, 0.1) / 8.0)
+			_set_head_poses(RavanBody.HeadPose.FACE)
+		State.TRANSITION:
+			body.set_pose(&"roar", 3.0 / maxf(transition_time * 0.6, 0.1) / 8.0)
+			_set_head_poses(RavanBody.HeadPose.ATTACK)
+		State.FURY:
+			body.set_pose(&"fury", FURY_SPEED)
+			for head in heads:
+				if not head.fury_lit:
+					body.set_head_pose(head.index, RavanBody.HeadPose.FACE)
+				else:
+					body.set_head_pose(head.index, RavanBody.HeadPose.DARK if head.fury_silent else RavanBody.HeadPose.FURY)
+		State.DYING:
+			body.set_pose(&"dying", 4.0 / maxf(death_time, 0.1) / 8.0)
+		State.DEAD:
+			body.set_pose(&"dead")
+		State.FIGHT:
+			# The body follows the most advanced attacking head: a wind-up while it
+			# telegraphs, the strike while it attacks. Roar heads stamp the floor.
+			var lead: HeadSlot = null
+			for head in heads:
+				if head.alive and (head.state == HeadState.TELEGRAPH or head.state == HeadState.ATTACK):
+					if lead == null or (head.state == HeadState.ATTACK and lead.state != HeadState.ATTACK):
+						lead = head
+			if lead != null:
+				body.set_pose(&"slam" if lead.attack_kind == Attack.ROAR else &"cast", 1.0, 1 if lead.state == HeadState.ATTACK else 0)
+			elif is_staggered() or is_spent():
+				body.set_pose(&"exposed", EXPOSED_SPEED)
+			else:
+				body.set_pose(&"idle", IDLE_SPEED)
+			var tired := is_staggered() or is_spent()
+			for head in heads:
+				match head.state:
+					HeadState.TELEGRAPH:
+						body.set_head_pose(head.index, RavanBody.HeadPose.TELEGRAPH, 0.5 + head.telegraph_progress())
+					HeadState.ATTACK:
+						body.set_head_pose(head.index, RavanBody.HeadPose.ATTACK)
+					_:
+						body.set_head_pose(head.index, RavanBody.HeadPose.EXHAUSTED if tired else RavanBody.HeadPose.FACE, 0.4)
+
+
+func _set_head_poses(head_pose: RavanBody.HeadPose) -> void:
+	for head in heads:
+		body.set_head_pose(head.index, head_pose)
 
 
 func _process_fight(delta: float) -> void:
@@ -383,7 +443,7 @@ func _lose_head() -> void:
 	body.head_count = heads_alive
 	_shake_remaining = SHAKE_TIME
 	var at := head_global(lost.index)
-	_pops.append({"at": RavanBody.HEAD_OFFSETS[lost.index], "age": 0.0})
+	body.pop_head(lost.index)
 	var scene_root := get_tree().current_scene
 	Burst.spawn(scene_root, at, Color(1.0, 0.5, 0.2), "", 44.0)
 	Burst.spawn(scene_root, at + Vector2(0, -6), Color(1.0, 0.9, 0.6), "SEVERED!", 26.0)
@@ -503,6 +563,8 @@ func _fire_head_attack(head: HeadSlot) -> void:
 	var aim := (target - mouth).normalized() if not (target - mouth).is_zero_approx() else Vector2.DOWN
 	var scene_root := get_tree().current_scene
 	var color: Color = head.attack_color()
+	# The moment the attack leaves the mouth.
+	RavanFx.burst(scene_root, &"mouth-flash", mouth)
 	match head.attack_kind:
 		Attack.FIRE:
 			var beam := Hazard.new()
@@ -528,6 +590,10 @@ func _fire_head_attack(head: HeadSlot) -> void:
 				bolt.turn_speed = 2.2
 				bolt.lifetime = 3.2
 				bolt.add_to_group("ravan_attacks")
+				bolt.add_to_group("ravan_orbs")
+				# The shared bolt draws itself; with orb art, only the art should show.
+				if _dress_shot(bolt, &"homing-orb"):
+					bolt.self_modulate = Color(1, 1, 1, 0)
 				scene_root.add_child(bolt)
 				bolt.global_position = mouth
 		Attack.ROAR:
@@ -538,6 +604,7 @@ func _fire_head_attack(head: HeadSlot) -> void:
 				wave.color = color
 				scene_root.add_child(wave)
 				wave.global_position = Vector2(x, global_position.y)
+			RavanFx.burst(scene_root, &"roar-ring", mouth)
 			Burst.spawn(scene_root, Vector2(x, global_position.y - 10.0), color, "ROAR!", 30.0)
 		Attack.LIGHTNING:
 			# Phase 3 adds a delayed second strike on the same spot: move, don't return.
@@ -558,9 +625,24 @@ func _fire_head_attack(head: HeadSlot) -> void:
 				shot.direction = aim.rotated((index - (count - 1) * 0.5) * 0.22)
 				shot.speed = 210.0
 				shot.add_to_group("ravan_attacks")
+				shot.get_node("Body").color = color
+				if _dress_shot(shot, &"spread-shot"):
+					shot.get_node("Body").visible = false
+					shot.get_node("Core").visible = false
 				scene_root.add_child(shot)
 				shot.global_position = mouth
-				shot.get_node("Body").color = color
+
+
+## Gives a shared projectile scene Swaminathan's effect art, turned to its flight.
+## Returns false (and leaves the shot's own visuals) while that art is not packaged.
+func _dress_shot(shot: Node2D, effect: StringName) -> bool:
+	var art := RavanFx.sprite(effect)
+	if art == null:
+		return false
+	art.name = "RavanArt"
+	art.rotation = shot.direction.angle()
+	shot.add_child(art)
+	return true
 
 
 func _begin_death() -> void:
@@ -579,14 +661,12 @@ func _update_feedback(delta: float) -> void:
 	_tint = move_toward(_tint, target_tint, delta * 2.5)
 	tint_rect.color = Color(0.45, 0.0, 0.02, 0.3 * _tint)
 	banner.visible = _banner_remaining > 0.0
-	# Shake after a lost head; slump while staggered or spent.
+	# Shake after a lost head (the exposed animation slumps him while staggered or spent).
 	var offset := Vector2.ZERO
 	if _shake_remaining > 0.0:
 		var t := Time.get_ticks_msec() * 0.001
 		var strength := 4.0 * minf(_shake_remaining / SHAKE_TIME, 1.0)
 		offset = Vector2(sin(t * 83.0), cos(t * 67.0) * 0.5) * strength
-	if is_staggered() or is_spent():
-		offset.y += 5.0
 	body.position = offset
 	if state == State.DEAD:
 		body.modulate = Color(0.4, 0.35, 0.35, maxf(body.modulate.a - delta, 0.25))
@@ -602,9 +682,6 @@ func _update_feedback(delta: float) -> void:
 		body.modulate = Color(0.75, 0.8, 0.85)
 	else:
 		body.modulate = Color.WHITE
-	for pop in _pops:
-		pop.age += delta
-	_pops = _pops.filter(func(pop: Dictionary) -> bool: return pop.age < POP_TIME)
 	_overlay.queue_redraw()
 
 
@@ -627,7 +704,7 @@ func _draw_overlay() -> void:
 	for head in heads:
 		if not head.alive:
 			continue
-		var at: Vector2 = RavanBody.HEAD_OFFSETS[head.index]
+		var at: Vector2 = body.head_position(head.index)
 		if head.state == HeadState.TELEGRAPH or head.state == HeadState.ATTACK:
 			# Heads cannot move, so the telegraph is a growing glow and a charge ring.
 			var color := head.attack_color()
@@ -652,11 +729,6 @@ func _draw_overlay() -> void:
 			for lane in range(LANE_COUNT):
 				if lane_head(lane) == head.index and not current_safe_lanes.has(lane):
 					_overlay.draw_line(at, to_local(Vector2(lane_center(lane), global_position.y)), aim, 1.5)
-	for pop in _pops:
-		var t: float = pop.age / POP_TIME
-		var ring := Color(1.0, 0.75, 0.35, 1.0 - t)
-		_overlay.draw_arc(pop.at, lerpf(10.0, 46.0, t), 0.0, TAU, 28, ring, 4.0 * (1.0 - t) + 1.0)
-		_overlay.draw_circle(pop.at, 14.0 * (1.0 - t), Color(1.0, 1.0, 0.85, 1.0 - t))
 	if state != State.FURY:
 		return
 	for lane in current_safe_lanes:

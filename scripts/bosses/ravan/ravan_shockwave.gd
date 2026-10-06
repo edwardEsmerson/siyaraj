@@ -1,6 +1,7 @@
 extends Node2D
 ## Low roar shockwave that rolls along the floor. Jump over it; walls stop it.
 const Burst = preload("res://scripts/effects/burst.gd")
+const RavanFx = preload("res://scripts/bosses/ravan/ravan_fx.gd")
 
 const PLAYER_BODY_MASK: int = 2
 const WORLD_MASK: int = 1
@@ -15,6 +16,7 @@ var color: Color = Color(1.0, 0.85, 0.2)
 var hit_player: bool = false
 var _age: float = 0.0
 var _shape := RectangleShape2D.new()
+var _has_art: bool = false
 
 
 func _ready() -> void:
@@ -22,6 +24,14 @@ func _ready() -> void:
 	add_to_group("ravan_attacks")
 	add_to_group("ravan_shockwaves")
 	z_index = 3
+	# Generated wave art (rolls right; flipped for waves rolling left), feet on the floor.
+	var art := RavanFx.sprite(&"shockwave")
+	if art != null:
+		_has_art = true
+		art.flip_h = direction < 0
+		if art.flip_h:
+			art.offset.x = -(art.sprite_frames.get_frame_texture(&"shockwave", 0).get_width() - RavanFx.pivot(&"shockwave").x)
+		add_child(art)
 
 
 func _physics_process(delta: float) -> void:
@@ -59,6 +69,8 @@ func _hurt_overlaps() -> void:
 
 
 func _draw() -> void:
+	if _has_art:
+		return
 	var half := size.x * 0.5
 	var crest := PackedVector2Array([Vector2(-half, 0), Vector2(-half * 0.3, -size.y), Vector2(half * 0.4 * direction, -size.y * 0.6), Vector2(half, 0)])
 	draw_colored_polygon(crest, color)

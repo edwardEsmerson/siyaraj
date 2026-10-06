@@ -18,9 +18,9 @@ script = ExtResource("1_boss")
 [node name="Body" type="Node2D" parent="."]
 script = ExtResource("2_body")
 
-[node name="Art" type="Sprite2D" parent="Body"]
-visible = false
+[node name="Art" type="AnimatedSprite2D" parent="Body"]
 scale = Vector2(0.5, 0.5)
+centered = false
 
 [node name="Hurtbox" type="StaticBody2D" parent="."]
 collision_layer = 4

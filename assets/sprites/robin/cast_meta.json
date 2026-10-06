@@ -48,8 +48,39 @@
         40,
         40
       ],
-      "models": {},
-      "notes": "`poses/fly.txt`"
+      "models": {
+        "01": "approved-base",
+        "02": "pro",
+        "03": "pro",
+        "04": "pro"
+      },
+      "notes": "`poses/fly.txt`",
+      "grid": {
+        "mode": "uniform",
+        "calibration_cell": 1,
+        "registration": "body, via the sheet's calibration cell",
+        "source_pixel_spacing": {
+          "01": null,
+          "02": 8.0,
+          "03": 8.0,
+          "04": 8.0
+        }
+      },
+      "sheet": {
+        "sources": {
+          "01": "base",
+          "02": "F1.png cell 2",
+          "03": "F1.png cell 3",
+          "04": "F1.png cell 4"
+        },
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "columns": 3,
+        "rows": 3,
+        "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
+      }
     },
     "hover": {
       "fps": 8,
@@ -81,9 +112,31 @@
       ],
       "models": {
         "01": "pro",
-        "02": "flash"
+        "02": "pro"
       },
-      "notes": "Poses: \"Hovering in place, wings raised, beak closed\" / \"Hovering, wings down, beak closed\"."
+      "notes": "Poses: \"Hovering in place, wings raised, beak closed\" / \"Hovering, wings down, beak closed\".",
+      "grid": {
+        "mode": "uniform",
+        "calibration_cell": 1,
+        "registration": "body, via the sheet's calibration cell",
+        "source_pixel_spacing": {
+          "01": 8.0,
+          "02": 8.0
+        }
+      },
+      "sheet": {
+        "sources": {
+          "01": "F1.png cell 5",
+          "02": "F1.png cell 6"
+        },
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "columns": 3,
+        "rows": 3,
+        "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
+      }
     },
     "hint": {
       "fps": 8,
@@ -114,25 +167,31 @@
         40
       ],
       "models": {
-        "01": "imagegen",
-        "02": "imagegen"
+        "01": "pro",
+        "02": "pro"
       },
       "notes": "Shown next to new hazards. Poses: \"Hovering, one wing pointing forward, beak wide open talking\" / \"Hovering, wing pointing, beak closed, eyebrow raised\".",
       "grid": {
         "mode": "uniform",
-        "source_pixel_spacing": 4.854166666666667,
-        "calibration_cell": 1
+        "calibration_cell": 1,
+        "registration": "body, via the sheet's calibration cell",
+        "source_pixel_spacing": {
+          "01": 8.0,
+          "02": 8.0
+        }
       },
       "sheet": {
-        "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+        "sources": {
+          "01": "F4.png cell 7",
+          "02": "F4.png cell 8"
+        },
         "dimensions": [
-          1254,
-          1254
+          2048,
+          2048
         ],
-        "columns": 5,
-        "rows": 4,
-        "first_cell": 0,
-        "extraction": "connected subjects on common source canvas"
+        "columns": 3,
+        "rows": 3,
+        "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
       }
     },
     "perch": {
@@ -163,8 +222,33 @@
         40,
         40
       ],
-      "models": {},
-      "notes": "Sitting on Siya's shoulder or a ledge in cutscenes. Poses: \"Perched, wings folded, feet gripping\" / \"Perched, head tilted, blinking\"."
+      "models": {
+        "01": "pro",
+        "02": "pro"
+      },
+      "notes": "Sitting on Siya's shoulder or a ledge in cutscenes. Poses: \"Perched, wings folded, feet gripping\" / \"Perched, head tilted, blinking\".",
+      "grid": {
+        "mode": "uniform",
+        "calibration_cell": 1,
+        "registration": "body, via the sheet's calibration cell",
+        "source_pixel_spacing": {
+          "01": 8.0,
+          "02": 8.0
+        }
+      },
+      "sheet": {
+        "sources": {
+          "01": "F2.png cell 2",
+          "02": "F2.png cell 3"
+        },
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "columns": 3,
+        "rows": 3,
+        "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
+      }
     },
     "peck": {
       "fps": 8,
@@ -197,26 +281,34 @@
         40
       ],
       "models": {
-        "01": "imagegen",
-        "02": "imagegen",
-        "03": "imagegen"
+        "01": "pro",
+        "02": "pro",
+        "03": "pro"
       },
       "notes": "The Robin strike. Poses: \"Wings pulled back, beak aimed forward, body coiled\" / \"Darting forward, beak jabbing, wings swept back\" / \"Bouncing back, wings flared\".",
       "grid": {
         "mode": "uniform",
-        "source_pixel_spacing": 4.854166666666667,
-        "calibration_cell": 1
+        "calibration_cell": 1,
+        "registration": "body, via the sheet's calibration cell",
+        "source_pixel_spacing": {
+          "01": 8.0,
+          "02": 8.0,
+          "03": 8.0
+        }
       },
       "sheet": {
-        "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+        "sources": {
+          "01": "F2.png cell 4",
+          "02": "F2.png cell 5",
+          "03": "F2.png cell 6"
+        },
         "dimensions": [
-          1254,
-          1254
+          2048,
+          2048
         ],
-        "columns": 5,
-        "rows": 4,
-        "first_cell": 2,
-        "extraction": "connected subjects on common source canvas"
+        "columns": 3,
+        "rows": 3,
+        "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
       }
     },
     "dive": {
@@ -250,26 +342,34 @@
         40
       ],
       "models": {
-        "01": "imagegen",
-        "02": "imagegen",
-        "03": "imagegen"
+        "01": "pro",
+        "02": "pro",
+        "03": "pro"
       },
       "notes": "Boss fight. Poses: \"Wings folded tight, diving steeply down-forward\" / \"Pulling out of the dive, wings flaring wide\" / \"Swooping level, wings spread\".",
       "grid": {
         "mode": "uniform",
-        "source_pixel_spacing": 4.854166666666667,
-        "calibration_cell": 1
+        "calibration_cell": 1,
+        "registration": "body, via the sheet's calibration cell",
+        "source_pixel_spacing": {
+          "01": 8.0,
+          "02": 8.0,
+          "03": 8.0
+        }
       },
       "sheet": {
-        "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+        "sources": {
+          "01": "F2.png cell 7",
+          "02": "F2.png cell 8",
+          "03": "F2.png cell 9"
+        },
         "dimensions": [
-          1254,
-          1254
+          2048,
+          2048
         ],
-        "columns": 5,
-        "rows": 4,
-        "first_cell": 5,
-        "extraction": "connected subjects on common source canvas"
+        "columns": 3,
+        "rows": 3,
+        "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
       }
     },
     "drop_sparks": {
@@ -301,25 +401,31 @@
         40
       ],
       "models": {
-        "01": "imagegen",
-        "02": "imagegen"
+        "01": "pro",
+        "02": "pro"
       },
       "notes": "Boss fight. Use `--free-palette`. Poses: \"Hovering, tail flicking down, a spray of sparks falling below\" / \"Wings up, sparks trailing\".",
       "grid": {
         "mode": "uniform",
-        "source_pixel_spacing": 4.854166666666667,
-        "calibration_cell": 1
+        "calibration_cell": 1,
+        "registration": "body, via the sheet's calibration cell",
+        "source_pixel_spacing": {
+          "01": 8.0,
+          "02": 8.0
+        }
       },
       "sheet": {
-        "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+        "sources": {
+          "01": "F4.png cell 2",
+          "02": "F4.png cell 3"
+        },
         "dimensions": [
-          1254,
-          1254
+          2048,
+          2048
         ],
-        "columns": 5,
-        "rows": 4,
-        "first_cell": 8,
-        "extraction": "connected subjects on common source canvas"
+        "columns": 3,
+        "rows": 3,
+        "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
       }
     },
     "hypnotised": {
@@ -351,25 +457,31 @@
         40
       ],
       "models": {
-        "01": "imagegen",
-        "02": "imagegen"
+        "01": "pro",
+        "02": "pro"
       },
       "notes": "Use `--free-palette`. Poses: \"Hovering stiffly, eyes replaced by purple spirals, beak open\" / \"Same, spirals turned the other way\".",
       "grid": {
         "mode": "uniform",
-        "source_pixel_spacing": 4.854166666666667,
-        "calibration_cell": 1
+        "calibration_cell": 1,
+        "registration": "body, via the sheet's calibration cell",
+        "source_pixel_spacing": {
+          "01": 7.989,
+          "02": 7.989
+        }
       },
       "sheet": {
-        "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+        "sources": {
+          "01": "F3.png cell 7",
+          "02": "F3.png cell 8"
+        },
         "dimensions": [
-          1254,
-          1254
+          2048,
+          2048
         ],
-        "columns": 5,
-        "rows": 4,
-        "first_cell": 10,
-        "extraction": "connected subjects on common source canvas"
+        "columns": 3,
+        "rows": 3,
+        "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
       }
     },
     "dizzy": {
@@ -403,26 +515,34 @@
         40
       ],
       "models": {
-        "01": "imagegen",
-        "02": "imagegen",
-        "03": "imagegen"
+        "01": "pro",
+        "02": "pro",
+        "03": "pro"
       },
       "notes": "The dizzy meter is full. Poses: \"Wobbling in the air, eyes as X marks, feathers ruffled\" / \"Tumbling sideways, wings limp\" / \"Lying on his back on the ground, little stars circling (separate fx)\".",
       "grid": {
         "mode": "uniform",
-        "source_pixel_spacing": 4.854166666666667,
-        "calibration_cell": 1
+        "calibration_cell": 1,
+        "registration": "body, via the sheet's calibration cell",
+        "source_pixel_spacing": {
+          "01": 8.788,
+          "02": 7.989,
+          "03": 7.989
+        }
       },
       "sheet": {
-        "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+        "sources": {
+          "01": "F3.png cell 2",
+          "02": "F3.png cell 3",
+          "03": "F3.png cell 4"
+        },
         "dimensions": [
-          1254,
-          1254
+          2048,
+          2048
         ],
-        "columns": 5,
-        "rows": 4,
-        "first_cell": 12,
-        "extraction": "connected subjects on common source canvas"
+        "columns": 3,
+        "rows": 3,
+        "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
       }
     },
     "wake": {
@@ -454,25 +574,31 @@
         40
       ],
       "models": {
-        "01": "imagegen",
-        "02": "imagegen"
+        "01": "pro",
+        "02": "pro"
       },
       "notes": "Poses: \"Sitting up, shaking his head\" / \"Hopping up, wings out, determined\".",
       "grid": {
         "mode": "uniform",
-        "source_pixel_spacing": 4.854166666666667,
-        "calibration_cell": 1
+        "calibration_cell": 1,
+        "registration": "body, via the sheet's calibration cell",
+        "source_pixel_spacing": {
+          "01": 9.586,
+          "02": 9.187
+        }
       },
       "sheet": {
-        "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+        "sources": {
+          "01": "F3.png cell 5",
+          "02": "F3.png cell 6"
+        },
         "dimensions": [
-          1254,
-          1254
+          2048,
+          2048
         ],
-        "columns": 5,
-        "rows": 4,
-        "first_cell": 15,
-        "extraction": "connected subjects on common source canvas"
+        "columns": 3,
+        "rows": 3,
+        "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
       }
     },
     "point": {
