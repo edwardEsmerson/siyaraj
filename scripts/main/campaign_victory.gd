@@ -82,6 +82,8 @@ func _continue_campaign() -> void:
 
 ## Campaign exits trigger the curtain close, then the existing aftermath.
 func _unlock_exit() -> void:
+	if not won or not _escape_ready or exit_zone != null:
+		return
 	var escape: Node = get_parent().get_node_or_null("PalaceEscape")
 	if escape != null:
 		escape.open()

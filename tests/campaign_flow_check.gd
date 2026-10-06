@@ -69,6 +69,8 @@ func run_checks() -> void:
 			check(cage.find_children("*", "CollisionObject2D", true, false).is_empty(), "Cage must not obstruct arena combat")
 		await ticks(4)
 		check(player.is_on_floor() and player.health == player.max_health and player.skyshot_ammo == 5, "Fight must start grounded with the arena's fresh loadout")
+		flow._unlock_exit()
+		check(flow.exit_zone == null and not current_scene.has_node("BossExit"), "Glow must stay absent while the boss is alive, even if an unlock is requested")
 		flow._unhandled_input(accept())
 		check(current_scene == showdown, "Enter must not skip a living boss")
 		if level == "palace":
@@ -84,6 +86,7 @@ func run_checks() -> void:
 		player = current_scene.get_node("Player")
 		await ticks(4)
 		check(not flow.won and boss.health == boss.max_health and player.health == player.max_health, "Retry must reset boss and player")
+		check(flow.exit_zone == null and not current_scene.has_node("BossExit"), "Restarting the fight must hide the glow until the boss is defeated again")
 		if level != "palace":
 			boss.take_damage(boss.max_health, Vector2.ZERO)
 		else:
