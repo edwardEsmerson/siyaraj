@@ -80,6 +80,24 @@ def texture(brief, key, roles, mode):
         layout = ("A wide side-scrolling parallax background layer. Horizontally seamless: the left edge "
                   "continues into the right edge. Side view, no characters, no UI, no text.")
         bg = ""
+    elif mode == "fringe":  # hangs under a platform
+        layout = ("A long horizontal pixel-art strip that runs across the FULL image width, edge to edge, "
+                  "horizontally seamless (the left end continues into the right end), centred vertically and about "
+                  "a third of the image tall, with flat key colour above and below it. It hangs UNDER a floating "
+                  "platform in a side-scroller, side view: a straight, solid top edge where it attaches to the "
+                  "platform's underside, and a ragged, dangling bottom edge. Evenly spread detail, no perspective.")
+        bg = background(key) + "\n"
+    elif mode == "piece":  # one isolated terrain piece (platform end cap etc.)
+        layout = ("Draw ONE isolated pixel-art game terrain piece, side view, no perspective, centred, about 65% of "
+                  "the image, with empty background all around. No characters, no text.")
+        bg = background(key) + "\n"
+    elif mode == "props":  # many small props on one sheet, split apart afterwards
+        layout = ("A pixel-art game prop sheet: 8 to 12 SEPARATE small decorative props, side view, no perspective, "
+                  "each standing upright, arranged in a loose grid with wide empty gaps between them (no prop touches "
+                  "another or the image edge). All at one consistent game scale: a small clay diya lamp is about 1/20 "
+                  "of the image height, a pot about 1/10, the largest prop at most 1/3. No characters, no text, no "
+                  "ground, no shadows.")
+        bg = background(key) + "\n"
     elif mode == "concept":  # art-direction mock: one framed screen, not seamless
         layout = ("A mock in-game screenshot of a 2D side-scrolling platformer level, 16:9, orthographic side "
                   "view, no perspective, no HUD, no text, no UI. Show the level's terrain kit clearly: a ground "

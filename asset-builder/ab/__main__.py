@@ -281,7 +281,7 @@ def cmd_keep(a):
 
 def cmd_texture(a):
     run = OUT / "textures" / a.name
-    aspect = {"tile": "1:1", "cap": "21:9", "concept": "16:9"}.get(a.mode, a.aspect)
+    aspect = {"tile": "1:1", "cap": "21:9", "fringe": "21:9", "concept": "16:9", "piece": "1:1", "props": "1:1"}.get(a.mode, a.aspect)
     refs = [ref_bytes(r, a.key) for r in a.ref]
     roles = [f"style/content reference ({Path(r).stem})" for r in a.ref]
     prompt = prompts.texture(a.brief, a.key, roles, a.mode)
@@ -292,16 +292,18 @@ def cmd_texture(a):
 
     def process(job, raw):
         problems = []
-        chunk = 1 if a.mode in ("tile", "cap") else a.chunk
+        if a.mode in ("piece", "props"):
+            return isolated(a, run, job, raw, previews)
+        chunk = 1 if a.mode in ("tile", "cap", "fringe") else a.chunk
         if a.mode == "tile":
             target = (a.tile, a.tile)
         else:
             target = (round(raw.width * a.height / raw.height) // chunk, a.height // chunk)
         source, px = raw, raw.height / target[1]
-        if a.mode in ("cutout", "cap"):
+        if a.mode in ("cutout", "cap", "fringe"):
             source, report = pixel.remove_background(raw, single=True)
             problems = [p for p in report["problems"] if "touches the image edge" not in p and "messy" not in p]
-        if a.mode == "cap":  # keep just the band (full width), sized to --cap-height
+        if a.mode in ("cap", "fringe"):  # keep just the band (full width), sized to --cap-height
             box = source.getchannel("A").getbbox()
             if not box:
                 return None, ["no strip found"]
@@ -311,7 +313,7 @@ def cmd_texture(a):
         native = pixel.snap(source, px=px, colours=a.colours)
         native = native.resize(target, Image.Resampling.NEAREST)  # absorb the snapper's +-few px
         native = native.resize((target[0] * chunk, target[1] * chunk), Image.Resampling.NEAREST)
-        if a.mode not in ("cutout", "cap"):
+        if a.mode not in ("cutout", "cap", "fringe"):
             native.putalpha(255)
         native.save(run / f"{job['id']}.png")
         if a.mode == "concept":
@@ -319,7 +321,7 @@ def cmd_texture(a):
             return native, problems
         axes = [0, 1] if a.mode == "tile" else [0]
         problems += [f"visible seam across {'xy'[ax]} edges" for ax in axes if pixel.seam(native, ax)]
-        repeat = (3, 3) if a.mode == "tile" else (3, 1) if a.mode == "cap" else (2, 1)
+        repeat = (3, 3) if a.mode == "tile" else (3, 1) if a.mode in ("cap", "fringe") else (2, 1)
         preview = Image.new("RGBA", (native.width * repeat[0], native.height * repeat[1]))
         for x in range(repeat[0]):
             for y in range(repeat[1]):
@@ -334,13 +336,58 @@ def cmd_texture(a):
         pixel.contact_sheet([im.resize((960, 540)) for im in shown], labels(results, a), run / "sheet.png", scale=1,
                             columns=2)
         print(f"review {run / 'sheet.png'}")
-    elif a.mode in ("tile", "cap"):
+    elif a.mode in ("tile", "cap", "fringe", "piece", "props"):
         shown = [previews[i] for i, (r, _) in results.items() if r]
-        pixel.contact_sheet(shown, labels(results, a), run / "sheet.png", scale=2 if a.mode == "cap" else 1,
-                            columns=1 if a.mode == "cap" else None)
+        strip = a.mode in ("cap", "fringe", "props")
+        pixel.contact_sheet(shown, labels(results, a), run / "sheet.png", scale=2 if strip else 1,
+                            columns=1 if strip else None)
         print(f"review {run / 'sheet.png'} (seams!)  keep one with:  cp {run}/NN.png textures/<area>/{a.name}.png")
     else:
         print(f"review {run}/NN-tiled.png (seams!)  keep one with:  cp {run}/NN.png textures/<area>/{a.name}.png")
+
+
+def isolated(a, run, job, raw, previews):
+    """piece: one object, longest side --piece art px. props: a sheet drawn at --sheet art px tall, split into
+    one PNG per prop (NN-pK.png), each trimmed so its bottom row is where it stands."""
+    import cv2
+    import numpy as np
+    cut, report = pixel.remove_background(raw)
+    problems = report["problems"]
+    box = cut.getchannel("A").getbbox()
+    if not box:
+        return None, problems or ["nothing found"]
+    if a.mode == "piece":
+        art = cut.crop(box)
+        px = max(art.size) / a.piece
+        art = pixel.snap(art, px=px, colours=a.colours)
+        art = art.resize((max(1, round(art.width * a.piece / max(art.size))),
+                          max(1, round(art.height * a.piece / max(art.size)))), Image.Resampling.NEAREST)
+        art.save(run / f"{job['id']}.png")
+        previews[job["id"]] = art
+        return art, problems
+    px = raw.height / a.sheet
+    art = pixel.snap(cut, px=px, colours=a.colours)
+    art = art.resize((round(raw.width / px), a.sheet), Image.Resampling.NEAREST)
+    alpha = (np.array(art.getchannel("A")) > 0).astype(np.uint8)
+    grown = cv2.dilate(alpha, np.ones((5, 5), np.uint8))  # keep flames/tassels with their prop
+    count, labels_, stats, _ = cv2.connectedComponentsWithStats(grown, connectivity=8)
+    for old in run.glob(f"{job['id']}-p*.png"):
+        old.unlink()
+    k = 0
+    for i in sorted(range(1, count), key=lambda i: (stats[i][1] // 64, stats[i][0])):
+        x, y, w, h, area = stats[i]
+        if area < 30:
+            continue
+        mask = (labels_[y:y + h, x:x + w] == i) & (alpha[y:y + h, x:x + w] > 0)
+        part = np.array(art.crop((x, y, x + w, y + h)))
+        part[~mask] = 0
+        prop = Image.fromarray(part)
+        prop = prop.crop(prop.getchannel("A").getbbox())
+        k += 1
+        prop.save(run / f"{job['id']}-p{k:02}.png")
+    art.save(run / f"{job['id']}.png")
+    previews[job["id"]] = art
+    return art, problems + ([] if k else ["no props found"])
 
 
 def blend(left, right, seed=0, step=4):
@@ -636,13 +683,16 @@ def parser():
     c = sub.add_parser("texture", help="tileable texture or parallax layer for maps")
     c.add_argument("name")
     c.add_argument("brief")
-    c.add_argument("--mode", default="tile", choices=["tile", "cap", "layer", "cutout", "concept"],
+    c.add_argument("--mode", default="tile", choices=["tile", "cap", "fringe", "piece", "props", "layer", "cutout", "concept"],
                    help="tile: seamless square fill; cap: platform top-edge strip (transparent); layer: opaque "
-                        "parallax; cutout: parallax shapes with transparency; concept: 16:9 mock level screen")
+                        "parallax; cutout: parallax shapes with transparency; concept: 16:9 mock level screen; fringe: strip "
+                        "hung under platforms; piece: one isolated object; props: sheet split into one PNG per prop")
     c.add_argument("--tile", type=int, default=128, help="tile size in art px (128 = 64 game units)")
     c.add_argument("--height", type=int, default=1080, help="layer height in art px (1080 = full screen)")
     c.add_argument("--chunk", type=int, default=2, help="art px per background pixel (backgrounds are chunkier)")
-    c.add_argument("--cap-height", type=int, default=32, help="cap strip height in art px (32 = 16 game units)")
+    c.add_argument("--cap-height", type=int, default=32, help="cap/fringe strip height in art px (32 = 16 game units)")
+    c.add_argument("--piece", type=int, default=80, help="piece: longest side in art px")
+    c.add_argument("--sheet", type=int, default=256, help="props: the sheet's height in art px (sets prop scale)")
     c.add_argument("--aspect", default="21:9", help="layer aspect: 16:9, 21:9 ...")
     c.add_argument("--colours", type=int, default=24)
     c.add_argument("--size", default="2K", choices=SIDE)
