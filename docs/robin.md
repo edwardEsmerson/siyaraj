@@ -30,10 +30,22 @@ The river and palace have no hints yet.
 
 ## Art
 
-Put the final art in `Visuals/Sprite`, an `AnimatedSprite2D` at scale 0.5 (1 game
-unit = 2 art px). Give it `SpriteFrames` with `fly` and `perch` animations, plus the
-optional `talk` and `point`. When frames are present, the placeholder polygons hide
-themselves. Draw the sprite facing right, because `Visuals` is mirrored for left.
+Robin is a Jatayu-inspired firebird: vermillion wings tipped with cream and green,
+a white vulture ruff, a hooked golden beak, a curled crest and a marigold tail fan.
+The approved sprite and its keyframes are in `asset-builder/sprites/robin/`, generated
+at 48 art px (24 game units, smaller than the 80 px flyer default so he can perch on
+Siya). The game copies are in `assets/sprites/robin/`, and `robin_frames.tres`
+defines three animations:
+
+- `fly`: 4 wing-beat frames at 10 fps.
+- `perch`: wings folded, standing still.
+- `talk`: perched with the beak opening and closing. It plays only while he is
+  perched and speaking.
+
+`Visuals/Sprite` uses these at scale 0.5 with the frames centred. The art faces right,
+and `Visuals` is mirrored for left. Remove the `SpriteFrames` and the placeholder
+polygons come back. To redo a pose, use `python -m ab frames robin <anim> --only N`
+followed by `python -m ab keep`, then copy the PNGs into `assets/sprites/robin/`.
 
 ## Scripting (cutscenes and the boss fight)
 

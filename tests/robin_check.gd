@@ -56,7 +56,7 @@ func run_checks() -> void:
 	await ticks(10)
 	check(get_first_node_in_group("robin") == robin, "Robin must register in the robin group")
 	check(robin.global_position.distance_to(robin._follow_spot()) < 30.0, "Robin must start beside Siya")
-	check(robin.placeholder.visible and not robin.sprite.visible, "Placeholder art shows until sprite frames exist")
+	check(robin.sprite.visible and not robin.placeholder.visible and robin.sprite.animation == &"fly", "Robin's sprite art must replace the placeholder")
 
 	# Standing still lets him perch on her head; moving sends him back into the air.
 	await ticks(roundi((robin.perch_delay + 0.8) * 60.0))

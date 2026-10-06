@@ -1,0 +1,47 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/fly_01.png" id="fly_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/fly_02.png" id="fly_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/fly_03.png" id="fly_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/fly_04.png" id="fly_04"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/perch_01.png" id="perch_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/perch_02.png" id="perch_02"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("fly_01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("fly_02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("fly_03")
+}, {
+"duration": 1.0,
+"texture": ExtResource("fly_04")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("perch_01")
+}],
+"loop": true,
+"name": &"perch",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("perch_01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("perch_02")
+}],
+"loop": true,
+"name": &"talk",
+"speed": 5.0
+}]
