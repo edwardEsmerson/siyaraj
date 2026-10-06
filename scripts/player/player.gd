@@ -36,7 +36,6 @@ var _attack_buffer_remaining: float = 0.0
 @onready var facing_marker: Polygon2D = $FacingMarker
 @onready var body: Polygon2D = $Body
 @onready var sparkler: Node2D = $Sparkler
-@onready var exhaust: Polygon2D = $DashExhaust
 
 
 func _ready() -> void:
@@ -94,7 +93,6 @@ func _physics_process(delta: float) -> void:
 		_dash_direction = facing_direction
 		_dash_remaining = movement_settings.dash_duration
 		_invulnerable_remaining = movement_settings.dash_duration + dash_invulnerability_grace
-		Burst.spawn(get_tree().current_scene, global_position + Vector2(0, -20), Color(1.0, 0.7, 0.2), "", 18.0)
 		_coyote_remaining = 0.0
 		_jump_buffer_remaining = 0.0
 		_process_dash(delta)
@@ -177,8 +175,6 @@ func _update_feedback() -> void:
 		body.modulate.a = 0.4 if int(_protection_remaining * 15.0) % 2 == 0 else 1.0
 	elif _invulnerable_remaining > 0.0:
 		body.modulate = Color(1.35, 1.35, 1.35, 0.7)
-	exhaust.visible = state == State.DASH
-	exhaust.scale.x = float(_dash_direction)
 	if state == State.DEAD:
 		body.color = Color(0.7, 0.2, 0.2)
 	elif state == State.DASH:
