@@ -48,4 +48,4 @@ horizontal_alignment = 1
 [node name="ReturnButton" type="Button" parent="Center/Content"]
 layout_mode = 2
 custom_minimum_size = Vector2(280, 48)
-text = "Return to playtest menu"
+text = "Return to title"
