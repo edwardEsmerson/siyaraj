@@ -1,0 +1,101 @@
+---
+name: siyaraj-assets
+description: Generate Siyaraj game art with Nano Banana on Vertex AI - new character/enemy/boss/prop sprites, animation keyframes for approved sprites, and map textures / parallax layers. Use for any sprite, keyframe, texture or background generation in asset-builder/.
+---
+
+# Siyaraj assets
+
+Work in `asset-builder/`. Run everything with `~/ml/bin/python -m ab ...` (`-h` on any command).
+Every command is idempotent: raw generations are cached in `out/`, so re-running only re-cleans
+(free). `--only 2,4` regenerates just those ids. Generation costs ~Rs12/image (2K pro), ~Rs22 (4K).
+
+## Layout
+- `sprites/<name>/` approved art: `sprite.png` (native), `meta.json` (brief, px, canvas, anchor, key),
+  `<anim>/` kept keyframes. Re-snapped to the canonical scale below. `python -m ab ls` lists them. These are the style + identity source of truth.
+- `refs/` inspiration images (characters/, weapons/, hud/, style/). `textures/<area>/` kept map art.
+- `poses/<anim>.txt` reusable keyframe pose lists (idle, walk, run, jump, dash, attack, throw, hurt, death, fly; Siya weapons: fuljadi, rocket, chakri).
+- `out/` scratch (gitignored). `ab/` the tool: `prompts.py` holds ALL prompt text, `pixel.py` cleanup.
+- Boss/enemy design notes for briefs: `../docs/bosses/*.md`.
+
+## Canonical scale (decided 2026-10-06; everything follows this)
+**1 game unit = 2 art px.** Art is authored for 1080p; the game is 960x540 (`canvas_items` stretch),
+so every sprite/texture goes in Godot at **scale 0.5** (pixel-perfect on 1080p+ screens). Sprite size
+= the subject's longest side, derived from its collider, set with `--role` (code: `ROLES` in `ab/__main__.py`):
+
+| role | art px | game units | used for |
+| --- | --- | --- | --- |
+| hero | 80 | 40 | Siya (collider 24x40), Raj, Swaminathan |
+| enemy | 88 | 44 | basic rakshas / ground shooter (32x40) |
+| brute | 136 | 68 | brute (48x64) |
+| flyer | 80 | 40 | winged demon (32x28 + wings), Robin smaller (`--height 40`) |
+| boss | 200 | 100 | Khara (56x92) |
+| big-boss | 280 | 140 | Ravan (100x60 body + heads) |
+| prop | 40 | 20 | weapons, thrown fireworks |
+| pickup | 24 | 12 | collectibles, small projectiles (radius 5) |
+
+Tiles: 128 art px (64 units). Parallax layers: 1080 art px tall (full screen), drawn at 2 art px per
+pixel (`--chunk 2`). Canvases are square, 1.5x the subject, so poses have room; feet sit on the anchor.
+
+## Cast notes (from the proposal)
+- Siya: hero, lean and graceful, visible hands (sparkler whip, rocket dash). Approved: `sprites/siya`.
+- Raj: dramatic captive / comic foil, clean-shaven, expressive poses.
+- Swaminathan: villain, big twirlable moustache; angrier phase after it is burned.
+- Robin: small bird companion (later hypnotised eyes, dizzy fall). Bosses: Khara, Ravan (`../docs/bosses/`).
+- Guards: reuse base shapes with palette swaps rather than new designs. No baked glow on characters;
+  firework light/sparks are separate effect sprites. Reference photos guide shape only (copyrighted).
+
+## 1. New sprite (character, enemy, boss, prop)
+```bash
+python -m ab sprite ravan "Ravan, ten-headed rakshasa king boss: ..." -r refs/characters/trishiras-three-headed-rakshasa.jpg --size 4K --style siya basic-rakshas
+python -m ab pick ravan 03            # after the user chooses from out/ravan/sheet.png
+```
+- 4 candidates by default (`-n`). Show the user `out/<name>/sheet.png` and **let them choose**.
+- `--style` = approved sprites to match pixel style (default `siya`; they never define identity).
+  `-r` = design references for the new subject (photos/paintings are fine).
+- Always pass the right `--role` (see the table); `--height N` overrides. Above 150px it generates at 4K
+  automatically. Flyers/props/projectiles: `--anchor center`.
+- `--key magenta` (or blue) if the subject is green; the key must not appear on the subject.
+- Brief: role, silhouette, build, face/hair, outfit colours, prop + which hand, relative size. Keep it
+  concrete and short; style/background/framing text is added automatically.
+
+## 2. Keyframes for an approved sprite
+```bash
+python -m ab frames siya run                       # uses poses/run.txt
+python -m ab frames siya cheer "arms raised, jumping with joy" "landing, grinning"
+python -m ab keep siya run                         # -> sprites/siya/run/ (frames, strip.png, preview.gif)
+```
+- One request per pose, each conditioned on the approved sprite; colours are locked to the sprite's
+  palette (`--free-palette` for effects like sparks). Frames are registered on the sprite's anchor (feet,
+  or body centre for flyers), so jumps/bobs are added in-engine.
+- Review `out/<name>/<anim>/sheet.png` + `preview.gif`; regenerate bad poses with `--only`.
+- These are keyframes: 2-5 strong poses per action. Write poses as concrete body positions (limbs,
+  weight, facing), not feelings. Add a reusable list to `poses/` when a new action repeats across sprites.
+
+## 3. Map textures and parallax layers
+```bash
+python -m ab texture ghat-stone "worn sandstone ghat steps, ..." --mode tile --tile 128
+python -m ab texture forest-far "dusk forest silhouettes, ..." --mode layer --aspect 21:9    # opaque, 1080px tall
+python -m ab texture forest-near "hanging vines and roots" --mode cutout                    # transparent shapes
+cp out/textures/forest-far/01.png textures/forest/forest-far.png
+```
+Check `NN-tiled.png` for seams before keeping. Existing forest layers: `textures/forest/j1-j4.png`.
+Viewport is 960x540 game units = 1920x1080 art px.
+
+## Problems the tool flags (`!!` in output, `!` on sheets)
+It auto-regenerates once (`--retry`). Background removal measures the real border colour, so off-colour
+flat backgrounds (muted green, grey, white) are handled; what it can't fix and flags:
+- fake checkerboard / scene bleed -> regenerate (`--only N`); usually caused by a photo `-r` - try fewer refs.
+- art touching the edge -> clipped; regenerate.
+- size drift on frames -> fine for crouch/stretch poses, otherwise regenerate.
+
+## Rate limits (429 RESOURCE_EXHAUSTED)
+Pro image models on Vertex use Dynamic Shared Quota: 429 means Google's shared pool is busy, not a
+per-project cap, so extra keys/projects don't help. The tool backs off and retries automatically
+(up to ~5 min). If it persists: `--jobs 1`, or `--fallback flash` (separate capacity, slightly lower
+quality), or try later. Never upgrade billing or use AI Studio keys (trial credits cover Vertex only).
+Spend is capped by `~/nanobanana/gen.py` (ledger `~/nanobanana/spend.json`); `python -m ab doctor` shows it.
+
+## Using art in the game
+Copy chosen PNGs into the Godot project (e.g. `assets/sprites/<name>/`); asset-builder has a
+`.gdignore`, so Godot never imports it. Use them at **scale 0.5** with the sprite's `anchor` as the
+origin offset (feet on the collider bottom). The project already uses nearest filtering.

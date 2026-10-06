@@ -1,0 +1,5 @@
+out/
+__pycache__/
+# copyrighted reference images (repo is public) and the built pixel-snapper binary (setup.sh)
+refs/
+bin/

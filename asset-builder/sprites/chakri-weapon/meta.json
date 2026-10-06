@@ -1,0 +1,17 @@
+{
+  "name": "chakri-weapon",
+  "role": "prop",
+  "target": 40,
+  "brief": "One isolated chakri ground-spinner firework weapon for Siyaraj. A low shallow disc, wide horizontally, pale cream paper-covered top visible as an oval above a thick rounded paper-wrapped rim. The rim has broad hot-pink, turquoise and marigold bands separated by small cream strips. One short thick tubular end curves along the rim and extends toward the lower right with a dark unlit end face, exactly like the shape of a single chakri in attachment 1. Simple handmade Diwali appearance, clean readable outline and chunky colors. Small static activation/spawn item which will later orbit the player. No player, hands, other objects, stack, sparks, flame, glow, motion trails, orbit ring, text, watermarks or photo texture. Cream top with one simple chunky pink-and-marigold four-petal center motif, no intricate ornament. Balanced pink and turquoise striped rim, marigold edge accents. Keep end shape fixed.",
+  "key": "green",
+  "size": "2K",
+  "canvas": [
+    64,
+    64
+  ],
+  "anchor": [
+    32,
+    31
+  ],
+  "anchor_mode": "center"
+}

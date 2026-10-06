@@ -1,0 +1,17 @@
+{
+  "name": "winged-forest-demon",
+  "role": "flyer",
+  "target": 80,
+  "brief": "Winged forest demon creature for Siyaraj, adapted from attachment 1. A lean adult gargoyle-like imp with moss/olive-green skin, angular hunched torso, long pointed swept-back ears, two slim curved head horns, one sharp right-facing hooked muzzle, a single visible marigold eye and small ivory fang. Two arms with long three-fingered claws and two digitigrade legs with three-toed talons; exactly four limbs plus two separate bat wings. The near leathery bat wing rises behind the shoulders and arcs to the left/back, with three clear ribs and a scalloped lower edge; the far wing is partially visible offset behind it. Keep the head and forward claw unobscured in a strict right-facing profile. A compact alert crouch with both taloned feet at one baseline, elbows bent and forward claws lowered; no front-facing symmetric spread. Deep aubergine outline and dark olive wing membranes, lighter moss-green ribs, sparse hot-pink sash at the waist, one marigold wrist band and one tiny ivory skull charm hung at the waist. Natural sinewy anatomy, no armor, crown, mace or human clothing. Omit the painting background, branch, hanging bones and scenery. Total creature including wing tips is approximately 90 native pixels tall and 92 native pixels wide. Body without wings is about 60 native pixels tall. Keep horns, muzzle, eye, fang, claws and wing ribs as bold separated pixel clusters. Fixed across variants: green skin, face, horns, crouching anatomy, wing count, sash and charm. Only wing-edge shape, minimal accent motifs and facial expression may vary. Same identity with a slightly hooked upper wing tip and two deeper lower-edge scallops; spare marigold wrist band.",
+  "key": "blue",
+  "size": "2K",
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    71
+  ],
+  "anchor_mode": "center"
+}

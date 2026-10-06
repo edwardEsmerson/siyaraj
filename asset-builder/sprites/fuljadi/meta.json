@@ -1,0 +1,17 @@
+{
+  "name": "fuljadi",
+  "role": "prop",
+  "target": 40,
+  "brief": "Standalone unlit fuljadi (phuljhari/sparkler) for Siyaraj, the handheld main melee weapon. A single slender straight metal wire with a slightly thicker matte unburnt coated distal section, rounded blunt tip, and a short exposed wire hand grip. Horizontal orthographic side view, hand-grip end LEFT and coated tip RIGHT. No character or hand. No sparks, fire, ember, smoke, glow or effects. About 88 native pixels long, with 26 native pixels of grip and 62 pixels of coated rod; readable 6-pixel coated diameter. Keep the real sparkler silhouette, with restrained optional grip decoration only. Classic plain fuljadi: exposed slim steel wire grip, no cloth wrap or decorative collar. Matte coated rod with one sparse muted highlight stripe; minimal everyday sparkler silhouette.",
+  "key": "green",
+  "size": "2K",
+  "canvas": [
+    64,
+    64
+  ],
+  "anchor": [
+    32,
+    32
+  ],
+  "anchor_mode": "center"
+}

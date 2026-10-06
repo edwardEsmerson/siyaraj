@@ -1,0 +1,4 @@
+# keyframes, one per line. Loop.
+Relaxed neutral stance, weight centred, arms loose at the sides, feet planted
+Small inhale: chest and shoulders lifted slightly, head up a touch, feet planted
+Exhale: shoulders dropped slightly, knees a little softer, feet planted
