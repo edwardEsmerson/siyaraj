@@ -100,8 +100,8 @@ func run_checks() -> void:
 	current_scene.checkpoint_guard.enabled = false
 	for enemy in current_scene.course.get_node("Encounters").get_children():
 		enemy.set_physics_process(false)
-		# Combat probes below move ClearingGuard; other authored encounters must
-		# not occupy their safe retry positions as the forest encounter list grows.
+		# Companion probes control ClearingGuard explicitly below. Other authored
+		# encounters must not turn the supposed quiet areas into combat tests.
 		if enemy.name != &"ClearingGuard":
 			enemy.collision_layer = 0
 	await ticks(10)

@@ -43,9 +43,11 @@ remain distinct. Story dialogue, Robin's final reveal and portraits are unchange
 Session memory uses the existing `seen_hints` dictionary and `forget_hints()` API;
 cross-session persistence belongs to the save/load system.
 
-The homing missile lesson starts before Hollow Trunks at X=7100, rather than at
-the later Banyan shooter. An earlier optional Root Chamber visit teaches it on
-the second descent landing at (1100, -1750). Both triggers share `homing_dash`,
+The homing missile lesson plays at X=2280, after ClearingGuard and before
+ClearingRearShooter, the main route's first shooter. Like the guard and diya
+hints, it waits until the nearby clearing fight is over. An earlier optional
+Root Chamber visit teaches it at the room entry (450, -2050), before any of the
+chamber's enemies come into range. Both triggers share `homing_dash`,
 so players hear this advice once whichever route they take first. They use the
 same combat deferral and quiet-time policy as other tutorials. `{dash}` in hint
 text resolves to the named Dash action and its current keyboard/controller

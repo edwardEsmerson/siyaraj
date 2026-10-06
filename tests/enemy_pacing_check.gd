@@ -2,9 +2,76 @@ extends "res://tests/forest_check.gd"
 ## Real patrol and zero-ammo lash probes for the added encounters, including raised main-route landings.
 
 const ADDED: Dictionary = {
-	"forest": ["ClearingScout", "RidgeGuard", "HollowExitGuard", "BanyanExitGuard", "UpperEntryGuard", "FinalScout", "FinalLowGuard", "FinalExitGuard"],
-	"river": ["DockGuard", "GhatRestGuard", "GhatEntryShooter", "ChannelScout", "ProcessionBrute"],
-	"palace": ["GateGuard", "GalleryEntranceGuard", "GalleryExitGuard", "RoofLookoutScout", "InnerEntryBrute", "InnerHallGuard"],
+	"forest": [
+		"ClearingScout",
+		"RidgeGuard",
+		"HollowExitGuard",
+		"BanyanExitGuard",
+		"UpperEntryGuard",
+		"FinalScout",
+		"FinalLowGuard",
+		"FinalExitGuard",
+		"EdgeRunGuard",
+		"EdgeStumpGuard",
+		"ClearingRearShooter",
+		"BranchGuard",
+		"BranchScout",
+		"RidgeApproachGuard",
+		"RidgeDropShooter",
+		"RidgeExitGuard",
+		"HollowEntryGuard",
+		"HollowWestGuard",
+		"StoneEntryScout",
+		"StoneMiddleGuard",
+		"StoneExitGuard",
+		"BanyanCrownScout",
+		"BanyanDescentGuard",
+		"UpperLandingShooter",
+		"ShrineBranchScout",
+		"FinalHighGuard",
+	],
+	"river": [
+		"DockGuard",
+		"GhatRestGuard",
+		"GhatEntryShooter",
+		"ChannelScout",
+		"ProcessionBrute",
+		"BankGuard",
+		"DockShooter",
+		"BrokenDockGuard",
+		"BrokenDockScout",
+		"FerryRearGuard",
+		"StoneBankGuard",
+		"StoneHighScout",
+		"StoneCourtShooter",
+		"GhatWestScout",
+		"GhatCourtGuard",
+		"GhatExitGuard",
+		"BridgeDescentGuard",
+		"BridgeFarGuard",
+		"ChannelMiddleGuard",
+		"ChannelExitShooter",
+	],
+	"palace": [
+		"GateGuard",
+		"GalleryEntranceGuard",
+		"GalleryExitGuard",
+		"RoofLookoutScout",
+		"InnerEntryBrute",
+		"InnerHallGuard",
+		"GateLintelShooter",
+		"GateDescentGuard",
+		"CourtyardRearGuard",
+		"WestColumnGuard",
+		"GalleryRearShooter",
+		"RoofStairGuard",
+		"BrokenRoofGuard",
+		"BrokenRoofScout",
+		"RoofCourtRearGuard",
+		"InnerWestScout",
+		"InnerEastGuard",
+		"ThroneRoofGuard",
+	],
 }
 
 func run_checks() -> void:
@@ -31,7 +98,18 @@ func run_checks() -> void:
 	await ticks(180)
 	check(player.health == player.max_health, "Root room arrival must remain safe through a patrol cycle")
 	freeze_encounters()
-	await probe_encounter("RootDescentGuard")
+	for enemy_name: String in ["RootDescentGuard", "RootFirstGuard", "RootSecondScout", "RootBedGuard"]:
+		await probe_encounter(enemy_name)
+	forest.current_room = &"CanopyNest"
+	forest.room_spawn = Vector2(350, -3600)
+	change_scene_to_file("res://scenes/main/forest.tscn")
+	await scene_changed
+	player = current_scene.player
+	await ticks(180)
+	check(player.health == player.max_health, "Nest arrival must remain safe through a patrol cycle")
+	freeze_encounters()
+	for enemy_name: String in ["NestEntryGuard", "CrownEastShooter"]:
+		await probe_encounter(enemy_name)
 	forest.checkpoint_x = 160.0
 	forest.current_room = &""
 	forest.lit_checkpoints.clear()

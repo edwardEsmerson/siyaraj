@@ -59,7 +59,7 @@ func run_checks() -> void:
 	await ticks(4)
 	course = current_scene.course
 	var encounters := course.get_node("Encounters")
-	check(encounters.get_child_count() == 15, "River must include fifteen staged encounters")
+	check(encounters.get_child_count() == 30, "River must include thirty staged encounters")
 	for enemy in encounters.get_children():
 		if not enemy.get_meta("airborne", false) and enemy.name != &"BridgeFlyer":
 			check(enemy.is_on_floor(), "%s must spawn on a broad combat landing" % enemy.name)

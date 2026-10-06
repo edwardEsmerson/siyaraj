@@ -1,6 +1,7 @@
 extends Node2D
 ## Shared timed melee swing. Movement remains owned by the character controller.
 const Burst = preload("res://scripts/effects/burst.gd")
+const SCENERY_MASK: int = 32
 
 @export var target_mask: int = 4
 @export var damage: int = 1
@@ -80,6 +81,19 @@ func _hit_overlaps() -> void:
 		target.take_damage(damage, Vector2(knockback.x * direction, knockback.y))
 		if target.health < health_before:
 			Burst.spawn(get_tree().current_scene, impact_at, swing_color, "ZAP!" if target_mask == 4 else "HIT!")
+	# Only Siya's lash touches optional scenery. A separate area query keeps the
+	# enemy body query and its result budget unchanged.
+	if target_mask == 4:
+		query.collision_mask = SCENERY_MASK
+		query.collide_with_bodies = false
+		query.collide_with_areas = true
+		for result in get_world_2d().direct_space_state.intersect_shape(query):
+			var prop: Node = result.collider.get_parent()
+			var id := prop.get_instance_id()
+			if _hit_targets.has(id) or not prop.has_method("on_scenery_hit"):
+				continue
+			_hit_targets[id] = true
+			prop.on_scenery_hit(direction)
 
 
 func _draw() -> void:

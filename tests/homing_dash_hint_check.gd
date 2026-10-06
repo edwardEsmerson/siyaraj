@@ -41,6 +41,22 @@ func load_forest(room: StringName = &"") -> void:
 	player.set_physics_process(false)
 
 
+## Stand in for the player having beaten the fights already passed on this route.
+func clear_fights_before(hint: Area2D) -> void:
+	for enemy in current_scene.course.get_node("Encounters").get_children():
+		if enemy.get_meta("room", &"") == Forest.current_room and enemy.global_position.x < hint.global_position.x:
+			enemy.free()
+	await ticks(2)
+
+
+func route_shooters() -> Array[Node]:
+	var shooters: Array[Node] = []
+	for enemy in current_scene.course.get_node("Encounters").get_children():
+		if enemy.get_meta("room", &"") == Forest.current_room and enemy.scene_file_path.ends_with("ground_shooter.tscn"):
+			shooters.append(enemy)
+	return shooters
+
+
 func enter_hint(hint: Area2D) -> void:
 	player.position = hint.global_position + Vector2(-100, -20)
 	await ticks(3)
@@ -55,6 +71,9 @@ func check_lesson(room: StringName, hint_name: String, shooter_name: String) -> 
 	var hint: Area2D = current_scene.course.get_node("RobinHints/" + hint_name)
 	var shooter: CharacterBody2D = current_scene.course.get_node("Encounters/" + shooter_name)
 	check(hint.global_position.x < shooter.global_position.x, "Lesson must precede the first shooter on this route")
+	for other in route_shooters():
+		check(other.global_position.x >= shooter.global_position.x, "%s must be the first shooter on this route, not %s" % [shooter_name, other.name])
+	await clear_fights_before(hint)
 	await enter_hint(hint)
 	check(not robin.combat_is_near(), "Authored lesson must be outside live enemy and missile range")
 	check(not shooter._can_see(player), "Shooter must not be able to fire during the first lesson")
@@ -70,10 +89,12 @@ func check_lesson(room: StringName, hint_name: String, shooter_name: String) -> 
 	check(spoken.size() == 1, "Leaving and re-entering must not repeat the missile lesson")
 	await load_forest(room)
 	hint = current_scene.course.get_node("RobinHints/" + hint_name)
+	await clear_fights_before(hint)
 	await enter_hint(hint)
 	check(spoken.size() == 1, "Death-style scene reload must retain lesson memory")
 	await load_forest(&"" if room != &"" else &"RootChamber")
 	hint = current_scene.course.get_node("RobinHints/" + ("ShooterHint" if room != &"" else "RootShooterHint"))
+	await clear_fights_before(hint)
 	await enter_hint(hint)
 	check(spoken.size() == 1, "Taking the other route must not repeat the same lesson")
 
@@ -83,6 +104,7 @@ func check_deferral_and_prompts() -> void:
 	spoken.clear()
 	await load_forest()
 	var hint: Area2D = current_scene.course.get_node("RobinHints/ShooterHint")
+	await clear_fights_before(hint)
 	var original: Array[InputEvent] = InputMap.action_get_events(&"dash")
 	InputMap.action_erase_events(&"dash")
 	var key := InputEventKey.new()
@@ -149,7 +171,7 @@ func check_real_missile_dodge(room: StringName, shooter_name: String, at: Vector
 
 
 func run_checks() -> void:
-	await check_lesson(&"", "ShooterHint", "HollowShooter")
+	await check_lesson(&"", "ShooterHint", "ClearingRearShooter")
 	await check_lesson(&"RootChamber", "RootShooterHint", "RootShooter")
 	await check_deferral_and_prompts()
 	await check_real_missile_dodge(&"", "HollowShooter", Vector2(7760, 430))
