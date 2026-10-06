@@ -1,0 +1,27 @@
+{
+  "name": "swami-lightning-flash",
+  "brief": "a lightning strike impact on the ground: a bright white and cyan starburst flash with crackling zigzag sparks spraying sideways from a flat bottom, small cyan debris. Deep blue outline. No character.",
+  "key": "magenta",
+  "role": "hero",
+  "target": 112,
+  "size": "2K",
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "prop",
+  "candidate_id": "02",
+  "model": "pro",
+  "canvas": [
+    192,
+    192
+  ],
+  "anchor": [
+    96,
+    180
+  ],
+  "art_dimensions": [
+    119,
+    71
+  ],
+  "generation_pixel_size": 13.875,
+  "problems": []
+}

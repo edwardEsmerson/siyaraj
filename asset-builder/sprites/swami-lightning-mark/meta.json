@@ -1,0 +1,27 @@
+{
+  "name": "swami-lightning-mark",
+  "brief": "a glowing cyan magic warning circle lying flat on the ground seen from the side (a wide thin ellipse about four times wider than tall) with small crackling sparks rising from it and a little zigzag mark in the middle. Deep blue outline. No character.",
+  "key": "magenta",
+  "role": "hero",
+  "target": 112,
+  "size": "2K",
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "prop",
+  "candidate_id": "02",
+  "model": "flash",
+  "canvas": [
+    176,
+    176
+  ],
+  "anchor": [
+    88,
+    165
+  ],
+  "art_dimensions": [
+    111,
+    84
+  ],
+  "generation_pixel_size": 15.357142857142858,
+  "problems": []
+}

@@ -1,0 +1,41 @@
+{
+  "name": "ladi-cracker",
+  "animation": "ash",
+  "size": "2K",
+  "view": "front",
+  "subject": "prop",
+  "anchor_mode": "feet",
+  "fps": 8,
+  "loop": "none",
+  "poses": [
+    "the same cracker after it has exploded: only the bottom quarter of the tube remains as a short charred stub, completely scorched black and ash-grey, a ragged torn-open top edge with a few splayed burnt paper petals, no gold band, no green, only two tiny dull red scraps, a small pile of grey ash around its base, no fuse. No flame, no spark, no smoke, no glow.",
+    "the same cracker after it has exploded: a flattened, burnt and split paper husk lying on the ground, charred black and ash-grey with one curled dull red scrap, very low, about a quarter of the original height. No fuse, no flame, no spark, no smoke."
+  ],
+  "expected_frames": 2,
+  "free_palette": true,
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "frames": [
+    "01",
+    "02"
+  ],
+  "problems": {},
+  "models": {
+    "01": "flash",
+    "02": "pro"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 32.0
+  },
+  "canvas": [
+    64,
+    64
+  ],
+  "anchor": [
+    32,
+    60
+  ]
+}

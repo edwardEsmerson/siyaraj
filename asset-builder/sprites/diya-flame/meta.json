@@ -1,0 +1,27 @@
+{
+  "name": "diya-flame",
+  "brief": "A single small oil-lamp flame effect sprite for a clay diya, with nothing else: an upright teardrop candle flame, rounded base at the bottom and one pointed tip at the top leaning very slightly right. Three flat colour bands from inside out: a small white-yellow hot core low in the flame, bright marigold-yellow body, deep orange outer edge with a thin red-orange rim. No dark outline, no wick, no lamp, no smoke, no sparks, no glow halo, no rays. About 14 pixels wide and 28 pixels tall.",
+  "key": "blue",
+  "role": "pickup",
+  "target": 28,
+  "size": "2K",
+  "anchor_mode": "feet",
+  "view": "front",
+  "subject": "prop",
+  "candidate_id": "04",
+  "model": "pro",
+  "canvas": [
+    48,
+    48
+  ],
+  "anchor": [
+    24,
+    45
+  ],
+  "art_dimensions": [
+    15,
+    28
+  ],
+  "generation_pixel_size": 32.25,
+  "problems": []
+}

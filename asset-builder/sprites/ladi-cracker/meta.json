@@ -1,0 +1,27 @@
+{
+  "name": "ladi-cracker",
+  "brief": "One single small Indian Diwali ladi firecracker (one cracker from a string of chained crackers), standing upright, front view. A short fat cylinder of glossy red paper, about twice as tall as wide, crimped flat ends, one narrow marigold-gold paper band and one thin green paper band wrapped around the middle, a tiny dark printed star. A short twisted grey-brown fuse (wick) sticks straight up out of the top centre, about a third of the tube's height. Deep aubergine outline, two or three hard shade steps, small paper-crease highlight. Unlit: no flame, spark, smoke, glow or lettering. Nothing else in the image.",
+  "key": "blue",
+  "role": "prop",
+  "target": 36,
+  "size": "2K",
+  "anchor_mode": "feet",
+  "view": "front",
+  "subject": "prop",
+  "candidate_id": "03",
+  "model": "pro",
+  "canvas": [
+    64,
+    64
+  ],
+  "anchor": [
+    32,
+    60
+  ],
+  "art_dimensions": [
+    14,
+    33
+  ],
+  "generation_pixel_size": 34.111111111111114,
+  "problems": []
+}

@@ -34,24 +34,32 @@
   "subject": "full-body",
   "problems": {},
   "models": {
-    "01": "imagegen",
-    "02": "imagegen",
-    "03": "imagegen"
+    "01": "pro",
+    "02": "pro",
+    "03": "pro"
   },
   "grid": {
     "mode": "uniform",
-    "source_pixel_spacing": 4.854166666666667,
-    "calibration_cell": 1
+    "calibration_cell": 1,
+    "registration": "body, via the sheet's calibration cell",
+    "source_pixel_spacing": {
+      "01": 8.788,
+      "02": 7.989,
+      "03": 7.989
+    }
   },
   "sheet": {
-    "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+    "sources": {
+      "01": "F3.png cell 2",
+      "02": "F3.png cell 3",
+      "03": "F3.png cell 4"
+    },
     "dimensions": [
-      1254,
-      1254
+      2048,
+      2048
     ],
-    "columns": 5,
-    "rows": 4,
-    "first_cell": 12,
-    "extraction": "connected subjects on common source canvas"
+    "columns": 3,
+    "rows": 3,
+    "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
   }
 }

@@ -1,0 +1,27 @@
+{
+  "name": "swami-fire-splash",
+  "brief": "a burst of fire splashing against the ground: orange and yellow flame tongues fanning up and outward from a flat bottom, a few flying sparks. Flat pixel flames with dark red outlines. No character.",
+  "key": "blue",
+  "role": "hero",
+  "target": 96,
+  "size": "2K",
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "prop",
+  "candidate_id": "01",
+  "model": "pro",
+  "canvas": [
+    160,
+    160
+  ],
+  "anchor": [
+    80,
+    150
+  ],
+  "art_dimensions": [
+    99,
+    78
+  ],
+  "generation_pixel_size": 17.59375,
+  "problems": []
+}

@@ -1,0 +1,59 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "poses": [
+    "Perched upright, wings folded neatly along the body, tail plumes hanging straight down behind, talons gripping below the belly, head up and proud, facing right",
+    "Identical to the perched pose facing right (head on the right, one tail fan hanging down on the left behind the body, wings folded), only the beak is open as if chirping and the crest is raised a little"
+  ],
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "free_palette": false,
+  "name": "robin",
+  "animation": "perch",
+  "size": "sheet",
+  "expected_frames": 2,
+  "frames": [
+    "01",
+    "02"
+  ],
+  "canvas": [
+    80,
+    80
+  ],
+  "anchor": [
+    40,
+    40
+  ],
+  "anchor_mode": "center",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "pro",
+    "02": "pro"
+  },
+  "grid": {
+    "mode": "uniform",
+    "calibration_cell": 1,
+    "registration": "body, via the sheet's calibration cell",
+    "source_pixel_spacing": {
+      "01": 8.0,
+      "02": 8.0
+    }
+  },
+  "sheet": {
+    "sources": {
+      "01": "F2.png cell 2",
+      "02": "F2.png cell 3"
+    },
+    "dimensions": [
+      2048,
+      2048
+    ],
+    "columns": 3,
+    "rows": 3,
+    "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
+  }
+}
