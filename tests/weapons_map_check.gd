@@ -27,7 +27,7 @@ func press(action: StringName) -> void:
 
 
 func run_checks() -> void:
-	change_scene_to_file("res://scenes/combat/weapons_playground.tscn")
+	change_scene_to_file("res://scenes/dev/weapons_playground.tscn")
 	await scene_changed
 	player = current_scene.get_node("Player")
 	var guard: CharacterBody2D = current_scene.get_node("Guard")

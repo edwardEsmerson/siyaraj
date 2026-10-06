@@ -3,7 +3,7 @@ extends Node2D
 const PlayerScene = preload("res://scenes/player/player.tscn")
 const PrototypePlayer = preload("res://scripts/player/weapons_playground_player.gd")
 const PrototypeSparkler = preload("res://scripts/combat/prototype_sparkler.gd")
-const Dummy = preload("res://scripts/combat/weapon_dummy.gd")
+const Dummy = preload("res://scripts/dev/weapon_dummy.gd")
 const GuardScene = preload("res://scenes/enemies/enemy.tscn")
 
 const MAP_WIDTH: int = 4200

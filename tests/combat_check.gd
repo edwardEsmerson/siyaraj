@@ -1,5 +1,6 @@
 extends SceneTree
 ## Exercises timed melee queries, enemy decisions, protection and real scene reloads.
+const Sandbox = preload("res://scripts/dev/sandbox.gd")
 
 var failures: int = 0
 var player: CharacterBody2D
@@ -25,10 +26,11 @@ func ticks(count: int) -> void:
 func reset_arena(freeze_enemy: bool = true) -> void:
 	for action in [&"attack", &"dash", &"move_left", &"move_right", &"jump"]:
 		Input.action_release(action)
-	change_scene_to_file("res://scenes/combat/combat_arena.tscn")
+	Sandbox.next_encounter = Sandbox.Encounter.GUARD
+	change_scene_to_file("res://scenes/dev/sandbox.tscn")
 	await scene_changed
 	player = current_scene.get_node("Player")
-	enemy = current_scene.get_node("TestCourse/Enemy")
+	enemy = current_scene.get_node("Enemy")
 	enemy.set_physics_process(not freeze_enemy)
 	await ticks(3)
 
@@ -129,7 +131,7 @@ func run_checks() -> void:
 	await ticks(3)
 	check(current_scene != old_scene, "Lethal damage must restart the encounter")
 	player = current_scene.get_node("Player")
-	enemy = current_scene.get_node("TestCourse/Enemy")
+	enemy = current_scene.get_node("Enemy")
 	check(player.health == 3 and enemy.health == 3, "Restart must restore both combatants' health")
 
 	if failures == 0:

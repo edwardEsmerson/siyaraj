@@ -22,7 +22,7 @@ five shots. Hold K for a full charge, then release for a chakri spin.
 Chakri has a 30-second cooldown. Ammo and cooldowns appear on the HUD.
 Doors preserve health, remaining shots and cooldowns. Diyas only save your
 position. Death and R restore the five-shot loadout and reset cooldowns.
-For isolated practice, open `scenes/combat/weapons_playground.tscn` with F6.
+For isolated practice, open `scenes/dev/weapons_playground.tscn` with F6.
 
 The earlier prototype course remains available at `scenes/main/main.tscn` with F6.
 Its guard and finish-gate behaviour described below are unchanged.
@@ -38,7 +38,7 @@ Siya has a single sparkler melee swing with wind-up, an active hit window, and
 recovery. She can run and jump while swinging; dash, hurt, and death cancel it.
 Each swing damages an enemy at most once. Siya and the guard each have three
 health. Damage applies knockback and protects Siya for 0.8 seconds. The combined course shows a brief death cue before restarting.
-The isolated arena restarts immediately; R also restarts.
+The dev sandbox restarts immediately; R also restarts.
 
 The guard patrols, approaches Siya, signals an attack with an orange wind-up,
 strikes, and recovers. Getting hit cancels its attack. The combined course places two dash gaps before the encounter.
@@ -65,12 +65,10 @@ toward Siya. Its limited turning speed lets you jump or air dash past it; bolts
 stop at solid world and expire after 2.8 seconds. J interrupts the charge and
 three hits defeat the shooter. The main course places it after the guard.
 
-For isolated tuning, open `scenes/main/movement_playground.tscn` or
-`scenes/combat/combat_arena.tscn` and press F6. The original
-`scenes/enemies/enemy_test.tscn` remains a separate button-driven damage test.
-Open `scenes/combat/flying_enemy_arena.tscn` with F6 to test just the flyer.
-Open `scenes/combat/brute_arena.tscn` with F6 to fight just the Brute.
-Open `scenes/combat/ground_shooter_arena.tscn` with F6 to test just the shooter.
+For isolated movement tuning, open `scenes/main/movement_playground.tscn` and
+press F6. To fight one enemy alone, open the dev sandbox
+`scenes/dev/sandbox.tscn`, pick `encounter` (Guard, Brute, Flyer, Shooter or
+none) on its root, optionally enable `three_weapons`, and press F6.
 
 Controls: A/D or arrows to move, Space to jump, Shift to dash, J to attack,
 and R to restart. Holding J does not automatically repeat attacks.
@@ -120,34 +118,13 @@ GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh
 The smoke build exports a PCK and runs it with the installed Godot executable,
 outside the editor. It is not a standalone distributable executable.
 Generated files go in the ignored `builds/linux/` directory. The export preset
-packs the main scene, movement playground, all three combat arenas, isolated enemy test,
-burst effect and their dependencies, excluding the
-proposal, regression checks and team docs. To run the enemy test from the pack:
+packs the forest, prototype course, movement playground, dev sandbox, weapons
+playground, burst effect and their dependencies, excluding the
+proposal, regression checks and team docs. To run the sandbox (default Guard
+encounter) from the pack:
 
 ```sh
-GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh res://scenes/enemies/enemy_test.tscn
-```
-
-To run the combat arena from the pack:
-
-```sh
-GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh res://scenes/combat/combat_arena.tscn
-```
-
-To run the flying enemy arena from the pack:
-
-```sh
-GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh res://scenes/combat/flying_enemy_arena.tscn
-```
-
-To run the Brute arena from the pack:
-
-```sh
-GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh res://scenes/combat/brute_arena.tscn
-To run the ground shooter arena from the pack:
-
-```sh
-GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh res://scenes/combat/ground_shooter_arena.tscn
+GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh res://scenes/dev/sandbox.tscn
 ```
 
 For a standalone Linux build, install the matching 4.7.2 export templates via

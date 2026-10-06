@@ -1,5 +1,6 @@
 extends SceneTree
 ## Integration checks against real collision geometry and physics ticks.
+const Sandbox = preload("res://scripts/dev/sandbox.gd")
 
 var player: CharacterBody2D
 var failures: int = 0
@@ -176,8 +177,13 @@ func run_checks() -> void:
 
 	for action in [&"move_left", &"move_right", &"jump"]:
 		Input.action_release(action)
-	change_scene_to_file("res://scenes/enemies/enemy_test.tscn")
+	Sandbox.next_encounter = Sandbox.Encounter.GUARD
+	change_scene_to_file("res://scenes/dev/sandbox.tscn")
 	await scene_changed
+	# Hide Siya from the guard so it keeps patrolling.
+	var sandbox_player: CharacterBody2D = current_scene.get_node("Player")
+	sandbox_player.remove_from_group("players")
+	sandbox_player.set_physics_process(false)
 	var enemy: CharacterBody2D = current_scene.get_node("Enemy")
 	await ticks(110)
 	check(enemy.velocity.x < 0.0, "Enemy must reverse at the end of its patrol")

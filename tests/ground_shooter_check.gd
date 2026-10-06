@@ -1,5 +1,6 @@
 extends SceneTree
 ## Real ground physics, interrupted charges, steering, impacts and scene recovery.
+const Sandbox = preload("res://scripts/dev/sandbox.gd")
 const PROJECTILE_SCENE = preload("res://scenes/combat/homing_projectile.tscn")
 
 var failures: int = 0
@@ -30,10 +31,11 @@ func release_inputs() -> void:
 
 func reset_arena(freeze_shooter: bool = true) -> void:
 	release_inputs()
-	change_scene_to_file("res://scenes/combat/ground_shooter_arena.tscn")
+	Sandbox.next_encounter = Sandbox.Encounter.SHOOTER
+	change_scene_to_file("res://scenes/dev/sandbox.tscn")
 	await scene_changed
 	player = current_scene.get_node("Player")
-	shooter = current_scene.get_node("GroundShooter")
+	shooter = current_scene.get_node("Enemy")
 	shooter.set_physics_process(not freeze_shooter)
 	await ticks(3)
 
@@ -261,7 +263,7 @@ func check_combat_and_restart() -> void:
 	await ticks(3)
 	check(current_scene != old_scene and shots().is_empty(), "R must restart the arena and clear all bolts")
 	player = current_scene.get_node("Player")
-	shooter = current_scene.get_node("GroundShooter")
+	shooter = current_scene.get_node("Enemy")
 	check(player.health == 3 and shooter.health == 3, "Restart must restore both combatants")
 	shooter.set_physics_process(false)
 	old_scene = current_scene
