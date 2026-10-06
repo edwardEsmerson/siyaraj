@@ -104,6 +104,7 @@ func run_checks() -> void:
 	current_scene._unhandled_input(accept)
 	await scene_changed
 	check(current_scene.scene_file_path.ends_with("palace.tscn"), "River completion must advance to palace")
+	navigation.enemies_enabled = true  # terrain-only runs skip bosses; the showdown leads on to the ending
 	current_scene._finish_course()
 	current_scene._unhandled_input(accept)
 	await scene_changed
