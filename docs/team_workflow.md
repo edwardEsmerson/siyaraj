@@ -434,3 +434,12 @@ read clearly at gameplay speed, and that the phase 2 pincer is fair with three h
 
 Manual checkpoint: play the Swaminathan arena with F6. Check that the head pips read
 clearly above the boss bar and that Fury lanes are fair without dashing.
+
+## Siya animation handoff (C2)
+
+`scenes/player/player.tscn` now shares the approved Siya art across every player
+variant. `player_visuals.gd` owns presentation only; movement and combat keep their
+existing authority. Weapon events emit `weapon_used`, successful diya interactions
+request a cosmetic pose, and visuals subscribe to course/boss completion. No main
+scene or movement controller changes are required. See `docs/player_animation.md`
+for timing, cutscene hooks, screenshots and the new `player_visuals_check.gd` suite.
