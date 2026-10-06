@@ -3,6 +3,7 @@
 ## Agreed rules
 
 - Dash moves horizontally in Siya's facing direction.
+- Dash preserves vertical momentum, with normal rise/fall gravity throughout.
 - Dash starts on the ground or in the air. One air dash, restored on landing;
   ground dashes keep the air charge and use a short cooldown instead.
 - Dash stops at solid walls. It grants i-frames for its duration plus a short

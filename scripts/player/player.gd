@@ -156,14 +156,16 @@ func _process_dash(delta: float) -> void:
 	# move_and_slide sweeps the body against solids, including thin walls.
 	# Scale the final tick so duration does not round up to a physics frame.
 	var step := minf(delta, _dash_remaining)
-	velocity = Vector2(_dash_direction * movement_settings.dash_speed * step / delta, 0.0)
+	velocity.x = _dash_direction * movement_settings.dash_speed * step / delta
+	var gravity := movement_settings.rise_gravity if velocity.y < 0.0 else movement_settings.fall_gravity
+	velocity.y = minf(velocity.y + gravity * delta, movement_settings.max_fall_speed)
 	move_and_slide()
 	_dash_remaining = maxf(_dash_remaining - delta, 0.0)
 	if not was_grounded and is_on_floor():
 		dash_available = true
 	if is_on_wall() or _dash_remaining <= 0.00001:
 		state = State.NORMAL
-		velocity = Vector2(0.0 if is_on_wall() else _dash_direction * movement_settings.run_speed, 0.0)
+		velocity.x = 0.0 if is_on_wall() else _dash_direction * movement_settings.run_speed
 
 
 func _update_feedback() -> void:
