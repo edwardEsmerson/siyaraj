@@ -67,11 +67,19 @@ func run_checks() -> void:
 			if actor.has_node("Visuals/Sprite") and actor.has_node("Body") and actor != player:
 				check(not actor.get_node("Body").visible, "%s must use cast art in gameplay" % actor.name)
 			if actor.has_node("Visual/Art"):
-				check(actor.get_node("Visual/Art").sprite_frames.has_animation("slam_impact"), "Pack must include Khara's gameplay animations")
+				var frames: SpriteFrames = actor.get_node("Visual/Art").sprite_frames
+				var attack: StringName = &"slam_impact" if actor.has_node("Visual/Gada") else &"rocket_salvo"
+				check(frames.has_animation(attack) and frames.has_animation(&"death"), "Pack must include %s's gameplay and death animations" % actor.boss_name)
+				for frame in range(frames.get_frame_count(&"death")):
+					check(frames.get_frame_texture(&"death", frame) != null, "Pack must ship every death texture for %s" % actor.boss_name)
 		var final_boss: Node = current_scene.get_node_or_null("Ravan")
 		if final_boss != null:
 			var body: Node = final_boss.get_node("Body")
 			check(body._textures.size() == 11 and body._textures.all(func(texture: Texture2D) -> bool: return texture != null), "Pack must ship all eleven Swaminathan head-state sprites")
+			var frames: SpriteFrames = body.death_art.sprite_frames
+			for animation: StringName in [&"dying", &"dead"]:
+				for frame in range(frames.get_frame_count(animation)):
+					check(frames.get_frame_texture(animation, frame) != null, "Pack must ship Swaminathan's collapse and corpse textures")
 	print("Pack checks: %s (%d scenes)" % ["PASS" if failures == 0 else "FAIL", paths.size()])
 	await audio.shutdown()
 	quit(0 if failures == 0 else 1)

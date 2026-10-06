@@ -1,0 +1,38 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    4.0,
+    4.0
+  ],
+  "poses": [
+    "Base stance: left hand on hip, brass fuse-lighter held upright at chest height in the forward right hand, feet planted, scowling",
+    "Same stance, chest and shoulders lifted slightly on an inhale, chin raised, moustache lifted"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    352,
+    304
+  ],
+  "anchor": [
+    152,
+    285
+  ],
+  "source_canvas": [
+    304,
+    304
+  ],
+  "source_anchor": [
+    152,
+    285
+  ],
+  "models": {
+    "01": "pro",
+    "02": "pro"
+  },
+  "notes": "Fallback loop after each attack lands.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 13.473684210526315
+  }
+}

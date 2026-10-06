@@ -317,9 +317,11 @@ func _physics_process(delta: float) -> void:
 		State.FURY:
 			_process_fury(delta)
 		State.DYING:
+			body.show_death(1.0 - _state_remaining / maxf(death_time, 0.001))
 			if _state_remaining <= 0.0:
 				Burst.spawn(get_tree().current_scene, global_position + Vector2(0, -80), Color(1.0, 0.7, 0.3), "DEFEATED", 90.0)
 				state = State.DEAD
+				body.show_dead()
 				died.emit()
 	_update_feedback(delta)
 
@@ -572,9 +574,12 @@ func _begin_death() -> void:
 	state = State.DYING
 	_state_remaining = death_time
 	_shake_remaining = death_time
+	get_node("Hurtbox").collision_layer = 0
+	body.show_death(0.0)
 	_calm_heads()
 	# Victory should never be followed by a stray hit.
 	for attack in get_tree().get_nodes_in_group("ravan_attacks"):
+		attack.set_physics_process(false)
 		attack.queue_free()
 	_show_banner("SWAMINATHAN FALLS", 4.0)
 
@@ -596,9 +601,7 @@ func _update_feedback(delta: float) -> void:
 	if state == State.DEAD:
 		body.modulate = Color(0.4, 0.35, 0.35, maxf(body.modulate.a - delta, 0.25))
 	elif state == State.DYING:
-		# Death flash: white and blood red, alternating.
-		var blink := int(_state_remaining * 12.0) % 2 == 0
-		body.modulate = Color(2.2, 2.2, 2.2) if blink else Color(1.4, 0.5, 0.45)
+		body.modulate = Color.WHITE
 	elif _flash_remaining > 0.0:
 		body.modulate = Color(2.2, 2.2, 2.2)
 	elif state == State.FURY:

@@ -1,7 +1,8 @@
 extends Node2D
 ## Ravan's body: one full-body sprite per head state (10 heads down to 0). Heads
 ## are lost right to left, so state n shows the leftmost n heads, and severed
-## necks end in a stump. Hurt flash, Fury tint and the death flash are modulate
+## necks end in a stump. The headless cast art supplies the final collapse.
+## Hurt flash and Fury tint are modulate
 ## effects from ravan_boss.gd on this node.
 ##
 ## Art: res://assets/sprites/swaminathan-states/state_10.png ... state_00.png,
@@ -32,6 +33,7 @@ var head_count: int = HEAD_COUNT:
 var _textures: Array[Texture2D] = []
 
 @onready var art: Sprite2D = $Art
+@onready var death_art: AnimatedSprite2D = $DeathArt
 
 
 static func mouth_offset(index: int) -> Vector2:
@@ -47,7 +49,26 @@ func _ready() -> void:
 
 
 func has_art() -> bool:
-	return art != null and art.texture != null
+	return death_art != null and death_art.visible or art != null and art.texture != null
+
+
+func show_death(progress: float) -> void:
+	art.hide()
+	death_art.show()
+	death_art.animation = &"dying"
+	death_art.pause()
+	var count := death_art.sprite_frames.get_frame_count(&"dying")
+	death_art.frame = clampi(int(progress * count), 0, count - 1)
+	queue_redraw()
+
+
+func show_dead() -> void:
+	art.hide()
+	death_art.show()
+	death_art.animation = &"dead"
+	death_art.frame = 0
+	death_art.pause()
+	queue_redraw()
 
 
 func _apply_state() -> void:
@@ -56,6 +77,7 @@ func _apply_state() -> void:
 	var texture: Texture2D = _textures[head_count]
 	art.texture = texture
 	art.visible = texture != null
+	death_art.hide()
 	if texture != null:
 		# Feet at the node origin: the canvas's bottom centre.
 		art.offset = Vector2(0, -texture.get_height() * 0.5)

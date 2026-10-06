@@ -1,0 +1,41 @@
+{
+  "fps": 8,
+  "loop": "hold",
+  "durations": [
+    2.4,
+    2.4,
+    2.4
+  ],
+  "poses": [
+    "Low bowling wind-up: knees bent, torso leaning forward, right arm swung far back behind his hip holding a flat round pink-and-gold pinwheel firework (chakri) the size of a dinner plate, left hand held forward for balance holding the brass fuse-lighter",
+    "Underarm bowling release: deep lunge on the bent front knee, back leg stretched behind, right arm swept forward low beside the front foot, hand open, the pinwheel firework rolling away from his fingers at ankle height",
+    "Rising from the lunge, right arm following through forward at waist height with the index finger pointing along the ground ahead, left hand with fuse-lighter on hip, smirking"
+  ],
+  "frame_count": 3,
+  "canvas": [
+    352,
+    304
+  ],
+  "anchor": [
+    152,
+    285
+  ],
+  "source_canvas": [
+    304,
+    304
+  ],
+  "source_anchor": [
+    152,
+    285
+  ],
+  "models": {
+    "01": "flash",
+    "02": "flash",
+    "03": "flash"
+  },
+  "notes": "CAST attack 1: wind-up through the fuse, release as the spinner rolls, follow-through.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 13.473684210526315
+  }
+}

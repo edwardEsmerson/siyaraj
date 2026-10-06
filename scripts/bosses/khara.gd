@@ -7,6 +7,7 @@ extends CharacterBody2D
 const Burst = preload("res://scripts/effects/burst.gd")
 const Ladi = preload("res://scripts/bosses/ladi_firecracker.gd")
 const Shockwave = preload("res://scripts/bosses/ground_shockwave.gd")
+const DEATH_TIME: float = 1.4
 
 signal health_changed(remaining: int)
 signal phase_changed(phase: int)
@@ -313,14 +314,15 @@ func _enter_phase_two() -> void:
 func _die() -> void:
 	state = State.DEAD
 	_death_time = 0.0
+	_hit_flash_remaining = 0.0
 	velocity = Vector2.ZERO
 	collision_layer = 0
 	# Defeat defuses every remaining ladi and shockwave.
 	for hazard in get_tree().get_nodes_in_group("boss_hazards"):
+		hazard.set_physics_process(false)
 		hazard.queue_free()
 	Burst.spawn(get_tree().current_scene, global_position + Vector2(0, -48), Color(1.0, 0.75, 0.25), "KHARA FALLS!", 70.0)
 	_update_feedback()
-	died.emit()
 
 
 func _process_death(delta: float) -> void:
@@ -328,7 +330,10 @@ func _process_death(delta: float) -> void:
 	_update_art()
 	if fmod(_death_time, 0.25) < delta:
 		Burst.spawn(get_tree().current_scene, global_position + Vector2(randf_range(-30, 30), randf_range(-80, -10)), Color(1.0, 0.6, 0.2), "", 30.0)
-	if _death_time >= 1.4:
+	if _death_time >= DEATH_TIME:
+		# Victory UI and exits wait until the final collapse pose has been seen.
+		set_physics_process(false)
+		died.emit()
 		queue_free()
 
 
@@ -367,6 +372,7 @@ func _update_feedback() -> void:
 			hint = "ENRAGED!"
 			gada_angle = -1.6
 		State.DEAD:
+			tint = Color.WHITE
 			hint = "DEFEATED"
 	if _hit_flash_remaining > 0.0:
 		tint = Color(2.2, 2.2, 2.2)
@@ -395,7 +401,7 @@ func _update_art() -> void:
 	if state not in [State.IDLE, State.APPROACH]:
 		# Pose timing follows combat, including tuned phase-two durations.
 		art.pause()
-		var progress := _death_time / 1.4 if state == State.DEAD else 1.0 - state_remaining / maxf(_state_duration, 0.001)
+		var progress := _death_time / DEATH_TIME if state == State.DEAD else 1.0 - state_remaining / maxf(_state_duration, 0.001)
 		var count := art.sprite_frames.get_frame_count(animation)
 		art.frame = clampi(int(progress * count), 0, count - 1)
 	_update_gada_art()

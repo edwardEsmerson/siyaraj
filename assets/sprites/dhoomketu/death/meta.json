@@ -1,0 +1,44 @@
+{
+  "fps": 8,
+  "loop": "hold",
+  "durations": [
+    2.8,
+    2.8,
+    2.8,
+    4.0
+  ],
+  "poses": [
+    "Staggering backward on one foot, turban knocked askew, eyes wide in shock, both arms thrown up, the fuse-lighter flying out of his hand",
+    "Toppling backward, knees buckling, arms flailing, leaning far back about to fall",
+    "Sitting slumped on the ground with legs stretched out in front, turban slipped over one eye, dazed, arms limp",
+    "One single figure lying flat on his back along the ground, seen from the side: turbaned head resting on the ground at the left, boots at the right pointing up, eyes as X marks, moustache drooping, both arms limp on the ground, rocket rack crushed flat under his shoulders. Only one body, one head"
+  ],
+  "frame_count": 4,
+  "canvas": [
+    352,
+    304
+  ],
+  "anchor": [
+    152,
+    285
+  ],
+  "source_canvas": [
+    352,
+    304
+  ],
+  "source_anchor": [
+    152,
+    285
+  ],
+  "models": {
+    "01": "flash",
+    "02": "pro",
+    "03": "flash",
+    "04": "flash"
+  },
+  "notes": "DEAD, plays once and holds.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 13.473684210526315
+  }
+}
