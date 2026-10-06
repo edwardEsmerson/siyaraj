@@ -136,7 +136,7 @@ LADI_RECOVERY, PHASE_SHIFT, DEAD`.
   node name) and `boss_title`.
 
 The bar shows a delayed damage chip, tick marks at `phase_thresholds` (default 0.5) and an
-enraged fill colour after a phase change. It fades out on death. Boss 2 (Ravan) uses it
+enraged fill colour after a phase change. It fades out on death. Boss 2 (Swaminathan) uses it
 too, with a separate head-indicator row (`scripts/bosses/ravan/ravan_head_indicators.gd`).
 
 ## Sprite and animation list for the artist

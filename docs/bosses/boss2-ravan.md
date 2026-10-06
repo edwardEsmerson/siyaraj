@@ -1,23 +1,23 @@
-# Final boss: Ravan (Dashanan)
+# Final boss: Swaminathan (Dashanan)
 
 Play the isolated arena with F6: `scenes/bosses/ravan/ravan_arena.tscn`.
 The palace exit opens `scenes/main/palace_showdown.tscn`, after Dhoomketu's ghats fight.
 Regression check: `godot --headless --path . --script res://tests/ravan_check.gd`.
-Ravan is being renamed Swaminathan (TODO B1); file and class names still say `ravan`.
+File and class names retain `ravan` for compatibility; the game calls him Swaminathan.
 
 ## Concept
 
-Ravan, king of Lanka, is the final major boss. He is known as Dashanan, the
+Swaminathan, king of Lanka, is the final major boss. He is known as Dashanan, the
 ten-headed one. Each of the ten heads attacks, and Siya cuts them down one by
 one until none is left.
 
-Ravan is stationary and stands at the centre of a 960 x 540 arena. Siya
+Swaminathan is stationary and stands at the centre of a 960 x 540 arena. Siya
 passes through his body. The project has no contact damage, so only his
 attacks hurt her.
 
 ## Rules
 
-1. **One health pool, hit anywhere.** Ravan has 80 health. The lash, skyshot
+1. **One health pool, hit anywhere.** Swaminathan has 80 health. The lash, skyshot
    and chakri hurt him anywhere on his body or his row of heads. There is no
    guarded state during normal fighting and no weak point to wait for.
 2. **Every tenth severs a head, right to left.** Each 8 health lost severs his
@@ -33,7 +33,7 @@ attacks hurt her.
 
 When a head is severed, the body swaps to the next state sprite and shakes. A
 white pop and an expanding ring mark where the head was, with a `SEVERED!`
-burst and a banner such as `CHITTA SEVERED - 9 HEADS LEFT`. Ravan then
+burst and a banner such as `CHITTA SEVERED - 9 HEADS LEFT`. Swaminathan then
 staggers for 0.6 s: pending telegraphs are cancelled and no head starts an
 attack, but he can still be hit. If the lost head crosses a phase boundary,
 the phase roar plays instead of the stagger.
@@ -99,9 +99,9 @@ left, it attacks alone.
 Clearing each phase fully restores Siya's health, including the final defeat.
 The health HUD updates immediately. Losing a head inside a phase does not heal her.
 
-Losing the head that leaves 7 or 3 heads starts the next phase. Ravan roars
+Losing the head that leaves 7 or 3 heads starts the next phase. Swaminathan roars
 for 1.2 s with the banner `PHASE N - DASHANAN AWAKENS`, then performs Dashanan
-Fury. Phase 3 repeats Fury every 30 s of normal fighting. Ravan is guarded
+Fury. Phase 3 repeats Fury every 30 s of normal fighting. Swaminathan is guarded
 (hits show `GUARDED`) during the intro, the roar and Fury. All values are in
 the `PHASES` and `PHASE_HEADS` tables and the exports in
 `scripts/bosses/ravan/ravan_boss.gd`.
@@ -118,7 +118,7 @@ heads each owns one lane; with five, each owns two).
 | 1.4 s | Wave 1 telegraph (1.6 s). Eight lanes show a bright red floor stripe and a faint pillar outline. The two safe lanes glow teal with a `SAFE` label. A head whose lanes are all safe goes dark |
 | 3.0 s | Fire pillars cover the full height of the red lanes for 0.4 s, then a 0.3 s pause |
 | Each later wave | The safe gap moves. Telegraph is 1.0 s in phase 2 and 0.85 s in phase 3, then 0.4 s of fire and a 0.3 s pause |
-| End | 0.6 s outro. The tint fades and Ravan is **spent**: for 2.5 s no head attacks (`SPENT - STRIKE!`), a free punish window |
+| End | 0.6 s outro. The tint fades and Swaminathan is **spent**: for 2.5 s no head attacks (`SPENT - STRIKE!`), a free punish window |
 
 A Fury runs **one wave per living head**, up to the phase's full sequence, so
 it shortens as he weakens:
@@ -127,7 +127,7 @@ it shortens as he weakens:
 - Phase 3 (3 heads or fewer, 3 waves at most): [4,5] → [7,8] → [4,5] → [1,2] →
   [3,4] → [6,7], cut to the first *n* waves
 
-The first gap is under Ravan, so Siya reaches it from anywhere in the arena.
+The first gap is under Swaminathan, so Siya reaches it from anywhere in the arena.
 Each later gap moves at most three lanes, about 190 px from the middle of the
 old gap to inside the new one. That takes about 0.8 s at the 240 px/s run
 speed, within the 1.15 to 1.3 s available. `tests/ravan_check.gd` checks this
@@ -135,7 +135,7 @@ rule. Jumping does not avoid the pillars, because they cover the full height.
 
 ## Death sequence
 
-The final hit severs the last head (with its pop) and removes every Ravan
+The final hit severs the last head (with its pop) and removes every Swaminathan
 projectile and hazard still in the arena, so no stray hit can follow the win.
 The banner shows `RAVAN FALLS`. The headless body shakes and flashes white and
 red for 0.9 s, then a large `DEFEATED` burst plays, the body dims and the
@@ -145,7 +145,7 @@ red for 0.9 s, then a large `DEFEATED` burst plays, the body dims and the
 
 Health uses the shared `scenes/ui/boss_health_bar.tscn` (instanced as
 `BossUI/HealthBar`) with a tick at every tenth, one per head.
-`BossUI/HeadIndicators` (`ravan_head_indicators.gd`) adds the Ravan-only row
+`BossUI/HeadIndicators` (`ravan_head_indicators.gd`) adds the Swaminathan-only row
 above it: one pip per head, each over its own tenth of the bar, so the pips
 go dark (a crossed ring) right to left as the bar drains. A pip lights in its
 attack colour while that head attacks, and turns red or teal during Fury.
@@ -169,12 +169,12 @@ Below the pips: the phase and `HEADS n/10`, plus `SPENT - STRIKE!` after Fury.
   tests, screenshots and dev snapshots.
 - The arena overrides the player's `max_health` to 5 on the instance only. No
   player code changes.
-- Ground dash i-frames apply to every Ravan hazard and projectile, which makes
+- Ground dash i-frames apply to every Swaminathan hazard and projectile, which makes
   Fury and lightning easier to dodge. The safe-gap timing does not rely on it.
 
 ## Art handoff: body state sprites
 
-Ravan is drawn as **one full-body sprite per head state**. Heads are severed
+Swaminathan is drawn as **one full-body sprite per head state**. Heads are severed
 right to left, so state *n* shows the leftmost *n* heads. The same body, crown,
 moustache and pose must hold across all states: generate state 10 first, get
 it approved, then derive the others from it.
@@ -184,7 +184,7 @@ it approved, then derive the others from it.
   death beat). `ravan_body.gd` loads whichever exist and falls back to the
   code-drawn placeholder for the rest, so states can land one at a time.
 - **Canvas:** 880 x 480 px, the same for every state, transparent background.
-  Ravan's feet sit at the bottom centre of the canvas, which is the boss
+  Swaminathan's feet sit at the bottom centre of the canvas, which is the boss
   origin. It is placed at scale 0.5 (1 game unit = 2 art px), so in game it
   spans 440 x 240 units.
 - **Head positions:** heads must sit where the code fires from. The single

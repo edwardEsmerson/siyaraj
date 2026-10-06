@@ -107,7 +107,7 @@ func check_structure() -> void:
 	var bar: Control = boss.get_node("BossUI/HealthBar")
 	check(bar.boss == boss and bar.visible, "Boss health bar must bind to Ravan")
 	check(bar.get_script().resource_path == "res://scripts/ui/boss_health_bar.gd", "Ravan must use the generic BossHealthBar")
-	check(bar.max_health == 80 and bar.health == 80 and bar.name_label.text == "RAVAN, DASHANAN", "Generic bar must read Ravan's health and title")
+	check(bar.max_health == 80 and bar.health == 80 and bar.name_label.text == "SWAMINATHAN, DASHANAN", "Generic bar must read Ravan's health and title")
 	check(bar.phase_thresholds.size() == 9 and is_equal_approx(bar.phase_thresholds[0], 0.1) and is_equal_approx(bar.phase_thresholds[8], 0.9), "Generic bar must tick each head's tenth")
 	var indicators: Control = boss.get_node("BossUI/HeadIndicators")
 	check(indicators.boss == boss and indicators.visible, "Head indicators must bind to Ravan")

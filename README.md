@@ -1,15 +1,20 @@
 # Siyaraj
 
-F5 opens the playtest menu. Select the forest, river/ghats, or temple/palace;
+F5 opens the title screen; choose Playtest menu in debug builds.
+Select the forest, river/ghats, or temple/palace;
 start at the beginning or a checkpoint section, and toggle enemy encounters.
 The developer snapshots selector opens the weapons playground, movement, the dev
-sandbox (preset to each enemy), the Khara and Ravan boss arenas, terrain and
+sandbox (preset to each enemy), the Khara, Dhoomketu and Swaminathan boss arenas, terrain and
 canopy tests. Esc pauses any scene and offers restart or level select.
 See [playtest menu and draft editing](docs/playtest_menu.md).
 
+Gamepad controls are available throughout gameplay and menus. Open Controls from
+the title or pause menu for keyboard and controller bindings; see the
+[controller mapping](docs/ui.md#controller-controls).
+
 The river and palace are editable grey levels, each 14,400 pixels long with five
 manual diya checkpoints. The forest exits into Khara's showdown, then the river
-leads into the palace and Ravan's showdown. Enter advances at each exit or victory.
+leads into the palace and Swaminathan's showdown. Enter advances at each exit or victory.
 Boss fights start with fresh resources and retry inside the arena on death.
 Terrain-only playtests bypass bosses. The menu also offers both campaign showdowns
 directly, alongside the original isolated boss arenas.
@@ -44,15 +49,15 @@ strings that pop along the ground toward Siya. Yellow chevrons show the directio
 At half health he enrages and adds a second ladi from the far wall. See
 [the Khara design doc](docs/bosses/boss1-khara.md). Khara is not yet placed in the forest.
 
-Boss 2, Ravan, has an isolated arena at `scenes/bosses/ravan/ravan_arena.tscn`
+Final boss, Swaminathan, has an isolated arena at `scenes/bosses/ravan/ravan_arena.tscn`
 (F6) and ends the campaign. Strike him anywhere: every tenth of his health severs
 his rightmost head for good, and only the heads still standing attack, each one
 glowing before it strikes. Phase changes trigger Dashanan Fury: stand in the teal
 lanes. See
-[the Ravan design doc](docs/bosses/boss2-ravan.md).
+[the Swaminathan design doc](docs/bosses/boss2-ravan.md).
 
 Both bosses use the reusable boss health bar, `scenes/ui/boss_health_bar.tscn`.
-Ravan adds a small head-indicator row above it. All boss hazards respect the
+Swaminathan adds a small head-indicator row above it. All boss hazards respect the
 dash i-frames described below.
 
 The earlier prototype course remains available at `scenes/main/main.tscn` with F6.
@@ -162,7 +167,7 @@ The smoke build exports a PCK and runs it with the installed Godot executable,
 outside the editor. It is not a standalone distributable executable.
 Generated files go in the ignored `builds/linux/` directory. The export preset
 packs the playtest menu, forest, river, palace, terrain sampler, prototype course,
-movement playground, dev sandbox, weapons playground, Khara and Ravan boss arenas,
+movement playground, dev sandbox, weapons playground, Khara, Dhoomketu and Swaminathan boss arenas,
 burst effect and their dependencies, excluding the
 proposal, regression checks and team docs. To run the sandbox (default Guard
 encounter) from the pack:

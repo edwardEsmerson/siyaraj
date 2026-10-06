@@ -43,6 +43,41 @@ func run_checks() -> void:
 		await scene_changed
 		await ticks(2)
 		check(current_scene.get_node_or_null("Robin") != null, "Robin must join every level: %s" % path)
+		player = current_scene.player
+		robin = current_scene.get_node("Robin")
+		player.set_physics_process(false)
+		current_scene.set_process(false)
+		current_scene.checkpoint_guard.enabled = false
+		for enemy in current_scene.course.get_node("Encounters").get_children():
+			enemy.set_physics_process(false)
+		var hints: Node2D = current_scene.course.get_node("RobinHints")
+		check(hints.get_child_count() >= 6, "River and palace must guide each new hazard section")
+		for area in hints.get_children():
+			# Approach from outside to exercise the actual body_entered trigger.
+			hold(area.global_position + Vector2(-100, -20))
+			await ticks(2)
+			hold(area.global_position + Vector2(0, -20))
+			await ticks(3)
+			check(robin.mode == Robin.Mode.POINT and robin.bubble_label.text.replace("\n", " ") == area.text, "Authored hint must speak on contact: %s/%s" % [path, area.name])
+			check(Robin.seen_hints.has(area.hint_id()), "Authored hints must be remembered across death reloads")
+			check(not robin.point_out(area.to_global(area.point), area.text, area.hint_id()), "Authored hints must only show once")
+		var final_hint: Area2D = hints.get_children().back()
+		var final_id: String = final_hint.hint_id()
+		reload_current_scene()
+		await scene_changed
+		await ticks(2)
+		player = current_scene.player
+		robin = current_scene.get_node("Robin")
+		current_scene.checkpoint_guard.enabled = false
+		current_scene.set_process(false)
+		player.set_physics_process(false)
+		final_hint = current_scene.course.get_node("RobinHints").get_children().back()
+		hold(final_hint.global_position + Vector2(0, -20))
+		await ticks(3)
+		check(final_hint.hint_id() == final_id and robin.mode != Robin.Mode.POINT, "Reloading a level must not repeat its final hint")
+		if path.ends_with("palace.tscn"):
+			check(final_hint.text.contains("Swaminathan"), "Palace approach must introduce Swaminathan")
+	Robin.forget_hints()
 	change_scene_to_file("res://scenes/main/forest.tscn")
 	await scene_changed
 	player = current_scene.player
@@ -56,6 +91,7 @@ func run_checks() -> void:
 	for enemy in current_scene.course.get_node("Encounters").get_children():
 		enemy.set_physics_process(false)
 	await ticks(10)
+	check(current_scene.course.get_node("RobinHints/BossHint").text.contains("Khara"), "Forest approach must introduce Khara")
 	check(get_first_node_in_group("robin") == robin, "Robin must register in the robin group")
 	check(robin.global_position.distance_to(robin._follow_spot()) < 30.0, "Robin must start beside Siya")
 	check(robin.sprite.visible and not robin.placeholder.visible and robin.sprite.animation == &"fly", "Robin's sprite art must replace the placeholder")

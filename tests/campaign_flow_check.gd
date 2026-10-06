@@ -15,6 +15,8 @@ func run_checks() -> void:
 		await scene_changed
 		current_scene._finish_course()
 		check(current_scene.get_node("HUD/Completion/Message").text.contains("face"), "Campaign exit must clearly offer the boss fight")
+		if level == "palace":
+			check(current_scene.showdown_name == "Swaminathan" and current_scene.get_node("HUD/Completion/Message").text.contains("face Swaminathan"), "Palace exit must name Swaminathan")
 		current_scene._unhandled_input(accept())
 		await scene_changed
 		check(current_scene.scene_file_path == "res://scenes/main/%s_showdown.tscn" % level, "Exit must enter its own showdown")

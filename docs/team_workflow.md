@@ -11,7 +11,7 @@
   ground dashes keep the air charge and use a short cooldown instead.
 - Dash stops at solid walls. It grants i-frames for its duration plus a short
   grace: `take_damage` is ignored and enemy shots pass through. Damage sources
-  may query `is_invulnerable()`. Boss hazards (Khara, Dhoomketu and Ravan) route through
+  may query `is_invulnerable()`. Boss hazards (Khara, Dhoomketu and Swaminathan) route through
   `take_damage`, so they respect the i-frames too.
 - Dash cancels any sparkler phase; an attack pressed mid-dash swings when it ends.
 - Dash preserves chakri charge progress. Charging pauses during the dash and
@@ -410,7 +410,7 @@ original player scene. `forest_weapons_check.gd` validates this integration.
 Manual checkpoint: play the Khara arena with F6. Check that the orange and yellow tells
 read clearly at gameplay speed, and that the phase 2 pincer is fair with three health.
 
-## Boss 2 (Ravan) handoff
+## Boss 2 (Swaminathan) handoff
 
 - Combat owns `scenes/bosses/ravan/` and `scripts/bosses/ravan/`. The isolated
   `scenes/bosses/ravan/ravan_arena.tscn` uses the forest player with all three
@@ -419,11 +419,11 @@ read clearly at gameplay speed, and that the phase 2 pincer is fair with three h
   severs the rightmost living head for good; only living heads attack, from fixed
   origins on the body sprite. Phase changes (7 and 3 heads left) start Dashanan
   Fury pillar waves, one wave per living head.
-- Ravan follows the generic boss contract: `max_health`, `health`,
+- Swaminathan follows the generic boss contract: `max_health`, `health`,
   `health_changed`, `phase_changed` and `died`, plus `head_lost`. His
   `BossUI/HealthBar` is an instance of `scenes/ui/boss_health_bar.tscn` with a tick
   per head; `BossUI/HeadIndicators` (`ravan_head_indicators.gd`) is a small
-  Ravan-only add-on showing one pip per head over its tenth of the bar, the phase
+  Swaminathan-only add-on showing one pip per head over its tenth of the bar, the phase
   and the heads left.
 - Hazards (pillars, beams, lightning, shockwaves) and the shared enemy projectiles
   all damage Siya through `take_damage`, so dash i-frames apply.
@@ -432,5 +432,5 @@ read clearly at gameplay speed, and that the phase 2 pincer is fair with three h
   phases, Fury safe lanes with the living heads, dash i-frames, the generic boss
   bar, defeat and restart.
 
-Manual checkpoint: play the Ravan arena with F6. Check that the head pips read
+Manual checkpoint: play the Swaminathan arena with F6. Check that the head pips read
 clearly above the boss bar and that Fury lanes are fair without dashing.

@@ -1,5 +1,5 @@
 extends Node2D
-## Ravan campaign finale, also available as a developer snapshot.
+## Swaminathan campaign finale, also available as a developer snapshot.
 
 const ENDING: String = "res://scenes/main/ending.tscn"
 
@@ -54,4 +54,4 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_ravan_defeated() -> void:
 	completed = true
-	$HUD/CombatStatus.text = "Ravan defeated! Enter: continue to the ending / R: replay."
+	$HUD/CombatStatus.text = "Swaminathan defeated! Enter: continue to the ending / R: replay."

@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3]
+[gd_scene load_steps=64 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/draft_level.gd" id="Script"]
 
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://scripts/levels/world_skin.gd" id="world_skin"]
 
 [ext_resource type="PackedScene" path="res://scenes/enemies/flying_enemy.tscn" id="flying_enemy"]
+
+[ext_resource type="PackedScene" path="res://scenes/companions/robin_hint.tscn" id="robin_hint"]
 
 [sub_resource type="RectangleShape2D" id="Bank"]
 size = Vector2(560, 24)
@@ -1374,3 +1376,29 @@ text = "LOWER CHANNEL"
 script = ExtResource("world_skin")
 biome = "river"
 direction = "truckart"
+
+[node name="RobinHints" type="Node2D" parent="."]
+
+[node name="DockHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(1000, 430)
+text = "Broken docks ahead! Jump, then dash across. The lower dock can catch a fall."
+
+[node name="FordsHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(3020, 430)
+text = "Take the high stones, or use the lower dock. Both paths rejoin at the diya."
+
+[node name="GhatHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(5800, 430)
+text = "A brute guards the court. Bait his swing, or climb the balconies to pass above."
+
+[node name="BridgeHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(8350, 430)
+text = "A low flyer guards the bridge. Jump and lash it; save your skyshots."
+
+[node name="CoverHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(10020, 430)
+text = "Crates stop the purple bolts. Jump over cover, then dash in to reach the shooter."
+
+[node name="TempleHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(13520, 430)
+text = "Light this last diya before the temple climb. The palace is just ahead!"

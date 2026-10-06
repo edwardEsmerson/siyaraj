@@ -20,7 +20,7 @@ variants.
   recovery shelves and cover give ways to approach ranged threats and recover
   from some missed jumps. It leads into the palace without adding another boss.
 - Palace uses broad courtyards, pillars, covered approach lanes and optional upper
-  routes. Climbs and descending roofs lead into a safe Ravan approach.
+  routes. Climbs and descending roofs lead into a safe Swaminathan approach.
 
 Read the level-specific design notes for exact routes and encounter placements.
 All use the existing movement and weapons without changing their tuning.
@@ -32,10 +32,10 @@ inherit the original boss arenas, so the actors, tells, hazards, phase behavior
 and arena dimensions match the existing tested fights. The campaign wrappers
 change grey scenery and attach victory navigation. No boss moves were rewritten.
 
-Khara victory leads to the river. River completion leads to the palace. Ravan
+Khara victory leads to the river. River completion leads to the palace. Swaminathan
 victory finishes the run and returns to level select. Fights start with the
 arena's full-health loadout, five shots and ready chakri. Khara retains the
-three-health player; Ravan retains his original five-health arena player.
+three-health player; Swaminathan retains his original five-health arena player.
 Death reloads the fight, not the whole traversal level. R repeats the fight.
 Esc pauses or returns to the menu. There is no disk save or cumulative run timer.
 

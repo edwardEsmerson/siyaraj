@@ -8,7 +8,7 @@ Siyaraj is a Godot 4.7.2 2D platformer using the Compatibility renderer. Open `p
 - `scenes/` contains corresponding `.tscn` scenes. `scenes/dev/` holds the dev-only sandbox (one selectable enemy, for isolated encounter work) and the weapons playground; `scenes/bosses/` holds each boss and its isolated arena; `scenes/main/movement_playground.tscn` remains for movement tuning.
 - `resources/player/default_movement.tres` stores shared movement tuning.
 - `tests/` contains physics regression scripts; `tools/` contains smoke-build helpers.
-- Bosses (Khara, Dhoomketu, Ravan) share the generic `scenes/ui/boss_health_bar.tscn`; boss-specific UI is a small add-on node, not a second bar. Boss design docs live in `docs/bosses/`.
+- Bosses (Khara, Dhoomketu, Swaminathan) share the generic `scenes/ui/boss_health_bar.tscn`; boss-specific UI is a small add-on node, not a second bar. Boss design docs live in `docs/bosses/`.
 - Robin, Siya's bird companion, is `scenes/companions/robin.tscn`. Levels place `robin_hint.tscn` areas for his tips. See `docs/robin.md`.
 - `docs/team_workflow.md` records ownership and gameplay contracts. `asset-builder/` contains local sprite tooling and reference images; current gameplay uses scene/script placeholders. Art scale: 1 game unit = 2 art px, so generated sprites and backgrounds are placed at scale 0.5 (Siya's 80px sprite fits her 24x40 collider); sizes per role are in `asset-builder/skills/siyaraj-assets/SKILL.md`.
 
