@@ -183,13 +183,13 @@ func _update_art() -> void:
 			tint = Color(1.9, 0.7, 0.5) if int(_anim_time * 10.0) % 2 == 0 else Color(1.3, 0.85, 0.7)
 		State.DEAD:
 			animation = &"death"
-			tint = Color(0.6, 0.55, 0.7)
-			# Until the death keyframes land he topples onto his back.
-			visual.rotation = -PI * 0.5 * facing
-			visual.position = Vector2(0, -22)
+			tint = Color(0.85, 0.8, 0.9)
 	if _flash > 0.0 and state != State.DEAD:
 		tint = Color(2.2, 2.2, 2.2)
 	visual.modulate = tint
+	if not art.sprite_frames.has_animation(animation):
+		animation = &"idle"
+		frame = -1
 	if art.animation != animation:
 		art.play(animation)
 	if frame >= 0:

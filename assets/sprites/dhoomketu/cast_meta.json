@@ -1,7 +1,7 @@
 {
   "name": "dhoomketu",
   "canvas": [
-    304,
+    352,
     304
   ],
   "anchor": [
@@ -17,110 +17,300 @@
   ],
   "animations": {
     "idle": {
-      "frames": [
-        "idle_01",
-        "idle_02"
-      ],
+      "fps": 8,
+      "loop": "loop",
       "durations": [
         4.0,
         4.0
       ],
-      "loop": true,
-      "fps": 8
+      "poses": [
+        "Base stance: left hand on hip, brass fuse-lighter held upright at chest height in the forward right hand, feet planted, scowling",
+        "Same stance, chest and shoulders lifted slightly on an inhale, chin raised, moustache lifted"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        352,
+        304
+      ],
+      "anchor": [
+        152,
+        285
+      ],
+      "source_canvas": [
+        304,
+        304
+      ],
+      "source_anchor": [
+        152,
+        285
+      ],
+      "models": {
+        "01": "pro",
+        "02": "pro"
+      },
+      "notes": "Fallback loop after each attack lands.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 13.473684210526315
+      }
     },
     "intro_taunt": {
-      "frames": [
-        "idle_01",
-        "chakri_throw_01",
-        "idle_02"
-      ],
+      "fps": 8,
+      "loop": "once",
       "durations": [
         2.667,
         2.667,
         2.667
       ],
-      "loop": false,
-      "fps": 8
+      "poses": [
+        "Twirling the tip of his moustache between the fingers of his left hand, brass fuse-lighter held upright in the right hand at chest height, smug sly grin, feet together",
+        "Thrusting the brass fuse-lighter straight forward at shoulder height in his right hand like pointing a challenge, left hand on hip, sneering, weight on the front foot",
+        "Arms folded high across his chest with the fuse-lighter tucked in the crook of his arm, chin raised arrogantly, feet apart, scowling"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        352,
+        304
+      ],
+      "anchor": [
+        152,
+        285
+      ],
+      "source_canvas": [
+        304,
+        304
+      ],
+      "source_anchor": [
+        152,
+        285
+      ],
+      "models": {
+        "01": "flash",
+        "02": "flash",
+        "03": "flash"
+      },
+      "notes": "INTRO, 1.0 s, frames follow state progress.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 13.473684210526315
+      }
     },
     "rocket_salvo": {
-      "frames": [
-        "idle_02",
-        "rocket_salvo_01",
-        "rocket_salvo_01"
-      ],
+      "fps": 8,
+      "loop": "hold",
       "durations": [
         2.4,
         2.4,
         2.4
       ],
-      "loop": false,
-      "fps": 8
+      "poses": [
+        "Twisting his torso back, head turned to look over his back shoulder, right arm reaching up behind his head to touch the brass fuse-lighter to the rockets in the rack on his back, left hand on hip",
+        "Leaning back with chest out, left arm pointing straight forward and upward at 45 degrees like a commander ordering fire, right hand holding the brass fuse-lighter raised beside his head, mouth open shouting; the three rockets still in the rack on his back",
+        "Bracing in a wide stance with knees bent as if from recoil, left arm still pointing forward and up, right fist with fuse-lighter pulled to his chest, grinning"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        352,
+        304
+      ],
+      "anchor": [
+        152,
+        285
+      ],
+      "source_canvas": [
+        304,
+        304
+      ],
+      "source_anchor": [
+        152,
+        285
+      ],
+      "models": {
+        "01": "flash",
+        "02": "pro",
+        "03": "pro"
+      },
+      "notes": "CAST attack 0: light the rack, order fire as rockets launch, brace.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 13.473684210526315
+      }
     },
     "chakri_throw": {
-      "frames": [
-        "idle_02",
-        "chakri_throw_01",
-        "chakri_throw_01"
-      ],
+      "fps": 8,
+      "loop": "hold",
       "durations": [
         2.4,
         2.4,
         2.4
       ],
-      "loop": false,
-      "fps": 8
+      "poses": [
+        "Low bowling wind-up: knees bent, torso leaning forward, right arm swung far back behind his hip holding a flat round pink-and-gold pinwheel firework (chakri) the size of a dinner plate, left hand held forward for balance holding the brass fuse-lighter",
+        "Underarm bowling release: deep lunge on the bent front knee, back leg stretched behind, right arm swept forward low beside the front foot, hand open, the pinwheel firework rolling away from his fingers at ankle height",
+        "Rising from the lunge, right arm following through forward at waist height with the index finger pointing along the ground ahead, left hand with fuse-lighter on hip, smirking"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        352,
+        304
+      ],
+      "anchor": [
+        152,
+        285
+      ],
+      "source_canvas": [
+        304,
+        304
+      ],
+      "source_anchor": [
+        152,
+        285
+      ],
+      "models": {
+        "01": "flash",
+        "02": "flash",
+        "03": "flash"
+      },
+      "notes": "CAST attack 1: wind-up through the fuse, release as the spinner rolls, follow-through.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 13.473684210526315
+      }
     },
     "anaar_plant": {
-      "frames": [
-        "idle_02",
-        "anaar_plant_01",
-        "rocket_salvo_01"
-      ],
+      "fps": 8,
+      "loop": "hold",
       "durations": [
         2.4,
         2.4,
         2.4
       ],
-      "loop": false,
-      "fps": 8
+      "poses": [
+        "Holding a small clay cone-shaped firework (anaar) in his right hand at chest height and touching its fuse with the brass fuse-lighter held in his left hand, looking down at it, slight crouch",
+        "Overhand lob: right arm fully extended forward and up at shoulder height, hand open having just released the cone firework (cone gone from his hand), left hand with fuse-lighter low at his side, weight on the front foot, back heel lifted",
+        "Standing tall with both fists on his hips, chest puffed out, chin raised, laughing with mouth open, fuse-lighter in the right fist"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        352,
+        304
+      ],
+      "anchor": [
+        152,
+        285
+      ],
+      "source_canvas": [
+        304,
+        304
+      ],
+      "source_anchor": [
+        152,
+        285
+      ],
+      "models": {
+        "01": "pro",
+        "02": "pro",
+        "03": "pro"
+      },
+      "notes": "CAST attack 2: light the cone, lob as the fuses expire, gloat while fountains burn.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 13.473684210526315
+      }
     },
     "reload": {
-      "frames": [
-        "idle_01",
-        "idle_02"
-      ],
+      "fps": 8,
+      "loop": "loop",
       "durations": [
         2.8,
         2.8
       ],
-      "loop": true,
-      "fps": 8
-    },
-    "phase_shift": {
-      "frames": [
-        "idle_02",
-        "rocket_salvo_01",
-        "chakri_throw_01"
+      "poses": [
+        "Hunched over with both hands reaching back over his shoulder fumbling with the rockets in the rack on his back, head turned back to look at them, one knee bent, off balance, sweating",
+        "Patting the bandolier on his chest with both hands, looking down at it in panic, shoulders hunched, knees bent, sweat drop on his brow, fuse-lighter clenched in the right hand"
       ],
-      "durations": [
-        3.2,
-        3.2,
-        3.2
+      "frame_count": 2,
+      "canvas": [
+        352,
+        304
       ],
-      "loop": false,
-      "fps": 8
+      "anchor": [
+        152,
+        285
+      ],
+      "source_canvas": [
+        304,
+        304
+      ],
+      "source_anchor": [
+        152,
+        285
+      ],
+      "models": {
+        "01": "flash",
+        "02": "flash"
+      },
+      "notes": "RECOVERY, 1.4 s punish window.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 13.473684210526315
+      }
     },
     "death": {
-      "frames": [
-        "idle_01"
-      ],
+      "fps": 8,
+      "loop": "hold",
       "durations": [
-        1.0
+        2.8,
+        2.8,
+        2.8,
+        4.0
       ],
-      "loop": false,
-      "fps": 8
+      "poses": [
+        "Staggering backward on one foot, turban knocked askew, eyes wide in shock, both arms thrown up, the fuse-lighter flying out of his hand",
+        "Toppling backward, knees buckling, arms flailing, leaning far back about to fall",
+        "Sitting slumped on the ground with legs stretched out in front, turban slipped over one eye, dazed, arms limp",
+        "One single figure lying flat on his back along the ground, seen from the side: turbaned head resting on the ground at the left, boots at the right pointing up, eyes as X marks, moustache drooping, both arms limp on the ground, rocket rack crushed flat under his shoulders. Only one body, one head"
+      ],
+      "frame_count": 4,
+      "canvas": [
+        352,
+        304
+      ],
+      "anchor": [
+        152,
+        285
+      ],
+      "source_canvas": [
+        352,
+        304
+      ],
+      "source_anchor": [
+        152,
+        285
+      ],
+      "models": {
+        "01": "flash",
+        "02": "pro",
+        "03": "flash",
+        "04": "flash"
+      },
+      "notes": "DEAD, plays once and holds.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 13.473684210526315
+      }
     }
   },
+  "attachment": {},
+  "view": "right-profile",
+  "subject": "full-body",
+  "art_px": 200,
+  "brief": "Dhoomketu, the Firework Commander boss: a wiry, tall, lean military trickster villain, narrow shoulders, long thin legs, upright cocky posture. Muted dusky-purple skin, single head, sharp hooked nose, huge swept-up black handlebar moustache, thick scowling brows. Plum-purple turban with a brass band and a small round gold crest at the front. Long plum military frock coat to the knees with a high collar and a dark charcoal chest panel with small brass buttons, dark trousers, pointed black boots. A diagonal brass bandolier across the chest from shoulder to hip, holding a row of short cylindrical pink-and-gold firework tubes. Strapped on his back, a rack of exactly three plum rockets with gold pointed tips, angled up behind the back shoulder, tips rising just above the turban. His forward right hand holds a short brass fuse-lighter stick (portfire) upright at chest height; his left hand rests on his hip. No horns, no crown, no mace, no blue skin, no armour plates. Strict right-facing side profile, full body, standing.",
+  "generation": {
+    "model": "pro base (candidate 04); keyframes pro/flash per set",
+    "size": "4K",
+    "batch": false
+  },
   "source": "asset-builder/sprites/dhoomketu",
-  "notes": "Interim set: approved base plus four finished keyframes; remaining poses reuse them."
+  "approval": "approved"
 }

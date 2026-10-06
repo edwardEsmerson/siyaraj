@@ -1,0 +1,38 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    2.8,
+    2.8
+  ],
+  "poses": [
+    "Hunched over with both hands reaching back over his shoulder fumbling with the rockets in the rack on his back, head turned back to look at them, one knee bent, off balance, sweating",
+    "Patting the bandolier on his chest with both hands, looking down at it in panic, shoulders hunched, knees bent, sweat drop on his brow, fuse-lighter clenched in the right hand"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    352,
+    304
+  ],
+  "anchor": [
+    152,
+    285
+  ],
+  "source_canvas": [
+    304,
+    304
+  ],
+  "source_anchor": [
+    152,
+    285
+  ],
+  "models": {
+    "01": "flash",
+    "02": "flash"
+  },
+  "notes": "RECOVERY, 1.4 s punish window.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 13.473684210526315
+  }
+}

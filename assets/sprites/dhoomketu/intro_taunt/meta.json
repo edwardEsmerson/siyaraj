@@ -1,0 +1,41 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "durations": [
+    2.667,
+    2.667,
+    2.667
+  ],
+  "poses": [
+    "Twirling the tip of his moustache between the fingers of his left hand, brass fuse-lighter held upright in the right hand at chest height, smug sly grin, feet together",
+    "Thrusting the brass fuse-lighter straight forward at shoulder height in his right hand like pointing a challenge, left hand on hip, sneering, weight on the front foot",
+    "Arms folded high across his chest with the fuse-lighter tucked in the crook of his arm, chin raised arrogantly, feet apart, scowling"
+  ],
+  "frame_count": 3,
+  "canvas": [
+    352,
+    304
+  ],
+  "anchor": [
+    152,
+    285
+  ],
+  "source_canvas": [
+    304,
+    304
+  ],
+  "source_anchor": [
+    152,
+    285
+  ],
+  "models": {
+    "01": "flash",
+    "02": "flash",
+    "03": "flash"
+  },
+  "notes": "INTRO, 1.0 s, frames follow state progress.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 13.473684210526315
+  }
+}
