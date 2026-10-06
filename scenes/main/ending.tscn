@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/main/ending_screen.gd" id="1_ending"]
+
+[node name="Ending" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ending")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.075, 0.045, 0.09, 1)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="VBoxContainer" parent="Center"]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Title" type="Label" parent="Center/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1.0, 0.78, 0.37, 1)
+theme_override_font_sizes/font_size = 42
+text = "THE LIGHTS RETURN"
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="Center/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.9, 0.86, 1)
+theme_override_font_sizes/font_size = 22
+text = "The journey across the forest, river, and palace is complete.\nThank you for playing Siyaraj."
+horizontal_alignment = 1
+
+[node name="ReturnButton" type="Button" parent="Center/Content"]
+layout_mode = 2
+custom_minimum_size = Vector2(280, 48)
+text = "Return to playtest menu"

@@ -37,7 +37,7 @@ leads nowhere.
 - [ ] **Hide the developer tools in release builds:** snapshots, the encounter toggle
   and the checkpoint picker. One way is to check `OS.is_debug_build()` or a custom
   export feature tag.
-- [ ] **Connect the levels:** level 1 → level 2 → level 3 → boss → ending.
+- [x] **Connect the levels:** level 1 → level 2 → level 3 → boss → ending.
 - [ ] **Add boss arenas to the levels**, with an entrance, a checkpoint before the
   fight, and a door or gate that unlocks after the win.
 - [ ] **Add an ending and credits:** the lit-up Diwali finale, Raj freed, then team
