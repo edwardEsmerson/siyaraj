@@ -1,6 +1,7 @@
 extends SceneTree
 ## Ravan boss: head slots, guarded/active heads, knockout and regrowth, navel exposure,
-## phases, Dashanan Fury safe lanes, head attacks, real weapons, death and restart.
+## phases, Dashanan Fury safe lanes, head attacks, real weapons, generic boss bar,
+## death and restart.
 const ARENA := "res://scenes/bosses/ravan/ravan_arena.tscn"
 
 var failures: int = 0
@@ -80,6 +81,11 @@ func check_structure() -> void:
 	check(boss.has_node("Body/Art") and boss.get_node("Core").collision_layer == 0, "Body must have an art slot and the navel must start closed")
 	var bar: Control = boss.get_node("BossUI/HealthBar")
 	check(bar.boss == boss and bar.visible, "Boss health bar must bind to Ravan")
+	check(bar.get_script().resource_path == "res://scripts/ui/boss_health_bar.gd", "Ravan must use the generic BossHealthBar")
+	check(bar.max_health == 30 and bar.health == 30 and bar.name_label.text == "RAVAN, DASHANAN", "Generic bar must read Ravan's core health and title")
+	check(bar.phase_thresholds.size() == 2 and is_equal_approx(bar.phase_thresholds[0], 20.0 / 30.0) and is_equal_approx(bar.phase_thresholds[1], 10.0 / 30.0), "Generic bar must mark both Ravan phase boundaries")
+	var indicators: Control = boss.get_node("BossUI/HeadIndicators")
+	check(indicators.boss == boss and indicators.visible, "Head indicators must bind to Ravan")
 
 
 func check_guard_knockout_and_regrowth() -> void:
@@ -126,6 +132,7 @@ func check_exposure() -> void:
 	await press(&"attack")
 	await ticks(20)
 	check(boss.core_health == 29, "Grounded sparkler must hit the exposed navel")
+	check(boss.get_node("BossUI/HealthBar").health == 29, "Generic bar must follow core damage through health_changed")
 	await ticks(300)
 	check(boss.state == boss.State.FIGHT and boss.get_node("Core").collision_layer == 0, "Exposure must end and close the navel")
 	var regrowing: bool = head(0).state == head(0).HeadState.REGROWING or head(0).state == head(0).HeadState.IDLE
@@ -304,7 +311,7 @@ func check_phases_and_fury() -> void:
 func check_death_and_restart() -> void:
 	await reset_arena()
 	var events := {"defeated": false}
-	boss.defeated.connect(func() -> void: events.defeated = true)
+	boss.died.connect(func() -> void: events.defeated = true)
 	boss.phase = 3
 	boss.core_health = 2
 	knock_out([0, 1, 2, 3, 9])
@@ -314,7 +321,10 @@ func check_death_and_restart() -> void:
 	await ticks(1)
 	check(boss.state == boss.State.DYING and attacks().is_empty(), "Final navel hit must start the death sequence and clear attacks")
 	await ticks(200)
-	check(boss.state == boss.State.DEAD and events.defeated, "Death sequence must finish and emit defeated")
+	check(boss.state == boss.State.DEAD and events.defeated, "Death sequence must finish and emit died")
+	var bar: Control = boss.get_node("BossUI/HealthBar")
+	check(bar.health == 0 and bar._fade_out or not bar.visible, "Generic bar must empty and fade out on death")
+	check(not boss.get_node("BossUI/HeadIndicators").visible, "Head indicators must hide on death")
 	for slot in boss.heads:
 		check(slot.state == slot.HeadState.DESTROYED, "All ten heads must be destroyed in the death sequence")
 	check(current_scene.get_node("HUD/CombatStatus").text.contains("defeated"), "Arena must announce victory")
@@ -334,6 +344,34 @@ func check_death_and_restart() -> void:
 	check(current_scene != old_scene, "Lethal damage must restart the Ravan arena")
 
 
+## Dash i-frames: head attacks, shared projectiles and Fury pillars all go
+## through the player's take_damage, so an invulnerable Siya takes nothing.
+func check_dash_invulnerability() -> void:
+	for index in [0, 1, 2, 3, 4, 6]:
+		await reset_arena()
+		player.set_physics_process(false)
+		player.position = Vector2(300, 430)
+		# Physics is paused, so the dash i-frame timer holds for the whole check.
+		player._invulnerable_remaining = 10.0
+		boss.activate_head(index)
+		await ticks(160)
+		check(player.health == 5, "Dash i-frames must ignore head %d's attack" % index)
+	for invulnerable in [true, false]:
+		await reset_arena()
+		player.set_physics_process(false)
+		player.position = Vector2(boss.lane_center(1), 430)
+		if invulnerable:
+			player._invulnerable_remaining = 10.0
+		boss.phase = 3
+		boss._fury_clock = boss.phase_three_fury_interval - 0.05
+		await ticks(230)
+		check(boss.state == boss.State.FURY and not 1 in boss.current_safe_lanes, "Fury check must stand Siya in a burning lane")
+		if invulnerable:
+			check(player.health == 5, "Dash i-frames must ignore Fury pillars")
+		else:
+			check(player.health < 5, "Fury pillars must hurt Siya without i-frames")
+
+
 func run_checks() -> void:
 	await check_structure()
 	await check_guard_knockout_and_regrowth()
@@ -343,8 +381,9 @@ func run_checks() -> void:
 	await check_auto_activation()
 	check_fury_fairness_data()
 	await check_phases_and_fury()
+	await check_dash_invulnerability()
 	await check_death_and_restart()
 	release_inputs()
 	if failures == 0:
-		print("PASS: ten head slots, guarded/active heads, knockout and regrowth, navel exposure, real weapons, head attacks, phases, Dashanan Fury safe lanes, death and restart")
+		print("PASS: ten head slots, guarded/active heads, knockout and regrowth, navel exposure, real weapons, head attacks, phases, Dashanan Fury safe lanes, dash i-frames, generic boss bar, death and restart")
 	quit(1 if failures > 0 else 0)

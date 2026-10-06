@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/bosses/ravan/ravan_boss.gd" id="1_boss"]
 [ext_resource type="Script" path="res://scripts/bosses/ravan/ravan_core.gd" id="2_core"]
 [ext_resource type="PackedScene" path="res://scenes/bosses/ravan/ravan_head.tscn" id="3_head"]
-[ext_resource type="Script" path="res://scripts/bosses/ravan/ravan_health_bar.gd" id="4_bar"]
+[ext_resource type="PackedScene" path="res://scenes/ui/boss_health_bar.tscn" id="4_bar"]
+[ext_resource type="Script" path="res://scripts/bosses/ravan/ravan_head_indicators.gd" id="5_heads"]
 
 [sub_resource type="RectangleShape2D" id="ArmourShape"]
 size = Vector2(100, 60)
@@ -155,12 +156,14 @@ theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 26
 horizontal_alignment = 1
 
-[node name="HealthBar" type="Control" parent="BossUI"]
+[node name="HealthBar" parent="BossUI" instance=ExtResource("4_bar")]
+
+[node name="HeadIndicators" type="Control" parent="BossUI"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 230.0
-offset_top = 470.0
-offset_right = 730.0
-offset_bottom = 536.0
+offset_left = 180.0
+offset_top = 438.0
+offset_right = 780.0
+offset_bottom = 476.0
 mouse_filter = 2
-script = ExtResource("4_bar")
+script = ExtResource("5_heads")

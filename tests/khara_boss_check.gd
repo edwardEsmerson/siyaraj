@@ -303,6 +303,35 @@ func check_damage_and_defeat() -> void:
 	check(current_scene != old_scene and current_scene.get_node("TestCourse/Boss").health == 24, "Restart must restore the boss fight")
 
 
+## Dash i-frames: every Khara hazard goes through take_damage, so a dashing
+## Siya takes nothing from the slam, its shockwave or a ladi.
+func check_dash_invulnerability() -> void:
+	await reset_arena()
+	boss.set_physics_process(true)
+	player.set_physics_process(false)
+	player.global_position = boss.global_position + Vector2(-80, 0)
+	# Physics is paused, so the dash i-frame timer holds for the whole check.
+	player._invulnerable_remaining = 10.0
+	await ticks(1)
+	check(player.is_invulnerable(), "Test setup must leave Siya invulnerable")
+	boss.start_slam(-1)
+	await ticks(80)
+	check(player.health == 3, "Dash i-frames must ignore the gada slam and its shockwave")
+
+	await reset_arena()
+	player.set_physics_process(false)
+	var origin := Vector2(400, 430)
+	player.global_position = origin + Vector2(150, 0)
+	player._invulnerable_remaining = 10.0
+	boss.place_ladi(origin, 1, 0.5, 10)
+	await ticks(100)
+	check(player.health == 3, "Dash i-frames must ignore ladi pops")
+	var wave: Node2D = boss.spawn_shockwave(1)
+	player.global_position = wave.global_position + Vector2(40, 0)
+	await ticks(20)
+	check(player.health == 3, "Dash i-frames must ignore a ground shockwave")
+
+
 func run_checks() -> void:
 	await check_setup()
 	await check_ladi_direction()
@@ -311,7 +340,8 @@ func run_checks() -> void:
 	await check_phase_two()
 	await check_ai()
 	await check_damage_and_defeat()
+	await check_dash_invulnerability()
 	release_inputs()
 	if failures == 0:
-		print("PASS: Khara setup, ladi direction/fuse/sequence/walls/jump, slam tell/damage/recovery/shockwave, phase 2, AI, weapon damage, defeat, health bar and restart")
+		print("PASS: Khara setup, ladi direction/fuse/sequence/walls/jump, slam tell/damage/recovery/shockwave, phase 2, AI, weapon damage, defeat, health bar, restart and dash i-frames")
 	quit(1 if failures > 0 else 0)

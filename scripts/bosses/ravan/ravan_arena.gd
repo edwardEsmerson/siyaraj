@@ -21,7 +21,7 @@ func _ready() -> void:
 	ravan.fury_started.connect(func() -> void:
 		$HUD/CombatStatus.text = "DASHANAN FURY: stand in the teal lanes."
 	)
-	ravan.defeated.connect(func() -> void:
+	ravan.died.connect(func() -> void:
 		$HUD/CombatStatus.text = "Ravan defeated! R to replay."
 	)
 

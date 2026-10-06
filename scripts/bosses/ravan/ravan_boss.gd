@@ -9,13 +9,13 @@ const Shockwave = preload("res://scripts/bosses/ravan/ravan_shockwave.gd")
 const HOMING_SCENE = preload("res://scenes/combat/homing_projectile.tscn")
 const STRAIGHT_SCENE = preload("res://scenes/combat/enemy_projectile.tscn")
 
-signal core_health_changed(remaining: int)
+signal health_changed(remaining: int)
 signal phase_changed(phase: int)
 signal exposure_started
 signal exposure_ended
 signal fury_started
 signal fury_ended
-signal defeated
+signal died
 
 enum State { INTRO, FIGHT, EXPOSED, TRANSITION, FURY, DYING, DEAD }
 
@@ -41,6 +41,7 @@ const FURY_COLOR: Color = Color(1.0, 0.3, 0.12)
 const SAFE_COLOR: Color = Color(0.35, 1.0, 0.85)
 
 @export var boss_name: String = "RAVAN"
+@export var boss_title: String = "Dashanan"
 @export var max_core_health: int = 30
 @export var phase_two_health: int = 20
 @export var phase_three_health: int = 10
@@ -57,6 +58,13 @@ const SAFE_COLOR: Color = Color(0.35, 1.0, 0.85)
 var state: State = State.INTRO
 var phase: int = 1
 var core_health: int
+## Generic boss contract (BossHealthBar): aliases for the navel core health.
+var max_health: int:
+	get:
+		return max_core_health
+var health: int:
+	get:
+		return core_health
 var heads: Array = []
 var fury_time: float = 0.0
 var fury_waves: Array = []
@@ -78,6 +86,7 @@ var _lane_overlay := Node2D.new()
 @onready var tint_rect: ColorRect = $BossUI/Tint
 @onready var banner: Label = $BossUI/Banner
 @onready var health_bar: Control = $BossUI/HealthBar
+@onready var head_indicators: Control = $BossUI/HeadIndicators
 
 
 func _ready() -> void:
@@ -92,7 +101,12 @@ func _ready() -> void:
 		child.knocked_out.connect(_on_head_knocked_out)
 	heads.sort_custom(func(a: Node, b: Node) -> bool: return a.head_index < b.head_index)
 	_apply_phase_tuning()
-	health_bar.boss = self
+	health_bar.phase_thresholds = PackedFloat32Array([
+		float(phase_two_health) / max_core_health,
+		float(phase_three_health) / max_core_health,
+	])
+	health_bar.bind(self)
+	head_indicators.boss = self
 	# Artists drop a texture or AnimatedSprite2D into Body/Art; the placeholder hides.
 	var has_art := (body_art is Sprite2D and (body_art as Sprite2D).texture != null) or (body_art is AnimatedSprite2D and (body_art as AnimatedSprite2D).sprite_frames != null)
 	$Body/Placeholder.visible = not has_art
@@ -250,7 +264,7 @@ func damage_core(amount: int) -> void:
 		floor_health = phase_three_health
 	core_health = maxi(core_health - amount, floor_health)
 	_flash_remaining = 0.1
-	core_health_changed.emit(core_health)
+	health_changed.emit(core_health)
 	if core_health <= 0:
 		_begin_death()
 	elif core_health <= floor_health:
@@ -438,7 +452,7 @@ func _process_dying() -> void:
 		return
 	Burst.spawn(get_tree().current_scene, global_position + Vector2(0, -80), Color(1.0, 0.7, 0.3), "DEFEATED", 90.0)
 	state = State.DEAD
-	defeated.emit()
+	died.emit()
 
 
 func _update_feedback(delta: float) -> void:
