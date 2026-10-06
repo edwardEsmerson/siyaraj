@@ -9,7 +9,9 @@ forest. He is a heavy, slow brawler with a bronze gada (mace). He also lays *lad
 of firecrackers, which pop in a chain along the ground.
 
 Difficulty is mid-level. Both attacks have long, colour-coded tells. Each one rewards
-movement the player already knows: running, the air dash, timed jumps, and punishing recovery.
+movement the player already knows: running, the dash, timed jumps, and punishing recovery.
+Every Khara hazard damages Siya through `take_damage`, so dash i-frames dodge the slam,
+shockwaves and ladi pops like any enemy hit.
 
 - Scene: `scenes/bosses/khara.tscn` (script `scripts/bosses/khara.gd`)
 - Arena: `scenes/bosses/khara_arena.tscn` (F6). It uses the forest player with all three weapons.
@@ -134,8 +136,8 @@ LADI_RECOVERY, PHASE_SHIFT, DEAD`.
   node name) and `boss_title`.
 
 The bar shows a delayed damage chip, tick marks at `phase_thresholds` (default 0.5) and an
-enraged fill colour after a phase change. It fades out on death. Boss 2 can reuse it
-directly.
+enraged fill colour after a phase change. It fades out on death. Boss 2 (Ravan) uses it
+too, with a separate head-indicator row (`scripts/bosses/ravan/ravan_head_indicators.gd`).
 
 ## Sprite and animation list for the artist
 

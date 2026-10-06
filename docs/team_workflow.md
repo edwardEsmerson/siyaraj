@@ -7,7 +7,8 @@
   ground dashes keep the air charge and use a short cooldown instead.
 - Dash stops at solid walls. It grants i-frames for its duration plus a short
   grace: `take_damage` is ignored and enemy shots pass through. Damage sources
-  may query `is_invulnerable()`.
+  may query `is_invulnerable()`. Boss hazards (Khara and Ravan) route through
+  `take_damage`, so they respect the i-frames too.
 - Dash cancels any sparkler phase; an attack pressed mid-dash swings when it ends.
 - Tapping and holding jump produce the same fixed jump height.
 - Jumping supports coyote time and jump buffering.
@@ -147,7 +148,8 @@ playtest before integrating the sparkler attack.
 - After the existing run/jump stations, a 220 px gap tests comfortable jump/dash
   traversal. A 250 px gap tests a jump very close to the edge with a dash near
   the apex. An 8 px wall tests high-speed collision at the end.
-- Combat still comes next; dash grants no damage protection.
+- Combat still comes next. (At this step dash granted no damage protection; ground
+  dash with i-frames later replaced that rule, see Agreed rules.)
 
 Validation commands, with the Godot executable on PATH or its full path substituted:
 
@@ -177,7 +179,7 @@ whether the controller feels enjoyable.
   Run and jump remain available; dash, hurt and death cancel the swing.
 - Both combatants have three health. Damage goes through `take_damage`;
   player movement still owns knockback. Siya gets 0.8 s damage protection,
-  including while dashing. Dash itself grants no protection.
+  including while dashing. (Dash i-frames were added later; see Agreed rules.)
 - Guard states are patrol, chase, attack, hurt and dead. Its strike has
   0.45 s wind-up, 0.12 s active and 0.65 s recovery. Orange signals wind-up;
   a red forward hitbox signals the active attack. Hits interrupt its swing.
@@ -314,7 +316,8 @@ counterattack window with Siya's existing three health.
   swept collision/damage handling, deal one damage, and expire after 2.8 s.
   Missing or dead targets leave them flying along their last heading. Shots
   survive their shooter's defeat and are cleared on restart. Flyer shots remain
-  straight and orange. There is still no contact damage or dash invulnerability.
+  straight and orange. There is no contact damage. (Dash i-frames, added later, let a dash pass
+  through bolts; see Agreed rules.)
 - `tests/ground_shooter_check.gd` covers gravity, patrol bounds, walls/ledges,
   charge/reload, interruption, bounded homing and moving/deleted/dead targets,
   swept impacts, protection, melee, death/restart and the guard-controlled gate.
@@ -368,7 +371,7 @@ original player scene. `forest_weapons_check.gd` validates this integration.
   All enemies now live in the forest.
 - `scenes/dev/sandbox.tscn` replaces them: a flat walled arena with one enemy.
   Choose `encounter` (none, Guard, Brute, Flyer, Shooter) and `three_weapons`
-  on the root, then press F6. Use it for future encounters such as bosses.
+  on the root, then press F6. Bosses get their own arenas under `scenes/bosses/`.
   Enemy checks select an encounter through `Sandbox.next_encounter`.
 - The weapons playground and its dummies moved to `scenes/dev/` and
   `scripts/dev/`. The movement playground remains for the movement and dash checks.
@@ -387,9 +390,10 @@ original player scene. `forest_weapons_check.gd` validates this integration.
     Yellow chevrons show the direction.
   - Phase 2 starts at 12 health: faster, double shockwave, a second ladi from the far
     wall, and a slam followed by a ladi.
-- `scenes/ui/boss_health_bar.tscn` is a generic bar. Call `bind(boss)` on any node
-  with `max_health`, `health` and `health_changed`. It also uses `died`,
-  `phase_changed`, `boss_name` and `boss_title` when they exist.
+- `scenes/ui/boss_health_bar.tscn` is the generic bar shared by every boss. Call
+  `bind(boss)` on any node with `max_health`, `health` and `health_changed`. It
+  also uses `died`, `phase_changed`, `boss_name` and `boss_title` when they exist;
+  set `phase_thresholds` (fractions of max health) for the phase tick marks.
 - Hazards join the `boss_hazards` group. Ladis also join `boss_ladis`. Defeat frees them all.
 - `tests/khara_boss_check.gd` covers ladi direction, fuse safety, sequential pops,
   wall clipping, jumping a ladi, slam tell, damage, reach and recovery, shockwaves,
@@ -398,3 +402,25 @@ original player scene. `forest_weapons_check.gd` validates this integration.
 
 Manual checkpoint: play the Khara arena with F6. Check that the orange and yellow tells
 read clearly at gameplay speed, and that the phase 2 pincer is fair with three health.
+
+## Boss 2 (Ravan) handoff
+
+- Combat owns `scenes/bosses/ravan/` and `scripts/bosses/ravan/`. The isolated
+  `scenes/bosses/ravan/ravan_arena.tscn` uses the forest player with all three
+  weapons and 5 health. The full moveset is in `docs/bosses/boss2-ravan.md`.
+- Ten heads take turns attacking; only an active head can be hurt. Knocking out
+  enough heads at once exposes the navel core, the only place Ravan takes damage.
+  Phase changes (20 and 10 core health) start Dashanan Fury pillar waves.
+- Ravan follows the generic boss contract: `max_health`/`health` alias his core
+  health, and he emits `health_changed`, `phase_changed` and `died`. His
+  `BossUI/HealthBar` is an instance of `scenes/ui/boss_health_bar.tscn`;
+  `BossUI/HeadIndicators` (`ravan_head_indicators.gd`) is a small Ravan-only add-on
+  showing one pip per head, the phase, the knockout goal and the exposure cue.
+- Hazards (pillars, beams, lightning, shockwaves) and the shared enemy projectiles
+  all damage Siya through `take_damage`, so dash i-frames apply.
+- `tests/ravan_check.gd` covers head slots, guard, knockout and regrowth, navel
+  exposure, real weapons, head attacks, phases, Fury safe lanes, dash i-frames,
+  the generic boss bar, defeat and restart.
+
+Manual checkpoint: play the Ravan arena with F6. Check that the head pips read
+clearly above the boss bar and that Fury lanes are fair without dashing.

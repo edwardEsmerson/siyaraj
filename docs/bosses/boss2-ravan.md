@@ -56,7 +56,7 @@ side of the arena gets every kind of threat.
 | --- | --- | --- | --- | --- | --- |
 | 0 | Mada | Pride | Roar shockwave | Gold | Jump the low wave, or stand on a side ledge, which blocks it |
 | 1 | Krodha | Anger | Fire breath | Orange | Leave the outlined beam before it ignites |
-| 2 | Lobha | Greed | Homing orb | Purple | Jump or air-dash past it; its turning is limited |
+| 2 | Lobha | Greed | Homing orb | Purple | Jump past it or dash through it; its turning is limited |
 | 3 | Moha | Delusion | Lightning | Cyan | Step off the marker |
 | 4 | Matsarya | Envy | Spread shot | Rose | Stand in the gaps between the shots, or jump |
 | 5 | Ahamkara | Ego | Spread shot | Rose | As for Matsarya |
@@ -137,7 +137,7 @@ Reading the safe gap and running to it is the only answer.
 The final navel hit removes every Ravan projectile and hazard still in the
 arena, so no stray hit can follow the win. The banner shows `RAVAN FALLS`.
 The heads burst from the outside in, 0.18 s apart, followed by a large
-`DEFEATED` burst after 0.8 s. The body dims and the `defeated` signal fires.
+`DEFEATED` burst after 0.8 s. The body dims and the `died` signal fires.
 The arena then shows `Ravan defeated! R to replay.`
 
 ## Integration notes
@@ -146,19 +146,23 @@ The arena then shows `Ravan defeated! R to replay.`
   the floor), `ravan_head.tscn` (one head) and `ravan_arena.tscn`.
 - Scripts: `ravan_boss.gd` runs the fight, `ravan_head.gd`, `ravan_core.gd`
   (the navel hurtbox), `ravan_hazard.gd` (telegraphed beam, column and pillar),
-  `ravan_shockwave.gd` and `ravan_health_bar.gd`.
+  `ravan_shockwave.gd` and `ravan_head_indicators.gd`.
 - Heads, the navel and the chest armour are StaticBody2D nodes on the enemy
   body layer (bit 4). The existing lash, skyshot and chakri therefore work
   without any changes to the player. The armour has no `take_damage`, so it
   absorbs skyshots that hit Ravan's chest.
-- Signals: `core_health_changed`, `phase_changed`, `exposure_started`,
-  `exposure_ended`, `fury_started`, `fury_ended` and `defeated`.
+- Signals: `health_changed`, `phase_changed`, `exposure_started`,
+  `exposure_ended`, `fury_started`, `fury_ended` and `died`. `max_health` and
+  `health` alias `max_core_health` and `core_health`, so Ravan meets the
+  generic boss contract.
 - The arena overrides the player's `max_health` to 5 on the instance only. No
   player code changes.
-- `ravan_health_bar.gd` is a self-contained boss bar. Boss 1 has its own
-  generic boss bar, so the two may need merging.
-- A ground dash with i-frames (in progress separately) would make Fury and
-  lightning easier to dodge. The safe-gap timing does not rely on it.
+- Core health uses the shared `scenes/ui/boss_health_bar.tscn` (instanced as
+  `BossUI/HealthBar`, with tick marks at both phase boundaries).
+  `BossUI/HeadIndicators` (`ravan_head_indicators.gd`) adds the Ravan-only row
+  above it: one pip per head, the phase, the knockout goal and `AMRIT EXPOSED`.
+- Ground dash i-frames apply to every Ravan hazard and projectile, which makes
+  Fury and lightning easier to dodge. The safe-gap timing does not rely on it.
 
 ## Art handoff: sprites and animations
 

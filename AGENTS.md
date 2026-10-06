@@ -8,6 +8,7 @@ Siyaraj is a Godot 4.7.2 2D platformer using the Compatibility renderer. Open `p
 - `scenes/` contains corresponding `.tscn` scenes. `scenes/dev/` holds the dev-only sandbox (one selectable enemy, for isolated encounter work) and the weapons playground; `scenes/bosses/` holds each boss and its isolated arena; `scenes/main/movement_playground.tscn` remains for movement tuning.
 - `resources/player/default_movement.tres` stores shared movement tuning.
 - `tests/` contains physics regression scripts; `tools/` contains smoke-build helpers.
+- Bosses (Khara, Ravan) share the generic `scenes/ui/boss_health_bar.tscn`; boss-specific UI is a small add-on node, not a second bar. Boss design docs live in `docs/bosses/`.
 - `docs/team_workflow.md` records ownership and gameplay contracts. `asset-builder/` contains local sprite tooling and reference images; current gameplay uses scene/script placeholders.
 
 ## Build, Test, and Development Commands
@@ -50,7 +51,7 @@ godot --headless --path . --script res://tests/ravan_check.gd
 
 Follow existing GDScript: tab indentation, typed declarations, `snake_case` files/functions/variables, `PascalCase` class names, and uppercase constants/enum members. Separate functions with blank lines. `.editorconfig` requires UTF-8; no formatter or linter is configured. Preserve companion `.gd.uid` files.
 
-Use named input actions. Player movement owns velocity; combat requests knockback through controller APIs. Coordinate ownership changes using `docs/team_workflow.md`; main-scene edits belong to integration.
+Use named input actions. Player movement owns velocity; combat requests knockback through controller APIs. Enemies and boss hazards damage Siya only through `take_damage`, so ground/air dash i-frames (`is_invulnerable()`) apply everywhere. Coordinate ownership changes using `docs/team_workflow.md`; main-scene edits belong to integration.
 
 ## Testing Guidelines
 

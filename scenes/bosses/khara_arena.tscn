@@ -104,7 +104,7 @@ offset_top = 48.0
 offset_right = 936.0
 offset_bottom = 70.0
 theme_override_font_sizes/font_size = 14
-text = "A/D: move    Space: jump    Shift: air dash    J: sparkler    L: skyshot    hold K: chakri    R: restart"
+text = "A/D: move    Space: jump    Shift: dash    J: sparkler    L: skyshot    hold K: chakri    R: restart"
 
 [node name="Milestone" type="Label" parent="HUD"]
 offset_left = 24.0

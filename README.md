@@ -28,14 +28,17 @@ Boss 1, Khara, has an isolated arena: open `scenes/bosses/khara_arena.tscn` with
 He telegraphs an orange gada slam with a ground shockwave, and lays ladi firecracker
 strings that pop along the ground toward Siya. Yellow chevrons show the direction.
 At half health he enrages and adds a second ladi from the far wall. See
-[the Khara design doc](docs/bosses/boss1-khara.md). The reusable boss health bar is
-`scenes/ui/boss_health_bar.tscn`. Khara is not yet placed in the forest.
+[the Khara design doc](docs/bosses/boss1-khara.md). Khara is not yet placed in the forest.
 
 Boss 2, Ravan, has an isolated arena at `scenes/bosses/ravan/ravan_arena.tscn`
 (F6); it is not yet part of level progression. Only a glowing, lunging head can be
 hurt. Knock out enough heads before they regrow to expose the amrit in his navel,
 then strike it. Phase changes trigger Dashanan Fury: stand in the teal lanes. See
 [the Ravan design doc](docs/bosses/boss2-ravan.md).
+
+Both bosses use the reusable boss health bar, `scenes/ui/boss_health_bar.tscn`.
+Ravan adds a small head-indicator row above it. All boss hazards respect the
+dash i-frames described below.
 
 The earlier prototype course remains available at `scenes/main/main.tscn` with F6.
 Its guard and finish-gate behaviour described below are unchanged.
@@ -47,8 +50,8 @@ Running, fixed-height jumping, coyote time, jump buffering, and rocket dash are
 implemented. Tapping or holding Space produces the same jump height. Dash works on the ground
 and in the air and stops at walls. One air dash is allowed, restored on landing;
 a ground dash keeps that charge but starts a 0.25-second cooldown after it ends.
-Dashing grants brief invulnerability (the dash plus 0.05 seconds): enemy swings
-and shots pass through Siya, and a dodged shot ignores her afterwards. Dash
+Dashing grants brief invulnerability (the dash plus 0.05 seconds): enemy swings,
+shots and boss hazards pass through Siya, and a dodged shot ignores her afterwards. Dash
 cancels any sparkler phase, including recovery. J pressed during a dash is held
 and swings as the dash ends.
 
@@ -88,8 +91,10 @@ press F6. To fight one enemy alone, open the dev sandbox
 `scenes/dev/sandbox.tscn`, pick `encounter` (Guard, Brute, Flyer, Shooter or
 none) on its root, optionally enable `three_weapons`, and press F6.
 
-Controls: A/D or arrows to move, Space to jump, Shift to dash, J to attack,
-and R to restart. Holding J does not automatically repeat attacks.
+Controls: A/D or arrows to move, Space to jump, Shift to dash (on the ground or
+in the air, with brief i-frames), J to attack, and R to restart. The forest, boss
+arenas and weapons playground add L for skyshot and hold/release K for chakri.
+Holding J does not automatically repeat attacks.
 
 Movement tuning lives in `resources/player/default_movement.tres`.
 Player health/protection can be tuned on the player root; attack timing, reach,
@@ -107,12 +112,12 @@ godot --headless --path . --script res://tests/movement_check.gd
 godot --headless --path . --script res://tests/dash_check.gd
 godot --headless --path . --script res://tests/combat_check.gd
 godot --headless --path . --script res://tests/course_check.gd
+godot --headless --path . --script res://tests/flying_enemy_check.gd
+godot --headless --path . --script res://tests/ground_shooter_check.gd
+godot --headless --path . --script res://tests/brute_check.gd
 godot --headless --path . --script res://tests/forest_check.gd
 godot --headless --path . --script res://tests/forest_rooms_check.gd
 godot --headless --path . --script res://tests/forest_encounters_check.gd
-godot --headless --path . --script res://tests/flying_enemy_check.gd
-godot --headless --path . --script res://tests/brute_check.gd
-godot --headless --path . --script res://tests/ground_shooter_check.gd
 godot --headless --path . --script res://tests/weapons_check.gd
 godot --headless --path . --script res://tests/weapons_map_check.gd
 godot --headless --path . --script res://tests/forest_weapons_check.gd
@@ -139,12 +144,19 @@ The smoke build exports a PCK and runs it with the installed Godot executable,
 outside the editor. It is not a standalone distributable executable.
 Generated files go in the ignored `builds/linux/` directory. The export preset
 packs the forest, prototype course, movement playground, dev sandbox, weapons
-playground, Khara boss arena, burst effect and their dependencies, excluding the
+playground, Khara and Ravan boss arenas, burst effect and their dependencies, excluding the
 proposal, regression checks and team docs. To run the sandbox (default Guard
 encounter) from the pack:
 
 ```sh
 GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh res://scenes/dev/sandbox.tscn
+```
+
+To run a boss arena from the pack:
+
+```sh
+GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh res://scenes/bosses/khara_arena.tscn
+GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh res://scenes/bosses/ravan/ravan_arena.tscn
 ```
 
 For a standalone Linux build, install the matching 4.7.2 export templates via
