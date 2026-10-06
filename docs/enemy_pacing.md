@@ -23,6 +23,17 @@ patrols to existing courts. Smaller landings use 10–25 unit patrol radii and
 80–130 unit detection ranges to leave room for the approach and retreat. Enemy
 health, attacks and their shared behavior are unchanged.
 
+Final encounter counts between successive main-route diyas are:
+
+| Level | Counts in checkpoint order |
+| --- | --- |
+| Forest | 4, 4, 4, 4, 4, 3, 4, 3, 4 |
+| River | 6, 7, 6, 6, 5 |
+| Palace | 5, 5, 5, 7, 2 |
+
+Palace weights the broad inner courts more heavily while leaving its final
+sanctum climb and boss approach less crowded.
+
 ## Placement choices
 
 Coordinates give enemy feet, in level space.
@@ -160,8 +171,9 @@ without changing Robin's behavior or weakening those checks.
 
 Validation uses the existing Godot `4.7.2.stable.official.ed1daf0bf` executable at
 `/home/sdixit/Downloads/Godot_v4.7.2-stable_linux.x86_64`, set as `GODOT_BIN`.
-Final doubling-pass results are recorded in the PR. The first pass passed all
-34 suites, smoke export/launch and 19 packed-scene checks.
+The final doubling pass on current main passed **36/36 suites**, smoke
+import/export and the exported-pack headless launch. The resource check passed
+all **19 packed scenes** from outside the project. `git diff --check` passed.
 
 Graphical encounter captures provide visual QA, not a complete manual campaign
 playthrough. Cumulative damage, combat fatigue and the added fights before each
