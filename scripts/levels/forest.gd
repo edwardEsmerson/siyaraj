@@ -37,9 +37,10 @@ func _physics_process(_delta: float) -> void:
 		return
 	for portal in $Portals.get_children():
 		var active: bool = portal.get_meta("room", &"") == current_room
-		var can_enter: bool = active and not completed and player.state == player.State.NORMAL and player.is_on_floor() and portal.overlaps_body(player)
+		var blocked := portal_guard_alive(portal)
+		var can_enter: bool = active and not blocked and not completed and player.state == player.State.NORMAL and player.is_on_floor() and portal.overlaps_body(player)
 		var explored: bool = current_room == &"" and completed_rooms.has(portal.get_meta("destination", &""))
-		portal.get_node("Prompt").text = ("E: " if can_enter else "") + str(portal.get_meta("label")) + ("\nCLEARED" if explored else "")
+		portal.get_node("Prompt").text = ("E: " if can_enter else "") + str(portal.get_meta("label")) + ("\nDefeat the sentinel" if blocked else ("\nCLEARED" if explored else ""))
 		if can_enter and Input.is_action_just_pressed("interact"):
 			_use_portal(portal)
 			return
@@ -60,6 +61,12 @@ func _physics_process(_delta: float) -> void:
 
 func _checkpoints() -> Array[Node]:
 	return $Checkpoints.get_children() + $RoomCheckpoints.get_children()
+
+
+func portal_guard_alive(portal: Area2D) -> bool:
+	var guard_name: String = portal.get_meta("guard", "")
+	var guard := $Encounters.get_node_or_null(NodePath(guard_name)) if not guard_name.is_empty() else null
+	return guard != null and guard.health > 0
 
 
 func _use_portal(portal: Area2D) -> void:
@@ -124,29 +131,29 @@ func reset_progress() -> void:
 
 func hint_at(x: float) -> String:
 	if current_room == &"RootChamber":
-		return "Root chamber / Descend into the hollow, then climb to the far exit."
+		return "Root chamber / Drop past the shooter, climb the roots, then defeat the exit sentinel."
 	if current_room == &"CanopyNest":
-		return "Canopy nest / Climb the trunk, cross the outer branches, then return from the nest."
+		return "Canopy nest / Changing branch lanes lead to two combat rests. Defeat the nest sentinel to return."
 	if completed:
-		return "Riverbank reached. R to replay the forest."
+		return "Khara clearing reached. R to replay the forest."
 	if x < 1600.0:
 		return "Forest edge / Climb the roots. Control your landing before the next jump."
 	if x < 2800.0:
 		return "First clearing / J strikes the guard. Step away during its wind-up. E lights the diya."
 	if x < 4800.0:
-		return "Broken canopy / Chain your jumps. Land before using another dash."
+		return "Broken canopy / Land on the broad branch. Jump-lash the scout or spend a skyshot."
 	if x < 6500.0:
 		return "Root ridge / Climb four high steps, then cross the descending ledges."
 	if x < 8900.0:
-		return "Hollow trunks / Mind your head. Clear the roof before jumping the next gap."
+		return "Hollow trunks / Low roofs create a dash lane. Cross the shooter's bolt, then interrupt its next charge."
 	if x < 11200.0:
 		return "Stone crossing / Land and recharge. At the banyan, dodge purple bolts or J to interrupt."
 	if x < 13600.0:
 		return "Banyan climb / Alternate left and right to climb the stacked branches."
 	if x < 16100.0:
-		return "Upper ravine / Dash between ledges. The shrine brute has a slow, heavy strike."
+		return "Upper ravine / Catch roots recover a missed landing. Fight the scout from the wide middle branch."
 	if x < 18400.0:
-		return "Old shrine / Climb the ridge and cross the deep breaks in the trail."
+		return "Old shrine / Dash through the brute's wind-up, then lash during recovery. Secure the final crossing diya."
 	if x < 21000.0:
-		return "Last crossing / A sustained dash chain. Secure the diya before committing."
-	return "River approach / One final jump to the exit."
+		return "Last crossing / Rise to the crown, drop into the ravine, then climb out. Save your air dash for the long breaks."
+	return "Khara clearing / Light the last diya. The showdown begins beyond this trail."
