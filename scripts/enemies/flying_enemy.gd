@@ -1,7 +1,6 @@
 extends CharacterBody2D
 ## Patrol and shooting run together. Hits interrupt firing, never flight altitude.
 const BURST = preload("res://scripts/effects/burst.gd")
-const ENEMY_VISUAL = preload("res://scripts/enemies/enemy.gd")
 const PROJECTILE_SCENE = preload("res://scenes/combat/enemy_projectile.tscn")
 
 signal health_changed(remaining: int)
@@ -26,21 +25,15 @@ var _home: Vector2
 var _direction: int = 1
 var _aim_direction: Vector2 = Vector2.RIGHT
 var _remaining: float = 0.0
-var _fire_animation_remaining: float = 0.0
 var _hit_flash_remaining: float = 0.0
 
 @onready var body: Polygon2D = $Body
 @onready var pupil: Polygon2D = $Pupil
-@onready var art: Node2D = $Visuals/Art
-@onready var sprite: AnimatedSprite2D = $Visuals/Art/Sprite
 @onready var status: Label = $Name
 @onready var shot_origin: Marker2D = $ShotOrigin
 
 
 func _ready() -> void:
-	body.hide()
-	$Eye.hide()
-	pupil.hide()
 	health = max_health
 	_home = global_position
 	_update_feedback()
@@ -51,7 +44,6 @@ func _physics_process(delta: float) -> void:
 		return
 	_hit_flash_remaining = maxf(_hit_flash_remaining - delta, 0.0)
 	_remaining = maxf(_remaining - delta, 0.0)
-	_fire_animation_remaining = maxf(_fire_animation_remaining - delta, 0.0)
 	if global_position.x >= _home.x + patrol_radius:
 		_direction = -1
 	elif global_position.x <= _home.x - patrol_radius:
@@ -113,43 +105,27 @@ func _fire() -> void:
 	get_tree().current_scene.add_child(projectile)
 	shot_fired.emit()
 	projectile.global_position = shot_origin.global_position
-	_fire_animation_remaining = 2.0 / 8.0
-	sprite.play(&"dive")
 	BURST.spawn(get_tree().current_scene, shot_origin.global_position, Color(1.0, 0.5, 0.2), "", 12.0)
 
 
 func _update_feedback() -> void:
-	sprite.modulate = Color.WHITE
+	body.modulate = Color.WHITE
 	var action_hint := "PATROL"
 	var look := Vector2(_direction, 0)
 	match state:
 		State.CHARGING:
-			sprite.modulate = Color(2.0, 1.2, 0.35)
+			body.modulate = Color(2.0, 1.2, 0.35)
 			action_hint = "CHARGING!"
 			look = _aim_direction
 		State.RECOVERY:
-			sprite.modulate = Color(0.7, 0.75, 0.85)
+			body.modulate = Color(0.7, 0.75, 0.85)
 			action_hint = "RELOADING"
 			look = _aim_direction
 		State.HURT:
-			sprite.modulate = Color(2.0, 2.0, 2.0) if _hit_flash_remaining > 0.0 else Color(1.2, 0.8, 0.8)
+			body.modulate = Color(2.0, 2.0, 2.0) if _hit_flash_remaining > 0.0 else Color(1.2, 0.8, 0.8)
 			action_hint = "HIT"
 	pupil.position = Vector2(0, -20) + look * 5.0
 	status.text = "Flyer %d/%d\n%s" % [health, max_health, action_hint]
-	var facing := _direction
-	if state == State.CHARGING or state == State.RECOVERY:
-		facing = -1 if _aim_direction.x < 0.0 else 1
-	art.scale.x = -0.5 if facing < 0 else 0.5
-	var animation: StringName = &"fly"
-	match state:
-		State.CHARGING:
-			animation = &"charge"
-		State.RECOVERY, State.HURT:
-			animation = &"recovery"
-	if state == State.RECOVERY and _fire_animation_remaining > 0.0:
-		animation = &"dive"
-	if sprite.animation != animation or not sprite.is_playing():
-		sprite.play(animation)
 	queue_redraw()
 
 
@@ -169,7 +145,6 @@ func take_damage(amount: int, knockback: Vector2) -> void:
 	health_changed.emit(health)
 	if health == 0:
 		state = State.DEAD
-		ENEMY_VISUAL.play_death_art(get_tree().current_scene, art, global_position)
 		BURST.spawn(get_tree().current_scene, shot_origin.global_position, Color(0.4, 0.8, 1.0), "BOOM!", 38.0)
 		died.emit()
 		queue_free()

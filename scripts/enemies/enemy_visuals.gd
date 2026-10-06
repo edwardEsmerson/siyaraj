@@ -38,7 +38,8 @@ func _ready() -> void:
 
 
 func _on_shot_fired() -> void:
-	_fire_remaining = 0.16
+	var action: StringName = &"fire" if subject == "ground-shooter" else &"dive"
+	_fire_remaining = float(sprite.sprite_frames.get_frame_count(action)) / sprite.sprite_frames.get_animation_speed(action)
 
 
 func _physics_process(delta: float) -> void:
@@ -62,7 +63,9 @@ func _physics_process(delta: float) -> void:
 		return
 	var animation: StringName
 	if melee != null:
-		animation = &"walk" if absf(actor.velocity.x) > 3.0 else &"idle"
+		animation = &"walk" if absf(actor.velocity.x) > 3.0 and actor.state != actor.State.HURT else &"idle"
+	elif actor.state == actor.State.HURT:
+		animation = &"recovery"
 	elif actor.state == actor.State.CHARGING:
 		animation = &"charge"
 	elif _fire_remaining > 0.0 and actor.state == actor.State.RECOVERY:

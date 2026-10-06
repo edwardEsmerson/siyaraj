@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_enemy"]
 [ext_resource type="Script" path="res://scripts/combat/melee_attack.gd" id="2_attack"]
-[ext_resource type="SpriteFrames" path="res://assets/sprites/basic-rakshas/cast_frames.tres" id="3_frames"]
 
 [ext_resource type="Script" path="res://scripts/enemies/enemy_visuals.gd" id="cast_visuals"]
 
@@ -17,17 +16,6 @@ script = ExtResource("1_enemy")
 [node name="Body" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-16, -40, 16, -40, 16, 0, -16, 0)
 color = Color(0.42, 0.44, 0.48, 1)
-
-[node name="Visuals" type="Node2D" parent="."]
-
-[node name="Art" type="Node2D" parent="Visuals"]
-scale = Vector2(0.5, 0.5)
-
-[node name="Sprite" type="AnimatedSprite2D" parent="Visuals/Art"]
-position = Vector2(-96, -135)
-centered = false
-sprite_frames = ExtResource("3_frames")
-animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
