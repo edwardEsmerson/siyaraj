@@ -15,6 +15,8 @@ static func spawn(parent: Node, at: Vector2, color: Color, word: String = "", ra
 	effect.spread = radius
 	parent.add_child(effect)
 	effect.global_position = at
+	# Spawn at the target immediately, without interpolating from the scene origin.
+	effect.reset_physics_interpolation()
 
 
 func _ready() -> void:

@@ -141,7 +141,7 @@ func check_slam() -> void:
 	check(boss.state == boss.State.SLAM_WINDUP and player.health == 3, "Gada slam must be telegraphed without damage during wind-up")
 	check(boss.get_node("Status").text.contains("GADA RAISED"), "Wind-up must show a readable tell")
 	await ticks(25)
-	check(player.health == 1, "Gada slam must deal two damage in front of Khara")
+	check(player.health == 2, "Gada slam must deal one damage in front of Khara")
 	check(player.velocity.x < 0.0, "Slam knockback must push Siya away from Khara")
 	await ticks(10)
 	check(boss.state == boss.State.SLAM_RECOVERY, "Slam must leave a recovery window")
@@ -188,7 +188,7 @@ func check_phase_two() -> void:
 	boss.take_damage(2, Vector2.ZERO)
 	check(phases == [2], "Phase 2 must only trigger once")
 
-	# Phase 2 ladi: a pincer of two strings bursting in opposite directions.
+	# Phase 2 keeps a single ladi aimed toward Siya.
 	await reset_arena()
 	player.set_physics_process(false)
 	player.global_position = Vector2(300, 430)
@@ -197,30 +197,83 @@ func check_phase_two() -> void:
 	boss.start_ladi()
 	await ticks(35)
 	var placed := ladis()
-	check(placed.size() == 2, "Phase 2 must place two ladis, got %d" % placed.size())
-	if placed.size() == 2:
-		var directions: Array[int] = [placed[0].direction, placed[1].direction]
-		directions.sort()
-		check(directions == [-1, 1], "Phase 2 ladis must burst in opposite directions")
-		var toward: Node = placed[0] if placed[0].direction == -1 else placed[1]
-		var pincer: Node = placed[1] if toward == placed[0] else placed[0]
-		check(toward.global_position.x > player.global_position.x, "The first ladi must start at Khara and burst toward Siya")
-		check(pincer.fuse_time > toward.fuse_time and pincer.global_position.x < 60.0, "The pincer ladi must start at the far wall with a later fuse")
+	check(placed.size() == 1, "Phase 2 must place one ladi, got %d" % placed.size())
+	if placed.size() == 1:
+		check(placed[0].direction == -1 and placed[0].global_position.x > player.global_position.x, "Phase 2 ladi must start at Khara and burst toward Siya")
 
-	# Phase 2 slam releases shockwaves both ways.
+	# Phase 2 leaves Khara's back safe, with just one forward shockwave.
 	await reset_arena()
 	player.set_physics_process(false)
-	player.global_position = Vector2(150, 430)
+	player.global_position = boss.global_position + Vector2(80, 0)
 	boss.take_damage(12, Vector2.ZERO)
 	boss.set_physics_process(true)
 	boss.start_slam(-1)
 	await ticks(42)
 	var waves := shockwaves()
-	var wave_directions: Array[int] = []
-	for wave in waves:
-		wave_directions.append(wave.direction)
-	wave_directions.sort()
-	check(wave_directions == [-1, 1], "Phase 2 slam must release shockwaves in both directions")
+	check(waves.size() == 1 and waves[0].direction == -1, "Phase 2 slam must release only a forward shockwave")
+	await ticks(35)
+	check(player.health == 3, "Standing behind Khara must remain safe in phase 2")
+
+
+func check_attack_spacing() -> void:
+	for phase in [1, 2]:
+		await reset_arena()
+		player.set_physics_process(false)
+		player._invulnerable_remaining = 10.0
+		player.global_position = boss.global_position + Vector2(-80, 0)
+		if phase == 2:
+			boss.take_damage(12, Vector2.ZERO)
+		# A long fuse outlasts recovery, idle and cooldown. Khara must wait
+		# through the fuse, every pop and cleanup, even with Siya in slam range.
+		boss.ladi_fuse = 3.0
+		boss.phase_two_ladi_fuse = 3.0
+		boss.ladi_cooldown = 0.0
+		boss.phase_two_ladi_cooldown = 0.0
+		boss.set_physics_process(true)
+		boss.start_ladi()
+		await ticks(35)
+		var placed := ladis()
+		check(placed.size() == 1, "Attack spacing setup must place one ladi in phase %d" % phase)
+		if placed.size() != 1:
+			continue
+		var ladi := placed[0]
+		var stayed_safe := true
+		for frame in range(280):
+			if not is_instance_valid(ladi):
+				break
+			stayed_safe = stayed_safe and boss.state in [boss.State.LADI_RECOVERY, boss.State.IDLE]
+			stayed_safe = stayed_safe and ladis().size() == 1 and shockwaves().is_empty()
+			await ticks(1)
+		check(stayed_safe, "Khara must not begin another attack while a ladi remains in phase %d" % phase)
+		check(not is_instance_valid(ladi), "Ladi must finish while Khara waits")
+		var resumed := false
+		for frame in range(90):
+			await ticks(1)
+			if boss.state in [boss.State.SLAM_WINDUP, boss.State.LADI_CAST]:
+				resumed = true
+				break
+		check(resumed, "Khara must resume attacking after the ladi finishes in phase %d" % phase)
+
+	# A ready ladi cooldown must not bypass the phase 2 post-slam pause.
+	await reset_arena()
+	player.set_physics_process(false)
+	player._invulnerable_remaining = 10.0
+	player.global_position = boss.global_position + Vector2(-80, 0)
+	boss.take_damage(12, Vector2.ZERO)
+	boss.set_physics_process(true)
+	boss.start_slam(-1)
+	await ticks(96)
+	check(boss.state == boss.State.IDLE and ladis().is_empty(), "Phase 2 slam must return to idle instead of chaining directly into a ladi")
+
+	# Crossing the phase threshold must not bypass an existing chain.
+	await reset_arena()
+	player.set_physics_process(false)
+	player._invulnerable_remaining = 10.0
+	boss.place_ladi(Vector2(480, 430), -1, 3.0, 12)
+	boss.take_damage(12, Vector2.ZERO)
+	boss.set_physics_process(true)
+	await ticks(100)
+	check(boss.state == boss.State.IDLE and ladis().size() == 1, "Phase change must wait for the existing ladi before its opening attack")
 
 
 func check_ai() -> void:
@@ -338,10 +391,11 @@ func run_checks() -> void:
 	await check_ladi_jump()
 	await check_slam()
 	await check_phase_two()
+	await check_attack_spacing()
 	await check_ai()
 	await check_damage_and_defeat()
 	await check_dash_invulnerability()
 	release_inputs()
 	if failures == 0:
-		print("PASS: Khara setup, ladi direction/fuse/sequence/walls/jump, slam tell/damage/recovery/shockwave, phase 2, AI, weapon damage, defeat, health bar, restart and dash i-frames")
+		print("PASS: Khara setup, ladi direction/fuse/sequence/walls/jump, slam tell/damage/recovery/shockwave, phase 2, attack spacing, AI, weapon damage, defeat, health bar, restart and dash i-frames")
 	quit(1 if failures > 0 else 0)
