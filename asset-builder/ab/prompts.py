@@ -64,12 +64,29 @@ def ui(brief, key, roles, kind):
 def texture(brief, key, roles, mode):
     if mode == "tile":
         layout = ("A seamless, tileable square pixel-art texture that fills the ENTIRE image edge to edge "
-                  "(left edge continues into right edge, top into bottom). Flat game-texture view, no perspective, "
-                  "no border, no single object in the centre.")
+                  "(left edge continues into right edge, top into bottom). It is the inside of a solid platform or "
+                  "wall in a side-scroller, seen straight from the side: flat front view, no perspective, no top "
+                  "surface, no border, no single object in the centre, even detail density everywhere.")
         bg = ""
+    elif mode == "cap":  # the lip drawn along the top edge of every platform, over the fill
+        layout = ("A long horizontal pixel-art border strip that runs across the FULL image width, edge to edge, "
+                  "horizontally seamless (the left end continues into the right end), centred vertically and about "
+                  "a third of the image tall, with flat key colour above and below it. It is the top edge of a "
+                  "platform in a side-scroller, side view: the upper third pokes up above the walking surface "
+                  "(tufts, ledge lip), the rest hangs down over the platform face with a ragged, irregular bottom "
+                  "edge. Detail is evenly spread, no single object, no perspective.")
+        bg = background(key) + "\n"
     elif mode == "layer":
         layout = ("A wide side-scrolling parallax background layer. Horizontally seamless: the left edge "
                   "continues into the right edge. Side view, no characters, no UI, no text.")
+        bg = ""
+    elif mode == "concept":  # art-direction mock: one framed screen, not seamless
+        layout = ("A mock in-game screenshot of a 2D side-scrolling platformer level, 16:9, orthographic side "
+                  "view, no perspective, no HUD, no text, no UI. Show the level's terrain kit clearly: a ground "
+                  "floor along the bottom, two or three floating platforms at different heights, one tall ledge "
+                  "or wall, one thin jump-through platform, decorative props sitting on surfaces, and a calmer "
+                  "background behind. Terrain reads clearly against the background; characters stay the "
+                  "brightest, most saturated things on screen.")
         bg = ""
     else:  # cutout layer: shapes over a key colour (foreground parallax, props, platforms)
         layout = ("A wide side-scrolling parallax layer of silhouettes/shapes placed over a flat key colour, "

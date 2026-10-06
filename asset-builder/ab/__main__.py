@@ -9,7 +9,7 @@ import shutil
 import sys
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 from . import pixel, prompts
 
@@ -262,41 +262,159 @@ def cmd_keep(a):
 
 def cmd_texture(a):
     run = OUT / "textures" / a.name
-    aspect = "1:1" if a.mode == "tile" else a.aspect
+    aspect = {"tile": "1:1", "cap": "21:9", "concept": "16:9"}.get(a.mode, a.aspect)
     refs = [ref_bytes(r, a.key) for r in a.ref]
     roles = [f"style/content reference ({Path(r).stem})" for r in a.ref]
     prompt = prompts.texture(a.brief, a.key, roles, a.mode)
     ids = prepare(run, a.only, a.n)
     (run / "prompt.txt").write_text(prompt)
     jobs = [{"id": i, "prompt": prompt, "refs": refs, "aspect": aspect, "raw": run / f"{i}.raw.png"} for i in ids]
+    previews = {}
 
     def process(job, raw):
         problems = []
-        chunk = 1 if a.mode == "tile" else a.chunk
+        chunk = 1 if a.mode in ("tile", "cap") else a.chunk
         if a.mode == "tile":
             target = (a.tile, a.tile)
         else:
             target = (round(raw.width * a.height / raw.height) // chunk, a.height // chunk)
-        source = raw
-        if a.mode == "cutout":
-            source, report = pixel.remove_background(raw)
-            problems = [p for p in report["problems"] if "touches the image edge" not in p]
-        native = pixel.snap(source, px=raw.height / target[1], colours=a.colours)
+        source, px = raw, raw.height / target[1]
+        if a.mode in ("cutout", "cap"):
+            source, report = pixel.remove_background(raw, single=True)
+            problems = [p for p in report["problems"] if "touches the image edge" not in p and "messy" not in p]
+        if a.mode == "cap":  # keep just the band (full width), sized to --cap-height
+            box = source.getchannel("A").getbbox()
+            if not box:
+                return None, ["no strip found"]
+            source = source.crop((0, box[1], source.width, box[3]))
+            px = source.height / a.cap_height
+            target = (round(source.width / px), a.cap_height)
+        native = pixel.snap(source, px=px, colours=a.colours)
         native = native.resize(target, Image.Resampling.NEAREST)  # absorb the snapper's +-few px
         native = native.resize((target[0] * chunk, target[1] * chunk), Image.Resampling.NEAREST)
-        if a.mode != "cutout":
+        if a.mode not in ("cutout", "cap"):
             native.putalpha(255)
         native.save(run / f"{job['id']}.png")
-        repeat = (3, 3) if a.mode == "tile" else (2, 1)
+        if a.mode == "concept":
+            previews[job["id"]] = native
+            return native, problems
+        axes = [0, 1] if a.mode == "tile" else [0]
+        problems += [f"visible seam across {'xy'[ax]} edges" for ax in axes if pixel.seam(native, ax)]
+        repeat = (3, 3) if a.mode == "tile" else (3, 1) if a.mode == "cap" else (2, 1)
         preview = Image.new("RGBA", (native.width * repeat[0], native.height * repeat[1]))
         for x in range(repeat[0]):
             for y in range(repeat[1]):
                 preview.paste(native, (x * native.width, y * native.height))
         preview.save(run / f"{job['id']}-tiled.png")
+        previews[job["id"]] = preview
         return native, problems
 
-    run_jobs(a, jobs, process)
-    print(f"review {run}/NN-tiled.png (seams!)  keep one with:  cp {run}/NN.png textures/<area>/{a.name}.png")
+    results = run_jobs(a, jobs, process)
+    if a.mode == "concept":
+        shown = [previews[i] for i, (r, _) in results.items() if r]
+        pixel.contact_sheet([im.resize((960, 540)) for im in shown], labels(results), run / "sheet.png", scale=1,
+                            columns=2)
+        print(f"review {run / 'sheet.png'}")
+    elif a.mode in ("tile", "cap"):
+        shown = [previews[i] for i, (r, _) in results.items() if r]
+        pixel.contact_sheet(shown, labels(results), run / "sheet.png", scale=2 if a.mode == "cap" else 1,
+                            columns=1 if a.mode == "cap" else None)
+        print(f"review {run / 'sheet.png'} (seams!)  keep one with:  cp {run}/NN.png textures/<area>/{a.name}.png")
+    else:
+        print(f"review {run}/NN-tiled.png (seams!)  keep one with:  cp {run}/NN.png textures/<area>/{a.name}.png")
+
+
+def blend(left, right, seed=0, step=4):
+    """Transition tile: `left` fill on the left, `right` on the right, split by a ragged boundary.
+    The boundary is a closed random walk (same x at top and bottom) and the left/right edges are untouched,
+    so A A AB B B tiles seamlessly whenever A and B do."""
+    import numpy as np
+    rng = np.random.default_rng(seed)
+    a, b = np.array(left.convert("RGBA")), np.array(right.convert("RGBA").resize(left.size, Image.Resampling.NEAREST))
+    h, w = a.shape[:2]
+    rows = h // step
+    walk = np.cumsum(rng.integers(-1, 2, rows)).astype(float)
+    walk -= np.linspace(0, walk[-1], rows)  # close the loop
+    edge = (w // 2 + np.round(walk - walk.mean()) * step).clip(w // 4, 3 * w // 4)
+    mask = np.zeros((h, w), bool)
+    for r in range(rows):
+        mask[r * step:(r + 1) * step, int(edge[r]):] = True
+    for _ in range(rows):  # loose clumps either side of the boundary
+        r, d = rng.integers(rows), rng.integers(-4, 4) * step
+        x = int(edge[r] + d)
+        if w // 8 < x < 7 * w // 8:
+            mask[r * step:(r + 1) * step, x:x + step] = d < 0
+    return Image.fromarray(np.where(mask[..., None], b, a))
+
+
+def cmd_blend(a):
+    left, right = Image.open(a.left), Image.open(a.right)
+    tile = blend(left, right, a.seed)
+    name = f"{Path(a.left).stem}__{Path(a.right).stem}"
+    out = Path(a.left).parent / f"{name}.png" if a.keep else OUT / "textures" / "blend" / f"{name}.png"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    tile.save(out)
+    w, h = tile.size
+    preview = Image.new("RGBA", (w * 5, h * 2))
+    for i, part in enumerate([left, left, tile, right, right]):
+        for y in range(2):
+            preview.paste(part.convert("RGBA").resize((w, h)), (i * w, y * h))
+    preview.save(out.with_name(f"{name}-preview.png"))
+    print(f"wrote {out} (+ -preview.png: A A AB B B)" + ("" if a.keep else "  keep with --keep, or try --seed N"))
+
+
+def board_area(area):
+    """Mock side view of one area: each cap on a platform of each fill, then a long floor of the fills
+    chained through their transition tiles."""
+    d = ROOT / "textures" / area
+    files = sorted(d.glob("*.png"))
+    caps = [Image.open(f).convert("RGBA") for f in files if f.stem.endswith("-cap")]
+    blends = {tuple(f.stem.split("__")): Image.open(f).convert("RGBA") for f in files if "__" in f.stem}
+    fills = {f.stem: Image.open(f).convert("RGBA") for f in files
+             if "__" not in f.stem and not f.stem.endswith("-cap") and Image.open(f).size[0] == Image.open(f).size[1]}
+    if not fills:
+        return None
+    t = next(iter(fills.values())).width
+    board = Image.new("RGBA", (max(len(fills), 4) * (3 * t + 64) + 64, 3 * t + 64 + 2 * t), "#2a2035")
+
+    def platform(fill, cap, x, y, w, h):
+        for tx in range(x, x + w, t):
+            for ty in range(y, y + h, t):
+                board.alpha_composite(fill.crop((0, 0, min(t, x + w - tx), min(t, y + h - ty))), (tx, ty))
+        if cap:  # walking surface sits a third of the way down the cap
+            for cx in range(x, x + w, cap.width):
+                board.alpha_composite(cap.crop((0, 0, min(cap.width, x + w - cx), cap.height)),
+                                      (cx, y - cap.height // 3))
+
+    for i, (name, fill) in enumerate(fills.items()):
+        x = 64 + i * (3 * t + 64)
+        platform(fill, caps[i % len(caps)] if caps else None, x, t, 3 * t, t // 2)  # thin 32-unit platform
+        platform(fill, caps[(i + 1) % len(caps)] if caps else None, x + t // 2, 2 * t, 2 * t, t + t // 2)
+    x, y, names = 0, board.height - t, list(fills)
+    for name, nxt in zip(names, names[1:] + [None]):  # floor: A A [A__B] B B ...
+        for part in [fills[name]] * 2 + ([blends[(name, nxt)]] if (name, nxt) in blends else []):
+            board.alpha_composite(part, (x, y))
+            x += t
+    if caps:
+        for cx in range(0, x, caps[0].width):
+            board.alpha_composite(caps[0].crop((0, 0, min(caps[0].width, x - cx), caps[0].height)), (cx, y - caps[0].height // 3))
+    return board.crop((0, 0, max(board.width, x), board.height))
+
+
+def cmd_board(a):
+    areas = a.areas or sorted(p.name for p in (ROOT / "textures").iterdir() if p.is_dir())
+    boards = [(area, b) for area in areas if (b := board_area(area))]
+    width = max(b.width for _, b in boards)
+    out = Image.new("RGB", (width, sum(b.height + 24 for _, b in boards)), "#1b1622")
+    draw, y = ImageDraw.Draw(out), 0
+    for area, b in boards:
+        draw.text((8, y + 6), area, fill="#ffd34f")
+        out.paste(b.convert("RGB"), (0, y + 24))
+        y += b.height + 24
+    path = OUT / "textures" / "board.png"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    out.save(path)
+    print(f"wrote {path} (1 px = 1 art px, i.e. the 1080p game view)")
 
 
 def symmetric(art):
@@ -313,8 +431,9 @@ def symmetric(art):
 
 
 def nine_slice(art, corner):
-    """Corners kept, a `corner`-long edge segment from the middle of each side, flat centre:
-    a (3*corner)^2 texture for Godot's StyleBoxTexture with texture_margin = corner."""
+    """Corners kept, a `corner`-long edge segment from the middle of each side, centre flattened to the
+    interior's main colour: a (3*corner)^2 texture for Godot's StyleBoxTexture with texture_margin = corner
+    and axis_stretch TILE_FIT (edge ornaments repeat instead of smearing)."""
     w, h = art.size
     c = corner
     out = Image.new("RGBA", (3 * c, 3 * c))
@@ -322,19 +441,40 @@ def nine_slice(art, corner):
     for (sx, dx, ww) in [(0, 0, c), (mx, c, c), (w - c, 2 * c, c)]:
         for (sy, dy, hh) in [(0, 0, c), (my, c, c), (h - c, 2 * c, c)]:
             out.paste(art.crop((sx, sy, sx + ww, sy + hh)), (dx, dy))
+    inner = art.crop((c, c, w - c, h - c)).convert("RGBA")
+    fill = max(inner.getcolors(inner.width * inner.height))[1]
+    out.paste(Image.new("RGBA", (c, c), fill), (c, c))
+    px = out.load()  # snapping leaves near-identical fill shades that show up once the fill is recoloured
+    for y in range(out.height):
+        for x in range(out.width):
+            if px[x, y][3] and max(abs(a - b) for a, b in zip(px[x, y][:3], fill[:3])) <= 8:
+                px[x, y] = fill
     return out
 
 
+def tile_fit(part, length, axis):
+    """Repeat `part` along one axis a whole number of times, stretched to fit (Godot TILE_FIT)."""
+    size = part.size[axis]
+    count = max(1, round(length / size))
+    strip = Image.new("RGBA", (size * count, part.height) if axis == 0 else (part.width, size * count))
+    for i in range(count):
+        strip.paste(part, (i * size, 0) if axis == 0 else (0, i * size))
+    target = (length, part.height) if axis == 0 else (part.width, length)
+    return strip.resize(target, Image.Resampling.NEAREST)
+
+
 def stretch_nine(nine, corner, size):
-    """Draw a nine-slice at `size` the way Godot does (edges/centre stretched), for previews."""
+    """Draw a nine-slice at `size` the way Godot's TILE_FIT does, for previews."""
     c, w, h = corner, *size
     out = Image.new("RGBA", size)
-    xs = [(0, c, 0, c), (c, 2 * c, c, w - c), (2 * c, 3 * c, w - c, w)]
-    ys = [(0, c, 0, c), (c, 2 * c, c, h - c), (2 * c, 3 * c, h - c, h)]
-    for sx0, sx1, dx0, dx1 in xs:
-        for sy0, sy1, dy0, dy1 in ys:
+    xs = [(0, 0, c), (c, c, w - c), (2 * c, w - c, w)]
+    ys = [(0, 0, c), (c, c, h - c), (2 * c, h - c, h)]
+    for sx, dx0, dx1 in xs:
+        for sy, dy0, dy1 in ys:
             if dx1 > dx0 and dy1 > dy0:
-                part = nine.crop((sx0, sy0, sx1, sy1)).resize((dx1 - dx0, dy1 - dy0), Image.Resampling.NEAREST)
+                part = nine.crop((sx, sy, sx + c, sy + c))
+                part = tile_fit(part, dx1 - dx0, 0) if sx == c else part
+                part = tile_fit(part, dy1 - dy0, 1) if sy == c else part
                 out.paste(part, (dx0, dy0))
     return out
 
@@ -353,7 +493,7 @@ def cmd_ui(a):
     (run / "prompt.txt").write_text(prompt)
     jobs = [{"id": i, "prompt": prompt, "refs": refs, "raw": run / f"{i}.raw.png"} for i in ids]
     corner = a.corner or a.px // 4
-    previews = {}
+    previews, margins = {}, {}
 
     def process(job, raw):
         cut, report = pixel.remove_background(raw)
@@ -365,14 +505,17 @@ def cmd_ui(a):
         problems = report["problems"]
         if a.kind == "frame":
             art = symmetric(art)
-            nine = nine_slice(art, corner)
+            c = min(corner, (min(art.size) - 1) // 2)  # wide/short frames get a smaller margin
+            margins[job["id"]] = c
+            nine = nine_slice(art, c)
             nine.save(run / f"{job['id']}-nine.png")
             # In-game sizes: a menu panel, a wide button, a small hint box.
-            shots = [stretch_nine(nine, corner, s) for s in [(300, 180), (200, 34), (140, 60)]]
+            tall = max(34, 2 * c + 4)
+            shots = [stretch_nine(nine, c, s) for s in [(300, 180), (200, tall), (140, max(60, tall))]]
             preview = Image.new("RGBA", (300 + 16 + 200, 180))
             preview.paste(shots[0], (0, 0))
             preview.paste(shots[1], (316, 0))
-            preview.paste(shots[2], (316, 60))
+            preview.paste(shots[2], (316, tall + 16))
             previews[job["id"]] = preview
         else:
             previews[job["id"]] = art
@@ -381,9 +524,12 @@ def cmd_ui(a):
 
     results = run_jobs(a, jobs, process)
     shown = [previews[i] for i, (r, _) in results.items() if r]
-    pixel.contact_sheet(shown, labels(results), run / "sheet.png", columns=1 if a.kind == "frame" else None)
+    names = [f"{l}  margin {margins[l[:2]]}" if l[:2] in margins else l for l in labels(results)]
+    pixel.contact_sheet(shown, names, run / "sheet.png", columns=1 if a.kind == "frame" else None)
+    if margins:
+        (run / "margins.json").write_text(json.dumps(margins, indent=2))
     print(f"review {run / 'sheet.png'}  keep one with:  cp {run}/NN{'-nine' if a.kind == 'frame' else ''}.png "
-          f"../assets/ui/{a.name}.png  (frame: texture_margin {corner})")
+          f"../assets/ui/{a.name}.png" + ("  (texture_margin per candidate: margins.json)" if margins else ""))
 
 
 def cmd_clean(a):
@@ -468,11 +614,13 @@ def parser():
     c = sub.add_parser("texture", help="tileable texture or parallax layer for maps")
     c.add_argument("name")
     c.add_argument("brief")
-    c.add_argument("--mode", default="tile", choices=["tile", "layer", "cutout"],
-                   help="tile: seamless square; layer: opaque parallax; cutout: parallax shapes with transparency")
+    c.add_argument("--mode", default="tile", choices=["tile", "cap", "layer", "cutout", "concept"],
+                   help="tile: seamless square fill; cap: platform top-edge strip (transparent); layer: opaque "
+                        "parallax; cutout: parallax shapes with transparency; concept: 16:9 mock level screen")
     c.add_argument("--tile", type=int, default=128, help="tile size in art px (128 = 64 game units)")
     c.add_argument("--height", type=int, default=1080, help="layer height in art px (1080 = full screen)")
     c.add_argument("--chunk", type=int, default=2, help="art px per background pixel (backgrounds are chunkier)")
+    c.add_argument("--cap-height", type=int, default=32, help="cap strip height in art px (32 = 16 game units)")
     c.add_argument("--aspect", default="21:9", help="layer aspect: 16:9, 21:9 ...")
     c.add_argument("--colours", type=int, default=24)
     c.add_argument("--size", default="2K", choices=SIDE)
@@ -480,13 +628,24 @@ def parser():
     gen_flags(c, 2)
     c.set_defaults(func=cmd_texture)
 
+    c = sub.add_parser("blend", help="transition tile between two kept fills (A on the left, B on the right)")
+    c.add_argument("left")
+    c.add_argument("right")
+    c.add_argument("--seed", type=int, default=0, help="different boundary shape")
+    c.add_argument("--keep", action="store_true", help="write next to the left fill as A__B.png")
+    c.set_defaults(func=cmd_blend)
+
+    c = sub.add_parser("board", help="mock side view of kept textures per area -> out/textures/board.png")
+    c.add_argument("areas", nargs="*", help="textures/<area> folders (default all)")
+    c.set_defaults(func=cmd_board)
+
     c = sub.add_parser("ui", help="UI frame (9-slice) or icon at 1 texel = 1 game unit")
     c.add_argument("name")
     c.add_argument("brief")
     c.add_argument("--kind", default="frame", choices=["frame", "icon"])
     c.add_argument("--px", type=int, default=64, help="longest side in game units (= texels)")
     c.add_argument("--corner", type=int, help="frame: 9-slice corner/margin size (default px/4)")
-    c.add_argument("--style", nargs="*", default=["siya"], help="approved sprites to copy palette from (or none)")
+    c.add_argument("--style", nargs="*", default=["none"], help="approved sprites to copy palette from (default none: refs leak into UI art)")
     c.add_argument("--colours", type=int, default=16)
     c.add_argument("--size", default="2K", choices=SIDE)
     c.add_argument("--key", default="green", choices=prompts.KEYS)
