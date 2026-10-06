@@ -208,6 +208,11 @@ func mouth_global(index: int) -> Vector2:
 	return to_global(RavanBody.mouth_offset(index))
 
 
+## The roar has a fixed floor origin, independent of Siya's position.
+func roar_origin(index: int) -> Vector2:
+	return Vector2(clampf(mouth_global(index).x, arena_left + 20.0, arena_right - 20.0), global_position.y)
+
+
 func lane_width() -> float:
 	return (arena_right - arena_left) / LANE_COUNT
 
@@ -531,14 +536,14 @@ func _fire_head_attack(head: HeadSlot) -> void:
 				scene_root.add_child(bolt)
 				bolt.global_position = mouth
 		Attack.ROAR:
-			var x := clampf(mouth.x, arena_left + 20.0, arena_right - 20.0)
+			var origin := roar_origin(head.index)
 			for direction in [-1, 1]:
 				var wave := Shockwave.new()
 				wave.direction = direction
 				wave.color = color
 				scene_root.add_child(wave)
-				wave.global_position = Vector2(x, global_position.y)
-			Burst.spawn(scene_root, Vector2(x, global_position.y - 10.0), color, "ROAR!", 30.0)
+				wave.global_position = origin
+			Burst.spawn(scene_root, origin + Vector2(0, -10.0), color, "ROAR!", 30.0)
 		Attack.LIGHTNING:
 			# Phase 3 adds a delayed second strike on the same spot: move, don't return.
 			var strikes := [0.7] if phase < 3 else [0.7, 1.15]
@@ -638,6 +643,17 @@ func _draw_overlay() -> void:
 			_overlay.draw_arc(at, 19.0, -PI * 0.5, -PI * 0.5 + TAU * maxf(progress, 0.01), 28, color, 3.0)
 			_overlay.draw_string_outline(font, at + Vector2(-60, -30), head.attack_word() + "!", HORIZONTAL_ALIGNMENT_CENTER, 120, 13, 4, Color(0.08, 0.03, 0.03))
 			_overlay.draw_string(font, at + Vector2(-60, -30), head.attack_word() + "!", HORIZONTAL_ALIGNMENT_CENTER, 120, 13, color)
+			if head.attack_kind == Attack.ROAR and head.state == HeadState.TELEGRAPH:
+				# Put the warning where melee players are looking, at the wave origin.
+				var floor_at := to_local(roar_origin(head.index))
+				var floor_color := head.attack_color()
+				floor_color.a = 0.45 + 0.55 * progress
+				_overlay.draw_line(floor_at + Vector2(-42, -2), floor_at + Vector2(42, -2), Color(0.08, 0.03, 0.03), 7.0)
+				for direction in [-1, 1]:
+					_overlay.draw_line(floor_at, floor_at + Vector2(direction * 42, -2), floor_color, 3.0)
+					_overlay.draw_polyline(PackedVector2Array([floor_at + Vector2(direction * 32, -9), floor_at + Vector2(direction * 42, -2), floor_at + Vector2(direction * 32, 5)]), floor_color, 3.0)
+				_overlay.draw_string_outline(font, floor_at + Vector2(-65, -32), "ROAR - JUMP!", HORIZONTAL_ALIGNMENT_CENTER, 130, 16, 4, Color(0.08, 0.03, 0.03))
+				_overlay.draw_string(font, floor_at + Vector2(-65, -32), "ROAR - JUMP!", HORIZONTAL_ALIGNMENT_CENTER, 130, 16, floor_color)
 			# A white flash marks the moment the attack leaves the mouth.
 			if head.state == HeadState.ATTACK and head.remaining > head.attack_time - 0.12:
 				_overlay.draw_circle(at, 11.0, Color(1.0, 1.0, 0.9, 0.8))

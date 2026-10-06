@@ -16,6 +16,10 @@ var _time: float = 0.0
 
 func _ready() -> void:
 	menu.get_node("NewGame").pressed.connect(_new_game)
+	var saved := CampaignSave.read_save()
+	menu.get_node("Continue").disabled = saved.is_empty()
+	menu.get_node("Continue").text = "View ending" if saved.get("stage") == "ending" else "Continue"
+	menu.get_node("Continue").pressed.connect(_continue_game)
 	menu.get_node("Controls").pressed.connect(_open_sub.bind(controls, menu.get_node("Controls")))
 	menu.get_node("Settings").pressed.connect(_open_sub.bind(settings, menu.get_node("Settings")))
 	menu.get_node("Playtest").pressed.connect(PlaytestNavigation.show_menu)
@@ -41,7 +45,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		_close_sub()
 
 
+func _continue_game() -> void:
+	if not CampaignSave.continue_game():
+		menu.get_node("Continue").disabled = true
+
+
 func _new_game() -> void:
+	CampaignSave.new_game()
 	PlaytestNavigation.enemies_enabled = true
 	PlaytestNavigation.start_level("res://scenes/main/prologue.tscn")
 

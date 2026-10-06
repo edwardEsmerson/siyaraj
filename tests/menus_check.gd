@@ -25,6 +25,9 @@ func joy_tap(button: JoyButton) -> void:
 	await joy_button(button, false)
 
 func run_checks() -> void:
+	var saves: Node = root.get_node("CampaignSave")
+	saves.save_path = "user://menus_check_campaign.json"
+	DirAccess.remove_absolute(saves.save_path)
 	var navigation: Node = root.get_node("PlaytestNavigation")
 	var settings_state: Node = root.get_node("GameSettings")
 	var saved_volume: float = settings_state.master_volume
@@ -148,5 +151,6 @@ func run_checks() -> void:
 	settings_state.fullscreen = saved_fullscreen
 	settings_state.apply()
 	settings_state.save()
+	DirAccess.remove_absolute(saves.save_path)
 	print("Menu checks: %s" % ("PASS" if failures == 0 else "FAIL (%d)" % failures))
 	quit(0 if failures == 0 else 1)

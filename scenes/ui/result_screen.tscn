@@ -100,5 +100,5 @@ offset_top = 393.0
 offset_right = 752.0
 offset_bottom = 415.0
 theme_override_font_sizes/font_size = 13
-text = "Enter / A: select    R: play again    Esc: pause"
+text = "Enter / A: select    Esc: pause"
 horizontal_alignment = 1

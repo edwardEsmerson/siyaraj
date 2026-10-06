@@ -38,7 +38,7 @@ func run_checks() -> void:
 		check(not forest.lit_checkpoints.has(checkpoint.name), "Room diya must require E")
 		player.health = 1
 		await press_interact()
-		check(player.health == 2, "Lighting a side-room diya must restore exactly one heart")
+		check(player.health == 1, "Side-room diyas must not heal Siya")
 		check(forest.room_spawn == checkpoint.position, "Room diya must secure a local respawn")
 		check(forest.checkpoint_x == 11000, "Local diya must not overwrite the forest save")
 		old_scene = current_scene

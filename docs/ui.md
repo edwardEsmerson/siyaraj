@@ -45,7 +45,9 @@ Its `continued`, `replayed`, and `menu_requested` signals are connected by the
 level or boss controller. Campaign and developer boss arenas both use it.
 Continue advances the campaign or returns a snapshot to the developer menu;
 Play Again restarts the current level/snapshot; Menu returns to the title.
-Enter/A selects the focused button, R replays, and Esc opens the pause menu.
+Enter/A selects the focused button and Esc opens the pause menu. R and the
+controller View/Select shortcut restart only in debug builds; release controls
+omit that action. Play Again and pause-menu Restart work in both builds.
 
 Layout and button navigation are covered by `tests/typography_check.gd`.
 Rendered examples are in `docs/screenshots/typography/`, including all three

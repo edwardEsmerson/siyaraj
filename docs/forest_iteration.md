@@ -8,7 +8,7 @@ The last crossing rises to a crown, descends into a low ravine and climbs back o
 
 The canopy changes branch lanes twice and has two broad boughs occupied by guards. Its nest has a sentinel and a low flying enemy. Both flying enemy placements remain reachable with unlimited grounded lash; spending a skyshot is a choice. The root chamber has its shooter plus an exit sentinel. Defeating each far-door sentinel opens that room's return portal. Entrance doors still allow leaving an unfinished room, and completed-room markers remain on the trail. The enemies-off playtest setting removes sentinels and opens both exits.
 
-There are nine main diyas, including `KharaDiya` at `(21200, 430)`. Side rooms keep separate saves and transport preserves health, ammo and weapon cooldowns. Death restores the last explicitly lit diya and a fresh player. Lighting a fresh diya restores one heart, capped at maximum health, without refilling weapons. Already lit diyas do not heal again.
+There are nine main diyas, including `KharaDiya` at `(21200, 430)`. Side rooms keep separate saves and transport preserves health, ammo and weapon cooldowns. Death restores the last explicitly lit diya and a fresh player. Lighting a fresh diya restores one heart, capped at maximum health, without refilling weapons. Already lit diyas and side-room diyas do not heal.
 
 ## Checks
 

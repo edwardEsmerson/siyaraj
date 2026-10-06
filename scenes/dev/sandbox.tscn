@@ -61,7 +61,7 @@ text = "SIYARAJ / sandbox"
 texture_filter = 2
 offset_left = 32.0
 offset_top = 76.0
-text = "A/D or arrows: move    Space: jump    Shift: dash    J: sparkler    L: skyshot    K: chakri    R: restart"
+text = "A/D or arrows: move    Space: jump    Shift: dash    J: sparkler    L: skyshot    K: chakri"
 
 [node name="Hint" type="Label" parent="HUD"]
 texture_filter = 2

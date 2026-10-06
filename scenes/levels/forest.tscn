@@ -3224,6 +3224,7 @@ text = "Raj went this way! Space jumps. Shift dashes, even in midair."
 [node name="GuardHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
 position = Vector2(1750, 430)
 text = "One of Swaminathan's guards! J lashes him. When he winds up, step back."
+topic = &"guard"
 
 [node name="DiyaHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
 position = Vector2(2400, 430)
@@ -3232,18 +3233,29 @@ text = "A diya! Light it, and if you fall, we start again from here."
 [node name="CanopyHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
 position = Vector2(2950, 430)
 text = "Wide gaps. Jump, then dash across. You get one air dash until you land!"
+topic = &"air_dash"
 
 [node name="WeaponsHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
 position = Vector2(4700, 430)
 text = "L fires a skyshot, but you only have five. Hold K to charge a chakri spin."
 
 [node name="ShooterHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
-position = Vector2(10250, 430)
-text = "Purple bolts! Dash straight through them, or hit him to stop the shot."
+position = Vector2(2280, 430)
+text = "Homing missiles ahead! {dash} through them. You're invulnerable during a dash."
+duration = 5.0
+topic = &"homing_dash"
+
+[node name="RootShooterHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(450, -2050)
+text = "Homing missiles below! {dash} through them. You're invulnerable during a dash."
+point = Vector2(400, -100)
+duration = 5.0
+topic = &"homing_dash"
 
 [node name="BruteHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
 position = Vector2(15300, 430)
 text = "That brute is slow but hits hard. Wait for the swing, then strike."
+topic = &"brute"
 
 [node name="SkinZones" type="Node2D" parent="."]
 
@@ -4008,3 +4020,297 @@ direction = "diyalit"
 position = Vector2(21230, 430)
 text = "Khara waits ahead! Jump her ground waves, and strike after her heavy slam."
 duration = 5.0
+
+[node name="ClearingScout" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(1710, 430)
+patrol_radius = 35.0
+detection_range = 140.0
+metadata/room = &""
+
+[node name="RidgeGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(5645, 270)
+patrol_radius = 30.0
+detection_range = 140.0
+metadata/room = &""
+
+[node name="HollowExitGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(8370, 430)
+patrol_radius = 30.0
+detection_range = 130.0
+metadata/room = &""
+
+[node name="BanyanExitGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(11320, 430)
+patrol_radius = 30.0
+detection_range = 140.0
+metadata/room = &""
+
+[node name="UpperEntryGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(13560, 430)
+patrol_radius = 30.0
+detection_range = 130.0
+metadata/room = &""
+
+[node name="FinalScout" parent="Encounters" instance=ExtResource("5_flyer")]
+position = Vector2(19040, 350)
+patrol_radius = 35.0
+detection_range = 170.0
+metadata/room = &""
+metadata/airborne = true
+
+[node name="FinalLowGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(19810, 450)
+patrol_radius = 30.0
+detection_range = 120.0
+metadata/room = &""
+
+[node name="FinalExitGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(20810, 430)
+patrol_radius = 30.0
+detection_range = 140.0
+metadata/room = &""
+
+[node name="RootDescentGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(1560, -1600)
+patrol_radius = 30.0
+detection_range = 110.0
+metadata/room = &"RootChamber"
+
+[node name="ClearingScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(1710, 430)
+
+[node name="RidgeGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(5645, 270)
+
+[node name="HollowExitGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(8370, 430)
+
+[node name="BanyanExitGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(11320, 430)
+
+[node name="UpperEntryGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(13560, 430)
+
+[node name="FinalScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(19040, 350)
+
+[node name="FinalLowGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(19810, 450)
+
+[node name="FinalExitGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(20810, 430)
+
+[node name="RootDescentGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(1560, -1600)
+
+[node name="EdgeRunGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(1000, 430)
+patrol_radius = 20.0
+detection_range = 110.0
+metadata/room = &""
+
+[node name="EdgeRunGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(1000, 430)
+
+[node name="EdgeStumpGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(1350, 430)
+patrol_radius = 15.0
+detection_range = 100.0
+metadata/room = &""
+
+[node name="EdgeStumpGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(1350, 430)
+
+[node name="ClearingRearShooter" parent="Encounters" instance=ExtResource("4_shooter")]
+position = Vector2(2670, 430)
+patrol_radius = 25.0
+detection_range = 120.0
+metadata/room = &""
+
+[node name="ClearingRearShooter" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(2670, 430)
+
+[node name="BranchGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(2970, 410)
+patrol_radius = 15.0
+detection_range = 100.0
+metadata/room = &""
+
+[node name="BranchGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(2970, 410)
+
+[node name="BranchScout" parent="Encounters" instance=ExtResource("5_flyer")]
+position = Vector2(3900, 410)
+patrol_radius = 20.0
+detection_range = 120.0
+metadata/room = &""
+metadata/airborne = true
+
+[node name="BranchScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(3900, 410)
+
+[node name="RidgeApproachGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(4890, 430)
+patrol_radius = 25.0
+detection_range = 120.0
+metadata/room = &""
+
+[node name="RidgeApproachGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(4890, 430)
+
+[node name="RidgeDropShooter" parent="Encounters" instance=ExtResource("4_shooter")]
+position = Vector2(6000, 330)
+patrol_radius = 20.0
+detection_range = 110.0
+metadata/room = &""
+
+[node name="RidgeDropShooter" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(6000, 330)
+
+[node name="RidgeExitGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(6400, 390)
+patrol_radius = 20.0
+detection_range = 110.0
+metadata/room = &""
+
+[node name="RidgeExitGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(6400, 390)
+
+[node name="HollowEntryGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(7090, 430)
+patrol_radius = 25.0
+detection_range = 130.0
+metadata/room = &""
+
+[node name="HollowEntryGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(7090, 430)
+
+[node name="HollowWestGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(7600, 430)
+patrol_radius = 20.0
+detection_range = 100.0
+metadata/room = &""
+
+[node name="HollowWestGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(7600, 430)
+
+[node name="StoneEntryScout" parent="Encounters" instance=ExtResource("5_flyer")]
+position = Vector2(9070, 410)
+patrol_radius = 10.0
+detection_range = 100.0
+metadata/room = &""
+metadata/airborne = true
+
+[node name="StoneEntryScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(9070, 410)
+
+[node name="StoneMiddleGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(9641, 430)
+patrol_radius = 10.0
+detection_range = 90.0
+metadata/room = &""
+
+[node name="StoneMiddleGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(9641, 430)
+
+[node name="StoneExitGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(10310, 450)
+patrol_radius = 15.0
+detection_range = 100.0
+metadata/room = &""
+
+[node name="StoneExitGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(10310, 450)
+
+[node name="BanyanCrownScout" parent="Encounters" instance=ExtResource("5_flyer")]
+position = Vector2(11730, 210)
+patrol_radius = 25.0
+detection_range = 120.0
+metadata/room = &""
+metadata/airborne = true
+
+[node name="BanyanCrownScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(11730, 210)
+
+[node name="BanyanDescentGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(12470, 310)
+patrol_radius = 20.0
+detection_range = 110.0
+metadata/room = &""
+
+[node name="BanyanDescentGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(12470, 310)
+
+[node name="UpperLandingShooter" parent="Encounters" instance=ExtResource("4_shooter")]
+position = Vector2(14910, 390)
+patrol_radius = 20.0
+detection_range = 110.0
+metadata/room = &""
+
+[node name="UpperLandingShooter" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(14910, 390)
+
+[node name="ShrineBranchScout" parent="Encounters" instance=ExtResource("5_flyer")]
+position = Vector2(16955, 290)
+patrol_radius = 20.0
+detection_range = 110.0
+metadata/room = &""
+metadata/airborne = true
+
+[node name="ShrineBranchScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(16955, 290)
+
+[node name="FinalHighGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(19460, 410)
+patrol_radius = 20.0
+detection_range = 100.0
+metadata/room = &""
+
+[node name="FinalHighGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(19460, 410)
+
+[node name="RootFirstGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(855, -1900)
+patrol_radius = 20.0
+detection_range = 100.0
+metadata/room = &"RootChamber"
+
+[node name="RootFirstGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(855, -1900)
+
+[node name="RootSecondScout" parent="Encounters" instance=ExtResource("5_flyer")]
+position = Vector2(1200, -1770)
+patrol_radius = 20.0
+detection_range = 100.0
+metadata/room = &"RootChamber"
+metadata/airborne = true
+
+[node name="RootSecondScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(1200, -1770)
+
+[node name="RootBedGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(2020, -1450)
+patrol_radius = 20.0
+detection_range = 80.0
+metadata/room = &"RootChamber"
+
+[node name="RootBedGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(2020, -1450)
+
+[node name="NestEntryGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(490, -3600)
+patrol_radius = 15.0
+detection_range = 80.0
+metadata/room = &"CanopyNest"
+
+[node name="NestEntryGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(490, -3600)
+
+[node name="CrownEastShooter" parent="Encounters" instance=ExtResource("4_shooter")]
+position = Vector2(1580, -4560)
+patrol_radius = 20.0
+detection_range = 100.0
+metadata/room = &"CanopyNest"
+
+[node name="CrownEastShooter" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(1580, -4560)

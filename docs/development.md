@@ -52,7 +52,7 @@ five shots. Hold K for a full charge, then release for a chakri spin.
 Chakri has a 30-second cooldown. Ammo and cooldowns appear on the HUD.
 Doors preserve health, remaining shots and cooldowns. Lighting a fresh diya saves your
 position and restores one heart, capped at maximum health, without refilling weapons.
-Already lit diyas do not heal again. Death and R restore the five-shot loadout
+Already lit diyas and side-room diyas do not heal. Death and R restore the five-shot loadout
 and reset cooldowns.
 For isolated practice, open `scenes/dev/weapons_playground.tscn` with F6.
 

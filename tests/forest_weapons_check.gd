@@ -56,11 +56,11 @@ func run_checks() -> void:
 	player.health = 1
 	var health_events: Array[int] = []
 	player.health_changed.connect(func(remaining: int) -> void: health_events.append(remaining))
-	var diya_cooldown_before: float = player.chakri_cooldown_remaining
+	var diya_cooldown: float = player.chakri_cooldown_remaining
 	await press_interact()
-	check(player.skyshot_ammo == 4 and player.health == 2, "Lighting a fresh diya must restore exactly one heart and preserve ammo")
+	check(player.skyshot_ammo == 4 and player.health == 2, "Lighting a new trail diya must heal one HP and preserve ammo")
 	check(health_events == [2], "Diya healing must notify the health HUD once")
-	check(player.chakri_cooldown_remaining > diya_cooldown_before - 1, "Diya healing must preserve chakri cooldown")
+	check(player.chakri_cooldown_remaining > diya_cooldown - 0.2 and player.chakri_cooldown_remaining <= diya_cooldown, "Diya healing must preserve the running chakri cooldown")
 	player.health = 1
 	await press_interact()
 	check(player.health == 1 and health_events == [2], "Already lit diyas must not give repeated healing")

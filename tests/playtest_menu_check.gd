@@ -135,10 +135,16 @@ func run_checks() -> void:
 	check(arena.completed, "Ravan's defeat signal must unlock the ending")
 	arena._unhandled_input(accept)
 	await ticks(2)
-	check(current_scene == arena and flow.comic.visible, "Arena input must not bypass Robin's reveal")
+	check(current_scene == arena and not flow.comic.visible, "Aftermath must wait for the gate")
+	check(arena.get_node("PalaceEscape").unlocked, "Boss defeat must unlock the palace escape")
+	arena.player.position = Vector2(760, 430)
+	arena.player.velocity = Vector2.ZERO
+	Input.action_press("move_right")
+	await ticks(90)
+	Input.action_release("move_right")
+	check(flow.comic.visible and is_equal_approx(flow.curtains.coverage, 1.0), "Gate must close the curtains before Robin's reveal")
 	for panel in flow.comic._panels.size():
 		flow.comic._unhandled_input(accept)
-	flow._unhandled_input(accept)
 	await scene_changed
 	check(current_scene.scene_file_path == "res://scenes/main/ending.tscn", "Ravan victory must advance to the ending")
 	var return_button: Button = current_scene.get_node("Center/Content/ReturnButton")

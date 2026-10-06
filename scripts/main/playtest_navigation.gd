@@ -11,6 +11,11 @@ var boss_introduction_seen: bool = false
 var panel: Control
 var respawn_transition: CanvasLayer
 
+func _enter_tree() -> void:
+	# Keep the named action for developer checks, but bind no release shortcut.
+	if not OS.is_debug_build():
+		InputMap.action_erase_events(&"restart")
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	layer = 100
@@ -41,6 +46,7 @@ func _restart() -> void:
 	var course := get_tree().current_scene.get_node_or_null("TestCourse")
 	if course != null and course.has_method("reset_progress"):
 		course.reset_progress()
+	CampaignSave.capture()
 	_resume()
 	get_tree().reload_current_scene()
 
@@ -54,18 +60,23 @@ func respawn(source: Node, death_delay: float = 0.0) -> void:
 	respawn_transition.respawn(source, death_delay)
 
 func show_menu() -> void:
+	CampaignSave.suspend()
 	respawn_transition.cancel()
 	snapshot.clear()
 	_resume()
 	get_tree().change_scene_to_file(MENU)
 
 func show_title() -> void:
+	CampaignSave.suspend()
 	respawn_transition.cancel()
 	snapshot.clear()
 	_resume()
 	get_tree().change_scene_to_file(TITLE)
 
 func start_level(path: String, section: int = 0, room: StringName = &"", as_snapshot: bool = false) -> void:
+	if as_snapshot:
+		CampaignSave.suspend()
+	CampaignSave.enter_stage(path)
 	respawn_transition.cancel()
 	boss_introduction_seen = false
 	snapshot = {"path": path, "section": section, "room": room} if as_snapshot else {}

@@ -258,10 +258,73 @@ func check_head_attacks() -> void:
 	player.set_physics_process(false)
 	player.position = Vector2(380, 430)
 	boss.activate_head(4)
-	await ticks(86)
+	await ticks(110)
 	check(player.health == 4, "Shockwave must hit a grounded player")
 	await ticks(140)
 	check(get_nodes_in_group("ravan_shockwaves").is_empty(), "Shockwaves must stop at ledges and walls")
+
+
+## Close melee can overlap the fixed roar origin. The floor tell must remain
+## harmless long enough to react, in both phases that still have roar heads.
+func check_roar_fairness() -> void:
+	for phase in [1, 2]:
+		for index in [4, 5]:
+			await reset_arena()
+			boss.phase = phase
+			player.set_physics_process(false)
+			player.position = boss.roar_origin(index)
+			var origin: Vector2 = boss.roar_origin(index)
+			check(boss.activate_head(index), "Living roar head must start its warning")
+			await ticks(40)
+			check(head(index).state == boss.HeadState.TELEGRAPH and attacks().is_empty() and player.health == 5, "Roar head warning must precede all damage")
+			# Moving Siya must not retarget the advertised floor origin.
+			player.position.x += 80.0
+			for frame in range(20):
+				if not get_nodes_in_group("ravan_shockwaves").is_empty():
+					break
+				await ticks(1)
+			var waves := get_nodes_in_group("ravan_shockwaves")
+			check(waves.size() == 2, "Both roar heads must release two waves")
+			player.position = origin
+			for wave in waves:
+				check(wave.is_telegraphing() and wave.global_position.distance_to(origin) < 0.1, "Roar must pause harmlessly at its advertised fixed origin")
+			await ticks(18)
+			for wave in waves:
+				check(wave.is_telegraphing() and wave.global_position.distance_to(origin) < 0.1, "Floor warning must allow at least 0.3 seconds before movement or damage")
+			check(player.health == 5, "Overlapping the roar warning must be harmless")
+			await ticks(10)
+			check(player.health == 4, "Staying grounded at the roar origin must take one damage after the warning")
+			await ticks(20)
+			check(player.health == 4, "Paired roar waves must respect damage protection")
+
+	# React to the floor outline with real movement inputs while in melee range.
+	for response in [&"jump", &"dash"]:
+		await reset_arena()
+		player.position = boss.roar_origin(4)
+		await ticks(2)
+		await press(&"attack")
+		check(boss.activate_head(4), "Roar must be available while Siya attacks")
+		for frame in range(60):
+			if not get_nodes_in_group("ravan_shockwaves").is_empty():
+				break
+			await ticks(1)
+		# Leave 0.3 seconds to notice the floor tell before responding.
+		await ticks(18)
+		if response == &"dash":
+			Input.action_press(&"move_right")
+		await press(response)
+		await ticks(35)
+		Input.action_release(&"move_right")
+		check(player.health == 5, "A late %s from melee range must avoid the roar" % response)
+
+	# An active wave that overlaps a dashing player still routes through take_damage.
+	await reset_arena()
+	player.set_physics_process(false)
+	player.position = boss.roar_origin(4)
+	player._invulnerable_remaining = 10.0
+	boss.activate_head(4)
+	await ticks(85)
+	check(player.health == 5, "Active roar waves at their origin must respect dash i-frames")
 
 
 func check_auto_activation() -> void:
@@ -431,6 +494,7 @@ func run_checks() -> void:
 	await check_head_thresholds()
 	await check_living_heads_attack()
 	await check_head_attacks()
+	await check_roar_fairness()
 	await check_auto_activation()
 	check_fury_fairness_data()
 	await check_phases_and_fury()

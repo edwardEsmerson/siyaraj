@@ -9,13 +9,13 @@ const SPARKLER_PLAYER = preload("res://scenes/player/player.tscn")
 const THREE_WEAPON_PLAYER = preload("res://scenes/player/forest_player.tscn")
 const ENCOUNTERS := {
 	Encounter.GUARD: [preload("res://scenes/enemies/enemy.tscn"), Vector2(500, 430), "Guard",
-		"Land three sparkler hits. Move or dash away during the orange tell."],
+		"Land three sparkler hits. Follow-up hits cannot keep it stunned.\nMove or dash away during the orange tell; punish recovery."],
 	Encounter.BRUTE: [preload("res://scenes/enemies/brute.tscn"), Vector2(500, 430), "Brute",
-		"Six hits; its heavy strike deals two damage.\nStep back during the long orange wind-up. Strike during recovery."],
+		"Six hits; its heavy strike deals two damage and cannot be interrupted.\nDodge the orange wind-up, then strike during recovery."],
 	Encounter.FLYER: [preload("res://scenes/enemies/flying_enemy.tscn"), Vector2(500, 385), "Flyer",
-		"Orange charge: move away from the aimed shot.\nJump and press J to hit the flyer. Three hits defeat it."],
+		"Orange charge: move away from the aimed shot.\nOne hit staggers it; follow-up hits cannot stop its next charge."],
 	Encounter.SHOOTER: [preload("res://scenes/enemies/ground_shooter.tscn"), Vector2(540, 430), "Shooter",
-		"Purple bolts follow you: jump past them or dash through them.\nJ interrupts the charge. Three hits defeat the shooter."],
+		"Purple bolts follow you: jump past them or dash through them.\nJ interrupts one charge; follow-up hits cannot keep it stunned."],
 }
 
 ## Overrides the inspector choice when set; kept across R/death reloads.
@@ -47,7 +47,7 @@ func _ready() -> void:
 		$HUD/Title.text = "SIYARAJ / sandbox / %s" % setup[2].to_lower()
 		$HUD/Hint.text = setup[3]
 		enemy.died.connect(func() -> void:
-			$HUD/CombatStatus.text = "%s defeated! R to replay." % setup[2]
+			$HUD/CombatStatus.text = "%s defeated! Use Restart in the pause menu to replay." % setup[2]
 		)
 
 
@@ -73,6 +73,6 @@ func _restart() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("restart"):
+	if OS.is_debug_build() and event.is_action_pressed("restart"):
 		get_viewport().set_input_as_handled()
 		_restart()
