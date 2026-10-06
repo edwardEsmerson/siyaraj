@@ -411,19 +411,22 @@ read clearly at gameplay speed, and that the phase 2 pincer is fair with three h
 - Combat owns `scenes/bosses/ravan/` and `scripts/bosses/ravan/`. The isolated
   `scenes/bosses/ravan/ravan_arena.tscn` uses the forest player with all three
   weapons and 5 health. The full moveset is in `docs/bosses/boss2-ravan.md`.
-- Ten heads take turns attacking; only an active head can be hurt. Knocking out
-  enough heads at once exposes the navel core, the only place Ravan takes damage.
-  Phase changes (20 and 10 core health) start Dashanan Fury pillar waves.
-- Ravan follows the generic boss contract: `max_health`/`health` alias his core
-  health, and he emits `health_changed`, `phase_changed` and `died`. His
-  `BossUI/HealthBar` is an instance of `scenes/ui/boss_health_bar.tscn`;
-  `BossUI/HeadIndicators` (`ravan_head_indicators.gd`) is a small Ravan-only add-on
-  showing one pip per head, the phase, the knockout goal and the exposure cue.
+- One health pool (80), hit anywhere on his body or head row. Every tenth lost
+  severs the rightmost living head for good; only living heads attack, from fixed
+  origins on the body sprite. Phase changes (7 and 3 heads left) start Dashanan
+  Fury pillar waves, one wave per living head.
+- Ravan follows the generic boss contract: `max_health`, `health`,
+  `health_changed`, `phase_changed` and `died`, plus `head_lost`. His
+  `BossUI/HealthBar` is an instance of `scenes/ui/boss_health_bar.tscn` with a tick
+  per head; `BossUI/HeadIndicators` (`ravan_head_indicators.gd`) is a small
+  Ravan-only add-on showing one pip per head over its tenth of the bar, the phase
+  and the heads left.
 - Hazards (pillars, beams, lightning, shockwaves) and the shared enemy projectiles
   all damage Siya through `take_damage`, so dash i-frames apply.
-- `tests/ravan_check.gd` covers head slots, guard, knockout and regrowth, navel
-  exposure, real weapons, head attacks, phases, Fury safe lanes, dash i-frames,
-  the generic boss bar, defeat and restart.
+- `tests/ravan_check.gd` covers hitting him anywhere with real weapons, head
+  thresholds right to left, no regrowth, only living heads attacking, head attacks,
+  phases, Fury safe lanes with the living heads, dash i-frames, the generic boss
+  bar, defeat and restart.
 
 Manual checkpoint: play the Ravan arena with F6. Check that the head pips read
 clearly above the boss bar and that Fury lanes are fair without dashing.

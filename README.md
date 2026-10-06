@@ -45,9 +45,10 @@ At half health he enrages and adds a second ladi from the far wall. See
 [the Khara design doc](docs/bosses/boss1-khara.md). Khara is not yet placed in the forest.
 
 Boss 2, Ravan, has an isolated arena at `scenes/bosses/ravan/ravan_arena.tscn`
-(F6); it is not yet part of level progression. Only a glowing, lunging head can be
-hurt. Knock out enough heads before they regrow to expose the amrit in his navel,
-then strike it. Phase changes trigger Dashanan Fury: stand in the teal lanes. See
+(F6) and ends the campaign. Strike him anywhere: every tenth of his health severs
+his rightmost head for good, and only the heads still standing attack, each one
+glowing before it strikes. Phase changes trigger Dashanan Fury: stand in the teal
+lanes. See
 [the Ravan design doc](docs/bosses/boss2-ravan.md).
 
 Both bosses use the reusable boss health bar, `scenes/ui/boss_health_bar.tscn`.
