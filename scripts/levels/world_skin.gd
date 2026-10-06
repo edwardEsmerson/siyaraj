@@ -169,12 +169,14 @@ func apply() -> void:
 	_mark_foundations(platforms)
 	for platform: Dictionary in platforms:
 		_dress(platform, kit, platforms)
+	var composed: bool = _decor(level, kit)
 	if not arena:
-		var keep_clear: Array[Vector2] = _keep_clear(level)
-		var pieces: Dictionary = _setpieces(kit)
-		_place_landmarks(pieces.landmarks, platforms, keep_clear)
-		_scatter_props(kit, platforms, keep_clear, pieces.small)
-		_recesses(kit, platforms)
+		if not composed:  # hand-placed decor replaces the scattered landmarks, props and recess walls
+			var keep_clear: Array[Vector2] = _keep_clear(level)
+			var pieces: Dictionary = _setpieces(kit)
+			_place_landmarks(pieces.landmarks, platforms, keep_clear)
+			_scatter_props(kit, platforms, keep_clear, pieces.small)
+			_recesses(kit, platforms)
 		_rooms(level, kit)
 	_doors(level, kit)
 	_backdrop(level, kit)
@@ -199,7 +201,8 @@ func _collect(node: Node, platforms: Array[Dictionary]) -> void:
 			var rect := Rect2(points[0], Vector2.ZERO)
 			for point: Vector2 in points:
 				rect = rect.expand(point)
-			platforms.append({"body": child, "rect": rect, "column": rect, "one_way": one_way, "foundation": false})
+			platforms.append({"body": child, "rect": rect, "column": rect, "one_way": one_way, "foundation": false,
+					"role": str(child.get_meta("kit", ""))})
 		elif not (child is CollisionObject2D):
 			_collect(child, platforms)
 
@@ -237,10 +240,10 @@ func _mark_foundations(platforms: Array[Dictionary]) -> void:
 func _dress(p: Dictionary, kit: String, platforms: Array[Dictionary]) -> void:
 	var body: StaticBody2D = p.body
 	var rect: Rect2 = p.rect
-	var cap: Texture2D = _tex(kit, "cap")
+	var cap: Texture2D = _part(kit, "cap", p)
 	var covered: bool = false
 	if p.one_way:
-		var strip: Texture2D = _tex(kit, "oneway")
+		var strip: Texture2D = _part(kit, "oneway", p)
 		if strip:
 			var height: float = strip.get_height() * ART_SCALE
 			_strip(strip, Rect2(rect.position.x, rect.get_center().y - height * 0.5, rect.size.x, height), Z_TOP)
@@ -251,19 +254,19 @@ func _dress(p: Dictionary, kit: String, platforms: Array[Dictionary]) -> void:
 		if covered:
 			_hide(body.get_node("Body"))
 	else:
-		var fill: Texture2D = _tex(kit, "fill")
+		var fill: Texture2D = _part(kit, "fill", p)
 		if fill:
 			_strip(fill, p.column, Z_FOUNDATION if p.foundation else Z_BODY, true)
 			_hide(body.get_node("Body"))
 			if p.foundation:
 				_shade(Rect2(rect.position.x, rect.position.y + 48.0, rect.size.x, p.column.end.y - rect.position.y - 48.0))
-		var fringe: Texture2D = _tex(kit, "fringe")
+		var fringe: Texture2D = _part(kit, "fringe", p)
 		if fringe and not p.foundation:
 			_strip(fringe, Rect2(rect.position.x, rect.end.y, rect.size.x, fringe.get_height() * ART_SCALE), Z_BODY)
 		var top: float = rect.position.y - (cap.get_height() if cap else 0) * ART_SCALE * cap_surface
 		if cap:
 			_strip(cap, Rect2(rect.position.x, top, rect.size.x, cap.get_height() * ART_SCALE), Z_TOP)
-		var end: Texture2D = _tex(kit, "end")
+		var end: Texture2D = _part(kit, "end", p)
 		if end:
 			if not cap:
 				top = rect.position.y - end.get_height() * ART_SCALE * cap_surface
@@ -276,6 +279,12 @@ func _dress(p: Dictionary, kit: String, platforms: Array[Dictionary]) -> void:
 		covered = fill != null or cap != null
 	if covered and body.has_node("Edge"):
 		_hide(body.get_node("Edge"))
+
+
+## A platform's kit piece: `<name>-<role>.png` when the platform's `kit` meta names a role the kit has, else `<name>.png`.
+func _part(kit: String, name: String, p: Dictionary) -> Texture2D:
+	var variant: Texture2D = _tex(kit, "%s-%s" % [name, p.role]) if p.role != "" else null
+	return variant if variant else _tex(kit, name)
 
 
 ## False when a neighbouring platform (or its foundation) continues the surface past this corner.
@@ -455,6 +464,41 @@ func _setpieces(kit: String) -> Dictionary:
 		var entry: Dictionary = {"tex": ImageTexture.create_from_image(piece), "used": Rect2(Vector2.ZERO, used.size), "size": Vector2(used.size)}
 		(landmarks if used.size.y >= LANDMARK_HEIGHT else small).append(entry)
 	return _cache[key]
+
+
+## Hand-placed art: each CanvasItem under a `KitDecor` node with a `piece` meta draws `<kit>/decor/<piece>.png` (kits
+## without that file draw nothing). The marker is the piece's bottom centre (top centre with meta `hang`), and its
+## z_index, modulate and scale (negative x flips) carry over. Meta `width` repeats the piece across that many game
+## units; meta `blend` = "add" draws it additively (light pools). Returns whether any piece was drawn: a composed
+## level skips the scattered landmarks, props and recess walls.
+func _decor(level: Node, kit: String) -> bool:
+	var drawn: bool = false
+	for holder: Node in level.find_children("KitDecor", "Node", true, false):
+		for marker: Node in holder.find_children("*", "CanvasItem", true, false):
+			var texture: Texture2D = _tex(kit.path_join("decor"), str(marker.get_meta("piece"))) if marker.has_meta("piece") else null
+			if texture == null:
+				continue
+			var at: Vector2 = to_local(marker.global_position)
+			var stretch: Vector2 = (marker as Node2D).scale if marker is Node2D else Vector2.ONE
+			var size: Vector2 = texture.get_size() * ART_SCALE * stretch.abs()
+			var width: float = float(marker.get_meta("width", size.x))
+			var top: float = at.y if marker.get_meta("hang", false) else at.y - size.y
+			var sprite: Sprite2D = _sprite(texture, (marker as CanvasItem).z_index)
+			sprite.scale = Vector2.ONE * ART_SCALE * stretch.abs()
+			sprite.flip_h = stretch.x < 0.0
+			sprite.position = Vector2(at.x - width * 0.5, top)
+			sprite.modulate = (marker as CanvasItem).modulate
+			if marker.has_meta("width"):
+				sprite.region_enabled = true
+				sprite.region_rect = Rect2(0.0, 0.0, width / sprite.scale.x, texture.get_height())
+			else:
+				sprite.texture_repeat = CanvasItem.TEXTURE_REPEAT_DISABLED
+			if marker.get_meta("blend", "") == "add":
+				var additive := CanvasItemMaterial.new()
+				additive.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+				sprite.material = additive
+			drawn = true
+	return drawn
 
 
 ## The space under a ceiling (a roof, balcony or gallery above a floor) gets the kit's back wall,
