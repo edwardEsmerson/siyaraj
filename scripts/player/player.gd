@@ -217,6 +217,24 @@ func take_damage(amount: int, knockback: Vector2) -> void:
 		apply_knockback(knockback)
 
 
+## Returns the health restored. Healing never revives Siya or grants protection.
+func heal(amount: int) -> int:
+	if state == State.DEAD or health <= 0 or amount <= 0:
+		return 0
+	var restored: int = mini(amount, maxi(max_health - health, 0))
+	if restored > 0:
+		health += restored
+		health_changed.emit(health)
+	return restored
+
+
+## Main-route diyas call this only after recording their first activation.
+func heal_from_diya() -> void:
+	var restored: int = heal(1)
+	if restored > 0:
+		Burst.spawn(get_tree().current_scene, global_position + Vector2(0, -20), Color("91e5a3"), "+%d HP" % restored, 32.0, 0.9)
+
+
 func die() -> void:
 	if state == State.DEAD:
 		return
