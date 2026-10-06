@@ -1,0 +1,19 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/idle/01.png" id="idle_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/idle/02.png" id="idle_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/rocket_salvo/01.png" id="rocket_salvo_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/chakri_throw/01.png" id="chakri_throw_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/anaar_plant/01.png" id="anaar_plant_01"]
+
+[resource]
+animations = [
+{"frames": [{"duration": 4.000000, "texture": ExtResource("idle_01")}, {"duration": 4.000000, "texture": ExtResource("idle_02")}], "loop": true, "name": &"idle", "speed": 8.0},
+{"frames": [{"duration": 2.667000, "texture": ExtResource("idle_01")}, {"duration": 2.667000, "texture": ExtResource("chakri_throw_01")}, {"duration": 2.667000, "texture": ExtResource("idle_02")}], "loop": false, "name": &"intro_taunt", "speed": 8.0},
+{"frames": [{"duration": 2.400000, "texture": ExtResource("idle_02")}, {"duration": 2.400000, "texture": ExtResource("rocket_salvo_01")}, {"duration": 2.400000, "texture": ExtResource("rocket_salvo_01")}], "loop": false, "name": &"rocket_salvo", "speed": 8.0},
+{"frames": [{"duration": 2.400000, "texture": ExtResource("idle_02")}, {"duration": 2.400000, "texture": ExtResource("chakri_throw_01")}, {"duration": 2.400000, "texture": ExtResource("chakri_throw_01")}], "loop": false, "name": &"chakri_throw", "speed": 8.0},
+{"frames": [{"duration": 2.400000, "texture": ExtResource("idle_02")}, {"duration": 2.400000, "texture": ExtResource("anaar_plant_01")}, {"duration": 2.400000, "texture": ExtResource("rocket_salvo_01")}], "loop": false, "name": &"anaar_plant", "speed": 8.0},
+{"frames": [{"duration": 2.800000, "texture": ExtResource("idle_01")}, {"duration": 2.800000, "texture": ExtResource("idle_02")}], "loop": true, "name": &"reload", "speed": 8.0},
+{"frames": [{"duration": 3.200000, "texture": ExtResource("idle_02")}, {"duration": 3.200000, "texture": ExtResource("rocket_salvo_01")}, {"duration": 3.200000, "texture": ExtResource("chakri_throw_01")}], "loop": false, "name": &"phase_shift", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("idle_01")}], "loop": false, "name": &"death", "speed": 8.0}
+]

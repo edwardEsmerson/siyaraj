@@ -23,7 +23,13 @@ var attack_index: int = 0
 var facing: int = -1
 var _flash: float = 0.0
 var _anim_time: float = 0.0
+var _cast_time: float = 0.0
+var _cast_kind: int = 0
+## Cast animations by attack index: rockets, chakri, anaar.
+const ATTACK_ANIMATIONS: Array[StringName] = [&"rocket_salvo", &"chakri_throw", &"anaar_plant"]
 @onready var status: Label = $Status
+@onready var visual: Node2D = $Visual
+@onready var art: AnimatedSprite2D = $Visual/Art
 
 
 func _ready() -> void:
@@ -39,6 +45,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	state_remaining -= delta
 	_flash = maxf(_flash - delta, 0.0)
+	_cast_time += delta
 	if state_remaining <= 0.0:
 		match state:
 			State.INTRO, State.RECOVERY, State.PHASE_SHIFT:
@@ -50,7 +57,7 @@ func _physics_process(delta: float) -> void:
 				state = State.RECOVERY
 				state_remaining = recovery_time
 				status.text = "RELOADING - STRIKE NOW"
-	queue_redraw()
+	_update_art()
 
 
 func current_warning() -> float:
@@ -84,6 +91,8 @@ func start_attack(index: int, target_x: float) -> void:
 		return
 	facing = 1 if target_x > position.x else -1
 	state = State.CAST
+	_cast_kind = index
+	_cast_time = 0.0
 	get_node("/root/AudioDirector").play_sfx(&"tell", global_position)
 	state_remaining = 0.0
 	match index:
@@ -92,7 +101,9 @@ func start_attack(index: int, target_x: float) -> void:
 			# Every target locks before the first fuse burns. No homing rockets.
 			var offsets := PackedFloat32Array([-85.0, 85.0, 0.0] if phase == 1 else [-120.0, 0.0, 120.0, 55.0])
 			for index_in_salvo in range(offsets.size()):
-				spawn_rocket(position + Vector2(facing * 36, -82 - index_in_salvo * 8), Vector2(clampf(target_x + offsets[index_in_salvo], 65, 895), position.y - 20), index_in_salvo * rocket_stagger)
+				# Launch from the tips of the three-rocket rack on his back.
+				var slot := index_in_salvo % 3
+				spawn_rocket(position + Vector2(-facing * (17.0 + slot * 6.5), -82 + slot * 4),Vector2(clampf(target_x + offsets[index_in_salvo], 65, 895), position.y - 20), index_in_salvo * rocket_stagger)
 		1:
 			status.text = "CHAKRI CHASE - JUMP THE SPINNERS"
 			spawn_hazard(Hazard.Kind.CHAKRI, position + Vector2(facing * 42, 0), Vector2(24, 16), 2.5, chakri_speed * (1.2 if phase == 2 else 1.0), facing)
@@ -123,7 +134,7 @@ func take_damage(amount: int, _knockback: Vector2 = Vector2.ZERO) -> void:
 		state_remaining = 1.2
 		status.text = "LIGHT EVERY FUSE!"
 		phase_changed.emit(phase)
-	queue_redraw()
+	_update_art()
 
 
 func _clear_hazards() -> void:
@@ -133,29 +144,56 @@ func _clear_hazards() -> void:
 			hazard.queue_free()
 
 
-func _draw() -> void:
-	var coat := Color(0.45, 0.1, 0.3) if phase == 1 else Color(0.7, 0.12, 0.2)
-	var gold := Color(1, 0.72, 0.2)
-	var skin := Color(0.35, 0.24, 0.45)
-	if _flash > 0:
-		coat = Color.WHITE
-	if state == State.DEAD:
-		coat = Color(0.25, 0.2, 0.25, 0.4)
-	draw_colored_polygon(PackedVector2Array([Vector2(-24, 0), Vector2(-30, -64), Vector2(-18, -80), Vector2(18, -80), Vector2(30, -64), Vector2(24, 0)]), coat)
-	draw_rect(Rect2(-18, -68, 36, 38), Color(0.15, 0.08, 0.18))
-	# Brass bandolier of fireworks and a shoulder-mounted rocket rack.
-	for index in range(4):
-		var center := Vector2(-15 + index * 10, -65 + index * 7)
-		draw_line(center - Vector2(0, 7), center + Vector2(0, 7), gold, 5)
-	for index in range(3):
-		var x := -facing * (25 + index * 8)
-		draw_line(Vector2(x, -62), Vector2(x, -100), coat.lightened(0.25), 6)
-		draw_colored_polygon(PackedVector2Array([Vector2(x - 5, -100), Vector2(x, -111), Vector2(x + 5, -100)]), gold)
-	draw_circle(Vector2(0, -89), 13, skin)
-	draw_rect(Rect2(-15, -104, 30, 9), coat)
-	draw_circle(Vector2(0, -108), 6, gold)
-	draw_line(Vector2(-10, -84), Vector2(0, -81), Color(0.07, 0.03, 0.08), 4)
-	draw_line(Vector2(0, -81), Vector2(10, -84), Color(0.07, 0.03, 0.08), 4)
-	draw_circle(Vector2(facing * 6, -90), 3, gold)
-	if state == State.CAST:
-		draw_circle(Vector2(facing * 35, -62), 3 + absf(sin(_anim_time * 25)), gold)
+func _cast_frame() -> int:
+	# Keyframes follow the fuse: wind-up while the warning burns, the throw or
+	# order to fire as hazards launch, then a follow-through; -1 returns to idle.
+	var fuse := current_warning()
+	var times: Array[float]
+	match _cast_kind:
+		0:
+			var last_launch := fuse + rocket_stagger * (3 if phase == 2 else 2)
+			times = [fuse * 0.55, last_launch + 0.1, last_launch + 0.6]
+		1: times = [fuse * 0.7, fuse + 0.3, fuse + 0.8]
+		_: times = [fuse * 0.6, fuse, INF]
+	for index in range(times.size()):
+		if _cast_time < times[index]:
+			return index
+	return -1
+
+
+func _update_art() -> void:
+	visual.scale.x = float(facing)
+	var animation: StringName = &"idle"
+	var frame := -1
+	var tint := Color(1.15, 0.92, 0.92) if phase == 2 else Color.WHITE
+	match state:
+		State.INTRO:
+			animation = &"intro_taunt"
+			frame = int((1.0 - clampf(state_remaining, 0.0, 1.0)) * 3.0)
+		State.CAST:
+			frame = _cast_frame()
+			if frame >= 0:
+				animation = ATTACK_ANIMATIONS[_cast_kind]
+		State.RECOVERY:
+			animation = &"reload"
+			tint = Color(0.8, 0.82, 0.95)
+		State.PHASE_SHIFT:
+			animation = &"phase_shift"
+			frame = int((1.0 - clampf(state_remaining / 1.2, 0.0, 1.0)) * 3.0)
+			tint = Color(1.9, 0.7, 0.5) if int(_anim_time * 10.0) % 2 == 0 else Color(1.3, 0.85, 0.7)
+		State.DEAD:
+			animation = &"death"
+			tint = Color(0.6, 0.55, 0.7)
+			# Until the death keyframes land he topples onto his back.
+			visual.rotation = -PI * 0.5 * facing
+			visual.position = Vector2(0, -22)
+	if _flash > 0.0 and state != State.DEAD:
+		tint = Color(2.2, 2.2, 2.2)
+	visual.modulate = tint
+	if art.animation != animation:
+		art.play(animation)
+	if frame >= 0:
+		art.pause()
+		art.frame = clampi(frame, 0, art.sprite_frames.get_frame_count(animation) - 1)
+	elif not art.is_playing() and state != State.DEAD:
+		art.play(animation)

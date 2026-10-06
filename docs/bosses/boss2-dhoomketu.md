@@ -4,7 +4,7 @@ Dhoomketu is an original Diwali villain for Siyaraj. He has commandeered a
 fireworks barge moored at the ghats and blocks the route to the palace.
 His plum coat, brass firework bandolier and shoulder rocket rack distinguish
 him from Khara's gada and ladi arsenal. Diyas, bunting and rocket crates dress
-the arena. The character and barge use scene/script placeholder art.
+the arena. Dhoomketu uses generated sprite art (`assets/sprites/dhoomketu/`, source `asset-builder/sprites/dhoomketu/`) on a `Visual/Art` AnimatedSprite2D at scale 0.5; the barge is still scene placeholder art.
 
 The level 2 exit opens `scenes/main/river_showdown.tscn`. Defeating Dhoomketu
 opens the palace and Swaminathan's finale. Death retries this fight with fresh health

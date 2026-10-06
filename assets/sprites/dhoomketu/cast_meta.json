@@ -1,0 +1,126 @@
+{
+  "name": "dhoomketu",
+  "canvas": [
+    304,
+    304
+  ],
+  "anchor": [
+    152,
+    285
+  ],
+  "scale": 0.5,
+  "art_pixels_per_unit": 2,
+  "anchor_mode": "feet",
+  "collider_units": [
+    48,
+    88
+  ],
+  "animations": {
+    "idle": {
+      "frames": [
+        "idle_01",
+        "idle_02"
+      ],
+      "durations": [
+        4.0,
+        4.0
+      ],
+      "loop": true,
+      "fps": 8
+    },
+    "intro_taunt": {
+      "frames": [
+        "idle_01",
+        "chakri_throw_01",
+        "idle_02"
+      ],
+      "durations": [
+        2.667,
+        2.667,
+        2.667
+      ],
+      "loop": false,
+      "fps": 8
+    },
+    "rocket_salvo": {
+      "frames": [
+        "idle_02",
+        "rocket_salvo_01",
+        "rocket_salvo_01"
+      ],
+      "durations": [
+        2.4,
+        2.4,
+        2.4
+      ],
+      "loop": false,
+      "fps": 8
+    },
+    "chakri_throw": {
+      "frames": [
+        "idle_02",
+        "chakri_throw_01",
+        "chakri_throw_01"
+      ],
+      "durations": [
+        2.4,
+        2.4,
+        2.4
+      ],
+      "loop": false,
+      "fps": 8
+    },
+    "anaar_plant": {
+      "frames": [
+        "idle_02",
+        "anaar_plant_01",
+        "rocket_salvo_01"
+      ],
+      "durations": [
+        2.4,
+        2.4,
+        2.4
+      ],
+      "loop": false,
+      "fps": 8
+    },
+    "reload": {
+      "frames": [
+        "idle_01",
+        "idle_02"
+      ],
+      "durations": [
+        2.8,
+        2.8
+      ],
+      "loop": true,
+      "fps": 8
+    },
+    "phase_shift": {
+      "frames": [
+        "idle_02",
+        "rocket_salvo_01",
+        "chakri_throw_01"
+      ],
+      "durations": [
+        3.2,
+        3.2,
+        3.2
+      ],
+      "loop": false,
+      "fps": 8
+    },
+    "death": {
+      "frames": [
+        "idle_01"
+      ],
+      "durations": [
+        1.0
+      ],
+      "loop": false,
+      "fps": 8
+    }
+  },
+  "source": "asset-builder/sprites/dhoomketu",
+  "notes": "Interim set: approved base plus four finished keyframes; remaining poses reuse them."
+}
