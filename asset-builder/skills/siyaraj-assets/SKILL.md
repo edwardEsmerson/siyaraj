@@ -129,9 +129,17 @@ dresses the grey Body/Edge platforms from `assets/world/<biome>/<direction>/` at
 `fill.png` (128 px seamless tile), `cap.png` (seamless strip, walking surface a third down), `end.png` (left end,
 mirrored for the right), `fringe.png` (hangs under floating platforms), `oneway.png` (strip centred on thin
 jump-through platforms), `far.png` (opaque) / `mid.png` (transparent) 1080 px tall seamless parallax, `water.png`
-(river tile) and `props/*.png` (stand on the bottom of their opaque pixels). New PNGs load straight from disk;
-run `godot --headless --path . --import` once before exporting. In game, `V` cycles the level's available kits.
-Screenshot every level x kit (from the repo root; in a fresh worktree import once first), then build contact sheets:
+(river tile, from just above the `RiverLine` to the bottom) and `props/*.png` (stand on the bottom of their opaque
+pixels). `setpieces.png` (512 px sheet of separate pieces on transparency) is cut into its connected pieces at load:
+pieces 96+ px tall become landmarks, drawn at twice prop scale on wide ground behind the actors (seeded, spaced,
+clear of diyas/doors/finish, every piece before repeats); smaller ones join the props. `back.png` (128 px tile) is the
+back wall: under roofs/balconies/galleries (recesses), over side-room `Backdrop`s and inside portal `Door`s (framed
+in fill). `arena.png` (1934x1080 one-screen scene) is the boss arena backdrop: the Khara (forest) and Ravan (palace)
+arenas have a `WorldSkin` with `arena = true`, which follows the direction the level last showed. New PNGs load
+straight from disk; run `godot --headless --path . --import` once before exporting. In game, `V` cycles the
+available kits; `tests/world_skin_check.gd` checks every kit dresses fully without moving collision geometry.
+Screenshot every level x kit at 5 spots plus the arena (from the repo root; in a fresh worktree import once first),
+then build contact sheets:
 ```bash
 xvfb-run -a godot --path . --resolution 1920x1080 -s tools/world_shots.gd [-- <biome> [<direction> | <kit dir>]]
 ~/ml/bin/python tools/world_sheet.py    # docs/screenshots/world/<biome>-sheet.png

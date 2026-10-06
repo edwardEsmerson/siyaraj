@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
+[ext_resource type="Script" path="res://scripts/levels/world_skin.gd" id="world_skin"]
 [ext_resource type="Script" path="res://scripts/bosses/ravan/ravan_arena.gd" id="1_arena"]
 [ext_resource type="PackedScene" path="res://scenes/player/forest_player.tscn" id="2_player"]
 [ext_resource type="PackedScene" path="res://scenes/bosses/ravan/ravan.tscn" id="3_ravan"]
@@ -127,3 +128,9 @@ offset_left = 32.0
 offset_top = 136.0
 theme_override_font_sizes/font_size = 13
 text = "Hit the glowing head while it lunges."
+
+[node name="WorldSkin" type="Node2D" parent="."]
+script = ExtResource("world_skin")
+biome = "palace"
+direction = "carved"
+arena = true

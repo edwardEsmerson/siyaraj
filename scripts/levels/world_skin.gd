@@ -3,20 +3,35 @@ class_name WorldSkin
 extends Node2D
 ## Dresses a grey-box level with the art kit in `res://assets/world/<biome>/<direction>/`, at load time and
 ## in the editor: textured platforms (fill, cap, end pieces, fringe, one-way strips), solid foundations under
-## low platforms, scattered props, Parallax2D far/mid layers and the river water. Level geometry is never
-## changed; the grey Body/Edge/Background/WaterLine polygons are only hidden while a kit covers them.
-## Every kit file is optional. Art is authored at 2 art px per game unit, so it is all drawn at scale 0.5.
+## low platforms, scattered props, landmarks cut from the set-piece sheet, back walls in recesses, side rooms
+## and doorways, Parallax2D far/mid layers (or the one-screen backdrop in boss arenas) and the river water.
+## Level geometry is never changed; the grey Body/Edge/Background/Backdrop/Door/RiverLine polygons are only
+## hidden while a kit covers them. Every kit file is optional. Art is authored at 2 art px per game unit, so
+## it is all drawn at scale 0.5 (landmarks larger, see `landmark_scale`).
 
 const ART_SCALE: float = 0.5
 const KIT_ROOT: String = "res://assets/world"
 const DIRECTIONS: PackedStringArray = ["titlematch", "madhubani", "truckart", "diyalit", "carved", "papercut"]
 const Z_FAR: int = -100
 const Z_MID: int = -90
-const Z_FOUNDATION: int = -4  # behind the river WaterLine (z -3), so ghat steps sink into the water
+const Z_BACK: int = -8  # back walls of recesses and side rooms
+const Z_LANDMARK: int = -6
+const Z_FOUNDATION: int = -4  # behind the river water, so ghat steps sink into it
+const Z_WATER: int = -3
 const Z_BODY: int = -2  # fills, fringes and props
 const Z_TOP: int = -1  # caps, end pieces and one-way strips; actors stay in front at z 0
 const MIN_PROP_PLATFORM: float = 120.0
 const WATER_DRIFT: float = 10.0  # art px per second
+const WATER_ABOVE_LINE: float = 40.0
+const ARENA_WIDTH: float = 960.0
+const SHEET_CELL: int = 4  # set-piece sheet pixels closer than this belong to the same piece
+const LANDMARK_HEIGHT: int = 96  # set pieces at least this tall (art px) are landmarks; smaller ones join the props
+const RECESS_DEPTH: Vector2 = Vector2(40.0, 260.0)  # floor-to-ceiling gaps that read as a covered recess
+const BACK_TINT: Color = Color(0.62, 0.62, 0.68)
+const ROOM_TINT: Color = Color(0.55, 0.55, 0.62)  # whole-screen room walls sit further back than recesses
+
+## Direction each biome's level last showed, so its boss arena (a separate scene) matches.
+static var _shown: Dictionary = {}
 
 @export_enum("forest", "river", "palace") var biome: String = "forest":
 	set(value):
@@ -38,6 +53,18 @@ const WATER_DRIFT: float = 10.0  # art px per second
 @export var course_bottom: float = 540.0
 ## Average platform width per prop slot; larger is sparser.
 @export var prop_spacing: float = 260.0
+## Minimum gap between landmarks (large `setpieces.png` pieces standing on the ground, behind the actors).
+@export var landmark_spacing: float = 420.0
+## Landmarks are drawn larger than props (2 = twice their scale) so they read as background architecture.
+@export_range(0.5, 2.0, 0.5) var landmark_scale: float = 2.0
+## How dark the deep part of solid ground gets, so tall foundations do not read as flat tile.
+@export_range(0.0, 1.0) var depth_shade: float = 0.35
+## Single-screen boss arena: `arena.png` replaces the parallax layers and the grey `Backdrop`; no props or
+## landmarks, and the direction follows whatever the biome's level last showed.
+@export var arena: bool = false:
+	set(value):
+		arena = value
+		_reapply()
 ## Reloads the kit from disk (after replacing art in the editor).
 @export var refresh: bool = false:
 	set(value):
@@ -58,7 +85,10 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	apply()
+	if arena and not Engine.is_editor_hint() and _shown.get(biome, direction) != direction:
+		direction = _shown[biome]  # the setter applies
+	else:
+		apply()
 
 
 func _exit_tree() -> void:
@@ -132,12 +162,21 @@ func apply() -> void:
 	_dressing.name = "Dressing"
 	add_child(_dressing)
 	var kit: String = kit_dir()
+	if not arena and kit_override == "" and not Engine.is_editor_hint():
+		_shown[biome] = direction
 	var platforms: Array[Dictionary] = []
 	_collect(level, platforms)
 	_mark_foundations(platforms)
 	for platform: Dictionary in platforms:
 		_dress(platform, kit, platforms)
-	_scatter_props(kit, platforms, _keep_clear(level))
+	if not arena:
+		var keep_clear: Array[Vector2] = _keep_clear(level)
+		var pieces: Dictionary = _setpieces(kit)
+		_place_landmarks(pieces.landmarks, platforms, keep_clear)
+		_scatter_props(kit, platforms, keep_clear, pieces.small)
+		_recesses(kit, platforms)
+		_rooms(level, kit)
+	_doors(level, kit)
 	_backdrop(level, kit)
 
 
@@ -216,6 +255,8 @@ func _dress(p: Dictionary, kit: String, platforms: Array[Dictionary]) -> void:
 		if fill:
 			_strip(fill, p.column, Z_FOUNDATION if p.foundation else Z_BODY, true)
 			_hide(body.get_node("Body"))
+			if p.foundation:
+				_shade(Rect2(rect.position.x, rect.position.y + 48.0, rect.size.x, p.column.end.y - rect.position.y - 48.0))
 		var fringe: Texture2D = _tex(kit, "fringe")
 		if fringe and not p.foundation:
 			_strip(fringe, Rect2(rect.position.x, rect.end.y, rect.size.x, fringe.get_height() * ART_SCALE), Z_BODY)
@@ -247,8 +288,8 @@ func _side_open(p: Dictionary, right: bool, platforms: Array[Dictionary]) -> boo
 	return true
 
 
-func _scatter_props(kit: String, platforms: Array[Dictionary], keep_clear: Array[Vector2]) -> void:
-	var props: Array[Dictionary] = []
+func _scatter_props(kit: String, platforms: Array[Dictionary], keep_clear: Array[Vector2], extra: Array[Dictionary]) -> void:
+	var props: Array[Dictionary] = extra.duplicate()
 	for file: String in _pngs(kit.path_join("props")):
 		var path: String = kit.path_join("props").path_join(file)
 		var tex: Texture2D = _tex(kit.path_join("props"), file.get_basename())
@@ -292,6 +333,217 @@ func _place_prop(prop: Dictionary, x: float, p: Dictionary, platforms: Array[Dic
 	sprite.position = Vector2(x - (used.position.x + used.size.x * 0.5) * ART_SCALE, p.rect.position.y - used.end.y * ART_SCALE + 1.0)
 
 
+## Large set pieces stand on wide ground behind everything that is played on, spaced out along the course.
+## They cycle through a seeded shuffle so every piece of the sheet shows up before any repeats.
+func _place_landmarks(pieces: Array[Dictionary], platforms: Array[Dictionary], keep_clear: Array[Vector2]) -> void:
+	if pieces.is_empty():
+		return
+	var order: Array[Dictionary] = pieces.duplicate()
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(kit_dir())
+	for i: int in range(order.size() - 1, 0, -1):
+		var j: int = rng.randi_range(0, i)
+		var swap: Dictionary = order[i]
+		order[i] = order[j]
+		order[j] = swap
+	var ground: Array[Dictionary] = []
+	for p: Dictionary in platforms:
+		if not p.one_way and p.rect.size.x >= 150.0:
+			ground.append(p)
+	ground.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.rect.position.x < b.rect.position.x)
+	var placed: Array[Rect2] = []
+	var next: int = 0
+	for p: Dictionary in ground:
+		var rect: Rect2 = p.rect
+		var x: float = rect.position.x + 24.0
+		while x < rect.end.x - 24.0:
+			var placed_one: bool = false
+			for attempt: int in mini(3, order.size()):  # a piece too wide for this spot waits for the next one
+				var piece: Dictionary = order[(next + attempt) % order.size()]
+				var size: Vector2 = piece.size * ART_SCALE * landmark_scale
+				var area := Rect2(x, rect.position.y - size.y + 2.0, size.x, size.y)
+				if area.end.x > rect.end.x - 8.0 or not _landmark_fits(area, p, platforms, keep_clear, placed):
+					continue
+				var sprite: Sprite2D = _sprite(piece.tex, Z_LANDMARK)
+				sprite.texture_repeat = CanvasItem.TEXTURE_REPEAT_DISABLED
+				sprite.scale = Vector2.ONE * ART_SCALE * landmark_scale
+				sprite.flip_h = rng.randf() < 0.5
+				sprite.position = area.position
+				placed.append(area)
+				order[(next + attempt) % order.size()] = order[next % order.size()]
+				order[next % order.size()] = piece
+				next += 1
+				x = area.end.x + landmark_spacing
+				placed_one = true
+				break
+			if not placed_one:
+				x += 48.0
+
+
+func _landmark_fits(area: Rect2, p: Dictionary, platforms: Array[Dictionary], keep_clear: Array[Vector2], placed: Array[Rect2]) -> bool:
+	var base := Rect2(area.position.x, area.get_center().y, area.size.x, area.size.y * 0.5 - 4.0)
+	for q: Dictionary in platforms:
+		if not is_same(q, p) and not q.one_way and q.column.intersects(base):
+			return false  # its base would vanish behind a neighbouring block
+	for point: Vector2 in keep_clear:
+		if point.x > area.position.x - 72.0 and point.x < area.end.x + 72.0 and absf(point.y - area.end.y) < 160.0:
+			return false
+	for other: Rect2 in placed:
+		if other.grow_individual(landmark_spacing, 0.0, landmark_spacing, 0.0).intersects(area):
+			return false
+	return true
+
+
+## Cuts `setpieces.png` into its separate pieces (connected opaque regions, cached per kit).
+## Returns {landmarks, small}: arrays of {tex, used, size}; small pieces are scattered with the props.
+func _setpieces(kit: String) -> Dictionary:
+	var key: String = kit.path_join("setpieces.png#pieces")
+	if _cache.has(key):
+		return _cache[key]
+	var landmarks: Array[Dictionary] = []
+	var small: Array[Dictionary] = []
+	_cache[key] = {"landmarks": landmarks, "small": small}
+	var sheet: Texture2D = _tex(kit, "setpieces")
+	if sheet == null:
+		return _cache[key]
+	var image: Image = sheet.get_image()
+	if image.is_compressed():
+		image.decompress()
+	image.convert(Image.FORMAT_RGBA8)
+	var width: int = image.get_width()
+	var columns: int = ceili(width / float(SHEET_CELL))
+	var rows: int = ceili(image.get_height() / float(SHEET_CELL))
+	var data: PackedByteArray = image.get_data()
+	var label := PackedInt32Array()
+	label.resize(columns * rows)
+	label.fill(-1)
+	for i: int in range(3, data.size(), 4):
+		if data[i] > 24:
+			var pixel: int = i / 4
+			label[(pixel / width / SHEET_CELL) * columns + (pixel % width) / SHEET_CELL] = 0
+	var count: int = 0
+	for start: int in label.size():
+		if label[start] != 0:
+			continue
+		count += 1
+		label[start] = count
+		var stack: PackedInt32Array = [start]
+		var cells: Rect2i = Rect2i(start % columns, start / columns, 1, 1)
+		while not stack.is_empty():
+			var cell: int = stack[stack.size() - 1]
+			stack.resize(stack.size() - 1)
+			var cx: int = cell % columns
+			var cy: int = cell / columns
+			cells = cells.expand(Vector2i(cx, cy)).expand(Vector2i(cx + 1, cy + 1))
+			for dy: int in range(-1, 2):
+				for dx: int in range(-1, 2):
+					var nx: int = cx + dx
+					var ny: int = cy + dy
+					if nx >= 0 and ny >= 0 and nx < columns and ny < rows and label[ny * columns + nx] == 0:
+						label[ny * columns + nx] = count
+						stack.append(ny * columns + nx)
+		var region := Rect2i(cells.position * SHEET_CELL, cells.size * SHEET_CELL).intersection(Rect2i(Vector2i.ZERO, image.get_size()))
+		var piece: Image = image.get_region(region)
+		for cy: int in range(cells.position.y, cells.end.y):
+			for cx: int in range(cells.position.x, cells.end.x):
+				if label[cy * columns + cx] != count:  # a neighbour reaching into this piece's box
+					piece.fill_rect(Rect2i(Vector2i(cx, cy) * SHEET_CELL - region.position, Vector2i.ONE * SHEET_CELL), Color(0, 0, 0, 0))
+		var used: Rect2i = piece.get_used_rect()
+		if maxi(used.size.x, used.size.y) < 16:
+			continue  # specks and sparks
+		piece = piece.get_region(used)
+		var entry: Dictionary = {"tex": ImageTexture.create_from_image(piece), "used": Rect2(Vector2.ZERO, used.size), "size": Vector2(used.size)}
+		(landmarks if used.size.y >= LANDMARK_HEIGHT else small).append(entry)
+	return _cache[key]
+
+
+## The space under a ceiling (a roof, balcony or gallery above a floor) gets the kit's back wall,
+## from the ceiling down behind the floor, so covered stretches read as interiors.
+func _recesses(kit: String, platforms: Array[Dictionary]) -> void:
+	var back: Texture2D = _tex(kit, "back")
+	if back == null:
+		return
+	for ceiling: Dictionary in platforms:
+		for below: Dictionary in platforms:
+			var gap: float = below.rect.position.y - ceiling.rect.end.y
+			var left: float = maxf(ceiling.rect.position.x, below.rect.position.x)
+			var right: float = minf(ceiling.rect.end.x, below.rect.end.x)
+			if is_same(ceiling, below) or below.one_way or gap < RECESS_DEPTH.x or gap > RECESS_DEPTH.y or right - left < 96.0:
+				continue
+			var top: float = ceiling.rect.get_center().y
+			var wall: Sprite2D = _strip(back, Rect2(left, top, right - left, below.rect.end.y - top), Z_BACK, true)
+			wall.modulate = BACK_TINT
+
+
+## Side rooms are painted on a grey `Backdrop` polygon; the back wall replaces it.
+func _rooms(level: Node, kit: String) -> void:
+	var back: Texture2D = _tex(kit, "back")
+	if back == null:
+		return
+	for backdrop: Node in level.find_children("Backdrop", "Polygon2D", true, false):
+		var wall: Polygon2D = _textured(backdrop, back, Z_BACK)
+		wall.color = ROOM_TINT
+
+
+## Portal doors become dark doorways of back wall in a frame of the kit's fill.
+func _doors(level: Node, kit: String) -> void:
+	var back: Texture2D = _tex(kit, "back")
+	if back == null:
+		return
+	var frame: Texture2D = _tex(kit, "fill")
+	for door: Node in level.find_children("Door", "Polygon2D", true, false):
+		if frame:
+			var outline: Polygon2D = _textured(door, frame, Z_BODY)
+			var grown := PackedVector2Array()
+			for point: Vector2 in door.polygon:
+				grown.append(Vector2(point.x * 1.35, point.y * 1.2 if point.y < 0.0 else point.y))
+			outline.polygon = grown
+		var doorway: Polygon2D = _textured(door, back, Z_BODY)
+		doorway.color = Color(0.5, 0.5, 0.55)
+		if door.get_parent().get_node_or_null("Threshold") is CanvasItem:
+			_hide(door.get_parent().get_node("Threshold"))
+
+
+## A copy of `source` in this node's space with `texture` tiled at art scale and aligned to world space;
+## the source polygon is hidden.
+func _textured(source: Polygon2D, texture: Texture2D, z: int) -> Polygon2D:
+	var copy := Polygon2D.new()
+	copy.transform = get_global_transform().affine_inverse() * source.get_global_transform()
+	copy.polygon = source.polygon
+	copy.texture = texture
+	copy.texture_scale = Vector2.ONE / ART_SCALE
+	copy.texture_offset = copy.position / ART_SCALE  # world-aligned tiling
+	copy.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+	copy.z_index = z
+	_dressing.add_child(copy)
+	_hide(source)
+	return copy
+
+
+## Darkens solid ground towards the bottom of the course.
+func _shade(area: Rect2) -> void:
+	if depth_shade <= 0.0 or area.size.y <= 0.0:
+		return
+	if not _cache.has("#shade"):
+		var gradient := Gradient.new()
+		gradient.set_color(0, Color(0, 0, 0, 0))
+		gradient.set_color(1, Color(0, 0, 0, 1))
+		var texture := GradientTexture2D.new()
+		texture.gradient = gradient
+		texture.width = 1
+		texture.height = 64
+		texture.fill_to = Vector2(0, 1)
+		_cache["#shade"] = texture
+	var shade := Sprite2D.new()
+	shade.texture = _cache["#shade"]
+	shade.centered = false
+	shade.position = area.position
+	shade.scale = Vector2(area.size.x, area.size.y / 64.0)
+	shade.z_index = Z_FOUNDATION
+	shade.modulate.a = depth_shade * clampf((course_bottom - area.position.y) / 160.0, 0.0, 1.0)
+	_dressing.add_child(shade)
+
+
 ## Diyas, portals and the finish keep their own silhouettes readable.
 func _keep_clear(level: Node) -> Array[Vector2]:
 	var points: Array[Vector2] = []
@@ -305,22 +557,34 @@ func _keep_clear(level: Node) -> Array[Vector2]:
 
 
 func _backdrop(level: Node, kit: String) -> void:
+	var stage: Texture2D = _tex(kit, "arena") if arena else null
+	if stage:
+		var size: Vector2 = stage.get_size() * ART_SCALE
+		var sprite: Sprite2D = _sprite(stage, Z_FAR)
+		sprite.texture_repeat = CanvasItem.TEXTURE_REPEAT_DISABLED
+		sprite.position = Vector2((ARENA_WIDTH - size.x) * 0.5, course_bottom - size.y)
 	var far: Texture2D = _tex(kit, "far")
-	if far:
+	if far and not stage:
 		_parallax(far, 0.15, Z_FAR)
-		if level.get_node_or_null("Background") is CanvasItem:
-			_hide(level.get_node("Background"))
+	if stage or far:
+		for name: String in ["Background", "Backdrop"] if arena else ["Background"]:
+			for backdrop: Node in level.find_children(name, "CanvasItem", true, false):
+				_hide(backdrop)
 	var mid: Texture2D = _tex(kit, "mid")
-	if mid:
+	if mid and not stage:
 		_parallax(mid, 0.45, Z_MID)
 	var water: Texture2D = _tex(kit, "water")
-	var line: Polygon2D = level.get_node_or_null("WaterLine") as Polygon2D
+	var line: Polygon2D = level.get_node_or_null("RiverLine") as Polygon2D
+	if line == null:
+		line = level.get_node_or_null("WaterLine") as Polygon2D
 	if water and line:
 		var points: PackedVector2Array = (get_global_transform().affine_inverse() * line.get_global_transform()) * line.polygon
 		var rect := Rect2(points[0], Vector2.ZERO)
 		for point: Vector2 in points:
 			rect = rect.expand(point)
-		_water = _strip(water, Rect2(rect.position, rect.size), line.z_index)
+		# The line marks where a missed jump lands; the surface sits a little above it and runs off the bottom.
+		var top: float = rect.position.y - WATER_ABOVE_LINE
+		_water = _strip(water, Rect2(rect.position.x, top, rect.size.x, maxf(course_bottom, rect.end.y) - top), Z_WATER)
 		_hide(line)
 		set_process(not Engine.is_editor_hint())
 
