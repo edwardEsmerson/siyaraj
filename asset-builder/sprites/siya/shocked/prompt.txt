@@ -1,0 +1,13 @@
+Use case: identity-preserve. Asset type: pixel-art game animation sheet for Siyaraj, siya story. The attached image is the exact APPROVED BASE IDENTITY, not just a style example. Create exactly 8 different keyframe sprites, 3 columns by 3 rows on a true transparent 1536x1536 PNG. Read cells left to right then top to bottom. Leave the last 1 unused cells entirely blank. No text, labels, lines or borders.
+Identity: Siya, clean-shaven young adult heroine of Siyaraj and daughter of a fireworks maker. Lean, graceful, expressive side-view game character based on the two user identity references: warm medium-brown skin, long black hair tied back with a loose curl, tiny bindi, simple gold jewelry, marigold-orange sari with crimson red-and-gold pallu, readable hands and feet, holding one unlit sparkler. The approved Basic Rakshas image is a style reference only. Same identity and pose: use a slightly more angular pallu edge with one broad, simple geometric gold border motif; keep all ornament large and sparse.
+Composition: right-profile; ONE complete isolated full body per occupied cell. Preserve exact original face, hair, crown, clothing, ornament, palette, outline weight and body proportions. Aubergine outlines, 2 or 3 flat tones per material, crisp native square pixels. Every occupied cell has ample transparent margin. SAME CAMERA SCALE in every frame: neutral upright subject height is 320 source pixels, each native art pixel is a 4x4 square. Keep identical physical body size: crouches, fallen poses and extended wings MUST NOT zoom to fill their cell. Feet on the same baseline within their cell; flying subjects and heads centered within the cell. Body rotations vary only when requested by the pose.
+FRAME POSES:
+Cell 1 (light_diya): Kneeling on one knee, touching the lit sparkler tip to a small diya on the ground in front of her
+Cell 2 (light_diya): Standing back up, smiling, sparkler raised
+Cell 3 (victory): Both arms raised, sparkler held high, jumping with joy
+Cell 4 (victory): Landing, fist pump, grinning
+Cell 5 (victory): Hands on hips, proud
+Cell 6 (talk): Standing, one hand gesturing while talking, mouth open
+Cell 7 (talk): Same, mouth closed
+Cell 8 (shocked): Leaning back, both hands up, eyes wide, mouth open in shock
+Only add sparks/flame/coloured eyes/ash where those frame poses explicitly ask; other frames keep the approved colours. Comic defeats, no blood or gore. Entire limbs, props and wings inside their cell. No scenery, floor, shadows, backdrop, checkerboard, blurry anti-aliasing, smooth gradients, baked glow, motion streaks or duplicate characters per cell. Use real alpha transparency. Each listed pose must be illustrated exactly, in order. Do not repeat a neutral pose instead of the action.

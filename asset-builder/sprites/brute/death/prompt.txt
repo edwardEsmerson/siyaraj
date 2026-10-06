@@ -1,0 +1,14 @@
+Use case: identity-preserve. Asset type: pixel-art game animation sheet for Siyaraj, brute combat. The attached image is the exact APPROVED BASE IDENTITY, not just a style example. Create exactly 9 different keyframe sprites, 3 columns by 3 rows on a true transparent 1536x1536 PNG. Read cells left to right then top to bottom. Leave the last 0 unused cells entirely blank. No text, labels, lines or borders.
+Identity: Rakshas brute, same family as attachment 1 but huge. Broad hunched shoulders, thick arms, round belly, short legs. Deep maroon skin, two short curved ivory horns, a thick bushy black moustache, angry underbite with two tusks. Wide gold belt with a big round buckle, chunky gold bracers on both forearms, marigold and hot-pink dhoti. Holds a heavy wooden club studded with brass, resting on his forward shoulder. Strict right-facing profile, wide stance.
+Composition: right-profile; ONE complete isolated full body per occupied cell. Preserve exact original face, hair, crown, clothing, ornament, palette, outline weight and body proportions. Aubergine outlines, 2 or 3 flat tones per material, crisp native square pixels. Every occupied cell has ample transparent margin. SAME CAMERA SCALE in every frame: neutral upright subject height is 272 source pixels, each native art pixel is a 2x2 square. Keep identical physical body size: crouches, fallen poses and extended wings MUST NOT zoom to fill their cell. Feet on the same baseline within their cell; flying subjects and heads centered within the cell. Body rotations vary only when requested by the pose.
+FRAME POSES:
+Cell 1 (attack): Anticipation: weapon or striking arm pulled far back, body twisted away, weight on the back foot
+Cell 2 (attack): Strike: weapon or arm swung fully forward at full extension, weight lunging onto the front foot
+Cell 3 (attack): Follow-through: weapon past the target and low, body leaning forward, front knee bent
+Cell 4 (attack): Recover: panting, club dragging, clear punish window
+Cell 5 (idle): Club on shoulder, chest heaving
+Cell 6 (idle): Same, scratching his belly
+Cell 7 (death): Hit hard: knocked backward, arms flung up, shocked expression. A big comic flop
+Cell 8 (death): Collapse: knees buckling, body folding forward, arms limp. A big comic flop
+Cell 9 (death): Down: lying flat on the ground on the side, eyes closed, completely still. A big comic flop
+Only add sparks/flame/coloured eyes/ash where those frame poses explicitly ask; other frames keep the approved colours. Comic defeats, no blood or gore. Entire limbs, props and wings inside their cell. No scenery, floor, shadows, backdrop, checkerboard, blurry anti-aliasing, smooth gradients, baked glow, motion streaks or duplicate characters per cell. Use real alpha transparency. Each listed pose must be illustrated exactly, in order. Do not repeat a neutral pose instead of the action.

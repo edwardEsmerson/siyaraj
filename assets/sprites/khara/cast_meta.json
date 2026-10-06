@@ -1,0 +1,790 @@
+{
+  "name": "khara",
+  "canvas": [
+    333,
+    320
+  ],
+  "anchor": [
+    173,
+    300
+  ],
+  "scale": 0.5,
+  "art_pixels_per_unit": 2,
+  "anchor_mode": "feet",
+  "collider_units": [
+    56,
+    92
+  ],
+  "animations": {
+    "idle": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Heavy stance, fist forward at chest height, chest heaving. Empty fists, no weapon; Khara's gada is a separate component",
+        "Same, shoulders lifted on an inhale. Empty fists, no weapon; Khara's gada is a separate component"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        333,
+        320
+      ],
+      "anchor": [
+        173,
+        300
+      ],
+      "source_canvas": [
+        320,
+        320
+      ],
+      "source_anchor": [
+        160,
+        300
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Poses: \"Heavy stance, fist forward at chest height, chest heaving\" / \"Same, shoulders lifted on an inhale\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.8097560975609757,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-5d3269e3-dd89-4c1c-bf74-4cf802323cde.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 1,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "walk": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Contact: front leg extended forward with heel touching the ground, back leg straight behind on its toes, opposite arm swung forward. Empty fists, no weapon; Khara's gada is a separate component",
+        "Down: front foot flat and knee bent taking the weight, back foot lifting off, body at its lowest. Empty fists, no weapon; Khara's gada is a separate component",
+        "Passing: weight on the straight front leg, back leg passing under the body with knee lifted, arms near the sides. Empty fists, no weapon; Khara's gada is a separate component",
+        "Up: pushing off the toes of the standing leg, body at its highest, free leg swinging forward. Empty fists, no weapon; Khara's gada is a separate component"
+      ],
+      "frame_count": 4,
+      "canvas": [
+        333,
+        320
+      ],
+      "anchor": [
+        173,
+        300
+      ],
+      "source_canvas": [
+        320,
+        320
+      ],
+      "source_anchor": [
+        160,
+        300
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen",
+        "04": "imagegen"
+      },
+      "notes": "`poses/walk.txt`. Slow stomp at 75 units/s; play 1.4x faster in phase 2.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.8097560975609757,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-5d3269e3-dd89-4c1c-bf74-4cf802323cde.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 3,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "slam_windup": {
+      "fps": 8,
+      "loop": "hold",
+      "durations": [
+        3.4,
+        3.4
+      ],
+      "poses": [
+        "Both fists lifted high behind his head, gripping, knees starting to bend. Empty fists, no weapon; Khara's gada is a separate component",
+        "Fists at the top of the swing behind his head, back arched, knees bent, teeth gritted. Empty fists, no weapon; Khara's gada is a separate component"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        333,
+        320
+      ],
+      "anchor": [
+        173,
+        300
+      ],
+      "source_canvas": [
+        320,
+        320
+      ],
+      "source_anchor": [
+        160,
+        300
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "0.85 s. Poses: \"Both fists lifted high behind his head, gripping, knees starting to bend\" / \"Fists at the top of the swing behind his head, back arched, knees bent, teeth gritted\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.604878048780488,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-6a176b53-93e9-43ab-a454-c82dd6acbab7.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 3,
+        "first_cell": 1,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "slam_impact": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        0.96
+      ],
+      "poses": [
+        "Bent deep forward, both fists driven down to knee height in front of him, as if a mace has hit the ground about 50 units ahead. Empty fists, no weapon; Khara's gada is a separate component"
+      ],
+      "frame_count": 1,
+      "canvas": [
+        333,
+        320
+      ],
+      "anchor": [
+        173,
+        300
+      ],
+      "source_canvas": [
+        320,
+        320
+      ],
+      "source_anchor": [
+        160,
+        300
+      ],
+      "models": {
+        "01": "imagegen"
+      },
+      "notes": "0.12 s. \"Bent deep forward, both fists driven down to knee height in front of him, as if a mace has hit the ground about 50 units ahead\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.604878048780488,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-6a176b53-93e9-43ab-a454-c82dd6acbab7.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 3,
+        "first_cell": 3,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "slam_recovery": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        4.4,
+        4.4
+      ],
+      "poses": [
+        "Bent forward, pulling backward with both fists low, straining. Empty fists, no weapon; Khara's gada is a separate component",
+        "Same, leaning further back, sweating, tongue out. Empty fists, no weapon; Khara's gada is a separate component"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        333,
+        320
+      ],
+      "anchor": [
+        173,
+        300
+      ],
+      "source_canvas": [
+        320,
+        320
+      ],
+      "source_anchor": [
+        160,
+        300
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "1.1 s, the punish window. Poses: \"Bent forward, pulling backward with both fists low, straining\" / \"Same, leaning further back, sweating, tongue out\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.604878048780488,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-6a176b53-93e9-43ab-a454-c82dd6acbab7.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 3,
+        "first_cell": 4,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "ladi_cast": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.6,
+        1.6,
+        0.8
+      ],
+      "poses": [
+        "Crouching, unrolling a string of red firecrackers along the ground. Empty fists, no weapon; Khara's gada is a separate component",
+        "Crouched, holding a glowing incense stick to the end of the string. Empty fists, no weapon; Khara's gada is a separate component",
+        "Rising, incense stick held up. Empty fists, no weapon; Khara's gada is a separate component"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        333,
+        320
+      ],
+      "anchor": [
+        173,
+        300
+      ],
+      "source_canvas": [
+        333,
+        320
+      ],
+      "source_anchor": [
+        173,
+        300
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "0.5 s. Use `--free-palette` for the ember. Poses: \"Crouching, unrolling a string of red firecrackers along the ground\" / \"Crouched, holding a glowing incense stick to the end of the string\" / \"Rising, incense stick held up\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.604878048780488,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-6a176b53-93e9-43ab-a454-c82dd6acbab7.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 3,
+        "first_cell": 6,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "ladi_recovery": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        2.4,
+        2.4
+      ],
+      "poses": [
+        "Standing, both fingers jammed in his ears, eyes squeezed shut. Empty fists, no weapon; Khara's gada is a separate component",
+        "Same, peeking with one eye. Empty fists, no weapon; Khara's gada is a separate component"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        333,
+        320
+      ],
+      "anchor": [
+        173,
+        300
+      ],
+      "source_canvas": [
+        320,
+        320
+      ],
+      "source_anchor": [
+        160,
+        300
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "0.6 s. Poses: \"Standing, both fingers jammed in his ears, eyes squeezed shut\" / \"Same, peeking with one eye\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.604878048780488,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-6a176b53-93e9-43ab-a454-c82dd6acbab7.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 3,
+        "first_cell": 9,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "intro_roar": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        2.666667,
+        2.666667,
+        2.666667
+      ],
+      "poses": [
+        "Beating his chest with both fists. Empty fists, no weapon; Khara's gada is a separate component",
+        "Fist raised to the sky, roaring. Empty fists, no weapon; Khara's gada is a separate component",
+        "Back to a heavy stance, glaring. Empty fists, no weapon; Khara's gada is a separate component"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        333,
+        320
+      ],
+      "anchor": [
+        173,
+        300
+      ],
+      "source_canvas": [
+        320,
+        320
+      ],
+      "source_anchor": [
+        160,
+        300
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "1.0 s. Poses: \"Beating his chest with both fists\" / \"Fist raised to the sky, roaring\" / \"Back to a heavy stance, glaring\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.5951219512195123,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-4cfee8e8-12dd-4972-9533-5efe70fb4749.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 3,
+        "first_cell": 1,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "phase_shift_roar": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        3.2,
+        3.2,
+        3.2
+      ],
+      "poses": [
+        "Hunched, fists clenched, shaking with rage. Empty fists, no weapon; Khara's gada is a separate component",
+        "Arms flung wide, roaring at the sky, steam from his nostrils. Empty fists, no weapon; Khara's gada is a separate component",
+        "Settled into a lower, angrier stance. Empty fists, no weapon; Khara's gada is a separate component"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        333,
+        320
+      ],
+      "anchor": [
+        173,
+        300
+      ],
+      "source_canvas": [
+        320,
+        320
+      ],
+      "source_anchor": [
+        160,
+        300
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "1.2 s. Poses: \"Hunched, fists clenched, shaking with rage\" / \"Arms flung wide, roaring at the sky, steam from his nostrils\" / \"Settled into a lower, angrier stance\". Pair with the `fx-flame-crown` overlay.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.5951219512195123,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-4cfee8e8-12dd-4972-9533-5efe70fb4749.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 3,
+        "first_cell": 4,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "death": {
+      "fps": 8,
+      "loop": "hold",
+      "durations": [
+        2.8,
+        2.8,
+        2.8,
+        2.8
+      ],
+      "poses": [
+        "Staggering backward, eyes wide. Empty fists, no weapon; Khara's gada is a separate component",
+        "Toppling back, arms flailing. Empty fists, no weapon; Khara's gada is a separate component",
+        "Falling flat on his back. Empty fists, no weapon; Khara's gada is a separate component",
+        "Lying flat, eyes as X marks, moustache drooping. Empty fists, no weapon; Khara's gada is a separate component"
+      ],
+      "frame_count": 4,
+      "canvas": [
+        333,
+        320
+      ],
+      "anchor": [
+        173,
+        300
+      ],
+      "source_canvas": [
+        320,
+        320
+      ],
+      "source_anchor": [
+        160,
+        300
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen",
+        "04": "imagegen"
+      },
+      "notes": "1.4 s. Poses: \"Staggering backward, eyes wide\" / \"Toppling back, arms flailing\" / \"Falling flat on his back\" / \"Lying flat, eyes as X marks, moustache drooping\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.5951219512195123,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-4cfee8e8-12dd-4972-9533-5efe70fb4749.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 3,
+        "first_cell": 7,
+        "extraction": "connected subjects on common source canvas"
+      }
+    }
+  },
+  "attachment": {
+    "sprite": "khara-gada",
+    "base_hand_units": [
+      37,
+      -68
+    ],
+    "frames": {
+      "idle": [
+        {
+          "hand_from_anchor_px": [
+            65,
+            -133
+          ],
+          "rotation_degrees": 0,
+          "visible": true
+        },
+        {
+          "hand_from_anchor_px": [
+            65,
+            -130
+          ],
+          "rotation_degrees": 0,
+          "visible": true
+        }
+      ],
+      "walk": [
+        {
+          "hand_from_anchor_px": [
+            86,
+            -124
+          ],
+          "rotation_degrees": -5,
+          "visible": true
+        },
+        {
+          "hand_from_anchor_px": [
+            62,
+            -119
+          ],
+          "rotation_degrees": 4,
+          "visible": true
+        },
+        {
+          "hand_from_anchor_px": [
+            18,
+            -108
+          ],
+          "rotation_degrees": 0,
+          "visible": true
+        },
+        {
+          "hand_from_anchor_px": [
+            78,
+            -136
+          ],
+          "rotation_degrees": -8,
+          "visible": true
+        }
+      ],
+      "slam_windup": [
+        {
+          "hand_from_anchor_px": [
+            -29,
+            -216
+          ],
+          "rotation_degrees": -65,
+          "visible": true
+        },
+        {
+          "hand_from_anchor_px": [
+            -26,
+            -207
+          ],
+          "rotation_degrees": -70,
+          "visible": true
+        }
+      ],
+      "slam_impact": [
+        {
+          "hand_from_anchor_px": [
+            55,
+            -30
+          ],
+          "rotation_degrees": 90,
+          "visible": true
+        }
+      ],
+      "slam_recovery": [
+        {
+          "hand_from_anchor_px": [
+            -27,
+            -57
+          ],
+          "rotation_degrees": 65,
+          "visible": true
+        },
+        {
+          "hand_from_anchor_px": [
+            39,
+            -66
+          ],
+          "rotation_degrees": 35,
+          "visible": true
+        }
+      ],
+      "ladi_cast": [
+        {
+          "hand_from_anchor_px": [
+            -55,
+            -22
+          ],
+          "rotation_degrees": 0,
+          "visible": false
+        },
+        {
+          "hand_from_anchor_px": [
+            -29,
+            -22
+          ],
+          "rotation_degrees": 0,
+          "visible": false
+        },
+        {
+          "hand_from_anchor_px": [
+            82,
+            -204
+          ],
+          "rotation_degrees": 0,
+          "visible": false
+        }
+      ],
+      "ladi_recovery": [
+        {
+          "hand_from_anchor_px": [
+            33,
+            -158
+          ],
+          "rotation_degrees": 0,
+          "visible": false
+        },
+        {
+          "hand_from_anchor_px": [
+            33,
+            -157
+          ],
+          "rotation_degrees": 0,
+          "visible": false
+        }
+      ],
+      "intro_roar": [
+        {
+          "hand_from_anchor_px": [
+            31,
+            -122
+          ],
+          "rotation_degrees": 0,
+          "visible": false
+        },
+        {
+          "hand_from_anchor_px": [
+            42,
+            -232
+          ],
+          "rotation_degrees": 0,
+          "visible": true
+        },
+        {
+          "hand_from_anchor_px": [
+            64,
+            -71
+          ],
+          "rotation_degrees": 0,
+          "visible": true
+        }
+      ],
+      "phase_shift_roar": [
+        {
+          "hand_from_anchor_px": [
+            82,
+            -77
+          ],
+          "rotation_degrees": 0,
+          "visible": true
+        },
+        {
+          "hand_from_anchor_px": [
+            86,
+            -132
+          ],
+          "rotation_degrees": 70,
+          "visible": false
+        },
+        {
+          "hand_from_anchor_px": [
+            78,
+            -84
+          ],
+          "rotation_degrees": 0,
+          "visible": true
+        }
+      ],
+      "death": [
+        {
+          "hand_from_anchor_px": [
+            48,
+            -167
+          ],
+          "rotation_degrees": 0,
+          "visible": false
+        },
+        {
+          "hand_from_anchor_px": [
+            24,
+            -133
+          ],
+          "rotation_degrees": 0,
+          "visible": false
+        },
+        {
+          "hand_from_anchor_px": [
+            -43,
+            -134
+          ],
+          "rotation_degrees": 0,
+          "visible": false
+        },
+        {
+          "hand_from_anchor_px": [
+            -34,
+            -16
+          ],
+          "rotation_degrees": 0,
+          "visible": false
+        }
+      ]
+    },
+    "approval": "approved",
+    "notes": "Reviewed native hand offsets and swing rotations for every frame. Gada is hidden while hands place fireworks, cover ears, pound the chest, or during defeat."
+  },
+  "view": "right-profile",
+  "subject": "full-body",
+  "art_px": 200,
+  "brief": "Khara, rakshasa lord of the forest outpost. Massive heavy brawler, barrel chest, thick neck, slightly bowed legs. Dark indigo-blue skin. Two large curved bull horns. Wild black hair, a huge upturned moustache, a scowl and fangs. Bronze armour plates on the shoulders and chest, a tiger-skin waist wrap, marigold dhoti, heavy gold anklets. His forward right fist is raised to chest height, closed around nothing, as if gripping a weapon handle. His left hand hangs open. No weapon. Strict right-facing profile, heavy planted stance.",
+  "generation": {
+    "model": "pro",
+    "size": "4K",
+    "batch": false,
+    "candidates": 4,
+    "jobs": 2
+  },
+  "source": "asset-builder/sprites/khara",
+  "approval": "approved"
+}

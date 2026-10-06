@@ -1,0 +1,16 @@
+Use case: identity-preserve. Asset type: pixel-art game animation sheet for Siyaraj, siya weapons. The attached image is the exact APPROVED BASE IDENTITY, not just a style example. Create exactly 11 different keyframe sprites, 4 columns by 4 rows on a true transparent 2048x2048 PNG. Read cells left to right then top to bottom. Leave the last 5 unused cells entirely blank. No text, labels, lines or borders.
+Identity: Siya, clean-shaven young adult heroine of Siyaraj and daughter of a fireworks maker. Lean, graceful, expressive side-view game character based on the two user identity references: warm medium-brown skin, long black hair tied back with a loose curl, tiny bindi, simple gold jewelry, marigold-orange sari with crimson red-and-gold pallu, readable hands and feet, holding one unlit sparkler. The approved Basic Rakshas image is a style reference only. Same identity and pose: use a slightly more angular pallu edge with one broad, simple geometric gold border motif; keep all ornament large and sparse.
+Composition: right-profile; ONE complete isolated full body per occupied cell. Preserve exact original face, hair, crown, clothing, ornament, palette, outline weight and body proportions. Aubergine outlines, 2 or 3 flat tones per material, crisp native square pixels. Every occupied cell has ample transparent margin. SAME CAMERA SCALE in every frame: neutral upright subject height is 320 source pixels, each native art pixel is a 4x4 square. Keep identical physical body size: crouches, fallen poses and extended wings MUST NOT zoom to fill their cell. Feet on the same baseline within their cell; flying subjects and heads centered within the cell. Body rotations vary only when requested by the pose.
+FRAME POSES:
+Cell 1 (lash): Ready: lit sparkler held up behind the shoulder, weight on the back foot
+Cell 2 (lash): Lash: arm whipped forward and down, sparkler pointing ahead at full reach, weight on the front foot
+Cell 3 (lash): Follow-through: arm low across the body, sparkler trailing behind, leaning forward
+Cell 4 (skyshot): Holding a rocket level at hip height in both hands like a launcher, fuse lit, leaning in
+Cell 5 (skyshot): Rocket leaving her hands forward with a flash, her body jolted back by the recoil, back foot sliding
+Cell 6 (skyshot): Recovering upright, hands still forward, slight smile
+Cell 7 (chakri_charge): Crouched, spinning a chakri on one raised fingertip above her head, other hand on her hip
+Cell 8 (chakri_charge): Same crouch, chakri lower and tilted, sparks flying
+Cell 9 (chakri_release): Wind-up: crouched, chakri held low at the side in the throwing hand
+Cell 10 (chakri_release): Fling: sidearm throw, arm extended low and forward, hand open, chakri leaving the hand
+Cell 11 (chakri_release): Recover: standing up, arm drawn back to the side, looking ahead
+Only add sparks/flame/coloured eyes/ash where those frame poses explicitly ask; other frames keep the approved colours. Comic defeats, no blood or gore. Entire limbs, props and wings inside their cell. No scenery, floor, shadows, backdrop, checkerboard, blurry anti-aliasing, smooth gradients, baked glow, motion streaks or duplicate characters per cell. Use real alpha transparency. Each listed pose must be illustrated exactly, in order. Do not repeat a neutral pose instead of the action.

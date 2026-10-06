@@ -1,0 +1,275 @@
+{
+  "name": "winged-forest-demon",
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    71
+  ],
+  "scale": 0.5,
+  "art_pixels_per_unit": 2,
+  "anchor_mode": "center",
+  "collider_units": [
+    32,
+    28
+  ],
+  "animations": {
+    "fly": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Wings fully raised above the body, body hovering level, legs tucked",
+        "Wings level and spread wide out to the sides, body level",
+        "Wings swept fully down below the body, body lifted slightly",
+        "Wings halfway up on the recovery, body level"
+      ],
+      "frame_count": 4,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        71
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        71
+      ],
+      "models": {
+        "01": "flash",
+        "02": "pro",
+        "03": "pro",
+        "04": "pro"
+      },
+      "notes": "`poses/fly.txt`"
+    },
+    "charge": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.8,
+        1.8
+      ],
+      "poses": [
+        "Wings raised high, body drawn back, claws forward, glaring",
+        "Same, wings at peak, mouth open in a screech"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        71
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        71
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "0.45 s wind-up. Poses: \"Wings raised high, body drawn back, claws forward, glaring\" / \"Same, wings at peak, mouth open in a screech\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.265625,
+        "calibration_cell": null
+      },
+      "sheet": {
+        "source": "exec-5f31ebd3-de51-4752-8944-de4f2bfb0761.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 0,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "dive": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Body stretched forward like a dart, wings swept back, claws extended",
+        "Same, wings tucked tighter"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        71
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        71
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Poses: \"Body stretched forward like a dart, wings swept back, claws extended\" / \"Same, wings tucked tighter\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.265625,
+        "calibration_cell": null
+      },
+      "sheet": {
+        "source": "exec-5f31ebd3-de51-4752-8944-de4f2bfb0761.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 2,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "recovery": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Flapping upward clumsily, dazed, wings uneven",
+        "Wings down, shaking head"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        71
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        71
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Poses: \"Flapping upward clumsily, dazed, wings uneven\" / \"Wings down, shaking head\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.265625,
+        "calibration_cell": null
+      },
+      "sheet": {
+        "source": "exec-5f31ebd3-de51-4752-8944-de4f2bfb0761.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 4,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "death": {
+      "fps": 8,
+      "loop": "hold",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Wings crumpled, tumbling",
+        "Spiralling down, eyes as X marks"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        71
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        71
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Poses: \"Wings crumpled, tumbling\" / \"Spiralling down, eyes as X marks\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.265625,
+        "calibration_cell": null
+      },
+      "sheet": {
+        "source": "exec-5f31ebd3-de51-4752-8944-de4f2bfb0761.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 6,
+        "extraction": "connected subjects on common source canvas"
+      }
+    }
+  },
+  "attachment": {},
+  "view": "right-profile",
+  "subject": "full-body",
+  "art_px": 80,
+  "brief": "Winged forest demon creature for Siyaraj, adapted from attachment 1. A lean adult gargoyle-like imp with moss/olive-green skin, angular hunched torso, long pointed swept-back ears, two slim curved head horns, one sharp right-facing hooked muzzle, a single visible marigold eye and small ivory fang. Two arms with long three-fingered claws and two digitigrade legs with three-toed talons; exactly four limbs plus two separate bat wings. The near leathery bat wing rises behind the shoulders and arcs to the left/back, with three clear ribs and a scalloped lower edge; the far wing is partially visible offset behind it. Keep the head and forward claw unobscured in a strict right-facing profile. A compact alert crouch with both taloned feet at one baseline, elbows bent and forward claws lowered; no front-facing symmetric spread. Deep aubergine outline and dark olive wing membranes, lighter moss-green ribs, sparse hot-pink sash at the waist, one marigold wrist band and one tiny ivory skull charm hung at the waist. Natural sinewy anatomy, no armor, crown, mace or human clothing. Omit the painting background, branch, hanging bones and scenery. Total creature including wing tips is approximately 90 native pixels tall and 92 native pixels wide. Body without wings is about 60 native pixels tall. Keep horns, muzzle, eye, fang, claws and wing ribs as bold separated pixel clusters. Fixed across variants: green skin, face, horns, crouching anatomy, wing count, sash and charm. Only wing-edge shape, minimal accent motifs and facial expression may vary. Same identity with a slightly hooked upper wing tip and two deeper lower-edge scallops; spare marigold wrist band.",
+  "generation": {
+    "model": "pro",
+    "size": "1K",
+    "batch": false,
+    "candidates": 4,
+    "jobs": 3,
+    "fallback": "flash"
+  },
+  "source": "asset-builder/sprites/winged-forest-demon",
+  "approval": "approved"
+}

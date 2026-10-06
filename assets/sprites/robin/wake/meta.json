@@ -1,0 +1,50 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Sitting up, shaking his head",
+    "Hopping up, wings out, determined"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    80,
+    80
+  ],
+  "anchor": [
+    40,
+    40
+  ],
+  "source_canvas": [
+    80,
+    80
+  ],
+  "source_anchor": [
+    40,
+    40
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "notes": "Poses: \"Sitting up, shaking his head\" / \"Hopping up, wings out, determined\".",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 4.854166666666667,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 5,
+    "rows": 4,
+    "first_cell": 15,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

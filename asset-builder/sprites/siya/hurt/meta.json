@@ -1,0 +1,53 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "poses": [
+    "Hit: head and torso snapped backward, arms flung out, pained expression, one foot lifted",
+    "Stagger: hunched forward, one hand clutching the stomach, knees bent, wincing"
+  ],
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "free_palette": false,
+  "name": "siya",
+  "animation": "hurt",
+  "size": "sheet",
+  "expected_frames": 2,
+  "frames": [
+    "01",
+    "02"
+  ],
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    112
+  ],
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 3.25,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-f0524f52-25a1-4c3f-b460-5f4dd1e47db6.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 4,
+    "first_cell": 8,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "scale": 0.5,
+  "subjects": {
+    "siya": {
+      "approval": "approved",
+      "frames": "res://assets/sprites/siya/cast_frames.tres",
+      "meta": "res://assets/sprites/siya/cast_meta.json",
+      "animations": [
+        "idle",
+        "run",
+        "jump",
+        "dash",
+        "lash",
+        "air_lash",
+        "skyshot",
+        "chakri_charge",
+        "chakri_release",
+        "hurt",
+        "death",
+        "light_diya",
+        "victory",
+        "talk",
+        "shocked"
+      ]
+    },
+    "robin": {
+      "approval": "approved",
+      "frames": "res://assets/sprites/robin/cast_frames.tres",
+      "meta": "res://assets/sprites/robin/cast_meta.json",
+      "animations": [
+        "fly",
+        "hover",
+        "hint",
+        "perch",
+        "peck",
+        "dive",
+        "drop_sparks",
+        "hypnotised",
+        "dizzy",
+        "wake",
+        "point",
+        "talk"
+      ]
+    },
+    "raj": {
+      "approval": "approved",
+      "frames": "res://assets/sprites/raj/cast_frames.tres",
+      "meta": "res://assets/sprites/raj/cast_meta.json",
+      "animations": [
+        "sulk",
+        "dramatic",
+        "freed"
+      ]
+    },
+    "basic-rakshas": {
+      "approval": "approved",
+      "frames": "res://assets/sprites/basic-rakshas/cast_frames.tres",
+      "meta": "res://assets/sprites/basic-rakshas/cast_meta.json",
+      "animations": [
+        "walk",
+        "attack",
+        "idle",
+        "death"
+      ]
+    },
+    "ground-shooter": {
+      "approval": "approved",
+      "frames": "res://assets/sprites/ground-shooter/cast_frames.tres",
+      "meta": "res://assets/sprites/ground-shooter/cast_meta.json",
+      "animations": [
+        "walk",
+        "charge",
+        "fire",
+        "recovery",
+        "death"
+      ]
+    },
+    "brute": {
+      "approval": "approved",
+      "frames": "res://assets/sprites/brute/cast_frames.tres",
+      "meta": "res://assets/sprites/brute/cast_meta.json",
+      "animations": [
+        "walk",
+        "attack",
+        "idle",
+        "death"
+      ]
+    },
+    "winged-forest-demon": {
+      "approval": "approved",
+      "frames": "res://assets/sprites/winged-forest-demon/cast_frames.tres",
+      "meta": "res://assets/sprites/winged-forest-demon/cast_meta.json",
+      "animations": [
+        "fly",
+        "charge",
+        "dive",
+        "recovery",
+        "death"
+      ]
+    },
+    "khara": {
+      "approval": "approved",
+      "frames": "res://assets/sprites/khara/cast_frames.tres",
+      "meta": "res://assets/sprites/khara/cast_meta.json",
+      "animations": [
+        "idle",
+        "walk",
+        "slam_windup",
+        "slam_impact",
+        "slam_recovery",
+        "ladi_cast",
+        "ladi_recovery",
+        "intro_roar",
+        "phase_shift_roar",
+        "death"
+      ]
+    },
+    "khara-gada": {
+      "approval": "approved",
+      "frames": "res://assets/sprites/khara-gada/cast_frames.tres",
+      "meta": "res://assets/sprites/khara-gada/cast_meta.json",
+      "animations": []
+    },
+    "swaminathan": {
+      "approval": "approved",
+      "frames": "res://assets/sprites/swaminathan/cast_frames.tres",
+      "meta": "res://assets/sprites/swaminathan/cast_meta.json",
+      "animations": [
+        "idle",
+        "exposed",
+        "dying",
+        "dead",
+        "intro",
+        "roar",
+        "fury"
+      ]
+    },
+    "swaminathan-head": {
+      "approval": "approved",
+      "frames": "res://assets/sprites/swaminathan-head/cast_frames.tres",
+      "meta": "res://assets/sprites/swaminathan-head/cast_meta.json",
+      "animations": [
+        "idle",
+        "telegraph",
+        "attack",
+        "exhausted",
+        "knocked_out",
+        "regrow",
+        "fury",
+        "destroyed",
+        "faces",
+        "burnt"
+      ]
+    }
+  }
+}

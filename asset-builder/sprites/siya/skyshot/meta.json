@@ -1,0 +1,60 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "poses": [
+    "Holding a rocket level at hip height in both hands like a launcher, fuse lit, leaning in",
+    "Rocket leaving her hands forward with a flash, her body jolted back by the recoil, back foot sliding",
+    "Recovering upright, hands still forward, slight smile"
+  ],
+  "durations": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "free_palette": true,
+  "name": "siya",
+  "animation": "skyshot",
+  "size": "sheet",
+  "expected_frames": 3,
+  "frames": [
+    "01",
+    "02",
+    "03"
+  ],
+  "canvas": [
+    130,
+    128
+  ],
+  "anchor": [
+    64,
+    112
+  ],
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 3.0875,
+    "calibration_cell": 6
+  },
+  "sheet": {
+    "source": "exec-6c83ac08-2f1d-44ed-b38e-6992f7fcf8f4.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 4,
+    "first_cell": 3,
+    "extraction": "connected subjects on common source canvas",
+    "effect_owners": {
+      "11": 10
+    }
+  }
+}

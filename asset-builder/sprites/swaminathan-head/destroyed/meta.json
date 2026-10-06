@@ -1,0 +1,58 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "poses": [
+    "Head cracking with light",
+    "Bursting into firework sparks",
+    "Smoking crown falling"
+  ],
+  "durations": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "free_palette": true,
+  "name": "swaminathan-head",
+  "animation": "destroyed",
+  "size": "sheet",
+  "expected_frames": 3,
+  "frames": [
+    "01",
+    "02",
+    "03"
+  ],
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    64
+  ],
+  "anchor_mode": "center",
+  "view": "front-three-quarter",
+  "subject": "head",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 5.148148148148148,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-d368057a-20dc-4d30-8fc9-3ab4d43ece12.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 2,
+    "rows": 2,
+    "first_cell": 1,
+    "extraction": "connected subjects on common source canvas",
+    "effect_owners": {}
+  }
+}

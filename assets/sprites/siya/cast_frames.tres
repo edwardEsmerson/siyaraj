@@ -1,0 +1,63 @@
+[gd_resource type="SpriteFrames" load_steps=43 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/sprite.png" id="base"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/idle/01.png" id="idle_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/idle/02.png" id="idle_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/idle/03.png" id="idle_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/run/01.png" id="run_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/run/02.png" id="run_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/run/03.png" id="run_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/run/04.png" id="run_04"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/jump/01.png" id="jump_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/jump/02.png" id="jump_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/jump/03.png" id="jump_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/jump/04.png" id="jump_04"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/jump/05.png" id="jump_05"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/dash/01.png" id="dash_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/dash/02.png" id="dash_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/dash/03.png" id="dash_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/lash/01.png" id="lash_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/lash/02.png" id="lash_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/lash/03.png" id="lash_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/air_lash/01.png" id="air_lash_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/air_lash/02.png" id="air_lash_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/skyshot/01.png" id="skyshot_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/skyshot/02.png" id="skyshot_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/skyshot/03.png" id="skyshot_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/chakri_charge/01.png" id="chakri_charge_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/chakri_charge/02.png" id="chakri_charge_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/chakri_release/01.png" id="chakri_release_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/chakri_release/02.png" id="chakri_release_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/chakri_release/03.png" id="chakri_release_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/hurt/01.png" id="hurt_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/hurt/02.png" id="hurt_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/death/01.png" id="death_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/death/02.png" id="death_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/death/03.png" id="death_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/light_diya/01.png" id="light_diya_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/light_diya/02.png" id="light_diya_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/victory/01.png" id="victory_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/victory/02.png" id="victory_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/victory/03.png" id="victory_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/talk/01.png" id="talk_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/talk/02.png" id="talk_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/siya/shocked/01.png" id="shocked_01"]
+
+[resource]
+animations = [
+{"frames": [{"duration": 1.000000, "texture": ExtResource("idle_01")}, {"duration": 1.000000, "texture": ExtResource("idle_02")}, {"duration": 1.000000, "texture": ExtResource("idle_03")}], "loop": true, "name": &"idle", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("run_01")}, {"duration": 1.000000, "texture": ExtResource("run_02")}, {"duration": 1.000000, "texture": ExtResource("run_03")}, {"duration": 1.000000, "texture": ExtResource("run_04")}], "loop": true, "name": &"run", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("jump_01")}, {"duration": 1.000000, "texture": ExtResource("jump_02")}, {"duration": 1.000000, "texture": ExtResource("jump_03")}, {"duration": 1.000000, "texture": ExtResource("jump_04")}, {"duration": 1.000000, "texture": ExtResource("jump_05")}], "loop": false, "name": &"jump", "speed": 8.0},
+{"frames": [{"duration": 0.400000, "texture": ExtResource("dash_01")}, {"duration": 0.400000, "texture": ExtResource("dash_02")}, {"duration": 0.400000, "texture": ExtResource("dash_03")}], "loop": false, "name": &"dash", "speed": 8.0},
+{"frames": [{"duration": 0.640000, "texture": ExtResource("lash_01")}, {"duration": 0.800000, "texture": ExtResource("lash_02")}, {"duration": 2.880000, "texture": ExtResource("lash_03")}], "loop": false, "name": &"lash", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("air_lash_01")}, {"duration": 1.000000, "texture": ExtResource("air_lash_02")}], "loop": false, "name": &"air_lash", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("skyshot_01")}, {"duration": 1.000000, "texture": ExtResource("skyshot_02")}, {"duration": 1.000000, "texture": ExtResource("skyshot_03")}], "loop": false, "name": &"skyshot", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("chakri_charge_01")}, {"duration": 1.000000, "texture": ExtResource("chakri_charge_02")}], "loop": true, "name": &"chakri_charge", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("chakri_release_01")}, {"duration": 1.000000, "texture": ExtResource("chakri_release_02")}, {"duration": 1.000000, "texture": ExtResource("chakri_release_03")}], "loop": false, "name": &"chakri_release", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("hurt_01")}, {"duration": 1.000000, "texture": ExtResource("hurt_02")}], "loop": false, "name": &"hurt", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("death_01")}, {"duration": 1.000000, "texture": ExtResource("death_02")}, {"duration": 1.000000, "texture": ExtResource("death_03")}], "loop": false, "name": &"death", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("light_diya_01")}, {"duration": 1.000000, "texture": ExtResource("light_diya_02")}], "loop": false, "name": &"light_diya", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("victory_01")}, {"duration": 1.000000, "texture": ExtResource("victory_02")}, {"duration": 1.000000, "texture": ExtResource("victory_03")}], "loop": false, "name": &"victory", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("talk_01")}, {"duration": 1.000000, "texture": ExtResource("talk_02")}], "loop": true, "name": &"talk", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("shocked_01")}], "loop": false, "name": &"shocked", "speed": 8.0}
+]

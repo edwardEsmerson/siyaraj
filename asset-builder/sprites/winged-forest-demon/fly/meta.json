@@ -1,0 +1,45 @@
+{
+  "name": "winged-forest-demon",
+  "animation": "fly",
+  "size": "1K",
+  "view": "right-profile",
+  "subject": "full-body",
+  "anchor_mode": "center",
+  "fps": 8,
+  "loop": "loop",
+  "poses": [
+    "Wings fully raised above the body, body hovering level, legs tucked",
+    "Wings level and spread wide out to the sides, body level",
+    "Wings swept fully down below the body, body lifted slightly",
+    "Wings halfway up on the recovery, body level"
+  ],
+  "expected_frames": 4,
+  "free_palette": false,
+  "durations": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "frames": [
+    "01",
+    "02",
+    "03",
+    "04"
+  ],
+  "problems": {},
+  "models": {
+    "01": "flash",
+    "02": "pro",
+    "03": "pro",
+    "04": "pro"
+  },
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    71
+  ]
+}

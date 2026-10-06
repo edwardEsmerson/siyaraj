@@ -1,0 +1,51 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Slumped forward, arms hanging, knees buckled. Headless; ten arms; keep the navel clear",
+    "Same, swaying. Headless; ten arms; keep the navel clear"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    420,
+    368
+  ],
+  "anchor": [
+    235,
+    345
+  ],
+  "source_canvas": [
+    368,
+    368
+  ],
+  "source_anchor": [
+    184,
+    345
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "notes": "Staggered and slumped, belly bare. Code moves him 6 units down. Poses: \"Slumped forward, arms hanging, knees buckled\" / \"Same, swaying\". Keep the navel clear.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 1.5020408163265306,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-bd086832-bbee-40f3-81f9-b7d9dc2fd138.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 3,
+    "rows": 3,
+    "first_cell": 1,
+    "extraction": "connected subjects on common source canvas",
+    "effect_owners": {}
+  }
+}

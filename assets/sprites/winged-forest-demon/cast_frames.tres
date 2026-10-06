@@ -1,0 +1,24 @@
+[gd_resource type="SpriteFrames" load_steps=14 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/winged-forest-demon/sprite.png" id="base"]
+[ext_resource type="Texture2D" path="res://assets/sprites/winged-forest-demon/fly/01.png" id="fly_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/winged-forest-demon/fly/02.png" id="fly_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/winged-forest-demon/fly/03.png" id="fly_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/winged-forest-demon/fly/04.png" id="fly_04"]
+[ext_resource type="Texture2D" path="res://assets/sprites/winged-forest-demon/charge/01.png" id="charge_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/winged-forest-demon/charge/02.png" id="charge_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/winged-forest-demon/dive/01.png" id="dive_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/winged-forest-demon/dive/02.png" id="dive_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/winged-forest-demon/recovery/01.png" id="recovery_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/winged-forest-demon/recovery/02.png" id="recovery_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/winged-forest-demon/death/01.png" id="death_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/winged-forest-demon/death/02.png" id="death_02"]
+
+[resource]
+animations = [
+{"frames": [{"duration": 1.000000, "texture": ExtResource("fly_01")}, {"duration": 1.000000, "texture": ExtResource("fly_02")}, {"duration": 1.000000, "texture": ExtResource("fly_03")}, {"duration": 1.000000, "texture": ExtResource("fly_04")}], "loop": true, "name": &"fly", "speed": 8.0},
+{"frames": [{"duration": 1.800000, "texture": ExtResource("charge_01")}, {"duration": 1.800000, "texture": ExtResource("charge_02")}], "loop": false, "name": &"charge", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("dive_01")}, {"duration": 1.000000, "texture": ExtResource("dive_02")}], "loop": true, "name": &"dive", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("recovery_01")}, {"duration": 1.000000, "texture": ExtResource("recovery_02")}], "loop": true, "name": &"recovery", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("death_01")}, {"duration": 1.000000, "texture": ExtResource("death_02")}], "loop": false, "name": &"death", "speed": 8.0}
+]

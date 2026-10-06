@@ -1,0 +1,51 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "poses": [
+    "Bent over, coughing, blowpipe lowered",
+    "Same, loading a dart into the blowpipe"
+  ],
+  "durations": [
+    6.4,
+    6.4
+  ],
+  "free_palette": false,
+  "name": "ground-shooter",
+  "animation": "recovery",
+  "size": "sheet",
+  "expected_frames": 2,
+  "frames": [
+    "01",
+    "02"
+  ],
+  "canvas": [
+    144,
+    144
+  ],
+  "anchor": [
+    72,
+    135
+  ],
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 3.46484375
+  },
+  "sheet": {
+    "source": "exec-1c674787-ca92-478d-8654-9403a3587e5f.png",
+    "dimensions": [
+      1774,
+      887
+    ],
+    "columns": 4,
+    "rows": 2,
+    "first_cell": 3
+  }
+}

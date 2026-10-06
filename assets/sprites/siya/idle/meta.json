@@ -1,0 +1,53 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Relaxed neutral stance, weight centred, arms loose at the sides, feet planted. Unlit sparkler held loosely in the front hand",
+    "Small inhale: chest and shoulders lifted slightly, head up a touch, feet planted. Unlit sparkler held loosely in the front hand",
+    "Exhale: shoulders dropped slightly, knees a little softer, feet planted. Unlit sparkler held loosely in the front hand"
+  ],
+  "frame_count": 3,
+  "canvas": [
+    160,
+    128
+  ],
+  "anchor": [
+    64,
+    112
+  ],
+  "source_canvas": [
+    128,
+    128
+  ],
+  "source_anchor": [
+    64,
+    112
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen"
+  },
+  "notes": "`poses/idle.txt`. Unlit sparkler held loosely in the front hand.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 3.25,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-f0524f52-25a1-4c3f-b460-5f4dd1e47db6.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 4,
+    "first_cell": 0,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

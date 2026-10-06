@@ -1,0 +1,55 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "poses": [
+    "Standing, back of one hand pressed to his forehead, swooning backward",
+    "Kneeling, both hands clasped, pleading upward",
+    "Gripping imaginary bars, face pressed forward, crying comically"
+  ],
+  "durations": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "free_palette": false,
+  "name": "raj",
+  "animation": "dramatic",
+  "size": "sheet",
+  "expected_frames": 3,
+  "frames": [
+    "01",
+    "02",
+    "03"
+  ],
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    120
+  ],
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 8.0
+  },
+  "sheet": {
+    "source": "source-sheet.png",
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "columns": 3,
+    "rows": 1,
+    "first_cell": 0
+  }
+}

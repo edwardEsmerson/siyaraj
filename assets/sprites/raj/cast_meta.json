@@ -1,0 +1,186 @@
+{
+  "name": "raj",
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    120
+  ],
+  "scale": 0.5,
+  "art_pixels_per_unit": 2,
+  "anchor_mode": "feet",
+  "collider_units": [
+    24,
+    40
+  ],
+  "animations": {
+    "sulk": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Sitting cross-legged with arms folded, pouting, looking away",
+        "Same, sighing, shoulders dropped"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        120
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        120
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Poses: \"Sitting cross-legged with arms folded, pouting, looking away\" / \"Same, sighing, shoulders dropped\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 6.8,
+        "calibration_cell": 3
+      },
+      "sheet": {
+        "source": "exec-b502284d-2dd7-4b14-ac93-02987f5be86c.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 2,
+        "rows": 2,
+        "first_cell": 0,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "dramatic": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Standing, back of one hand pressed to his forehead, swooning backward",
+        "Kneeling, both hands clasped, pleading upward",
+        "Gripping imaginary bars, face pressed forward, crying comically"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        120
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        120
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "Poses: \"Standing, back of one hand pressed to his forehead, swooning backward\" / \"Kneeling, both hands clasped, pleading upward\" / \"Gripping imaginary bars, face pressed forward, crying comically\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 8.0
+      },
+      "sheet": {
+        "source": "source-sheet.png",
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "columns": 3,
+        "rows": 1,
+        "first_cell": 0
+      }
+    },
+    "freed": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Arms flung wide in relief, beaming",
+        "Bowing theatrically to Siya"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        120
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        120
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Poses: \"Arms flung wide in relief, beaming\" / \"Bowing theatrically to Siya\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 6.8,
+        "calibration_cell": 3
+      },
+      "sheet": {
+        "source": "exec-b502284d-2dd7-4b14-ac93-02987f5be86c.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 2,
+        "rows": 2,
+        "first_cell": 2,
+        "extraction": "connected subjects on common source canvas"
+      }
+    }
+  },
+  "attachment": {},
+  "view": "right-profile",
+  "subject": "full-body",
+  "art_px": 80,
+  "brief": "Raj, clean-shaven young adult man, slim and theatrical. Black hair in a tall dramatic quiff. Turquoise kurta with a gold placket and buttons, cream churidar, a long hot-pink stole over one shoulder, embroidered juttis. Strict right-facing side profile, standing upright with his chin raised and one hand on his chest. Vain, wounded expression. No moustache or beard.",
+  "generation": {
+    "model": "pro",
+    "size": "1K",
+    "batch": false,
+    "candidates": 4,
+    "jobs": 3,
+    "fallback": "flash"
+  },
+  "source": "asset-builder/sprites/raj",
+  "approval": "approved"
+}

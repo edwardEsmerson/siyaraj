@@ -1,0 +1,23 @@
+Use case: identity-preserve. Asset type: pixel-art game animation sheet for Siyaraj, swaminathan-head actions. The attached image is the exact APPROVED BASE IDENTITY, not just a style example. Create exactly 18 different keyframe sprites, 5 columns by 4 rows on a true transparent 2048x2048 PNG. Read cells left to right then top to bottom. Leave the last 2 unused cells entirely blank. No text, labels, lines or borders.
+Identity: One crowned rakshasa king's head on its own. A tall pointed gold crown with a single jewel, pointed ears with gold earrings, purple-black skin. A HUGE black handlebar moustache with curled tips, twice the width of the face. Heavy eyebrows, smug expression. Three-quarter view facing slightly down. A short neck stub at the bottom.
+Composition: front-three-quarter; ONE isolated crowned head with neck stub only, no torso or arms per occupied cell. Preserve exact original face, hair, crown, clothing, ornament, palette, outline weight and body proportions. Aubergine outlines, 2 or 3 flat tones per material, crisp native square pixels. Every occupied cell has ample transparent margin. SAME CAMERA SCALE in every frame: neutral upright subject height is 304 source pixels, each native art pixel is a 4x4 square. Keep identical physical body size: crouches, fallen poses and extended wings MUST NOT zoom to fill their cell. Feet on the same baseline within their cell; flying subjects and heads centered within the cell. Body rotations vary only when requested by the pose.
+FRAME POSES:
+Cell 1 (idle): Smug, eyes open
+Cell 2 (idle): Smug, blinking
+Cell 3 (telegraph): Mouth opening, eyes starting to glow, moustache tips curling up
+Cell 4 (telegraph): Moustache tips twirled into tight spirals, eyes glowing
+Cell 5 (telegraph): Mouth wide, eyes blazing
+Cell 6 (attack): Mouth gaping wide, jaw forward (breath, spit or roar)
+Cell 7 (attack): Same, eyes crackling with lightning
+Cell 8 (exhausted): Drooping, eyes half closed, tongue out, moustache limp
+Cell 9 (exhausted): Same, wobbling
+Cell 10 (knocked_out): Limp, eyes as X marks, mouth open, moustache drooping
+Cell 11 (regrow): Small glowing bud of a head
+Cell 12 (regrow): Head half formed, sparkles
+Cell 13 (regrow): Fully formed, smug
+Cell 14 (fury): Eyes ablaze, teeth bared, moustache bristling
+Cell 15 (fury): Same, flames at the crown
+Cell 16 (destroyed): Head cracking with light
+Cell 17 (destroyed): Bursting into firework sparks
+Cell 18 (destroyed): Smoking crown falling
+Only add sparks/flame/coloured eyes/ash where those frame poses explicitly ask; other frames keep the approved colours. Comic defeats, no blood or gore. Entire limbs, props and wings inside their cell. No scenery, floor, shadows, backdrop, checkerboard, blurry anti-aliasing, smooth gradients, baked glow, motion streaks or duplicate characters per cell. Use real alpha transparency. Each listed pose must be illustrated exactly, in order. Do not repeat a neutral pose instead of the action.

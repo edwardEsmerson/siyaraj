@@ -1,0 +1,50 @@
+{
+  "fps": 8,
+  "loop": "hold",
+  "durations": [
+    3.4,
+    3.4
+  ],
+  "poses": [
+    "Both fists lifted high behind his head, gripping, knees starting to bend. Empty fists, no weapon; Khara's gada is a separate component",
+    "Fists at the top of the swing behind his head, back arched, knees bent, teeth gritted. Empty fists, no weapon; Khara's gada is a separate component"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    333,
+    320
+  ],
+  "anchor": [
+    173,
+    300
+  ],
+  "source_canvas": [
+    320,
+    320
+  ],
+  "source_anchor": [
+    160,
+    300
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "notes": "0.85 s. Poses: \"Both fists lifted high behind his head, gripping, knees starting to bend\" / \"Fists at the top of the swing behind his head, back arched, knees bent, teeth gritted\".",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 1.604878048780488,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-6a176b53-93e9-43ab-a454-c82dd6acbab7.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 3,
+    "first_cell": 1,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

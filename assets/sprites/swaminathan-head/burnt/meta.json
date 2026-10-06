@@ -1,0 +1,48 @@
+{
+  "fps": 8,
+  "loop": "none",
+  "durations": [
+    1.0
+  ],
+  "poses": [
+    "Same head, moustache singed to smoking stubs, furious"
+  ],
+  "frame_count": 1,
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    64
+  ],
+  "source_canvas": [
+    128,
+    128
+  ],
+  "source_anchor": [
+    64,
+    64
+  ],
+  "models": {
+    "01": "imagegen"
+  },
+  "notes": "Phase 3 option from the proposal: \"Same head, moustache singed to smoking stubs, furious\".",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 5.9753086419753085,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-4019cb8f-0603-419b-a3a4-92d9465fe4a2.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 2,
+    "rows": 2,
+    "first_cell": 1,
+    "extraction": "connected subjects on common source canvas",
+    "effect_owners": {}
+  }
+}

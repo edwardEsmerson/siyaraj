@@ -1,0 +1,54 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "poses": [
+    "All arms raised high, fists glowing. Headless; ten arms; keep the navel clear",
+    "Same, arms shifted. Headless; ten arms; keep the navel clear"
+  ],
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "free_palette": true,
+  "name": "swaminathan",
+  "animation": "fury",
+  "size": "sheet",
+  "expected_frames": 2,
+  "frames": [
+    "01",
+    "02"
+  ],
+  "canvas": [
+    368,
+    368
+  ],
+  "anchor": [
+    184,
+    345
+  ],
+  "anchor_mode": "feet",
+  "view": "front-three-quarter",
+  "subject": "headless-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 1.8081632653061224,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-07d42b01-1580-4fca-95a9-0ef3449da610.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 2,
+    "rows": 2,
+    "first_cell": 1,
+    "extraction": "connected subjects on common source canvas",
+    "effect_owners": {}
+  }
+}

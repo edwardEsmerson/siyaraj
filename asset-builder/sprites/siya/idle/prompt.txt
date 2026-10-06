@@ -1,0 +1,18 @@
+Use case: identity-preserve. Asset type: pixel-art game animation sheet for Siyaraj, siya movement. The attached image is the exact APPROVED BASE IDENTITY, not just a style example. Create exactly 13 different keyframe sprites, 4 columns by 4 rows on a true transparent 2048x2048 PNG. Read cells left to right then top to bottom. Leave the last 3 unused cells entirely blank. No text, labels, lines or borders.
+Identity: Siya, clean-shaven young adult heroine of Siyaraj and daughter of a fireworks maker. Lean, graceful, expressive side-view game character based on the two user identity references: warm medium-brown skin, long black hair tied back with a loose curl, tiny bindi, simple gold jewelry, marigold-orange sari with crimson red-and-gold pallu, readable hands and feet, holding one unlit sparkler. The approved Basic Rakshas image is a style reference only. Same identity and pose: use a slightly more angular pallu edge with one broad, simple geometric gold border motif; keep all ornament large and sparse.
+Composition: right-profile; ONE complete isolated full body per occupied cell. Preserve exact original face, hair, crown, clothing, ornament, palette, outline weight and body proportions. Aubergine outlines, 2 or 3 flat tones per material, crisp native square pixels. Every occupied cell has ample transparent margin. SAME CAMERA SCALE in every frame: neutral upright subject height is 320 source pixels, each native art pixel is a 4x4 square. Keep identical physical body size: crouches, fallen poses and extended wings MUST NOT zoom to fill their cell. Feet on the same baseline within their cell; flying subjects and heads centered within the cell. Body rotations vary only when requested by the pose.
+FRAME POSES:
+Cell 1 (idle): Relaxed neutral stance, weight centred, arms loose at the sides, feet planted. Unlit sparkler held loosely in the front hand
+Cell 2 (idle): Small inhale: chest and shoulders lifted slightly, head up a touch, feet planted. Unlit sparkler held loosely in the front hand
+Cell 3 (idle): Exhale: shoulders dropped slightly, knees a little softer, feet planted. Unlit sparkler held loosely in the front hand
+Cell 4 (jump): Anticipation crouch: knees deeply bent, arms swung back, body low and coiled
+Cell 5 (jump): Take-off: legs fully extended pushing off the toes, arms thrown upward, body stretched tall
+Cell 6 (jump): Apex: in the air, knees tucked up, arms out for balance
+Cell 7 (jump): Fall: in the air, legs extended down reaching for the ground, arms raised slightly
+Cell 8 (jump): Landing: knees deeply bent absorbing impact, arms forward for balance, feet planted
+Cell 9 (hurt): Hit: head and torso snapped backward, arms flung out, pained expression, one foot lifted
+Cell 10 (hurt): Stagger: hunched forward, one hand clutching the stomach, knees bent, wincing
+Cell 11 (death): Hit hard: knocked backward, arms flung up, shocked expression
+Cell 12 (death): Collapse: knees buckling, body folding forward, arms limp
+Cell 13 (death): Down: lying flat on the ground on the side, eyes closed, completely still. Dazed swirl eyes, comic rather than grim
+Only add sparks/flame/coloured eyes/ash where those frame poses explicitly ask; other frames keep the approved colours. Comic defeats, no blood or gore. Entire limbs, props and wings inside their cell. No scenery, floor, shadows, backdrop, checkerboard, blurry anti-aliasing, smooth gradients, baked glow, motion streaks or duplicate characters per cell. Use real alpha transparency. Each listed pose must be illustrated exactly, in order. Do not repeat a neutral pose instead of the action.

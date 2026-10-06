@@ -1,0 +1,57 @@
+{
+  "fps": 8,
+  "loop": "hold",
+  "poses": [
+    "Hit hard: knocked backward, arms flung up, shocked expression",
+    "Collapse: knees buckling, body folding forward, arms limp",
+    "Down: lying flat on the ground on the side, eyes closed, completely still"
+  ],
+  "durations": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "free_palette": false,
+  "name": "basic-rakshas",
+  "animation": "death",
+  "size": "sheet",
+  "expected_frames": 3,
+  "frames": [
+    "01",
+    "02",
+    "03"
+  ],
+  "canvas": [
+    168,
+    144
+  ],
+  "anchor": [
+    96,
+    135
+  ],
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 2.977272727272727,
+    "calibration_cell": 9
+  },
+  "sheet": {
+    "source": "exec-3ca437b1-f5a0-433c-a0bd-87e6a797f833.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 4,
+    "first_cell": 10,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

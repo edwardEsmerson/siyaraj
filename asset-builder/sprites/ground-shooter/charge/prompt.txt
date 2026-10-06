@@ -1,0 +1,10 @@
+Use case: identity-preserve. Asset type: pixel-art game animation sprite sheet. Create exactly EIGHT frames in a 4-column, 2-row regular grid on a transparent 2048x1024 PNG. Image 1 is the approved ground-shooter identity. Same rakshas footsoldier family as attachment 1: plum-purple skin, curled black moustache, hooked nose, small gold crown. Leaner build. Violet and turquoise dhoti and drape instead of pink. No mace. He holds a short bamboo blowpipe with a brass mouthpiece in both hands, level and pointing forward. Strict right-facing profile, knees bent, alert. Keep his exact face, crown, lean proportions, violet skin, turquoise sash, violet dhoti and bamboo blowpipe. Pixel style, outline weight, flat palette and facing are identical to the reference. Each cell is 512x512. SAME CAMERA SCALE for all cells: an upright body is 352 source pixels tall, each native art pixel is a crisp 4x4 square. Do not enlarge crouches or collapse poses to fill a cell. One full-body subject per cell, ample transparent margin, feet baseline at 450 inside each cell. Order is left to right then top to bottom.
+Cell 1: Planted, blowpipe raised to his lips aimed forward, cheeks puffing up
+Cell 2: Same, cheeks fully ballooned, eyes squeezed
+Cell 3: Blowpipe aimed forward, cheeks deflated, recoiling back a step
+Cell 4: Bent over, coughing, blowpipe lowered
+Cell 5: Same, loading a dart into the blowpipe
+Cell 6: Hit hard: knocked backward, arms flung up, shocked expression
+Cell 7: Collapse: knees buckling, body folding forward, arms limp
+Cell 8: Down: lying flat on the ground on the side, eyes closed, completely still
+Preserve genuine alpha transparency. No text, labels, borders, duplicate actors per cell, scenery, background, glow, gradients or motion trails. No injury gore. Each pose clearly different. All limbs and blowpipes fit entirely in their cell. Only change the pose/expression; keep the approved identity and pixel density.

@@ -1,0 +1,50 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Arms flung wide in relief, beaming",
+    "Bowing theatrically to Siya"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    120
+  ],
+  "source_canvas": [
+    128,
+    128
+  ],
+  "source_anchor": [
+    64,
+    120
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "notes": "Poses: \"Arms flung wide in relief, beaming\" / \"Bowing theatrically to Siya\".",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 6.8,
+    "calibration_cell": 3
+  },
+  "sheet": {
+    "source": "exec-b502284d-2dd7-4b14-ac93-02987f5be86c.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 2,
+    "rows": 2,
+    "first_cell": 2,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

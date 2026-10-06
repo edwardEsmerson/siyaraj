@@ -1,0 +1,53 @@
+{
+  "fps": 8,
+  "loop": "hold",
+  "durations": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Hit hard: knocked backward, arms flung up, shocked expression",
+    "Collapse: knees buckling, body folding forward, arms limp",
+    "Down: lying flat on the ground on the side, eyes closed, completely still. Dazed swirl eyes, comic rather than grim"
+  ],
+  "frame_count": 3,
+  "canvas": [
+    160,
+    128
+  ],
+  "anchor": [
+    64,
+    112
+  ],
+  "source_canvas": [
+    128,
+    128
+  ],
+  "source_anchor": [
+    64,
+    112
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen"
+  },
+  "notes": "`poses/death.txt`. Comic, not grim: add \"dazed swirl eyes\" to the last pose.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 3.25,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-f0524f52-25a1-4c3f-b460-5f4dd1e47db6.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 4,
+    "first_cell": 10,
+    "extraction": "connected subjects on common source canvas"
+  }
+}
