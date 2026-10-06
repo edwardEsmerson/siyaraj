@@ -159,7 +159,13 @@ func run_checks() -> void:
 	player = current_scene.player
 	check(absf(player.position.x - 18100) < 1 and player.health == 3, "Death must restore the latest secured checkpoint and health")
 	check(not current_scene.course.get_node("Checkpoints/RidgeDiya/Flame").visible, "Skipped diyas must remain unlit after reload")
-	root.get_node("PlaytestNavigation").enemies_enabled = false
+	var navigation: Node = root.get_node("PlaytestNavigation")
+	navigation.enemies_enabled = false
+	# Enemy mode is applied when loading a level, including the new final stretch.
+	navigation.start_level("res://scenes/main/forest.tscn")
+	await scene_changed
+	player = current_scene.player
+	await ticks(4)
 	await place(Vector2(21400, 430))
 	check(current_scene.completed, "Riverbank must still finish without enemies")
 	var event := InputEventAction.new()

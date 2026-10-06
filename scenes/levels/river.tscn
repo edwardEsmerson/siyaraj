@@ -2218,3 +2218,44 @@ text = "Light this last diya before the temple climb. Dhoomketu guards the ghats
 
 [node name="BridgePlanks" type="Node2D" parent="."]
 script = ExtResource("bridge_planks")
+
+[node name="DockGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(1010, 390)
+patrol_radius = 45.0
+detection_range = 160.0
+
+[node name="DockGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(1010, 390)
+
+[node name="GhatRestGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(4910, 430)
+patrol_radius = 45.0
+detection_range = 150.0
+
+[node name="GhatRestGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(4910, 430)
+
+[node name="GhatEntryShooter" parent="Encounters" instance=ExtResource("ground_shooter")]
+position = Vector2(5510, 430)
+patrol_radius = 30.0
+detection_range = 160.0
+
+[node name="GhatEntryShooter" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(5510, 430)
+
+[node name="ChannelScout" parent="Encounters" instance=ExtResource("flying_enemy")]
+position = Vector2(11540, 337)
+patrol_radius = 30.0
+detection_range = 160.0
+metadata/airborne = true
+
+[node name="ChannelScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(11540, 337)
+
+[node name="ProcessionBrute" parent="Encounters" instance=ExtResource("brute")]
+position = Vector2(13200, 430)
+patrol_radius = 35.0
+detection_range = 140.0
+
+[node name="ProcessionBrute" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(13200, 430)

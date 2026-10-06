@@ -71,9 +71,10 @@ func run_checks() -> void:
 	player = current_scene.player
 	await ticks(4)
 	course = current_scene.course
-	check(course.get_node("Encounters").get_child_count() == 6, "Palace has six staged encounters")
+	check(course.get_node("Encounters").get_child_count() == 12, "Palace has twelve staged encounters")
 	for enemy: CharacterBody2D in course.get_node("Encounters").get_children():
-		check(enemy.is_on_floor(), "%s must stand on reachable solid ground" % enemy.name)
+		if not enemy.get_meta("airborne", false):
+			check(enemy.is_on_floor(), "%s must stand on reachable solid ground" % enemy.name)
 		for checkpoint: Area2D in course.get_node("Checkpoints").get_children():
 			check(absf(enemy.position.x - checkpoint.position.x) > enemy.detection_range + enemy.patrol_radius, "%s must be outside %s approach" % [checkpoint.name, enemy.name])
 	freeze_encounters()

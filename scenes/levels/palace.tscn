@@ -1,9 +1,10 @@
-[gd_scene load_steps=77 format=3]
+[gd_scene load_steps=78 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/draft_level.gd" id="Script"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="enemy"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/ground_shooter.tscn" id="ground_shooter"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/brute.tscn" id="brute"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/flying_enemy.tscn" id="flying_enemy"]
 [ext_resource type="Script" path="res://scripts/levels/world_skin.gd" id="world_skin"]
 
 [ext_resource type="PackedScene" path="res://scenes/companions/robin_hint.tscn" id="robin_hint"]
@@ -2097,3 +2098,52 @@ text = "A brute waits atop these steps. Dodge his swing, then strike during reco
 position = Vector2(13630, 430)
 text = "Light the last diya! Swaminathan waits beyond. Knock out his active heads to expose his core."
 duration = 5.0
+
+[node name="GateGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(490, 430)
+patrol_radius = 50.0
+detection_range = 160.0
+
+[node name="GateGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(490, 430)
+
+[node name="GalleryEntranceGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(3500, 430)
+patrol_radius = 40.0
+detection_range = 150.0
+
+[node name="GalleryEntranceGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(3500, 430)
+
+[node name="GalleryExitGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(4780, 430)
+patrol_radius = 45.0
+detection_range = 160.0
+
+[node name="GalleryExitGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(4780, 430)
+
+[node name="RoofLookoutScout" parent="Encounters" instance=ExtResource("flying_enemy")]
+position = Vector2(6360, 217)
+patrol_radius = 35.0
+detection_range = 170.0
+metadata/airborne = true
+
+[node name="RoofLookoutScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(6360, 217)
+
+[node name="InnerEntryBrute" parent="Encounters" instance=ExtResource("brute")]
+position = Vector2(9100, 430)
+patrol_radius = 40.0
+detection_range = 140.0
+
+[node name="InnerEntryBrute" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(9100, 430)
+
+[node name="InnerHallGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(10800, 430)
+patrol_radius = 45.0
+detection_range = 150.0
+
+[node name="InnerHallGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(10800, 430)

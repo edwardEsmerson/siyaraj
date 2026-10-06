@@ -4008,3 +4008,85 @@ direction = "diyalit"
 position = Vector2(21230, 430)
 text = "Khara waits ahead! Jump her ground waves, and strike after her heavy slam."
 duration = 5.0
+
+[node name="ClearingScout" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(1710, 430)
+patrol_radius = 35.0
+detection_range = 140.0
+metadata/room = &""
+
+[node name="RidgeGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(5645, 270)
+patrol_radius = 30.0
+detection_range = 140.0
+metadata/room = &""
+
+[node name="HollowExitGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(8370, 430)
+patrol_radius = 30.0
+detection_range = 130.0
+metadata/room = &""
+
+[node name="BanyanExitGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(11320, 430)
+patrol_radius = 30.0
+detection_range = 140.0
+metadata/room = &""
+
+[node name="UpperEntryGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(13560, 430)
+patrol_radius = 30.0
+detection_range = 130.0
+metadata/room = &""
+
+[node name="FinalScout" parent="Encounters" instance=ExtResource("5_flyer")]
+position = Vector2(19040, 350)
+patrol_radius = 35.0
+detection_range = 170.0
+metadata/room = &""
+metadata/airborne = true
+
+[node name="FinalLowGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(19810, 450)
+patrol_radius = 30.0
+detection_range = 120.0
+metadata/room = &""
+
+[node name="FinalExitGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(20810, 430)
+patrol_radius = 30.0
+detection_range = 140.0
+metadata/room = &""
+
+[node name="RootDescentGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(1560, -1600)
+patrol_radius = 30.0
+detection_range = 110.0
+metadata/room = &"RootChamber"
+
+[node name="ClearingScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(1710, 430)
+
+[node name="RidgeGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(5645, 270)
+
+[node name="HollowExitGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(8370, 430)
+
+[node name="BanyanExitGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(11320, 430)
+
+[node name="UpperEntryGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(13560, 430)
+
+[node name="FinalScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(19040, 350)
+
+[node name="FinalLowGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(19810, 450)
+
+[node name="FinalExitGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(20810, 430)
+
+[node name="RootDescentGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(1560, -1600)

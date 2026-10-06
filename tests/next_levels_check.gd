@@ -49,7 +49,7 @@ func run_checks() -> void:
 		player = current_scene.player
 		await ticks(4)
 		var course: Node2D = current_scene.course
-		check(course.get_node("Encounters").get_child_count() == (10 if level == "river" else 6), "%s must include its revised encounter composition" % level)
+		check(course.get_node("Encounters").get_child_count() == (15 if level == "river" else 12), "%s must include its revised encounter composition" % level)
 		for enemy in course.get_node("Encounters").get_children():
 			if not enemy.scene_file_path.ends_with("flying_enemy.tscn"):
 				check(enemy.is_on_floor(), "%s encounter must stand on terrain" % enemy.name)
