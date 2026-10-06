@@ -10,7 +10,8 @@ the last checkpoint with full health and weapon resources. R resets the level.
 
 Esc pauses any level or standalone playground. Resume, restart, or return to
 level select. Time and gameplay stop while paused. Finishing the forest or river
-offers Enter to advance to the next level.
+offers Enter to advance to the next level. Finishing the palace offers Enter to
+face Ravan; defeating Ravan and pressing Enter opens the ending screen.
 
 ## Developer snapshots
 

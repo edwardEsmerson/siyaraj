@@ -1,7 +1,10 @@
 extends Node2D
-## Isolated Ravan encounter with the three-weapon player. Not part of level progression.
+## Ravan campaign finale, also available as a developer snapshot.
+
+const ENDING: String = "res://scenes/main/ending.tscn"
 
 var _restarting: bool = false
+var completed: bool = false
 
 @onready var player: CharacterBody2D = $Player
 @onready var ravan: Node2D = $Ravan
@@ -21,9 +24,7 @@ func _ready() -> void:
 	ravan.fury_started.connect(func() -> void:
 		$HUD/CombatStatus.text = "DASHANAN FURY: stand in the teal lanes."
 	)
-	ravan.died.connect(func() -> void:
-		$HUD/CombatStatus.text = "Ravan defeated! R to replay."
-	)
+	ravan.died.connect(_on_ravan_defeated)
 
 
 func _process(_delta: float) -> void:
@@ -42,6 +43,15 @@ func _restart() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if completed and event.is_action_pressed("ui_accept"):
+		get_viewport().set_input_as_handled()
+		PlaytestNavigation.start_level(ENDING)
+		return
 	if event.is_action_pressed("restart"):
 		get_viewport().set_input_as_handled()
 		_restart()
+
+
+func _on_ravan_defeated() -> void:
+	completed = true
+	$HUD/CombatStatus.text = "Ravan defeated! Enter: continue to the ending / R: replay."
