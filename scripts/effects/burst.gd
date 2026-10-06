@@ -8,11 +8,12 @@ var spread: float = 25.0
 var age: float = 0.0
 
 
-static func spawn(parent: Node, at: Vector2, color: Color, word: String = "", radius: float = 25.0) -> void:
+static func spawn(parent: Node, at: Vector2, color: Color, word: String = "", radius: float = 25.0, duration: float = 0.28) -> void:
 	var effect := preload("res://scripts/effects/burst.gd").new()
 	effect.tint = color
 	effect.label = word
 	effect.spread = radius
+	effect.lifetime = duration
 	parent.add_child(effect)
 	effect.global_position = at
 	# Spawn at the target immediately, without interpolating from the scene origin.

@@ -54,8 +54,10 @@ func run_checks() -> void:
 	await ticks(16)
 	await place(Vector2(2450, 430))
 	player.health = 2
+	var diya_cooldown: float = player.chakri_cooldown_remaining
 	await press_interact()
-	check(player.skyshot_ammo == 4 and player.health == 2, "Lighting a diya must preserve ammo and health")
+	check(player.skyshot_ammo == 4 and player.health == 3, "Lighting a new trail diya must heal one HP and preserve ammo")
+	check(player.chakri_cooldown_remaining > diya_cooldown - 0.2 and player.chakri_cooldown_remaining <= diya_cooldown, "Diya healing must preserve the running chakri cooldown")
 	await place(Vector2(5660, 270))
 	player.health = 2
 	var cooldown_before: float = player.chakri_cooldown_remaining
