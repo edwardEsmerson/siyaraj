@@ -292,16 +292,18 @@ and the flyer/guard encounter is fair with the existing three-health player.
 - Six health, two damage per swing, 300/-180 knockback and a wider 64 x 48 hitbox
   make it stronger than a guard. Patrol/chase speeds are 40/70 px/s. Wind-up is
   0.7 s, active time 0.16 s and recovery 0.95 s. Facing locks for each swing.
-- Hits interrupt its attack; incoming knockback is multiplied by 0.55. A 32 px
-  ground probe keeps the wider body away from unsupported edges. Existing guard
-  defaults and the player movement/damage APIs are preserved.
+- Nonlethal hits cannot interrupt its wind-up or active strike. Incoming
+  knockback outside its attack is multiplied by 0.55. A 32 px ground probe
+  keeps the wider body away from unsupported edges. Ordinary enemies resist
+  repeated stagger for 1.4 s; see [enemy balance](enemy_balance.md). The player
+  movement/damage APIs are preserved.
 - Level integration places it at (4020, 430), after the regular guard. It has
   ordinary floating health/status feedback, with no boss phases or boss UI.
   The regular guard still owns the exit gate. The isolated arena shares main
   restart/HUD handling; integration now derives its defeat label from enemy name.
 - `tests/brute_check.gd` covers size and strength, bounded patrol, edges and walls,
   chase, wind-up/dodging/recovery, hit reach and facing, one hit per swing without
-  damage protection, interruptions, knockback resistance, six real sparkler hits,
+  damage protection, attack armor, knockback resistance, six real sparkler hits,
   defeat/restart and course gate ownership. Course regression isolates the Brute
   while checking the existing guard encounter and verifies replay restores it.
 - Run the new check alongside all five existing checks. The smoke export includes

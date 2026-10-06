@@ -76,7 +76,7 @@ func run_checks() -> void:
 			check(visuals.scale.x == -1.0, "Ranged pose must face its target")
 			enemy.take_damage(1, Vector2.ZERO)
 			await ticks(1)
-			check(enemy.state == enemy.State.HURT and sprite.animation not in [&"fire", &"dive", &"charge"], "Interrupted ranged attacks must clear their release pose")
+			check(enemy.state == enemy.State.RECOVERY and sprite.animation == (&"fire" if encounter == Sandbox.Encounter.SHOOTER else &"dive"), "Damage during reload must preserve the real projectile release pose")
 		enemy.take_damage(1, Vector2.ZERO)
 		check(health_bar.visible and is_equal_approx(health_bar.health_fraction, float(enemy.health) / enemy.max_health), "Damage must immediately shrink the enemy bar to its remaining health")
 		enemy.take_damage(100, Vector2.ZERO)

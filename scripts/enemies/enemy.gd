@@ -14,6 +14,9 @@ signal died
 @export var gravity: float = 1800.0
 @export var edge_probe_distance: float = 24.0
 @export_range(0.0, 1.0) var knockback_multiplier: float = 1.0
+@export var stagger_cooldown: float = 1.4
+@export var hurt_time: float = 0.12
+@export var armored_attacks: bool = false
 
 enum State { PATROL, CHASE, ATTACK, HURT, DEAD }
 var state: State = State.PATROL
@@ -22,6 +25,7 @@ var _home_x: float
 var _direction: int = 1
 var _hurt_remaining: float = 0.0
 var _hit_flash_remaining: float = 0.0
+var _stagger_cooldown_remaining: float = 0.0
 
 @onready var body: Polygon2D = $Body
 @onready var attack: Node2D = $MeleeAttack
@@ -39,6 +43,7 @@ func _physics_process(delta: float) -> void:
 		return
 	_hurt_remaining = maxf(_hurt_remaining - delta, 0.0)
 	_hit_flash_remaining = maxf(_hit_flash_remaining - delta, 0.0)
+	_stagger_cooldown_remaining = maxf(_stagger_cooldown_remaining - delta, 0.0)
 	var player := get_tree().get_first_node_in_group("players") as CharacterBody2D
 	var can_see := is_instance_valid(player) and absf(player.global_position.x - global_position.x) <= detection_range and absf(player.global_position.y - global_position.y) < 64.0
 	if _hurt_remaining > 0.0:
@@ -89,6 +94,8 @@ func _update_feedback() -> void:
 				attack.Phase.WINDUP:
 					body.modulate = Color(2.0, 1.2, 0.35)
 					action_hint = "WIND-UP!"
+					if armored_attacks:
+						action_hint = "BRACED WIND-UP!"
 				attack.Phase.ACTIVE:
 					body.modulate = Color(2.2, 0.4, 0.3)
 					action_hint = "STRIKE!"
@@ -98,6 +105,8 @@ func _update_feedback() -> void:
 		State.CHASE:
 			body.modulate = Color(1.4, 1.1, 0.7)
 			action_hint = "APPROACHING"
+	if _hit_flash_remaining > 0.0 and state != State.HURT:
+		body.modulate = body.modulate.lerp(Color(2.0, 2.0, 2.0), 0.35)
 	status.text = "%s %d/%d\n%s" % [enemy_name, health, max_health, action_hint]
 
 
@@ -106,15 +115,21 @@ func take_damage(amount: int, knockback: Vector2) -> void:
 		return
 	health = maxi(health - amount, 0)
 	health_changed.emit(health)
-	attack.cancel()
 	if health == 0:
+		attack.cancel()
 		state = State.DEAD
 		Burst.spawn(get_tree().current_scene, global_position + Vector2(0, -20), Color(1.0, 0.75, 0.25), "BOOM!", 38.0)
 		died.emit()
 		queue_free()
 		return
-	state = State.HURT
-	velocity = knockback * knockback_multiplier
-	_hurt_remaining = 0.20
 	_hit_flash_remaining = 0.09
+	# Recovery stays fixed, and committed strikes cannot be cancelled by a late hit.
+	var committed: bool = attack.phase == attack.Phase.ACTIVE or attack.phase == attack.Phase.RECOVERY
+	committed = committed or (armored_attacks and attack.phase == attack.Phase.WINDUP)
+	if _stagger_cooldown_remaining <= 0.0 and not committed:
+		attack.cancel()
+		state = State.HURT
+		velocity = knockback * knockback_multiplier
+		_hurt_remaining = hurt_time
+		_stagger_cooldown_remaining = stagger_cooldown
 	_update_feedback()
