@@ -243,7 +243,7 @@ movement feel or a two-minute first-play completion time.
   retain their current behaviour.
 - Sparkler: J for a single ground or aerial lash. Jumping preserves the swing;
   recovery presses are ignored. Dash, hurt and death cancel it.
-- Skyshot replaces anar: S/Down + J fires one projectile in the facing direction,
+- Skyshot replaces anar: L fires one projectile in the facing direction,
   including in the air. Five shots per round, with a 0.45-second firing recovery.
   Misses and wall impacts cost ammo. There are no pickups or timed refills.
 - Fresh player instances on level entry/death start with five shots; nonlethal

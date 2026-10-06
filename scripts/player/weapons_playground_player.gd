@@ -42,7 +42,7 @@ func _physics_process(delta: float) -> void:
 		super._physics_process(delta)
 		queue_redraw()
 		return
-	var shot_pressed := Input.is_action_just_pressed("attack") and Input.is_action_pressed("attack_down")
+	var shot_pressed := Input.is_action_just_pressed("skyshot")
 	if shot_pressed and special_recovery <= 0.0 and shot_recovery_remaining <= 0.0:
 		if skyshot_ammo > 0:
 			var input_direction := Input.get_axis("move_left", "move_right")

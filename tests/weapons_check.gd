@@ -22,7 +22,7 @@ func ticks(count: int) -> void:
 
 
 func reset_playground() -> void:
-	for action in [&"attack", &"attack_down", &"special", &"dash", &"jump", &"restart", &"move_left", &"move_right"]:
+	for action in [&"attack", &"skyshot", &"special", &"dash", &"jump", &"restart", &"move_left", &"move_right"]:
 		Input.action_release(action)
 	change_scene_to_file("res://scenes/combat/weapons_playground.tscn")
 	await scene_changed
@@ -40,6 +40,8 @@ func press(action: StringName) -> void:
 func run_checks() -> void:
 	await reset_playground()
 	check(player.is_on_floor(), "Playground player must spawn on solid ground")
+	var shot_keys := InputMap.action_get_events("skyshot")
+	check(shot_keys.size() == 1 and shot_keys[0] is InputEventKey and shot_keys[0].physical_keycode == KEY_L, "Skyshot must be bound to L")
 	dummy.set_physics_process(false)
 	player.position.x = dummy.position.x - 42
 	await press("attack")
@@ -150,9 +152,7 @@ func run_checks() -> void:
 
 
 func fire_shot() -> void:
-	Input.action_press("attack_down")
-	await press("attack")
-	Input.action_release("attack_down")
+	await press("skyshot")
 
 
 func check_skyshots() -> void:
@@ -218,11 +218,9 @@ func check_skyshots() -> void:
 	await reset_playground()
 	dummy.set_physics_process(false)
 	dummy.position.x = 430
-	Input.action_press("attack_down")
-	Input.action_press("attack")
+	Input.action_press("skyshot")
 	await ticks(90)
-	Input.action_release("attack")
-	Input.action_release("attack_down")
+	Input.action_release("skyshot")
 	check(player.skyshot_ammo == 4 and dummy.health == 10, "Holding fire must not repeat shots")
 
 	await reset_playground()

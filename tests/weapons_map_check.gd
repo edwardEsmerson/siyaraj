@@ -39,9 +39,7 @@ func run_checks() -> void:
 	check(player.is_on_floor(), "Skyshot firing line must provide stable grounded space")
 	var firing_x: float = player.position.x
 	for shot in range(2):
-		Input.action_press("attack_down")
-		await press("attack")
-		Input.action_release("attack_down")
+		await press("skyshot")
 		await ticks(40)
 	check(target.health == 0 and player.skyshot_ammo == 3, "Two shots from the firing line must clear the ranged target")
 	check(player.position.x < firing_x - 20, "Firing line must leave space behind Siya for recoil")
