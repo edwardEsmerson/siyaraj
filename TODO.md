@@ -24,9 +24,12 @@ says *what* is left and *who* does it, and points there for the *how*.
   sit in `assets/sprites/` for Siya, Robin, Raj, all four enemies, Khara with her
   gada, and Swaminathan. Only **Robin** is wired into gameplay. Siya, the enemies
   and both bosses still draw code placeholders.
-- **World kits:** levels are dressed through `WorldSkin`. The latest kit pass
-  (`feat/world-showcase`, 9 commits) is on `review/integration` and **not yet
-  merged to `main`**.
+- **World kits:** levels and both boss arenas are dressed through `WorldSkin` in all
+  six styles (press V in a level to cycle). Merged in #15 and #19.
+- **Red suites on `main`:** `course`, `dash`, `forest`, `forest_rooms` and
+  `next_levels` fail since #17 (preserve vertical momentum during dash, `e5fff81`):
+  some dash gaps and route links are no longer reachable. Fix this first (B0).
+  The other 21 suites pass, `world_skin_check` included.
 - **No audio plays.** There are no `AudioStreamPlayer` nodes and no buses.
   `assets/Audio/` is gitignored, so teammates don't have the music files.
 - **Only export preset:** "Linux smoke test".
@@ -65,12 +68,6 @@ says *what* is left and *who* does it, and points there for the *how*.
 
 Open the file, judge it, then reply "fine" or "redo X".
 
-- [ ] **Don't commit the stray `project.godot` change** on `review/integration`. It
-  deletes `physics_interpolation=true`, which undoes the jitter fix from `90751fd`.
-  It looks like an editor rewrite. Revert it.
-- [ ] **Merge the world-showcase work.** Look through
-  `C:\Users\solan\Desktop\git repos\siyaraj\docs\screenshots\world\`, then open or
-  approve the PR from `review/integration` / `feat/world-showcase` into `main`.
 - [ ] **The full cast:** open
   `C:\Users\solan\Desktop\git repos\siyaraj\docs\art\cast_review.html` in a browser
   and flag every animation that looks bad, as you did with Ravan. Better still, play
@@ -102,6 +99,13 @@ Open the file, judge it, then reply "fine" or "redo X".
 
 ### Code
 
+- [ ] **B0. Make the suites green again (do this first).** Since #17, dashing keeps
+  vertical momentum, which shortened jump + dash reach. `dash_check` (220 and 250 px
+  gaps), `course_check` (times out), `forest_check`, `forest_rooms_check` and
+  `next_levels_check` (route links such as `Branch5 -> BranchExit`,
+  `CrownRest -> OuterBranch1`, `UpperLanding -> DashLanding`) fail. Tune the dash so
+  the old reach comes back while keeping the momentum feel. Don't move level geometry
+  or weaken the checks. Run only those five suites, since each one is slow.
 - [ ] **B1. Rename Ravan → Swaminathan** in all player-facing text: boss bar,
   completion screen, `showdown_name` in `scenes/main/palace.tscn`, the playtest menu
   and docs. Renaming files and classes (`scripts/bosses/ravan/`, `ravan_check.gd`)
