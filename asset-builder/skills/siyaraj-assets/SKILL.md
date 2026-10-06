@@ -113,8 +113,38 @@ python -m ab texture forest-far "dusk forest silhouettes, ..." --mode layer --as
 python -m ab texture forest-near "hanging vines and roots" --mode cutout                    # transparent shapes
 cp out/textures/forest-far/01.png textures/forest/forest-far.png
 ```
-Check `NN-tiled.png` for seams before keeping. Existing forest layers: `textures/forest/j1-j4.png`.
-Viewport is 960x540 game units = 1920x1080 art px.
+- Modes: `tile` seamless square fill (128 art px = 64 units); `cap` transparent strip along a platform's
+  top edge, full-width seamless, `--cap-height` art px tall (default 32), the walking surface a third of
+  the way down; `concept` a 16:9 mock level screen for choosing art direction (not used in game);
+  `layer` opaque parallax; `cutout` parallax shapes with transparency.
+- **Terrain scale:** most platforms are thin 32-unit (64 art px) slabs, so a fill shows barely half a
+  tile; **caps and fringes carry most of the look**. Spend iterations there; keep fills calm.
+- Check `sheet.png` / `NN-tiled.png` for seams before keeping. `ab blend A B` builds a transition tile
+  in code (no generation; `--seed N` for another boundary). `ab board [area]` composes the kept
+  `textures/<area>/` fills (`*-cap.png` as caps, `A__B.png` as transitions) into a mock side view.
+- Viewport is 960x540 game units = 1920x1080 art px. Existing forest layers: `textures/forest/j1-j4.png`.
+
+**World kits in Godot:** `scripts/levels/world_skin.gd` (`WorldSkin` node in each level, `biome` + `direction`)
+dresses the grey Body/Edge platforms from `assets/world/<biome>/<direction>/` at scale 0.5. Every file is optional:
+`fill.png` (128 px seamless tile), `cap.png` (seamless strip, walking surface a third down), `end.png` (left end,
+mirrored for the right), `fringe.png` (hangs under floating platforms), `oneway.png` (strip centred on thin
+jump-through platforms), `far.png` (opaque) / `mid.png` (transparent) 1080 px tall seamless parallax, `water.png`
+(river tile) and `props/*.png` (stand on the bottom of their opaque pixels). New PNGs load straight from disk;
+run `godot --headless --path . --import` once before exporting. In game, `V` cycles the level's available kits.
+Screenshot every level x kit (from the repo root; in a fresh worktree import once first), then build contact sheets:
+```bash
+xvfb-run -a godot --path . --resolution 1920x1080 -s tools/world_shots.gd [-- <biome> [<direction> | <kit dir>]]
+~/ml/bin/python tools/world_sheet.py    # docs/screenshots/world/<biome>-sheet.png
+```
+
+## 4. UI art
+```bash
+python -m ab ui panel "carved marigold wood frame with brass corners" --kind frame   # 9-slice
+python -m ab ui heart "pink diya heart" --kind icon --px 16
+```
+UI is drawn at 1 texel = 1 game unit (used at scale 1, unlike sprites). Frames are mirrored to
+symmetric corners and cut to `NN-nine.png` for a StyleBoxTexture (`texture_margin` per candidate in
+`margins.json`, axis stretch TILE_FIT); copy the pick to `../assets/ui/`.
 
 ## Problems the tool flags (`!!` in output, `!` on sheets)
 It auto-regenerates once (`--retry`). Background removal measures the real border colour, so off-colour

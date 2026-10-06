@@ -1,9 +1,10 @@
-[gd_scene load_steps=50 format=3]
+[gd_scene load_steps=51 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/draft_level.gd" id="Script"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="enemy"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/ground_shooter.tscn" id="ground_shooter"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/brute.tscn" id="brute"]
+[ext_resource type="Script" path="res://scripts/levels/world_skin.gd" id="world_skin"]
 
 [sub_resource type="RectangleShape2D" id="GateApproach"]
 size = Vector2(720, 32)
@@ -1089,3 +1090,8 @@ text = "TERRACE AND SANCTUM"
 position = Vector2(11340, 155)
 theme_override_font_sizes/font_size = 17
 text = "SANCTUM ASCENT"
+
+[node name="WorldSkin" type="Node2D" parent="."]
+script = ExtResource("world_skin")
+biome = "palace"
+direction = "carved"

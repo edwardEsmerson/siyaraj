@@ -34,14 +34,17 @@ As of 2026-10-06, from `../TODO.md`:
 
 ## Budget
 
-`~/nanobanana/spend.json` showed about Rs1,265 spent of the Rs25,000 cap on 2026-10-06.
+Spend is capped at Rs25,000; `python -m ab doctor` shows the running total and any batch jobs.
 Prices:
 
-- 2K image: about Rs12. A 4-candidate 2K sprite costs about Rs50.
-- 4K image: about Rs22. A 4-candidate 4K boss costs about Rs90.
+- Pro, 2K image: about Rs12. A 4-candidate 2K sprite costs about Rs50.
+- Pro, 4K image: about Rs22. A 4-candidate 4K boss costs about Rs90.
+- Flash: about Rs9 (2K) / Rs14 (4K). `--split pro,flash` averages the two.
+- `--batch` (Vertex batch, results in minutes to hours): half of the above. Use it for whole
+  animation lists and texture sets.
 
-Everything in both lists, including retries, should come to about Rs6,000 to Rs8,000.
-Check with `python -m ab doctor` before big batches.
+Everything in both lists, including retries, should come to about Rs6,000 to Rs8,000 live, or
+roughly half through batch.
 
 ---
 
