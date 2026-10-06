@@ -56,6 +56,16 @@ expand_mode = 1
 stretch_mode = 5
 texture_filter = 1
 
+[node name="SupportingArt" type="TextureRect" parent="."]
+offset_left = 100.0
+offset_top = 28.0
+offset_right = 450.0
+offset_bottom = 372.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+texture_filter = 1
+
 [node name="BubbleTail" type="Polygon2D" parent="."]
 z_index = 1
 polygon = PackedVector2Array(92, 402, 148, 402, 111, 366)

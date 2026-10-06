@@ -44,6 +44,8 @@ func _restart() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if completed and event.is_action_pressed("ui_accept"):
+		if has_node("CampaignFlow"):
+			return  # Campaign dialogue and developer snapshot routing own the exit.
 		get_viewport().set_input_as_handled()
 		PlaytestNavigation.start_level(ENDING)
 		return

@@ -43,7 +43,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _new_game() -> void:
 	PlaytestNavigation.enemies_enabled = true
-	PlaytestNavigation.start_level(FIRST_LEVEL)
+	PlaytestNavigation.start_level("res://scenes/main/prologue.tscn")
 
 
 func _open_sub(panel: Control, from: Button) -> void:

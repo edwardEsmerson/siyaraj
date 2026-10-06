@@ -101,7 +101,17 @@ func run_checks() -> void:
 	menu.get_node("NewGame").pressed.emit()
 	await scene_changed
 	await ticks(4)
-	check(current_scene.scene_file_path == first_level, "New game must start the first level")
+	check(current_scene.scene_file_path == "res://scenes/main/prologue.tscn", "New game must start with Raj's abduction")
+	var opening: CanvasLayer = current_scene.get_node("ComicCutscene")
+	check(opening.visible and opening._panels.size() > 0, "Opening dialogue must be playable")
+	for panel in opening._panels.size():
+		var advance := InputEventAction.new()
+		advance.action = &"ui_accept"
+		advance.pressed = true
+		opening._unhandled_input(advance)
+	await scene_changed
+	await ticks(4)
+	check(current_scene.scene_file_path == first_level, "Closing the opening must start the forest")
 	await escape()
 	var pause: Control = navigation.panel
 	var buttons: Control = pause.get_node("Center/Menu/Column/Buttons")

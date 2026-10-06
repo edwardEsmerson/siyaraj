@@ -34,4 +34,5 @@ boss_path = NodePath("../TestCourse/Boss")
 next_level = "res://scenes/main/river.tscn"
 destination_name = "river and ghats"
 
-introduction = Array[Dictionary]([{"texture": "res://assets/backgrounds/cast/forest.png", "subject": "res://assets/sprites/khara/intro_roar/02.png", "speaker": "Khara", "text": "No one leaves my forest. Turn back, Siya!"}, {"texture": "res://assets/backgrounds/cast/forest.png", "subject": "res://assets/sprites/khara/intro_roar/02.png", "speaker": "Siya", "text": "Raj is waiting for me. Step aside."}, {"texture": "res://assets/backgrounds/cast/forest.png", "subject": "res://assets/sprites/khara/intro_roar/02.png", "speaker": "Robin", "text": "Watch his raised gada. Dash behind the slam, then strike while he recovers."}])
+
+story_key = "forest"
