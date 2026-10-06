@@ -58,6 +58,7 @@ func _physics_process(_delta: float) -> void:
 				room_spawn = checkpoint.global_position
 			checkpoint.get_node("Flame").visible = true
 			checkpoint.get_node("Prompt").text = "SAVED"
+			player.get_node("Visuals").play_story(&"light_diya")
 			get_parent().combat_status.text = "Diya lit. Death returns here. R resets the whole forest, including side rooms."
 
 

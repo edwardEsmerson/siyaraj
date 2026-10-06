@@ -22,7 +22,7 @@ says *what* is left and *who* does it, and points there for the *how*.
   curtain transition (placeholder art), and `docs/.gdignore`.
 - **Art exists but isn't in the game.** 73 approved animation sets (195 frames)
   sit in `assets/sprites/` for Siya, Robin, Raj, all four enemies, Khara with her
-  gada, and Swaminathan. Only **Robin** is wired into gameplay. Siya, the enemies
+  gada, and Swaminathan. **Siya and Robin** are wired into gameplay. The enemies
   and both bosses still draw code placeholders.
 - **World kits:** levels and both boss arenas are dressed through `WorldSkin` in all
   six styles (press V in a level to cycle). Merged in #15 and #19.
@@ -184,13 +184,14 @@ Open the file, judge it, then reply "fine" or "redo X".
     the outside-in death burst and the head pips to the rules decided in A.
   - **Keep** `tests/ravan_check.gd` passing (update it to the new rules), and update
     `docs/bosses/boss2-ravan.md`. Send screenshots of all 10 states for review.
-- [ ] **C2. Wire Siya's 15 animations into the player.** Drive a sprite state machine
+- [x] **C2. Wire Siya's 15 animations into the player.** Drive a sprite state machine
   from the movement and combat state: idle, run, jump (frame picked by vertical
   velocity), dash (ground and air), lash, air lash (hit on frame 2), skyshot,
   chakri charge and release, hurt (with the existing blink), death, light diya and
   victory. Keep the 24×40 collider and scale 0.5, and flip with facing. All movement,
   dash, combat and weapons suites must still pass. Hand over a short clip or
-  screenshots for review.
+  screenshots for review. Done: `docs/player_animation.md` and
+  `docs/screenshots/siya/review-sheet.png`; talk/shocked have a cutscene API.
 - [ ] **C3. Wire Khara's sprite and her separate gada.** The gada pivots on its
   handle, uses the 26 hand registrations and hides during two-handed actions and
   defeat. It has to line up with the existing slam and shockwave hitboxes and the

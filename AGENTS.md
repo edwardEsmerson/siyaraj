@@ -32,6 +32,7 @@ Run all regression checks from the repository root:
 godot --headless --path . --script res://tests/movement_check.gd
 godot --headless --path . --script res://tests/dash_check.gd
 godot --headless --path . --script res://tests/combat_check.gd
+godot --headless --path . --script res://tests/player_visuals_check.gd
 godot --headless --path . --script res://tests/course_check.gd
 godot --headless --path . --script res://tests/flying_enemy_check.gd
 godot --headless --path . --script res://tests/ground_shooter_check.gd
