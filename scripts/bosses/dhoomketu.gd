@@ -104,7 +104,9 @@ func start_attack(index: int, target_x: float) -> void:
 			# Every target locks before the first fuse burns. No homing rockets.
 			var offsets := PackedFloat32Array([-85.0, 85.0, 0.0] if phase == 1 else [-120.0, 0.0, 120.0, 55.0])
 			for index_in_salvo in range(offsets.size()):
-				spawn_rocket(position + Vector2(facing * 36, -82 - index_in_salvo * 8), Vector2(clampf(target_x + offsets[index_in_salvo], 65, 895), position.y - 20), index_in_salvo * rocket_stagger)
+				# Launch from the tips of the three-rocket rack on his back.
+				var slot := index_in_salvo % 3
+				spawn_rocket(position + Vector2(-facing * (17.0 + slot * 6.5), -82 + slot * 4),Vector2(clampf(target_x + offsets[index_in_salvo], 65, 895), position.y - 20), index_in_salvo * rocket_stagger)
 		1:
 			status.text = "CHAKRI CHASE - JUMP THE SPINNERS"
 			spawn_hazard(Hazard.Kind.CHAKRI, position + Vector2(facing * 42, 0), Vector2(24, 16), 2.5, chakri_speed * (1.2 if phase == 2 else 1.0), facing)

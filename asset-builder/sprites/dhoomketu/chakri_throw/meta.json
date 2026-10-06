@@ -1,0 +1,56 @@
+{
+  "name": "dhoomketu",
+  "animation": "chakri_throw",
+  "size": "4K",
+  "view": "right-profile",
+  "subject": "full-body",
+  "anchor_mode": "feet",
+  "fps": 8,
+  "loop": "hold",
+  "poses": [
+    "Low bowling wind-up: knees bent, torso leaning forward, right arm swung far back behind his hip holding a flat round pink-and-gold pinwheel firework (chakri) the size of a dinner plate, left hand held forward for balance holding the brass fuse-lighter",
+    "Underarm bowling release: deep lunge on the bent front knee, back leg stretched behind, right arm swept forward low beside the front foot, hand open, the pinwheel firework rolling away from his fingers at ankle height",
+    "Rising from the lunge, right arm following through forward at waist height with the index finger pointing along the ground ahead, left hand with fuse-lighter on hip, smirking"
+  ],
+  "expected_frames": 3,
+  "free_palette": false,
+  "durations": [
+    2.4,
+    2.4,
+    2.4
+  ],
+  "frames": [
+    "01",
+    "02",
+    "03"
+  ],
+  "problems": {
+    "01": [
+      "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': 'RESOURCE_EXHAUSTED'}}"
+    ],
+    "02": [
+      "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': 'RESOURCE_EXHAUSTED'}}"
+    ]
+  },
+  "models": {
+    "01": "flash",
+    "02": "flash",
+    "03": "flash"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 13.473684210526315
+  },
+  "canvas": [
+    304,
+    304
+  ],
+  "anchor": [
+    152,
+    285
+  ],
+  "holds": {
+    "01": "idle/02.png",
+    "02": "chakri_throw/03.png"
+  }
+}
