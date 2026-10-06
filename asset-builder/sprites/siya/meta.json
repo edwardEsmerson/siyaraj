@@ -1,0 +1,17 @@
+{
+  "name": "siya",
+  "role": "hero",
+  "target": 80,
+  "brief": "Siya, clean-shaven young adult heroine of Siyaraj and daughter of a fireworks maker. Lean, graceful, expressive side-view game character based on the two user identity references: warm medium-brown skin, long black hair tied back with a loose curl, tiny bindi, simple gold jewelry, marigold-orange sari with crimson red-and-gold pallu, readable hands and feet, holding one unlit sparkler. The approved Basic Rakshas image is a style reference only. Same identity and pose: use a slightly more angular pallu edge with one broad, simple geometric gold border motif; keep all ornament large and sparse.",
+  "key": "green",
+  "size": "2K",
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    112
+  ],
+  "anchor_mode": "feet"
+}

@@ -9,7 +9,8 @@ Siyaraj is a Godot 4.7.2 2D platformer using the Compatibility renderer. Open `p
 - `resources/player/default_movement.tres` stores shared movement tuning.
 - `tests/` contains physics regression scripts; `tools/` contains smoke-build helpers.
 - Bosses (Khara, Ravan) share the generic `scenes/ui/boss_health_bar.tscn`; boss-specific UI is a small add-on node, not a second bar. Boss design docs live in `docs/bosses/`.
-- `docs/team_workflow.md` records ownership and gameplay contracts. `asset-builder/` contains local sprite tooling and reference images; current gameplay uses scene/script placeholders.
+- Robin, Siya's bird companion, is `scenes/companions/robin.tscn`. Levels place `robin_hint.tscn` areas for his tips. See `docs/robin.md`.
+- `docs/team_workflow.md` records ownership and gameplay contracts. `asset-builder/` contains local sprite tooling and reference images; current gameplay uses scene/script placeholders. Art scale: 1 game unit = 2 art px, so generated sprites and backgrounds are placed at scale 0.5 (Siya's 80px sprite fits her 24x40 collider); sizes per role are in `asset-builder/skills/siyaraj-assets/SKILL.md`.
 
 ## Build, Test, and Development Commands
 
@@ -45,6 +46,7 @@ godot --headless --path . --script res://tests/khara_boss_check.gd
 godot --headless --path . --script res://tests/ravan_check.gd
 godot --headless --path . --script res://tests/next_levels_check.gd
 godot --headless --path . --script res://tests/playtest_menu_check.gd
+godot --headless --path . --script res://tests/robin_check.gd
 ```
 
 `GODOT_BIN=godot ./tools/smoke_build.sh` imports resources and exports `builds/linux/siyaraj.pck`. `GODOT_BIN=godot ./tools/run_smoke_build.sh --headless --quit-after 120` launches that pack outside the editor. Substitute the executable path when needed. Standalone Linux exports require matching export templates.

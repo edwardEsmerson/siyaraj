@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/companions/robin_hint.gd" id="1_hint"]
+
+[sub_resource type="RectangleShape2D" id="HintShape"]
+resource_local_to_scene = true
+size = Vector2(64, 480)
+
+[node name="RobinHint" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_hint")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -200)
+shape = SubResource("HintShape")
