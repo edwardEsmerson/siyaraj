@@ -1,0 +1,37 @@
+{
+  "name": "checkpoint-diya",
+  "animation": "lit",
+  "size": "2K",
+  "view": "front",
+  "subject": "prop",
+  "anchor_mode": "feet",
+  "fps": 8,
+  "loop": "none",
+  "poses": [
+    "EXACTLY the same clay lamp, same position, same size, same painted band, every clay pixel unchanged. The ONLY change: the wick is now burning, so the charred dark grey wick tip becomes a bright marigold-yellow glowing ember tip with one white-hot pixel, and the top third of the wick is tinted warm yellow. Do NOT draw any flame, fire, smoke, halo or glow around it (the flame is a separate sprite)."
+  ],
+  "expected_frames": 1,
+  "free_palette": false,
+  "durations": [
+    1.0
+  ],
+  "frames": [
+    "01"
+  ],
+  "problems": {},
+  "models": {
+    "01": "flash"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 25.6
+  },
+  "canvas": [
+    80,
+    80
+  ],
+  "anchor": [
+    40,
+    75
+  ]
+}

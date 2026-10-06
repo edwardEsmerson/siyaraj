@@ -1,0 +1,27 @@
+{
+  "name": "swami-shockwave",
+  "brief": "a low rolling wave of golden energy and dust rushing along the ground to the RIGHT: a curling gold and cream crest at the right front, a trail of tan dust puffs behind it to the left, a flat bottom edge. About one and a half times wider than tall. No character.",
+  "key": "blue",
+  "role": "hero",
+  "target": 64,
+  "size": "2K",
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "prop",
+  "candidate_id": "02",
+  "model": "pro",
+  "canvas": [
+    96,
+    96
+  ],
+  "anchor": [
+    48,
+    90
+  ],
+  "art_dimensions": [
+    64,
+    29
+  ],
+  "generation_pixel_size": 25.59375,
+  "problems": []
+}

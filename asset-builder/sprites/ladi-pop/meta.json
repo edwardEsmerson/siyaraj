@@ -1,0 +1,27 @@
+{
+  "name": "ladi-pop",
+  "brief": "A small Diwali firecracker pop explosion effect at ground level, side view, wider than tall: a jagged white-hot and bright yellow starburst flash in the middle, short marigold-orange spark streaks shooting up and out, a few small torn red paper confetti scraps flying outward, a small round grey-white smoke puff starting at the bottom. Flat bottom edge where it touches the ground. Hard-edged chunky pixel effect with a few hard colour steps, no soft glow, no gradients. ONLY the explosion: no cracker, no object, no character.",
+  "key": "blue",
+  "role": "prop",
+  "target": 72,
+  "size": "2K",
+  "anchor_mode": "feet",
+  "view": "front",
+  "subject": "prop",
+  "candidate_id": "03",
+  "model": "flash",
+  "canvas": [
+    112,
+    112
+  ],
+  "anchor": [
+    56,
+    105
+  ],
+  "art_dimensions": [
+    66,
+    47
+  ],
+  "generation_pixel_size": 18.791666666666668,
+  "problems": []
+}

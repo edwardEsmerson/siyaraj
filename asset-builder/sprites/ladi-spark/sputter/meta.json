@@ -1,0 +1,45 @@
+{
+  "name": "ladi-spark",
+  "animation": "sputter",
+  "size": "2K",
+  "view": "front",
+  "subject": "prop",
+  "anchor_mode": "center",
+  "fps": 15,
+  "loop": "loop",
+  "poses": [
+    "the same fuse spark, sputter phase A: white-hot core slightly smaller, rays shorter and uneven, longer rays to the upper left, two tiny orange embers flying up-left",
+    "the same fuse spark, sputter phase B: white-hot core larger and brighter, rays long and spiky in all directions, one ember dropping down-right",
+    "the same fuse spark, sputter phase C: core small, only four or five short yellow rays mostly upward, three tiny separate orange embers scattered around"
+  ],
+  "expected_frames": 3,
+  "free_palette": true,
+  "durations": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "frames": [
+    "01",
+    "02",
+    "03"
+  ],
+  "problems": {},
+  "models": {
+    "01": "pro",
+    "02": "flash",
+    "03": "flash"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 42.666666666666664
+  },
+  "canvas": [
+    48,
+    48
+  ],
+  "anchor": [
+    24,
+    24
+  ]
+}

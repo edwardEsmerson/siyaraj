@@ -1,0 +1,27 @@
+{
+  "name": "raj-cage",
+  "brief": "An ornate hanging gilded iron birdcage big enough for a seated man, Mughal / Rajput palace style, the same design as the attached cage reference. Rounded onion dome top with a finial and a large round hanging ring at the very top. Tall cylindrical body, about twice as tall as the dome: evenly spaced thin vertical gold bars, a band of small scalloped arches under the dome rim and another just above the base. In the centre of the front, a closed tall hinged door outlined in thicker gold with a small empty latch hasp at its middle (NO padlock). Heavy round floor plate base with a scalloped gold rim. Gold and brass metal with deep aubergine outlines, small hot-pink tassels hanging from the dome rim. Empty: nothing inside, the inside is open see-through background between the bars.",
+  "key": "green",
+  "role": "hero",
+  "target": 300,
+  "size": "4K",
+  "anchor_mode": "feet",
+  "view": "front",
+  "subject": "prop",
+  "candidate_id": "01",
+  "model": "pro",
+  "canvas": [
+    464,
+    464
+  ],
+  "anchor": [
+    232,
+    435
+  ],
+  "art_dimensions": [
+    154,
+    306
+  ],
+  "generation_pixel_size": 12.086666666666666,
+  "problems": []
+}

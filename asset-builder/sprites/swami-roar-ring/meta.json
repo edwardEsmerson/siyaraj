@@ -1,0 +1,27 @@
+{
+  "name": "swami-roar-ring",
+  "brief": "a cartoon roar sound blast seen from the front: three thick concentric crescent arcs of gold and cream, opening outward in a ring around an empty centre, with small gold spark ticks. No character, no mouth.",
+  "key": "blue",
+  "role": "hero",
+  "target": 112,
+  "size": "2K",
+  "anchor_mode": "center",
+  "view": "front",
+  "subject": "prop",
+  "candidate_id": "02",
+  "model": "flash",
+  "canvas": [
+    160,
+    160
+  ],
+  "anchor": [
+    80,
+    80
+  ],
+  "art_dimensions": [
+    97,
+    99
+  ],
+  "generation_pixel_size": 14.526785714285714,
+  "problems": []
+}

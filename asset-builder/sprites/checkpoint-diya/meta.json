@@ -1,0 +1,27 @@
+{
+  "name": "checkpoint-diya",
+  "brief": "Standalone UNLIT traditional Diwali clay diya oil lamp, a save-point prop. Side view seen a little from above. SHAPE: a SHALLOW wide almond / leaf-shaped open clay dish (NOT a deep bowl, about 2.5 times wider than tall), low gently curved sides, small round flat foot, and the right end narrows and is PINCHED UP into a clear pointed spout lip like a teardrop tip. A thick twisted white cotton wick lies in the spout, its tip poking up and out of the spout, tip charred dark grey (unlit). COLOURS: warm terracotta orange-brown clay, two flat shading tones, a dark brown oil well inside the rim with one golden oil glint line. Painted side band: a bold clean row of 5 white dots alternating with marigold-yellow four-petal flower dots, and one thin white rim line; large readable motifs, not speckle noise. Thick deep aubergine outline. About 56 pixels wide and 22 pixels tall. No flame, fire, smoke, glow or sparks.",
+  "key": "green",
+  "role": "prop",
+  "target": 56,
+  "size": "2K",
+  "anchor_mode": "feet",
+  "view": "front",
+  "subject": "prop",
+  "candidate_id": "01",
+  "model": "flash",
+  "canvas": [
+    80,
+    80
+  ],
+  "anchor": [
+    40,
+    75
+  ],
+  "art_dimensions": [
+    52,
+    33
+  ],
+  "generation_pixel_size": 24.857142857142858,
+  "problems": []
+}

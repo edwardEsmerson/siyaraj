@@ -74,7 +74,7 @@ in the Movement, Gada slam and Ladi fireworks inspector groups.
   - The red crackers are physically laid out on the side the chain will travel.
   - Three yellow chevrons pulse at the lit end, pointing that way.
   - A faint yellow lane covers the full blast length.
-  - A sputtering yellow spark with a countdown ring sits at the lit end.
+  - A sputtering spark burns along a short lead into the lit end, inside a countdown ring.
 - The string itself is harmless until the fuse finishes, so Siya can walk across it.
 - Counterplay:
   - Cross to the **other side of the lit end** during the fuse.
@@ -159,10 +159,10 @@ Effects:
 
 | Effect | Size | Frames |
 | --- | --- | --- |
-| Ladi cracker (unlit) | 8 x 14 px red tube with a gold wick, plus a cord tile | static |
-| Ladi pop | 34 x 18 px flash with sparks above | 4-5 frames, 0.16 s |
-| Ladi ash | 10 x 4 px | static |
-| Fuse spark | 8-12 px, looping sputter | 3-4 frames |
+| Ladi cracker (unlit) | `assets/sprites/ladi/cracker.png` (7 x 17 px in game) on the tiling `cord.png` | static |
+| Ladi pop | `pop_0..3.png`, flash, red confetti and smoke over the 34 x 18 px hitbox | 4 frames, 0.16 s |
+| Ladi ash | `ash_0..1.png` burnt husks | static |
+| Fuse spark | `spark_0..2.png`, looping sputter at 15 fps | 3 frames |
 | Direction chevron | 3 per ladi, about 8 x 16 px | static |
 | Shockwave | 28 x 16 px dust crescent | 3-4 looping frames |
 | Slam impact dust/crack | about 120 px wide | 4 frames |

@@ -498,7 +498,24 @@
           "free_palette": false,
           "approval": "approved",
           "wave": "reuse",
-          "notes": "`poses/fly.txt`"
+          "notes": "`poses/fly.txt`",
+          "source_models": {
+            "01": "approved-base",
+            "02": "pro",
+            "03": "pro",
+            "04": "pro"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "calibration_cell": 1,
+            "registration": "body, via the sheet's calibration cell",
+            "source_pixel_spacing": {
+              "01": null,
+              "02": 8.0,
+              "03": 8.0,
+              "04": 8.0
+            }
+          }
         },
         "hover": {
           "frame_count": 2,
@@ -515,7 +532,20 @@
           "free_palette": false,
           "approval": "approved",
           "wave": "movement",
-          "notes": "Poses: \"Hovering in place, wings raised, beak closed\" / \"Hovering, wings down, beak closed\"."
+          "notes": "Poses: \"Hovering in place, wings raised, beak closed\" / \"Hovering, wings down, beak closed\".",
+          "source_models": {
+            "01": "pro",
+            "02": "pro"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "calibration_cell": 1,
+            "registration": "body, via the sheet's calibration cell",
+            "source_pixel_spacing": {
+              "01": 8.0,
+              "02": 8.0
+            }
+          }
         },
         "hint": {
           "frame_count": 2,
@@ -534,13 +564,17 @@
           "wave": "story",
           "notes": "Shown next to new hazards. Poses: \"Hovering, one wing pointing forward, beak wide open talking\" / \"Hovering, wing pointing, beak closed, eyebrow raised\".",
           "source_models": {
-            "01": "imagegen",
-            "02": "imagegen"
+            "01": "pro",
+            "02": "pro"
           },
           "source_grid": {
             "mode": "uniform",
-            "source_pixel_spacing": 4.854166666666667,
-            "calibration_cell": 1
+            "calibration_cell": 1,
+            "registration": "body, via the sheet's calibration cell",
+            "source_pixel_spacing": {
+              "01": 8.0,
+              "02": 8.0
+            }
           }
         },
         "perch": {
@@ -558,7 +592,20 @@
           "free_palette": false,
           "approval": "approved",
           "wave": "reuse",
-          "notes": "Sitting on Siya's shoulder or a ledge in cutscenes. Poses: \"Perched, wings folded, feet gripping\" / \"Perched, head tilted, blinking\"."
+          "notes": "Sitting on Siya's shoulder or a ledge in cutscenes. Poses: \"Perched, wings folded, feet gripping\" / \"Perched, head tilted, blinking\".",
+          "source_models": {
+            "01": "pro",
+            "02": "pro"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "calibration_cell": 1,
+            "registration": "body, via the sheet's calibration cell",
+            "source_pixel_spacing": {
+              "01": 8.0,
+              "02": 8.0
+            }
+          }
         },
         "peck": {
           "frame_count": 3,
@@ -579,14 +626,19 @@
           "wave": "story",
           "notes": "The Robin strike. Poses: \"Wings pulled back, beak aimed forward, body coiled\" / \"Darting forward, beak jabbing, wings swept back\" / \"Bouncing back, wings flared\".",
           "source_models": {
-            "01": "imagegen",
-            "02": "imagegen",
-            "03": "imagegen"
+            "01": "pro",
+            "02": "pro",
+            "03": "pro"
           },
           "source_grid": {
             "mode": "uniform",
-            "source_pixel_spacing": 4.854166666666667,
-            "calibration_cell": 1
+            "calibration_cell": 1,
+            "registration": "body, via the sheet's calibration cell",
+            "source_pixel_spacing": {
+              "01": 8.0,
+              "02": 8.0,
+              "03": 8.0
+            }
           }
         },
         "dive": {
@@ -608,14 +660,19 @@
           "wave": "story",
           "notes": "Boss fight. Poses: \"Wings folded tight, diving steeply down-forward\" / \"Pulling out of the dive, wings flaring wide\" / \"Swooping level, wings spread\".",
           "source_models": {
-            "01": "imagegen",
-            "02": "imagegen",
-            "03": "imagegen"
+            "01": "pro",
+            "02": "pro",
+            "03": "pro"
           },
           "source_grid": {
             "mode": "uniform",
-            "source_pixel_spacing": 4.854166666666667,
-            "calibration_cell": 1
+            "calibration_cell": 1,
+            "registration": "body, via the sheet's calibration cell",
+            "source_pixel_spacing": {
+              "01": 8.0,
+              "02": 8.0,
+              "03": 8.0
+            }
           }
         },
         "drop_sparks": {
@@ -635,13 +692,17 @@
           "wave": "story",
           "notes": "Boss fight. Use `--free-palette`. Poses: \"Hovering, tail flicking down, a spray of sparks falling below\" / \"Wings up, sparks trailing\".",
           "source_models": {
-            "01": "imagegen",
-            "02": "imagegen"
+            "01": "pro",
+            "02": "pro"
           },
           "source_grid": {
             "mode": "uniform",
-            "source_pixel_spacing": 4.854166666666667,
-            "calibration_cell": 1
+            "calibration_cell": 1,
+            "registration": "body, via the sheet's calibration cell",
+            "source_pixel_spacing": {
+              "01": 8.0,
+              "02": 8.0
+            }
           }
         },
         "hypnotised": {
@@ -661,13 +722,17 @@
           "wave": "story",
           "notes": "Use `--free-palette`. Poses: \"Hovering stiffly, eyes replaced by purple spirals, beak open\" / \"Same, spirals turned the other way\".",
           "source_models": {
-            "01": "imagegen",
-            "02": "imagegen"
+            "01": "pro",
+            "02": "pro"
           },
           "source_grid": {
             "mode": "uniform",
-            "source_pixel_spacing": 4.854166666666667,
-            "calibration_cell": 1
+            "calibration_cell": 1,
+            "registration": "body, via the sheet's calibration cell",
+            "source_pixel_spacing": {
+              "01": 7.989,
+              "02": 7.989
+            }
           }
         },
         "dizzy": {
@@ -689,14 +754,19 @@
           "wave": "story",
           "notes": "The dizzy meter is full. Poses: \"Wobbling in the air, eyes as X marks, feathers ruffled\" / \"Tumbling sideways, wings limp\" / \"Lying on his back on the ground, little stars circling (separate fx)\".",
           "source_models": {
-            "01": "imagegen",
-            "02": "imagegen",
-            "03": "imagegen"
+            "01": "pro",
+            "02": "pro",
+            "03": "pro"
           },
           "source_grid": {
             "mode": "uniform",
-            "source_pixel_spacing": 4.854166666666667,
-            "calibration_cell": 1
+            "calibration_cell": 1,
+            "registration": "body, via the sheet's calibration cell",
+            "source_pixel_spacing": {
+              "01": 8.788,
+              "02": 7.989,
+              "03": 7.989
+            }
           }
         },
         "wake": {
@@ -716,13 +786,17 @@
           "wave": "story",
           "notes": "Poses: \"Sitting up, shaking his head\" / \"Hopping up, wings out, determined\".",
           "source_models": {
-            "01": "imagegen",
-            "02": "imagegen"
+            "01": "pro",
+            "02": "pro"
           },
           "source_grid": {
             "mode": "uniform",
-            "source_pixel_spacing": 4.854166666666667,
-            "calibration_cell": 1
+            "calibration_cell": 1,
+            "registration": "body, via the sheet's calibration cell",
+            "source_pixel_spacing": {
+              "01": 9.586,
+              "02": 9.187
+            }
           }
         }
       },
