@@ -46,6 +46,7 @@ func run_checks() -> void:
 	# Guard/gate regression stays isolated from the independently tested flyer.
 	course.get_node("FlyingEnemy").set_physics_process(false)
 	course.get_node("Brute").set_physics_process(false)
+	course.get_node("GroundShooter").set_physics_process(false)
 	await ticks(3)
 	check(player.is_on_floor(), "Combined course must spawn Siya on solid ground")
 	check(current_scene.get_node("Camera2D").limit_right == 4800, "Camera must cover the finish platform")

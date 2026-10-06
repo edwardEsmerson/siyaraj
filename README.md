@@ -49,12 +49,18 @@ deals two damage with a wider strike, and resists knockback. It moves more slowl
 and signals its attack with a 0.7-second orange wind-up, followed by a long
 recovery. Step back, then counterattack; hits still interrupt its swing.
 It uses ordinary enemy health and defeat feedback and has no boss phases.
+The ground shooter patrols with gravity and turns at walls and platform edges.
+It stops for a purple charge, then fires a slower purple homing bolt that curves
+toward Siya. Its limited turning speed lets you jump or air dash past it; bolts
+stop at solid world and expire after 2.8 seconds. J interrupts the charge and
+three hits defeat the shooter. The main course places it after the guard.
 
 For isolated tuning, open `scenes/main/movement_playground.tscn` or
 `scenes/combat/combat_arena.tscn` and press F6. The original
 `scenes/enemies/enemy_test.tscn` remains a separate button-driven damage test.
 Open `scenes/combat/flying_enemy_arena.tscn` with F6 to test just the flyer.
 Open `scenes/combat/brute_arena.tscn` with F6 to fight just the Brute.
+Open `scenes/combat/ground_shooter_arena.tscn` with F6 to test just the shooter.
 
 Controls: A/D or arrows to move, Space to jump, Shift to dash, J to attack,
 and R to restart. Holding J does not automatically repeat attacks.
@@ -65,6 +71,8 @@ and knockback on its Sparkler child. Enemy detection and speed live on the enemy
 root; enemy attack timing lives on its MeleeAttack child.
 The flying enemy root exposes patrol speed/radius, detection range, charge and
 recovery timing, and projectile speed, damage, lifetime, and knockback.
+The ground shooter also exposes gravity and projectile turning speed (radians
+per second). Its projectile uses the same swept collisions and player damage API.
 
 Run the physics regression checks with:
 
@@ -77,6 +85,7 @@ godot --headless --path . --script res://tests/forest_check.gd
 godot --headless --path . --script res://tests/forest_rooms_check.gd
 godot --headless --path . --script res://tests/flying_enemy_check.gd
 godot --headless --path . --script res://tests/brute_check.gd
+godot --headless --path . --script res://tests/ground_shooter_check.gd
 ```
 
 See [the team workflow](docs/team_workflow.md) for ownership, agreed rules,
@@ -121,6 +130,10 @@ To run the Brute arena from the pack:
 
 ```sh
 GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh res://scenes/combat/brute_arena.tscn
+To run the ground shooter arena from the pack:
+
+```sh
+GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh res://scenes/combat/ground_shooter_arena.tscn
 ```
 
 For a standalone Linux build, install the matching 4.7.2 export templates via
