@@ -2,7 +2,6 @@ extends Node2D
 ## Robin, Siya's bird companion. He flies free of collisions, follows Siya, perches on her
 ## head when she stands still, points out hints and comments on what happens. He never
 ## deals or takes damage. Cutscenes and the boss fight drive him with take_control().
-const Burst = preload("res://scripts/effects/burst.gd")
 
 signal arrived
 signal spoke(text: String)
@@ -27,13 +26,14 @@ const LINES: Dictionary = {
 ## Beyond this distance (scene reloads, room changes) Robin pops back beside Siya.
 @export var teleport_distance: float = 700.0
 @export var perch_delay: float = 2.0
-@export var idle_chatter_delay: float = 9.0
 @export var point_speed: float = 420.0
 ## A pointed hint ends early if Siya moves this far from the hint spot.
 @export var point_leash: float = 380.0
 @export var bubble_duration: float = 3.0
-@export var warn_range: float = 260.0
-@export var warn_cooldown: float = 5.0
+## Keep tutorials clear of nearby enemies and hostile shots.
+@export var combat_range: float = 320.0
+## Quiet time after a tutorial bubble ends.
+@export var hint_cooldown: float = 2.0
 @export var reaction_cooldown: float = 2.5
 
 ## Hint ids already shown this session. Survives death reloads; reset by forget_hints().
@@ -45,17 +45,15 @@ var velocity: Vector2 = Vector2.ZERO
 var facing: int = 1
 var _placed: bool = false
 var _idle_time: float = 0.0
-var _chattered: bool = false
 var _bubble_remaining: float = 0.0
+var _tutorial_bubble: bool = false
 var _point_at: Vector2
 var _point_remaining: float = 0.0
 var _scripted_target: Vector2
 var _scripted_speed: float = 0.0
 var _scripted_moving: bool = false
-var _warn_remaining: float = 0.0
-var _scan_remaining: float = 0.0
+var _hint_remaining: float = 0.0
 var _reaction_remaining: float = 0.0
-var _warned: Dictionary = {}
 var _time: float = 0.0
 
 @onready var visuals: Node2D = $Visuals
@@ -83,7 +81,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_time += delta
 	_bubble_remaining = maxf(_bubble_remaining - delta, 0.0)
-	_warn_remaining = maxf(_warn_remaining - delta, 0.0)
+	_hint_remaining = maxf(_hint_remaining - delta, 0.0)
 	_reaction_remaining = maxf(_reaction_remaining - delta, 0.0)
 	bubble.visible = _bubble_remaining > 0.0
 	if player == null or not is_instance_valid(player):
@@ -105,10 +103,6 @@ func _find_player() -> void:
 	if player == null:
 		return
 	player.died.connect(func() -> void: react(&"down", true))
-	player.health_changed.connect(func(remaining: int) -> void:
-		if remaining > 0:
-			react(&"hurt")
-	)
 
 
 func _follow_spot() -> Vector2:
@@ -126,12 +120,10 @@ func _process_follow(delta: float) -> void:
 	_fly_toward(spot, delta)
 	if player.state == player.State.DEAD:
 		return
-	_scan_for_enemies(delta)
 	var resting: bool = player.state == player.State.NORMAL and player.is_on_floor() and player.velocity.length() < 5.0
 	_idle_time = _idle_time + delta if resting else 0.0
 	if _idle_time >= perch_delay and _bubble_remaining <= 0.0:
 		mode = Mode.PERCH
-		_chattered = false
 
 
 func _process_perch(delta: float) -> void:
@@ -154,13 +146,14 @@ func _process_perch(delta: float) -> void:
 	else:
 		global_position = seat
 		velocity = Vector2.ZERO
-	_idle_time += delta
-	if not _chattered and _idle_time >= idle_chatter_delay:
-		_chattered = true
-		react(&"idle", true)
 
 
 func _process_point(delta: float) -> void:
+	if _tutorial_bubble and combat_is_near():
+		_bubble_remaining = 0.0
+		bubble.visible = false
+		mode = Mode.FOLLOW
+		return
 	_point_remaining = maxf(_point_remaining - delta, 0.0)
 	_fly_toward(_point_at + Vector2(0.0, sin(_time * 4.0) * 4.0), delta, point_speed)
 	var wandered: bool = player != null and player.global_position.distance_to(_point_at) > point_leash
@@ -191,35 +184,30 @@ func _fly_toward(spot: Vector2, delta: float, speed_limit: float = max_speed) ->
 	global_position += velocity * delta
 
 
-func _scan_for_enemies(delta: float) -> void:
-	_scan_remaining -= delta
-	if _scan_remaining > 0.0 or _warn_remaining > 0.0 or _bubble_remaining > 0.0:
-		return
-	_scan_remaining = 0.2
-	var enemies := _new_enemies_near(player.global_position, warn_range)
-	if enemies.is_empty():
-		return
-	_warned[enemies[0].get_instance_id()] = true
-	_warn_remaining = warn_cooldown
-	react(&"enemy", true)
-	Burst.spawn(get_tree().current_scene, global_position + Vector2(0, -14), Color(1.0, 0.85, 0.3), "!", 14.0)
-
-
-## Living enemy bodies within radius that Robin has not called out yet.
-func _new_enemies_near(center: Vector2, radius: float) -> Array[Object]:
+## Tutorials wait until Siya is free to read; story say() calls bypass this gate.
+func combat_is_near() -> bool:
+	if player == null or not is_instance_valid(player):
+		return true
+	if player.state in [player.State.HURT, player.State.DEAD] or player.sparkler.is_busy():
+		return true
+	if player.get("charging") == true:
+		return true
+	for property in [&"shot_recovery_remaining", &"special_recovery"]:
+		var remaining: Variant = player.get(property)
+		if remaining != null and float(remaining) > 0.0:
+			return true
 	var circle := CircleShape2D.new()
-	circle.radius = radius
+	circle.radius = combat_range
 	var query := PhysicsShapeQueryParameters2D.new()
 	query.shape = circle
-	query.transform = Transform2D(0.0, center)
-	query.collision_mask = 4
-	var found: Array[Object] = []
+	query.transform = Transform2D(0.0, player.global_position + Vector2(0, -20))
+	query.collision_mask = 4 | 16
+	query.collide_with_areas = true
 	for result in get_world_2d().direct_space_state.intersect_shape(query):
-		var enemy: Object = result.collider
-		var health: Variant = enemy.get("health")
-		if not _warned.has(enemy.get_instance_id()) and (health == null or int(health) > 0):
-			found.append(enemy)
-	return found
+		var health: Variant = result.collider.get("health")
+		if health == null or int(health) > 0:
+			return true
+	return false
 
 
 func _update_visuals() -> void:
@@ -251,6 +239,7 @@ func _update_visuals() -> void:
 
 ## Show a speech bubble above Robin. Works in every mode, including scripted scenes.
 func say(text: String, duration: float = bubble_duration) -> void:
+	_tutorial_bubble = false
 	bubble_label.text = _wrap(text, 30)
 	bubble.reset_size()
 	bubble.position = Vector2(-bubble.size.x * 0.5, -bubble.size.y - 20.0)
@@ -286,16 +275,17 @@ func react(event: StringName, force: bool = false) -> void:
 func point_out(at: Vector2, text: String, hint_id: String = "", duration: float = 3.5) -> bool:
 	if mode == Mode.SCRIPTED or (not hint_id.is_empty() and seen_hints.has(hint_id)):
 		return false
+	if _bubble_remaining > 0.0 or _hint_remaining > 0.0 or combat_is_near() or player.state == player.State.DASH:
+		return false
 	if not hint_id.is_empty():
 		seen_hints[hint_id] = true
-	# A hint about an enemy already counts as the warning for it.
-	for enemy in _new_enemies_near(at, warn_range * 2.0):
-		_warned[enemy.get_instance_id()] = true
+	_hint_remaining = duration + hint_cooldown
 	mode = Mode.POINT
 	_point_at = at
 	_point_remaining = duration
 	_idle_time = 0.0
 	say(text, duration)
+	_tutorial_bubble = true
 	return true
 
 
