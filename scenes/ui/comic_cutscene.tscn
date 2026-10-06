@@ -1,0 +1,104 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/comic_cutscene.gd" id="1_script"]
+[ext_resource type="Theme" path="res://resources/ui/siyaraj_theme.tres" id="2_theme"]
+
+[sub_resource type="StyleBoxFlat" id="SpeechBubble"]
+bg_color = Color(1, 0.94, 0.82, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.16, 0.05, 0.19, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+
+[node name="ComicCutscene" type="CanvasLayer"]
+layer = 40
+script = ExtResource("1_script")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+color = Color(0.035, 0.025, 0.075, 1)
+
+[node name="PanelArt" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="BubbleTail" type="Polygon2D" parent="."]
+z_index = 1
+polygon = PackedVector2Array(92, 402, 148, 402, 111, 366)
+color = Color(0.16, 0.05, 0.19, 1)
+
+[node name="BubbleTailInner" type="Polygon2D" parent="."]
+z_index = 1
+polygon = PackedVector2Array(98, 399, 142, 399, 112, 372)
+color = Color(1, 0.94, 0.82, 1)
+
+[node name="DialogueBubble" type="PanelContainer" parent="."]
+anchors_preset = 10
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -438.0
+offset_top = 388.0
+offset_right = 438.0
+offset_bottom = 526.0
+grow_horizontal = 2
+z_index = 2
+theme = ExtResource("2_theme")
+theme_override_styles/panel = SubResource("SpeechBubble")
+
+[node name="Contents" type="HBoxContainer" parent="DialogueBubble"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Portrait" type="TextureRect" parent="DialogueBubble/Contents"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Words" type="VBoxContainer" parent="DialogueBubble/Contents"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Speaker" type="Label" parent="DialogueBubble/Contents/Words"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_type_variation = &"HeaderLabel"
+theme_override_font_sizes/font_size = 20
+
+[node name="Dialogue" type="Label" parent="DialogueBubble/Contents/Words"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 17
+autowrap_mode = 3
+
+[node name="Advance" type="Label" parent="DialogueBubble/Contents/Words"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.44, 0.24, 0.34, 1)
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 2

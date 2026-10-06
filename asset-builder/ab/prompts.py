@@ -120,6 +120,16 @@ def texture(brief, key, roles, mode):
                   "background behind. Terrain reads clearly against the background; characters stay the "
                   "brightest, most saturated things on screen.")
         bg = ""
+    elif mode == "panel":  # one complete comic illustration; dialogue is drawn in Godot
+        layout = ("One complete static comic-book story panel for a 2D side-scrolling platform game, 16:9. "
+                  "Show one clear moment in one continuous scene, with a strong readable foreground and background "
+                  "and a clear focal action. Compose important faces and action inside the central 90 percent. "
+                  "Reserve the lower quarter as a calm, uncluttered area for a dialogue bubble that will be added "
+                  "in-game. This is a single illustration, not a comic page, grid, collage, or sequence. "
+                  "No speech bubbles, captions, lettering, sound effects, logos, UI, or watermark. Do not make it "
+                  "seamless or tileable. Use a simple dark aubergine panel edge with a restrained rangoli corner "
+                  "ornament; the illustration fills the rest of the frame.")
+        bg = ""
     else:  # cutout layer: shapes over a key colour (foreground parallax, props, platforms)
         layout = ("A wide side-scrolling parallax layer of silhouettes/shapes placed over a flat key colour, "
                   "horizontally seamless, side view, no characters, no UI, no text.")

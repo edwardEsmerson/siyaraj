@@ -193,13 +193,12 @@ Open the file, judge it, then reply "fine" or "redo X".
   handle, uses the 26 hand registrations and hides during two-handed actions and
   defeat. It has to line up with the existing slam and shockwave hitboxes and the
   phase-2 flame crown. `tests/khara_boss_check.gd` must pass.
-- [ ] **C4. Comic cutscene system.** Show static panels with speech bubbles that
-  advance on a key press, plus a dialogue/hint box with portraits for Robin and the
-  tutorial prompts. Add a small tool change for panel generation
-  (`Sprites_List.md` §8), then generate and wire the intro, pre-Khara,
-  pre-Swaminathan and ending panels from the beats you approve in A. Needs:
-  dialogue panel, portraits for Siya, Robin and Raj, and the P2 comic hit words
-  (BOOM!, ZAP!, POP!, DHAM!).
+- [ ] **C4. Comic cutscene system.** The reusable player and `ab texture --mode panel`
+  are in place: static panels advance on `ui_accept`, and the same scene can show
+  portrait dialogue/hints. Approve the story beats in A, then generate and wire the
+  intro, pre-Khara, pre-Swaminathan and ending panels. Remaining art: dialogue panel,
+  portraits for Siya, Robin and Raj, and the P2 comic hit words (BOOM!, ZAP!, POP!,
+  DHAM!). See `docs/cutscenes.md`.
 - [ ] **C5. Boss arenas inside the levels.** Replace the "TRAIL CLEARED → Enter"
   jump to a separate showdown scene with a walk-in arena: entrance, a checkpoint
   before the fight, and a gate that unlocks after the win. Khara at the end of the
