@@ -69,9 +69,9 @@ Open the file, judge it, then reply "fine" or "redo X".
   `C:\Users\solan\Desktop\git repos\siyaraj\docs\art\cast_review.html` in a browser
   and flag every animation that looks bad, as you did with Ravan. Better still, play
   the F6 scene `scenes/dev/cast_preview.tscn` to judge timing.
-- [ ] **The current Ravan/Swaminathan sprite is horrible.** It's already flagged and
-  being replaced (C1). Don't wire the current `swaminathan` / `swaminathan-head`
-  art into the fight.
+- [ ] **The new Swaminathan state sprites (C1, PR #26):** check
+  `docs\screenshots\swaminathan_states.png`, `swaminathan_fight.png` and
+  `swaminathan_sever.png`, then reply "fine" or "redo X".
 - [ ] **Every art-integration PR** from B and C must include in-engine screenshots in
   `docs\screenshots\`. Check each one before merge.
 - [ ] **Audio mix:** once B4 lands, listen to one full run for loud or quiet cues and
@@ -164,25 +164,17 @@ Open the file, judge it, then reply "fine" or "redo X".
 
 ## C. Really good LLM
 
-- [ ] **C1. Rebuild Swaminathan as one body sprite per head state.** The current
-  sprite is horrible. **Code half done** (branch `feat/swaminathan-hp-heads`): the
-  ten `ravan_head.tscn` entities are gone; one 80-health pool is hit anywhere,
-  each tenth severs the rightmost head (no regrowth), heads are fixed attack
-  origins with a glow telegraph, Fury uses the living heads, and the body loads
-  `assets/sprites/swaminathan-states/state_NN.png` with a code placeholder until
-  the art exists. `tests/ravan_check.gd` and `docs/bosses/boss2-ravan.md` are
-  updated; placeholder shots are in `docs/screenshots/swaminathan_*.png`.
+- [ ] **C1. Rebuild Swaminathan as one body sprite per head state.** Code and art
+  done (branch `feat/swaminathan-hp-heads`, PR #26): one 80-health pool hit
+  anywhere, each tenth severs the rightmost head (no regrowth), heads are fixed
+  attack origins with a glow telegraph, Fury uses the living heads. Art: state 10
+  (`asset-builder/sprites/swaminathan-full`) was generated from the approved
+  `swaminathan` body + `swaminathan-head` faces; states 9..0 are cut from it by
+  `tools/swaminathan_states.py` and exported to `assets/sprites/swaminathan-states/`.
+  `HEAD_OFFSETS` and the hurtbox match the art. Shots: `docs/screenshots/swaminathan_*.png`.
   What's left:
-  - **Art:** generate one full-body sprite per head state, `state_10.png` down to
-    `state_01.png` plus `state_00.png` (headless), 880 x 480 px, feet at the bottom
-    centre (spec in `docs/bosses/boss2-ravan.md`). Heads are removed **right to
-    left**, so state *n* shows the leftmost *n* heads. The same body, crown,
-    moustache and pose must hold across all states: generate state 10 first, get
-    it approved, then derive the others from it. Do not wire the old
-    `swaminathan` / `swaminathan-head` art.
-  - **Align:** once state 10 is approved, set `HEAD_OFFSETS` in
-    `scripts/bosses/ravan/ravan_body.gd` to its face centres, re-run
-    `tools/ravan_shots.gd` and send the 11-state sheet for review.
+  - **User review** of the 11-state sheet and the fight/sever shots.
+  - Confirm the Fury-uses-living-heads rule; playtest the 80 HP pool.
 - [ ] **C2. Wire Siya's 15 animations into the player.** Drive a sprite state machine
   from the movement and combat state: idle, run, jump (frame picked by vertical
   velocity), dash (ground and air), lash, air lash (hit on frame 2), skyshot,

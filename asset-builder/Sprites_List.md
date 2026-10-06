@@ -129,8 +129,19 @@ these, so keep them readable and comic rather than scary.
 
 ### Swaminathan (final boss; code: Ravan, `docs/bosses/boss2-ravan.md`)
 
-Ten heads on necks over one body. Code draws the necks as lines. The heads and the
-body are separate nodes and separate sprites.
+In game he is **one full-body sprite per head state** (`state_10` down to `state_00`);
+heads are severed right to left. The separate body and head below are the approved
+model those state sprites were built from.
+
+- [x] **P0 Swaminathan body states** (`swaminathan-full`, big-boss, `--height 410` re-clean)
+  - State 10: `ab sprite` with `--style none -r <layout>`, where the layout reference placed
+    the approved `swaminathan` body and the ten `swaminathan-head/faces` on curving necks
+    over the collar (Mada to Chitta, left to right). Body at the approved body's scale.
+  - States 9 to 0: `~/ml/bin/python tools/swaminathan_states.py` (from the repo root) cuts
+    the rightmost heads off state 10 and caps the neck stumps, so every state is
+    pixel-identical apart from the lost heads. Sources in `sprites/swaminathan-full/states/`.
+  - Game export: `assets/sprites/swaminathan-states/state_NN.png`, 464 x 384 art px, feet at
+    the bottom centre; head offsets in `scripts/bosses/ravan/ravan_body.gd`.
 
 - [x] **P0 Swaminathan body** (`swaminathan`, big-boss, `--height 260`)
   - Body canvas 192 x 160 game units, which is about 384 x 320 art px. The origin is
