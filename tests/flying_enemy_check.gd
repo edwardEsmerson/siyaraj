@@ -1,5 +1,6 @@
 extends SceneTree
 ## Real flight, aimed shots, swept collisions, jumping melee, and scene recovery.
+const Sandbox = preload("res://scripts/dev/sandbox.gd")
 const PROJECTILE_SCENE = preload("res://scenes/combat/enemy_projectile.tscn")
 
 var failures: int = 0
@@ -30,10 +31,11 @@ func release_inputs() -> void:
 
 func reset_arena(freeze_flyer: bool = true) -> void:
 	release_inputs()
-	change_scene_to_file("res://scenes/combat/flying_enemy_arena.tscn")
+	Sandbox.next_encounter = Sandbox.Encounter.FLYER
+	change_scene_to_file("res://scenes/dev/sandbox.tscn")
 	await scene_changed
 	player = current_scene.get_node("Player")
-	flyer = current_scene.get_node("FlyingEnemy")
+	flyer = current_scene.get_node("Enemy")
 	flyer.set_physics_process(not freeze_flyer)
 	await ticks(3)
 
@@ -250,7 +252,7 @@ func check_melee_and_restart() -> void:
 	await ticks(3)
 	check(current_scene != old_scene, "R must restart the flying enemy arena")
 	player = current_scene.get_node("Player")
-	flyer = current_scene.get_node("FlyingEnemy")
+	flyer = current_scene.get_node("Enemy")
 	check(player.health == 3 and flyer.health == 3 and shots().is_empty(), "Restart must restore both combatants and clear projectiles")
 	flyer.set_physics_process(false)
 	old_scene = current_scene

@@ -5,7 +5,7 @@
 Siyaraj is a Godot 4.7.2 2D platformer using the Compatibility renderer. Open `project.godot`; the entry scene is `scenes/main/forest.tscn`. The original prototype is `scenes/main/main.tscn`.
 
 - `scripts/` groups GDScript by player, combat, enemies, levels, effects, and main integration.
-- `scenes/` contains corresponding `.tscn` scenes, including isolated movement and combat playgrounds.
+- `scenes/` contains corresponding `.tscn` scenes. `scenes/dev/` holds the dev-only sandbox (one selectable enemy, for isolated encounter work) and the weapons playground; `scenes/main/movement_playground.tscn` remains for movement tuning.
 - `resources/player/default_movement.tres` stores shared movement tuning.
 - `tests/` contains physics regression scripts; `tools/` contains smoke-build helpers.
 - `docs/team_workflow.md` records ownership and gameplay contracts. `asset-builder/` contains local sprite tooling and reference images; current gameplay uses scene/script placeholders.

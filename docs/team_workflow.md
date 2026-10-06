@@ -114,7 +114,7 @@ milestones. Stop adding features during today's final hour.
 - C's playground has a run lane, 40 px steps, 70/120 px gaps, a low ceiling,
   a ledge for coyote/buffer testing and a lower safety floor.
 - B's patrol/damage foundation is implemented in `scripts/enemies/enemy.gd`.
-  Open `scenes/enemies/enemy_test.tscn` with F6 to test it separately. Main-course
+  (The original `enemy_test.tscn` is replaced by `scenes/dev/sandbox.tscn`.) Main-course
   enemy behaviour and player combat are deliberately not connected yet.
 - D's grey placeholders remain readable; Siya's eye indicates facing direction.
 - E added horizontal camera follow to make the extended course playable.
@@ -180,7 +180,7 @@ whether the controller feels enjoyable.
 - Guards stop at unsupported platform edges. Bodies do not block one another;
   only timed attack hitboxes deal damage.
 - Main course station 6 now includes a working guard. The separate
-  `scenes/combat/combat_arena.tscn` offers immediate combat testing with F6.
+  combat arena offered immediate combat testing (now `scenes/dev/sandbox.tscn`).
 - HUD shows Siya's health and guard defeat. Lethal damage, falling and R reload
   the scene, restoring both characters. The existing camera tuning is preserved.
 - Run `tests/combat_check.gd` alongside the movement and dash checks.
@@ -214,8 +214,8 @@ Coyote time and jump buffering remain in the controller. Combat is station 5.
 - Siya flashes on damage and blinks during her existing protection. Death shows
   a DOWN burst and a 0.35 s restart cue in the combined course.
 - Open `scenes/main/movement_playground.tscn` with F6 for the original tuning
-  course. Existing movement and dash checks target that scene. The isolated
-  combat arena remains available with F6.
+  course. Existing movement and dash checks target that scene. The dev
+  sandbox (`scenes/dev/sandbox.tscn`) replaces the isolated combat arena.
 - `tests/course_check.gd` checks new gap traversal, trail expiry, gate collision,
   real sparkler combat, exit unlock, final jump, completion, replay and death recovery.
 - The export preset explicitly includes the burst script and movement playground.
@@ -238,7 +238,7 @@ movement feel or a two-minute first-play completion time.
 ## Flying enemy handoff
 
 - Combat owns the reusable flying enemy and projectile scenes/controllers and
-  the isolated `scenes/combat/flying_enemy_arena.tscn` encounter. Level integration
+  an isolated arena (now the dev sandbox Flyer encounter). Level integration
   places a flyer before the guard in the combined prototype course; no player
   controller or main-scene changes are required. The guard still opens the exit.
 - The flyer has three health and uses the existing `take_damage` API plus
@@ -262,14 +262,14 @@ movement feel or a two-minute first-play completion time.
   death/restart, and the guard-controlled gate. The smoke export includes the
   flying arena and projectile dependencies.
 
-Manual checkpoint: play the flying arena with F6, then the whole course with F5.
+Manual checkpoint: play the sandbox Flyer encounter with F6, then the whole course with F5.
 Check that the orange charge and shot are readable, jumping hits feel reachable,
 and the flyer/guard encounter is fair with the existing three-health player.
 
 ## Brute enemy handoff
 
 - Combat owns `scenes/enemies/brute.tscn` and the isolated
-  `scenes/combat/brute_arena.tscn` / `brute_course.tscn` encounter. The Brute reuses
+  arena (now the dev sandbox Brute encounter). The Brute reuses
   the guard controller and shared melee component as an ordinary enemy.
 - The collider is 48 x 64, compared with the guard's 32 x 40. Its broad shoulders,
   brown body, dark bracers and belt distinguish it at gameplay size.
@@ -291,13 +291,13 @@ and the flyer/guard encounter is fair with the existing three-health player.
 - Run the new check alongside all five existing checks. The smoke export includes
   the Brute arena and its dependencies.
 
-Manual checkpoint: play the Brute arena with F6, then the whole course with F5.
+Manual checkpoint: play the sandbox Brute encounter with F6, then the whole course with F5.
 Check that its heavy swing is readable and the long recovery offers a fair
 counterattack window with Siya's existing three health.
 ## Ground shooter handoff
 
 - Combat owns `ground_shooter.gd`, its reusable enemy scene, the homing projectile
-  script/scene and `scenes/combat/ground_shooter_arena.tscn`. Level integration
+  script/scene and an isolated arena (now the dev sandbox Shooter encounter). Level integration
   places a shooter after the guard at (3970, 430) without changing player movement
   or the main scene. The guard still controls the exit gate.
 - The shooter has three health, patrols at 45 px/s within 70 px of spawn, uses
@@ -316,7 +316,7 @@ counterattack window with Siya's existing three health.
   swept impacts, protection, melee, death/restart and the guard-controlled gate.
   The export preset includes the isolated arena and homing dependencies.
 
-Manual checkpoint: play the ground shooter arena with F6, then the course with
+Manual checkpoint: play the sandbox Shooter encounter with F6, then the course with
 F5. Check that the purple charge and steering are readable, jumping/dashing past
 bolts is fair, and the three-enemy encounter works with Siya's three health.
 
@@ -328,7 +328,7 @@ same-level room transitions. Death and R restore a fresh loadout. The
 forest HUD displays weapon state; the original prototype still uses its
 original player scene. `forest_weapons_check.gd` validates this integration.
 
-- Open `scenes/combat/weapons_playground.tscn` with F6. All three weapons are
+- Open `scenes/dev/weapons_playground.tscn` with F6. All three weapons are
   unlocked in the isolated playground. Shared player and main-course scripts
   retain their current behaviour.
 - Sparkler: J for a single ground or aerial lash. Jumping preserves the swing;
@@ -356,3 +356,15 @@ original player scene. `forest_weapons_check.gd` validates this integration.
   five-shot limits, recoil, empty input, refill lifecycle and chakri cooldown.
   `tests/weapons_map_check.gd` verifies ranged targets, recoil space, crowd clear,
   respawn, traversal, ammo persistence and camera boundaries.
+
+## Test area cleanup
+
+- The per-enemy arenas (combat, Brute, flyer, ground shooter), their course
+  scenes and arena scripts, and the button-driven `enemy_test.tscn` are removed.
+  All enemies now live in the forest.
+- `scenes/dev/sandbox.tscn` replaces them: a flat walled arena with one enemy.
+  Choose `encounter` (none, Guard, Brute, Flyer, Shooter) and `three_weapons`
+  on the root, then press F6. Use it for future encounters such as bosses.
+  Enemy checks select an encounter through `Sandbox.next_encounter`.
+- The weapons playground and its dummies moved to `scenes/dev/` and
+  `scripts/dev/`. The movement playground remains for the movement and dash checks.
