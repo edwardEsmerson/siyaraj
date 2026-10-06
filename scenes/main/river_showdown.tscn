@@ -12,3 +12,5 @@ text = "SIYARAJ / ghats showdown: Dhoomketu"
 boss_path = NodePath("../TestCourse/Boss")
 next_level = "res://scenes/main/palace.tscn"
 destination_name = "palace"
+
+story_key = "river"

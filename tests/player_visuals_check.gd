@@ -199,7 +199,14 @@ func run_checks() -> void:
 		if level == "palace":
 			boss.set_physics_process(true)
 			await boss.died
+		if flow.comic != null and flow.comic.visible:
+			check(not player.can_process(), "Aftermath dialogue must freeze the player's animation clock")
+			for panel in flow.comic._panels.size():
+				var advance := InputEventAction.new()
+				advance.action = &"ui_accept"
+				advance.pressed = true
+				flow.comic._unhandled_input(advance)
 		await ticks(2)
-		check(sprite.animation == &"victory", "%s boss death must trigger Siya's victory animation" % level)
+		check(sprite.animation == &"victory", "%s boss death must trigger Siya's victory animation after dialogue" % level)
 	print("Player visuals checks: %d failure(s)" % failures)
 	quit(1 if failures > 0 else 0)

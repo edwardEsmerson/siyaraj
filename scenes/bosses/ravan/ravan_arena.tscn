@@ -100,48 +100,86 @@ max_health = 5
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("polished_hud")
 
+[node name="TextBackdrop" type="ColorRect" parent="HUD"]
+offset_right = 960.0
+offset_bottom = 124.0
+color = Color(0.07, 0.03, 0.11, 0.86)
+mouse_filter = 2
+
+[node name="StatusBackdrop" type="ColorRect" parent="HUD"]
+offset_top = 442.0
+offset_right = 960.0
+offset_bottom = 540.0
+color = Color(0.07, 0.03, 0.11, 0.88)
+mouse_filter = 2
+
 [node name="HUDShade" type="ColorRect" parent="HUD"]
 offset_right = 960.0
-offset_bottom = 160.0
+offset_bottom = 124.0
 mouse_filter = 2
 color = Color(0.06, 0.06, 0.06, 0.93)
 
 [node name="Title" type="Label" parent="HUD"]
-offset_left = 32.0
-offset_top = 8.0
-theme_override_font_sizes/font_size = 22
+theme_type_variation = &"HUDTitle"
+texture_filter = 2
 text = "SIYARAJ / final boss: Swaminathan arena"
 
+offset_left = 24.0
+offset_top = 10.0
+offset_right = 530.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 20
+
 [node name="Controls" type="Label" parent="HUD"]
-offset_left = 32.0
-offset_top = 40.0
-theme_override_font_sizes/font_size = 13
+texture_filter = 2
 text = "A/D: move   Space: jump   Shift: dash   J: lash   L: skyshot   hold K: chakri   R: restart"
 
-[node name="Hint" type="Label" parent="HUD"]
-offset_left = 32.0
-offset_top = 60.0
+offset_left = 24.0
+offset_top = 44.0
+offset_right = 936.0
+offset_bottom = 64.0
 theme_override_font_sizes/font_size = 13
-text = "Strike Swaminathan anywhere. Every tenth of his health severs his rightmost head,
-and only the heads still standing attack. A glowing head is about to strike."
+
+[node name="Hint" type="Label" parent="HUD"]
+texture_filter = 2
+text = "Strike Swaminathan anywhere. Every tenth of his health severs his rightmost head,\nand only the heads still standing attack. A glowing head is about to strike."
+
+offset_left = 24.0
+offset_top = 70.0
+offset_right = 936.0
+offset_bottom = 116.0
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 2
 
 [node name="HealthStatus" type="Label" parent="HUD"]
-offset_left = 32.0
-offset_top = 100.0
-theme_override_font_sizes/font_size = 13
+texture_filter = 2
 text = "Siya health: 5/5"
 
+offset_left = 560.0
+offset_top = 16.0
+offset_right = 710.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 14
+
 [node name="WeaponStatus" type="Label" parent="HUD"]
-offset_left = 32.0
-offset_top = 118.0
-theme_override_font_sizes/font_size = 13
+texture_filter = 2
 text = "Skyshot 5/5    Chakri ready"
 
+offset_left = 24.0
+offset_top = 448.0
+offset_right = 936.0
+offset_bottom = 472.0
+theme_override_font_sizes/font_size = 14
+
 [node name="CombatStatus" type="Label" parent="HUD"]
-offset_left = 32.0
-offset_top = 136.0
-theme_override_font_sizes/font_size = 13
+texture_filter = 2
 text = "Strike him anywhere. Watch the glowing heads."
+
+offset_left = 24.0
+offset_top = 474.0
+offset_right = 936.0
+offset_bottom = 498.0
+theme_override_font_sizes/font_size = 14
 
 [node name="WorldSkin" type="Node2D" parent="."]
 script = ExtResource("world_skin")

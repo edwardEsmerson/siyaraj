@@ -15,6 +15,7 @@ shape = SubResource("Body")
 
 [node name="Status" type="Label" parent="."]
 visible = false
+texture_filter = 2
 offset_left = -180.0
 offset_top = -151.0
 offset_right = 180.0

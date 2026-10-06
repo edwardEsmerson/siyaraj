@@ -110,6 +110,7 @@ shape = SubResource("KharaShape")
 
 [node name="Status" type="Label" parent="."]
 visible = false
+texture_filter = 2
 offset_left = -110.0
 offset_top = -176.0
 offset_right = 110.0

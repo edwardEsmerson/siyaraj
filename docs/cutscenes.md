@@ -25,9 +25,14 @@ lettering or speech bubbles; the game renders dialogue over the art.
 
 ## Campaign boss entries
 
-Finishing the forest or palace enters its showdown immediately. Each showdown's
-`CampaignFlow.introduction` contains three comic panels. `subject` optionally places
+New Game plays `scenes/main/prologue.tscn` before entering the forest. The opening,
+boss introductions and aftermath sequences live in `scripts/main/story_panels.gd`,
+adapted from `siyaraj.refined.txt`. Direct developer level launches bypass the opening.
+
+Finishing the forest or palace enters its showdown immediately. All three showdowns
+select their dialogue using `CampaignFlow.story_key`. `subject` optionally places
 existing character art above the dialogue over the panel's `texture` background.
+`supporting_subject` shows a second character beside it for the abduction and reunion.
 Enter or gamepad A advances; held-key repeats are ignored. Arena processing stops
 until the last panel closes, so neither Siya nor the boss can attack during dialogue.
 Esc opens the regular pause menu.
@@ -35,7 +40,33 @@ Esc opens the regular pause menu.
 The introduction is remembered for that encounter. Death, R, and checkpoint retries
 reload the fight directly; launching the showdown afresh replays the introduction.
 Terrain-only launches still bypass bosses, and the river retains its completion prompt.
-Khara's victory leads to the river; Swaminathan's victory leads to the ending.
+Defeating each boss plays its aftermath with arena processing stopped. Closing it
+unlocks the victory prompt. Khara's aftermath leads to the river, Dhoomketu's to the
+palace, and Swaminathan's reveals Robin's betrayal and Raj's rescue before the ending.
+Developer snapshots return to level select after victory and omit aftermath sequences.
+
+## Story adaptation and available art
+
+Siya's parents make fireworks. A neighbour asks about Raj, and Siya witnesses
+Swaminathan abducting him. Robin offers to guide her through the forest and ghats
+to Lanka. Khara resents Siya and Raj breaking his toll gate; Dhoomketu resents their
+exposure of his stolen fireworks; Swaminathan resents the family's refusal to obey
+him. These grievances supply the requested personal motives, which the transcript
+does not specify. The existing name Siya is retained; merge and TGC asides are omitted.
+
+Robin remains useful during the journey. After Swaminathan falls, Robin admits that
+he has always served him and deliberately guided Siya into the guards. He leaves,
+and Siya reunites with Raj. There is no added Robin fight or redemption subplot.
+
+The palace showdown displays Raj in a decorative hanging cage using his existing
+sulk animation. Defeating Swaminathan opens its bars and plays Raj's freed animation.
+The ending shows Siya and Raj together beneath her parents' fireworks.
+
+Panels reuse the approved sprites and existing region backgrounds. The parents,
+workshop and abduction action are conveyed through dialogue and narration because
+dedicated artwork is unavailable. Dhoomketu's introduction shows Siya at the ghats;
+his dedicated character art is still pending. The cage uses Godot drawing commands
+and adds no collision to the arena. Enter or gamepad A advances each panel.
 
 Khara uses the approved cast animations and registered gada hand positions.
 Swaminathan now uses all eleven supplied body-state sprites. His attack origins,

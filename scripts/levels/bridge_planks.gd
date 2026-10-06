@@ -19,6 +19,7 @@ var carried_visual: Node2D
 
 func _ready() -> void:
 	prompt = Label.new()
+	prompt.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	prompt.position = SUPPLY_START + Vector2(-85, -85)
 	InteractionPrompt.configure(prompt)
 	add_child(prompt)

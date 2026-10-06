@@ -12,6 +12,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="Header" type="Label" parent="Column"]
+texture_filter = 2
 layout_mode = 2
 theme_type_variation = &"HeaderLabel"
 text = "Settings"
@@ -23,6 +24,7 @@ texture = ExtResource("2_divider")
 stretch_mode = 3
 
 [node name="Fullscreen" type="CheckBox" parent="Column"]
+texture_filter = 2
 layout_mode = 2
 text = "Fullscreen"
 
@@ -31,6 +33,7 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="Label" type="Label" parent="Column/VolumeRow"]
+texture_filter = 2
 layout_mode = 2
 text = "Volume"
 
@@ -43,5 +46,6 @@ step = 0.05
 value = 0.8
 
 [node name="Back" type="Button" parent="Column"]
+texture_filter = 2
 layout_mode = 2
 text = "Back"

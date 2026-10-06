@@ -7,13 +7,7 @@
 [ext_resource type="PackedScene" path="res://scenes/player/forest_player.tscn" id="3_player"]
 [ext_resource type="PackedScene" path="res://scenes/companions/robin.tscn" id="4_robin"]
 
-[sub_resource type="StyleBoxFlat" id="CompletionStyle"]
-bg_color = Color(0.08, 0.08, 0.08, 0.97)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.8, 0.8, 0.8, 1)
+[ext_resource type="PackedScene" path="res://scenes/ui/result_screen.tscn" id="result_screen"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_main")
@@ -51,51 +45,58 @@ mouse_filter = 2
 color = Color(0.06, 0.06, 0.06, 0.93)
 
 [node name="Title" type="Label" parent="HUD"]
+theme_type_variation = &"HUDTitle"
+texture_filter = 2
 offset_left = 24.0
 offset_top = 12.0
 theme_override_font_sizes/font_size = 24
 text = "SIYARAJ / river ghats"
 
 [node name="Controls" type="Label" parent="HUD"]
+texture_filter = 2
 offset_left = 24.0
 offset_top = 48.0
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "A/D: move   Space: jump   Shift: dash   J: lash   L: skyshot   K: chakri   E: use   R: reset"
 
 [node name="Milestone" type="Label" parent="HUD"]
+texture_filter = 2
 offset_left = 24.0
 offset_top = 82.0
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "Riverbank / Broken docks lead into the crossing."
 
 [node name="InputStatus" type="Label" parent="HUD"]
+texture_filter = 2
 offset_left = 870.0
 offset_top = 82.0
 text = "0.0 s"
 
 [node name="DashStatus" type="Label" parent="HUD"]
+texture_filter = 2
 offset_left = 660.0
 offset_top = 12.0
 text = "Rocket dash: READY"
 
 [node name="HealthStatus" type="Label" parent="HUD"]
+texture_filter = 2
 offset_left = 490.0
 offset_top = 12.0
 text = "Siya health: 3/3"
 
 [node name="CombatStatus" type="Label" parent="HUD"]
+texture_filter = 2
 offset_left = 24.0
 offset_top = 503.0
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "Press E beside a diya to secure a checkpoint. R resets this level. Esc pauses."
 
 [node name="WeaponStatus" type="Label" parent="HUD"]
+texture_filter = 2
 offset_left = 24.0
 offset_top = 474.0
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "Skyshot: 5/5    Chakri: READY    Hold K to charge; release to spin."
 
 [node name="DeathMessage" type="Label" parent="HUD"]
+theme_type_variation = &"DeathLabel"
+texture_filter = 2
 visible = false
 offset_left = 300.0
 offset_top = 185.0
@@ -105,20 +106,4 @@ theme_override_font_sizes/font_size = 28
 text = "SIYA DOWN\nRestarting..."
 horizontal_alignment = 1
 
-[node name="Completion" type="Panel" parent="HUD"]
-visible = false
-offset_left = 250.0
-offset_top = 160.0
-offset_right = 710.0
-offset_bottom = 285.0
-mouse_filter = 2
-theme_override_styles/panel = SubResource("CompletionStyle")
-
-[node name="Message" type="Label" parent="HUD/Completion"]
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 444.0
-offset_bottom = 109.0
-theme_override_font_sizes/font_size = 24
-text = "COURSE COMPLETE\nR to replay"
-horizontal_alignment = 1
+[node name="Completion" parent="HUD" instance=ExtResource("result_screen")]

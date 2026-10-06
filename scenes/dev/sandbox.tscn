@@ -50,26 +50,32 @@ position = Vector2(340, 430)
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Title" type="Label" parent="HUD"]
+theme_type_variation = &"HUDTitle"
+texture_filter = 2
 offset_left = 32.0
 offset_top = 24.0
 theme_override_font_sizes/font_size = 28
 text = "SIYARAJ / sandbox"
 
 [node name="Controls" type="Label" parent="HUD"]
+texture_filter = 2
 offset_left = 32.0
 offset_top = 76.0
 text = "A/D or arrows: move    Space: jump    Shift: dash    J: sparkler    L: skyshot    K: chakri    R: restart"
 
 [node name="Hint" type="Label" parent="HUD"]
+texture_filter = 2
 offset_left = 32.0
 offset_top = 116.0
 
 [node name="HealthStatus" type="Label" parent="HUD"]
+texture_filter = 2
 offset_left = 32.0
 offset_top = 185.0
 text = "Siya health: 3/3"
 
 [node name="CombatStatus" type="Label" parent="HUD"]
+texture_filter = 2
 offset_left = 32.0
 offset_top = 503.0
 text = "Pick the encounter and loadout on the Sandbox root, then press F6."

@@ -17,6 +17,7 @@ extends Node2D
 ## - `SkinZones`: a node whose Node2D children start zones along x. Their metadata `skin`, `far`, `mid`, `near`
 ##   (kit file names) and `tint` / `mid_tint` (Colors for the parallax) change the look per section, with the
 ##   parallax crossfading between zones as the camera moves.
+##   An empty layer name disables that layer for the zone, for kits with a complete far background.
 ## - `SkinDecor`: a node whose Node2D children each place one kit piece: metadata `piece` (path in the kit
 ##   without .png), `layer` (far, back, wall, landmark, body, top or front), `size` (x art scale), `hang` (anchor
 ##   at the top instead of the bottom), `flip`, `tint`. A level whose decor placed anything is not
@@ -766,6 +767,8 @@ func _backdrop(level: Node, kit: String) -> void:
 		for kind: String in ["far", "mid", "near"]:
 			var names: PackedStringArray = []
 			for zone: Dictionary in _zones:
+				if str(zone[kind]).is_empty():
+					continue
 				if _tex(kit, zone[kind]) == null:
 					zone[kind] = kind  # this kit lacks the zone's variant: use its plain layer
 				if not names.has(zone[kind]):
@@ -936,6 +939,7 @@ func _show_toast(text: String) -> void:
 		layer.layer = 90
 		add_child(layer)
 		_toast = Label.new()
+		_toast.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 		_toast.position = Vector2(16, 124)  # just under the main scenes' HUD bar
 		_toast.add_theme_font_size_override("font_size", 18)
 		_toast.add_theme_constant_override("outline_size", 6)

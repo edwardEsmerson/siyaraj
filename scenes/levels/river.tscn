@@ -1894,6 +1894,8 @@ polygon = PackedVector2Array(0, -24, 5, -13, 3, -8, -3, -8, -5, -13)
 color = Color(1, 0.66, 0.2, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/FerryDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -85.0
 offset_right = 65.0
@@ -1920,6 +1922,8 @@ polygon = PackedVector2Array(0, -24, 5, -13, 3, -8, -3, -8, -5, -13)
 color = Color(1, 0.66, 0.2, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/GhatDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -85.0
 offset_right = 65.0
@@ -1946,6 +1950,8 @@ polygon = PackedVector2Array(0, -24, 5, -13, 3, -8, -3, -8, -5, -13)
 color = Color(1, 0.66, 0.2, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/BridgeDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -85.0
 offset_right = 65.0
@@ -1972,6 +1978,8 @@ polygon = PackedVector2Array(0, -24, 5, -13, 3, -8, -3, -8, -5, -13)
 color = Color(1, 0.66, 0.2, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/AqueductDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -85.0
 offset_right = 65.0
@@ -1998,6 +2006,8 @@ polygon = PackedVector2Array(0, -24, 5, -13, 3, -8, -3, -8, -5, -13)
 color = Color(1, 0.66, 0.2, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/TempleDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -85.0
 offset_right = 65.0
@@ -2099,56 +2109,78 @@ polygon = PackedVector2Array(3, -55, 48, -55, 36, -30, 3, -30)
 color = Color(1, 0.55, 0.15, 1)
 
 [node name="RouteNote0" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(100, 160)
 theme_override_font_sizes/font_size = 15
 text = "FERRY LANDING"
 
 [node name="RouteNote1" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(2910, 200)
 theme_override_font_sizes/font_size = 15
 text = "STONE FORDS / lower dock catches a missed jump"
 
 [node name="RouteNote2" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(5640, 160)
 theme_override_font_sizes/font_size = 15
 text = "GHAT COURTYARD / upper balcony bypass"
 
 [node name="RouteNote3" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(8180, 160)
 theme_override_font_sizes/font_size = 15
 text = "BROKEN BRIDGE / build with 4 planks, then jump + dash"
 
 [node name="RouteNote4" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(10010, 160)
 theme_override_font_sizes/font_size = 15
 text = "AQUEDUCT / jump crates to close on the shooter"
 
 [node name="RouteNote5" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(12600, 160)
 theme_override_font_sizes/font_size = 15
 text = "TEMPLE PROCESSION"
 
 [node name="RouteNote6" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(800, 452)
 theme_override_font_sizes/font_size = 15
 text = "River below / a missed landing returns to your diya"
 
 [node name="RouteNote7" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(1260, 466)
 theme_override_font_sizes/font_size = 15
 text = "RECOVERY DOCK"
 
 [node name="RouteNote8" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(2870, 466)
 theme_override_font_sizes/font_size = 15
 text = "RECOVERY DOCK"
 
 [node name="RouteNote9" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(8750, 427)
 theme_override_font_sizes/font_size = 15
 text = "RECOVERY SHELVES"
 
 [node name="RouteNote10" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(11660, 426)
 theme_override_font_sizes/font_size = 15
 text = "LOWER CHANNEL"

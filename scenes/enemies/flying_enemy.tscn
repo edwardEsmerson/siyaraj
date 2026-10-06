@@ -45,6 +45,7 @@ position = Vector2(0, -20)
 
 [node name="Name" type="Label" parent="."]
 visible = false
+texture_filter = 2
 offset_left = -65.0
 offset_top = -112.0
 offset_right = 65.0

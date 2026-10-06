@@ -5,6 +5,18 @@ marks this integration so the team can return to the same tested revision.
 Keep new changes on a feature branch and open a PR back to `main`.
 The earlier `team-baseline-2026-10-06` tag is retained for recovery.
 
+## Follow-up consolidation
+
+Current `main` also includes `feat/game-typography`, the campaign dialogue adapted
+from `siyaraj.refined.txt`, the forest background composition fix, and
+`t3/remove-siya-melee-effect`. The existing baseline tags retain their earlier
+revisions. All fetched feature branch tips are included in this consolidation.
+
+New Game now starts with Raj's abduction before the forest. All three bosses have
+introductions and aftermath dialogue; the finale reveals Robin's allegiance and
+ends with Siya and Raj together. The new typography and shared result buttons
+remain in use alongside these sequences. The regression runner now has 31 suites.
+
 ## Refresh after the first baseline
 
 - Local cast gameplay integration, Raj's ending and the expanded Robin library.

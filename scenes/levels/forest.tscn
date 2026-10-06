@@ -44,7 +44,7 @@ size = Vector2(120, 32)
 size = Vector2(130, 32)
 
 [sub_resource type="RectangleShape2D" id="Branch5Shape"]
-size = Vector2(180, 32)
+size = Vector2(202, 32)
 
 [sub_resource type="RectangleShape2D" id="BranchExitShape"]
 size = Vector2(820, 32)
@@ -65,7 +65,7 @@ size = Vector2(130, 32)
 size = Vector2(210, 32)
 
 [sub_resource type="RectangleShape2D" id="RidgeDrop1Shape"]
-size = Vector2(180, 32)
+size = Vector2(202, 32)
 
 [sub_resource type="RectangleShape2D" id="RidgeDrop2Shape"]
 size = Vector2(200, 32)
@@ -77,7 +77,7 @@ size = Vector2(680, 32)
 size = Vector2(120, 32)
 
 [sub_resource type="RectangleShape2D" id="HollowFloorShape"]
-size = Vector2(520, 32)
+size = Vector2(543, 32)
 
 [sub_resource type="RectangleShape2D" id="HollowExitShape"]
 size = Vector2(650, 32)
@@ -89,10 +89,10 @@ size = Vector2(140, 32)
 size = Vector2(140, 32)
 
 [sub_resource type="RectangleShape2D" id="Stone3Shape"]
-size = Vector2(120, 32)
+size = Vector2(142, 32)
 
 [sub_resource type="RectangleShape2D" id="Stone4Shape"]
-size = Vector2(100, 32)
+size = Vector2(121, 32)
 
 [sub_resource type="RectangleShape2D" id="Stone5Shape"]
 size = Vector2(180, 32)
@@ -116,16 +116,16 @@ size = Vector2(120, 12)
 size = Vector2(260, 12)
 
 [sub_resource type="RectangleShape2D" id="BanyanDrop1Shape"]
-size = Vector2(160, 12)
+size = Vector2(183, 12)
 
 [sub_resource type="RectangleShape2D" id="BanyanDrop2Shape"]
 size = Vector2(200, 12)
 
 [sub_resource type="RectangleShape2D" id="BanyanDrop3Shape"]
-size = Vector2(180, 12)
+size = Vector2(202, 12)
 
 [sub_resource type="RectangleShape2D" id="UpperEntryShape"]
-size = Vector2(440, 32)
+size = Vector2(462, 32)
 
 [sub_resource type="RectangleShape2D" id="Upper1Shape"]
 size = Vector2(140, 32)
@@ -140,7 +140,7 @@ size = Vector2(120, 32)
 size = Vector2(220.0, 32)
 
 [sub_resource type="RectangleShape2D" id="Upper5Shape"]
-size = Vector2(150, 32)
+size = Vector2(172, 32)
 
 [sub_resource type="RectangleShape2D" id="ShrineEntryShape"]
 size = Vector2(740, 32)
@@ -155,10 +155,10 @@ size = Vector2(120, 32)
 size = Vector2(120, 32)
 
 [sub_resource type="RectangleShape2D" id="ShrineBranchShape"]
-size = Vector2(190, 32)
+size = Vector2(211, 32)
 
 [sub_resource type="RectangleShape2D" id="ShrineDropShape"]
-size = Vector2(160, 32)
+size = Vector2(182, 32)
 
 [sub_resource type="RectangleShape2D" id="FinalEntryShape"]
 size = Vector2(770, 32)
@@ -341,7 +341,7 @@ size = Vector2(220.0, 12)
 size = Vector2(220.0, 12)
 
 [sub_resource type="RectangleShape2D" id="CrownRestShape"]
-size = Vector2(650, 32)
+size = Vector2(671, 32)
 
 [sub_resource type="RectangleShape2D" id="OuterBranch1Shape"]
 size = Vector2(170, 32)
@@ -671,17 +671,17 @@ shape = SubResource("Branch4Shape")
 
 [node name="Branch5" type="StaticBody2D" parent="Terrain"]
 metadata/skin = "root"
-position = Vector2(3890.0, 446.0)
+position = Vector2(3901, 446.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 11
 
 [node name="Body" type="Polygon2D" parent="Terrain/Branch5"]
-polygon = PackedVector2Array(-90.0, -16.0, 90.0, -16.0, 90.0, 16.0, -90.0, 16.0)
+polygon = PackedVector2Array(-101.0, -16.0, 101.0, -16.0, 101.0, 16.0, -101.0, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/Branch5"]
-polygon = PackedVector2Array(-90.0, -16.0, 90.0, -16.0, 90.0, -13.0, -90.0, -13.0)
+polygon = PackedVector2Array(-101.0, -16.0, 101.0, -16.0, 101.0, -13.0, -101.0, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Branch5"]
@@ -796,17 +796,17 @@ shape = SubResource("RidgeTopShape")
 
 [node name="RidgeDrop1" type="StaticBody2D" parent="Terrain"]
 metadata/skin = "root"
-position = Vector2(5990.0, 346.0)
+position = Vector2(6001, 346.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 18
 
 [node name="Body" type="Polygon2D" parent="Terrain/RidgeDrop1"]
-polygon = PackedVector2Array(-90.0, -16.0, 90.0, -16.0, 90.0, 16.0, -90.0, 16.0)
+polygon = PackedVector2Array(-101.0, -16.0, 101.0, -16.0, 101.0, 16.0, -101.0, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/RidgeDrop1"]
-polygon = PackedVector2Array(-90.0, -16.0, 90.0, -16.0, 90.0, -13.0, -90.0, -13.0)
+polygon = PackedVector2Array(-101.0, -16.0, 101.0, -16.0, 101.0, -13.0, -101.0, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/RidgeDrop1"]
@@ -866,17 +866,17 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("HollowRootShape")
 
 [node name="HollowFloor" type="StaticBody2D" parent="Terrain"]
-position = Vector2(7760.0, 446.0)
+position = Vector2(7771.5, 446.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 22
 
 [node name="Body" type="Polygon2D" parent="Terrain/HollowFloor"]
-polygon = PackedVector2Array(-260.0, -16.0, 260.0, -16.0, 260.0, 16.0, -260.0, 16.0)
+polygon = PackedVector2Array(-271.5, -16.0, 271.5, -16.0, 271.5, 16.0, -271.5, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/HollowFloor"]
-polygon = PackedVector2Array(-260.0, -16.0, 260.0, -16.0, 260.0, -13.0, -260.0, -13.0)
+polygon = PackedVector2Array(-271.5, -16.0, 271.5, -16.0, 271.5, -13.0, -271.5, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/HollowFloor"]
@@ -934,17 +934,17 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("Stone2Shape")
 
 [node name="Stone3" type="StaticBody2D" parent="Terrain"]
-position = Vector2(9630.0, 446.0)
+position = Vector2(9641, 446.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 26
 
 [node name="Body" type="Polygon2D" parent="Terrain/Stone3"]
-polygon = PackedVector2Array(-60.0, -16.0, 60.0, -16.0, 60.0, 16.0, -60.0, 16.0)
+polygon = PackedVector2Array(-71.0, -16.0, 71.0, -16.0, 71.0, 16.0, -71.0, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/Stone3"]
-polygon = PackedVector2Array(-60.0, -16.0, 60.0, -16.0, 60.0, -13.0, -60.0, -13.0)
+polygon = PackedVector2Array(-71.0, -16.0, 71.0, -16.0, 71.0, -13.0, -71.0, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Stone3"]
@@ -952,17 +952,17 @@ one_way_collision = true
 shape = SubResource("Stone3Shape")
 
 [node name="Stone4" type="StaticBody2D" parent="Terrain"]
-position = Vector2(9960.0, 446.0)
+position = Vector2(9970.5, 446.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 27
 
 [node name="Body" type="Polygon2D" parent="Terrain/Stone4"]
-polygon = PackedVector2Array(-50.0, -16.0, 50.0, -16.0, 50.0, 16.0, -50.0, 16.0)
+polygon = PackedVector2Array(-60.5, -16.0, 60.5, -16.0, 60.5, 16.0, -60.5, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/Stone4"]
-polygon = PackedVector2Array(-50.0, -16.0, 50.0, -16.0, 50.0, -13.0, -50.0, -13.0)
+polygon = PackedVector2Array(-60.5, -16.0, 60.5, -16.0, 60.5, -13.0, -60.5, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Stone4"]
@@ -1093,17 +1093,17 @@ shape = SubResource("Banyan5Shape")
 one_way_collision = true
 
 [node name="BanyanDrop1" type="StaticBody2D" parent="Terrain"]
-position = Vector2(12060.0, 256.0)
+position = Vector2(12071.5, 256.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 35
 
 [node name="Body" type="Polygon2D" parent="Terrain/BanyanDrop1"]
-polygon = PackedVector2Array(-80.0, -6.0, 80.0, -6.0, 80.0, 6.0, -80.0, 6.0)
+polygon = PackedVector2Array(-91.5, -6.0, 91.5, -6.0, 91.5, 6.0, -91.5, 6.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/BanyanDrop1"]
-polygon = PackedVector2Array(-80.0, -6.0, 80.0, -6.0, 80.0, -3.0, -80.0, -3.0)
+polygon = PackedVector2Array(-91.5, -6.0, 91.5, -6.0, 91.5, -3.0, -91.5, -3.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/BanyanDrop1"]
@@ -1129,17 +1129,17 @@ shape = SubResource("BanyanDrop2Shape")
 one_way_collision = true
 
 [node name="BanyanDrop3" type="StaticBody2D" parent="Terrain"]
-position = Vector2(12850.0, 376.0)
+position = Vector2(12861, 376.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 37
 
 [node name="Body" type="Polygon2D" parent="Terrain/BanyanDrop3"]
-polygon = PackedVector2Array(-90.0, -6.0, 90.0, -6.0, 90.0, 6.0, -90.0, 6.0)
+polygon = PackedVector2Array(-101.0, -6.0, 101.0, -6.0, 101.0, 6.0, -101.0, 6.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/BanyanDrop3"]
-polygon = PackedVector2Array(-90.0, -6.0, 90.0, -6.0, 90.0, -3.0, -90.0, -3.0)
+polygon = PackedVector2Array(-101.0, -6.0, 101.0, -6.0, 101.0, -3.0, -101.0, -3.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/BanyanDrop3"]
@@ -1147,17 +1147,17 @@ shape = SubResource("BanyanDrop3Shape")
 one_way_collision = true
 
 [node name="UpperEntry" type="StaticBody2D" parent="Terrain"]
-position = Vector2(13380.0, 446.0)
+position = Vector2(13391, 446.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 38
 
 [node name="Body" type="Polygon2D" parent="Terrain/UpperEntry"]
-polygon = PackedVector2Array(-220.0, -16.0, 220.0, -16.0, 220.0, 16.0, -220.0, 16.0)
+polygon = PackedVector2Array(-231.0, -16.0, 231.0, -16.0, 231.0, 16.0, -231.0, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/UpperEntry"]
-polygon = PackedVector2Array(-220.0, -16.0, 220.0, -16.0, 220.0, -13.0, -220.0, -13.0)
+polygon = PackedVector2Array(-231.0, -16.0, 231.0, -16.0, 231.0, -13.0, -231.0, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/UpperEntry"]
@@ -1233,17 +1233,17 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("Upper4Shape")
 
 [node name="Upper5" type="StaticBody2D" parent="Terrain"]
-position = Vector2(15265.0, 446.0)
+position = Vector2(15276, 446.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 43
 
 [node name="Body" type="Polygon2D" parent="Terrain/Upper5"]
-polygon = PackedVector2Array(-75.0, -16.0, 75.0, -16.0, 75.0, 16.0, -75.0, 16.0)
+polygon = PackedVector2Array(-86.0, -16.0, 86.0, -16.0, 86.0, 16.0, -86.0, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/Upper5"]
-polygon = PackedVector2Array(-75.0, -16.0, 75.0, -16.0, 75.0, -13.0, -75.0, -13.0)
+polygon = PackedVector2Array(-86.0, -16.0, 86.0, -16.0, 86.0, -13.0, -86.0, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Upper5"]
@@ -1318,17 +1318,17 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("ShrineRoot3Shape")
 
 [node name="ShrineBranch" type="StaticBody2D" parent="Terrain"]
-position = Vector2(16945.0, 326.0)
+position = Vector2(16955.5, 326.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 48
 
 [node name="Body" type="Polygon2D" parent="Terrain/ShrineBranch"]
-polygon = PackedVector2Array(-95.0, -16.0, 95.0, -16.0, 95.0, 16.0, -95.0, 16.0)
+polygon = PackedVector2Array(-105.5, -16.0, 105.5, -16.0, 105.5, 16.0, -105.5, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/ShrineBranch"]
-polygon = PackedVector2Array(-95.0, -16.0, 95.0, -16.0, 95.0, -13.0, -95.0, -13.0)
+polygon = PackedVector2Array(-105.5, -16.0, 105.5, -16.0, 105.5, -13.0, -105.5, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/ShrineBranch"]
@@ -1336,17 +1336,17 @@ shape = SubResource("ShrineBranchShape")
 
 [node name="ShrineDrop" type="StaticBody2D" parent="Terrain"]
 metadata/skin = "ground"
-position = Vector2(17330.0, 386.0)
+position = Vector2(17341, 386.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 49
 
 [node name="Body" type="Polygon2D" parent="Terrain/ShrineDrop"]
-polygon = PackedVector2Array(-80.0, -16.0, 80.0, -16.0, 80.0, 16.0, -80.0, 16.0)
+polygon = PackedVector2Array(-91.0, -16.0, 91.0, -16.0, 91.0, 16.0, -91.0, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/ShrineDrop"]
-polygon = PackedVector2Array(-80.0, -16.0, 80.0, -16.0, 80.0, -13.0, -80.0, -13.0)
+polygon = PackedVector2Array(-91.0, -16.0, 91.0, -16.0, 91.0, -13.0, -91.0, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/ShrineDrop"]
@@ -1568,6 +1568,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/ClearingDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1594,6 +1596,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/RidgeDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1620,6 +1624,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/HollowDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1646,6 +1652,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/StoneDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1672,6 +1680,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/BanyanDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1698,6 +1708,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/UpperDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1724,6 +1736,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/ShrineDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1750,6 +1764,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/FinalDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1776,6 +1792,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/KharaDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1827,69 +1845,80 @@ polygon = PackedVector2Array(3, -55, 48, -55, 36, -30, 3, -30)
 color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="Section0" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(100, 300)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "FOREST EDGE"
 
 [node name="Section1" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(1850, 280)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "CLEARING\nE beside a diya to save."
 
 [node name="Section2" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(2830, 270)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "BROKEN CANOPY"
 
 [node name="Section3" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(4860, 230)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "ROOT RIDGE"
 
 [node name="Section4" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(6540, 275)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "HOLLOW TRUNKS"
 
 [node name="Section5" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(8920, 260)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "STONE CROSSING"
 
 [node name="Section6" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(11280, 175)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "BANYAN CLIMB\nJump right, then left. Repeat."
 
 [node name="Section7" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(13610, 260)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "UPPER RAVINE"
 
 [node name="Section8" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(15580, 280)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "OLD SHRINE"
 
 [node name="Section9" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(18400, 260)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "LAST CROSSING"
 
 [node name="Section10" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(21140, 275)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "KHARA CLEARING"
 
 [node name="Portals" type="Node2D" parent="."]
@@ -1920,6 +1949,8 @@ polygon = PackedVector2Array(-24, -4, 24, -4, 24, 0, -24, 0)
 color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Prompt" type="Label" parent="Portals/RootEntrance"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -120.0
 offset_top = -110.0
 offset_right = 120.0
@@ -1952,6 +1983,8 @@ polygon = PackedVector2Array(-24, -4, 24, -4, 24, 0, -24, 0)
 color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Prompt" type="Label" parent="Portals/NestEntrance"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -120.0
 offset_top = -110.0
 offset_right = 120.0
@@ -1985,11 +2018,19 @@ polygon = PackedVector2Array(0, 0, 3300, 0, 3300, 1400, 0, 1400)
 color = Color(0.08, 0.08, 0.08, 1)
 
 [node name="DescentSign" type="Label" parent="SideRooms/RootChamber"]
-position = Vector2(70, 300)
+texture_filter = 2
+theme_type_variation = &"WorldSign"
+offset_left = 320.0
+offset_top = 270.0
 theme_override_font_sizes/font_size = 17
-text = "ROOT HOLLOW\nFollow the roots down into the chamber."
+offset_right = 660.0
+offset_bottom = 380.0
+autowrap_mode = 2
+text = "ROOT HOLLOW\nFollow the roots down\ninto the chamber."
 
 [node name="BedSign" type="Label" parent="SideRooms/RootChamber"]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(1800, 860)
 theme_override_font_sizes/font_size = 17
 text = "ROOT BED\nLight the diya, then climb back to daylight."
@@ -2320,16 +2361,22 @@ polygon = PackedVector2Array(620, 1400, 620, 370, 930, 370, 930, 1400)
 color = Color(0.17, 0.17, 0.17, 1)
 
 [node name="ClimbSign" type="Label" parent="SideRooms/CanopyNest"]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(50, 1230)
 theme_override_font_sizes/font_size = 17
 text = "INSIDE THE BANYAN\nChange branch lanes. Wide boughs give room to fight."
 
 [node name="CrownSign" type="Label" parent="SideRooms/CanopyNest"]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(1120, 240)
 theme_override_font_sizes/font_size = 17
 text = "CROWN REST\nE lights the diya before the outer branches."
 
 [node name="NestSign" type="Label" parent="SideRooms/CanopyNest"]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(2520, 345)
 theme_override_font_sizes/font_size = 17
 text = "CANOPY NEST\nDefeat the sentinel to reopen the trail door."
@@ -2761,16 +2808,16 @@ shape = SubResource("TrunkBranch24Shape")
 one_way_collision = true
 
 [node name="CrownRest" type="StaticBody2D" parent="SideRooms/CanopyNest/Terrain"]
-position = Vector2(1375.0, 456.0)
+position = Vector2(1385.5, 456.0)
 collision_mask = 0
 metadata/route_order = 25
 
 [node name="Body" type="Polygon2D" parent="SideRooms/CanopyNest/Terrain/CrownRest"]
-polygon = PackedVector2Array(-325.0, -16.0, 325.0, -16.0, 325.0, 16.0, -325.0, 16.0)
+polygon = PackedVector2Array(-335.5, -16.0, 335.5, -16.0, 335.5, 16.0, -335.5, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="SideRooms/CanopyNest/Terrain/CrownRest"]
-polygon = PackedVector2Array(-325.0, -16.0, 325.0, -16.0, 325.0, -13.0, -325.0, -13.0)
+polygon = PackedVector2Array(-335.5, -16.0, 335.5, -16.0, 335.5, -13.0, -335.5, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SideRooms/CanopyNest/Terrain/CrownRest"]
@@ -2868,6 +2915,8 @@ polygon = PackedVector2Array(-24, -4, 24, -4, 24, 0, -24, 0)
 color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Prompt" type="Label" parent="Portals/RootAbort"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -120.0
 offset_top = -110.0
 offset_right = 120.0
@@ -2899,6 +2948,8 @@ polygon = PackedVector2Array(-24, -4, 24, -4, 24, 0, -24, 0)
 color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Prompt" type="Label" parent="Portals/RootReturn"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -120.0
 offset_top = -110.0
 offset_right = 120.0
@@ -2929,6 +2980,8 @@ polygon = PackedVector2Array(-24, -4, 24, -4, 24, 0, -24, 0)
 color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Prompt" type="Label" parent="Portals/NestAbort"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -120.0
 offset_top = -110.0
 offset_right = 120.0
@@ -2960,6 +3013,8 @@ polygon = PackedVector2Array(-24, -4, 24, -4, 24, 0, -24, 0)
 color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Prompt" type="Label" parent="Portals/NestReturn"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -120.0
 offset_top = -110.0
 offset_right = 120.0
@@ -2987,6 +3042,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="RoomCheckpoints/RootBedDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -3014,6 +3071,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="RoomCheckpoints/TrunkDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -3041,6 +3100,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="RoomCheckpoints/CrownDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -3148,6 +3209,8 @@ color = Color(0.25, 0.25, 0.25, 1)
 shape = SubResource("UpperRecover3Shape")
 
 [node name="KharaApproachSign" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(21060, 200)
 theme_override_font_sizes/font_size = 17
 text = "Light the diya before the showdown."
@@ -3187,42 +3250,42 @@ text = "That brute is slow but hits hard. Wait for the swing, then strike."
 [node name="Edge" type="Marker2D" parent="SkinZones"]
 position = Vector2(0, 0)
 metadata/far = "far"
-metadata/mid = "mid"
+metadata/mid = ""
 metadata/tint = Color(1.0, 0.92, 0.98, 1.0)
 metadata/mid_tint = Color(0.7, 0.62, 0.78, 1.0)
 
 [node name="Clearing" type="Marker2D" parent="SkinZones"]
 position = Vector2(1500, 0)
 metadata/far = "far"
-metadata/mid = "mid"
+metadata/mid = ""
 metadata/tint = Color(1.08, 0.95, 0.88, 1.0)
 metadata/mid_tint = Color(0.82, 0.68, 0.7, 1.0)
 
 [node name="Canopy" type="Marker2D" parent="SkinZones"]
 position = Vector2(2850, 0)
 metadata/far = "far-moon"
-metadata/mid = "mid-calm"
+metadata/mid = ""
 metadata/tint = Color(0.8, 0.86, 1.0, 1.0)
 metadata/mid_tint = Color(0.42, 0.48, 0.62, 1.0)
 
 [node name="Ridge" type="Marker2D" parent="SkinZones"]
 position = Vector2(4200, 0)
 metadata/far = "far"
-metadata/mid = "mid"
+metadata/mid = ""
 metadata/tint = Color(1.0, 0.9, 0.85, 1.0)
 metadata/mid_tint = Color(0.78, 0.66, 0.62, 1.0)
 
 [node name="Hollow" type="Marker2D" parent="SkinZones"]
 position = Vector2(6450, 0)
 metadata/far = "far"
-metadata/mid = "mid-calm"
+metadata/mid = ""
 metadata/tint = Color(0.7, 0.62, 0.72, 1.0)
 metadata/mid_tint = Color(0.7, 0.6, 0.66, 1.0)
 
 [node name="Stone" type="Marker2D" parent="SkinZones"]
 position = Vector2(8950, 0)
 metadata/far = "far-moon"
-metadata/mid = "mid-calm"
+metadata/mid = ""
 metadata/tint = Color(0.82, 0.92, 0.98, 1.0)
 metadata/mid_tint = Color(0.62, 0.7, 0.76, 1.0)
 metadata/skin = "stone"
@@ -3230,21 +3293,21 @@ metadata/skin = "stone"
 [node name="Banyan" type="Marker2D" parent="SkinZones"]
 position = Vector2(10450, 0)
 metadata/far = "far"
-metadata/mid = "mid-banyan"
+metadata/mid = ""
 metadata/tint = Color(1.0, 0.95, 0.9, 1.0)
 metadata/mid_tint = Color(0.75, 0.68, 0.74, 1.0)
 
 [node name="Ravine" type="Marker2D" parent="SkinZones"]
 position = Vector2(13100, 0)
 metadata/far = "far-moon"
-metadata/mid = "mid-calm"
+metadata/mid = ""
 metadata/tint = Color(0.88, 0.88, 1.05, 1.0)
 metadata/mid_tint = Color(0.62, 0.62, 0.8, 1.0)
 
 [node name="Shrine" type="Marker2D" parent="SkinZones"]
 position = Vector2(15500, 0)
 metadata/far = "far-shrine"
-metadata/mid = "mid-shrine"
+metadata/mid = ""
 metadata/tint = Color(1.02, 0.9, 1.0, 1.0)
 metadata/mid_tint = Color(0.78, 0.64, 0.76, 1.0)
 metadata/skin = "stone"
@@ -3252,14 +3315,14 @@ metadata/skin = "stone"
 [node name="Last" type="Marker2D" parent="SkinZones"]
 position = Vector2(17600, 0)
 metadata/far = "far-ember"
-metadata/mid = "mid-calm"
+metadata/mid = ""
 metadata/tint = Color(0.95, 0.78, 0.78, 1.0)
 metadata/mid_tint = Color(0.62, 0.5, 0.55, 1.0)
 
 [node name="Khara" type="Marker2D" parent="SkinZones"]
 position = Vector2(20600, 0)
 metadata/far = "far-ember"
-metadata/mid = "mid-calm"
+metadata/mid = ""
 metadata/tint = Color(1.0, 0.82, 0.75, 1.0)
 metadata/mid_tint = Color(0.7, 0.55, 0.52, 1.0)
 
