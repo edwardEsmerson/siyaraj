@@ -1,0 +1,29 @@
+{
+  "name": "dhoomketu-pixel-v1",
+  "brief": "Exact left name SIYA, exact right name DHOOMKETU. Siya pixel bust in strict right-facing side profile matching her approved sprite: brown skin, tied black hair, tiny bindi, orange sari, crimson/gold pallu, simple gold jewellery and small sparkler. Dhoomketu on the right is the Firework Commander, render him in the SAME chunky sprite style as the supplied Khara style reference, but as a DIFFERENT character: muted dusky-purple skin, single head, sharp nose, swept-up black moustache, plum coat, dark chest panel, diagonal brass bandolier of cylindrical fireworks, plum turban with brass band and small round gold crest. Behind the outside shoulder is a rack of three plum rockets with gold pointed tips. A wiry military trickster, no horns, no crown, no gada, no blue Khara skin or Khara armour. Dhoomketu faces LEFT towards Siya. Background low-detail dark river ghats with a few silhouettes of moored barge and stone steps. Small hot-pink rocket accents, muted teal river, aubergine base. Only bitmap SIYA, VS, DHOOMKETU lettering. Focus on angular sprite portraits and visible individual pixels.",
+  "cast": [
+    "siya",
+    "khara"
+  ],
+  "size": "2K",
+  "aspect": "16:9",
+  "native_canvas": [
+    320,
+    180
+  ],
+  "display_canvas": [
+    1920,
+    1080
+  ],
+  "display_scale": 6,
+  "palette_limit": 64,
+  "style": "approved-sprite pixel art",
+  "approval": "approved",
+  "source_models": {
+    "01": "pro"
+  },
+  "candidates": [
+    "01"
+  ],
+  "gameplay_asset": "assets/cutscenes/boss-versus/dhoomketu.png"
+}

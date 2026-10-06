@@ -8,6 +8,7 @@ const Story = preload("res://scripts/main/story_panels.gd")
 @export var destination_name: String = "level select"
 @export var introduction: Array[Dictionary] = []
 @export var story_key: String = ""
+@export var versus_texture: String = ""
 var won: bool = false
 var comic: CanvasLayer
 var _arena_process_mode: ProcessMode
@@ -18,6 +19,8 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	if not story_key.is_empty():
 		introduction = Story.introduction(story_key)
+	if not versus_texture.is_empty():
+		introduction.push_front({"texture": versus_texture, "presentation": "versus", "text": ""})
 	$Victory.continued.connect(_continue_campaign)
 	$Victory.replayed.connect(PlaytestNavigation._restart)
 	$Victory.menu_requested.connect(PlaytestNavigation.show_title)

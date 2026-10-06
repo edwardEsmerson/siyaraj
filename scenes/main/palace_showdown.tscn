@@ -38,6 +38,7 @@ destination_name = "the ending"
 
 
 story_key = "palace"
+versus_texture = "res://assets/cutscenes/boss-versus/swaminathan.png"
 
 [node name="RajCage" type="Node2D" parent="."]
 position = Vector2(770, 310)

@@ -36,3 +36,4 @@ destination_name = "river and ghats"
 
 
 story_key = "forest"
+versus_texture = "res://assets/cutscenes/boss-versus/khara.png"

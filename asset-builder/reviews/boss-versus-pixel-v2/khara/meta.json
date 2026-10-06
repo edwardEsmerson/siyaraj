@@ -1,0 +1,30 @@
+{
+  "name": "khara-pixel-v1",
+  "brief": "Exact left name SIYA, exact right name KHARA. Siya pixel bust in strict right-facing side profile like the approved sprite: warm medium-brown skin, tiny bindi, tied black hair with loose curl, orange sari and crimson/gold pallu, simple gold jewellery, a small sparkler. Khara enlarged pixel bust facing LEFT: massive indigo-blue horned rakshasa, huge moustache and fangs, wild black hair, bronze shoulder plates, a bronze gada just behind his outside shoulder. Keep the exact approved costume colours and facial proportions. Faces large and confrontational, restrained diagonal slash, dark teal forest silhouette behind Siya and dark aubergine forest behind Khara. No elaborate border or decoration. Only pixel SIYA, VS, KHARA lettering.",
+  "cast": [
+    "siya",
+    "khara",
+    "khara-gada"
+  ],
+  "size": "2K",
+  "aspect": "16:9",
+  "native_canvas": [
+    320,
+    180
+  ],
+  "display_canvas": [
+    1920,
+    1080
+  ],
+  "display_scale": 6,
+  "palette_limit": 64,
+  "style": "approved-sprite pixel art",
+  "approval": "approved",
+  "source_models": {
+    "01": "pro"
+  },
+  "candidates": [
+    "01"
+  ],
+  "gameplay_asset": "assets/cutscenes/boss-versus/khara.png"
+}

@@ -16,6 +16,7 @@ const ADVANCE_ACTION: StringName = &"ui_accept"
 @onready var speaker_label: Label = $DialogueBubble/Contents/Words/Speaker
 @onready var dialogue_label: Label = $DialogueBubble/Contents/Words/Dialogue
 @onready var advance_label: Label = $DialogueBubble/Contents/Words/Advance
+@onready var splash_advance: Label = $SplashAdvance
 @onready var bubble_tail: Polygon2D = $BubbleTail
 @onready var bubble_tail_inner: Polygon2D = $BubbleTailInner
 
@@ -71,12 +72,14 @@ func _show_current_panel() -> void:
 	if _index < 0 or _index >= _panels.size():
 		return
 	var panel: Dictionary = _panels[_index]
+	var versus: bool = panel.get("presentation", "") == "versus" and not _hint_mode
 	panel_art.texture = _load_texture(panel.get("texture"))
 	panel_art.visible = not _hint_mode and panel_art.texture != null
+	panel_art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED if versus else TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	featured_art.texture = _load_texture(panel.get("subject"))
-	featured_art.visible = not _hint_mode and featured_art.texture != null
+	featured_art.visible = not _hint_mode and not versus and featured_art.texture != null
 	supporting_art.texture = _load_texture(panel.get("supporting_subject"))
-	supporting_art.visible = not _hint_mode and supporting_art.texture != null
+	supporting_art.visible = not _hint_mode and not versus and supporting_art.texture != null
 	featured_art.position.x = 480.0 if supporting_art.visible else 170.0
 	featured_art.size.x = 350.0 if supporting_art.visible else 620.0
 	speaker_label.text = str(panel.get("speaker", ""))
@@ -85,9 +88,10 @@ func _show_current_panel() -> void:
 	portrait.texture = _load_texture(panel.get("portrait"))
 	portrait.visible = portrait.texture != null
 	advance_label.text = "Enter / A: dismiss" if _hint_mode else "Enter / A: continue"
-	bubble.show()
-	bubble_tail.show()
-	bubble_tail_inner.show()
+	bubble.visible = not versus
+	bubble_tail.visible = not versus
+	bubble_tail_inner.visible = not versus
+	splash_advance.visible = versus
 	panel_changed.emit(_index, _panels.size())
 
 

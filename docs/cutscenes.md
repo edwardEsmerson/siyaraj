@@ -29,6 +29,17 @@ New Game plays `scenes/main/prologue.tscn` before entering the forest. The openi
 boss introductions and aftermath sequences live in `scripts/main/story_panels.gd`,
 adapted from `siyaraj.refined.txt`. Direct developer level launches bypass the opening.
 
+Every campaign showdown opens with its approved pixel-art versus card: Siya against
+Khara, Dhoomketu, or Swaminathan. Gameplay PNGs live in
+`assets/cutscenes/boss-versus/`; approved sources and generation prompts live in
+`asset-builder/reviews/boss-versus-pixel-v2/`.
+
+Set `CampaignFlow.versus_texture` to prepend the card to the current story dialogue.
+The `versus` presentation fits the complete image with nearest filtering, hides
+dialogue and both character overlays, and shows `Enter / A: continue`. Approved
+cards are 320x180 pixel art enlarged exactly 6x to 1920x1080. Each source pixel
+occupies 3x3 pixels at the 960x540 game viewport.
+
 Finishing the forest or palace enters its showdown immediately. All three showdowns
 select their dialogue using `CampaignFlow.story_key`. `subject` optionally places
 existing character art above the dialogue over the panel's `texture` background.

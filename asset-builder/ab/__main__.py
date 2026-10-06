@@ -693,6 +693,50 @@ def cmd_ui(a):
           f"../assets/ui/{a.name}.png" + ("  (texture_margin per candidate: margins.json)" if margins else ""))
 
 
+def cmd_versus(a):
+    resolve_size(a, "2K")
+    run = OUT / "versus" / a.name
+    refs = [sprite_ref(name, a.key, a.size) for name in a.cast]
+    roles = []
+    for name in a.cast:
+        meta, _ = load_sprite(name)
+        roles.append(f"approved identity reference {name}: {meta['brief']}")
+    for path in a.ref:
+        refs.append(ref_bytes(path, a.key, a.size))
+        roles.append(f"supporting composition reference ({Path(path).stem})")
+    prompt = prompts.versus(a.brief, roles)
+    ids = prepare(run, a.only, a.n)
+    (run / "prompt.txt").write_text(prompt)
+    jobs = [{"id": i, "prompt": prompt, "refs": refs, "aspect": "16:9",
+             "raw": run / f"{i}.raw.png"} for i in ids]
+
+    def process(job, raw):
+        # One fixed grid and integer enlargement keep the card's pixels square.
+        native = pixel.snap_fixed(raw, px=raw.height / 180, colours=64)
+        native = native.resize((320, 180), Image.Resampling.NEAREST).convert("RGB")
+        native.save(run / f"{job['id']}-native.png")
+        display = native.resize((1920, 1080), Image.Resampling.NEAREST)
+        display.save(run / f"{job['id']}.png")
+        return display, []
+
+    results = run_jobs(a, jobs, process)
+    shown = [image.resize((960, 540), Image.Resampling.NEAREST)
+             for image, _ in results.values() if image is not None]
+    if not shown:
+        if a.batch:
+            return
+        raise SystemExit("no versus candidates generated; inspect request errors above")
+    pixel.contact_sheet(shown, labels(results, a), run / "sheet.png", scale=1, columns=2)
+    (run / "meta.json").write_text(json.dumps({
+        "name": a.name, "brief": a.brief, "cast": a.cast, "size": a.size,
+        "aspect": "16:9", "native_canvas": [320, 180], "display_canvas": [1920, 1080],
+        "display_scale": 6, "palette_limit": 64, "style": "approved-sprite pixel art",
+        "approval": "pending", "source_models": a.made,
+        "candidates": [i for i, (image, _) in results.items() if image is not None],
+    }, indent=2) + "\n")
+    print(f"review {run / 'sheet.png'}; keep candidates outside gameplay until user approval")
+
+
 def cmd_clean(a):
     for path in a.images:
         with Image.open(path) as raw:
@@ -829,6 +873,15 @@ def parser():
     c.add_argument("--key", default="green", choices=prompts.KEYS)
     gen_flags(c, 4)
     c.set_defaults(func=cmd_ui)
+
+    c = sub.add_parser("versus", help="pixel-art boss-introduction cards using approved sprite style")
+    c.add_argument("name")
+    c.add_argument("brief", help="matchup, composition and exact names to print")
+    c.add_argument("--cast", nargs="+", default=["siya", "khara"], help="approved identity sources")
+    c.add_argument("--size", choices=SIDE)
+    c.add_argument("--key", default="green", choices=prompts.KEYS, help="reference transparency backing only")
+    gen_flags(c, 2)
+    c.set_defaults(func=cmd_versus)
 
     c = sub.add_parser("clean",help="cut out + pixel-snap any existing image(s), no generation")
     c.add_argument("images", nargs="+")

@@ -14,3 +14,4 @@ next_level = "res://scenes/main/palace.tscn"
 destination_name = "palace"
 
 story_key = "river"
+versus_texture = "res://assets/cutscenes/boss-versus/dhoomketu.png"

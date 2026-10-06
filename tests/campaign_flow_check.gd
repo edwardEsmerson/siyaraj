@@ -35,17 +35,34 @@ func run_checks() -> void:
 		var flow: CanvasLayer = showdown.get_node("CampaignFlow")
 		var boss: Node = flow.get_node(flow.boss_path)
 		player = showdown.get_node("Player")
+		check(flow.comic.visible and not player.can_process() and not boss.can_process(), "Every versus entry must freeze both combatants")
+		var health_before: int = player.health
+		var boss_timer: float = boss._state_remaining if level == "palace" else boss.state_remaining
+		await ticks(90)
+		check(player.health == health_before and get_nodes_in_group("boss_hazards").is_empty(), "Versus entry must not allow attacks or damage")
+		check(is_equal_approx(boss_timer, boss._state_remaining if level == "palace" else boss.state_remaining), "Versus entry must preserve the boss intro timer")
+		var boss_art: String = {"forest": "khara", "river": "dhoomketu", "palace": "swaminathan"}[level]
+		check(flow.comic.panel_art.texture.resource_path == "res://assets/cutscenes/boss-versus/%s.png" % boss_art, "Each showdown must show its approved versus card first")
+		check(flow.comic.panel_art.texture_filter == CanvasItem.TEXTURE_FILTER_NEAREST and flow.comic.panel_art.stretch_mode == TextureRect.STRETCH_KEEP_ASPECT_CENTERED, "Versus cards must preserve pixels and the complete image")
+		check(not flow.comic.bubble.visible and not flow.comic.featured_art.visible and not flow.comic.supporting_art.visible and not flow.comic.bubble_tail.visible and flow.comic.splash_advance.visible, "Versus faces and names must stay clear of dialogue and extra character overlays")
+		var repeated_enter := InputEventKey.new()
+		repeated_enter.keycode = KEY_ENTER
+		repeated_enter.pressed = true
+		repeated_enter.echo = true
+		flow.comic._unhandled_input(repeated_enter)
+		check(flow.comic._index == 0, "Held Enter must not skip the versus card")
+		paused = true
+		flow.comic._unhandled_input(accept())
+		check(flow.comic._index == 0, "Pause must block advancing the versus card")
+		paused = false
+		flow.comic._unhandled_input(accept())
+		check(flow.introduction.size() == story.introduction(level).size() + 1, "Versus card must preserve all current story dialogue")
 		if not flow.introduction.is_empty():
-			check(flow.comic.visible and not player.can_process() and not boss.can_process(), "Comic entry must freeze both combatants")
-			var health_before: int = player.health
-			var boss_timer: float = boss.state_remaining if level != "palace" else boss._state_remaining
-			await ticks(90)
-			check(player.health == health_before and get_nodes_in_group("boss_hazards").is_empty(), "Comic entry must not allow attacks or damage")
-			check(is_equal_approx(boss_timer, boss.state_remaining if level != "palace" else boss._state_remaining), "Comic entry must preserve the boss intro timer")
+			check(flow.comic.bubble.visible and flow.comic.bubble_tail.visible and not flow.comic.splash_advance.visible, "After the versus card, the existing dialogue layout must return")
 			check(flow.comic.featured_art.texture != null and flow.comic.panel_art.texture != null, "Boss comic must show existing character and background art")
-			for panel in flow.introduction.size():
+			for panel in flow.introduction.size() - 1:
 				flow.comic._unhandled_input(accept())
-			check(not flow.comic.visible and player.can_process() and boss.can_process(), "Closing the comic must release combat")
+		check(not flow.comic.visible and player.can_process() and boss.can_process(), "Closing the introduction must release combat")
 		if level == "palace":
 			var cage: Node2D = showdown.get_node("RajCage")
 			check(not cage.freed and cage.raj.animation == &"sulk", "Raj must be visibly captive during the final fight")
