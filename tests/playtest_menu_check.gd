@@ -118,15 +118,9 @@ func run_checks() -> void:
 	boss.auto_activate = false
 	boss.start_fight()
 	await ticks(3)
-	boss.phase = 3
-	boss.core_health = 1
-	for index in [0, 1, 2, 3, 9]:
-		boss.activate_head(index)
-		var head: Node2D = boss.heads[index]
-		head.take_damage(head.max_health, Vector2.ZERO)
-	await ticks(2)
-	check(boss.is_exposed(), "Final-phase head knockouts must expose Ravan's core")
-	boss.get_node("Core").take_damage(1, Vector2.ZERO)
+	boss.set_head_count(1)
+	check(boss.heads_alive == 1 and boss.phase == 3, "Ravan must be down to his last head")
+	boss.get_node("Hurtbox").take_damage(boss.health, Vector2.ZERO)
 	arena._unhandled_input(accept)
 	await ticks(1)
 	check(current_scene == arena and not arena.completed, "Enter must wait for Ravan's death sequence to finish")
