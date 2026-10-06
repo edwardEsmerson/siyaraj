@@ -20,6 +20,8 @@ const SNAPSHOTS: Array[Dictionary] = [
 	{"label": "Terrain / river stepping stones", "path": "res://scenes/main/river.tscn", "terrain": true, "section": 1},
 	{"label": "Terrain / palace gallery and roofs", "path": "res://scenes/main/palace.tscn", "terrain": true, "section": 2},
 	{"label": "Mechanic / canopy climb", "path": "res://scenes/main/forest.tscn", "terrain": true, "room": &"CanopyNest"},
+	{"label": "Campaign / forest showdown", "path": "res://scenes/main/forest_showdown.tscn"},
+	{"label": "Campaign / palace showdown", "path": "res://scenes/main/palace_showdown.tscn"},
 ]
 
 func _ready() -> void:

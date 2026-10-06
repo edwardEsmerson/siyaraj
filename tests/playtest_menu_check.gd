@@ -17,7 +17,7 @@ func run_checks() -> void:
 	await scene_changed
 	var menu: Control = current_scene
 	var snapshots: Array[Dictionary] = menu.SNAPSHOTS
-	check(snapshots.size() == 14 and menu.get_node("Layout/Lab").item_count == snapshots.size(), "Menu must offer all developer snapshots")
+	check(snapshots.size() == 16 and menu.get_node("Layout/Lab").item_count == snapshots.size(), "Menu must offer all developer snapshots")
 	for wanted in ["res://scenes/dev/sandbox.tscn", "res://scenes/dev/weapons_playground.tscn", "res://scenes/bosses/khara_arena.tscn", "res://scenes/bosses/ravan/ravan_arena.tscn"]:
 		check(snapshots.any(func(entry: Dictionary) -> bool: return entry.path == wanted), "Menu must offer %s" % wanted)
 	for entry in snapshots:
@@ -90,6 +90,7 @@ func run_checks() -> void:
 		await scene_changed
 		check(not paused, "Returning to menu must unpause")
 	# Completing levels advances through the agreed game sequence.
+	navigation.enemies_enabled = false
 	navigation.start_level("res://scenes/main/forest.tscn")
 	await scene_changed
 	current_scene._finish_course()

@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/bosses/khara_arena.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/main/campaign_victory.tscn" id="2"]
+
+[node name="Main" instance=ExtResource("1")]
+
+[node name="Backdrop" parent="TestCourse" index="0"]
+color = Color(0.08, 0.08, 0.08, 1)
+
+[node name="TrunkLeft" parent="TestCourse/Backdrop" index="0"]
+color = Color(0.13, 0.13, 0.13, 1)
+
+[node name="TrunkMiddle" parent="TestCourse/Backdrop" index="1"]
+color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="TrunkRight" parent="TestCourse/Backdrop" index="2"]
+color = Color(0.13, 0.13, 0.13, 1)
+
+[node name="Body" parent="TestCourse/Ground" index="0"]
+color = Color(0.34, 0.34, 0.34, 1)
+
+[node name="Body" parent="TestCourse/LeftWall" index="0"]
+color = Color(0.25, 0.25, 0.25, 1)
+
+[node name="Body" parent="TestCourse/RightWall" index="0"]
+color = Color(0.25, 0.25, 0.25, 1)
+
+[node name="Title" parent="HUD" index="0"]
+text = "SIYARAJ / forest showdown: Khara"
+
+[node name="CampaignFlow" parent="." instance=ExtResource("2")]
+boss_path = NodePath("../TestCourse/Boss")
+next_level = "res://scenes/main/river.tscn"
+destination_name = "river and ghats"
