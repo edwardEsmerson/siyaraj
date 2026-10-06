@@ -1,4 +1,9 @@
-# Forest traversal draft
+# Forest traversal history
+
+For the current route, encounters, recovery paths and guarded detours, read
+[forest iteration](forest_iteration.md). F5 opens the playtest menu. The forest
+exit now offers Khara's campaign showdown; see [level integration](level_iteration.md).
+The notes below describe the earlier traversal draft and its original design decisions.
 
 The level order is forest, river/ghats, temple/palace. F5 starts the forest.
 This revision expands the route from 7,200 to 21,600 pixels and removes the
