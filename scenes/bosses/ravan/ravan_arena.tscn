@@ -31,6 +31,7 @@ polygon = PackedVector2Array(40, 430, 40, 250, 90, 250, 90, 190, 110, 160, 130, 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(480, 454)
 collision_mask = 0
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Ground"]
 color = Color(0.3, 0.24, 0.22, 1)
@@ -42,6 +43,7 @@ shape = SubResource("FloorShape")
 [node name="LeftWall" type="StaticBody2D" parent="."]
 position = Vector2(28, 230)
 collision_mask = 0
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="LeftWall"]
 color = Color(0.3, 0.24, 0.22, 1)
@@ -53,6 +55,7 @@ shape = SubResource("WallShape")
 [node name="RightWall" type="StaticBody2D" parent="."]
 position = Vector2(932, 230)
 collision_mask = 0
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="RightWall"]
 color = Color(0.3, 0.24, 0.22, 1)
@@ -64,6 +67,7 @@ shape = SubResource("WallShape")
 [node name="LedgeLeft" type="StaticBody2D" parent="."]
 position = Vector2(88, 412)
 collision_mask = 0
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="LedgeLeft"]
 color = Color(0.36, 0.29, 0.26, 1)
@@ -75,6 +79,7 @@ shape = SubResource("LedgeShape")
 [node name="LedgeRight" type="StaticBody2D" parent="."]
 position = Vector2(872, 412)
 collision_mask = 0
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="LedgeRight"]
 color = Color(0.36, 0.29, 0.26, 1)
@@ -138,5 +143,5 @@ text = "Strike him anywhere. Watch the glowing heads."
 [node name="WorldSkin" type="Node2D" parent="."]
 script = ExtResource("world_skin")
 biome = "palace"
-direction = "carved"
+direction = "diyalit"
 arena = true

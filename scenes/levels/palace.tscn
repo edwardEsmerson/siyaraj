@@ -473,6 +473,7 @@ position = Vector2(5605.0, 410.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 14
+metadata/kit = "roof"
 
 [node name="Body" type="Polygon2D" parent="Terrain/RoofStair1"]
 polygon = PackedVector2Array(-65.0, -20.0, 65.0, -20.0, 65.0, 20.0, -65.0, 20.0)
@@ -490,6 +491,7 @@ position = Vector2(5735.0, 370.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 15
+metadata/kit = "roof"
 
 [node name="Body" type="Polygon2D" parent="Terrain/RoofStair2"]
 polygon = PackedVector2Array(-65.0, -20.0, 65.0, -20.0, 65.0, 20.0, -65.0, 20.0)
@@ -507,6 +509,7 @@ position = Vector2(5865.0, 330.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 16
+metadata/kit = "roof"
 
 [node name="Body" type="Polygon2D" parent="Terrain/RoofStair3"]
 polygon = PackedVector2Array(-65.0, -20.0, 65.0, -20.0, 65.0, 20.0, -65.0, 20.0)
@@ -524,6 +527,7 @@ position = Vector2(5995.0, 290.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 17
+metadata/kit = "roof"
 
 [node name="Body" type="Polygon2D" parent="Terrain/RoofStair4"]
 polygon = PackedVector2Array(-65.0, -20.0, 65.0, -20.0, 65.0, 20.0, -65.0, 20.0)
@@ -541,6 +545,7 @@ position = Vector2(6125.0, 250.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 18
+metadata/kit = "roof"
 
 [node name="Body" type="Polygon2D" parent="Terrain/RoofStair5"]
 polygon = PackedVector2Array(-65.0, -20.0, 65.0, -20.0, 65.0, 20.0, -65.0, 20.0)
@@ -558,6 +563,7 @@ position = Vector2(6360.0, 250.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 19
+metadata/kit = "roof"
 
 [node name="Body" type="Polygon2D" parent="Terrain/RoofLookout"]
 polygon = PackedVector2Array(-170.0, -20.0, 170.0, -20.0, 170.0, 20.0, -170.0, 20.0)
@@ -575,6 +581,7 @@ position = Vector2(6820.0, 270.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 20
+metadata/kit = "roof"
 
 [node name="Body" type="Polygon2D" parent="Terrain/BrokenRoof1"]
 polygon = PackedVector2Array(-120.0, -20.0, 120.0, -20.0, 120.0, 20.0, -120.0, 20.0)
@@ -592,6 +599,7 @@ position = Vector2(7200.0, 310.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 21
+metadata/kit = "roof"
 
 [node name="Body" type="Polygon2D" parent="Terrain/BrokenRoof2"]
 polygon = PackedVector2Array(-110.0, -20.0, 110.0, -20.0, 110.0, 20.0, -110.0, 20.0)
@@ -609,6 +617,7 @@ position = Vector2(7585.0, 350.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 22
+metadata/kit = "roof"
 
 [node name="Body" type="Polygon2D" parent="Terrain/BrokenRoof3"]
 polygon = PackedVector2Array(-125.0, -20.0, 125.0, -20.0, 125.0, 20.0, -125.0, 20.0)
@@ -626,6 +635,7 @@ position = Vector2(7910.0, 376.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 23
+metadata/kit = "roof"
 
 [node name="Body" type="Polygon2D" parent="Terrain/RoofLanding"]
 polygon = PackedVector2Array(-90.0, -6.0, 90.0, -6.0, 90.0, 6.0, -90.0, 6.0)
@@ -662,6 +672,7 @@ position = Vector2(9145.0, 450.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 25
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/InnerCourtEntry"]
 polygon = PackedVector2Array(-235.0, -20.0, 235.0, -20.0, 235.0, 20.0, -235.0, 20.0)
@@ -679,6 +690,7 @@ position = Vector2(9455.0, 410.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 26
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/InnerWestBase"]
 polygon = PackedVector2Array(-75.0, -20.0, 75.0, -20.0, 75.0, 20.0, -75.0, 20.0)
@@ -696,6 +708,7 @@ position = Vector2(9740.0, 450.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 27
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/InnerGuardCourt"]
 polygon = PackedVector2Array(-210.0, -20.0, 210.0, -20.0, 210.0, 20.0, -210.0, 20.0)
@@ -713,6 +726,7 @@ position = Vector2(10025.0, 410.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 28
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/InnerEastBase"]
 polygon = PackedVector2Array(-75.0, -20.0, 75.0, -20.0, 75.0, 20.0, -75.0, 20.0)
@@ -730,6 +744,7 @@ position = Vector2(10680.0, 450.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 29
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/InnerHall"]
 polygon = PackedVector2Array(-580.0, -20.0, 580.0, -20.0, 580.0, 20.0, -580.0, 20.0)
@@ -747,6 +762,7 @@ position = Vector2(11325.0, 410.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 30
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/SanctumStep1"]
 polygon = PackedVector2Array(-65.0, -20.0, 65.0, -20.0, 65.0, 20.0, -65.0, 20.0)
@@ -764,6 +780,7 @@ position = Vector2(11455.0, 370.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 31
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/SanctumStep2"]
 polygon = PackedVector2Array(-65.0, -20.0, 65.0, -20.0, 65.0, 20.0, -65.0, 20.0)
@@ -781,6 +798,7 @@ position = Vector2(11585.0, 330.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 32
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/SanctumStep3"]
 polygon = PackedVector2Array(-65.0, -20.0, 65.0, -20.0, 65.0, 20.0, -65.0, 20.0)
@@ -798,6 +816,7 @@ position = Vector2(11715.0, 290.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 33
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/SanctumStep4"]
 polygon = PackedVector2Array(-65.0, -20.0, 65.0, -20.0, 65.0, 20.0, -65.0, 20.0)
@@ -815,6 +834,7 @@ position = Vector2(11845.0, 250.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 34
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/SanctumStep5"]
 polygon = PackedVector2Array(-65.0, -20.0, 65.0, -20.0, 65.0, 20.0, -65.0, 20.0)
@@ -832,6 +852,7 @@ position = Vector2(12065.0, 250.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 35
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/SanctumTop"]
 polygon = PackedVector2Array(-155.0, -20.0, 155.0, -20.0, 155.0, 20.0, -155.0, 20.0)
@@ -849,6 +870,7 @@ position = Vector2(12490.0, 290.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 36
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/ThroneRoof1"]
 polygon = PackedVector2Array(-120.0, -20.0, 120.0, -20.0, 120.0, 20.0, -120.0, 20.0)
@@ -866,6 +888,7 @@ position = Vector2(12880.0, 340.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 37
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/ThroneRoof2"]
 polygon = PackedVector2Array(-120.0, -20.0, 120.0, -20.0, 120.0, 20.0, -120.0, 20.0)
@@ -883,6 +906,7 @@ position = Vector2(13225.0, 376.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 38
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/ThroneRoof3"]
 polygon = PackedVector2Array(-85.0, -6.0, 85.0, -6.0, 85.0, 6.0, -85.0, 6.0)
@@ -902,6 +926,7 @@ position = Vector2(13590.0, 450.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 39
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/ThroneApproach"]
 polygon = PackedVector2Array(-190.0, -20.0, 190.0, -20.0, 190.0, 20.0, -190.0, 20.0)
@@ -919,6 +944,7 @@ position = Vector2(13840.0, 410.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 40
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/ThroneStep1"]
 polygon = PackedVector2Array(-60.0, -20.0, 60.0, -20.0, 60.0, 20.0, -60.0, 20.0)
@@ -936,6 +962,7 @@ position = Vector2(13960.0, 370.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 41
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/ThroneStep2"]
 polygon = PackedVector2Array(-60.0, -20.0, 60.0, -20.0, 60.0, 20.0, -60.0, 20.0)
@@ -953,6 +980,7 @@ position = Vector2(14190.0, 370.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 42
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="Terrain/ThroneLanding"]
 polygon = PackedVector2Array(-170.0, -20.0, 170.0, -20.0, 170.0, 20.0, -170.0, 20.0)
@@ -1226,6 +1254,7 @@ position = Vector2(9135.0, 396.0)
 collision_layer = 1
 collision_mask = 0
 metadata/alternate_route = true
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="AlternateRoutes/InnerBalconyStep1"]
 polygon = PackedVector2Array(-65.0, -6.0, 65.0, -6.0, 65.0, 6.0, -65.0, 6.0)
@@ -1245,6 +1274,7 @@ position = Vector2(9265.0, 356.0)
 collision_layer = 1
 collision_mask = 0
 metadata/alternate_route = true
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="AlternateRoutes/InnerBalconyStep2"]
 polygon = PackedVector2Array(-65.0, -6.0, 65.0, -6.0, 65.0, 6.0, -65.0, 6.0)
@@ -1264,6 +1294,7 @@ position = Vector2(9395.0, 316.0)
 collision_layer = 1
 collision_mask = 0
 metadata/alternate_route = true
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="AlternateRoutes/InnerBalconyStep3"]
 polygon = PackedVector2Array(-65.0, -6.0, 65.0, -6.0, 65.0, 6.0, -65.0, 6.0)
@@ -1283,6 +1314,7 @@ position = Vector2(9525.0, 276.0)
 collision_layer = 1
 collision_mask = 0
 metadata/alternate_route = true
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="AlternateRoutes/InnerBalconyStep4"]
 polygon = PackedVector2Array(-65.0, -6.0, 65.0, -6.0, 65.0, 6.0, -65.0, 6.0)
@@ -1302,6 +1334,7 @@ position = Vector2(9905.0, 236.0)
 collision_layer = 1
 collision_mask = 0
 metadata/alternate_route = true
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="AlternateRoutes/InnerBalcony"]
 polygon = PackedVector2Array(-315.0, -6.0, 315.0, -6.0, 315.0, 6.0, -315.0, 6.0)
@@ -1321,6 +1354,7 @@ position = Vector2(10425.0, 296.0)
 collision_layer = 1
 collision_mask = 0
 metadata/alternate_route = true
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="AlternateRoutes/InnerBalconyDescent1"]
 polygon = PackedVector2Array(-85.0, -6.0, 85.0, -6.0, 85.0, 6.0, -85.0, 6.0)
@@ -1340,6 +1374,7 @@ position = Vector2(10675.0, 356.0)
 collision_layer = 1
 collision_mask = 0
 metadata/alternate_route = true
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="AlternateRoutes/InnerBalconyDescent2"]
 polygon = PackedVector2Array(-85.0, -6.0, 85.0, -6.0, 85.0, 6.0, -85.0, 6.0)
@@ -1359,6 +1394,7 @@ position = Vector2(10925.0, 396.0)
 collision_layer = 1
 collision_mask = 0
 metadata/alternate_route = true
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="AlternateRoutes/InnerBalconyDescent3"]
 polygon = PackedVector2Array(-85.0, -6.0, 85.0, -6.0, 85.0, 6.0, -85.0, 6.0)
@@ -1378,6 +1414,7 @@ position = Vector2(12680.0, 490.0)
 collision_layer = 1
 collision_mask = 0
 metadata/alternate_route = true
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="AlternateRoutes/SanctumRecovery"]
 polygon = PackedVector2Array(-460.0, -20.0, 460.0, -20.0, 460.0, 20.0, -460.0, 20.0)
@@ -1395,6 +1432,7 @@ position = Vector2(13205.0, 470.0)
 collision_layer = 1
 collision_mask = 0
 metadata/alternate_route = true
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="AlternateRoutes/SanctumRecoveryStep1"]
 polygon = PackedVector2Array(-65.0, -20.0, 65.0, -20.0, 65.0, 20.0, -65.0, 20.0)
@@ -1412,6 +1450,7 @@ position = Vector2(13335.0, 450.0)
 collision_layer = 1
 collision_mask = 0
 metadata/alternate_route = true
+metadata/kit = "hall"
 
 [node name="Body" type="Polygon2D" parent="AlternateRoutes/SanctumRecoveryStep2"]
 polygon = PackedVector2Array(-65.0, -20.0, 65.0, -20.0, 65.0, 20.0, -65.0, 20.0)
@@ -1439,11 +1478,11 @@ shape = SubResource("Checkpoint")
 
 [node name="Bowl" type="Polygon2D" parent="Checkpoints/CourtyardDiya"]
 polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+color = Color(0.78, 0.5, 0.22, 1)
 
 [node name="Flame" type="Polygon2D" parent="Checkpoints/CourtyardDiya"]
 polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+color = Color(1, 0.74, 0.28, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/CourtyardDiya"]
 offset_left = -65.0
@@ -1465,11 +1504,11 @@ shape = SubResource("Checkpoint")
 
 [node name="Bowl" type="Polygon2D" parent="Checkpoints/GalleryDiya"]
 polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+color = Color(0.78, 0.5, 0.22, 1)
 
 [node name="Flame" type="Polygon2D" parent="Checkpoints/GalleryDiya"]
 polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+color = Color(1, 0.74, 0.28, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/GalleryDiya"]
 offset_left = -65.0
@@ -1491,11 +1530,11 @@ shape = SubResource("Checkpoint")
 
 [node name="Bowl" type="Polygon2D" parent="Checkpoints/RoofDiya"]
 polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+color = Color(0.78, 0.5, 0.22, 1)
 
 [node name="Flame" type="Polygon2D" parent="Checkpoints/RoofDiya"]
 polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+color = Color(1, 0.74, 0.28, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/RoofDiya"]
 offset_left = -65.0
@@ -1517,11 +1556,11 @@ shape = SubResource("Checkpoint")
 
 [node name="Bowl" type="Polygon2D" parent="Checkpoints/SanctumDiya"]
 polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+color = Color(0.78, 0.5, 0.22, 1)
 
 [node name="Flame" type="Polygon2D" parent="Checkpoints/SanctumDiya"]
 polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+color = Color(1, 0.74, 0.28, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/SanctumDiya"]
 offset_left = -65.0
@@ -1543,11 +1582,11 @@ shape = SubResource("Checkpoint")
 
 [node name="Bowl" type="Polygon2D" parent="Checkpoints/ThroneDiya"]
 polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+color = Color(0.78, 0.5, 0.22, 1)
 
 [node name="Flame" type="Polygon2D" parent="Checkpoints/ThroneDiya"]
 polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+color = Color(1, 0.74, 0.28, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/ThroneDiya"]
 offset_left = -65.0
@@ -1613,10 +1652,12 @@ collision_mask = 2
 shape = SubResource("Finish")
 
 [node name="Post" type="Polygon2D" parent="Finish"]
+visible = false
 polygon = PackedVector2Array(-3, -55, 3, -55, 3, 80, -3, 80)
 color = Color(0.6, 0.6, 0.6, 1)
 
 [node name="Flag" type="Polygon2D" parent="Finish"]
+visible = false
 polygon = PackedVector2Array(3, -55, 48, -55, 36, -30, 3, -30)
 color = Color(0.9, 0.9, 0.9, 1)
 
@@ -1650,10 +1691,363 @@ position = Vector2(13480, 145)
 theme_override_font_sizes/font_size = 16
 text = "THRONE APPROACH"
 
+[node name="KitDecor" type="Node2D" parent="."]
+
+[node name="wall-gallery0" type="Marker2D" parent="KitDecor"]
+position = Vector2(4450, 452)
+z_index = -8
+metadata/piece = "wall-gallery"
+metadata/width = 2260.0
+
+[node name="wall-hall1" type="Marker2D" parent="KitDecor"]
+position = Vector2(10085, 452)
+z_index = -8
+modulate = Color(0.52, 0.48, 0.58, 1)
+metadata/piece = "wall-hall"
+metadata/width = 2390.0
+
+[node name="wall-sanctum2" type="Marker2D" parent="KitDecor"]
+position = Vector2(12330, 452)
+z_index = -8
+modulate = Color(0.66, 0.6, 0.68, 1)
+metadata/piece = "wall-sanctum"
+metadata/width = 2140.0
+
+[node name="wall-throne3" type="Marker2D" parent="KitDecor"]
+position = Vector2(13930, 452)
+z_index = -8
+metadata/piece = "wall-throne"
+metadata/width = 1060.0
+
+[node name="pilaster4" type="Marker2D" parent="KitDecor"]
+position = Vector2(3320, 548)
+scale = Vector2(1.202, 1.202)
+z_index = -7
+modulate = Color(0.62, 0.58, 0.66, 1)
+metadata/piece = "pilaster"
+
+[node name="pilaster5" type="Marker2D" parent="KitDecor"]
+position = Vector2(5560, 548)
+scale = Vector2(1.202, 1.202)
+z_index = -7
+modulate = Color(0.62, 0.58, 0.66, 1)
+metadata/piece = "pilaster"
+
+[node name="pilaster6" type="Marker2D" parent="KitDecor"]
+position = Vector2(8880, 548)
+scale = Vector2(1.202, 1.202)
+z_index = -7
+modulate = Color(0.62, 0.58, 0.66, 1)
+metadata/piece = "pilaster"
+
+[node name="pilaster7" type="Marker2D" parent="KitDecor"]
+position = Vector2(11265, 548)
+scale = Vector2(1.202, 1.202)
+z_index = -7
+modulate = Color(0.62, 0.58, 0.66, 1)
+metadata/piece = "pilaster"
+
+[node name="pilaster8" type="Marker2D" parent="KitDecor"]
+position = Vector2(13400, 548)
+scale = Vector2(1.202, 1.202)
+z_index = -7
+modulate = Color(0.62, 0.58, 0.66, 1)
+metadata/piece = "pilaster"
+
+[node name="gate9" type="Marker2D" parent="KitDecor"]
+position = Vector2(430, 432)
+z_index = -6
+modulate = Color(0.86, 0.84, 0.9, 1)
+metadata/piece = "gate"
+
+[node name="glow-big10" type="Marker2D" parent="KitDecor"]
+position = Vector2(330, 394.0)
+z_index = -5
+metadata/piece = "glow-big"
+metadata/blend = "add"
+
+[node name="glow-big11" type="Marker2D" parent="KitDecor"]
+position = Vector2(530, 394.0)
+z_index = -5
+metadata/piece = "glow-big"
+metadata/blend = "add"
+
+[node name="chhatri12" type="Marker2D" parent="KitDecor"]
+position = Vector2(1480, 272)
+z_index = -6
+metadata/piece = "chhatri"
+
+[node name="elephant13" type="Marker2D" parent="KitDecor"]
+position = Vector2(2440, 432)
+z_index = -6
+metadata/piece = "elephant"
+
+[node name="elephant14" type="Marker2D" parent="KitDecor"]
+position = Vector2(3190, 432)
+scale = Vector2(-1.0, 1.0)
+z_index = -6
+metadata/piece = "elephant"
+
+[node name="lamptower15" type="Marker2D" parent="KitDecor"]
+position = Vector2(2780, 432)
+scale = Vector2(1.4, 1.4)
+z_index = -6
+metadata/piece = "lamptower"
+
+[node name="glow16" type="Marker2D" parent="KitDecor"]
+position = Vector2(2780, 382.0)
+z_index = -5
+metadata/piece = "glow"
+metadata/blend = "add"
+
+[node name="glow17" type="Marker2D" parent="KitDecor"]
+position = Vector2(3060, 432.0)
+z_index = -5
+metadata/piece = "glow"
+metadata/blend = "add"
+
+[node name="pillar18" type="Marker2D" parent="KitDecor"]
+position = Vector2(3755, 392)
+scale = Vector2(0.738, 0.738)
+z_index = -6
+metadata/piece = "pillar"
+
+[node name="pillar19" type="Marker2D" parent="KitDecor"]
+position = Vector2(4335, 392)
+scale = Vector2(1.262, 1.262)
+z_index = -6
+metadata/piece = "pillar"
+
+[node name="lantern20" type="Marker2D" parent="KitDecor"]
+position = Vector2(4100, 242)
+z_index = -2
+metadata/piece = "lantern"
+metadata/hang = true
+
+[node name="lantern21" type="Marker2D" parent="KitDecor"]
+position = Vector2(4470, 242)
+z_index = -2
+metadata/piece = "lantern"
+metadata/hang = true
+
+[node name="glow22" type="Marker2D" parent="KitDecor"]
+position = Vector2(4100, 322.0)
+z_index = -5
+metadata/piece = "glow"
+metadata/blend = "add"
+
+[node name="glow23" type="Marker2D" parent="KitDecor"]
+position = Vector2(4470, 322.0)
+z_index = -5
+metadata/piece = "glow"
+metadata/blend = "add"
+
+[node name="glow24" type="Marker2D" parent="KitDecor"]
+position = Vector2(5340, 432.0)
+z_index = -5
+metadata/piece = "glow"
+metadata/blend = "add"
+
+[node name="chhatri25" type="Marker2D" parent="KitDecor"]
+position = Vector2(6330, 232)
+scale = Vector2(0.9, 0.9)
+z_index = -6
+metadata/piece = "chhatri"
+
+[node name="dome-ruin26" type="Marker2D" parent="KitDecor"]
+position = Vector2(8230, 432)
+z_index = -6
+metadata/piece = "dome-ruin"
+
+[node name="glow27" type="Marker2D" parent="KitDecor"]
+position = Vector2(8600, 432.0)
+z_index = -5
+metadata/piece = "glow"
+metadata/blend = "add"
+
+[node name="lantern28" type="Marker2D" parent="KitDecor"]
+position = Vector2(9800, 242)
+z_index = -2
+metadata/piece = "lantern"
+metadata/hang = true
+
+[node name="lantern29" type="Marker2D" parent="KitDecor"]
+position = Vector2(10130, 242)
+z_index = -2
+metadata/piece = "lantern"
+metadata/hang = true
+
+[node name="glow30" type="Marker2D" parent="KitDecor"]
+position = Vector2(9800, 322.0)
+z_index = -5
+metadata/piece = "glow"
+metadata/blend = "add"
+
+[node name="glow31" type="Marker2D" parent="KitDecor"]
+position = Vector2(10130, 322.0)
+z_index = -5
+metadata/piece = "glow"
+metadata/blend = "add"
+
+[node name="pillar32" type="Marker2D" parent="KitDecor"]
+position = Vector2(9455, 392)
+scale = Vector2(0.934, 0.934)
+z_index = -6
+metadata/piece = "pillar"
+
+[node name="pillar33" type="Marker2D" parent="KitDecor"]
+position = Vector2(10025, 392)
+scale = Vector2(1.262, 1.262)
+z_index = -6
+metadata/piece = "pillar"
+
+[node name="glow34" type="Marker2D" parent="KitDecor"]
+position = Vector2(11060, 432.0)
+z_index = -5
+metadata/piece = "glow"
+metadata/blend = "add"
+
+[node name="lamptower35" type="Marker2D" parent="KitDecor"]
+position = Vector2(11950, 232)
+scale = Vector2(1.2, 1.2)
+z_index = -6
+metadata/piece = "lamptower"
+
+[node name="lamptower36" type="Marker2D" parent="KitDecor"]
+position = Vector2(12690, 472)
+scale = Vector2(1.8, 1.8)
+z_index = -6
+metadata/piece = "lamptower"
+
+[node name="glow37" type="Marker2D" parent="KitDecor"]
+position = Vector2(11950, 212.0)
+z_index = -5
+metadata/piece = "glow"
+metadata/blend = "add"
+
+[node name="glow-big38" type="Marker2D" parent="KitDecor"]
+position = Vector2(12690, 394.0)
+z_index = -5
+metadata/piece = "glow-big"
+metadata/blend = "add"
+
+[node name="throne-door39" type="Marker2D" parent="KitDecor"]
+position = Vector2(14200, 352)
+z_index = -6
+metadata/piece = "throne-door"
+
+[node name="glow40" type="Marker2D" parent="KitDecor"]
+position = Vector2(13600, 432.0)
+z_index = -5
+metadata/piece = "glow"
+metadata/blend = "add"
+
+[node name="glow-big41" type="Marker2D" parent="KitDecor"]
+position = Vector2(14200, 314.0)
+z_index = -5
+metadata/piece = "glow-big"
+metadata/blend = "add"
+
+[node name="jharokha42" type="Marker2D" parent="KitDecor"]
+position = Vector2(1405, 430)
+scale = Vector2(1.3, 1.3)
+z_index = -3
+modulate = Color(0.8, 0.78, 0.86, 1)
+metadata/piece = "jharokha"
+
+[node name="jharokha43" type="Marker2D" parent="KitDecor"]
+position = Vector2(6360, 400)
+scale = Vector2(1.3, 1.3)
+z_index = -3
+modulate = Color(0.8, 0.78, 0.86, 1)
+metadata/piece = "jharokha"
+
+[node name="jharokha44" type="Marker2D" parent="KitDecor"]
+position = Vector2(12065, 400)
+scale = Vector2(1.3, 1.3)
+z_index = -3
+modulate = Color(0.8, 0.78, 0.86, 1)
+metadata/piece = "jharokha"
+
+[node name="stacked-pot45" type="Marker2D" parent="KitDecor"]
+position = Vector2(690, 430)
+z_index = -2
+metadata/piece = "stacked-pot"
+
+[node name="big-diya46" type="Marker2D" parent="KitDecor"]
+position = Vector2(610, 430)
+z_index = -2
+metadata/piece = "big-diya"
+
+[node name="rockets47" type="Marker2D" parent="KitDecor"]
+position = Vector2(1290, 270)
+z_index = -2
+metadata/piece = "rockets"
+
+[node name="vase-teal48" type="Marker2D" parent="KitDecor"]
+position = Vector2(2390, 430)
+z_index = -2
+metadata/piece = "vase-teal"
+
+[node name="lamp-stand49" type="Marker2D" parent="KitDecor"]
+position = Vector2(3420, 430)
+z_index = -2
+metadata/piece = "lamp-stand"
+
+[node name="lamp-stand50" type="Marker2D" parent="KitDecor"]
+position = Vector2(5440, 430)
+z_index = -2
+metadata/piece = "lamp-stand"
+
+[node name="kite51" type="Marker2D" parent="KitDecor"]
+position = Vector2(6235, 230)
+z_index = -2
+metadata/piece = "kite"
+
+[node name="pigeon52" type="Marker2D" parent="KitDecor"]
+position = Vector2(6505, 230)
+z_index = -2
+metadata/piece = "pigeon"
+
+[node name="rubble53" type="Marker2D" parent="KitDecor"]
+position = Vector2(6895, 250)
+z_index = -2
+metadata/piece = "rubble"
+
+[node name="rubble254" type="Marker2D" parent="KitDecor"]
+position = Vector2(7135, 290)
+z_index = -2
+metadata/piece = "rubble2"
+
+[node name="crackers55" type="Marker2D" parent="KitDecor"]
+position = Vector2(6600, 470)
+z_index = -2
+metadata/piece = "crackers"
+
+[node name="pots-kite56" type="Marker2D" parent="KitDecor"]
+position = Vector2(7390, 470)
+z_index = -2
+metadata/piece = "pots-kite"
+
+[node name="rubble57" type="Marker2D" parent="KitDecor"]
+position = Vector2(7930, 470)
+z_index = -2
+metadata/piece = "rubble"
+
+[node name="rockets58" type="Marker2D" parent="KitDecor"]
+position = Vector2(8150, 430)
+z_index = -2
+metadata/piece = "rockets"
+
+[node name="stacked-pot59" type="Marker2D" parent="KitDecor"]
+position = Vector2(8790, 430)
+z_index = -2
+metadata/piece = "stacked-pot"
+
 [node name="WorldSkin" type="Node2D" parent="."]
 script = ExtResource("world_skin")
 biome = "palace"
-direction = "carved"
+direction = "diyalit"
 
 [node name="RobinHints" type="Node2D" parent="."]
 

@@ -174,5 +174,5 @@ horizontal_alignment = 1
 [node name="WorldSkin" type="Node2D" parent="."]
 script = ExtResource("world_skin")
 biome = "forest"
-direction = "truckart"
+direction = "diyalit"
 arena = true
