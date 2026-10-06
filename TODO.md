@@ -61,9 +61,10 @@ twist yet.
 
 ## 4. Robin (if kept)
 
-Robin doesn't exist in the code yet.
+Robin follows Siya and gives hints in the forest (see `docs/robin.md`). His sprites,
+and hints for the river and palace, are still to do.
 
-- [ ] **Robin as a guide at minimum:** follows Siya and shows a hint near new
+- [x] **Robin as a guide at minimum:** follows Siya and shows a hint near new
   hazards and moves. This is the proposal's fallback if time runs short.
 - [ ] **The Robin boss fight**, plus a dizzy meter so Siya can knock him out without
   killing him, if we keep the proposal's twist.

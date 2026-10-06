@@ -1,10 +1,11 @@
-[gd_scene load_steps=122 format=3]
+[gd_scene load_steps=123 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/forest.gd" id="1_forest"]
 
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="2_guard"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/brute.tscn" id="3_brute"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/ground_shooter.tscn" id="4_shooter"]
+[ext_resource type="PackedScene" path="res://scenes/companions/robin_hint.tscn" id="5_robin_hint"]
 
 [sub_resource type="RectangleShape2D" id="StartShape"]
 size = Vector2(360, 32)
@@ -2895,3 +2896,33 @@ offset_bottom = -75.0
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 15
 text = "DIYA"
+
+[node name="RobinHints" type="Node2D" parent="."]
+
+[node name="StartHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(420, 430)
+text = "Raj went this way! Space jumps. Shift dashes, even in midair."
+
+[node name="GuardHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(1750, 430)
+text = "One of Swaminathan's guards! J lashes him. When he winds up, step back."
+
+[node name="DiyaHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(2400, 430)
+text = "A diya! Press E to light it. If you fall, we start again from here."
+
+[node name="CanopyHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(2950, 430)
+text = "Wide gaps. Jump, then dash across. You get one air dash until you land!"
+
+[node name="WeaponsHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(4700, 430)
+text = "L fires a skyshot, but you only have five. Hold K to charge a chakri spin."
+
+[node name="ShooterHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(10250, 430)
+text = "Purple bolts! Dash straight through them, or hit him to stop the shot."
+
+[node name="BruteHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(15300, 430)
+text = "That brute is slow but hits hard. Wait for the swing, then strike."
