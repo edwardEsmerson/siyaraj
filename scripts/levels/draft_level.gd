@@ -35,6 +35,7 @@ func _update_diyas(player: CharacterBody2D) -> void:
 		if nearby and Input.is_action_just_pressed("interact"):
 			if not saved.lit.has(checkpoint.name):
 				saved.lit.append(checkpoint.name)
+				player.heal(1)
 				get_node("/root/AudioDirector").play_cue(&"checkpoint")
 				player.get_node("Visuals").play_story(&"light_diya")
 			if checkpoint.position.x >= saved.spawn.x:

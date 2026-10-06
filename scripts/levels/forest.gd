@@ -56,6 +56,7 @@ func _physics_process(_delta: float) -> void:
 		InteractionPrompt.set_available(checkpoint.get_node("Prompt"), can_light and not saved)
 		if can_light and not saved and Input.is_action_just_pressed("interact"):
 			lit_checkpoints.append(checkpoint.name)
+			player.heal(1)
 			get_node("/root/AudioDirector").play_cue(&"checkpoint")
 			if current_room == &"":
 				checkpoint_x = maxf(checkpoint_x, checkpoint.position.x)

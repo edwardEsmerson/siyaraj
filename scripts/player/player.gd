@@ -217,6 +217,13 @@ func take_damage(amount: int, knockback: Vector2) -> void:
 		apply_knockback(knockback)
 
 
+func heal(amount: int) -> void:
+	if state == State.DEAD or amount <= 0 or health >= max_health:
+		return
+	health = mini(health + amount, max_health)
+	health_changed.emit(health)
+
+
 func die() -> void:
 	if state == State.DEAD:
 		return
