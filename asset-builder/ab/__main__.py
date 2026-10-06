@@ -11,7 +11,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-from . import pixel, prompts
+from . import batch, pixel, prompts
 
 ROOT = pixel.ROOT
 OUT = ROOT / "out"
@@ -88,19 +88,32 @@ def clean_sprite(raw, mode="feet", palette=None, px=None, target=None, canvas=No
 
 
 def run_jobs(a, jobs, process):
-    """Generate every job in parallel (cached raws are reused), clean, and retry once on problems."""
+    """Generate every job in parallel (cached raws are reused), clean, and retry once on problems.
+    --split alternates candidates between models; --batch queues missing raws instead of generating."""
     gen = nanobanana()
-    print(f"~Rs{gen.spent_inr():.0f} spent so far; {sum(not j['raw'].exists() for j in jobs)} new request(s) "
-          f"with {a.model}, {a.jobs} at a time", flush=True)
+    lanes = [gen.MODELS.get(m, m) for m in (a.split.split(",") if a.split else [a.model])]
+    for i, job in enumerate(jobs):
+        job["model"] = lanes[i % len(lanes)]
+    pending = [j for j in jobs if not j["raw"].exists()]
+    if a.batch:
+        a.retry = 0  # cleaning only: a regenerate would be another batch round
+        if pending:
+            batch.enqueue(gen, a, pending)
+        jobs = [j for j in jobs if j["raw"].exists()]
+        if not jobs:
+            raise SystemExit(0)
+    print(f"~Rs{gen.spent_inr():.0f} spent so far; {len(pending) * (not a.batch)} new request(s) "
+          f"with {', '.join(batch.short(gen, m) for m in lanes)}, {a.jobs} at a time", flush=True)
 
     def one(job):
         for attempt in range(a.retry + 1):
             if not job["raw"].exists():
                 try:
-                    data = generate(gen, a, job)
+                    data, model = generate(gen, a, job)
                 except gen.Blocked as e:
                     return job, None, [str(e)]
                 job["raw"].write_bytes(data)
+                batch.note_model(job["raw"], batch.short(gen, model))
             with Image.open(job["raw"]) as raw:
                 result, problems = process(job, raw.convert("RGB"))
             if not problems or attempt == a.retry:
@@ -109,26 +122,29 @@ def run_jobs(a, jobs, process):
             job["raw"].rename(job["raw"].with_suffix(".rejected.png"))
         return job, result, problems
 
-    results = {}
+    results, a.made = {}, {}
     with cf.ThreadPoolExecutor(a.jobs) as pool:
         for job, result, problems in pool.map(one, jobs):
             flag = "  !! " + "; ".join(problems) if problems else ""
             print(f"  {job['id']} done{flag}", flush=True)
             results[job["id"]] = (result, problems)
+            a.made[job["id"]] = batch.made_by(job["raw"])
     print(f"~Rs{gen.spent_inr():.0f} spent so far")
     return results
 
 
 def generate(gen, a, job):
+    """-> (image bytes, model id that made it)."""
     log = lambda m: print(f"  {job['id']}:{m}", flush=True)
     try:
-        return gen.generate(job["prompt"], job["refs"], a.model, a.size, job.get("aspect", "1:1"),
-                            attempts=4 if a.fallback else 8, log=log)[0]
+        return gen.generate(job["prompt"], job["refs"], job["model"], a.size, job.get("aspect", "1:1"),
+                            attempts=4 if a.fallback else 8, log=log)[0], job["model"]
     except Exception as e:  # rate-limited past all retries -> optional cheaper model with separate capacity
         if not a.fallback or getattr(e, "code", None) != 429:
             raise
         log(f" still rate-limited, falling back to {a.fallback}")
-        return gen.generate(job["prompt"], job["refs"], a.fallback, a.size, job.get("aspect", "1:1"), log=log)[0]
+        model = gen.MODELS.get(a.fallback, a.fallback)
+        return gen.generate(job["prompt"], job["refs"], model, a.size, job.get("aspect", "1:1"), log=log)[0], model
 
 
 def prepare(run, only, total):
@@ -140,8 +156,11 @@ def prepare(run, only, total):
     return ids
 
 
-def labels(results):
-    return [f"{i}{' !' if p else ''}" for i, (_, p) in results.items()]
+def labels(results, a):
+    """Sheet labels for the candidates that produced an image: id, model if not pro, ! on problems."""
+    made = getattr(a, "made", {})
+    return [f"{i}{' ' + made[i] if made.get(i, 'pro') != 'pro' else ''}{' !' if p else ''}"
+            for i, (r, p) in results.items() if r]
 
 
 # ---------------------------------------------------------------- commands
@@ -176,7 +195,7 @@ def cmd_sprite(a):
     meta = {"name": a.name, "brief": a.brief, "key": a.key, "role": a.role, "target": target, "size": a.size,
             "anchor_mode": a.anchor, "candidates": frames}
     (run / "run.json").write_text(json.dumps(meta, indent=2))
-    pixel.contact_sheet([r for r, _ in results.values() if r], labels(results), run / "sheet.png")
+    pixel.contact_sheet([r for r, _ in results.values() if r], labels(results, a), run / "sheet.png")
     print(f"review {run / 'sheet.png'}  then:  python -m ab pick {a.name} <NN>")
 
 
@@ -244,7 +263,7 @@ def cmd_frames(a):
     if frames:
         pixel.strip(frames, run / "strip.png")
         pixel.gif(frames, run / "preview.gif", ms=1000 // a.fps)
-        pixel.contact_sheet([base] + frames, ["approved"] + labels(results), run / "sheet.png", columns=6)
+        pixel.contact_sheet([base] + frames, ["approved"] + labels(results, a), run / "sheet.png", columns=6)
     print(f"review {run / 'sheet.png'} and preview.gif  then:  python -m ab keep {a.name} {a.anim}")
 
 
@@ -312,12 +331,12 @@ def cmd_texture(a):
     results = run_jobs(a, jobs, process)
     if a.mode == "concept":
         shown = [previews[i] for i, (r, _) in results.items() if r]
-        pixel.contact_sheet([im.resize((960, 540)) for im in shown], labels(results), run / "sheet.png", scale=1,
+        pixel.contact_sheet([im.resize((960, 540)) for im in shown], labels(results, a), run / "sheet.png", scale=1,
                             columns=2)
         print(f"review {run / 'sheet.png'}")
     elif a.mode in ("tile", "cap"):
         shown = [previews[i] for i, (r, _) in results.items() if r]
-        pixel.contact_sheet(shown, labels(results), run / "sheet.png", scale=2 if a.mode == "cap" else 1,
+        pixel.contact_sheet(shown, labels(results, a), run / "sheet.png", scale=2 if a.mode == "cap" else 1,
                             columns=1 if a.mode == "cap" else None)
         print(f"review {run / 'sheet.png'} (seams!)  keep one with:  cp {run}/NN.png textures/<area>/{a.name}.png")
     else:
@@ -524,7 +543,7 @@ def cmd_ui(a):
 
     results = run_jobs(a, jobs, process)
     shown = [previews[i] for i, (r, _) in results.items() if r]
-    names = [f"{l}  margin {margins[l[:2]]}" if l[:2] in margins else l for l in labels(results)]
+    names = [f"{l}  margin {margins[l[:2]]}" if l[:2] in margins else l for l in labels(results, a)]
     pixel.contact_sheet(shown, names, run / "sheet.png", columns=1 if a.kind == "frame" else None)
     if margins:
         (run / "margins.json").write_text(json.dumps(margins, indent=2))
@@ -558,6 +577,7 @@ def cmd_doctor(a):
     print("generator:", gen.__file__, f"| spent ~Rs{gen.spent_inr():.0f} of Rs{gen.BUDGET_INR:.0f}")
     adc = Path("~/.config/gcloud/application_default_credentials.json").expanduser()
     print("gcloud ADC:", "ok" if adc.exists() else "MISSING -> gcloud auth application-default login")
+    batch.doctor(gen)
 
 
 def parser():
@@ -568,7 +588,9 @@ def parser():
         if n:
             c.add_argument("-n", type=int, default=n, help="number of candidates")
         c.add_argument("--model", default="pro", help="pro | flash | full model id")
+        c.add_argument("--split", help="alternate candidates between models, e.g. pro,flash (both capacity pools)")
         c.add_argument("--fallback", default=None, help="model to use when still rate-limited, e.g. flash")
+        c.add_argument("--batch", action="store_true", help="queue missing raws for `ab batch submit` (~50%% price)")
         c.add_argument("--jobs", type=int, default=3, help="parallel requests")
         c.add_argument("--retry", type=int, default=1, help="auto-regenerate outputs with problems this many times")
         c.add_argument("--only", type=lambda s: s.split(","), help="regenerate just these ids, e.g. 2,4")
@@ -659,7 +681,18 @@ def parser():
     c.set_defaults(func=cmd_clean)
 
     sub.add_parser("ls", help="list approved sprites and their animations").set_defaults(func=cmd_ls)
-    sub.add_parser("doctor", help="check tools, auth and spend").set_defaults(func=cmd_doctor)
+    sub.add_parser("doctor", help="check tools, auth, spend and batch jobs").set_defaults(func=cmd_doctor)
+
+    c = sub.add_parser("batch", help="Vertex batch jobs for commands run with --batch")
+    bsub = c.add_subparsers(dest="action", required=True)
+    b = bsub.add_parser("submit", help="upload the queue and start one batch job per model")
+    b.add_argument("--model", help="run every queued request on this model instead (pro | flash)")
+    bsub.add_parser("status", help="queue size and job states")
+    bsub.add_parser("fetch", help="write finished results to their raws and re-run the commands (clean only)")
+    b = bsub.add_parser("wait", help="poll until jobs finish, then fetch")
+    b.add_argument("--every", type=int, default=60, help="seconds between polls")
+    bsub.add_parser("clear", help="drop everything queued (not submitted)")
+    c.set_defaults(func=lambda a: getattr(batch, a.action)(a, nanobanana()))
     return p
 
 
