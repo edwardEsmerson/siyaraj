@@ -139,6 +139,7 @@ godot --headless --path . --script res://tests/khara_boss_check.gd
 godot --headless --path . --script res://tests/ravan_check.gd
 godot --headless --path . --script res://tests/next_levels_check.gd
 godot --headless --path . --script res://tests/playtest_menu_check.gd
+godot --headless --path . --script res://tests/world_skin_check.gd
 ```
 
 See [the team workflow](docs/team_workflow.md) for ownership, agreed rules,

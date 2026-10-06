@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
+[ext_resource type="Script" path="res://scripts/levels/world_skin.gd" id="world_skin"]
 [ext_resource type="Script" path="res://scripts/bosses/boss_arena.gd" id="1_arena"]
 [ext_resource type="PackedScene" path="res://scenes/bosses/khara.tscn" id="2_khara"]
 [ext_resource type="PackedScene" path="res://scenes/player/forest_player.tscn" id="3_player"]
@@ -169,3 +170,9 @@ Restarting..."
 horizontal_alignment = 1
 
 [node name="BossHealthBar" parent="HUD" instance=ExtResource("4_bar")]
+
+[node name="WorldSkin" type="Node2D" parent="."]
+script = ExtResource("world_skin")
+biome = "forest"
+direction = "truckart"
+arena = true
