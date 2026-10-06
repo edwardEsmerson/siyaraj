@@ -64,7 +64,7 @@ func _physics_process(_delta: float) -> void:
 			checkpoint.get_node("Flame").visible = true
 			InteractionPrompt.set_available(checkpoint.get_node("Prompt"), false)
 			player.get_node("Visuals").play_story(&"light_diya")
-			get_parent().combat_status.text = "Diya lit. Death returns here. R resets the whole forest, including side rooms."
+			get_parent().combat_status.text = "Diya lit. Death returns here. Restart in the pause menu resets the whole forest."
 
 
 func _checkpoints() -> Array[Node]:
@@ -145,7 +145,7 @@ func hint_at(x: float) -> String:
 	if current_room == &"CanopyNest":
 		return "Canopy nest / Changing branch lanes lead to two combat rests. Defeat the nest sentinel to return."
 	if completed:
-		return "Khara clearing reached. R to replay the forest."
+		return "Khara clearing reached."
 	if x < 1600.0:
 		return "Forest edge / Climb the roots. Control your landing before the next jump."
 	if x < 2800.0:

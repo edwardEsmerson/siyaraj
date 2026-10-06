@@ -55,7 +55,7 @@ provide the handoff; avoid replacing another owner's scene with a local copy.
 | `jump` | Space |
 | `dash` | Shift |
 | `attack` | J |
-| `restart` | R |
+| `restart` | R, debug builds only |
 
 Use input actions rather than hardcoded keys. Coordinates are in pixels;
 positive Y points down. Player and enemy roots sit at their feet.

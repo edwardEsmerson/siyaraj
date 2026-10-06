@@ -19,7 +19,7 @@ func _ready() -> void:
 	boss_bar.bind(boss)
 	var defeated_name: String = boss.boss_name
 	boss.died.connect(func() -> void:
-		combat_status.text = "%s defeated! R to fight again." % defeated_name
+		combat_status.text = "%s defeated! Use Play Again to fight again." % defeated_name
 	)
 	if boss.has_signal("phase_changed"):
 		boss.phase_changed.connect(func(_phase: int) -> void:

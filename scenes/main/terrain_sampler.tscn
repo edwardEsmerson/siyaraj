@@ -12,7 +12,7 @@ restart_delay = 0.35
 next_level = "res://scenes/main/river.tscn"
 completion_title = "TERRAIN COMPLETE"
 completion_detail = "Terrain sampler complete"
-completion_status = "Esc: level select / R: repeat terrain sampler"
+completion_status = "Esc: pause / level select"
 
 [node name="TestCourse" parent="." instance=ExtResource("2_course")]
 
@@ -41,7 +41,7 @@ text = "SIYARAJ / terrain sampler"
 texture_filter = 2
 offset_left = 24.0
 offset_top = 48.0
-text = "A/D: move   Space: jump   Shift: dash   J: lash   L: skyshot   K: chakri   E: use   R: reset"
+text = "A/D: move   Space: jump   Shift: dash   J: lash   L: skyshot   K: chakri   E: use"
 
 [node name="Milestone" type="Label" parent="HUD"]
 texture_filter = 2
@@ -71,7 +71,7 @@ text = "Siya health: 3/3"
 texture_filter = 2
 offset_left = 24.0
 offset_top = 503.0
-text = "Press E beside a diya to secure a checkpoint. R resets this level. Esc pauses."
+text = "Press E beside a diya to secure a checkpoint. Esc pauses; use Restart to reset this level."
 
 [node name="WeaponStatus" type="Label" parent="HUD"]
 texture_filter = 2

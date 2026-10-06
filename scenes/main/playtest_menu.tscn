@@ -92,5 +92,5 @@ text = "Open developer snapshot"
 [node name="Controls" type="Label" parent="Layout"]
 texture_filter = 2
 layout_mode = 2
-text = "A/D: move   Space: jump   Shift: dash   J/L/K: weapons\nE: light diya   R: reset level   Esc: pause / level select"
+text = "A/D: move   Space: jump   Shift: dash   J/L/K: weapons\nE: light diya level   Esc: pause / level select"
 horizontal_alignment = 1
