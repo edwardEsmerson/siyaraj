@@ -61,6 +61,7 @@ func _physics_process(_delta: float) -> void:
 				checkpoint_x = maxf(checkpoint_x, checkpoint.position.x)
 			else:
 				room_spawn = checkpoint.global_position
+			get_node("/root/CampaignSave").capture()
 			checkpoint.get_node("Flame").visible = true
 			InteractionPrompt.set_available(checkpoint.get_node("Prompt"), false)
 			player.get_node("Visuals").play_story(&"light_diya")
@@ -101,6 +102,7 @@ func _use_portal(portal: Area2D) -> void:
 			get_node("/root/AudioDirector").play_cue(&"discovery")
 		current_room = &""
 		pending_return = true
+	get_node("/root/CampaignSave").capture()
 	get_tree().call_deferred("reload_current_scene")
 
 

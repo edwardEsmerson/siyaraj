@@ -40,6 +40,7 @@ func _update_diyas(player: CharacterBody2D) -> void:
 			if checkpoint.position.x >= saved.spawn.x:
 				saved.spawn = checkpoint.position
 			progress[level_id] = saved
+			get_node("/root/CampaignSave").capture()
 		checkpoint.get_node("Flame").visible = saved.lit.has(checkpoint.name)
 		InteractionPrompt.set_available(checkpoint.get_node("Prompt"), nearby and not saved.lit.has(checkpoint.name))
 

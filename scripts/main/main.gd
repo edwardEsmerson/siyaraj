@@ -191,6 +191,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		if course.has_method("reset_progress"):
 			course.reset_progress()
+		CampaignSave.capture()
 		_restart()
 		return
 	if course.has_method("hint_at"):
