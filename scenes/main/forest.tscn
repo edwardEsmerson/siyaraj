@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/main/main.gd" id="1_main"]
 [ext_resource type="PackedScene" path="res://scenes/levels/forest.tscn" id="2_course"]
-[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/player/forest_player.tscn" id="3_player"]
 
 [sub_resource type="StyleBoxFlat" id="CompletionStyle"]
 bg_color = Color(0.08, 0.08, 0.08, 0.97)
@@ -44,7 +44,7 @@ text = "SIYARAJ / forest trail"
 offset_left = 24.0
 offset_top = 48.0
 theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
-text = "A/D: move    Space: jump    Shift: dash    J: attack    E: diya / door    R: restart"
+text = "A/D: move   Space: jump   Shift: dash   J: lash   L: skyshot   K: chakri   E: use   R: reset"
 
 [node name="Milestone" type="Label" parent="HUD"]
 offset_left = 24.0
@@ -72,6 +72,12 @@ offset_left = 24.0
 offset_top = 503.0
 theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "Press E beside a diya to secure a checkpoint. R restarts the whole forest."
+
+[node name="WeaponStatus" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 474.0
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+text = "Skyshot: 5/5    Chakri: READY    Hold K to charge; release to spin."
 
 [node name="DeathMessage" type="Label" parent="HUD"]
 visible = false

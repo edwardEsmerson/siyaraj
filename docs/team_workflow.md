@@ -322,6 +322,12 @@ bolts is fair, and the three-enemy encounter works with Siya's three health.
 
 ## Three-weapon playground handoff
 
+The forest also uses this controller through `scenes/player/forest_player.tscn`.
+Forest doors preserve health, ammunition and weapon cooldowns across the
+same-level room transitions. Death and R restore a fresh loadout. The
+forest HUD displays weapon state; the original prototype still uses its
+original player scene. `forest_weapons_check.gd` validates this integration.
+
 - Open `scenes/combat/weapons_playground.tscn` with F6. All three weapons are
   unlocked in the isolated playground. Shared player and main-course scripts
   retain their current behaviour.

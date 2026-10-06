@@ -1,5 +1,5 @@
 extends "res://scripts/combat/melee_attack.gd"
-## Single ground or aerial playground lash. Recovery presses are ignored, never buffered.
+## Single ground or aerial lash. Recovery presses are ignored, never buffered.
 var externally_locked: bool = false
 
 

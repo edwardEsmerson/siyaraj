@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/player/weapons_playground_player.gd" id="2_weapons"]
+[ext_resource type="Script" path="res://scripts/combat/prototype_sparkler.gd" id="3_lash"]
+
+[node name="Player" instance=ExtResource("1_player")]
+script = ExtResource("2_weapons")
+
+[node name="Sparkler" parent="." index="6"]
+script = ExtResource("3_lash")

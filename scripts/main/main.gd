@@ -25,6 +25,8 @@ var _course_width: int = 4200
 
 func _ready() -> void:
 	player.global_position = player_spawn.global_position
+	if course.has_method("restore_transition_state"):
+		course.restore_transition_state(player)
 	player.died.connect(_restart)
 	camera.position.x = player.global_position.x
 	camera.limit_left = 0
@@ -65,6 +67,10 @@ func _process(delta: float) -> void:
 		else:
 			camera.position.y = 270.0
 	health_status.text = "Siya health: %d/%d" % [player.health, player.max_health]
+	var weapon_status := get_node_or_null("HUD/WeaponStatus") as Label
+	if weapon_status != null:
+		var cooldown: String = "READY" if player.chakri_cooldown_remaining <= 0.0 else "%ds" % ceili(player.chakri_cooldown_remaining)
+		weapon_status.text = "Skyshot: %d/5    Chakri: %s    %s" % [player.skyshot_ammo, cooldown, "Hold K to charge; release to spin." if player.attack_status == "Ready" else player.attack_status]
 	if player.is_on_floor():
 		dash_status.text = "Rocket dash: jump to dash"
 	else:

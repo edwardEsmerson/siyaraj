@@ -11,6 +11,7 @@ static var room_spawn: Vector2
 static var return_point: Vector2
 static var pending_return: bool = false
 static var completed_rooms: Array[StringName] = []
+static var transition_state: Dictionary = {}
 var transitioning: bool = false
 var completed: bool = false
 
@@ -63,6 +64,13 @@ func _checkpoints() -> Array[Node]:
 
 func _use_portal(portal: Area2D) -> void:
 	transitioning = true
+	var player := get_tree().get_first_node_in_group("players") as CharacterBody2D
+	transition_state = {
+		"health": player.health,
+		"skyshot_ammo": player.skyshot_ammo,
+		"chakri_cooldown_remaining": player.chakri_cooldown_remaining,
+		"shot_recovery_remaining": player.shot_recovery_remaining,
+	}
 	if current_room == &"":
 		current_room = portal.get_meta("destination")
 		return_point = portal.global_position
@@ -77,6 +85,13 @@ func _use_portal(portal: Area2D) -> void:
 		current_room = &""
 		pending_return = true
 	get_tree().call_deferred("reload_current_scene")
+
+
+func restore_transition_state(player: CharacterBody2D) -> void:
+	# Doors remain within this forest level. Death and R create a fresh player.
+	for property in transition_state:
+		player.set(property, transition_state[property])
+	transition_state.clear()
 
 
 func camera_region() -> Rect2:
@@ -104,6 +119,7 @@ func reset_progress() -> void:
 	current_room = &""
 	pending_return = false
 	completed_rooms.clear()
+	transition_state.clear()
 
 
 func hint_at(x: float) -> String:

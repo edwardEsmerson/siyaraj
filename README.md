@@ -16,6 +16,14 @@ returns to the forest entrance. The entrance door allows leaving early.
 The nest has a tall trunk climb with vertical camera follow. See the
 [Guacamelee footage and map notes](docs/guacamelee_research.md).
 
+The forest now uses the three-weapon controller from PR #7. J performs a
+single ground or aerial lash. L fires a skyshot with recoil, using one of
+five shots. Hold K for a full charge, then release for a chakri spin.
+Chakri has a 30-second cooldown. Ammo and cooldowns appear on the HUD.
+Doors preserve health, remaining shots and cooldowns. Diyas only save your
+position. Death and R restore the five-shot loadout and reset cooldowns.
+For isolated practice, open `scenes/combat/weapons_playground.tscn` with F6.
+
 The earlier prototype course remains available at `scenes/main/main.tscn` with F6.
 Its guard and finish-gate behaviour described below are unchanged.
 
@@ -89,6 +97,9 @@ godot --headless --path . --script res://tests/forest_encounters_check.gd
 godot --headless --path . --script res://tests/flying_enemy_check.gd
 godot --headless --path . --script res://tests/brute_check.gd
 godot --headless --path . --script res://tests/ground_shooter_check.gd
+godot --headless --path . --script res://tests/weapons_check.gd
+godot --headless --path . --script res://tests/weapons_map_check.gd
+godot --headless --path . --script res://tests/forest_weapons_check.gd
 ```
 
 See [the team workflow](docs/team_workflow.md) for ownership, agreed rules,

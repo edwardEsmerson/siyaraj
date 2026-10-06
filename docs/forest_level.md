@@ -97,6 +97,26 @@ The flying enemy already merged on GitHub is also available in that prototype
 and its isolated arena. Terrain remains grey; enemy attack feedback uses
 the shared combat scenes.
 
+## Weapon integration
+
+The forest player scene inherits the shared movement scene and uses the
+weapon PR's controller and single-lash component. J attacks on the ground
+or in the air. L fires a two-damage skyshot with recoil, consuming one of
+five shots. Holding K for one second and releasing produces a full chakri
+spin for three damage; a shorter charge produces a smaller, weaker spin.
+Chakri has a 30-second cooldown. The HUD shows ammunition and cooldown.
+
+Door transitions preserve current health, ammunition, chakri cooldown and
+shot recovery. Entering or leaving an optional room cannot refill weapons
+or heal Siya. Lighting a diya also leaves these values alone. Death and R
+restore the loadout, health and cooldowns at the appropriate saved position.
+The dedicated weapons playground remains available with F6, and the original
+prototype/tuning scenes continue using their original player controller.
+
+`forest_weapons_check.gd` fires through physical L input at a real forest
+guard, finishes it with J, charges chakri against the Brute, checks the HUD,
+and exercises diya interaction, room entry/exit and death recovery.
+
 ## Validation
 
 `tests/forest_check.gd` runs real Godot collisions across every consecutive

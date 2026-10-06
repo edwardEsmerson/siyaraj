@@ -1,5 +1,5 @@
 extends "res://scripts/player/player.gd"
-## Isolated prototype controller. All movement impulses stay in this controller.
+## Weapon controller shared by the playground and forest. Movement impulses stay here.
 const Skyshot = preload("res://scripts/combat/skyshot_projectile.gd")
 
 const MAX_SKYSHOT_AMMO: int = 5

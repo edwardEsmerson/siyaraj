@@ -37,6 +37,9 @@ godot --headless --path . --script res://tests/brute_check.gd
 godot --headless --path . --script res://tests/forest_check.gd
 godot --headless --path . --script res://tests/forest_rooms_check.gd
 godot --headless --path . --script res://tests/forest_encounters_check.gd
+godot --headless --path . --script res://tests/weapons_check.gd
+godot --headless --path . --script res://tests/weapons_map_check.gd
+godot --headless --path . --script res://tests/forest_weapons_check.gd
 ```
 
 `GODOT_BIN=godot ./tools/smoke_build.sh` imports resources and exports `builds/linux/siyaraj.pck`. `GODOT_BIN=godot ./tools/run_smoke_build.sh --headless --quit-after 120` launches that pack outside the editor. Substitute the executable path when needed. Standalone Linux exports require matching export templates.
