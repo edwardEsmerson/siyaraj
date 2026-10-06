@@ -92,7 +92,7 @@ max_health = 5
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Backdrop" type="ColorRect" parent="HUD"]
+[node name="HUDShade" type="ColorRect" parent="HUD"]
 offset_right = 960.0
 offset_bottom = 160.0
 mouse_filter = 2
