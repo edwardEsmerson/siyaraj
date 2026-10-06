@@ -25,8 +25,20 @@ lettering or speech bubbles; the game renders dialogue over the art.
 
 ## Campaign boss entries
 
-Finishing the forest or palace enters its showdown immediately. Each showdown's
-`CampaignFlow.introduction` contains three comic panels. `subject` optionally places
+Every campaign showdown opens with its approved pixel-art versus card: Siya against
+Khara (forest), Dhoomketu (ghats), or Swaminathan (palace). The PNGs live in
+`assets/cutscenes/boss-versus/`; approved sources, native pixels and generation prompts
+live in `asset-builder/reviews/boss-versus-pixel-v2/`.
+
+Use `{"texture": "res://assets/cutscenes/boss-versus/khara.png", "presentation": "versus", "text": ""}`
+as the first introduction entry. This presentation fits the complete image with nearest
+filtering, hides dialogue and featured-character overlays, and shows a small
+`Enter / A: continue` prompt. The approved cards are 320x180 pixel art enlarged exactly
+6x to 1920x1080. At the 960x540 game viewport, each source pixel occupies 3x3 pixels.
+
+Finishing the forest or palace enters its showdown immediately; the ghats exit offers
+Dhoomketu's fight. After the versus card, the forest and palace keep their existing
+three dialogue panels. `subject` optionally places
 existing character art above the dialogue over the panel's `texture` background.
 Enter or gamepad A advances; held-key repeats are ignored. Arena processing stops
 until the last panel closes, so neither Siya nor the boss can attack during dialogue.

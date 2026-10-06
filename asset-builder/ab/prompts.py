@@ -75,6 +75,34 @@ def ui(brief, key, roles, kind):
     return f"{background(key)}\n{layout}\nSubject: {brief}\n{ref_roles(roles)}\n{STYLE}\n{background(key)}"
 
 
+def versus(brief, roles):
+    references = " ".join(f"Attached image {i}: {role}." for i, role in enumerate(roles, 1))
+    return (
+        "Use case: stylized-concept. Asset: 16:9 PIXEL-ART boss-introduction versus card for Siyaraj.\n"
+        "Draw directly as low-resolution sprite artwork on a 320 by 180 pixel canvas, enlarged with "
+        "nearest-neighbour only. Every source pixel is an equal square block, approximately 8.5 by 8.5 "
+        "pixels in this 2K output. Contours consist of intentional staircase edges and compact clusters. "
+        "This is genuine low-resolution game art, not a smooth illustration with a pixel filter.\n"
+        "The attached approved sprites define BOTH character identity AND rendering style. Preserve "
+        "their angular small faces, sturdy pixel-cluster silhouettes, sparse detail, costume shapes "
+        "and muted material colours. Do not beautify or reinterpret them as cartoon characters. "
+        "Render two opposing enlarged pixel busts: Siya left facing right, boss right facing left. "
+        "A restrained stepped diagonal slash separates the two. Central chunky pixel-letter VS. "
+        "Dark uncluttered backgrounds; a few flat environment silhouettes. Portraits dominate, not decoration. "
+        "Keep every face inside its own panel, away from the divider and names.\n"
+        "Style: late-1990s 2D arcade versus screen, matching Siyaraj's actual gameplay sprites. "
+        "Deep aubergine pixel outlines, two or three solid shade clusters per material, limited palette "
+        "of roughly 48 to 64 colours across the whole card. Marigold, muted turquoise and hot pink "
+        "are small accents. No smooth outlines, anti-aliasing, curves between pixels, gradients, "
+        "halftone, cel-shaded comic inking, vector art, painterly brushwork, glossy faces, 3D, "
+        "photorealism, ornate ornamental borders, HUD, watermarks or logos. No copied key-colour background.\n"
+        f"{references}\n"
+        f"Matchup and exact lettering: {brief}\n"
+        "Use only the requested names and VS. Names use compact blocky bitmap capitals along the "
+        "lower edge, not smooth comic lettering. Opaque scene, no fake transparency checkerboard."
+    )
+
+
 def texture(brief, key, roles, mode):
     if mode == "tile":
         layout = ("A seamless, tileable square pixel-art texture that fills the ENTIRE image edge to edge "

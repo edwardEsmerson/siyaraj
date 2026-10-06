@@ -156,6 +156,27 @@ UI is drawn at 1 texel = 1 game unit (used at scale 1, unlike sprites). Frames a
 symmetric corners and cut to `NN-nine.png` for a StyleBoxTexture (`texture_margin` per candidate in
 `margins.json`, axis stretch TILE_FIT); copy the pick to `../assets/ui/`.
 
+### Boss versus cards
+
+```bash
+python -m ab versus khara-v1 "SIYA versus KHARA; forest face-off, lit sparkler and bronze gada" --cast siya khara khara-gada --size 2K -n 2
+python -m ab versus swaminathan-v1 "SIYA versus SWAMINATHAN; exactly ten crowned heads" --cast siya swaminathan-full swaminathan-head --key blue --size 2K -n 2
+```
+
+`versus` generates opaque 16:9 pixel-art face-off cards. Approved cast references define
+both identity and pixel style. Use angular pixel clusters, sparse shading and subdued scenery;
+avoid smooth comic/vector portraits, halftone and ornate borders. Cards are sampled on one
+fixed 320x180 grid with up to 64 colours, saved as `NN-native.png`, then enlarged exactly
+6x with nearest filtering to `NN.png` (1920x1080). Review sheets also use nearest filtering.
+Candidates, cached raws, the exact prompt, model records and `sheet.png` live in
+`out/versus/<name>/`. Use a new versioned run name when changing style or prompts so older
+cached generations are not accidentally reused. Re-running reuses completed raws;
+`--only` regenerates selected ids.
+Use the requested display names in the brief. A boss without approved art can use its
+design document as a written brief and `--cast siya` for the heroine reference.
+Copy review deliverables to `reviews/`, show candidates and wait for the user's selection
+before copying any card into gameplay assets or editing scenes.
+
 ## Problems the tool flags (`!!` in output, `!` on sheets)
 It auto-regenerates once (`--retry`). Background removal measures the real border colour, so off-colour
 flat backgrounds (muted green, grey, white) are handled; what it can't fix and flags:

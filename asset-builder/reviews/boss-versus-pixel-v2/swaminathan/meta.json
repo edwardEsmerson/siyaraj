@@ -1,0 +1,30 @@
+{
+  "name": "swaminathan-pixel-v1",
+  "brief": "Exact left name SIYA, exact right name SWAMINATHAN. Siya on the left in enlarged right-facing pixel profile matching her approved sprite, orange sari, crimson/gold pallu, bindi, tied black hair, small sparkler. Right panel has the exact approved complete Swaminathan sprite anatomy and pixel rendering. Preserve exactly TEN separate equal-sized crowned moustached heads in its shallow arc: five left and five right of the midpoint, exactly as in the full reference. Every head has its own long curved purple neck rising from the same broad gold collar. No single large head in the middle. Include the many raised fists, broad bare royal torso, gold collar, pink/gold dhoti and turquoise sash at the bottom. This boss can have a wider camera to fit all heads while Siya remains a large bust. Keep the complete ten-head arc inside the right 60 percent with margin. Do not allow VS or the separator to cover any head. Dark subdued palace arches behind; small gold and purple accents, a muted teal block behind Siya. Preserve the reference crowned pixel faces and black moustaches rather than drawing handsome cartoon faces. Only bitmap SIYA, VS, SWAMINATHAN lettering. Count ten gold crowns before finishing.",
+  "cast": [
+    "siya",
+    "swaminathan-full",
+    "swaminathan-head"
+  ],
+  "size": "2K",
+  "aspect": "16:9",
+  "native_canvas": [
+    320,
+    180
+  ],
+  "display_canvas": [
+    1920,
+    1080
+  ],
+  "display_scale": 6,
+  "palette_limit": 64,
+  "style": "approved-sprite pixel art",
+  "approval": "approved",
+  "source_models": {
+    "01": "flash"
+  },
+  "candidates": [
+    "01"
+  ],
+  "gameplay_asset": "assets/cutscenes/boss-versus/swaminathan.png"
+}

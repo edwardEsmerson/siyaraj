@@ -38,6 +38,11 @@ func run_checks() -> void:
 		var player: Node = current_scene.get_node_or_null("Player")
 		if player != null:
 			check(player.get_node("Visuals/Sprite").sprite_frames.get_animation_names().size() == 15, "%s must ship Siya's animation library" % path)
+		if path.ends_with("_showdown.tscn"):
+			var flow: Node = current_scene.get_node("CampaignFlow")
+			check(flow.comic != null and flow.comic.panel_art.texture != null, "%s must ship its runtime-loaded versus card" % path)
+			if flow.comic != null:
+				check(flow.comic.splash_advance.visible and not flow.comic.bubble.visible, "%s must open with unobscured versus artwork" % path)
 		if path == "res://scenes/dev/cast_preview.tscn":
 			for subject in ["basic-rakshas", "brute", "ground-shooter", "winged-forest-demon", "khara", "robin", "raj"]:
 				current_scene.select_subject(subject)
