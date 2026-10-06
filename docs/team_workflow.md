@@ -11,7 +11,7 @@
   ground dashes keep the air charge and use a short cooldown instead.
 - Dash stops at solid walls. It grants i-frames for its duration plus a short
   grace: `take_damage` is ignored and enemy shots pass through. Damage sources
-  may query `is_invulnerable()`. Boss hazards (Khara and Ravan) route through
+  may query `is_invulnerable()`. Boss hazards (Khara, Dhoomketu and Ravan) route through
   `take_damage`, so they respect the i-frames too.
 - Dash cancels any sparkler phase; an attack pressed mid-dash swings when it ends.
 - Dash preserves chakri charge progress. Charging pauses during the dash and

@@ -1,7 +1,7 @@
-# Boss 2: Ravan (Dashanan)
+# Final boss: Ravan (Dashanan)
 
 Play the isolated arena with F6: `scenes/bosses/ravan/ravan_arena.tscn`.
-It is not wired into level progression.
+The palace exit opens `scenes/main/palace_showdown.tscn`, after Dhoomketu's ghats fight.
 Regression check: `godot --headless --path . --script res://tests/ravan_check.gd`.
 
 ## Concept
