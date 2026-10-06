@@ -11,6 +11,12 @@ var completed: bool = false
 
 
 func _ready() -> void:
+	if not has_node("CampaignFlow"):
+		var flow := preload("res://scenes/main/campaign_victory.tscn").instantiate()
+		flow.boss_path = NodePath("../Ravan")
+		flow.next_level = ENDING
+		flow.destination_name = "Raj's rescue"
+		add_child(flow)
 	player.died.connect(_restart)
 	ravan.head_lost.connect(func(_index: int, remaining: int) -> void:
 		$HUD/CombatStatus.text = "A head falls! %d left." % remaining if remaining > 0 else "The last head falls!"

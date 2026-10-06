@@ -68,6 +68,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="Title" type="Label" parent="Center/Content"]
+texture_filter = 2
 layout_mode = 2
 theme_type_variation = &"TitleLabel"
 text = "The lights return"
@@ -100,6 +101,7 @@ animation = &"victory"
 autoplay = "victory"
 
 [node name="Message" type="Label" parent="Center/Content"]
+texture_filter = 2
 layout_mode = 2
 text = "Siya and Raj are home together.
 Her parents' fireworks light the village sky.
@@ -111,6 +113,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
 [node name="ReturnButton" type="Button" parent="Center/Content"]
+texture_filter = 2
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 size_flags_horizontal = 4

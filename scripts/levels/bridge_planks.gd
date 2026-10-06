@@ -17,6 +17,7 @@ var carried_visual: Node2D
 
 func _ready() -> void:
 	prompt = Label.new()
+	prompt.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	prompt.position = SUPPLY_START + Vector2(-85, -85)
 	prompt.add_theme_font_size_override("font_size", 15)
 	add_child(prompt)

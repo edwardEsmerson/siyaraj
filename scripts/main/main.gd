@@ -35,6 +35,16 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	if course.has_node("Boss") and not has_node("CampaignFlow"):
+		var flow := preload("res://scenes/main/campaign_victory.tscn").instantiate()
+		flow.boss_path = NodePath("../TestCourse/Boss")
+		flow.destination_name = "the developer menu"
+		add_child(flow)
+	var completion := get_node_or_null("HUD/Completion")
+	if completion != null:
+		completion.continued.connect(_continue_course)
+		completion.replayed.connect(PlaytestNavigation._restart)
+		completion.menu_requested.connect(PlaytestNavigation.show_title)
 	PlaytestNavigation.configure_course(course)
 	if not PlaytestNavigation.snapshot.is_empty():
 		combat_status.text = "E: light diya / R: repeat this snapshot / Esc: pause and developer menu"
@@ -138,17 +148,28 @@ func _finish_course() -> void:
 	if automatic_showdown and not showdown_scene.is_empty() and PlaytestNavigation.enemies_enabled:
 		PlaytestNavigation.call_deferred("start_level", showdown_scene)
 		return
-	$HUD/Completion.visible = true
-	$HUD/Completion/Message.text = "%s\n%s / %.1f seconds\nR to replay" % [completion_title, completion_detail, elapsed]
+	var title := completion_title.capitalize()
+	var detail := "%s / %.1f seconds" % [completion_detail, elapsed]
+	var destination := "Next level" if not next_level.is_empty() else "Menu"
 	if not showdown_scene.is_empty() and PlaytestNavigation.enemies_enabled:
-		$HUD/Completion/Message.text = "TRAIL CLEARED\n%s awaits / %.1f seconds\nEnter: face %s / R: replay" % [showdown_name, elapsed, showdown_name]
+		title = "Trail cleared"
+		detail = "%s awaits. Enter to face %s.\nTime: %.1f seconds" % [showdown_name, showdown_name, elapsed]
+		destination = "Face " + showdown_name
 		combat_status.text = "Enter the showdown with fresh health and weapons. Death retries the fight."
+	else:
+		combat_status.text = completion_status
+	$HUD/Completion.present(title, detail, destination)
+
+
+func _continue_course() -> void:
+	if not completed:
 		return
+	if not showdown_scene.is_empty() and PlaytestNavigation.enemies_enabled:
+		PlaytestNavigation.start_level(showdown_scene)
 	elif not next_level.is_empty():
-		$HUD/Completion/Message.text += " / Enter: next level"
-	elif not showdown_scene.is_empty():
-		$HUD/Completion/Message.text += " / Enter: menu"
-	combat_status.text = completion_status
+		PlaytestNavigation.start_level(next_level)
+	else:
+		PlaytestNavigation.show_menu()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -156,12 +177,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if completed and event.is_action_pressed("ui_accept") and (not next_level.is_empty() or not showdown_scene.is_empty()):
 		get_viewport().set_input_as_handled()
-		if not showdown_scene.is_empty() and PlaytestNavigation.enemies_enabled:
-			PlaytestNavigation.start_level(showdown_scene)
-		elif not next_level.is_empty():
-			PlaytestNavigation.start_level(next_level)
-		else:
-			PlaytestNavigation.show_menu()
+		_continue_course()
 		return
 	if event.is_action_pressed("restart"):
 		get_viewport().set_input_as_handled()

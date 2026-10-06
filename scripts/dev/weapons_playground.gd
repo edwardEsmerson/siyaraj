@@ -77,6 +77,7 @@ func _ready() -> void:
 	controls.text = "A/D: move    Space: jump    Shift: dash    J: sparkler    L: skyshot\nHold/release K: chakri    R: reset    Walk right through practice arenas and recovery lane"
 	hud.add_child(controls)
 	status = Label.new()
+	status.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	status.position = Vector2(30, 112)
 	status.add_theme_color_override("font_color", Color(1, 0.8, 0.4))
 	hud.add_child(status)
@@ -159,11 +160,11 @@ func _draw() -> void:
 	# The firing line leaves distance to the targets and clear space for recoil.
 	var firing_x := 970.0
 	draw_line(Vector2(firing_x, FLOOR_Y - 2), Vector2(firing_x, 488), Color(1, 0.7, 0.2), 3)
-	draw_string(ThemeDB.fallback_font, Vector2(firing_x - 65, 510), "FIRE FROM HERE", HORIZONTAL_ALIGNMENT_CENTER, 130, 14, Color(1, 0.7, 0.2))
+	draw_string(preload("res://assets/fonts/YatraOne-Regular.ttf"), Vector2(firing_x - 65, 510), "FIRE FROM HERE", HORIZONTAL_ALIGNMENT_CENTER, 130, 14, Color(1, 0.7, 0.2))
 	# The targets sit within full-charge reach on either side of this ring.
 	var ring_color := Color(0.2, 0.95, 0.8, 0.65)
 	draw_ellipse_marker(Vector2(CHAKRI_CENTER, FLOOR_Y - 3), ring_color)
-	draw_string(ThemeDB.fallback_font, Vector2(CHAKRI_CENTER - 55, 507), "CHARGE HERE", HORIZONTAL_ALIGNMENT_CENTER, 110, 14, ring_color)
+	draw_string(preload("res://assets/fonts/YatraOne-Regular.ttf"), Vector2(CHAKRI_CENTER - 55, 507), "CHARGE HERE", HORIZONTAL_ALIGNMENT_CENTER, 110, 14, ring_color)
 	for x in [800, 1670, 2560, 3450]:
 		draw_line(Vector2(x - 12, 499), Vector2(x + 12, 499), Color(0.6, 0.8, 0.9), 2)
 		draw_line(Vector2(x + 12, 499), Vector2(x + 4, 493), Color(0.6, 0.8, 0.9), 2)

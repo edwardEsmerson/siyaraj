@@ -18,7 +18,7 @@ func _process(_delta: float) -> void:
 func _draw() -> void:
 	if not is_instance_valid(boss):
 		return
-	var font := ThemeDB.fallback_font
+	var font := preload("res://assets/fonts/YatraOne-Regular.ttf")
 	# A dark backing keeps the row readable over any arena floor art.
 	draw_rect(Rect2(-6, -3, size.x + 12, size.y + 2), Color(0.06, 0.05, 0.08, 0.8))
 	var pip_gap: float = size.x / boss.HEAD_COUNT
@@ -41,8 +41,8 @@ func _draw() -> void:
 		draw_circle(center, radius + 1.5, Color(0.1, 0.06, 0.04))
 		draw_circle(center, radius, color)
 	var text_color := Color(0.85, 0.85, 0.9)
-	draw_string(font, Vector2(0, 32), "PHASE %d/3" % boss.phase, HORIZONTAL_ALIGNMENT_LEFT, size.x, 12, Color(1.0, 0.85, 0.6))
-	draw_string(font, Vector2(0, 32), "HEADS %d/%d" % [boss.heads_alive, boss.HEAD_COUNT], HORIZONTAL_ALIGNMENT_CENTER, size.x, 12, text_color)
+	draw_string(font, Vector2(0, 32), "PHASE %d/3" % boss.phase, HORIZONTAL_ALIGNMENT_LEFT, size.x, 14, Color(1.0, 0.85, 0.6))
+	draw_string(font, Vector2(0, 32), "HEADS %d/%d" % [boss.heads_alive, boss.HEAD_COUNT], HORIZONTAL_ALIGNMENT_CENTER, size.x, 14, text_color)
 	if boss.is_spent():
 		var pulse := 0.5 + 0.5 * sin(Time.get_ticks_msec() * 0.012)
-		draw_string(font, Vector2(0, 32), "SPENT - STRIKE!", HORIZONTAL_ALIGNMENT_RIGHT, size.x, 12, Color(0.5, 1.0, 0.85, 0.5 + 0.5 * pulse))
+		draw_string(font, Vector2(0, 32), "SPENT - STRIKE!", HORIZONTAL_ALIGNMENT_RIGHT, size.x, 14, Color(0.5, 1.0, 0.85, 0.5 + 0.5 * pulse))

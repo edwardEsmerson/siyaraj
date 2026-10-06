@@ -12,14 +12,20 @@ var won: bool = false
 var comic: CanvasLayer
 var _arena_process_mode: ProcessMode
 var _showing_aftermath: bool = false
+var _boss_name: String
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	if not story_key.is_empty():
 		introduction = Story.introduction(story_key)
+	$Victory.continued.connect(_continue_campaign)
+	$Victory.replayed.connect(PlaytestNavigation._restart)
+	$Victory.menu_requested.connect(PlaytestNavigation.show_title)
 	if not PlaytestNavigation.snapshot.is_empty():
-		destination_name = "level select"
-	get_node(boss_path).died.connect(_on_defeated)
+		destination_name = "the developer menu"
+	var boss: Node = get_node(boss_path)
+	_boss_name = boss.get("boss_name") if boss.get("boss_name") != null else boss.name
+	boss.died.connect(_on_defeated)
 	if not introduction.is_empty() and not PlaytestNavigation.boss_introduction_seen:
 		_play_comic(introduction)
 
@@ -54,11 +60,15 @@ func _on_defeated() -> void:
 		_show_victory()
 
 func _show_victory() -> void:
-	$Victory.show()
-	$Victory/Message.text = "BOSS DEFEATED\nEnter: %s\nR: fight again / Esc: menu" % destination_name
+	$Victory.present("Boss defeated", "%s has fallen.\nThe path to %s is open." % [_boss_name, destination_name], "Continue")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if get_tree().paused or (comic != null and comic.visible) or not won or not event.is_action_pressed("ui_accept"):
+		return
+	_continue_campaign()
+
+func _continue_campaign() -> void:
+	if get_tree().paused or (comic != null and comic.visible) or not won:
 		return
 	var player: CharacterBody2D = get_parent().get_node("Player")
 	if player.state == player.State.DEAD:

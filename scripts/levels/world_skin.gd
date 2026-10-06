@@ -947,6 +947,7 @@ func _show_toast(text: String) -> void:
 		layer.layer = 90
 		add_child(layer)
 		_toast = Label.new()
+		_toast.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 		_toast.position = Vector2(16, 124)  # just under the main scenes' HUD bar
 		_toast.add_theme_font_size_override("font_size", 18)
 		_toast.add_theme_constant_override("outline_size", 6)

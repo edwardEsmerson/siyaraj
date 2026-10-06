@@ -110,7 +110,7 @@ border_width_bottom = 2
 border_color = Color(1, 0.69, 0.15, 1)
 
 [resource]
-default_font = ExtResource("1_body")
+default_font = ExtResource("2_display")
 default_font_size = 16
 Button/colors/font_color = Color(1, 0.94, 0.82, 1)
 Button/colors/font_disabled_color = Color(0.72, 0.62, 0.72, 1)
@@ -155,7 +155,7 @@ HeaderLabel/font_sizes/font_size = 32
 HeaderLabel/fonts/font = ExtResource("2_display")
 Label/colors/font_color = Color(1, 0.94, 0.82, 1)
 Label/colors/font_outline_color = Color(0.12, 0.05, 0.15, 1)
-Label/constants/outline_size = 4
+Label/constants/outline_size = 2
 Panel/styles/panel = SubResource("StyleBoxTexture_panel")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_panel")
 TitleLabel/base_type = &"Label"
@@ -170,3 +170,20 @@ TitleLabel/font_sizes/font_size = 72
 TitleLabel/fonts/font = ExtResource("2_display")
 KeyLabel/base_type = &"Label"
 KeyLabel/colors/font_color = Color(1, 0.69, 0.15, 1)
+
+WorldSign/base_type = &"Label"
+WorldSign/colors/font_color = Color(1, 0.79, 0.38, 1)
+WorldSign/constants/outline_size = 3
+WorldSign/constants/line_spacing = 4
+WorldSign/font_sizes/font_size = 17
+WorldPrompt/base_type = &"Label"
+WorldPrompt/colors/font_color = Color(1, 0.94, 0.82, 1)
+WorldPrompt/constants/outline_size = 3
+WorldPrompt/font_sizes/font_size = 15
+HUDTitle/base_type = &"Label"
+HUDTitle/colors/font_color = Color(1, 0.69, 0.15, 1)
+
+DeathLabel/base_type = &"Label"
+DeathLabel/colors/font_color = Color(1, 0.69, 0.15, 1)
+DeathLabel/constants/line_spacing = 2
+DeathLabel/styles/normal = SubResource("StyleBoxTexture_panel")

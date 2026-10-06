@@ -48,6 +48,8 @@ func _ready() -> void:
 func _add_label(grid: GridContainer, text: String, heading: bool = false) -> void:
 	var label := Label.new()
 	label.text = text
+	label.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	label.add_theme_font_size_override("font_size", 14)
 	if heading:
 		label.theme_type_variation = &"KeyLabel"
 	grid.add_child(label)

@@ -1568,6 +1568,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/ClearingDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1594,6 +1596,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/RidgeDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1620,6 +1624,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/HollowDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1646,6 +1652,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/StoneDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1672,6 +1680,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/BanyanDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1698,6 +1708,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/UpperDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1724,6 +1736,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/ShrineDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1750,6 +1764,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/FinalDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1776,6 +1792,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/KharaDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -1827,69 +1845,80 @@ polygon = PackedVector2Array(3, -55, 48, -55, 36, -30, 3, -30)
 color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="Section0" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(100, 300)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "FOREST EDGE"
 
 [node name="Section1" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(1850, 280)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "CLEARING\nE beside a diya to save."
 
 [node name="Section2" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(2830, 270)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "BROKEN CANOPY"
 
 [node name="Section3" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(4860, 230)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "ROOT RIDGE"
 
 [node name="Section4" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(6540, 275)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "HOLLOW TRUNKS"
 
 [node name="Section5" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(8920, 260)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "STONE CROSSING"
 
 [node name="Section6" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(11280, 175)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "BANYAN CLIMB\nJump right, then left. Repeat."
 
 [node name="Section7" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(13610, 260)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "UPPER RAVINE"
 
 [node name="Section8" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(15580, 280)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "OLD SHRINE"
 
 [node name="Section9" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(18400, 260)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "LAST CROSSING"
 
 [node name="Section10" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(21140, 275)
 theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 text = "KHARA CLEARING"
 
 [node name="Portals" type="Node2D" parent="."]
@@ -1920,6 +1949,8 @@ polygon = PackedVector2Array(-24, -4, 24, -4, 24, 0, -24, 0)
 color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Prompt" type="Label" parent="Portals/RootEntrance"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -120.0
 offset_top = -110.0
 offset_right = 120.0
@@ -1952,6 +1983,8 @@ polygon = PackedVector2Array(-24, -4, 24, -4, 24, 0, -24, 0)
 color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Prompt" type="Label" parent="Portals/NestEntrance"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -120.0
 offset_top = -110.0
 offset_right = 120.0
@@ -1985,11 +2018,19 @@ polygon = PackedVector2Array(0, 0, 3300, 0, 3300, 1400, 0, 1400)
 color = Color(0.08, 0.08, 0.08, 1)
 
 [node name="DescentSign" type="Label" parent="SideRooms/RootChamber"]
-position = Vector2(70, 300)
+texture_filter = 2
+theme_type_variation = &"WorldSign"
+offset_left = 320.0
+offset_top = 270.0
 theme_override_font_sizes/font_size = 17
-text = "ROOT HOLLOW\nFollow the roots down into the chamber."
+offset_right = 660.0
+offset_bottom = 380.0
+autowrap_mode = 2
+text = "ROOT HOLLOW\nFollow the roots down\ninto the chamber."
 
 [node name="BedSign" type="Label" parent="SideRooms/RootChamber"]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(1800, 860)
 theme_override_font_sizes/font_size = 17
 text = "ROOT BED\nLight the diya, then climb back to daylight."
@@ -2320,16 +2361,22 @@ polygon = PackedVector2Array(620, 1400, 620, 370, 930, 370, 930, 1400)
 color = Color(0.17, 0.17, 0.17, 1)
 
 [node name="ClimbSign" type="Label" parent="SideRooms/CanopyNest"]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(50, 1230)
 theme_override_font_sizes/font_size = 17
 text = "INSIDE THE BANYAN\nChange branch lanes. Wide boughs give room to fight."
 
 [node name="CrownSign" type="Label" parent="SideRooms/CanopyNest"]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(1120, 240)
 theme_override_font_sizes/font_size = 17
 text = "CROWN REST\nE lights the diya before the outer branches."
 
 [node name="NestSign" type="Label" parent="SideRooms/CanopyNest"]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(2520, 345)
 theme_override_font_sizes/font_size = 17
 text = "CANOPY NEST\nDefeat the sentinel to reopen the trail door."
@@ -2868,6 +2915,8 @@ polygon = PackedVector2Array(-24, -4, 24, -4, 24, 0, -24, 0)
 color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Prompt" type="Label" parent="Portals/RootAbort"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -120.0
 offset_top = -110.0
 offset_right = 120.0
@@ -2899,6 +2948,8 @@ polygon = PackedVector2Array(-24, -4, 24, -4, 24, 0, -24, 0)
 color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Prompt" type="Label" parent="Portals/RootReturn"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -120.0
 offset_top = -110.0
 offset_right = 120.0
@@ -2929,6 +2980,8 @@ polygon = PackedVector2Array(-24, -4, 24, -4, 24, 0, -24, 0)
 color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Prompt" type="Label" parent="Portals/NestAbort"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -120.0
 offset_top = -110.0
 offset_right = 120.0
@@ -2960,6 +3013,8 @@ polygon = PackedVector2Array(-24, -4, 24, -4, 24, 0, -24, 0)
 color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Prompt" type="Label" parent="Portals/NestReturn"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -120.0
 offset_top = -110.0
 offset_right = 120.0
@@ -2987,6 +3042,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="RoomCheckpoints/RootBedDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -3014,6 +3071,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="RoomCheckpoints/TrunkDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -3041,6 +3100,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="RoomCheckpoints/CrownDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -105.0
 offset_right = 65.0
@@ -3148,6 +3209,8 @@ color = Color(0.25, 0.25, 0.25, 1)
 shape = SubResource("UpperRecover3Shape")
 
 [node name="KharaApproachSign" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(21060, 200)
 theme_override_font_sizes/font_size = 17
 text = "Light the diya before the showdown."

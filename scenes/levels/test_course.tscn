@@ -224,44 +224,49 @@ color = Color(0.27, 0.29, 0.33, 1)
 shape = SubResource("RightBoundaryShape")
 
 [node name="RunHint" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 offset_left = 60.0
 offset_top = 310.0
 offset_right = 560.0
 offset_bottom = 380.0
-text = "1 / RUN
-Stop, reverse, then jump."
+text = "1 / RUN\nStop, reverse, then jump."
 
 [node name="StepHint" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 offset_left = 620.0
 offset_top = 235.0
 offset_right = 1120.0
 offset_bottom = 305.0
-text = "2 / STEPS
-40 px rises. Space to climb."
+text = "2 / STEPS\n40 px rises. Space to climb."
 
 [node name="GapHint" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 offset_left = 1090.0
 offset_top = 310.0
 offset_right = 1590.0
 offset_bottom = 380.0
-text = "3 / GAPS
-70 px then 120 px. Jump near the edge."
+text = "3 / GAPS\n70 px then 120 px. Jump near the edge."
 
 [node name="CeilingHint" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 offset_left = 1890.0
 offset_top = 270.0
 offset_right = 2390.0
 offset_bottom = 340.0
-text = "4 / LOW CEILING
-Jump. Check head collisions."
+text = "4 / LOW CEILING\nJump. Check head collisions."
 
 [node name="FinishHint" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 offset_left = 2800.0
 offset_top = 300.0
 offset_right = 3300.0
 offset_bottom = 370.0
-text = "5 / COMBAT
-J: sparkler. Dodge the orange attack tell."
+text = "5 / COMBAT\nJ: sparkler. Dodge the orange attack tell."
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 position = Vector2(160, 430)
@@ -306,6 +311,8 @@ color = Color(0.45, 0.47, 0.51, 1)
 shape = SubResource("ThinWallShape")
 
 [node name="DashHint" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 offset_left = 3220.0
 offset_top = 265.0
 offset_right = 3750.0
@@ -313,6 +320,8 @@ offset_bottom = 325.0
 text = "6 / ROCKET DASH\n220 px gap. Jump + Shift near the edge."
 
 [node name="HardDashHint" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 offset_left = 3590.0
 offset_top = 270.0
 offset_right = 4060.0
@@ -320,6 +329,8 @@ offset_bottom = 330.0
 text = "7 / PRECISION DASH\n250 px gap. Jump; dash near the apex."
 
 [node name="WallHint" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 offset_left = 3950.0
 offset_top = 280.0
 offset_right = 4200.0
