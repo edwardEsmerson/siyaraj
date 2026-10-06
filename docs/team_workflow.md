@@ -235,6 +235,39 @@ Next is the fresh-player test. Record first-play duration, misunderstood control
 missed jumps and unreadable attacks. Automated traversal checks do not establish
 movement feel or a two-minute first-play completion time.
 
+
+## Three-weapon playground handoff
+
+- Open `scenes/combat/weapons_playground.tscn` with F6. All three weapons are
+  unlocked in the isolated playground. Shared player and main-course scripts
+  retain their current behaviour.
+- Sparkler: J for a single ground or aerial lash. Jumping preserves the swing;
+  recovery presses are ignored. Dash, hurt and death cancel it.
+- Skyshot replaces anar: L fires one projectile in the facing direction,
+  including in the air. Five shots per round, with a 0.45-second firing recovery.
+  Misses and wall impacts cost ammo. There are no pickups or timed refills.
+- Fresh player instances on level entry/death start with five shots; nonlethal
+  damage, enemy respawns and moving between stations never refill ammo. R is the
+  playground's full new-round reset. Production level transitions still need
+  integration with the eventual three level scenes.
+- Recoil is controlled by `weapons_playground_player.gd`: 120 px/s for 0.12 s,
+  opposite the fired direction. It sweeps against world collisions, permits jump
+  input and grants neither hurt state nor damage protection.
+- `skyshot_projectile.gd` sweeps against walls and enemies, deals two damage to
+  the first collision and expires after 1.2 seconds. The export preset explicitly
+  includes runtime-loaded weapon scripts.
+- Chakri: hold/release K. Full charge is one second; release starts a 30-second
+  cooldown. Interrupted charges cost nothing. Its cooldown is independent of ammo.
+- The 4200 px map has sparkler, skyshot and chakri practice areas, a safe movement
+  lane and a separate guard encounter. The old shield/ruler station is replaced
+  by a firing line and distant four-health targets. The crowd retains three health
+  for a one-spin clear. The HUD shows ammo and chakri cooldown.
+- `tests/weapons_check.gd` verifies single-lash timing, projectiles, wall collision,
+  five-shot limits, recoil, empty input, refill lifecycle and chakri cooldown.
+  `tests/weapons_map_check.gd` verifies ranged targets, recoil space, crowd clear,
+  respawn, traversal, ammo persistence and camera boundaries.
+
+
 ## Flying enemy handoff
 
 - Combat owns the reusable flying enemy and projectile scenes/controllers and
