@@ -2,8 +2,9 @@
 
 F5 opens the playtest menu. Select the forest, river/ghats, or temple/palace;
 start at the beginning or a checkpoint section, and toggle enemy encounters.
-The developer snapshots selector opens weapon, player movement, enemy, terrain
-and canopy tests. Esc pauses any scene and offers restart or level select.
+The developer snapshots selector opens the weapons playground, movement, the dev
+sandbox (preset to each enemy), the Khara and Ravan boss arenas, terrain and
+canopy tests. Esc pauses any scene and offers restart or level select.
 See [playtest menu and draft editing](docs/playtest_menu.md).
 
 The river and palace are editable grey drafts, each 14,400 pixels long with five
@@ -132,6 +133,8 @@ godot --headless --path . --script res://tests/weapons_map_check.gd
 godot --headless --path . --script res://tests/forest_weapons_check.gd
 godot --headless --path . --script res://tests/khara_boss_check.gd
 godot --headless --path . --script res://tests/ravan_check.gd
+godot --headless --path . --script res://tests/next_levels_check.gd
+godot --headless --path . --script res://tests/playtest_menu_check.gd
 ```
 
 See [the team workflow](docs/team_workflow.md) for ownership, agreed rules,
@@ -152,8 +155,9 @@ GODOT_BIN=/path/to/godot ./tools/run_smoke_build.sh
 The smoke build exports a PCK and runs it with the installed Godot executable,
 outside the editor. It is not a standalone distributable executable.
 Generated files go in the ignored `builds/linux/` directory. The export preset
-packs the forest, prototype course, movement playground, dev sandbox, weapons
-playground, Khara and Ravan boss arenas, burst effect and their dependencies, excluding the
+packs the playtest menu, forest, river, palace, terrain sampler, prototype course,
+movement playground, dev sandbox, weapons playground, Khara and Ravan boss arenas,
+burst effect and their dependencies, excluding the
 proposal, regression checks and team docs. To run the sandbox (default Guard
 encounter) from the pack:
 
