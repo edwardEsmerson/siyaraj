@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Theme" path="res://resources/ui/siyaraj_theme.tres" id="1_theme"]
 [ext_resource type="Script" path="res://scripts/main/title_screen.gd" id="2_title"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/controls_panel.tscn" id="7_controls"]
 [ext_resource type="Script" path="res://scripts/ui/diya_cursor.gd" id="8_cursor"]
 [ext_resource type="Texture2D" path="res://assets/ui/diya.png" id="9_diya"]
+[ext_resource type="Texture2D" path="res://assets/ui/heart.svg" id="10_heart"]
 
 [sub_resource type="Gradient" id="Gradient_dusk"]
 offsets = PackedFloat32Array(0, 0.5, 0.8, 1)
@@ -139,8 +140,7 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="Hint" type="Label" parent="."]
-texture_filter = 2
+[node name="Hint" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -150,10 +150,36 @@ offset_top = -26.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
+
+[node name="Credits" type="HBoxContainer" parent="Hint"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 3
+
+[node name="MadeWith" type="Label" parent="Hint/Credits"]
+texture_filter = 2
+layout_mode = 2
 theme_type_variation = &"KeyLabel"
 theme_override_font_sizes/font_size = 12
-text = "Made with ❤️ by Ayaansh, Shourya, Atharva, Samhith, Nathan Robin"
-horizontal_alignment = 1
+text = "Made with"
+
+[node name="Heart" type="TextureRect" parent="Hint/Credits"]
+texture_filter = 2
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("10_heart")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Authors" type="Label" parent="Hint/Credits"]
+texture_filter = 2
+layout_mode = 2
+theme_type_variation = &"KeyLabel"
+theme_override_font_sizes/font_size = 12
+text = "by Ayaansh, Shourya, Atharva, Samhith, Nathan Robin"
 
 [node name="DiyaCursor" type="TextureRect" parent="." node_paths=PackedStringArray("menu")]
 layout_mode = 0
