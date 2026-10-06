@@ -26,10 +26,8 @@ says *what* is left and *who* does it, and points there for the *how*.
   and both bosses still draw code placeholders.
 - **World kits:** levels and both boss arenas are dressed through `WorldSkin` in all
   six styles (press V in a level to cycle). Merged in #15 and #19.
-- **Red suites on `main`:** `course`, `dash`, `forest`, `forest_rooms` and
-  `next_levels` fail since #17 (preserve vertical momentum during dash, `e5fff81`):
-  some dash gaps and route links are no longer reachable. Fix this first (B0).
-  The other 21 suites pass, `world_skin_check` included.
+- **All 25 suites pass** again after B0 (air dashes now exit at 780 px/s and ease
+  back to run speed, restoring the jump + dash reach lost in #17).
 - **No audio plays.** There are no `AudioStreamPlayer` nodes and no buses.
   `assets/Audio/` is gitignored, so teammates don't have the music files.
 - **Only export preset:** "Linux smoke test".
@@ -99,7 +97,7 @@ Open the file, judge it, then reply "fine" or "redo X".
 
 ### Code
 
-- [ ] **B0. Make the suites green again (do this first).** Since #17, dashing keeps
+- [x] **B0. Make the suites green again (do this first).** Since #17, dashing keeps
   vertical momentum, which shortened jump + dash reach. `dash_check` (220 and 250 px
   gaps), `course_check` (times out), `forest_check`, `forest_rooms_check` and
   `next_levels_check` (route links such as `Branch5 -> BranchExit`,

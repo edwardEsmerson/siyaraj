@@ -52,6 +52,7 @@ func run_checks() -> void:
 	await ticks(8)
 	check(absf(player.position.x - grounded_x - 108.0) < 0.2, "Ground dash must travel the same 108 px")
 	check(player.state == player.State.NORMAL and player.is_on_floor(), "Ground dash must end on the floor")
+	check(is_equal_approx(player.velocity.x, player.movement_settings.run_speed), "Ground dash must exit at run speed")
 	await ticks(4)
 	check(not player.is_invulnerable(), "I-frames must end shortly after the dash")
 	Input.action_press("dash")
@@ -96,6 +97,7 @@ func run_checks() -> void:
 	await ticks(8)
 	check(absf(player.position.x - start_x - 108.0) < 0.2, "Dash distance must be 108 px, independent of opposite input")
 	check(player.state == player.State.NORMAL, "Dash must return to NORMAL after its duration")
+	check(is_equal_approx(player.velocity.x, player.movement_settings.air_dash_exit_speed), "Air dash must exit at its carry speed")
 	check(player.position.y > falling_y, "Siya must keep falling during a dash")
 	check(is_equal_approx(player.velocity.y, falling_speed + player.movement_settings.fall_gravity * 9.0 / 60.0), "Ending a dash must preserve downward momentum")
 	Input.action_release("move_left")
@@ -136,7 +138,8 @@ func run_checks() -> void:
 		Input.action_press("move_right")
 		await ticks(7)
 		Input.action_press("jump")
-		await ticks(20)
+		# Dash keeps the jump arc, so it buys reach while rising, not by hovering late.
+		await ticks(12)
 		Input.action_press("dash")
 		await ticks(9)
 		Input.action_release("dash")
@@ -181,5 +184,5 @@ func run_checks() -> void:
 	check(current_scene != old_scene, "R action must reload the scene")
 	release_inputs()
 	if failures == 0:
-		print("PASS: ground dash with cooldown and i-frames, air dash distance/direction, air charge, gravity, thin-wall/ceiling collision, both gaps, hurt interruption, fall and manual restart")
+		print("PASS: ground dash with cooldown and i-frames, air dash distance/direction/exit carry, air charge, gravity, thin-wall/ceiling collision, both gaps, hurt interruption, fall and manual restart")
 	quit(1 if failures > 0 else 0)
