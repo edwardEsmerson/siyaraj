@@ -279,8 +279,8 @@ def cmd_texture(a):
             target = (round(raw.width * a.height / raw.height) // chunk, a.height // chunk)
         source = raw
         if a.mode == "cutout":
-            source, report = pixel.remove_background(raw)
-            problems = [p for p in report["problems"] if "touches the image edge" not in p]
+            source, report = pixel.remove_background(raw, single=True)
+            problems = [p for p in report["problems"] if "touches the image edge" not in p and "messy" not in p]
         native = pixel.snap(source, px=raw.height / target[1], colours=a.colours)
         native = native.resize(target, Image.Resampling.NEAREST)  # absorb the snapper's +-few px
         native = native.resize((target[0] * chunk, target[1] * chunk), Image.Resampling.NEAREST)
@@ -313,8 +313,9 @@ def symmetric(art):
 
 
 def nine_slice(art, corner):
-    """Corners kept, a `corner`-long edge segment from the middle of each side, flat centre:
-    a (3*corner)^2 texture for Godot's StyleBoxTexture with texture_margin = corner."""
+    """Corners kept, a `corner`-long edge segment from the middle of each side, centre flattened to the
+    interior's main colour: a (3*corner)^2 texture for Godot's StyleBoxTexture with texture_margin = corner
+    and axis_stretch TILE_FIT (edge ornaments repeat instead of smearing)."""
     w, h = art.size
     c = corner
     out = Image.new("RGBA", (3 * c, 3 * c))
@@ -322,19 +323,40 @@ def nine_slice(art, corner):
     for (sx, dx, ww) in [(0, 0, c), (mx, c, c), (w - c, 2 * c, c)]:
         for (sy, dy, hh) in [(0, 0, c), (my, c, c), (h - c, 2 * c, c)]:
             out.paste(art.crop((sx, sy, sx + ww, sy + hh)), (dx, dy))
+    inner = art.crop((c, c, w - c, h - c)).convert("RGBA")
+    fill = max(inner.getcolors(inner.width * inner.height))[1]
+    out.paste(Image.new("RGBA", (c, c), fill), (c, c))
+    px = out.load()  # snapping leaves near-identical fill shades that show up once the fill is recoloured
+    for y in range(out.height):
+        for x in range(out.width):
+            if px[x, y][3] and max(abs(a - b) for a, b in zip(px[x, y][:3], fill[:3])) <= 8:
+                px[x, y] = fill
     return out
 
 
+def tile_fit(part, length, axis):
+    """Repeat `part` along one axis a whole number of times, stretched to fit (Godot TILE_FIT)."""
+    size = part.size[axis]
+    count = max(1, round(length / size))
+    strip = Image.new("RGBA", (size * count, part.height) if axis == 0 else (part.width, size * count))
+    for i in range(count):
+        strip.paste(part, (i * size, 0) if axis == 0 else (0, i * size))
+    target = (length, part.height) if axis == 0 else (part.width, length)
+    return strip.resize(target, Image.Resampling.NEAREST)
+
+
 def stretch_nine(nine, corner, size):
-    """Draw a nine-slice at `size` the way Godot does (edges/centre stretched), for previews."""
+    """Draw a nine-slice at `size` the way Godot's TILE_FIT does, for previews."""
     c, w, h = corner, *size
     out = Image.new("RGBA", size)
-    xs = [(0, c, 0, c), (c, 2 * c, c, w - c), (2 * c, 3 * c, w - c, w)]
-    ys = [(0, c, 0, c), (c, 2 * c, c, h - c), (2 * c, 3 * c, h - c, h)]
-    for sx0, sx1, dx0, dx1 in xs:
-        for sy0, sy1, dy0, dy1 in ys:
+    xs = [(0, 0, c), (c, c, w - c), (2 * c, w - c, w)]
+    ys = [(0, 0, c), (c, c, h - c), (2 * c, h - c, h)]
+    for sx, dx0, dx1 in xs:
+        for sy, dy0, dy1 in ys:
             if dx1 > dx0 and dy1 > dy0:
-                part = nine.crop((sx0, sy0, sx1, sy1)).resize((dx1 - dx0, dy1 - dy0), Image.Resampling.NEAREST)
+                part = nine.crop((sx, sy, sx + c, sy + c))
+                part = tile_fit(part, dx1 - dx0, 0) if sx == c else part
+                part = tile_fit(part, dy1 - dy0, 1) if sy == c else part
                 out.paste(part, (dx0, dy0))
     return out
 
@@ -353,7 +375,7 @@ def cmd_ui(a):
     (run / "prompt.txt").write_text(prompt)
     jobs = [{"id": i, "prompt": prompt, "refs": refs, "raw": run / f"{i}.raw.png"} for i in ids]
     corner = a.corner or a.px // 4
-    previews = {}
+    previews, margins = {}, {}
 
     def process(job, raw):
         cut, report = pixel.remove_background(raw)
@@ -365,14 +387,17 @@ def cmd_ui(a):
         problems = report["problems"]
         if a.kind == "frame":
             art = symmetric(art)
-            nine = nine_slice(art, corner)
+            c = min(corner, (min(art.size) - 1) // 2)  # wide/short frames get a smaller margin
+            margins[job["id"]] = c
+            nine = nine_slice(art, c)
             nine.save(run / f"{job['id']}-nine.png")
             # In-game sizes: a menu panel, a wide button, a small hint box.
-            shots = [stretch_nine(nine, corner, s) for s in [(300, 180), (200, 34), (140, 60)]]
+            tall = max(34, 2 * c + 4)
+            shots = [stretch_nine(nine, c, s) for s in [(300, 180), (200, tall), (140, max(60, tall))]]
             preview = Image.new("RGBA", (300 + 16 + 200, 180))
             preview.paste(shots[0], (0, 0))
             preview.paste(shots[1], (316, 0))
-            preview.paste(shots[2], (316, 60))
+            preview.paste(shots[2], (316, tall + 16))
             previews[job["id"]] = preview
         else:
             previews[job["id"]] = art
@@ -381,9 +406,12 @@ def cmd_ui(a):
 
     results = run_jobs(a, jobs, process)
     shown = [previews[i] for i, (r, _) in results.items() if r]
-    pixel.contact_sheet(shown, labels(results), run / "sheet.png", columns=1 if a.kind == "frame" else None)
+    names = [f"{l}  margin {margins[l[:2]]}" if l[:2] in margins else l for l in labels(results)]
+    pixel.contact_sheet(shown, names, run / "sheet.png", columns=1 if a.kind == "frame" else None)
+    if margins:
+        (run / "margins.json").write_text(json.dumps(margins, indent=2))
     print(f"review {run / 'sheet.png'}  keep one with:  cp {run}/NN{'-nine' if a.kind == 'frame' else ''}.png "
-          f"../assets/ui/{a.name}.png  (frame: texture_margin {corner})")
+          f"../assets/ui/{a.name}.png" + ("  (texture_margin per candidate: margins.json)" if margins else ""))
 
 
 def cmd_clean(a):
@@ -486,7 +514,7 @@ def parser():
     c.add_argument("--kind", default="frame", choices=["frame", "icon"])
     c.add_argument("--px", type=int, default=64, help="longest side in game units (= texels)")
     c.add_argument("--corner", type=int, help="frame: 9-slice corner/margin size (default px/4)")
-    c.add_argument("--style", nargs="*", default=["siya"], help="approved sprites to copy palette from (or none)")
+    c.add_argument("--style", nargs="*", default=["none"], help="approved sprites to copy palette from (default none: refs leak into UI art)")
     c.add_argument("--colours", type=int, default=16)
     c.add_argument("--size", default="2K", choices=SIDE)
     c.add_argument("--key", default="green", choices=prompts.KEYS)

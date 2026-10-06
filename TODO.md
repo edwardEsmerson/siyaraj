@@ -10,22 +10,27 @@ start-to-finish route, so section 1 comes first.
 
 Most of sections 2 to 4 depend on these.
 
-- [ ] **Check the jam rules:** deadline, platform (Windows, Web or Linux), upload
+- [x] **Check the jam rules:** deadline, platform (Windows, Web or Linux), upload
   format, and whether AI-generated art must be declared or is banned. Our sprites
   come from Nano Banana, so this one matters most.
-- [ ] **Match the story to what's built.** The proposal has Swaminathan, the Robin
+  - [ ] Need to submit to itch.io, AI everything is allowed no declarations needed
+- [x] **Match the story to what's built.** The proposal has Swaminathan, the Robin
   fight and the "Nathan Robin" twist. The code has Khara and Ravan as bosses and no
   Robin, Raj or Swaminathan. Either write a new story around Khara and Ravan, or add
   the Swaminathan/Robin fight. The proposal says the Robin fight and the lit-up
-  ending stay in no matter what.
-- [ ] **Fix the level order.** The proposal goes ghats → forest → palace. The code
+  ending stay in no matter what., 
+  - [ ] Ravan should be Swaminathan, we need to make a simple name change, we need
+- [x] **Fix the level order.** The proposal goes ghats → forest → palace. The code
   goes forest → river → palace (`next_level` in `scenes/main/forest.tscn` and
   `scenes/main/river.tscn`).
-- [ ] **Decide where each boss goes.** Khara and Ravan only exist in separate
+  - [ ] that doesn't matter
+- [x] **Decide where each boss goes.** Khara and Ravan only exist in separate
   arenas. None of the three levels leads into a boss fight.
+  - [ ] The last level should lead to a fight with Swaminathan and the second level to khara, we need to integrate that into the levels
 - [ ] **Write down the cuts from the proposal:** anar slam (skyshot took its place),
   Robin strike, the shielded enemy and the sparkler combo chain. Then the submission
   page and the theme explanation can match the game.
+  - [ ] This we'll do later
 
 ## 2. A playable game from start to finish
 
