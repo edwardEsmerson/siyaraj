@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-Siyaraj is a Godot 4.7.2 2D platformer using the Compatibility renderer. Open `project.godot`; the entry scene is `scenes/main/playtest_menu.tscn`. Forest, river and palace drafts and developer snapshots are available from this menu. The original prototype is `scenes/main/main.tscn`. See `docs/playtest_menu.md` for launch and editing details.
+Siyaraj is a Godot 4.7.2 2D platformer using the Compatibility renderer. Open `project.godot`; the entry scene is the title screen, `scenes/main/title.tscn`; its debug-only Playtest menu button opens `scenes/main/playtest_menu.tscn`, where forest, river and palace drafts and developer snapshots are available. Menus share `resources/ui/siyaraj_theme.tres` (see `docs/ui.md`). The original prototype is `scenes/main/main.tscn`. See `docs/playtest_menu.md` for launch and editing details.
 
 - `scripts/` groups GDScript by player, combat, enemies, bosses, UI, levels, effects, dev tools, and main integration.
 - `scenes/` contains corresponding `.tscn` scenes. `scenes/dev/` holds the dev-only sandbox (one selectable enemy, for isolated encounter work) and the weapons playground; `scenes/bosses/` holds each boss and its isolated arena; `scenes/main/movement_playground.tscn` remains for movement tuning.
@@ -14,7 +14,7 @@ Siyaraj is a Godot 4.7.2 2D platformer using the Compatibility renderer. Open `p
 
 ## Build, Test, and Development Commands
 
-Use Godot 4.7.2. Run `godot --path . --editor`, then F5 for the playtest menu or F6 for the current scene.
+Use Godot 4.7.2. Run `godot --path . --editor`, then F5 for the title screen or F6 for the current scene.
 
 On the Linux workstation, Godot 4.7.2 is installed persistently at
 `/home/solan/.local/share/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64`.
@@ -46,6 +46,7 @@ godot --headless --path . --script res://tests/khara_boss_check.gd
 godot --headless --path . --script res://tests/ravan_check.gd
 godot --headless --path . --script res://tests/next_levels_check.gd
 godot --headless --path . --script res://tests/playtest_menu_check.gd
+godot --headless --path . --script res://tests/menus_check.gd
 godot --headless --path . --script res://tests/robin_check.gd
 ```
 

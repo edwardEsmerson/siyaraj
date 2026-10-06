@@ -11,12 +11,13 @@ config_version=5
 [application]
 
 config/name="Siyaraj"
-run/main_scene="res://scenes/main/playtest_menu.tscn"
+run/main_scene="res://scenes/main/title.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
+GameSettings="*res://scripts/main/game_settings.gd"
 PlaytestNavigation="*res://scripts/main/playtest_navigation.gd"
 
 [display]

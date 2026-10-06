@@ -32,11 +32,12 @@ Most of sections 2 to 4 depend on these.
 The game currently opens on the developer playtest menu, and the palace finish
 leads nowhere.
 
-- [ ] **Add a title screen** with New Game, Controls, Settings and Quit. Right now
-  `run/main_scene` is the playtest menu.
-- [ ] **Hide the developer tools in release builds:** snapshots, the encounter toggle
-  and the checkpoint picker. One way is to check `OS.is_debug_build()` or a custom
-  export feature tag.
+- [x] **Add a title screen** with New Game, Controls, Settings and Quit
+  (`scenes/main/title.tscn`, now `run/main_scene`). Pause menu restyled to match.
+- [x] **Hide the developer tools in release builds:** the title's Playtest menu button
+  and the pause menu's Level select only show when `OS.is_debug_build()`, so a
+  release export never reaches snapshots, the encounter toggle or the checkpoint
+  picker. Export the itch.io build with debug off.
 - [ ] **Connect the levels:** level 1 → level 2 → level 3 → boss → ending.
 - [ ] **Add boss arenas to the levels**, with an entrance, a checkpoint before the
   fight, and a door or gate that unlocks after the win.

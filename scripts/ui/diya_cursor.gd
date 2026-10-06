@@ -14,6 +14,10 @@ func _ready() -> void:
 	top_level = true
 	hide()
 	get_viewport().gui_focus_changed.connect(_on_focus_changed)
+	# Hovering moves focus, so the mouse and keyboard never highlight two buttons.
+	if menu != null:
+		for button in menu.find_children("*", "BaseButton", true, false):
+			button.mouse_entered.connect(button.grab_focus)
 
 
 func _process(delta: float) -> void:
@@ -22,11 +26,15 @@ func _process(delta: float) -> void:
 	modulate = Color(1, 1, 1).lerp(Color(1.15, 1.05, 0.9), 0.5 + 0.5 * sin(_time * 9.0) * sin(_time * 3.7))
 	var focused := get_viewport().gui_get_focus_owner()
 	if focused != null and visible:
-		_place(focused)
+		if not focused.is_visible_in_tree():
+			hide()
+		else:
+			_place(focused)
 
 
 func _on_focus_changed(control: Control) -> void:
-	visible = control is Button and menu != null and menu.is_ancestor_of(control)
+	# Plain menu buttons only: checkboxes and sliders show their own focus ring.
+	visible = control is Button and not (control as Button).toggle_mode and menu != null and menu.is_ancestor_of(control)
 
 
 func _place(button: Control) -> void:

@@ -13,12 +13,14 @@ ROOT = Path(__file__).resolve().parents[1]
 HOLE = (255, 0, 255)  # placeholder colour for transparent pixels while snapping
 
 
-def remove_background(image, tol=40, step=6):
+def remove_background(image, tol=40, step=6, single=False):
     """Cut out whatever flat-ish background the model actually drew.
 
     The model often ignores the requested key (muted green, grey, white, a fake
     checkerboard, a soft gradient), so we measure the real border colours instead
-    of trusting the prompt. Returns (RGBA image, report).
+    of trusting the prompt. `single` keeps only the dominant border colour, for
+    layers whose art runs off the edges (else the art itself counts as background).
+    Returns (RGBA image, report).
     """
     rgb = np.ascontiguousarray(np.array(image.convert("RGB")))
     h, w = rgb.shape[:2]
@@ -32,7 +34,7 @@ def remove_background(image, tol=40, step=6):
     for cluster in np.argsort(-counts)[:4]:
         seeds.append(ring[inverse == cluster].mean(0))
         covered += counts[cluster]
-        if covered >= 0.9 * len(ring):
+        if single or covered >= 0.9 * len(ring):
             break
     distance = np.min([np.abs(rgb.astype(int) - s).max(axis=2) for s in seeds], axis=0)
     near = (distance <= tol).astype(np.uint8)

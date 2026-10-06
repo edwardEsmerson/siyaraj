@@ -279,8 +279,8 @@ def cmd_texture(a):
             target = (round(raw.width * a.height / raw.height) // chunk, a.height // chunk)
         source = raw
         if a.mode == "cutout":
-            source, report = pixel.remove_background(raw)
-            problems = [p for p in report["problems"] if "touches the image edge" not in p]
+            source, report = pixel.remove_background(raw, single=True)
+            problems = [p for p in report["problems"] if "touches the image edge" not in p and "messy" not in p]
         native = pixel.snap(source, px=raw.height / target[1], colours=a.colours)
         native = native.resize(target, Image.Resampling.NEAREST)  # absorb the snapper's +-few px
         native = native.resize((target[0] * chunk, target[1] * chunk), Image.Resampling.NEAREST)

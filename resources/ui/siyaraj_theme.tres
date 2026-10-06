@@ -168,3 +168,5 @@ TitleLabel/constants/shadow_offset_y = 5
 TitleLabel/constants/shadow_outline_size = 14
 TitleLabel/font_sizes/font_size = 72
 TitleLabel/fonts/font = ExtResource("2_display")
+KeyLabel/base_type = &"Label"
+KeyLabel/colors/font_color = Color(1, 0.69, 0.15, 1)
