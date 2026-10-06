@@ -198,3 +198,9 @@ func _draw() -> void:
 		var angle := index * TAU / 6.0 + effect_time * 20.0
 		var tip := Vector2.RIGHT.rotated(angle) * effect_radius
 		draw_line(Vector2(0, -20) + tip * 0.6, Vector2(0, -20) + tip, color, 3)
+
+
+func return_to_diya(destination: Vector2) -> void:
+	recoil_remaining = 0.0
+	_cancel_specials()
+	super.return_to_diya(destination)

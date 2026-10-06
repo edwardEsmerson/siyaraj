@@ -224,3 +224,18 @@ func die() -> void:
 	Burst.spawn(get_tree().current_scene, global_position + Vector2(0, -20), Color(1.0, 0.35, 0.3), "DOWN", 38.0)
 	_update_feedback()
 	died.emit()
+
+
+func return_to_diya(destination: Vector2) -> void:
+	# A checkpoint rejection moves Siya without healing or resetting the encounter.
+	sparkler.cancel()
+	state = State.NORMAL
+	velocity = Vector2.ZERO
+	_dash_remaining = 0.0
+	_hurt_remaining = 0.0
+	_jump_buffer_remaining = 0.0
+	_coyote_remaining = 0.0
+	_attack_buffer_remaining = 0.0
+	_invulnerable_remaining = 0.0
+	global_position = destination
+	_update_feedback()

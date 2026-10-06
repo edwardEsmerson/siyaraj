@@ -25,7 +25,9 @@ func _physics_process(_delta: float) -> void:
 func _update_diyas(player: CharacterBody2D) -> void:
 	var saved: Dictionary = progress.get(level_id, {"spawn": Vector2(160, 430), "lit": []})
 	for checkpoint: Area2D in $Checkpoints.get_children():
-		var nearby: bool = player != null and checkpoint.overlaps_body(player) and player.is_on_floor() and player.state == player.State.NORMAL
+		var guard: CanvasLayer = get_parent().checkpoint_guard
+		var blocked: bool = guard != null and guard.blocked(checkpoint)
+		var nearby: bool = not blocked and player != null and checkpoint.overlaps_body(player) and player.is_on_floor() and player.state == player.State.NORMAL
 		if nearby and Input.is_action_just_pressed("interact"):
 			if not saved.lit.has(checkpoint.name):
 				saved.lit.append(checkpoint.name)
@@ -33,7 +35,7 @@ func _update_diyas(player: CharacterBody2D) -> void:
 				saved.spawn = checkpoint.position
 			progress[level_id] = saved
 		checkpoint.get_node("Flame").visible = saved.lit.has(checkpoint.name)
-		checkpoint.get_node("Prompt").text = "SAVED" if saved.lit.has(checkpoint.name) else ("E: light diya" if nearby else "DIYA")
+		checkpoint.get_node("Prompt").text = "Defeat enemies before this diya" if blocked else ("SAVED" if saved.lit.has(checkpoint.name) else ("E: light diya" if nearby else "DIYA"))
 
 func set_start(at: Vector2) -> void:
 	progress[level_id] = {"spawn": at, "lit": []}

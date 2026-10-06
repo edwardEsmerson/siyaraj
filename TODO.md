@@ -1,6 +1,6 @@
 # Hackathon submission to-do
 
-Art and animation are tracked separately and are not listed here.
+Art and animation are tracked separately, except for the curtain assets below.
 
 As of 2026-10-06, `main` matches `origin/main` and all 17 regression suites pass.
 The biggest gaps are the story mismatch with the proposal and the missing
@@ -88,6 +88,10 @@ buses. Finding the music and sound files may belong on the asset list.
 
 ## 6. Player-facing polish
 
+- [ ] **Create curtain assets** for the blocked-diya transition. Replace the drawn
+  placeholder with left and right curtain artwork that slides shut, fully covers
+  the screen during the 0.5-second teleport hold, then slides open. Preserve
+  the top-led pull, curved trailing hem, and delayed settling in both directions.
 - [ ] **Teach the controls** to someone who has never seen the game, inside the
   levels, instead of the current developer-style HUD.
 - [ ] **Add a Settings screen** with volume sliders and fullscreen. Key rebinding is

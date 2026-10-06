@@ -34,6 +34,9 @@ func place(at: Vector2) -> void:
 	await ticks(4)
 
 func freeze_encounters() -> void:
+	# Traversal and isolated weapon probes deliberately bypass route progression.
+	if current_scene.checkpoint_guard != null:
+		current_scene.checkpoint_guard.enabled = false
 	for enemy in current_scene.course.get_node("Encounters").get_children():
 		enemy.set_physics_process(false)
 

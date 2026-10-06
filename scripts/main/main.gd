@@ -19,6 +19,7 @@ extends Node2D
 @onready var combat_status: Label = $HUD/CombatStatus
 @onready var camera: Camera2D = $Camera2D
 
+var checkpoint_guard: CanvasLayer
 var _restarting: bool = false
 var completed: bool = false
 var elapsed: float = 0.0
@@ -60,6 +61,10 @@ func _ready() -> void:
 		enemy.died.connect(func() -> void:
 			combat_status.text = "%s defeated! Exit open; reach the flag." % encounter_name if course.has_signal("finished") else "%s defeated! R to replay." % encounter_name
 		)
+
+	if course.has_node("Checkpoints") and course.has_node("Encounters"):
+		checkpoint_guard = preload("res://scripts/levels/checkpoint_guard.gd").new()
+		add_child(checkpoint_guard)
 
 
 func _process(delta: float) -> void:
