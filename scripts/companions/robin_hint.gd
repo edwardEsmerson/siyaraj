@@ -1,6 +1,7 @@
 extends Area2D
 
 const Robin = preload("res://scripts/companions/robin.gd")
+const Controls = preload("res://scripts/ui/controls_panel.gd")
 ## Drop into a level. When Siya walks in, Robin flies to `point` and says `text`.
 ## Each hint shows once per session, so death reloads do not repeat it.
 
@@ -25,6 +26,18 @@ func hint_id() -> String:
 		return "lesson:%s" % topic
 	var scene := get_tree().current_scene
 	return "%s:%s" % [scene.scene_file_path if scene != null else "", scene.get_path_to(self) if scene != null else get_path()]
+
+
+## Resolve the dash prompt when presented, including current InputMap remaps.
+func formatted_text() -> String:
+	if not text.contains("{dash}"):
+		return text
+	var bindings: PackedStringArray = []
+	for binding in [Controls.key_text(&"dash"), Controls.joypad_text(&"dash")]:
+		if not binding.is_empty():
+			bindings.append(binding)
+	var prompt := "Dash" if bindings.is_empty() else "Dash [%s]" % " or ".join(bindings)
+	return text.replace("{dash}", prompt)
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -52,6 +65,6 @@ func _try_hint() -> void:
 		return
 	var robin := get_tree().get_first_node_in_group("robin")
 	if robin != null:
-		if robin.point_out(to_global(point), text, hint_id() if once else "", duration):
+		if robin.point_out(to_global(point), formatted_text(), hint_id() if once else "", duration):
 			_visitor = null
 			get_node("/root/AudioDirector").play_cue(&"hint")

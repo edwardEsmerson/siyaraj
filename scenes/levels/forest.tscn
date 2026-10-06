@@ -3240,8 +3240,16 @@ position = Vector2(4700, 430)
 text = "L fires a skyshot, but you only have five. Hold K to charge a chakri spin."
 
 [node name="ShooterHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
-position = Vector2(10250, 430)
-text = "Purple bolts! Dash straight through them, or hit him to stop the shot."
+position = Vector2(7100, 430)
+text = "Homing missiles ahead! {dash} through them. You're invulnerable during a dash."
+duration = 5.0
+topic = &"homing_dash"
+
+[node name="RootShooterHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(1100, -1750)
+text = "Homing missiles below! {dash} through them. You're invulnerable during a dash."
+duration = 5.0
+topic = &"homing_dash"
 
 [node name="BruteHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
 position = Vector2(15300, 430)
