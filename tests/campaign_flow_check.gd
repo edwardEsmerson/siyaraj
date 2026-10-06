@@ -75,6 +75,9 @@ func run_checks() -> void:
 		check(not flow.get_node("Victory").visible, "Victory controls must wait for the story")
 		flow._unhandled_input(accept())
 		check(current_scene == flow.get_parent(), "Enter must not bypass the aftermath dialogue")
+		flow.get_node("Victory/Actions/Continue").pressed.emit()
+		check(current_scene == flow.get_parent(), "Result button must not bypass the aftermath dialogue")
+		await ticks(120)  # Boss corpses may finish freeing while the reader stays in the comic.
 		if level == "palace":
 			check(current_scene.get_node("RajCage").freed, "Swaminathan's defeat must open Raj's cage")
 		for panel in flow.comic._panels.size():

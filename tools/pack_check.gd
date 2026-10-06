@@ -16,7 +16,7 @@ func check(condition: bool, message: String) -> void:
 func run_checks() -> void:
 	check(not ResourceLoader.exists("res://tests/movement_check.gd"), "Pack must exclude regression scripts")
 	var menu_script: Script = load("res://scripts/main/playtest_menu.gd")
-	var paths: PackedStringArray = ["res://scenes/main/title.tscn", "res://scenes/main/ending.tscn", "res://scenes/main/playtest_menu.tscn"]
+	var paths: PackedStringArray = ["res://scenes/main/title.tscn", "res://scenes/main/prologue.tscn", "res://scenes/main/ending.tscn", "res://scenes/main/playtest_menu.tscn"]
 	paths.append_array(menu_script.LEVELS)
 	for entry: Dictionary in menu_script.SNAPSHOTS:
 		if not paths.has(entry.path):
@@ -27,6 +27,9 @@ func run_checks() -> void:
 		for frame in 4:
 			await physics_frame
 			await process_frame
+		if path == "res://scenes/main/prologue.tscn":
+			var comic: CanvasLayer = current_scene.get_node("ComicCutscene")
+			check(comic.visible and comic.panel_art.texture != null and comic.featured_art.texture != null, "Pack must play the opening with its artwork")
 		var skin: Node = current_scene.get_node_or_null("TestCourse/WorldSkin")
 		if skin == null:
 			skin = current_scene.get_node_or_null("WorldSkin")
