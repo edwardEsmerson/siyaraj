@@ -47,7 +47,7 @@ func run_checks() -> void:
 		for actor in current_scene.find_children("*", "CharacterBody2D", true, false):
 			if actor.has_node("Visuals/Sprite") and actor.has_node("Body") and actor != player:
 				check(not actor.get_node("Body").visible, "%s must use cast art in gameplay" % actor.name)
-			if actor.has_node("Visual/CastVisuals"):
-				check(actor.get_node("Visual/CastVisuals").sprite.sprite_frames.has_animation("slam_impact"), "Pack must include Khara's gameplay animations")
+			if actor.has_node("Visual/Art"):
+				check(actor.get_node("Visual/Art").sprite_frames.has_animation("slam_impact"), "Pack must include Khara's gameplay animations")
 	print("Pack checks: %s (%d scenes)" % ["PASS" if failures == 0 else "FAIL", paths.size()])
 	quit(0 if failures == 0 else 1)

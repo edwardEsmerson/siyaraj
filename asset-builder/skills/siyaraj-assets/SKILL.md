@@ -116,7 +116,9 @@ cp out/textures/forest-far/01.png textures/forest/forest-far.png
 - Modes: `tile` seamless square fill (128 art px = 64 units); `cap` transparent strip along a platform's
   top edge, full-width seamless, `--cap-height` art px tall (default 32), the walking surface a third of
   the way down; `concept` a 16:9 mock level screen for choosing art direction (not used in game);
-  `layer` opaque parallax; `cutout` parallax shapes with transparency.
+  `layer` opaque parallax; `cutout` parallax shapes with transparency; `panel` one complete opaque 16:9
+  comic illustration (no speech bubbles or lettering; pass approved characters with repeated `-r` flags).
+  Panel candidates are written to `out/panels/<name>/`; review `sheet.png` and let the user choose.
 - **Terrain scale:** most platforms are thin 32-unit (64 art px) slabs, so a fill shows barely half a
   tile; **caps and fringes carry most of the look**. Spend iterations there; keep fills calm.
 - Check `sheet.png` / `NN-tiled.png` for seams before keeping. `ab blend A B` builds a transition tile
