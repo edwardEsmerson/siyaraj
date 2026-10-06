@@ -71,6 +71,9 @@ func run_checks() -> void:
 		check(player.is_on_floor() and player.health == player.max_health and player.skyshot_ammo == 5, "Fight must start grounded with the arena's fresh loadout")
 		flow._unhandled_input(accept())
 		check(current_scene == showdown, "Enter must not skip a living boss")
+		if level == "palace":
+			flow.finish_escape()
+			check(not showdown.get_node("PalaceEscape").unlocked and current_scene == showdown, "Living boss must keep the palace escape locked")
 		player.die()
 		await scene_changed
 		await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
@@ -98,13 +101,61 @@ func run_checks() -> void:
 		await ticks(120)  # Boss corpses may finish freeing while the reader stays in the comic.
 		if level == "palace":
 			check(current_scene.get_node("RajCage").freed, "Swaminathan's defeat must open Raj's cage")
+			check(not current_scene.get_node("PalaceEscape").unlocked, "Palace gates must wait for Robin's reveal and the reunion dialogue")
 		for panel in flow.comic._panels.size():
 			flow.comic._unhandled_input(accept())
-		check(flow.get_node("Victory").visible, "Closing the aftermath must unlock the next stage")
-		flow._unhandled_input(accept())
-		await scene_changed
+		if level == "palace":
+			var escape: Node = current_scene.get_node("PalaceEscape")
+			check(escape.unlocked and not flow.get_node("Victory").visible, "Final dialogue must unlock the escape instead of covering the gates")
+			check(story.aftermath("palace")[3].text.contains("always served Swaminathan"), "Finale must preserve Robin's allegiance reveal")
+			flow._unhandled_input(accept())
+			flow.get_node("Victory/Actions/Continue").pressed.emit()
+			check(current_scene == flow.get_parent(), "Enter and hidden result controls must not bypass the escape")
+			player.position = Vector2(800, 430)
+			player.velocity = Vector2.ZERO
+			Input.action_press("move_right")
+			await ticks(90)
+			Input.action_release("move_right")
+		else:
+			check(flow.get_node("Victory").visible, "Closing the aftermath must unlock the next stage")
+			flow._unhandled_input(accept())
+			await scene_changed
 		var destination: String = {"forest": "river.tscn", "river": "palace.tscn", "palace": "ending.tscn"}[level]
 		check(current_scene.scene_file_path.ends_with(destination), "Boss victory must advance to the next campaign stage")
+	# Every ending action must work with mouse activation and focus navigation.
+	check(current_scene.get_node("Center/Content/ReturnButton").has_focus(), "Victory must focus a usable navigation button")
+	for button_name: String in ["ReturnButton", "NewJourney", "ReplayFinale"]:
+		var button: Button = current_scene.get_node("Center/Content/" + button_name)
+		check(button.get_global_rect().intersection(current_scene.get_global_rect()) == button.get_global_rect(), "Every ending button must fit inside the viewport")
+	var down := InputEventAction.new()
+	down.action = &"ui_down"
+	down.pressed = true
+	Input.parse_input_event(down)
+	await ticks(1)
+	check(current_scene.get_node("Center/Content/NewJourney").has_focus(), "Keyboard and controller navigation must reach the next ending action")
+	down.pressed = false
+	Input.parse_input_event(down)
+	current_scene.get_node("Center/Content/ReplayFinale").pressed.emit()
+	await scene_changed
+	check(current_scene.scene_file_path.ends_with("palace_showdown.tscn") and not current_scene.get_node("CampaignFlow").won, "Replay finale must start a fresh boss with its dialogue")
+	navigation.start_level("res://scenes/main/ending.tscn")
+	await scene_changed
+	current_scene.get_node("Center/Content/NewJourney").pressed.emit()
+	await scene_changed
+	check(current_scene.scene_file_path.ends_with("prologue.tscn") and navigation.enemies_enabled, "New journey must start the story with encounters enabled")
+	navigation.start_level("res://scenes/main/ending.tscn")
+	await scene_changed
+	current_scene.get_node("Center/Content/ReturnButton").pressed.emit()
+	await scene_changed
+	check(current_scene.scene_file_path.ends_with("title.tscn") and not paused, "Return to title must leave an interactive menu")
+	navigation.start_level("res://scenes/main/ending.tscn")
+	await scene_changed
+	var back := InputEventAction.new()
+	back.action = &"ui_cancel"
+	back.pressed = true
+	current_scene._unhandled_input(back)
+	await scene_changed
+	check(current_scene.scene_file_path.ends_with("title.tscn"), "Ending back action must return to title")
 	# Terrain-only launches deliberately bypass encounters and boss fights.
 	navigation.enemies_enabled = false
 	for level in ["forest", "river"]:
