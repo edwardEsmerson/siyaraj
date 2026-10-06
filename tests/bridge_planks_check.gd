@@ -77,6 +77,7 @@ func run_checks() -> void:
 	player.died.connect(current_scene._restart)
 	player.die()
 	await scene_changed
+	await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
 	player = current_scene.player
 	await ticks(4)
 	check(current_scene.course.get_node("BridgePlanks").placed_count == 4, "Death must preserve built planks")

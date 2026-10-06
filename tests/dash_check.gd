@@ -167,6 +167,7 @@ func run_checks() -> void:
 		await ticks(1)
 		if current_scene != old_scene:
 			break
+	await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
 	check(current_scene != old_scene, "Falling below the boundary must restart the scene")
 	player = current_scene.get_node("Player")
 	await ticks(3)

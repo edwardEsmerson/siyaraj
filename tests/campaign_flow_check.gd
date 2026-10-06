@@ -40,10 +40,11 @@ func run_checks() -> void:
 		check(current_scene == showdown, "Enter must not skip a living boss")
 		player.die()
 		await scene_changed
+		await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
 		check(current_scene.scene_file_path.ends_with("%s_showdown.tscn" % level), "Death must retry the boss, not the long level")
 		flow = current_scene.get_node("CampaignFlow")
 		boss = flow.get_node(flow.boss_path)
-		check(flow.comic == null and current_scene.can_process(), "Death must retry immediately without replaying the comic")
+		check(flow.comic == null and current_scene.can_process(), "Death must retry without replaying the comic")
 		player = current_scene.get_node("Player")
 		await ticks(4)
 		check(not flow.won and boss.health == boss.max_health and player.health == player.max_health, "Retry must reset boss and player")
