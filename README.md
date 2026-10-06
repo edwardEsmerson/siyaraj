@@ -5,7 +5,9 @@ is 21,600 pixels long, with 59 route platforms, high root climbs, narrow
 landings, ceiling sections, a switchback climb and sustained dash chains.
 Stand beside a diya and press E to light it and secure a checkpoint. Passing
 one does not save. Death returns to the furthest lit diya with full health;
-R clears all eight checkpoints and restarts the forest. No enemies are placed.
+R clears all checkpoints and restarts the forest. The clearing has a guard,
+the banyan approach has a ground shooter, and the shrine has a Brute.
+The root chamber also has a shooter; the canopy nest awaits a future encounter.
 See [forest design and enemy handoff](docs/forest_level.md).
 
 The root ridge and banyan climb also have E doors into isolated root and
@@ -83,6 +85,7 @@ godot --headless --path . --script res://tests/combat_check.gd
 godot --headless --path . --script res://tests/course_check.gd
 godot --headless --path . --script res://tests/forest_check.gd
 godot --headless --path . --script res://tests/forest_rooms_check.gd
+godot --headless --path . --script res://tests/forest_encounters_check.gd
 godot --headless --path . --script res://tests/flying_enemy_check.gd
 godot --headless --path . --script res://tests/brute_check.gd
 godot --headless --path . --script res://tests/ground_shooter_check.gd

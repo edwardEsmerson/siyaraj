@@ -82,10 +82,20 @@ The level's `EncounterSpawns` Marker2D nodes are on flat safe ground:
 | ShrineRearGuard | 16150 | Optional second shrine enemy after combat tuning |
 | FinalGuard | 17850 | Final encounter before the dash chain |
 
-The incoming enemy's collider, attack ranges and defeat signals still need
-inspection before placement. Keep pursuit inside each clearing and away
-from pit takeoffs and diya interaction zones. No enemy behaviour or gate
-system is assumed. The enemy-free exit remains available for traversal tests.
+The first integrated pass uses the guard at X=2050, ground shooter at
+X=10650, Brute at X=15700, and a shorter-range shooter at X=2200 in the
+root chamber's local coordinates. Enemy roots and their patrol detection
+envelopes start outside the secured diya respawn positions. Projectiles
+already fired can still reach a player moving toward a diya.
+
+Only the current area's enemies are instantiated. Room transitions and
+death reloads restore enemies with full health. The nest remains empty
+until its encounter is designed. Forest completion and room doors currently
+require traversal, so combat can be bypassed. No boss or defeat gate is added.
+The original prototype keeps its guard-controlled gate and both new enemies.
+The flying enemy already merged on GitHub is also available in that prototype
+and its isolated arena. Terrain remains grey; enemy attack feedback uses
+the shared combat scenes.
 
 ## Validation
 
@@ -99,6 +109,12 @@ The check also tests all checkpoint spawn floors, no automatic activation,
 physical E input, holding E while approaching, airborne rejection, visible
 activation, skipped-diya state, death recovery, completion and R reset.
 Run it alongside movement, dash, combat and course checks.
+
+`forest_rooms_check.gd` checks every detour connection, local save/recovery,
+door completion, leaving early and R from a room. `forest_encounters_check.gd`
+checks active-area isolation, enemy floors, damage and initial patrol spacing
+from diyas. Terrain probes freeze enemy controllers so combat cannot hide
+a failed jump. The independent enemy suites exercise their actual attacks.
 
 The next manual playtest should record failed jump locations, whether small
 landings give enough braking room, whether the jump-through branches read

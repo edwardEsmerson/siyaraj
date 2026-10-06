@@ -24,6 +24,9 @@ func _ready() -> void:
 		pending_return = false
 	for checkpoint in _checkpoints():
 		checkpoint.get_node("Flame").visible = lit_checkpoints.has(checkpoint.name)
+	for enemy in $Encounters.get_children():
+		if enemy.get_meta("room", &"") != current_room:
+			enemy.free()
 	$Finish.body_entered.connect(_on_finish_entered)
 
 
@@ -113,7 +116,7 @@ func hint_at(x: float) -> String:
 	if x < 1600.0:
 		return "Forest edge / Climb the roots. Control your landing before the next jump."
 	if x < 2800.0:
-		return "First clearing / Press E beside a diya to secure a checkpoint."
+		return "First clearing / J strikes the guard. Step away during its wind-up. E lights the diya."
 	if x < 4800.0:
 		return "Broken canopy / Chain your jumps. Land before using another dash."
 	if x < 6500.0:
@@ -121,11 +124,11 @@ func hint_at(x: float) -> String:
 	if x < 8900.0:
 		return "Hollow trunks / Mind your head. Clear the roof before jumping the next gap."
 	if x < 11200.0:
-		return "Stone crossing / Small landings. Brake, recharge, then jump again."
+		return "Stone crossing / Land and recharge. At the banyan, dodge purple bolts or J to interrupt."
 	if x < 13600.0:
 		return "Banyan climb / Alternate left and right to climb the stacked branches."
 	if x < 16100.0:
-		return "Upper ravine / Mix high landings with long dashes."
+		return "Upper ravine / Dash between ledges. The shrine brute has a slow, heavy strike."
 	if x < 18400.0:
 		return "Old shrine / Climb the ridge and cross the deep breaks in the trail."
 	if x < 21000.0:

@@ -9,6 +9,7 @@ func run_checks() -> void:
 	await scene_changed
 	player = current_scene.player
 	await ticks(4)
+	freeze_encounters()
 	for room in [&"RootChamber", &"CanopyNest"]:
 		var entrance: Vector2 = Vector2(5660, 270) if room == &"RootChamber" else Vector2(11730, 230)
 		await place(entrance)
@@ -17,6 +18,7 @@ func run_checks() -> void:
 		await ticks(6)
 		check(current_scene != old_scene and forest.current_room == room, "E must transport into %s" % room)
 		player = current_scene.player
+		freeze_encounters()
 		check(player.is_on_floor(), "Room entrance must spawn grounded")
 		check(current_scene.camera.limit_top < -1000, "Room camera must frame the isolated climb")
 		check(forest.checkpoint_x == 11000, "Entering a room must preserve the forest diya")

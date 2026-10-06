@@ -33,6 +33,10 @@ func place(at: Vector2) -> void:
 	player._dash_remaining = 0
 	await ticks(4)
 
+func freeze_encounters() -> void:
+	for enemy in current_scene.course.get_node("Encounters").get_children():
+		enemy.set_physics_process(false)
+
 func bounds(platform: Node2D) -> Rect2:
 	var collider: CollisionShape2D = platform.get_node("CollisionShape2D")
 	return Rect2(collider.global_position - collider.shape.size * 0.5, collider.shape.size)
@@ -87,6 +91,7 @@ func run_checks() -> void:
 	await scene_changed
 	player = current_scene.player
 	await ticks(4)
+	freeze_encounters()
 	check(player.is_on_floor(), "Forest must spawn grounded")
 	check(current_scene.camera.limit_right == 21600, "Expanded forest must span 21600 pixels")
 	# Disable reloads only during isolated connection probes; real death is checked below.

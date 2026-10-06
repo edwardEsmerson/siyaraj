@@ -1,6 +1,10 @@
-[gd_scene load_steps=119 format=3]
+[gd_scene load_steps=122 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/forest.gd" id="1_forest"]
+
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="2_guard"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/brute.tscn" id="3_brute"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/ground_shooter.tscn" id="4_shooter"]
 
 [sub_resource type="RectangleShape2D" id="StartShape"]
 size = Vector2(360, 32)
@@ -352,6 +356,26 @@ size = Vector2(40, 1600)
 
 [node name="ForestCourse" type="Node2D"]
 script = ExtResource("1_forest")
+
+[node name="Encounters" type="Node2D" parent="."]
+
+[node name="ClearingGuard" parent="Encounters" instance=ExtResource("2_guard")]
+position = Vector2(2050, 430)
+patrol_radius = 70.0
+metadata/room = &""
+
+[node name="BanyanShooter" parent="Encounters" instance=ExtResource("4_shooter")]
+position = Vector2(10650, 430)
+metadata/room = &""
+
+[node name="ShrineBrute" parent="Encounters" instance=ExtResource("3_brute")]
+position = Vector2(15700, 430)
+metadata/room = &""
+
+[node name="RootShooter" parent="Encounters" instance=ExtResource("4_shooter")]
+position = Vector2(2200, -1450)
+detection_range = 180.0
+metadata/room = &"RootChamber"
 
 [node name="Background" type="Polygon2D" parent="."]
 z_index = -5
