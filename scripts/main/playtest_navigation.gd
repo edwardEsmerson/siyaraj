@@ -9,12 +9,15 @@ var pending_section: int = -1
 var snapshot: Dictionary = {}
 var boss_introduction_seen: bool = false
 var panel: Control
+var respawn_transition: CanvasLayer
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	layer = 100
 	panel = load("res://scenes/ui/pause_menu.tscn").instantiate()
 	add_child(panel)
+	respawn_transition = preload("res://scripts/ui/respawn_transition.gd").new()
+	add_child(respawn_transition)
 
 func _input(event: InputEvent) -> void:
 	# Title, menus and the ending are Controls; only gameplay scenes (Node2D) pause.
@@ -31,6 +34,7 @@ func _resume() -> void:
 	get_tree().paused = false
 
 func _restart() -> void:
+	respawn_transition.cancel()
 	if not snapshot.is_empty():
 		start_level(snapshot.path, snapshot.section, snapshot.room, true)
 		return
@@ -42,20 +46,27 @@ func _restart() -> void:
 
 ## Reload keeps the level's session checkpoint, so Siya returns to the last lit diya.
 func restart_checkpoint() -> void:
+	respawn_transition.cancel()
 	_resume()
 	get_tree().reload_current_scene()
 
+func respawn(source: Node, death_delay: float = 0.0) -> void:
+	respawn_transition.respawn(source, death_delay)
+
 func show_menu() -> void:
+	respawn_transition.cancel()
 	snapshot.clear()
 	_resume()
 	get_tree().change_scene_to_file(MENU)
 
 func show_title() -> void:
+	respawn_transition.cancel()
 	snapshot.clear()
 	_resume()
 	get_tree().change_scene_to_file(TITLE)
 
 func start_level(path: String, section: int = 0, room: StringName = &"", as_snapshot: bool = false) -> void:
+	respawn_transition.cancel()
 	boss_introduction_seen = false
 	snapshot = {"path": path, "section": section, "room": room} if as_snapshot else {}
 	# Reset before the new course's _ready restores its session checkpoint.

@@ -10,6 +10,7 @@ const ADVANCE_ACTION: StringName = &"ui_accept"
 @onready var backdrop: ColorRect = $Backdrop
 @onready var panel_art: TextureRect = $PanelArt
 @onready var featured_art: TextureRect = $FeaturedArt
+@onready var supporting_art: TextureRect = $SupportingArt
 @onready var bubble: PanelContainer = $DialogueBubble
 @onready var portrait: TextureRect = $DialogueBubble/Contents/Portrait
 @onready var speaker_label: Label = $DialogueBubble/Contents/Words/Speaker
@@ -77,6 +78,10 @@ func _show_current_panel() -> void:
 	panel_art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED if versus else TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	featured_art.texture = _load_texture(panel.get("subject"))
 	featured_art.visible = not _hint_mode and not versus and featured_art.texture != null
+	supporting_art.texture = _load_texture(panel.get("supporting_subject"))
+	supporting_art.visible = not _hint_mode and not versus and supporting_art.texture != null
+	featured_art.position.x = 480.0 if supporting_art.visible else 170.0
+	featured_art.size.x = 350.0 if supporting_art.visible else 620.0
 	speaker_label.text = str(panel.get("speaker", ""))
 	speaker_label.visible = not speaker_label.text.is_empty()
 	dialogue_label.text = str(panel.get("text", ""))
@@ -94,6 +99,8 @@ func _load_texture(value: Variant) -> Texture2D:
 	if value is Texture2D:
 		return value
 	if value is String or value is StringName:
+		if str(value).is_empty():
+			return null
 		return load(str(value)) as Texture2D
 	return null
 

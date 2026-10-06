@@ -363,7 +363,7 @@ original player scene. `forest_weapons_check.gd` validates this integration.
 - `skyshot_projectile.gd` sweeps against walls and enemies, deals two damage to
   the first collision and expires after 1.2 seconds. The export preset explicitly
   includes runtime-loaded weapon scripts.
-- Chakri: hold/release K. Full charge is one second; release starts a 30-second
+- Chakri: hold/release K. Full charge is one second; release starts a 10-second
   cooldown. Interrupted charges cost nothing. Its cooldown is independent of ammo.
 - The 4200 px map has sparkler, skyshot and chakri practice areas, a safe movement
   lane and a separate guard encounter. The old shield/ruler station is replaced

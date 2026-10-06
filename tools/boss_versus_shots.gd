@@ -37,10 +37,8 @@ func capture() -> void:
 		event.pressed = true
 		comic._unhandled_input(event)
 		await ticks(4)
-		if level == "river":
-			assert(not comic.visible and current_scene.can_process())
-		else:
-			assert(comic.bubble.visible and not comic.splash_advance.visible)
-		await save_shot(level + ("-combat" if level == "river" else "-dialogue"))
+		assert(comic.bubble.visible and not comic.splash_advance.visible)
+		await save_shot(level + "-dialogue")
 	print("Boss versus screenshots: PASS")
+	await root.get_node("AudioDirector").shutdown()
 	quit(0)

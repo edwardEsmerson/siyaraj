@@ -80,5 +80,5 @@ func _draw() -> void:
 	if shielded and stagger_time <= 0.0:
 		draw_arc(Vector2(0, -20), 24, 0, TAU, 24, Color(0.5, 0.75, 1), 3)
 	var title := "Armour" if shielded else "Dummy"
-	draw_string(ThemeDB.fallback_font, Vector2(-60, -78), "%s %d/%d" % [title, health, max_health], HORIZONTAL_ALIGNMENT_CENTER, 120, 14)
-	draw_string(ThemeDB.fallback_font, Vector2(-60, -99), last_hit, HORIZONTAL_ALIGNMENT_CENTER, 120, 13)
+	draw_string(preload("res://assets/fonts/YatraOne-Regular.ttf"), Vector2(-60, -78), "%s %d/%d" % [title, health, max_health], HORIZONTAL_ALIGNMENT_CENTER, 120, 14)
+	draw_string(preload("res://assets/fonts/YatraOne-Regular.ttf"), Vector2(-60, -99), last_hit, HORIZONTAL_ALIGNMENT_CENTER, 120, 13)

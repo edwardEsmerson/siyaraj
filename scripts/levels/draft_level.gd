@@ -1,6 +1,8 @@
 extends Node2D
 ## Shared checkpoint and finish behavior for the river and palace grey drafts.
 
+const InteractionPrompt = preload("res://scripts/ui/interaction_prompt.gd")
+
 signal finished
 const COURSE_WIDTH: int = 14400
 static var progress: Dictionary = {}
@@ -17,6 +19,8 @@ func _ready() -> void:
 	if progress.has(level_id):
 		$PlayerSpawn.position = progress[level_id].spawn
 	$Finish.body_entered.connect(_on_finish)
+	for checkpoint in $Checkpoints.get_children():
+		InteractionPrompt.configure(checkpoint.get_node("Prompt"))
 	_update_diyas(null)
 
 func _physics_process(_delta: float) -> void:
@@ -31,12 +35,13 @@ func _update_diyas(player: CharacterBody2D) -> void:
 		if nearby and Input.is_action_just_pressed("interact"):
 			if not saved.lit.has(checkpoint.name):
 				saved.lit.append(checkpoint.name)
+				get_node("/root/AudioDirector").play_cue(&"checkpoint")
 				player.get_node("Visuals").play_story(&"light_diya")
 			if checkpoint.position.x >= saved.spawn.x:
 				saved.spawn = checkpoint.position
 			progress[level_id] = saved
 		checkpoint.get_node("Flame").visible = saved.lit.has(checkpoint.name)
-		checkpoint.get_node("Prompt").text = "Defeat enemies before this diya" if blocked else ("SAVED" if saved.lit.has(checkpoint.name) else ("E: light diya" if nearby else "DIYA"))
+		InteractionPrompt.set_available(checkpoint.get_node("Prompt"), nearby and not saved.lit.has(checkpoint.name))
 
 func set_start(at: Vector2) -> void:
 	progress[level_id] = {"spawn": at, "lit": []}

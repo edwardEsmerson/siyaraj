@@ -37,7 +37,7 @@ func run_checks() -> void:
 	var menu: Control = title.get_node("Menu")
 	var first_level: String = title.FIRST_LEVEL
 	check(root.gui_get_focus_owner() == menu.get_node("NewGame"), "New game must start focused")
-	check(menu.get_node("Playtest").visible == OS.is_debug_build(), "Playtest menu must only show in debug builds")
+	check(not menu.get_node("Playtest").visible, "The game menu must hide developer playtests")
 	await escape()
 	check(not paused and not navigation.panel.visible, "Esc must not pause the title screen")
 
@@ -101,14 +101,24 @@ func run_checks() -> void:
 	menu.get_node("NewGame").pressed.emit()
 	await scene_changed
 	await ticks(4)
-	check(current_scene.scene_file_path == first_level, "New game must start the first level")
+	check(current_scene.scene_file_path == "res://scenes/main/prologue.tscn", "New game must start with Raj's abduction")
+	var opening: CanvasLayer = current_scene.get_node("ComicCutscene")
+	check(opening.visible and opening._panels.size() > 0, "Opening dialogue must be playable")
+	for panel in opening._panels.size():
+		var advance := InputEventAction.new()
+		advance.action = &"ui_accept"
+		advance.pressed = true
+		opening._unhandled_input(advance)
+	await scene_changed
+	await ticks(4)
+	check(current_scene.scene_file_path == first_level, "Closing the opening must start the forest")
 	await escape()
 	var pause: Control = navigation.panel
 	var buttons: Control = pause.get_node("Center/Menu/Column/Buttons")
 	check(paused and pause.visible, "Esc must pause the level")
 	check(root.gui_get_focus_owner() == buttons.get_node("Resume"), "Pause must focus Resume")
 	check(buttons.get_node("Checkpoint").visible, "Levels must offer the last diya")
-	check(buttons.get_node("LevelSelect").visible == OS.is_debug_build(), "Level select must only show in debug builds")
+	check(not buttons.get_node("LevelSelect").visible, "Pause must hide developer level select")
 	buttons.get_node("Settings").pressed.emit()
 	await escape()
 	check(paused and pause.get_node("Center/Menu").visible and not pause.get_node("Center/Settings").visible, "Esc must close a pause sub-panel before resuming")

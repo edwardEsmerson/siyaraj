@@ -130,7 +130,7 @@ func run_checks() -> void:
 	player.take_damage(3, Vector2.ZERO)
 	await ticks(2)
 	check(current_scene == old_scene and current_scene.get_node("HUD/DeathMessage").visible, "Death must briefly display its cue before restarting")
-	await ticks(30)
+	await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
 	check(current_scene != old_scene, "Death cue must not prevent automatic restart")
 	if failures == 0:
 		print("PASS: combined course gaps, trail expiry, locked exit, real combat unlock, final jump, completion, responsive movement, replay and death cue")

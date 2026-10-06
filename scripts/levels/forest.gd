@@ -1,6 +1,8 @@
 extends Node2D
 ## Explicit diya interaction. Saved progress survives death reloads, not a new run.
 
+const InteractionPrompt = preload("res://scripts/ui/interaction_prompt.gd")
+
 signal finished
 
 const COURSE_WIDTH: int = 21600
@@ -23,7 +25,10 @@ func _ready() -> void:
 	elif pending_return:
 		$PlayerSpawn.position = return_point
 		pending_return = false
+	for portal in $Portals.get_children():
+		InteractionPrompt.configure(portal.get_node("Prompt"))
 	for checkpoint in _checkpoints():
+		InteractionPrompt.configure(checkpoint.get_node("Prompt"))
 		checkpoint.get_node("Flame").visible = lit_checkpoints.has(checkpoint.name)
 	for enemy in $Encounters.get_children():
 		if enemy.get_meta("room", &"") != current_room:
@@ -39,8 +44,7 @@ func _physics_process(_delta: float) -> void:
 		var active: bool = portal.get_meta("room", &"") == current_room
 		var blocked := portal_guard_alive(portal)
 		var can_enter: bool = active and not blocked and not completed and player.state == player.State.NORMAL and player.is_on_floor() and portal.overlaps_body(player)
-		var explored: bool = current_room == &"" and completed_rooms.has(portal.get_meta("destination", &""))
-		portal.get_node("Prompt").text = ("E: " if can_enter else "") + str(portal.get_meta("label")) + ("\nDefeat the sentinel" if blocked else ("\nCLEARED" if explored else ""))
+		InteractionPrompt.set_available(portal.get_node("Prompt"), can_enter)
 		if can_enter and Input.is_action_just_pressed("interact"):
 			_use_portal(portal)
 			return
@@ -49,15 +53,16 @@ func _physics_process(_delta: float) -> void:
 		var blocked: bool = guard != null and guard.blocked(checkpoint)
 		var saved := lit_checkpoints.has(checkpoint.name)
 		var can_light: bool = not blocked and checkpoint.get_meta("room", &"") == current_room and not completed and player.state == player.State.NORMAL and player.is_on_floor() and checkpoint.overlaps_body(player)
-		checkpoint.get_node("Prompt").text = "Defeat enemies before this diya" if blocked else ("SAVED" if saved else ("E: light diya" if can_light else "DIYA"))
+		InteractionPrompt.set_available(checkpoint.get_node("Prompt"), can_light and not saved)
 		if can_light and not saved and Input.is_action_just_pressed("interact"):
 			lit_checkpoints.append(checkpoint.name)
+			get_node("/root/AudioDirector").play_cue(&"checkpoint")
 			if current_room == &"":
 				checkpoint_x = maxf(checkpoint_x, checkpoint.position.x)
 			else:
 				room_spawn = checkpoint.global_position
 			checkpoint.get_node("Flame").visible = true
-			checkpoint.get_node("Prompt").text = "SAVED"
+			InteractionPrompt.set_available(checkpoint.get_node("Prompt"), false)
 			player.get_node("Visuals").play_story(&"light_diya")
 			get_parent().combat_status.text = "Diya lit. Death returns here. R resets the whole forest, including side rooms."
 
@@ -83,6 +88,7 @@ func _use_portal(portal: Area2D) -> void:
 	}
 	if current_room == &"":
 		current_room = portal.get_meta("destination")
+		get_node("/root/AudioDirector").play_cue(&"portal")
 		return_point = portal.global_position
 		room_spawn = get_node("RoomStarts/" + str(current_room)).position
 		# Each visit starts at the entrance; a local diya applies only to that visit.
@@ -92,6 +98,7 @@ func _use_portal(portal: Area2D) -> void:
 	else:
 		if portal.get_meta("complete", false) and not completed_rooms.has(current_room):
 			completed_rooms.append(current_room)
+			get_node("/root/AudioDirector").play_cue(&"discovery")
 		current_room = &""
 		pending_return = true
 	get_tree().call_deferred("reload_current_scene")

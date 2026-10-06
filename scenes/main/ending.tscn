@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Theme" path="res://resources/ui/siyaraj_theme.tres" id="1_theme"]
 [ext_resource type="Script" path="res://scripts/main/ending_screen.gd" id="2_ending"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" path="res://assets/ui/diya.png" id="7_diya"]
 
 [ext_resource type="SpriteFrames" path="res://assets/sprites/raj/cast_frames.tres" id="8_raj"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/siya/cast_frames.tres" id="9_siya"]
 
 [sub_resource type="Gradient" id="Gradient_dusk"]
 offsets = PackedFloat32Array(0, 0.5, 0.8, 1)
@@ -67,6 +68,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="Title" type="Label" parent="Center/Content"]
+texture_filter = 2
 layout_mode = 2
 theme_type_variation = &"TitleLabel"
 text = "The lights return"
@@ -90,10 +92,20 @@ sprite_frames = ExtResource("8_raj")
 animation = &"sulk"
 autoplay = "sulk"
 
+[node name="Siya" type="AnimatedSprite2D" parent="Center/Content/RajStage"]
+scale = Vector2(0.5, 0.5)
+centered = false
+offset = Vector2(-64, -112)
+sprite_frames = ExtResource("9_siya")
+animation = &"victory"
+autoplay = "victory"
+
 [node name="Message" type="Label" parent="Center/Content"]
+texture_filter = 2
 layout_mode = 2
-text = "The journey across the forest, river, and palace is complete.
-Raj is free. Happy Diwali!"
+text = "Siya and Raj are home together.
+Her parents' fireworks light the village sky.
+Happy Diwali!"
 horizontal_alignment = 1
 
 [node name="Spacer" type="Control" parent="Center/Content"]
@@ -101,6 +113,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
 [node name="ReturnButton" type="Button" parent="Center/Content"]
+texture_filter = 2
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 size_flags_horizontal = 4

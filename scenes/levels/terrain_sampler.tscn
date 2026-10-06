@@ -308,6 +308,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/DashDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -85.0
 offset_right = 65.0
@@ -334,6 +336,8 @@ polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
 color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Prompt" type="Label" parent="Checkpoints/LandingDiya"]
+texture_filter = 2
+theme_type_variation = &"WorldPrompt"
 offset_left = -65.0
 offset_top = -85.0
 offset_right = 65.0
@@ -363,6 +367,8 @@ polygon = PackedVector2Array(3, -55, 48, -55, 36, -30, 3, -30)
 color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="Section0" type="Label" parent="."]
+texture_filter = 2
+theme_type_variation = &"WorldSign"
 position = Vector2(100, 155)
 theme_override_font_sizes/font_size = 17
 text = "TERRAIN SAMPLER"

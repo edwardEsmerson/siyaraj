@@ -27,6 +27,7 @@ func start(facing: int) -> bool:
 	_hit_targets.clear()
 	phase = Phase.WINDUP
 	_remaining = windup_time
+	get_node("/root/AudioDirector").play_sfx(&"lash" if target_mask == 4 else &"tell", global_position)
 	queue_redraw()
 	return true
 

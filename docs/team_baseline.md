@@ -5,6 +5,18 @@ marks this integration so the team can return to the same tested revision.
 Keep new changes on a feature branch and open a PR back to `main`.
 The earlier `team-baseline-2026-10-06` tag is retained for recovery.
 
+## Follow-up consolidation
+
+Current `main` also includes `feat/game-typography`, the campaign dialogue adapted
+from `siyaraj.refined.txt`, the forest background composition fix, and
+`t3/remove-siya-melee-effect`. The existing baseline tags retain their earlier
+revisions. All fetched feature branch tips are included in this consolidation.
+
+New Game now starts with Raj's abduction before the forest. All three bosses have
+introductions and aftermath dialogue; the finale reveals Robin's allegiance and
+ends with Siya and Raj together. The new typography and shared result buttons
+remain in use alongside these sequences. The regression runner now has 31 suites.
+
 ## Refresh after the first baseline
 
 - Local cast gameplay integration, Raj's ending and the expanded Robin library.
@@ -88,9 +100,11 @@ python tools/run_checks.py
 
 The runner discovers every `tests/*_check.gd`, runs each at 60 fixed FPS, and
 fails on a nonzero exit, a script error, missing success output or a timeout.
-Logs stay in ignored `.godot/checks/`. The refreshed baseline has 30 suites covering
+Logs stay in ignored `.godot/checks/`. The current branch has 32 suites covering
 movement, weapons, enemies, checkpoints, all levels, bosses, campaign navigation,
-menus, companion hints, character assets, world skins and player animation.
+menus, companion hints, character assets, world skins, player animation,
+typography and audio. Physics/UI suites run without playback; the dedicated audio
+suite runs and drains the mixer before quitting.
 
 The baseline also passed the exported-pack check across all 18 distinct menu
 scenes and rendered checks of menus, levels and all three boss arenas.
@@ -102,7 +116,7 @@ Playtest changed sections yourself; automated route checks do not judge how the 
 
 ## Remaining work
 
-`TODO.md` remains the shared task list. Dhoomketu character artwork, audio
-playback, remaining story illustrations, art review and release exports remain
+`TODO.md` remains the shared task list. Dhoomketu character artwork, remaining
+story illustrations, art review and release exports remain
 open. Swaminathan's eleven state sprites are now present and used in gameplay;
 their review and 80-HP fight tuning are still listed separately.

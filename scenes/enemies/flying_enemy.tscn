@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/flying_enemy.gd" id="1_enemy"]
 
 [ext_resource type="Script" path="res://scripts/enemies/enemy_visuals.gd" id="cast_visuals"]
+
+[ext_resource type="Script" path="res://scripts/ui/enemy_health_bar.gd" id="health_bar"]
 
 [sub_resource type="RectangleShape2D" id="EnemyShape"]
 size = Vector2(32, 28)
@@ -42,6 +44,8 @@ shape = SubResource("EnemyShape")
 position = Vector2(0, -20)
 
 [node name="Name" type="Label" parent="."]
+visible = false
+texture_filter = 2
 offset_left = -65.0
 offset_top = -112.0
 offset_right = 65.0
@@ -54,3 +58,9 @@ horizontal_alignment = 1
 position = Vector2(0, -20)
 script = ExtResource("cast_visuals")
 subject = "winged-forest-demon"
+
+[node name="HealthBar" type="Node2D" parent="."]
+position = Vector2(0, -64)
+z_index = 5
+script = ExtResource("health_bar")
+bar_width = 36.0

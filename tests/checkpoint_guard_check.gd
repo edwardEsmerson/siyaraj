@@ -48,7 +48,7 @@ func run_checks() -> void:
 		await place(first.position)
 		await press_interact()
 		check(not first.get_node("Flame").visible, "An uncleared diya must not save a bypass")
-		check(first.get_node("Prompt").text.contains("Defeat"), "Blocked diya must explain the requirement")
+		check(not first.get_node("Prompt").visible, "Blocked diya must hide its interaction keycap")
 		player.set_physics_process(false)
 		player.position = first.position + Vector2(guard.PASS_LEEWAY, -80)
 		await ticks(4)

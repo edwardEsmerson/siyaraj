@@ -77,6 +77,7 @@ func _process_attack() -> void:
 		var toward := player.global_position + Vector2(0, -20) - shot_origin.global_position
 		_aim_direction = toward.normalized() if not toward.is_zero_approx() else Vector2(_direction, 0)
 		state = State.CHARGING
+		get_node("/root/AudioDirector").play_sfx(&"tell", global_position)
 		_remaining = windup_time
 	elif state == State.CHARGING and _remaining <= 0.0:
 		_fire()

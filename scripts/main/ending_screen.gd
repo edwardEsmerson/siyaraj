@@ -19,3 +19,5 @@ func _ready() -> void:
 func _place_raj() -> void:
 	var stage: Control = $Center/Content/RajStage
 	$Center/Content/RajStage/Raj.position = Vector2(stage.size.x * 0.5, stage.size.y)
+	$Center/Content/RajStage/Raj.position.x += 38.0
+	$Center/Content/RajStage/Siya.position = Vector2(stage.size.x * 0.5 - 38.0, stage.size.y)

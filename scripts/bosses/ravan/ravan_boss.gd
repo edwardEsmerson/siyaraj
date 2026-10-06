@@ -245,6 +245,7 @@ func activate_head(index: int) -> bool:
 	head.attack_time = settings.attack
 	head.recover_time = settings.recover
 	head.state = HeadState.TELEGRAPH
+	get_node("/root/AudioDirector").play_sfx(&"tell", head_global(index))
 	head.remaining = head.telegraph_time
 	_last_activated = index
 	return true
@@ -622,7 +623,7 @@ func _player_alive() -> bool:
 
 
 func _draw_overlay() -> void:
-	var font := ThemeDB.fallback_font
+	var font := preload("res://assets/fonts/YatraOne-Regular.ttf")
 	for head in heads:
 		if not head.alive:
 			continue

@@ -22,7 +22,9 @@ func _init() -> void:
 			var name: String = "%s/%s" % [biome, direction]
 			check(_count(dressing, WorldSkin.Z_LANDMARK) >= 6, "%s must place landmarks from setpieces.png" % name)
 			check(_count(dressing, WorldSkin.Z_BACK) > 0, "%s must use back.png" % name)
-			check(_count(dressing, WorldSkin.Z_FAR) > 0 and _count(dressing, WorldSkin.Z_MID) > 0, "%s must keep both parallax layers" % name)
+			check(_count(dressing, WorldSkin.Z_FAR) > 0, "%s must keep the complete far background" % name)
+			check(_count(dressing, WorldSkin.Z_MID) == 0 if biome == "forest" else _count(dressing, WorldSkin.Z_MID) > 0,
+					"%s must respect the authored optional middle layer" % name)
 			if biome == "river":
 				check(_count(dressing, WorldSkin.Z_WATER) == 1, "%s must draw the river water" % name)
 		check(_shapes(level) == shapes, "%s dressing must not change collision geometry" % biome)

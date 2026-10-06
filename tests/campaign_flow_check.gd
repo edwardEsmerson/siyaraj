@@ -8,6 +8,18 @@ func accept() -> InputEventAction:
 	return event
 
 func run_checks() -> void:
+	var story: GDScript = preload("res://scripts/main/story_panels.gd")
+	var sequences: Array = [story.opening()]
+	for region: String in ["forest", "river", "palace"]:
+		sequences.append(story.introduction(region))
+		sequences.append(story.aftermath(region))
+	for sequence: Array in sequences:
+		check(not sequence.is_empty(), "Every story stage must have dialogue")
+		for panel: Dictionary in sequence:
+			check(not panel.text.is_empty(), "Story panels must have dialogue")
+			for key: String in ["texture", "subject", "supporting_subject"]:
+				if not str(panel.get(key, "")).is_empty():
+					check(ResourceLoader.exists(panel[key]), "Story artwork must exist: %s" % panel[key])
 	var navigation: Node = root.get_node("PlaytestNavigation")
 	navigation.enemies_enabled = true
 	for level in ["forest", "river", "palace"]:
@@ -32,7 +44,7 @@ func run_checks() -> void:
 		var boss_art: String = {"forest": "khara", "river": "dhoomketu", "palace": "swaminathan"}[level]
 		check(flow.comic.panel_art.texture.resource_path == "res://assets/cutscenes/boss-versus/%s.png" % boss_art, "Each showdown must show its approved versus card first")
 		check(flow.comic.panel_art.texture_filter == CanvasItem.TEXTURE_FILTER_NEAREST and flow.comic.panel_art.stretch_mode == TextureRect.STRETCH_KEEP_ASPECT_CENTERED, "Versus cards must preserve pixels and the complete image")
-		check(not flow.comic.bubble.visible and not flow.comic.featured_art.visible and not flow.comic.bubble_tail.visible and flow.comic.splash_advance.visible, "Versus faces and names must stay clear of dialogue and extra character overlays")
+		check(not flow.comic.bubble.visible and not flow.comic.featured_art.visible and not flow.comic.supporting_art.visible and not flow.comic.bubble_tail.visible and flow.comic.splash_advance.visible, "Versus faces and names must stay clear of dialogue and extra character overlays")
 		var repeated_enter := InputEventKey.new()
 		repeated_enter.keycode = KEY_ENTER
 		repeated_enter.pressed = true
@@ -44,22 +56,28 @@ func run_checks() -> void:
 		check(flow.comic._index == 0, "Pause must block advancing the versus card")
 		paused = false
 		flow.comic._unhandled_input(accept())
-		if level != "river":
+		check(flow.introduction.size() == story.introduction(level).size() + 1, "Versus card must preserve all current story dialogue")
+		if not flow.introduction.is_empty():
 			check(flow.comic.bubble.visible and flow.comic.bubble_tail.visible and not flow.comic.splash_advance.visible, "After the versus card, the existing dialogue layout must return")
 			check(flow.comic.featured_art.texture != null and flow.comic.panel_art.texture != null, "Boss comic must show existing character and background art")
 			for panel in flow.introduction.size() - 1:
 				flow.comic._unhandled_input(accept())
 		check(not flow.comic.visible and player.can_process() and boss.can_process(), "Closing the introduction must release combat")
+		if level == "palace":
+			var cage: Node2D = showdown.get_node("RajCage")
+			check(not cage.freed and cage.raj.animation == &"sulk", "Raj must be visibly captive during the final fight")
+			check(cage.find_children("*", "CollisionObject2D", true, false).is_empty(), "Cage must not obstruct arena combat")
 		await ticks(4)
 		check(player.is_on_floor() and player.health == player.max_health and player.skyshot_ammo == 5, "Fight must start grounded with the arena's fresh loadout")
 		flow._unhandled_input(accept())
 		check(current_scene == showdown, "Enter must not skip a living boss")
 		player.die()
 		await scene_changed
+		await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
 		check(current_scene.scene_file_path.ends_with("%s_showdown.tscn" % level), "Death must retry the boss, not the long level")
 		flow = current_scene.get_node("CampaignFlow")
 		boss = flow.get_node(flow.boss_path)
-		check(flow.comic == null and current_scene.can_process(), "Death must retry immediately without replaying the comic")
+		check(flow.comic == null and current_scene.can_process(), "Death must retry without replaying the comic")
 		player = current_scene.get_node("Player")
 		await ticks(4)
 		check(not flow.won and boss.health == boss.max_health and player.health == player.max_health, "Retry must reset boss and player")
@@ -71,7 +89,18 @@ func run_checks() -> void:
 			boss.set_head_count(1)
 			boss.take_damage(boss.health, Vector2.ZERO)
 			await ticks(600)
-		check(flow.won and flow.get_node("Victory").visible, "Boss's real death signal must unlock victory")
+		check(flow.won and flow.comic.visible and not player.can_process(), "Boss defeat must show the region transition with combat frozen")
+		check(not flow.get_node("Victory").visible, "Victory controls must wait for the story")
+		flow._unhandled_input(accept())
+		check(current_scene == flow.get_parent(), "Enter must not bypass the aftermath dialogue")
+		flow.get_node("Victory/Actions/Continue").pressed.emit()
+		check(current_scene == flow.get_parent(), "Result button must not bypass the aftermath dialogue")
+		await ticks(120)  # Boss corpses may finish freeing while the reader stays in the comic.
+		if level == "palace":
+			check(current_scene.get_node("RajCage").freed, "Swaminathan's defeat must open Raj's cage")
+		for panel in flow.comic._panels.size():
+			flow.comic._unhandled_input(accept())
+		check(flow.get_node("Victory").visible, "Closing the aftermath must unlock the next stage")
 		flow._unhandled_input(accept())
 		await scene_changed
 		var destination: String = {"forest": "river.tscn", "river": "palace.tscn", "palace": "ending.tscn"}[level]

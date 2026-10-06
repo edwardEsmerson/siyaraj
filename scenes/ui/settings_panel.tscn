@@ -12,6 +12,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="Header" type="Label" parent="Column"]
+texture_filter = 2
 layout_mode = 2
 theme_type_variation = &"HeaderLabel"
 text = "Settings"
@@ -23,6 +24,7 @@ texture = ExtResource("2_divider")
 stretch_mode = 3
 
 [node name="Fullscreen" type="CheckBox" parent="Column"]
+texture_filter = 2
 layout_mode = 2
 text = "Fullscreen"
 
@@ -31,8 +33,10 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="Label" type="Label" parent="Column/VolumeRow"]
+texture_filter = 2
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
-text = "Volume"
+text = "Master"
 
 [node name="Volume" type="HSlider" parent="Column/VolumeRow"]
 layout_mode = 2
@@ -42,6 +46,43 @@ max_value = 1.0
 step = 0.05
 value = 0.8
 
+[node name="MusicRow" type="HBoxContainer" parent="Column"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Column/MusicRow"]
+texture_filter = 2
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Music"
+
+[node name="Volume" type="HSlider" parent="Column/MusicRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 0.8
+
+[node name="SFXRow" type="HBoxContainer" parent="Column"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Column/SFXRow"]
+texture_filter = 2
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Effects"
+
+[node name="Volume" type="HSlider" parent="Column/SFXRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 0.9
+
 [node name="Back" type="Button" parent="Column"]
+texture_filter = 2
 layout_mode = 2
 text = "Back"

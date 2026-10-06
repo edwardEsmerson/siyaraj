@@ -16,7 +16,6 @@ const ACTIONS: Array[Array] = [
 	[&"ui_accept", "Confirm / continue"],
 	[&"ui_cancel", "Pause / back"],
 	[&"restart", "Restart level"],
-	[&"cycle_world_kit", "Cycle scenery (dev)"],
 ]
 
 const JOYPAD_NAMES: Dictionary = {
@@ -48,6 +47,8 @@ func _ready() -> void:
 func _add_label(grid: GridContainer, text: String, heading: bool = false) -> void:
 	var label := Label.new()
 	label.text = text
+	label.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	label.add_theme_font_size_override("font_size", 14)
 	if heading:
 		label.theme_type_variation = &"KeyLabel"
 	grid.add_child(label)

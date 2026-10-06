@@ -41,7 +41,7 @@ func run_checks() -> void:
 		check(forest.checkpoint_x == 11000, "Local diya must not overwrite the forest save")
 		old_scene = current_scene
 		player.die()
-		await ticks(30)
+		await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
 		player = current_scene.player
 		check(current_scene != old_scene and forest.current_room == room, "Death must stay inside the room")
 		check(player.position.distance_to(saved_position) < 1, "Death must return to the local diya")
@@ -61,7 +61,7 @@ func run_checks() -> void:
 		check(current_scene.camera.limit_top == 0 and current_scene.camera.limit_right == 21600, "Return must restore forest camera")
 		# A death after returning uses the forest diya, not the side-room spawn.
 		player.die()
-		await ticks(30)
+		await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
 		player = current_scene.player
 		check(absf(player.position.x - 11000) < 1, "Forest death must still use the original diya")
 	# An unfinished room can be left from its entrance.
