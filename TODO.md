@@ -15,19 +15,22 @@ says *what* is left and *who* does it, and points there for the *how*.
 ## Where things stand
 
 - **Playable route:** title → forest → Khara → river → Dhoomketu → palace → Swaminathan → ending.
-  Each boss is a separate showdown scene. A "TRAIL CLEARED / Enter: face Khara"
-  screen leads into it, not an arena inside the level.
+  Each boss is a separate showdown scene. Forest and palace enter their boss
+  comics automatically; river retains its completion prompt. Death retries skip
+  the already-seen comic.
 - **Done:** title screen, themed pause menu, controls panel, settings (master volume
   and fullscreen), debug-only playtest tools, Robin as a guide in all three levels, blocked-diya
   curtain transition (placeholder art), and `docs/.gdignore`.
 - **Gameplay cast art:** Siya, Robin, all four enemies and Khara with his registered
   gada now use the approved sprites in live gameplay. Raj uses all three rescue
   animations in the ending. The cast preview remains a library, including future
-  Robin combat poses and the explicitly rejected old Swaminathan art. Swaminathan
-  still needs replacement body-state art; Dhoomketu has no supplied sprite set.
+  Robin combat poses and the earlier Swaminathan design. The eleven newer
+  Swaminathan body-state sprites are integrated; Dhoomketu has no supplied sprite set.
   See `docs/cast_gameplay.md` for the integration and remaining asset decisions.
 - **World kits:** levels and both boss arenas are dressed through `WorldSkin` in all
-  six styles (press V in a level to cycle). Merged in #15 and #19. Dhoomketu uses his authored placeholder arena.
+  six styles (press V in a level to cycle). PR #33 adds authored dressing and
+  section palettes: forest/palace default to diyalit, river to titlematch.
+  Dhoomketu uses his authored placeholder arena.
 - **All 30 suites pass**, including cast gameplay checks. B0 air dashes exit at 780 px/s and ease
   back to run speed, restoring the jump + dash reach lost in #17.
 - **No audio plays.** There are no `AudioStreamPlayer` nodes and no buses.

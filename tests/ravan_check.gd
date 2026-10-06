@@ -104,6 +104,11 @@ func check_structure() -> void:
 	var body: Node2D = boss.get_node("Body")
 	check(body.has_node("Art") and body.head_count == 10, "Body must own the art slot and show ten heads")
 	check(body.has_art() and body.art.scale == Vector2(0.5, 0.5), "Swaminathan must render the committed art at gameplay scale")
+	for count in range(11):
+		body.head_count = count
+		check(body.art.texture != null and body.art.texture.get_size() == Vector2(464, 384), "Every remaining-head state must have the aligned body artwork")
+		check(body.art.texture == body._textures[count] and body.art.offset == Vector2(0, -192), "Head loss must swap the correct sprite without moving the feet")
+	body.head_count = 10
 	check(hurtbox().collision_layer == 4 and hurtbox().get_child_count() >= 2, "One enemy-body hurtbox must cover body and head row")
 	var bar: Control = boss.get_node("BossUI/HealthBar")
 	check(bar.boss == boss and bar.visible, "Boss health bar must bind to Ravan")

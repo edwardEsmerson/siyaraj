@@ -33,6 +33,8 @@ func run_checks() -> void:
 		if skin != null:
 			check(skin.available_directions().size() == 6, "%s must ship all six world kits" % path)
 			check(skin.get_node("Dressing").get_child_count() > 0, "%s must dress its world from packed textures" % path)
+			if path in ["res://scenes/main/forest.tscn", "res://scenes/main/river.tscn", "res://scenes/main/palace.tscn"]:
+				check(skin.direction == ("titlematch" if skin.biome == "river" else "diyalit"), "%s must export PR #33's selected level art" % path)
 		var player: Node = current_scene.get_node_or_null("Player")
 		if player != null:
 			check(player.get_node("Visuals/Sprite").sprite_frames.get_animation_names().size() == 15, "%s must ship Siya's animation library" % path)
@@ -49,5 +51,9 @@ func run_checks() -> void:
 				check(not actor.get_node("Body").visible, "%s must use cast art in gameplay" % actor.name)
 			if actor.has_node("Visual/Art"):
 				check(actor.get_node("Visual/Art").sprite_frames.has_animation("slam_impact"), "Pack must include Khara's gameplay animations")
+		var final_boss: Node = current_scene.get_node_or_null("Ravan")
+		if final_boss != null:
+			var body: Node = final_boss.get_node("Body")
+			check(body._textures.size() == 11 and body._textures.all(func(texture: Texture2D) -> bool: return texture != null), "Pack must ship all eleven Swaminathan head-state sprites")
 	print("Pack checks: %s (%d scenes)" % ["PASS" if failures == 0 else "FAIL", paths.size()])
 	quit(0 if failures == 0 else 1)

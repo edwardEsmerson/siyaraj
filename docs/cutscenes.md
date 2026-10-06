@@ -38,6 +38,5 @@ Terrain-only launches still bypass bosses, and the river retains its completion 
 Khara's victory leads to the river; Swaminathan's victory leads to the ending.
 
 Khara uses the approved cast animations and registered gada hand positions.
-The merged Swaminathan head-state code references PNGs that were not committed.
-His body therefore composes the approved body and ten face sprites at the existing
-head positions, hiding heads from right to left as health falls.
+Swaminathan now uses all eleven supplied body-state sprites. His attack origins,
+telegraph glows and hurtbox follow the measured positions in that artwork.

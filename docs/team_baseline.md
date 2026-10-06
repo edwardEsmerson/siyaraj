@@ -1,8 +1,22 @@
 # Shared team baseline
 
-`main` is the starting point for team work. The `team-baseline-2026-10-06` tag
+`main` is the starting point for team work. The `team-baseline-2026-10-06-v2` tag
 marks this integration so the team can return to the same tested revision.
 Keep new changes on a feature branch and open a PR back to `main`.
+The earlier `team-baseline-2026-10-06` tag is retained for recovery.
+
+## Refresh after the first baseline
+
+- Local cast gameplay integration, Raj's ending and the expanded Robin library.
+- PR #31's comic player and PR #34's boss introductions and automatic forest/palace showdowns.
+- PR #32's enemy art, combined with phase-synchronized damage poses, improved flying anchors and complete release animations. Each actor has one presentation controller.
+- PR #33's full level artwork: forest and palace use diyalit; river uses titlematch. All supplied world-art files are unchanged from the PR. The authored decorations, section colour scripts and platform roles are retained alongside the current bridge geometry and Robin hints.
+- The remaining `feat/swaminathan-hp-heads` commits, including all eleven body-state sprites, aligned head origins and hurtbox. The temporary body/face composition is replaced by the finished state art.
+- The original forest, river and palace worktree histories. Their patch IDs match the copies already on main, so their histories are joined without reapplying older geometry.
+
+All fetched remote branch tips and local feature branches are included in this
+refresh. The old worktrees remain as references; begin new tasks from this tag
+or current `main`.
 
 ## What was consolidated
 
@@ -74,11 +88,11 @@ python tools/run_checks.py
 
 The runner discovers every `tests/*_check.gd`, runs each at 60 fixed FPS, and
 fails on a nonzero exit, a script error, missing success output or a timeout.
-Logs stay in ignored `.godot/checks/`. The baseline has 29 suites covering
+Logs stay in ignored `.godot/checks/`. The refreshed baseline has 30 suites covering
 movement, weapons, enemies, checkpoints, all levels, bosses, campaign navigation,
 menus, companion hints, character assets, world skins and player animation.
 
-The baseline also passed the exported-pack check across all 17 distinct menu
+The baseline also passed the exported-pack check across all 18 distinct menu
 scenes and rendered checks of menus, levels and all three boss arenas.
 
 Also export and launch the smoke PCK outside the project using the existing
@@ -88,8 +102,7 @@ Playtest changed sections yourself; automated route checks do not judge how the 
 
 ## Remaining work
 
-`TODO.md` remains the shared task list. Swaminathan's replacement body-state art,
-audio playback, story work and release exports are still open.
-Enemy and Khara animation integration and Raj's ending were completed after
-this tagged baseline; see `docs/cast_gameplay.md`.
-Keep the existing boss placeholder fallback until the replacement art is ready.
+`TODO.md` remains the shared task list. Dhoomketu character artwork, audio
+playback, remaining story illustrations, art review and release exports remain
+open. Swaminathan's eleven state sprites are now present and used in gameplay;
+their review and 80-HP fight tuning are still listed separately.

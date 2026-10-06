@@ -12,6 +12,10 @@ func _init() -> void:
 		var shapes: String = _shapes(level)
 		root.add_child(level)
 		var skin: WorldSkin = level.get_node("WorldSkin")
+		check(skin.direction == ("titlematch" if biome == "river" else "diyalit"), "%s must start in PR #33's selected art direction" % biome)
+		check(level.has_node("SkinDecor" if biome == "forest" else "KitDecor" if biome == "palace" else "Decor/titlematch"), "%s must retain its authored level dressing" % biome)
+		if biome == "forest":
+			check(level.get_node("SkinZones").get_child_count() > 1, "Forest must retain its section colour script")
 		for direction: String in skin.available_directions():
 			skin.direction = direction
 			var dressing: Node = skin.get_node("Dressing")

@@ -10,6 +10,7 @@ from actual movement, attack and story events.
 | Ground shooter | Walk, charge, actual projectile release, recovery and defeat. Interrupted charges cannot show a release. |
 | Winged forest demon | Flight, charge, projectile release pose, recovery and defeat. Its `dive` pose briefly accompanies firing; its existing ranged flight behavior is unchanged. |
 | Khara | All ten states, with the separate gada following the 26 reviewed hand registrations. Ladi handling and defeat hide the weapon. |
+| Swaminathan | Eleven full-body sprites for 10 through 0 heads, with attack origins, glows and the hurtbox aligned to the supplied art. |
 | Robin | Expanded cast frames for flight, hover, hint, pointing, perched chatter and perching in the existing guide behavior. |
 | Raj | Sulk, dramatic reaction and freed in the ending reached after Swaminathan. |
 
@@ -36,10 +37,10 @@ JSON metadata needed by Khara and the preview. Screenshots are under
 
 ## Assets still awaiting content or a design decision
 
-- **Swaminathan:** `TODO.md` A rejects the old preview sprite and C1 requests a
-  replacement body sprite for each remaining-head state. Those replacement
-  assets do not exist yet. Keep the existing gameplay placeholder rather than
-  restoring the rejected body and obsolete regrowing-head artwork.
+- **Swaminathan review:** the previously missing `swaminathan-states` art arrived
+  through the remaining head-state branch commits and is now integrated. The old
+  cast-preview library still contains the earlier rejected design. Review the new
+  state sheet and playtest the 80-HP fight as requested in `TODO.md`.
 - **Dhoomketu:** his code-driven fight is playable, but no Dhoomketu sprite set
   is supplied in the cast library.
 - **Robin combat poses:** peck, dive, sparks, hypnosis, dizzy and wake are
