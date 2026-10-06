@@ -108,8 +108,8 @@ text = "A/D: move   Space: jump   Shift: dash   J: lash   L: skyshot   hold K: c
 offset_left = 32.0
 offset_top = 60.0
 theme_override_font_sizes/font_size = 13
-text = "Only a glowing head can be hurt. Knock out enough heads before they regrow
-to expose the amrit in Ravan's navel, then strike it."
+text = "Strike Ravan anywhere. Every tenth of his health severs his rightmost head,
+and only the heads still standing attack. A glowing head is about to strike."
 
 [node name="HealthStatus" type="Label" parent="HUD"]
 offset_left = 32.0
@@ -127,7 +127,7 @@ text = "Skyshot 5/5    Chakri ready"
 offset_left = 32.0
 offset_top = 136.0
 theme_override_font_sizes/font_size = 13
-text = "Hit the glowing head while it lunges."
+text = "Strike him anywhere. Watch the glowing heads."
 
 [node name="WorldSkin" type="Node2D" parent="."]
 script = ExtResource("world_skin")

@@ -37,10 +37,10 @@ func run_checks() -> void:
 		if level != "palace":
 			boss.take_damage(boss.max_health, Vector2.ZERO)
 		else:
-			boss.phase = 3
-			boss.core_health = 1
-			boss._begin_exposure(5.0)
-			boss.damage_core(1)
+			boss.start_fight()
+			await ticks(2)
+			boss.set_head_count(1)
+			boss.take_damage(boss.health, Vector2.ZERO)
 			await ticks(600)
 		check(flow.won and flow.get_node("Victory").visible, "Boss's real death signal must unlock victory")
 		flow._unhandled_input(accept())

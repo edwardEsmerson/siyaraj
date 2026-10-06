@@ -38,14 +38,11 @@ says *what* is left and *who* does it, and points there for the *how*.
 
 ### Decisions (they block work in B and C)
 
-- [ ] **Swaminathan's head rules.** The new sprite plan (see C1) has heads destroyed
-  right to left. Decide:
-  - Does *any* head hit count toward the rightmost head, or can Siya only damage
-    the rightmost living head?
-  - Do heads still **regrow**? Regrowth would make the sprite step back up a state.
-    Suggestion: no regrowth; a destroyed head stays gone.
-  - Should the **Dashanan Fury** super still bring back all ten heads? Suggestion:
-    Fury uses only the heads still alive, which also makes it easier as he weakens.
+- [x] **Swaminathan's head rules.** Decided: Siya can hit him **anywhere** (one
+  health pool); every tenth of his health lost removes the **rightmost** living
+  head; **no regrowth**; only living heads attack. Dashanan Fury uses only the
+  heads still alive (the suggested default, not explicitly confirmed: one Fury
+  wave per living head). Implemented in C1's code half.
 - [ ] **Music licensing.** The tracks in `assets/Audio/` are from Diamond Rush and
   Prince of Persia: The Forgotten Sands, which are copyrighted. Decide whether to
   ship them, which risks a takedown on itch.io, or swap them for royalty-free/CC0
@@ -166,22 +163,24 @@ Open the file, judge it, then reply "fine" or "redo X".
 ## C. Really good LLM
 
 - [ ] **C1. Rebuild Swaminathan as one body sprite per head state.** The current
-  sprite is horrible. The ten heads are separate entities (`ravan_head.tscn` ×10)
-  with their own art, and that must go.
-  - **Art:** generate one full-body sprite for each head state, 10 heads down to 1
-    (plus 0 / defeated). Heads are removed **right to left**, so state *n* shows the
-    leftmost *n* heads. The same body, crown, moustache and pose must hold
-    across all 10 sprites: generate state 10 first, get it approved, then derive
-    the others from it. Re-do `idle`, `roar`, `exposed`, `fury`, `dying` and
-    `dead` per state only if needed, or keep them to a minimal set (idle and hurt
-    flash per state, plus fury and death).
-  - **Code:** heads become invisible hurtboxes and attack origins positioned over
-    the sprite. Losing a head swaps the body sprite and removes the rightmost living
-    head's hurtbox. Rework the lunge telegraph, which can no longer move a head, so
-    use a glow or flash on the attacking head instead. Rework regrowth, Fury lanes,
-    the outside-in death burst and the head pips to the rules decided in A.
-  - **Keep** `tests/ravan_check.gd` passing (update it to the new rules), and update
-    `docs/bosses/boss2-ravan.md`. Send screenshots of all 10 states for review.
+  sprite is horrible. **Code half done** (branch `feat/swaminathan-hp-heads`): the
+  ten `ravan_head.tscn` entities are gone; one 80-health pool is hit anywhere,
+  each tenth severs the rightmost head (no regrowth), heads are fixed attack
+  origins with a glow telegraph, Fury uses the living heads, and the body loads
+  `assets/sprites/swaminathan-states/state_NN.png` with a code placeholder until
+  the art exists. `tests/ravan_check.gd` and `docs/bosses/boss2-ravan.md` are
+  updated; placeholder shots are in `docs/screenshots/swaminathan_*.png`.
+  What's left:
+  - **Art:** generate one full-body sprite per head state, `state_10.png` down to
+    `state_01.png` plus `state_00.png` (headless), 880 x 480 px, feet at the bottom
+    centre (spec in `docs/bosses/boss2-ravan.md`). Heads are removed **right to
+    left**, so state *n* shows the leftmost *n* heads. The same body, crown,
+    moustache and pose must hold across all states: generate state 10 first, get
+    it approved, then derive the others from it. Do not wire the old
+    `swaminathan` / `swaminathan-head` art.
+  - **Align:** once state 10 is approved, set `HEAD_OFFSETS` in
+    `scripts/bosses/ravan/ravan_body.gd` to its face centres, re-run
+    `tools/ravan_shots.gd` and send the 11-state sheet for review.
 - [ ] **C2. Wire Siya's 15 animations into the player.** Drive a sprite state machine
   from the movement and combat state: idle, run, jump (frame picked by vertical
   velocity), dash (ground and air), lash, air lash (hit on frame 2), skyshot,

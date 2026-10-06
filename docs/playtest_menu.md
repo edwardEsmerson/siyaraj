@@ -32,7 +32,7 @@ controllers and tuning resources:
 | Melee guard | Dev sandbox preset: chase, attack timing and protection |
 | Dev sandbox | `scenes/dev/sandbox.tscn` with the encounter and loadout chosen on its root in the inspector |
 | Khara arena | Boss 1: gada slam shockwave, ladi firecrackers and enrage (`scenes/bosses/khara_arena.tscn`) |
-| Ravan arena | Boss 2: lunging heads, regrowth, amrit window and Dashanan Fury (`scenes/bosses/ravan/ravan_arena.tscn`) |
+| Ravan arena | Boss 2: one health pool, heads severed right to left, glowing head attacks and Dashanan Fury (`scenes/bosses/ravan/ravan_arena.tscn`) |
 | Original combat course | Traversal, combat and exit unlock |
 | Terrain sampler | Stairs, narrow tops, dash gaps and descending landings |
 | River stepping stones | Actual river route starting at the ferry checkpoint |
