@@ -73,16 +73,31 @@ func run_checks() -> void:
 	check(player.state == player.State.DASH and not player.dash_available, "Air dash must still be available after ground dashes")
 
 	await reset_player(Vector2(300, 200))
+	player.velocity.y = player.movement_settings.jump_velocity
+	var rising_y := player.position.y
+	Input.action_press("dash")
+	await ticks(1)
+	check(is_equal_approx(player.velocity.y, player.movement_settings.jump_velocity + player.movement_settings.rise_gravity / 60.0), "Dash must preserve upward momentum with normal rise gravity")
+	Input.action_release("dash")
+	await ticks(8)
+	check(player.position.y < rising_y and player.state == player.State.NORMAL, "Siya must keep rising throughout an early-jump dash")
+	check(is_equal_approx(player.velocity.y, player.movement_settings.jump_velocity + player.movement_settings.rise_gravity * 9.0 / 60.0), "Ending a dash must preserve upward momentum")
+
+	await reset_player(Vector2(300, 200))
 	var start_x := player.position.x
+	var falling_y := player.position.y
+	var falling_speed := player.velocity.y
 	Input.action_press("dash")
 	await ticks(1)
 	check(player.state == player.State.DASH and not player.dash_available, "Air dash must enter DASH and consume its charge")
-	check(is_zero_approx(player.velocity.y), "Dash must suspend vertical motion")
+	check(is_equal_approx(player.velocity.y, falling_speed + player.movement_settings.fall_gravity / 60.0), "Dash must preserve downward momentum with normal fall gravity")
 	Input.action_release("dash")
 	Input.action_press("move_left")
 	await ticks(8)
 	check(absf(player.position.x - start_x - 108.0) < 0.2, "Dash distance must be 108 px, independent of opposite input")
 	check(player.state == player.State.NORMAL, "Dash must return to NORMAL after its duration")
+	check(player.position.y > falling_y, "Siya must keep falling during a dash")
+	check(is_equal_approx(player.velocity.y, falling_speed + player.movement_settings.fall_gravity * 9.0 / 60.0), "Ending a dash must preserve downward momentum")
 	Input.action_release("move_left")
 	Input.action_press("dash")
 	await ticks(1)
@@ -117,6 +132,7 @@ func run_checks() -> void:
 
 	for gap_start in [3335.0, 3735.0]:
 		await reset_player(Vector2(gap_start, 430))
+		var gap_scene := current_scene
 		Input.action_press("move_right")
 		await ticks(7)
 		Input.action_press("jump")
@@ -124,9 +140,14 @@ func run_checks() -> void:
 		Input.action_press("dash")
 		await ticks(9)
 		Input.action_release("dash")
-		await ticks(23)
-		print("Gap start=", gap_start, " landing=", player.position, " grounded=", player.is_on_floor())
-		check(player.is_on_floor() and absf(player.position.y - 430.0) < 1.0, "Jump + dash must clear the %.0f px test gap" % (220.0 if gap_start == 3335.0 else 250.0))
+		for frame in range(23):
+			await ticks(1)
+			if current_scene != gap_scene:
+				break
+		var cleared_gap := is_instance_valid(player) and current_scene == gap_scene
+		if cleared_gap:
+			cleared_gap = player.is_on_floor() and absf(player.position.y - 430.0) < 1.0
+		check(cleared_gap, "Jump + dash must clear the %.0f px test gap" % (220.0 if gap_start == 3335.0 else 250.0))
 
 	await reset_player(Vector2(300, 200))
 	Input.action_press("dash")
