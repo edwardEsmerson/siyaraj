@@ -1,0 +1,19 @@
+{
+  "name": "khara",
+  "brief": "Khara, rakshasa lord of the forest outpost. Massive heavy brawler, barrel chest, thick neck, slightly bowed legs. Dark indigo-blue skin. Two large curved bull horns. Wild black hair, a huge upturned moustache, a scowl and fangs. Bronze armour plates on the shoulders and chest, a tiger-skin waist wrap, marigold dhoti, heavy gold anklets. His forward right fist is raised to chest height, closed around nothing, as if gripping a weapon handle. His left hand hangs open. No weapon. Strict right-facing profile, heavy planted stance.",
+  "key": "green",
+  "role": "boss",
+  "target": 200,
+  "size": "4K",
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "canvas": [
+    320,
+    320
+  ],
+  "anchor": [
+    160,
+    300
+  ]
+}

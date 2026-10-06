@@ -1,0 +1,250 @@
+{
+  "name": "brute",
+  "canvas": [
+    240,
+    208
+  ],
+  "anchor": [
+    104,
+    195
+  ],
+  "scale": 0.5,
+  "art_pixels_per_unit": 2,
+  "anchor_mode": "feet",
+  "collider_units": [
+    48,
+    64
+  ],
+  "animations": {
+    "walk": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Contact: front leg extended forward with heel touching the ground, back leg straight behind on its toes, opposite arm swung forward. A heavy stomp",
+        "Down: front foot flat and knee bent taking the weight, back foot lifting off, body at its lowest. A heavy stomp",
+        "Passing: weight on the straight front leg, back leg passing under the body with knee lifted, arms near the sides. A heavy stomp",
+        "Up: pushing off the toes of the standing leg, body at its highest, free leg swinging forward. A heavy stomp"
+      ],
+      "frame_count": 4,
+      "canvas": [
+        240,
+        208
+      ],
+      "anchor": [
+        104,
+        195
+      ],
+      "source_canvas": [
+        208,
+        208
+      ],
+      "source_anchor": [
+        104,
+        195
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen",
+        "04": "imagegen"
+      },
+      "notes": "`poses/walk.txt`, a heavy stomp.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.1029411764705883,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-17b8e81e-f1bf-4dd7-807e-77919146534a.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 2,
+        "first_cell": 1,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "attack": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        5.6,
+        1.28,
+        3.8,
+        3.8
+      ],
+      "poses": [
+        "Anticipation: weapon or striking arm pulled far back, body twisted away, weight on the back foot",
+        "Strike: weapon or arm swung fully forward at full extension, weight lunging onto the front foot",
+        "Follow-through: weapon past the target and low, body leaning forward, front knee bent",
+        "Recover: panting, club dragging, clear punish window"
+      ],
+      "frame_count": 4,
+      "canvas": [
+        240,
+        208
+      ],
+      "anchor": [
+        104,
+        195
+      ],
+      "source_canvas": [
+        240,
+        208
+      ],
+      "source_anchor": [
+        104,
+        195
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen",
+        "04": "imagegen"
+      },
+      "notes": "`poses/attack.txt` with the club. Hold frame 1 for the long wind-up (code tints it orange). Strike is frame 2. Frame 4 should read as \"panting, club dragging\", which is the punish window.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 2.4926470588235294,
+        "calibration_cell": 5
+      },
+      "sheet": {
+        "source": "exec-acd14fab-fe2c-430e-8abb-25e0b55febdc.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 0,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "idle": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Club on shoulder, chest heaving",
+        "Same, scratching his belly"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        240,
+        208
+      ],
+      "anchor": [
+        104,
+        195
+      ],
+      "source_canvas": [
+        208,
+        208
+      ],
+      "source_anchor": [
+        104,
+        195
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Poses: \"Club on shoulder, chest heaving\" / \"Same, scratching his belly\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 2.4926470588235294,
+        "calibration_cell": 5
+      },
+      "sheet": {
+        "source": "exec-acd14fab-fe2c-430e-8abb-25e0b55febdc.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 4,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "death": {
+      "fps": 8,
+      "loop": "hold",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Hit hard: knocked backward, arms flung up, shocked expression. A big comic flop",
+        "Collapse: knees buckling, body folding forward, arms limp. A big comic flop",
+        "Down: lying flat on the ground on the side, eyes closed, completely still. A big comic flop"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        240,
+        208
+      ],
+      "anchor": [
+        104,
+        195
+      ],
+      "source_canvas": [
+        225,
+        208
+      ],
+      "source_anchor": [
+        104,
+        195
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "`poses/death.txt`. Make it a big comic flop.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 2.4926470588235294,
+        "calibration_cell": 5
+      },
+      "sheet": {
+        "source": "exec-acd14fab-fe2c-430e-8abb-25e0b55febdc.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 6,
+        "extraction": "connected subjects on common source canvas"
+      }
+    }
+  },
+  "attachment": {},
+  "view": "right-profile",
+  "subject": "full-body",
+  "art_px": 136,
+  "brief": "Rakshas brute, same family as attachment 1 but huge. Broad hunched shoulders, thick arms, round belly, short legs. Deep maroon skin, two short curved ivory horns, a thick bushy black moustache, angry underbite with two tusks. Wide gold belt with a big round buckle, chunky gold bracers on both forearms, marigold and hot-pink dhoti. Holds a heavy wooden club studded with brass, resting on his forward shoulder. Strict right-facing profile, wide stance.",
+  "generation": {
+    "model": "pro",
+    "size": "1K",
+    "batch": false,
+    "candidates": 4,
+    "jobs": 3,
+    "fallback": "flash"
+  },
+  "source": "asset-builder/sprites/brute",
+  "approval": "approved"
+}

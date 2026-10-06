@@ -1,0 +1,50 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Standing, one hand gesturing while talking, mouth open",
+    "Same, mouth closed"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    160,
+    128
+  ],
+  "anchor": [
+    64,
+    112
+  ],
+  "source_canvas": [
+    128,
+    128
+  ],
+  "source_anchor": [
+    64,
+    112
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "notes": "For cutscenes. Poses: \"Standing, one hand gesturing while talking, mouth open\" / \"Same, mouth closed\".",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 4.0,
+    "calibration_cell": 5
+  },
+  "sheet": {
+    "source": "exec-f59bec21-ad2c-4ea1-b279-cc95b6f5a2d4.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 3,
+    "rows": 3,
+    "first_cell": 5,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

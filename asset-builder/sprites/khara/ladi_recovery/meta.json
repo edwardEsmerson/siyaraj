@@ -1,0 +1,53 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "poses": [
+    "Standing, both fingers jammed in his ears, eyes squeezed shut. Empty fists, no weapon; Khara's gada is a separate component",
+    "Same, peeking with one eye. Empty fists, no weapon; Khara's gada is a separate component"
+  ],
+  "durations": [
+    2.4,
+    2.4
+  ],
+  "free_palette": false,
+  "name": "khara",
+  "animation": "ladi_recovery",
+  "size": "sheet",
+  "expected_frames": 2,
+  "frames": [
+    "01",
+    "02"
+  ],
+  "canvas": [
+    320,
+    320
+  ],
+  "anchor": [
+    160,
+    300
+  ],
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 1.604878048780488,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-6a176b53-93e9-43ab-a454-c82dd6acbab7.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 3,
+    "first_cell": 9,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

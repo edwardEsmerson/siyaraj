@@ -1,0 +1,53 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Crouched, spinning a chakri on one raised fingertip above her head, other hand on her hip",
+    "Same crouch, chakri lower and tilted, sparks flying"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    160,
+    128
+  ],
+  "anchor": [
+    64,
+    112
+  ],
+  "source_canvas": [
+    128,
+    128
+  ],
+  "source_anchor": [
+    64,
+    112
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "notes": "The K key, held for up to 1 s. Use `--free-palette`. Poses: \"Crouched, spinning a chakri on one raised fingertip above her head, other hand on her hip\" / \"Same crouch, chakri lower and tilted, sparks flying\".",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 3.0875,
+    "calibration_cell": 6
+  },
+  "sheet": {
+    "source": "exec-6c83ac08-2f1d-44ed-b38e-6992f7fcf8f4.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 4,
+    "first_cell": 6,
+    "extraction": "connected subjects on common source canvas",
+    "effect_owners": {
+      "11": 10
+    }
+  }
+}

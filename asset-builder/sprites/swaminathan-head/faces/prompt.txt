@@ -1,0 +1,16 @@
+Use case: identity-preserve. Asset type: pixel-art game animation sheet for Siyaraj, swaminathan-head expressions. The attached image is the exact APPROVED BASE IDENTITY, not just a style example. Create exactly 11 different keyframe sprites, 4 columns by 3 rows on a true transparent 1536x1536 PNG. Read cells left to right then top to bottom. Leave the last 1 unused cells entirely blank. No text, labels, lines or borders.
+Identity: One crowned rakshasa king's head on its own. A tall pointed gold crown with a single jewel, pointed ears with gold earrings, purple-black skin. A HUGE black handlebar moustache with curled tips, twice the width of the face. Heavy eyebrows, smug expression. Three-quarter view facing slightly down. A short neck stub at the bottom.
+Composition: front-three-quarter; ONE isolated crowned head with neck stub only, no torso or arms per occupied cell. Preserve exact original face, hair, crown, clothing, ornament, palette, outline weight and body proportions. Aubergine outlines, 2 or 3 flat tones per material, crisp native square pixels. Every occupied cell has ample transparent margin. SAME CAMERA SCALE in every frame: neutral upright subject height is 228 source pixels, each native art pixel is a 3x3 square. Keep identical physical body size: crouches, fallen poses and extended wings MUST NOT zoom to fill their cell. Feet on the same baseline within their cell; flying subjects and heads centered within the cell. Body rotations vary only when requested by the pose.
+FRAME POSES:
+Cell 1 (faces): Mada: smug
+Cell 2 (faces): Krodha: furious
+Cell 3 (faces): Lobha: grasping, licking his lips
+Cell 4 (faces): Moha: hazy, half-lidded
+Cell 5 (faces): Matsarya: glancing sideways, jealous
+Cell 6 (faces): Ahamkara: haughty, nose up
+Cell 7 (faces): Manas: restless, darting eyes
+Cell 8 (faces): Kama: winking, alluring
+Cell 9 (faces): Buddhi: calm
+Cell 10 (faces): Chitta: stern
+Cell 11 (burnt): Same head, moustache singed to smoking stubs, furious
+Only add sparks/flame/coloured eyes/ash where those frame poses explicitly ask; other frames keep the approved colours. Comic defeats, no blood or gore. Entire limbs, props and wings inside their cell. No scenery, floor, shadows, backdrop, checkerboard, blurry anti-aliasing, smooth gradients, baked glow, motion streaks or duplicate characters per cell. Use real alpha transparency. Each listed pose must be illustrated exactly, in order. Do not repeat a neutral pose instead of the action.

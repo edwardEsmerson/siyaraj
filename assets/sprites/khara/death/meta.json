@@ -1,0 +1,56 @@
+{
+  "fps": 8,
+  "loop": "hold",
+  "durations": [
+    2.8,
+    2.8,
+    2.8,
+    2.8
+  ],
+  "poses": [
+    "Staggering backward, eyes wide. Empty fists, no weapon; Khara's gada is a separate component",
+    "Toppling back, arms flailing. Empty fists, no weapon; Khara's gada is a separate component",
+    "Falling flat on his back. Empty fists, no weapon; Khara's gada is a separate component",
+    "Lying flat, eyes as X marks, moustache drooping. Empty fists, no weapon; Khara's gada is a separate component"
+  ],
+  "frame_count": 4,
+  "canvas": [
+    333,
+    320
+  ],
+  "anchor": [
+    173,
+    300
+  ],
+  "source_canvas": [
+    320,
+    320
+  ],
+  "source_anchor": [
+    160,
+    300
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen",
+    "04": "imagegen"
+  },
+  "notes": "1.4 s. Poses: \"Staggering backward, eyes wide\" / \"Toppling back, arms flailing\" / \"Falling flat on his back\" / \"Lying flat, eyes as X marks, moustache drooping\".",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 1.5951219512195123,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-4cfee8e8-12dd-4972-9533-5efe70fb4749.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 3,
+    "first_cell": 7,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

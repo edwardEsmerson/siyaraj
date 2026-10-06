@@ -1,0 +1,50 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Heavy stance, fist forward at chest height, chest heaving. Empty fists, no weapon; Khara's gada is a separate component",
+    "Same, shoulders lifted on an inhale. Empty fists, no weapon; Khara's gada is a separate component"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    333,
+    320
+  ],
+  "anchor": [
+    173,
+    300
+  ],
+  "source_canvas": [
+    320,
+    320
+  ],
+  "source_anchor": [
+    160,
+    300
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "notes": "Poses: \"Heavy stance, fist forward at chest height, chest heaving\" / \"Same, shoulders lifted on an inhale\".",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 1.8097560975609757,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-5d3269e3-dd89-4c1c-bf74-4cf802323cde.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 3,
+    "rows": 3,
+    "first_cell": 1,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

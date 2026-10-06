@@ -1,0 +1,54 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "durations": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Arms pulled in, clenched. Headless; ten arms; keep the navel clear",
+    "All arms flung out. Headless; ten arms; keep the navel clear",
+    "Arms raised high. Headless; ten arms; keep the navel clear"
+  ],
+  "frame_count": 3,
+  "canvas": [
+    420,
+    368
+  ],
+  "anchor": [
+    235,
+    345
+  ],
+  "source_canvas": [
+    368,
+    368
+  ],
+  "source_anchor": [
+    184,
+    345
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen"
+  },
+  "notes": "Phase transition. Poses: \"Arms pulled in, clenched\" / \"All arms flung out\" / \"Arms raised high\".",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 1.2285714285714286,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-08fb00a2-9a7b-4634-9f90-00dc2c67dd9a.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 3,
+    "first_cell": 4,
+    "extraction": "connected subjects on common source canvas",
+    "effect_owners": {}
+  }
+}

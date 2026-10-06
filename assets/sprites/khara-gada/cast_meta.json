@@ -1,0 +1,41 @@
+{
+  "name": "khara-gada",
+  "canvas": [
+    192,
+    192
+  ],
+  "anchor": [
+    96,
+    96
+  ],
+  "scale": 0.5,
+  "art_pixels_per_unit": 2,
+  "anchor_mode": "center",
+  "collider_units": [
+    0,
+    0
+  ],
+  "animations": {},
+  "attachment": {
+    "pivot": "handle_bottom",
+    "approval": "approved",
+    "anchor": [
+      96,
+      130
+    ]
+  },
+  "view": "front",
+  "subject": "prop",
+  "art_px": 120,
+  "brief": "Bronze gada mace on its own: a large ribbed round head with a pointed top finial and a long bronze handle with a grip wrap. Vertical, head up. No hand.",
+  "generation": {
+    "model": "pro",
+    "size": "1K",
+    "batch": false,
+    "candidates": 4,
+    "jobs": 3,
+    "fallback": "flash"
+  },
+  "source": "asset-builder/sprites/khara-gada",
+  "approval": "approved"
+}

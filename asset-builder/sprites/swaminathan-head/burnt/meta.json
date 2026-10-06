@@ -1,0 +1,50 @@
+{
+  "fps": 8,
+  "loop": "none",
+  "poses": [
+    "Same head, moustache singed to smoking stubs, furious"
+  ],
+  "durations": [
+    1.0
+  ],
+  "free_palette": true,
+  "name": "swaminathan-head",
+  "animation": "burnt",
+  "size": "sheet",
+  "expected_frames": 1,
+  "frames": [
+    "01"
+  ],
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    64
+  ],
+  "anchor_mode": "center",
+  "view": "front-three-quarter",
+  "subject": "head",
+  "problems": {},
+  "models": {
+    "01": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 5.9753086419753085,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-4019cb8f-0603-419b-a3a4-92d9465fe4a2.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 2,
+    "rows": 2,
+    "first_cell": 1,
+    "extraction": "connected subjects on common source canvas",
+    "effect_owners": {}
+  }
+}

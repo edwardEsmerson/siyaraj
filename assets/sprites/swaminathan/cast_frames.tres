@@ -1,0 +1,31 @@
+[gd_resource type="SpriteFrames" load_steps=19 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/sprite.png" id="base"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/idle/01.png" id="idle_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/idle/02.png" id="idle_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/exposed/01.png" id="exposed_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/exposed/02.png" id="exposed_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/dying/01.png" id="dying_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/dying/02.png" id="dying_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/dying/03.png" id="dying_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/dying/04.png" id="dying_04"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/dead/01.png" id="dead_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/intro/01.png" id="intro_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/intro/02.png" id="intro_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/intro/03.png" id="intro_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/roar/01.png" id="roar_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/roar/02.png" id="roar_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/roar/03.png" id="roar_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/fury/01.png" id="fury_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan/fury/02.png" id="fury_02"]
+
+[resource]
+animations = [
+{"frames": [{"duration": 1.000000, "texture": ExtResource("idle_01")}, {"duration": 1.000000, "texture": ExtResource("idle_02")}], "loop": true, "name": &"idle", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("exposed_01")}, {"duration": 1.000000, "texture": ExtResource("exposed_02")}], "loop": true, "name": &"exposed", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("dying_01")}, {"duration": 1.000000, "texture": ExtResource("dying_02")}, {"duration": 1.000000, "texture": ExtResource("dying_03")}, {"duration": 1.000000, "texture": ExtResource("dying_04")}], "loop": false, "name": &"dying", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("dead_01")}], "loop": false, "name": &"dead", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("intro_01")}, {"duration": 1.000000, "texture": ExtResource("intro_02")}, {"duration": 1.000000, "texture": ExtResource("intro_03")}], "loop": false, "name": &"intro", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("roar_01")}, {"duration": 1.000000, "texture": ExtResource("roar_02")}, {"duration": 1.000000, "texture": ExtResource("roar_03")}], "loop": false, "name": &"roar", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("fury_01")}, {"duration": 1.000000, "texture": ExtResource("fury_02")}], "loop": true, "name": &"fury", "speed": 8.0}
+]

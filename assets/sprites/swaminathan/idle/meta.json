@@ -1,0 +1,34 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Hands on hips, arms fanned behind, chest raised. Headless; ten arms; keep the navel clear",
+    "Same, chest dropped slightly. Headless; ten arms; keep the navel clear"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    420,
+    368
+  ],
+  "anchor": [
+    235,
+    345
+  ],
+  "source_canvas": [
+    368,
+    368
+  ],
+  "source_anchor": [
+    184,
+    345
+  ],
+  "models": {
+    "01": "pro",
+    "02": "pro"
+  },
+  "notes": "Poses: \"Hands on hips, arms fanned behind, chest raised\" / \"Same, chest dropped slightly\"."
+}

@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" load_steps=31 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/sprite.png" id="base"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/idle/01.png" id="idle_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/idle/02.png" id="idle_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/telegraph/01.png" id="telegraph_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/telegraph/02.png" id="telegraph_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/telegraph/03.png" id="telegraph_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/attack/01.png" id="attack_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/attack/02.png" id="attack_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/exhausted/01.png" id="exhausted_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/exhausted/02.png" id="exhausted_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/knocked_out/01.png" id="knocked_out_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/regrow/01.png" id="regrow_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/regrow/02.png" id="regrow_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/regrow/03.png" id="regrow_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/fury/01.png" id="fury_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/fury/02.png" id="fury_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/destroyed/01.png" id="destroyed_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/destroyed/02.png" id="destroyed_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/destroyed/03.png" id="destroyed_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/faces/01.png" id="faces_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/faces/02.png" id="faces_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/faces/03.png" id="faces_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/faces/04.png" id="faces_04"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/faces/05.png" id="faces_05"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/faces/06.png" id="faces_06"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/faces/07.png" id="faces_07"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/faces/08.png" id="faces_08"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/faces/09.png" id="faces_09"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/faces/10.png" id="faces_10"]
+[ext_resource type="Texture2D" path="res://assets/sprites/swaminathan-head/burnt/01.png" id="burnt_01"]
+
+[resource]
+animations = [
+{"frames": [{"duration": 1.000000, "texture": ExtResource("idle_01")}, {"duration": 1.000000, "texture": ExtResource("idle_02")}], "loop": true, "name": &"idle", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("telegraph_01")}, {"duration": 1.000000, "texture": ExtResource("telegraph_02")}, {"duration": 1.000000, "texture": ExtResource("telegraph_03")}], "loop": true, "name": &"telegraph", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("attack_01")}, {"duration": 1.000000, "texture": ExtResource("attack_02")}], "loop": false, "name": &"attack", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("exhausted_01")}, {"duration": 1.000000, "texture": ExtResource("exhausted_02")}], "loop": true, "name": &"exhausted", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("knocked_out_01")}], "loop": false, "name": &"knocked_out", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("regrow_01")}, {"duration": 1.000000, "texture": ExtResource("regrow_02")}, {"duration": 1.000000, "texture": ExtResource("regrow_03")}], "loop": false, "name": &"regrow", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("fury_01")}, {"duration": 1.000000, "texture": ExtResource("fury_02")}], "loop": true, "name": &"fury", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("destroyed_01")}, {"duration": 1.000000, "texture": ExtResource("destroyed_02")}, {"duration": 1.000000, "texture": ExtResource("destroyed_03")}], "loop": false, "name": &"destroyed", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("faces_01")}, {"duration": 1.000000, "texture": ExtResource("faces_02")}, {"duration": 1.000000, "texture": ExtResource("faces_03")}, {"duration": 1.000000, "texture": ExtResource("faces_04")}, {"duration": 1.000000, "texture": ExtResource("faces_05")}, {"duration": 1.000000, "texture": ExtResource("faces_06")}, {"duration": 1.000000, "texture": ExtResource("faces_07")}, {"duration": 1.000000, "texture": ExtResource("faces_08")}, {"duration": 1.000000, "texture": ExtResource("faces_09")}, {"duration": 1.000000, "texture": ExtResource("faces_10")}], "loop": false, "name": &"faces", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("burnt_01")}], "loop": false, "name": &"burnt", "speed": 8.0}
+]

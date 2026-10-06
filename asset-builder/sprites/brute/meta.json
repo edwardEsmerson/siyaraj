@@ -1,0 +1,27 @@
+{
+  "name": "brute",
+  "brief": "Rakshas brute, same family as attachment 1 but huge. Broad hunched shoulders, thick arms, round belly, short legs. Deep maroon skin, two short curved ivory horns, a thick bushy black moustache, angry underbite with two tusks. Wide gold belt with a big round buckle, chunky gold bracers on both forearms, marigold and hot-pink dhoti. Holds a heavy wooden club studded with brass, resting on his forward shoulder. Strict right-facing profile, wide stance.",
+  "key": "green",
+  "role": "brute",
+  "target": 136,
+  "size": "1K",
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "candidate_id": "04",
+  "model": "pro",
+  "canvas": [
+    208,
+    208
+  ],
+  "anchor": [
+    104,
+    195
+  ],
+  "art_dimensions": [
+    99,
+    136
+  ],
+  "generation_pixel_size": 6.397058823529412,
+  "problems": []
+}

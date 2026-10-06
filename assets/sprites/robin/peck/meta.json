@@ -1,0 +1,53 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "durations": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Wings pulled back, beak aimed forward, body coiled",
+    "Darting forward, beak jabbing, wings swept back",
+    "Bouncing back, wings flared"
+  ],
+  "frame_count": 3,
+  "canvas": [
+    80,
+    80
+  ],
+  "anchor": [
+    40,
+    40
+  ],
+  "source_canvas": [
+    80,
+    80
+  ],
+  "source_anchor": [
+    40,
+    40
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen"
+  },
+  "notes": "The Robin strike. Poses: \"Wings pulled back, beak aimed forward, body coiled\" / \"Darting forward, beak jabbing, wings swept back\" / \"Bouncing back, wings flared\".",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 4.854166666666667,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 5,
+    "rows": 4,
+    "first_cell": 2,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

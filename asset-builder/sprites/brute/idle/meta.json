@@ -1,0 +1,53 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "poses": [
+    "Club on shoulder, chest heaving",
+    "Same, scratching his belly"
+  ],
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "free_palette": false,
+  "name": "brute",
+  "animation": "idle",
+  "size": "sheet",
+  "expected_frames": 2,
+  "frames": [
+    "01",
+    "02"
+  ],
+  "canvas": [
+    208,
+    208
+  ],
+  "anchor": [
+    104,
+    195
+  ],
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 2.4926470588235294,
+    "calibration_cell": 5
+  },
+  "sheet": {
+    "source": "exec-acd14fab-fe2c-430e-8abb-25e0b55febdc.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 3,
+    "rows": 3,
+    "first_cell": 4,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

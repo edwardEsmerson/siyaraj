@@ -1,0 +1,56 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Contact: front leg extended forward with heel touching the ground, back leg straight behind on its toes, opposite arm swung forward. Blowpipe held across the body",
+    "Down: front foot flat and knee bent taking the weight, back foot lifting off, body at its lowest. Blowpipe held across the body",
+    "Passing: weight on the straight front leg, back leg passing under the body with knee lifted, arms near the sides. Blowpipe held across the body",
+    "Up: pushing off the toes of the standing leg, body at its highest, free leg swinging forward. Blowpipe held across the body"
+  ],
+  "frame_count": 4,
+  "canvas": [
+    144,
+    144
+  ],
+  "anchor": [
+    72,
+    135
+  ],
+  "source_canvas": [
+    144,
+    144
+  ],
+  "source_anchor": [
+    72,
+    135
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen",
+    "04": "imagegen"
+  },
+  "notes": "`poses/walk.txt`, blowpipe held across the body.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 4.863636363636363,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-83a2d495-6ed5-4948-a64c-1f9f17d785e5.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 3,
+    "rows": 2,
+    "first_cell": 1,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

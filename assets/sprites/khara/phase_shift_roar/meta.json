@@ -1,0 +1,53 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "durations": [
+    3.2,
+    3.2,
+    3.2
+  ],
+  "poses": [
+    "Hunched, fists clenched, shaking with rage. Empty fists, no weapon; Khara's gada is a separate component",
+    "Arms flung wide, roaring at the sky, steam from his nostrils. Empty fists, no weapon; Khara's gada is a separate component",
+    "Settled into a lower, angrier stance. Empty fists, no weapon; Khara's gada is a separate component"
+  ],
+  "frame_count": 3,
+  "canvas": [
+    333,
+    320
+  ],
+  "anchor": [
+    173,
+    300
+  ],
+  "source_canvas": [
+    320,
+    320
+  ],
+  "source_anchor": [
+    160,
+    300
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen"
+  },
+  "notes": "1.2 s. Poses: \"Hunched, fists clenched, shaking with rage\" / \"Arms flung wide, roaring at the sky, steam from his nostrils\" / \"Settled into a lower, angrier stance\". Pair with the `fx-flame-crown` overlay.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 1.5951219512195123,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-4cfee8e8-12dd-4972-9533-5efe70fb4749.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 3,
+    "first_cell": 4,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

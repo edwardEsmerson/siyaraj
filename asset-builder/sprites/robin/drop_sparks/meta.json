@@ -1,0 +1,53 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "poses": [
+    "Hovering, tail flicking down, a spray of sparks falling below",
+    "Wings up, sparks trailing"
+  ],
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "free_palette": true,
+  "name": "robin",
+  "animation": "drop_sparks",
+  "size": "sheet",
+  "expected_frames": 2,
+  "frames": [
+    "01",
+    "02"
+  ],
+  "canvas": [
+    80,
+    80
+  ],
+  "anchor": [
+    40,
+    40
+  ],
+  "anchor_mode": "center",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 4.854166666666667,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 5,
+    "rows": 4,
+    "first_cell": 8,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

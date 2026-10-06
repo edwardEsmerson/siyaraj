@@ -6,8 +6,9 @@ description: Generate Siyaraj game art with Nano Banana on Vertex AI - new chara
 # Siyaraj assets
 
 Work in `asset-builder/`. Run everything with `~/ml/bin/python -m ab ...` (`-h` on any command).
-Every command is idempotent: raw generations are cached in `out/`, so re-running only re-cleans
-(free). `--only 2,4` regenerates just those ids. Generation costs ~Rs12/image (2K pro), ~Rs22 (4K).
+Raw generations are cached in `out/`, so re-running re-cleans completed requests for free and
+generates only missing raws. `--only 2,4` regenerates just those ids. Generation costs ~Rs12/image
+(1K/2K Pro live), ~Rs6 (1K Pro batch), ~Rs22 (4K Pro live).
 
 ## Layout
 - `sprites/<name>/` approved art: `sprite.png` (native), `meta.json` (brief, px, canvas, anchor, key),
@@ -27,7 +28,7 @@ so every sprite/texture goes in Godot at **scale 0.5** (pixel-perfect on 1080p+ 
 | hero | 80 | 40 | Siya (collider 24x40), Raj, Swaminathan |
 | enemy | 88 | 44 | basic rakshas / ground shooter (32x40) |
 | brute | 136 | 68 | brute (48x64) |
-| flyer | 80 | 40 | winged demon (32x28 + wings), Robin smaller (`--height 40`) |
+| flyer | 80 | 40 | winged demon (32x28 + wings), approved Robin smaller (`--height 48`) |
 | boss | 200 | 100 | Khara (56x92) |
 | big-boss | 280 | 140 | Ravan (100x60 body + heads) |
 | prop | 40 | 20 | weapons, thrown fireworks |
@@ -53,7 +54,13 @@ python -m ab pick ravan 03            # after the user chooses from out/ravan/sh
 - `--style` = approved sprites to match pixel style (default `siya`; they never define identity).
   `-r` = design references for the new subject (photos/paintings are fine).
 - Always pass the right `--role` (see the table); `--height N` overrides. Above 150px it generates at 4K
-  automatically. Flyers/props/projectiles: `--anchor center`.
+  automatically in live mode. Flyers/props/projectiles: `--anchor center`.
+- `--view right-profile|front-three-quarter|front` and
+  `--subject full-body|head|headless-body|prop` set composition. Defaults retain the existing
+  full-body right profile. Animation prompts preserve the approved base's choices.
+- `--batch` resolves to 1K before preparing prompts/references; explicit 2K/4K batches are
+  rejected. Queue with `--batch`, then `ab batch submit`, `status`, and `fetch`. Do not change
+  a prepared queue's resolution. Live boss bodies remain 4K.
 - `--key magenta` (or blue) if the subject is green; the key must not appear on the subject.
 - Brief: role, silhouette, build, face/hair, outfit colours, prop + which hand, relative size. Keep it
   concrete and short; style/background/framing text is added automatically.
@@ -70,6 +77,34 @@ python -m ab keep siya run                         # -> sprites/siya/run/ (frame
 - Review `out/<name>/<anim>/sheet.png` + `preview.gif`; regenerate bad poses with `--only`.
 - These are keyframes: 2-5 strong poses per action. Write poses as concrete body positions (limbs,
   weight, facing), not feelings. Add a reusable list to `poses/` when a new action repeats across sprites.
+- `--fps`, `--loop loop|once|hold|none`, and `--durations` (one positive duration in 1/FPS units
+  per frame) preserve timing in metadata and GIFs. Expanded poses share padding around the anchor;
+  no individual frame is resized. `keep` refuses incomplete frame sequences.
+
+## Cast production and packaging
+
+`cast_manifest.json` is the tracked character plan: seven new bases, 73 sets / 195 frames,
+including Robin's existing fly/perch. Swaminathan's headless body is 260px and his separate
+head is 76px; Khara is 200px and his separate gada is 120px. See
+`../docs/art/character_library.md` for generation, attachment registration and F6 preview.
+
+`ab cast prepare --base` or `--wave movement|combat|story` prints the existing sprite/frames
+commands; `--execute` runs them. Review candidates with `ab cast review`, then let the user
+choose before `pick`. Review wave sheets/GIFs before `keep`. `ab cast export` packages only
+approved sources. `--complete` validates the entire requested library, including hand/pivot
+registration. Finish a successful fetched 1K pilot before expanding the animation queue.
+
+Scratch outputs and batch records remain worktree-local. Cloud jobs have unique prefixes.
+Re-running `batch submit` resumes unsent model lanes, and `batch fetch` retries downloads
+without discarding completed raws or treating missing rows as rejected images.
+
+`ab cast import-sheet` imports a generated transparent sheet using one fixed source
+camera grid. A neutral `--calibration-cell` establishes scale once for the whole sheet;
+`--start-cell` skips it in the animation output. Connected extraction preserves limbs
+across mathematical cell borders. Reviewed `--effect-owner SOURCE:DESTINATION` values
+attach detached effects to their intended actor. Review sheets/GIFs before `keep`.
+Record every Khara hand using `ab cast attach`; `--hide` marks actions with busy hands.
+Actual source models/grid metadata remain separate from preferred generation settings.
 
 ## 3. Map textures and parallax layers
 ```bash

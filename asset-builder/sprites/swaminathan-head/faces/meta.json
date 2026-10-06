@@ -1,0 +1,85 @@
+{
+  "fps": 8,
+  "loop": "none",
+  "poses": [
+    "Mada: smug",
+    "Krodha: furious",
+    "Lobha: grasping, licking his lips",
+    "Moha: hazy, half-lidded",
+    "Matsarya: glancing sideways, jealous",
+    "Ahamkara: haughty, nose up",
+    "Manas: restless, darting eyes",
+    "Kama: winking, alluring",
+    "Buddhi: calm",
+    "Chitta: stern"
+  ],
+  "durations": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "free_palette": false,
+  "name": "swaminathan-head",
+  "animation": "faces",
+  "size": "sheet",
+  "expected_frames": 10,
+  "frames": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10"
+  ],
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    64
+  ],
+  "anchor_mode": "center",
+  "view": "front-three-quarter",
+  "subject": "head",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen",
+    "04": "imagegen",
+    "05": "imagegen",
+    "06": "imagegen",
+    "07": "imagegen",
+    "08": "imagegen",
+    "09": "imagegen",
+    "10": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 3.7777777777777777,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-d924667a-bd0a-47f0-994d-be16e923ecbe.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 3,
+    "first_cell": 0,
+    "extraction": "connected subjects on common source canvas"
+  }
+}
