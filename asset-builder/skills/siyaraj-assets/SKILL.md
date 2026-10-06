@@ -95,12 +95,17 @@ python -m ab board forest                         # -> out/textures/board.png, m
   `textures/<area>/` fills (`*-cap.png` as caps, `A__B.png` as transitions) into a mock side view.
 - Viewport is 960x540 game units = 1920x1080 art px. Existing forest layers: `textures/forest/j1-j4.png`.
 
-**Terrain in Godot:** `scripts/levels/terrain_skin.gd` (`TerrainSkin` node) dresses the plain Body/Edge platform
-polygons under `Terrain` with `fill`, `cap`, `end_cap`, `fringe` and `one_way_cap` textures at scale 0.5.
-To review a kit in-engine without editing a level, put `fill/cap/end/fringe/oneway/bg.png` (any subset)
-in one folder and screenshot (from the repo root; in a fresh worktree run `godot --headless --path . --import` once first):
+**World kits in Godot:** `scripts/levels/world_skin.gd` (`WorldSkin` node in each level, `biome` + `direction`)
+dresses the grey Body/Edge platforms from `assets/world/<biome>/<direction>/` at scale 0.5. Every file is optional:
+`fill.png` (128 px seamless tile), `cap.png` (seamless strip, walking surface a third down), `end.png` (left end,
+mirrored for the right), `fringe.png` (hangs under floating platforms), `oneway.png` (strip centred on thin
+jump-through platforms), `far.png` (opaque) / `mid.png` (transparent) 1080 px tall seamless parallax, `water.png`
+(river tile) and `props/*.png` (stand on the bottom of their opaque pixels). New PNGs load straight from disk;
+run `godot --headless --path . --import` once before exporting. In game, `V` cycles the level's available kits.
+Screenshot every level x kit (from the repo root; in a fresh worktree import once first), then build contact sheets:
 ```bash
-xvfb-run -a godot --path . --resolution 1920x1080 -s tools/terrain_shot.gd -- <level.tscn> <kit dir> <out.png> <camera x>
+xvfb-run -a godot --path . --resolution 1920x1080 -s tools/world_shots.gd [-- <biome> [<direction> | <kit dir>]]
+~/ml/bin/python tools/world_sheet.py    # docs/screenshots/world/<biome>-sheet.png
 ```
 
 ## 4. UI art
