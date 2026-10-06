@@ -34,8 +34,8 @@ says *what* is left and *who* does it, and points there for the *how*.
 - **All 30 suites pass**, including cast gameplay checks. B0 air dashes exit at 780 px/s and ease
   back to run speed, restoring the jump + dash reach lost in #17.
 - **No audio plays.** There are no `AudioStreamPlayer` nodes and no buses.
-  The catalog and `assets/Audio/` files are tracked and shared; playback remains B4.
-- **Only export preset:** "Linux smoke test".
+  The old unlicensed audio is quarantined in ignored local build storage. The submission build is silent.
+- **Release preparation:** Linux smoke test and Web presets are available. See docs/submission_checklist.md for current release status.
 
 ---
 
@@ -48,10 +48,9 @@ says *what* is left and *who* does it, and points there for the *how*.
   head; **no regrowth**; only living heads attack. Dashanan Fury uses only the
   heads still alive (the suggested default, not explicitly confirmed: one Fury
   wave per living head). Implemented in C1's code half.
-- [ ] **Music licensing.** The tracks in `assets/Audio/` are from Diamond Rush and
-  Prince of Persia: The Forgotten Sands, which are copyrighted. Decide whether to
-  ship them, which risks a takedown on itch.io, or swap them for royalty-free/CC0
-  music. The files are now tracked for team work; the shipping choice remains open.
+- [x] **Music licensing.** The unlicensed Diamond Rush and Prince of Persia tracks
+  were removed from the submission source tree and excluded from exports.
+  Local copies remain in ignored `builds/quarantined-audio/`. The release is silent.
 - [ ] **The twist.** The final boss is now named Swaminathan. Is that the twist? Or does the
   Robin fight / "Nathan Robin" reveal from the proposal stay in? The answer decides
   whether C6 happens.
@@ -88,8 +87,7 @@ Open the file, judge it, then reply "fine" or "redo X".
 - [ ] **Run the release build on a machine without Godot.**
 - [ ] **Call the bug bash, then the feature freeze.** The proposal keeps the last 10%
   of the time for "bug fixes and the build. No new features."
-- [ ] **Create the itch.io page** (the jam allows AI everything, no declaration
-  needed). Upload a test build early, then the final one.
+- [ ] **Create the itch.io page** (AI tools must be fully disclosed). Upload a test build early, then the final one.
 - [ ] **Write the credits:** team names and roles, plus any third-party music or
   fonts.
 

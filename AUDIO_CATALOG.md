@@ -1,7 +1,6 @@
 # Audio catalog
 
-Audio assets live in `assets/Audio/`. Filenames use lowercase snake case and
-describe the cue's likely role.
+These files were removed from the submission source tree because no redistribution license was supplied. They are retained only in ignored local builds/quarantined-audio/ storage and earlier Git history. This catalog is an archival record.
 
 **Catalog note:** I could not audition the files in this interface. The
 descriptions below are based on the available filenames and durations; review
