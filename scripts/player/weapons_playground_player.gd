@@ -38,7 +38,9 @@ func _physics_process(delta: float) -> void:
 	effect_time = maxf(effect_time - delta, 0.0)
 	special_recovery = maxf(special_recovery - delta, 0.0)
 	if state != State.NORMAL:
-		_cancel_specials()
+		# Keep the chakri charge through a dash; hurt and death still cancel it.
+		if state != State.DASH:
+			_cancel_specials()
 		super._physics_process(delta)
 		queue_redraw()
 		return
@@ -64,11 +66,12 @@ func _physics_process(delta: float) -> void:
 	if charging:
 		charge_time = minf(charge_time + delta, full_charge_time)
 		attack_status = "CHAKRI: %d%% charged" % roundi(charge_time / full_charge_time * 100.0)
-		if Input.is_action_just_released("special"):
+		# A release during a dash is handled on the first normal movement tick.
+		if not Input.is_action_pressed("special"):
 			_release_chakri()
 	sparkler.externally_locked = charging or special_recovery > 0.0 or shot_pressed
 	super._physics_process(delta)
-	if state != State.NORMAL:
+	if state != State.NORMAL and state != State.DASH:
 		_cancel_specials()
 	elif sparkler.is_busy():
 		attack_status = "SPARKLER: lash"

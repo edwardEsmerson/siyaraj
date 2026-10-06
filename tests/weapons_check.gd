@@ -137,18 +137,56 @@ func run_checks() -> void:
 	Input.action_release("special")
 	await ticks(2)
 	check(not player.charging and player.effect_kind.is_empty() and player.chakri_cooldown_remaining == 0.0, "Interrupted charge must cancel without consuming chakri cooldown")
-	await ticks(60)
-	await press("jump")
-	Input.action_press("special")
-	await ticks(1)
-	await press("dash")
-	Input.action_release("special")
-	check(not player.charging and not player.sparkler.is_busy(), "Dash must cancel charge and sparkler")
+	await check_chakri_dashes()
 
 	await check_skyshots()
 	if failures == 0:
-		print("PASS: single ground/air lash, projectile collision/damage, five-shot ammo/recoil, round refill, chakri cooldown and interruption")
+		print("PASS: single ground/air lash, projectile collision/damage, five-shot ammo/recoil, round refill, chakri cooldown, dash preservation and damage interruption")
 	quit(1 if failures > 0 else 0)
+
+
+func check_chakri_dashes() -> void:
+	for airborne in [false, true]:
+		await reset_playground()
+		dummy.set_physics_process(false)
+		Input.action_press("special")
+		await ticks(65)
+		if airborne:
+			await press("jump")
+		await press("dash")
+		check(player.state == player.State.DASH and player.charging and is_equal_approx(player.charge_time, player.full_charge_time), "Ground and air dash must preserve a fully charged chakri")
+		check(not player.sparkler.is_busy() and player.chakri_cooldown_remaining == 0.0, "Dashing with a charge must leave sparkler idle and not spend chakri cooldown")
+		await ticks(12)
+		check(player.state == player.State.NORMAL and player.charging and is_equal_approx(player.charge_time, player.full_charge_time), "Chakri must remain fully charged after the dash ends")
+		dummy.position = player.position + Vector2(60, 0)
+		await ticks(1)
+		Input.action_release("special")
+		await ticks(2)
+		check(dummy.health == 9 and dummy.total_hits == 1, "Releasing after a dash must deal full chakri damage once")
+
+	await reset_playground()
+	Input.action_press("special")
+	await ticks(8)
+	await press("dash")
+	var saved_charge: float = player.charge_time
+	await ticks(3)
+	check(player.charging and is_equal_approx(player.charge_time, saved_charge), "A partial charge must retain its progress during a dash")
+	await ticks(10)
+	check(player.charging and player.charge_time > saved_charge, "Holding special must resume charging after the dash")
+	player.take_damage(1, Vector2.ZERO)
+	check(not player.charging and player.charge_time == 0.0, "Damage after a dash must still cancel the preserved charge")
+
+	await reset_playground()
+	Input.action_press("special")
+	await ticks(65)
+	await press("dash")
+	Input.action_release("special")
+	await ticks(2)
+	check(player.state == player.State.DASH and player.charging and player.chakri_cooldown_remaining == 0.0, "Releasing mid-dash must keep the charge until the dash ends")
+	await ticks(12)
+	check(not player.charging and is_equal_approx(player.effect_radius, player.chakri_radius) and player.chakri_cooldown_remaining > 29.9, "A mid-dash release must fire a full chakri after the dash")
+	await ticks(40)
+	check(player.chakri_cooldown_remaining < 29.5, "A queued chakri release must fire only once")
 
 
 func fire_shot() -> void:

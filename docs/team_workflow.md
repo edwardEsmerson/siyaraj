@@ -10,6 +10,8 @@
   may query `is_invulnerable()`. Boss hazards (Khara and Ravan) route through
   `take_damage`, so they respect the i-frames too.
 - Dash cancels any sparkler phase; an attack pressed mid-dash swings when it ends.
+- Dash preserves chakri charge progress. Charging pauses during the dash and
+  resumes afterward; releasing K during the dash fires chakri when it ends.
 - Tapping and holding jump produce the same fixed jump height.
 - Jumping supports coyote time and jump buffering.
 - One sparkler swing damages each enemy at most once.
