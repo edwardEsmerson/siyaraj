@@ -1,0 +1,166 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/bosses/ravan/ravan_boss.gd" id="1_boss"]
+[ext_resource type="Script" path="res://scripts/bosses/ravan/ravan_core.gd" id="2_core"]
+[ext_resource type="PackedScene" path="res://scenes/bosses/ravan/ravan_head.tscn" id="3_head"]
+[ext_resource type="Script" path="res://scripts/bosses/ravan/ravan_health_bar.gd" id="4_bar"]
+
+[sub_resource type="RectangleShape2D" id="ArmourShape"]
+size = Vector2(100, 60)
+
+[sub_resource type="CircleShape2D" id="CoreShape"]
+radius = 18.0
+
+[node name="Ravan" type="Node2D" groups=["bosses"]]
+script = ExtResource("1_boss")
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Placeholder" type="Node2D" parent="Body"]
+
+[node name="ArmLeft" type="Polygon2D" parent="Body/Placeholder"]
+color = Color(0.45, 0.31, 0.26, 1)
+polygon = PackedVector2Array(-50, -118, -68, -112, -78, -52, -62, -48, -50, -98)
+
+[node name="ArmRight" type="Polygon2D" parent="Body/Placeholder"]
+color = Color(0.45, 0.31, 0.26, 1)
+polygon = PackedVector2Array(50, -118, 68, -112, 78, -52, 62, -48, 50, -98)
+
+[node name="Legs" type="Polygon2D" parent="Body/Placeholder"]
+color = Color(0.78, 0.5, 0.12, 1)
+polygon = PackedVector2Array(-44, 0, -6, 0, 0, -12, 6, 0, 44, 0, 36, -40, -36, -40)
+
+[node name="Torso" type="Polygon2D" parent="Body/Placeholder"]
+color = Color(0.4, 0.28, 0.25, 1)
+polygon = PackedVector2Array(-38, -40, 38, -40, 52, -118, -52, -118)
+
+[node name="Belt" type="Polygon2D" parent="Body/Placeholder"]
+color = Color(0.9, 0.7, 0.2, 1)
+polygon = PackedVector2Array(-40, -26, 40, -26, 38, -46, -38, -46)
+
+[node name="Collar" type="Polygon2D" parent="Body/Placeholder"]
+color = Color(0.88, 0.66, 0.2, 1)
+polygon = PackedVector2Array(-58, -120, 58, -120, 40, -100, 0, -92, -40, -100)
+
+[node name="Art" type="Sprite2D" parent="Body"]
+
+[node name="Armour" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Armour"]
+position = Vector2(0, -90)
+shape = SubResource("ArmourShape")
+
+[node name="Core" type="StaticBody2D" parent="."]
+position = Vector2(0, -36)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("2_core")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Core"]
+shape = SubResource("CoreShape")
+
+[node name="Heads" type="Node2D" parent="."]
+
+[node name="Head0" parent="Heads" instance=ExtResource("3_head")]
+position = Vector2(-198, -150)
+head_index = 0
+head_name = "Mada"
+attack_kind = 2
+lunge_offset = Vector2(-24, 85)
+
+[node name="Head1" parent="Heads" instance=ExtResource("3_head")]
+position = Vector2(-154, -161.9)
+head_index = 1
+head_name = "Krodha"
+attack_kind = 0
+lunge_offset = Vector2(-24, 85)
+
+[node name="Head2" parent="Heads" instance=ExtResource("3_head")]
+position = Vector2(-110, -170.7)
+head_index = 2
+head_name = "Lobha"
+attack_kind = 1
+lunge_offset = Vector2(-24, 85)
+
+[node name="Head3" parent="Heads" instance=ExtResource("3_head")]
+position = Vector2(-66, -176.7)
+head_index = 3
+head_name = "Moha"
+attack_kind = 3
+lunge_offset = Vector2(-24, 85)
+
+[node name="Head4" parent="Heads" instance=ExtResource("3_head")]
+position = Vector2(-22, -179.6)
+head_index = 4
+head_name = "Matsarya"
+attack_kind = 4
+lunge_offset = Vector2(-24, 85)
+
+[node name="Head5" parent="Heads" instance=ExtResource("3_head")]
+position = Vector2(22, -179.6)
+head_index = 5
+head_name = "Ahamkara"
+attack_kind = 4
+lunge_offset = Vector2(24, 85)
+
+[node name="Head6" parent="Heads" instance=ExtResource("3_head")]
+position = Vector2(66, -176.7)
+head_index = 6
+head_name = "Manas"
+attack_kind = 3
+lunge_offset = Vector2(24, 85)
+
+[node name="Head7" parent="Heads" instance=ExtResource("3_head")]
+position = Vector2(110, -170.7)
+head_index = 7
+head_name = "Kama"
+attack_kind = 1
+lunge_offset = Vector2(24, 85)
+
+[node name="Head8" parent="Heads" instance=ExtResource("3_head")]
+position = Vector2(154, -161.9)
+head_index = 8
+head_name = "Buddhi"
+attack_kind = 0
+lunge_offset = Vector2(24, 85)
+
+[node name="Head9" parent="Heads" instance=ExtResource("3_head")]
+position = Vector2(198, -150)
+head_index = 9
+head_name = "Chitta"
+attack_kind = 2
+lunge_offset = Vector2(24, 85)
+
+[node name="BossUI" type="CanvasLayer" parent="."]
+
+[node name="Tint" type="ColorRect" parent="BossUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.45, 0, 0.02, 0)
+
+[node name="Banner" type="Label" parent="BossUI"]
+visible = false
+offset_top = 196.0
+offset_right = 960.0
+offset_bottom = 232.0
+theme_override_colors/font_color = Color(1, 0.8, 0.45, 1)
+theme_override_colors/font_outline_color = Color(0.1, 0.02, 0.02, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 1
+
+[node name="HealthBar" type="Control" parent="BossUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 230.0
+offset_top = 470.0
+offset_right = 730.0
+offset_bottom = 536.0
+mouse_filter = 2
+script = ExtResource("4_bar")

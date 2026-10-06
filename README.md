@@ -31,6 +31,12 @@ At half health he enrages and adds a second ladi from the far wall. See
 [the Khara design doc](docs/bosses/boss1-khara.md). The reusable boss health bar is
 `scenes/ui/boss_health_bar.tscn`. Khara is not yet placed in the forest.
 
+Boss 2, Ravan, has an isolated arena at `scenes/bosses/ravan/ravan_arena.tscn`
+(F6); it is not yet part of level progression. Only a glowing, lunging head can be
+hurt. Knock out enough heads before they regrow to expose the amrit in his navel,
+then strike it. Phase changes trigger Dashanan Fury: stand in the teal lanes. See
+[the Ravan design doc](docs/bosses/boss2-ravan.md).
+
 The earlier prototype course remains available at `scenes/main/main.tscn` with F6.
 Its guard and finish-gate behaviour described below are unchanged.
 
@@ -111,6 +117,7 @@ godot --headless --path . --script res://tests/weapons_check.gd
 godot --headless --path . --script res://tests/weapons_map_check.gd
 godot --headless --path . --script res://tests/forest_weapons_check.gd
 godot --headless --path . --script res://tests/khara_boss_check.gd
+godot --headless --path . --script res://tests/ravan_check.gd
 ```
 
 See [the team workflow](docs/team_workflow.md) for ownership, agreed rules,

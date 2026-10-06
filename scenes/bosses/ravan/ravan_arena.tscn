@@ -1,0 +1,129 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/bosses/ravan/ravan_arena.gd" id="1_arena"]
+[ext_resource type="PackedScene" path="res://scenes/player/forest_player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/bosses/ravan/ravan.tscn" id="3_ravan"]
+
+[sub_resource type="RectangleShape2D" id="FloorShape"]
+size = Vector2(880, 48)
+
+[sub_resource type="RectangleShape2D" id="WallShape"]
+size = Vector2(24, 400)
+
+[sub_resource type="RectangleShape2D" id="LedgeShape"]
+size = Vector2(96, 36)
+
+[node name="RavanArena" type="Node2D"]
+script = ExtResource("1_arena")
+
+[node name="Backdrop" type="Node2D" parent="."]
+z_index = -2
+
+[node name="Sky" type="Polygon2D" parent="Backdrop"]
+color = Color(0.13, 0.08, 0.1, 1)
+polygon = PackedVector2Array(40, 30, 920, 30, 920, 430, 40, 430)
+
+[node name="LankaTowers" type="Polygon2D" parent="Backdrop"]
+color = Color(0.2, 0.12, 0.12, 1)
+polygon = PackedVector2Array(40, 430, 40, 250, 90, 250, 90, 190, 110, 160, 130, 190, 130, 280, 250, 280, 250, 220, 280, 180, 310, 220, 310, 300, 650, 300, 650, 220, 680, 180, 710, 220, 710, 280, 830, 280, 830, 190, 850, 160, 870, 190, 870, 250, 920, 250, 920, 430)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(480, 454)
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="Ground"]
+color = Color(0.3, 0.24, 0.22, 1)
+polygon = PackedVector2Array(-440, -24, 440, -24, 440, 24, -440, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("FloorShape")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(28, 230)
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="LeftWall"]
+color = Color(0.3, 0.24, 0.22, 1)
+polygon = PackedVector2Array(-12, -200, 12, -200, 12, 200, -12, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("WallShape")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(932, 230)
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="RightWall"]
+color = Color(0.3, 0.24, 0.22, 1)
+polygon = PackedVector2Array(-12, -200, 12, -200, 12, 200, -12, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("WallShape")
+
+[node name="LedgeLeft" type="StaticBody2D" parent="."]
+position = Vector2(88, 412)
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="LedgeLeft"]
+color = Color(0.36, 0.29, 0.26, 1)
+polygon = PackedVector2Array(-48, -18, 48, -18, 48, 18, -48, 18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LedgeLeft"]
+shape = SubResource("LedgeShape")
+
+[node name="LedgeRight" type="StaticBody2D" parent="."]
+position = Vector2(872, 412)
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="LedgeRight"]
+color = Color(0.36, 0.29, 0.26, 1)
+polygon = PackedVector2Array(-48, -18, 48, -18, 48, 18, -48, 18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LedgeRight"]
+shape = SubResource("LedgeShape")
+
+[node name="Ravan" parent="." instance=ExtResource("3_ravan")]
+position = Vector2(480, 430)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(220, 430)
+max_health = 5
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Title" type="Label" parent="HUD"]
+offset_left = 32.0
+offset_top = 8.0
+theme_override_font_sizes/font_size = 22
+text = "SIYARAJ / boss 2: Ravan arena"
+
+[node name="Controls" type="Label" parent="HUD"]
+offset_left = 32.0
+offset_top = 40.0
+theme_override_font_sizes/font_size = 13
+text = "A/D: move   Space: jump   Shift: air dash   J: lash   L: skyshot   hold K: chakri   R: restart"
+
+[node name="Hint" type="Label" parent="HUD"]
+offset_left = 32.0
+offset_top = 60.0
+theme_override_font_sizes/font_size = 13
+text = "Only a glowing head can be hurt. Knock out enough heads before they regrow
+to expose the amrit in Ravan's navel, then strike it."
+
+[node name="HealthStatus" type="Label" parent="HUD"]
+offset_left = 32.0
+offset_top = 100.0
+theme_override_font_sizes/font_size = 13
+text = "Siya health: 5/5"
+
+[node name="WeaponStatus" type="Label" parent="HUD"]
+offset_left = 32.0
+offset_top = 118.0
+theme_override_font_sizes/font_size = 13
+text = "Skyshot 5/5    Chakri ready"
+
+[node name="CombatStatus" type="Label" parent="HUD"]
+offset_left = 32.0
+offset_top = 136.0
+theme_override_font_sizes/font_size = 13
+text = "Hit the glowing head while it lunges."
