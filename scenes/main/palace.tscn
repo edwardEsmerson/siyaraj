@@ -18,6 +18,7 @@ script = ExtResource("1_main")
 restart_delay = 0.35
 showdown_scene = "res://scenes/main/palace_showdown.tscn"
 showdown_name = "Swaminathan"
+automatic_showdown = true
 completion_title = "PALACE COMPLETE"
 completion_detail = "Swaminathan awaits in Lanka"
 completion_status = "The palace is clear. Enter: face Swaminathan / R: replay the palace."
