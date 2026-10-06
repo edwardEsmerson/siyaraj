@@ -89,6 +89,10 @@ cycle_world_kit={
 2d_physics/layer_4="Player attack"
 2d_physics/layer_5="Enemy attack"
 
+[physics]
+
+common/physics_interpolation=true
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

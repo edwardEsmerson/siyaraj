@@ -16,6 +16,7 @@ var camera: Camera2D
 
 
 func _ready() -> void:
+	process_physics_priority = 10
 	RenderingServer.set_default_clear_color(Color(0.055, 0.07, 0.11))
 	_add_platform(Rect2(0, FLOOR_Y, MAP_WIDTH, 80), Color(0.15, 0.19, 0.27))
 	_add_platform(Rect2(-24, 0, 24, 540), Color(0.15, 0.19, 0.27))
@@ -52,6 +53,7 @@ func _ready() -> void:
 	add_child(player)
 	player.died.connect(_on_player_died)
 	camera = Camera2D.new()
+	camera.process_callback = Camera2D.CAMERA2D_PROCESS_PHYSICS
 	camera.position = Vector2(480, 270)
 	camera.limit_left = 0
 	camera.limit_right = MAP_WIDTH

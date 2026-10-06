@@ -61,3 +61,18 @@ robin.release_control()            # back to following Siya
 The hypnotised state, the dizzy meter and the boss attacks are not built yet. They
 should live in the boss script and drive Robin through this API, or swap in a
 separate boss-Robin scene for the fight.
+
+## Smooth movement on high refresh displays
+
+Project physics interpolation fills the rendered frames between the 60 Hz physics
+ticks. Siya, Robin and his speech bubble share that timing, and the course camera
+follows in `_physics_process` after character movement. Keep movement and camera
+transforms on the physics clock. After placing or teleporting a character, call
+`reset_physics_interpolation()` so it does not streak across the screen. Robin's
+initial placement, distance catch-up and `snap_to()` already do this.
+
+For visual checks, run the forest at 200 FPS on a high refresh display, walk in
+both directions through camera scrolling, reverse direction, dash, and read a
+Robin hint while moving. Also check room transitions and respawns for streaks.
+`tests/movement_check.gd` guards against camera movement during idle frames;
+`tests/robin_check.gd` covers following, perching, hints and teleport catch-up.

@@ -15,6 +15,7 @@ func _ready() -> void:
 	camera.limit_right = arena_width
 	camera.position.x = arena_width * 0.5
 	camera.reset_smoothing()
+	camera.reset_physics_interpolation()
 	boss_bar.bind(boss)
 	var defeated_name: String = boss.boss_name
 	boss.died.connect(func() -> void:
