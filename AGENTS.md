@@ -29,34 +29,12 @@ On the Windows workstation, use the existing executable at
 Run all regression checks from the repository root:
 
 ```sh
-godot --headless --path . --script res://tests/movement_check.gd
-godot --headless --path . --script res://tests/dash_check.gd
-godot --headless --path . --script res://tests/combat_check.gd
-godot --headless --path . --script res://tests/player_visuals_check.gd
-godot --headless --path . --script res://tests/course_check.gd
-godot --headless --path . --script res://tests/flying_enemy_check.gd
-godot --headless --path . --script res://tests/ground_shooter_check.gd
-godot --headless --path . --script res://tests/brute_check.gd
-godot --headless --path . --script res://tests/forest_check.gd
-godot --headless --path . --script res://tests/forest_rooms_check.gd
-godot --headless --path . --script res://tests/forest_encounters_check.gd
-godot --headless --path . --script res://tests/checkpoint_guard_check.gd
-godot --headless --path . --script res://tests/weapons_check.gd
-godot --headless --path . --script res://tests/weapons_map_check.gd
-godot --headless --path . --script res://tests/forest_weapons_check.gd
-godot --headless --path . --script res://tests/dhoomketu_check.gd
-godot --headless --path . --script res://tests/khara_boss_check.gd
-godot --headless --path . --script res://tests/ravan_check.gd
-godot --headless --path . --script res://tests/next_levels_check.gd
-godot --headless --path . --script res://tests/playtest_menu_check.gd
-godot --headless --path . --script res://tests/menus_check.gd
-godot --headless --path . --script res://tests/robin_check.gd
-godot --headless --path . --script res://tests/campaign_flow_check.gd
-godot --headless --path . --script res://tests/palace_layout_check.gd
-godot --headless --path . --script res://tests/forest_iteration_check.gd
-godot --headless --path . --script res://tests/river_design_check.gd
-godot --headless --path . --script res://tests/world_skin_check.gd
+python tools/run_checks.py
 ```
+
+Set `GODOT_BIN` to your Godot 4.7.2 executable first. The runner discovers all
+28 suites and rejects script errors even when Godot exits with code zero.
+See [the shared baseline](docs/team_baseline.md) for platform commands.
 
 `GODOT_BIN=godot ./tools/smoke_build.sh` imports resources and exports `builds/linux/siyaraj.pck`. `GODOT_BIN=godot ./tools/run_smoke_build.sh --headless --quit-after 120` launches that pack outside the editor. Substitute the executable path when needed. Standalone Linux exports require matching export templates.
 

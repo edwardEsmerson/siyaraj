@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://csdju54kdwqlj"
-path="res://.godot/imported/mountain_exploration.mp3-ac8a9c1f3099c6e7ecfb36df08e38f89.mp3str"
+path="res://.godot/imported/mountain_exploration.mp3-6f91a214534816eff2620f3d3ebb5088.mp3str"
 
 [deps]
 
 source_file="res://assets/Audio/mountain_exploration.mp3"
-dest_files=["res://.godot/imported/mountain_exploration.mp3-ac8a9c1f3099c6e7ecfb36df08e38f89.mp3str"]
+dest_files=["res://.godot/imported/mountain_exploration.mp3-6f91a214534816eff2620f3d3ebb5088.mp3str"]
 
 [params]
 

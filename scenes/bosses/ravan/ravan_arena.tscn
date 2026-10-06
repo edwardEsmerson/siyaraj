@@ -92,11 +92,17 @@ max_health = 5
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
+[node name="Backdrop" type="ColorRect" parent="HUD"]
+offset_right = 960.0
+offset_bottom = 160.0
+mouse_filter = 2
+color = Color(0.06, 0.06, 0.06, 0.93)
+
 [node name="Title" type="Label" parent="HUD"]
 offset_left = 32.0
 offset_top = 8.0
 theme_override_font_sizes/font_size = 22
-text = "SIYARAJ / boss 2: Swaminathan arena"
+text = "SIYARAJ / final boss: Swaminathan arena"
 
 [node name="Controls" type="Label" parent="HUD"]
 offset_left = 32.0
@@ -108,7 +114,7 @@ text = "A/D: move   Space: jump   Shift: dash   J: lash   L: skyshot   hold K: c
 offset_left = 32.0
 offset_top = 60.0
 theme_override_font_sizes/font_size = 13
-text = "Strike Ravan anywhere. Every tenth of his health severs his rightmost head,
+text = "Strike Swaminathan anywhere. Every tenth of his health severs his rightmost head,
 and only the heads still standing attack. A glowing head is about to strike."
 
 [node name="HealthStatus" type="Label" parent="HUD"]

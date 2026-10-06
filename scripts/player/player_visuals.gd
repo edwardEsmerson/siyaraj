@@ -30,11 +30,11 @@ func _ready() -> void:
 
 func _bind_scene_events() -> void:
 	var course := player.get_parent().get_node_or_null("TestCourse")
-	if course == null:
-		return
-	if course.has_signal("finished"):
+	if course != null and course.has_signal("finished"):
 		course.connect("finished", _queue_victory)
-	var boss := course.get_node_or_null("Boss")
+	var boss := player.get_parent().get_node_or_null("TestCourse/Boss")
+	if boss == null:
+		boss = player.get_parent().get_node_or_null("Ravan")
 	if boss != null and boss.has_signal("died"):
 		boss.connect("died", _queue_victory)
 

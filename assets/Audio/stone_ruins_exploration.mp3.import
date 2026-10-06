@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://s82h4rv0qf5c"
-path="res://.godot/imported/stone_ruins_exploration.mp3-361caa5f68c79075f9065896fc9416a2.mp3str"
+path="res://.godot/imported/stone_ruins_exploration.mp3-828ddcfc3a482485aef0e4e6532cba3e.mp3str"
 
 [deps]
 
 source_file="res://assets/Audio/stone_ruins_exploration.mp3"
-dest_files=["res://.godot/imported/stone_ruins_exploration.mp3-361caa5f68c79075f9065896fc9416a2.mp3str"]
+dest_files=["res://.godot/imported/stone_ruins_exploration.mp3-828ddcfc3a482485aef0e4e6532cba3e.mp3str"]
 
 [params]
 

@@ -45,7 +45,7 @@ func _physics_process(_delta: float) -> void:
 			_use_portal(portal)
 			return
 	for checkpoint in _checkpoints():
-		var guard: CanvasLayer = get_parent().checkpoint_guard
+		var guard: CanvasLayer = get_parent().get("checkpoint_guard")
 		var blocked: bool = guard != null and guard.blocked(checkpoint)
 		var saved := lit_checkpoints.has(checkpoint.name)
 		var can_light: bool = not blocked and checkpoint.get_meta("room", &"") == current_room and not completed and player.state == player.State.NORMAL and player.is_on_floor() and checkpoint.overlaps_body(player)

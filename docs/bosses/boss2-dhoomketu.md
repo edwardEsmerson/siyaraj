@@ -7,7 +7,7 @@ him from Khara's gada and ladi arsenal. Diyas, bunting and rocket crates dress
 the arena. The character and barge use scene/script placeholder art.
 
 The level 2 exit opens `scenes/main/river_showdown.tscn`. Defeating Dhoomketu
-opens the palace and Ravan's finale. Death retries this fight with fresh health
+opens the palace and Swaminathan's finale. Death retries this fight with fresh health
 and weapons. Terrain-only launches bypass it. The developer menu offers his
 isolated arena and the ghats campaign showdown.
 

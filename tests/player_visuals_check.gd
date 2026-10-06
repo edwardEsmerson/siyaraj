@@ -175,15 +175,24 @@ func run_checks() -> void:
 		check(sprite.animation == &"victory", "Level completion must celebrate when grounded and still")
 
 	navigation.enemies_enabled = true
-	navigation.start_level("res://scenes/main/forest_showdown.tscn")
-	await scene_changed
-	player = current_scene.get_node("Player")
-	sprite = player.get_node("Visuals/Sprite")
-	var boss: CharacterBody2D = current_scene.get_node("TestCourse/Boss")
-	boss.set_physics_process(false)
-	await ticks(8)
-	boss.take_damage(999, Vector2.ZERO)
-	await ticks(2)
-	check(sprite.animation == &"victory", "Boss death must trigger Siya's victory animation")
+	for level in ["forest", "river", "palace"]:
+		navigation.start_level("res://scenes/main/%s_showdown.tscn" % level)
+		await scene_changed
+		player = current_scene.get_node("Player")
+		sprite = player.get_node("Visuals/Sprite")
+		var boss: Node2D = current_scene.get_node("Ravan" if level == "palace" else "TestCourse/Boss")
+		boss.set_physics_process(false)
+		await ticks(8)
+		if level == "palace":
+			boss.start_fight()
+			boss.set_physics_process(true)
+			await ticks(2)
+			boss.set_head_count(1)
+		boss.take_damage(999, Vector2.ZERO)
+		if level == "palace":
+			boss.set_physics_process(true)
+			await boss.died
+		await ticks(2)
+		check(sprite.animation == &"victory", "%s boss death must trigger Siya's victory animation" % level)
 	print("Player visuals checks: %d failure(s)" % failures)
 	quit(1 if failures > 0 else 0)

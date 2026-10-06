@@ -25,7 +25,7 @@ func _physics_process(_delta: float) -> void:
 func _update_diyas(player: CharacterBody2D) -> void:
 	var saved: Dictionary = progress.get(level_id, {"spawn": Vector2(160, 430), "lit": []})
 	for checkpoint: Area2D in $Checkpoints.get_children():
-		var guard: CanvasLayer = get_parent().checkpoint_guard
+		var guard: CanvasLayer = get_parent().get("checkpoint_guard")
 		var blocked: bool = guard != null and guard.blocked(checkpoint)
 		var nearby: bool = not blocked and player != null and checkpoint.overlaps_body(player) and player.is_on_floor() and player.state == player.State.NORMAL
 		if nearby and Input.is_action_just_pressed("interact"):

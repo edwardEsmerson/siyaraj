@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://cb01su2lbsrvj"
-path="res://.godot/imported/jungle_exploration.mp3-cb2756b94c8d86107906fdf70ef255b8.mp3str"
+path="res://.godot/imported/jungle_exploration.mp3-09f8429de60489d30439dd3b362f79fd.mp3str"
 
 [deps]
 
 source_file="res://assets/Audio/jungle_exploration.mp3"
-dest_files=["res://.godot/imported/jungle_exploration.mp3-cb2756b94c8d86107906fdf70ef255b8.mp3str"]
+dest_files=["res://.godot/imported/jungle_exploration.mp3-09f8429de60489d30439dd3b362f79fd.mp3str"]
 
 [params]
 

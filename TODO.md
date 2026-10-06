@@ -6,7 +6,7 @@ art and animation included, sorted by who should pick it up:
 - **A. You (a human):** decisions, reviews, playtests and the submission itself.
 - **B. A good LLM:** well-scoped work that follows patterns already in the repo.
 - **C. A really good LLM:** cross-cutting work that needs design judgement, touches
-  many systems, or could easily break the 25 regression suites.
+  many systems, or could easily break the 28 regression suites.
 
 Per-asset briefs, sizes and generation commands live in
 `asset-builder/Sprites_List.md` and `asset-builder/Animations-List.md`. This file
@@ -14,7 +14,7 @@ says *what* is left and *who* does it, and points there for the *how*.
 
 ## Where things stand
 
-- **Playable route:** title → forest → Khara → river → palace → Swaminathan → ending.
+- **Playable route:** title → forest → Khara → river → Dhoomketu → palace → Swaminathan → ending.
   Each boss is a separate showdown scene. A "TRAIL CLEARED / Enter: face Khara"
   screen leads into it, not an arena inside the level.
 - **Done:** title screen, themed pause menu, controls panel, settings (master volume
@@ -25,11 +25,11 @@ says *what* is left and *who* does it, and points there for the *how*.
   gada, and Swaminathan. **Siya and Robin** are wired into gameplay. The enemies
   and both bosses still draw code placeholders.
 - **World kits:** levels and both boss arenas are dressed through `WorldSkin` in all
-  six styles (press V in a level to cycle). Merged in #15 and #19.
-- **All 25 suites pass** again after B0 (air dashes now exit at 780 px/s and ease
+  six styles (press V in a level to cycle). Merged in #15 and #19. Dhoomketu uses his authored placeholder arena.
+- **All 28 suites pass** again after B0 (air dashes now exit at 780 px/s and ease
   back to run speed, restoring the jump + dash reach lost in #17).
 - **No audio plays.** There are no `AudioStreamPlayer` nodes and no buses.
-  `assets/Audio/` is gitignored, so teammates don't have the music files.
+  The catalog and `assets/Audio/` files are tracked and shared; playback remains B4.
 - **Only export preset:** "Linux smoke test".
 
 ---
@@ -46,7 +46,7 @@ says *what* is left and *who* does it, and points there for the *how*.
 - [ ] **Music licensing.** The tracks in `assets/Audio/` are from Diamond Rush and
   Prince of Persia: The Forgotten Sands, which are copyrighted. Decide whether to
   ship them, which risks a takedown on itch.io, or swap them for royalty-free/CC0
-  music. Either way, un-ignore whatever we ship so the build and teammates get it.
+  music. The files are now tracked for team work; the shipping choice remains open.
 - [ ] **The twist.** The final boss is now named Swaminathan. Is that the twist? Or does the
   Robin fight / "Nathan Robin" reveal from the proposal stay in? The answer decides
   whether C6 happens.

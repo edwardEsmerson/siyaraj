@@ -26,7 +26,7 @@ color = Color(0.4, 0.4, 0.4, 1)
 [node name="Body" parent="LedgeRight" index="0"]
 color = Color(0.4, 0.4, 0.4, 1)
 
-[node name="Title" parent="HUD" index="0"]
+[node name="Title" parent="HUD" index="1"]
 text = "SIYARAJ / palace showdown: Swaminathan"
 
 [node name="CampaignFlow" parent="." instance=ExtResource("2")]

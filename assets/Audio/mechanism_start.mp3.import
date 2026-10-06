@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://boet5lnav7gs7"
-path="res://.godot/imported/mechanism_start.mp3-19be88d2c7678918c6e0f28dedc65999.mp3str"
+path="res://.godot/imported/mechanism_start.mp3-f8eb733117e7493341c90b86bce51931.mp3str"
 
 [deps]
 
 source_file="res://assets/Audio/mechanism_start.mp3"
-dest_files=["res://.godot/imported/mechanism_start.mp3-19be88d2c7678918c6e0f28dedc65999.mp3str"]
+dest_files=["res://.godot/imported/mechanism_start.mp3-f8eb733117e7493341c90b86bce51931.mp3str"]
 
 [params]
 

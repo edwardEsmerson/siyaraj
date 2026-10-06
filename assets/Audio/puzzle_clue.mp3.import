@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://b2idti6bnayf3"
-path="res://.godot/imported/puzzle_clue.mp3-c007778b31f770f447fc6da45ff72a50.mp3str"
+path="res://.godot/imported/puzzle_clue.mp3-3499eb23dd39e46b0bc96f47f7bc151b.mp3str"
 
 [deps]
 
 source_file="res://assets/Audio/puzzle_clue.mp3"
-dest_files=["res://.godot/imported/puzzle_clue.mp3-c007778b31f770f447fc6da45ff72a50.mp3str"]
+dest_files=["res://.godot/imported/puzzle_clue.mp3-3499eb23dd39e46b0bc96f47f7bc151b.mp3str"]
 
 [params]
 

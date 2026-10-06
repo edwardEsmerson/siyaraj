@@ -1,5 +1,8 @@
 # Today's workflow
 
+Use `main` as the shared starting point. See [the team baseline](team_baseline.md)
+for the branch audit, new-worktree commands and complete regression runner.
+
 ## Agreed rules
 
 - Dash moves horizontally in Siya's facing direction.
@@ -410,7 +413,7 @@ original player scene. `forest_weapons_check.gd` validates this integration.
 Manual checkpoint: play the Khara arena with F6. Check that the orange and yellow tells
 read clearly at gameplay speed, and that the phase 2 pincer is fair with three health.
 
-## Boss 2 (Swaminathan) handoff
+## Final boss (Swaminathan) handoff
 
 - Combat owns `scenes/bosses/ravan/` and `scripts/bosses/ravan/`. The isolated
   `scenes/bosses/ravan/ravan_arena.tscn` uses the forest player with all three

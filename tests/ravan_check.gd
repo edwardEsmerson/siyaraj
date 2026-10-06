@@ -367,13 +367,14 @@ func check_death_and_restart() -> void:
 	check(player.health == player.max_health, "Defeating Ravan must fully heal Siya")
 	await ticks(1)
 	check(boss.state == boss.State.DYING and boss.heads_alive == 0 and attacks().is_empty(), "Final hit must sever the last head, start the death and clear attacks")
+	check(boss.banner.text == "SWAMINATHAN FALLS", "Defeat banner must name Swaminathan")
 	check(boss.get_node("Body").head_count == 0, "Body must show the headless state")
 	await ticks(80)
 	check(boss.state == boss.State.DEAD and events.defeated, "Death sequence must finish and emit died")
 	var bar: Control = boss.get_node("BossUI/HealthBar")
 	check(bar.health == 0 and bar._fade_out or not bar.visible, "Generic bar must empty and fade out on death")
 	check(not boss.get_node("BossUI/HeadIndicators").visible, "Head indicators must hide on death")
-	check(current_scene.get_node("HUD/CombatStatus").text.contains("defeated"), "Arena must announce victory")
+	check(current_scene.get_node("HUD/CombatStatus").text.contains("Swaminathan defeated"), "Arena must announce Swaminathan's victory")
 	var old_scene := current_scene
 	var restart := InputEventAction.new()
 	restart.action = "restart"

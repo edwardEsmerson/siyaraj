@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://ck2gm0goedmug"
-path="res://.godot/imported/chest_anticipation.mp3-600ae00cd9527ea9433960927ef3ad36.mp3str"
+path="res://.godot/imported/chest_anticipation.mp3-e6ea38feb4527b9fd4c094b16455379e.mp3str"
 
 [deps]
 
 source_file="res://assets/Audio/chest_anticipation.mp3"
-dest_files=["res://.godot/imported/chest_anticipation.mp3-600ae00cd9527ea9433960927ef3ad36.mp3str"]
+dest_files=["res://.godot/imported/chest_anticipation.mp3-e6ea38feb4527b9fd4c094b16455379e.mp3str"]
 
 [params]
 

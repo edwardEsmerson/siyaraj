@@ -1,5 +1,8 @@
 # Siyaraj
 
+Start new work from `main`. See [the shared team baseline](docs/team_baseline.md)
+for the integration audit, worktree commands and verification steps.
+
 F5 opens the title screen; choose Playtest menu in debug builds.
 Select the forest, river/ghats, or temple/palace;
 start at the beginning or a checkpoint section, and toggle enemy encounters.
@@ -13,10 +16,11 @@ the title or pause menu for keyboard and controller bindings; see the
 [controller mapping](docs/ui.md#controller-controls).
 
 The river and palace are editable grey levels, each 14,400 pixels long with five
-manual diya checkpoints. The forest exits into Khara's showdown, then the river
-leads into the palace and Swaminathan's showdown. Enter advances at each exit or victory.
+manual diya checkpoints. The forest exits into Khara's showdown; the river ends
+at Dhoomketu's ghats fight, then the palace ends at Swaminathan's showdown.
+Enter advances at each exit or victory.
 Boss fights start with fresh resources and retry inside the arena on death.
-Terrain-only playtests bypass bosses. The menu also offers both campaign showdowns
+Terrain-only playtests bypass bosses. The menu also offers all three campaign showdowns
 directly, alongside the original isolated boss arenas.
 
 The forest level is `scenes/main/forest.tscn`. The current grey draft
@@ -47,7 +51,12 @@ Boss 1, Khara, has an isolated arena: open `scenes/bosses/khara_arena.tscn` with
 He telegraphs an orange gada slam with a ground shockwave, and lays ladi firecracker
 strings that pop along the ground toward Siya. Yellow chevrons show the direction.
 At half health he enrages and adds a second ladi from the far wall. See
-[the Khara design doc](docs/bosses/boss1-khara.md). Khara is not yet placed in the forest.
+[the Khara design doc](docs/bosses/boss1-khara.md). The forest exit opens his showdown.
+
+Boss 2, Dhoomketu, guards the ghats in `scenes/bosses/dhoomketu_arena.tscn`.
+His locked rocket paths, rolling chakris and marked anaar lanes lead into a
+counterattack window. The river exit opens his showdown; victory unlocks the
+palace. See [the Dhoomketu design doc](docs/bosses/boss2-dhoomketu.md).
 
 Final boss, Swaminathan, has an isolated arena at `scenes/bosses/ravan/ravan_arena.tscn`
 (F6) and ends the campaign. Strike him anywhere: every tenth of his health severs
@@ -56,7 +65,7 @@ glowing before it strikes. Phase changes trigger Dashanan Fury: stand in the tea
 lanes. See
 [the Swaminathan design doc](docs/bosses/boss2-ravan.md).
 
-Both bosses use the reusable boss health bar, `scenes/ui/boss_health_bar.tscn`.
+All three bosses use the reusable boss health bar, `scenes/ui/boss_health_bar.tscn`.
 Swaminathan adds a small head-indicator row above it. All boss hazards respect the
 dash i-frames described below.
 
@@ -128,25 +137,12 @@ per second). Its projectile uses the same swept collisions and player damage API
 Run the physics regression checks with:
 
 ```sh
-godot --headless --path . --script res://tests/movement_check.gd
-godot --headless --path . --script res://tests/dash_check.gd
-godot --headless --path . --script res://tests/combat_check.gd
-godot --headless --path . --script res://tests/course_check.gd
-godot --headless --path . --script res://tests/flying_enemy_check.gd
-godot --headless --path . --script res://tests/ground_shooter_check.gd
-godot --headless --path . --script res://tests/brute_check.gd
-godot --headless --path . --script res://tests/forest_check.gd
-godot --headless --path . --script res://tests/forest_rooms_check.gd
-godot --headless --path . --script res://tests/forest_encounters_check.gd
-godot --headless --path . --script res://tests/weapons_check.gd
-godot --headless --path . --script res://tests/weapons_map_check.gd
-godot --headless --path . --script res://tests/forest_weapons_check.gd
-godot --headless --path . --script res://tests/khara_boss_check.gd
-godot --headless --path . --script res://tests/ravan_check.gd
-godot --headless --path . --script res://tests/next_levels_check.gd
-godot --headless --path . --script res://tests/playtest_menu_check.gd
-godot --headless --path . --script res://tests/world_skin_check.gd
+python tools/run_checks.py
 ```
+
+Set `GODOT_BIN` to your Godot 4.7.2 executable first. The runner discovers all
+28 suites and rejects script errors even when Godot exits with code zero.
+See [the shared baseline](docs/team_baseline.md) for platform commands.
 
 See [the team workflow](docs/team_workflow.md) for ownership, agreed rules,
 integration contracts, and the next tasks.
@@ -168,8 +164,8 @@ outside the editor. It is not a standalone distributable executable.
 Generated files go in the ignored `builds/linux/` directory. The export preset
 packs the playtest menu, forest, river, palace, terrain sampler, prototype course,
 movement playground, dev sandbox, weapons playground, Khara, Dhoomketu and Swaminathan boss arenas,
-burst effect and their dependencies, excluding the
-proposal, regression checks and team docs. To run the sandbox (default Guard
+all runtime assets, including dynamically loaded world kits, while excluding
+asset-building tools, regression checks and team docs. To run the sandbox (default Guard
 encounter) from the pack:
 
 ```sh

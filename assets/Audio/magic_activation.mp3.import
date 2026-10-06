@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://dkpoilnavtuq3"
-path="res://.godot/imported/magic_activation.mp3-8d4c4ea0c33af248ab76683d5f71f115.mp3str"
+path="res://.godot/imported/magic_activation.mp3-70c7a81f07fe837d7fd28672c715cd93.mp3str"
 
 [deps]
 
 source_file="res://assets/Audio/magic_activation.mp3"
-dest_files=["res://.godot/imported/magic_activation.mp3-8d4c4ea0c33af248ab76683d5f71f115.mp3str"]
+dest_files=["res://.godot/imported/magic_activation.mp3-70c7a81f07fe837d7fd28672c715cd93.mp3str"]
 
 [params]
 

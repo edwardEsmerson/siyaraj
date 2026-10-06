@@ -12,8 +12,9 @@ the last checkpoint with full health and weapon resources. R resets the level.
 Esc pauses any level or standalone playground. Resume, go back to the last lit
 diya, restart, change settings, quit to the title, or (debug builds) return to
 level select. Time and gameplay stop while paused. The forest exit offers Enter
-to face Khara, whose victory leads to the river. River completion leads to the
-palace, whose exit offers Swaminathan's showdown; defeating Swaminathan and pressing Enter
+to face Khara, whose victory leads to the river. River completion offers
+Dhoomketu's showdown; his victory leads to the palace, whose exit offers
+Swaminathan's showdown. Defeating Swaminathan and pressing Enter
 opens the ending screen. Boss death retries the fight with fresh resources.
 Terrain-only launches skip bosses. See [level iteration](level_iteration.md).
 
@@ -32,6 +33,7 @@ controllers and tuning resources:
 | Melee guard | Dev sandbox preset: chase, attack timing and protection |
 | Dev sandbox | `scenes/dev/sandbox.tscn` with the encounter and loadout chosen on its root in the inspector |
 | Khara arena | Boss 1: gada slam shockwave, ladi firecrackers and enrage (`scenes/bosses/khara_arena.tscn`) |
+| Dhoomketu arena | Boss 2: rocket salvos, rolling chakris and anaar fountains (`scenes/bosses/dhoomketu_arena.tscn`) |
 | Swaminathan arena | Final boss: one health pool, heads severed right to left, glowing head attacks and Dashanan Fury (`scenes/bosses/ravan/ravan_arena.tscn`) |
 | Original combat course | Traversal, combat and exit unlock |
 | Terrain sampler | Stairs, narrow tops, dash gaps and descending landings |
@@ -39,6 +41,7 @@ controllers and tuning resources:
 | Palace gallery and roofs | Actual palace route starting below the gallery climb |
 | Canopy climb | Forest nest room, alternating branches, local diyas and return door |
 | Forest showdown | Campaign Khara fight and victory navigation |
+| Ghats showdown | Campaign Dhoomketu fight and victory navigation |
 | Palace showdown | Campaign Swaminathan fight and victory navigation |
 
 The four enemy snapshots open the one dev sandbox with that enemy preselected
@@ -46,8 +49,8 @@ The four enemy snapshots open the one dev sandbox with that enemy preselected
 Dev sandbox entry clears that preset so the inspector choice applies.
 Snapshots are listed once, in the `SNAPSHOTS` table in
 `scripts/main/playtest_menu.gd`; the selector is filled from it at runtime.
-Add a row there (and to the smoke export list in `export_presets.cfg`) to
-register a new snapshot.
+Add a row there to register a new snapshot. The smoke preset includes all
+runtime resources, so newly referenced scenes and art are packed automatically.
 
 Terrain and canopy snapshots omit encounters. Pause-menu restart repeats the
 chosen snapshot, including the sandbox preset. R also repeats terrain and canopy snapshots. Other playgrounds
