@@ -8,7 +8,6 @@
 /.claude/worktrees/
 
 # Local-only files
-/assets/Audio/
 /.claude/scheduled_tasks.lock
 /.claude/settings.local.json
 /docs/**/*.import
