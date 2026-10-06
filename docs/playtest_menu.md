@@ -67,8 +67,8 @@ Edit the native scenes under `scenes/levels/`. Each route platform has
 `metadata/route_order`; `Checkpoints`, `Encounters`, and `EncounterSpawns` are
 separate editable groups. `AlternateRoutes` separates optional geometry from the
 ordered primary route. Grey river water is a fall zone, with no swimming mechanic.
-Art and moving terrain remain future design work. The existing bosses now finish
-the forest and palace, and forest detour guardians control the far return doors.
+Art and moving terrain remain future design work. Khara, Dhoomketu and Ravan now finish
+the forest, ghats and palace, and forest detour guardians control the far return doors.
 
 `scripts/levels/draft_level.gd` shares checkpoint behavior between these drafts.
 `scripts/main/playtest_navigation.gd` owns pausing and snapshot launches; the pause

@@ -14,6 +14,7 @@ const SNAPSHOTS: Array[Dictionary] = [
 	{"label": "Enemy / melee guard", "path": SANDBOX, "encounter": Sandbox.Encounter.GUARD},
 	{"label": "Dev / sandbox (inspector encounter)", "path": SANDBOX, "encounter": -1},
 	{"label": "Boss / Khara arena", "path": "res://scenes/bosses/khara_arena.tscn"},
+	{"label": "Boss / Dhoomketu arena", "path": "res://scenes/bosses/dhoomketu_arena.tscn"},
 	{"label": "Boss / Ravan arena", "path": "res://scenes/bosses/ravan/ravan_arena.tscn"},
 	{"label": "Mechanic / original combat course", "path": "res://scenes/main/main.tscn"},
 	{"label": "Terrain / sampler", "path": "res://scenes/main/terrain_sampler.tscn", "terrain": true},
@@ -21,6 +22,7 @@ const SNAPSHOTS: Array[Dictionary] = [
 	{"label": "Terrain / palace gallery and roofs", "path": "res://scenes/main/palace.tscn", "terrain": true, "section": 2},
 	{"label": "Mechanic / canopy climb", "path": "res://scenes/main/forest.tscn", "terrain": true, "room": &"CanopyNest"},
 	{"label": "Campaign / forest showdown", "path": "res://scenes/main/forest_showdown.tscn"},
+	{"label": "Campaign / ghats showdown", "path": "res://scenes/main/river_showdown.tscn"},
 	{"label": "Campaign / palace showdown", "path": "res://scenes/main/palace_showdown.tscn"},
 ]
 

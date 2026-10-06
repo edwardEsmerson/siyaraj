@@ -1,0 +1,337 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/bosses/boss_arena.gd" id="1_arena"]
+[ext_resource type="PackedScene" path="res://scenes/bosses/dhoomketu.tscn" id="2_dhoomketu"]
+[ext_resource type="PackedScene" path="res://scenes/player/forest_player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/boss_health_bar.tscn" id="4_bar"]
+
+[sub_resource type="RectangleShape2D" id="FloorShape"]
+size = Vector2(960, 48)
+
+[sub_resource type="RectangleShape2D" id="WallShape"]
+size = Vector2(24, 540)
+
+[sub_resource type="RectangleShape2D" id="CeilingShape"]
+size = Vector2(960, 24)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_arena")
+restart_delay = 0.6
+phase_two_message = "All fuses lit: four rockets, two chakris and three anaar fountains."
+
+[node name="TestCourse" type="Node2D" parent="."]
+
+[node name="Backdrop" type="Polygon2D" parent="TestCourse"]
+z_index = -10
+polygon = PackedVector2Array(0, 0, 960, 0, 960, 430, 0, 430)
+color = Color(0.04, 0.12, 0.2, 1)
+
+[node name="River" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(0, 330, 960, 330, 960, 430, 0, 430)
+color = Color(0.05, 0.28, 0.38, 1)
+
+[node name="Waterline" type="Polygon2D" parent="TestCourse/Backdrop/River"]
+polygon = PackedVector2Array(0, 344, 960, 344, 960, 348, 0, 348)
+color = Color(0.1, 0.55, 0.65, 1)
+
+[node name="PillarLeft" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(90, 210, 130, 210, 130, 430, 90, 430)
+color = Color(0.23, 0.3, 0.34, 1)
+
+[node name="PillarMiddle" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(440, 190, 480, 190, 480, 430, 440, 430)
+color = Color(0.19, 0.25, 0.29, 1)
+
+[node name="PillarRight" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(800, 210, 840, 210, 840, 430, 800, 430)
+color = Color(0.23, 0.3, 0.34, 1)
+
+[node name="Ground" type="StaticBody2D" parent="TestCourse"]
+position = Vector2(480, 454)
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="TestCourse/Ground"]
+polygon = PackedVector2Array(-480, -24, 480, -24, 480, 24, -480, 24)
+color = Color(0.35, 0.19, 0.12, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestCourse/Ground"]
+shape = SubResource("FloorShape")
+
+[node name="LeftWall" type="StaticBody2D" parent="TestCourse"]
+position = Vector2(12, 270)
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="TestCourse/LeftWall"]
+polygon = PackedVector2Array(-12, -270, 12, -270, 12, 270, -12, 270)
+color = Color(0.2, 0.18, 0.16, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestCourse/LeftWall"]
+shape = SubResource("WallShape")
+
+[node name="RightWall" type="StaticBody2D" parent="TestCourse"]
+position = Vector2(948, 270)
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="TestCourse/RightWall"]
+polygon = PackedVector2Array(-12, -270, 12, -270, 12, 270, -12, 270)
+color = Color(0.2, 0.18, 0.16, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestCourse/RightWall"]
+shape = SubResource("WallShape")
+
+[node name="Ceiling" type="StaticBody2D" parent="TestCourse"]
+position = Vector2(480, -12)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestCourse/Ceiling"]
+shape = SubResource("CeilingShape")
+
+[node name="PlayerSpawn" type="Marker2D" parent="TestCourse"]
+position = Vector2(200, 430)
+
+[node name="Boss" parent="TestCourse" instance=ExtResource("2_dhoomketu")]
+position = Vector2(720, 430)
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 270)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Title" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 14.0
+offset_right = 936.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 22
+text = "SIYARAJ / boss arena: Dhoomketu"
+
+[node name="Controls" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 936.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 14
+text = "A/D: move    Space: jump    Shift: dash    J: sparkler    L: skyshot    hold K: chakri    R: restart"
+
+[node name="Milestone" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 72.0
+offset_right = 936.0
+offset_bottom = 112.0
+theme_override_font_sizes/font_size = 14
+text = "Pink flight paths: staggered rockets. Gold spinners: jump or dash.
+Gold ground marks: anaar fountains. Leave the lanes; strike while he reloads."
+
+[node name="HealthStatus" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 116.0
+offset_right = 936.0
+offset_bottom = 136.0
+theme_override_font_sizes/font_size = 14
+text = "Siya health: 3/3"
+
+[node name="DashStatus" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 136.0
+offset_right = 936.0
+offset_bottom = 156.0
+theme_override_font_sizes/font_size = 14
+text = "Rocket dash: READY"
+
+[node name="WeaponStatus" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 156.0
+offset_right = 936.0
+offset_bottom = 176.0
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 14
+text = "Skyshot: 5/5    Chakri: READY    Hold K to charge; release to spin."
+
+[node name="CombatStatus" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 176.0
+offset_right = 936.0
+offset_bottom = 196.0
+theme_override_font_sizes/font_size = 14
+text = "Dhoomketu commands the fireworks barge. Strike while he reloads."
+
+[node name="InputStatus" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 196.0
+offset_right = 936.0
+offset_bottom = 216.0
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_font_sizes/font_size = 12
+text = "Input received: none"
+
+[node name="DeathMessage" type="Label" parent="HUD"]
+visible = false
+offset_left = 300.0
+offset_top = 220.0
+offset_right = 660.0
+offset_bottom = 285.0
+theme_override_font_sizes/font_size = 28
+text = "SIYA DOWN
+Restarting..."
+horizontal_alignment = 1
+
+[node name="BossHealthBar" parent="HUD" instance=ExtResource("4_bar")]
+
+[node name="BargeHull" type="Polygon2D" parent="TestCourse"]
+z_index = -1
+polygon = PackedVector2Array(25, 478, 935, 478, 870, 528, 90, 528)
+color = Color(0.24, 0.11, 0.08, 1)
+
+[node name="Diya0" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(65, 418, 85, 418, 81, 424, 69, 424)
+color = Color(0.7, 0.32, 0.12, 1)
+
+[node name="Flame" type="Polygon2D" parent="TestCourse/Backdrop/Diya0"]
+polygon = PackedVector2Array(72, 416, 75, 405, 79, 416)
+color = Color(1, 0.76, 0.22, 1)
+
+[node name="Diya1" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(150, 418, 170, 418, 166, 424, 154, 424)
+color = Color(0.7, 0.32, 0.12, 1)
+
+[node name="Flame" type="Polygon2D" parent="TestCourse/Backdrop/Diya1"]
+polygon = PackedVector2Array(157, 416, 160, 405, 164, 416)
+color = Color(1, 0.76, 0.22, 1)
+
+[node name="Diya2" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(235, 418, 255, 418, 251, 424, 239, 424)
+color = Color(0.7, 0.32, 0.12, 1)
+
+[node name="Flame" type="Polygon2D" parent="TestCourse/Backdrop/Diya2"]
+polygon = PackedVector2Array(242, 416, 245, 405, 249, 416)
+color = Color(1, 0.76, 0.22, 1)
+
+[node name="Diya3" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(320, 418, 340, 418, 336, 424, 324, 424)
+color = Color(0.7, 0.32, 0.12, 1)
+
+[node name="Flame" type="Polygon2D" parent="TestCourse/Backdrop/Diya3"]
+polygon = PackedVector2Array(327, 416, 330, 405, 334, 416)
+color = Color(1, 0.76, 0.22, 1)
+
+[node name="Diya4" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(405, 418, 425, 418, 421, 424, 409, 424)
+color = Color(0.7, 0.32, 0.12, 1)
+
+[node name="Flame" type="Polygon2D" parent="TestCourse/Backdrop/Diya4"]
+polygon = PackedVector2Array(412, 416, 415, 405, 419, 416)
+color = Color(1, 0.76, 0.22, 1)
+
+[node name="Diya5" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(490, 418, 510, 418, 506, 424, 494, 424)
+color = Color(0.7, 0.32, 0.12, 1)
+
+[node name="Flame" type="Polygon2D" parent="TestCourse/Backdrop/Diya5"]
+polygon = PackedVector2Array(497, 416, 500, 405, 504, 416)
+color = Color(1, 0.76, 0.22, 1)
+
+[node name="Diya6" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(575, 418, 595, 418, 591, 424, 579, 424)
+color = Color(0.7, 0.32, 0.12, 1)
+
+[node name="Flame" type="Polygon2D" parent="TestCourse/Backdrop/Diya6"]
+polygon = PackedVector2Array(582, 416, 585, 405, 589, 416)
+color = Color(1, 0.76, 0.22, 1)
+
+[node name="Diya7" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(660, 418, 680, 418, 676, 424, 664, 424)
+color = Color(0.7, 0.32, 0.12, 1)
+
+[node name="Flame" type="Polygon2D" parent="TestCourse/Backdrop/Diya7"]
+polygon = PackedVector2Array(667, 416, 670, 405, 674, 416)
+color = Color(1, 0.76, 0.22, 1)
+
+[node name="Diya8" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(745, 418, 765, 418, 761, 424, 749, 424)
+color = Color(0.7, 0.32, 0.12, 1)
+
+[node name="Flame" type="Polygon2D" parent="TestCourse/Backdrop/Diya8"]
+polygon = PackedVector2Array(752, 416, 755, 405, 759, 416)
+color = Color(1, 0.76, 0.22, 1)
+
+[node name="Diya9" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(830, 418, 850, 418, 846, 424, 834, 424)
+color = Color(0.7, 0.32, 0.12, 1)
+
+[node name="Flame" type="Polygon2D" parent="TestCourse/Backdrop/Diya9"]
+polygon = PackedVector2Array(837, 416, 840, 405, 844, 416)
+color = Color(1, 0.76, 0.22, 1)
+
+[node name="Bunting0" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(60, 230, 100, 230, 80, 255)
+color = Color(0.95, 0.65, 0.15, 1)
+
+[node name="Bunting1" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(150, 230, 190, 230, 170, 255)
+color = Color(0.75, 0.12, 0.3, 1)
+
+[node name="Bunting2" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(240, 230, 280, 230, 260, 255)
+color = Color(0.95, 0.65, 0.15, 1)
+
+[node name="Bunting3" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(330, 230, 370, 230, 350, 255)
+color = Color(0.75, 0.12, 0.3, 1)
+
+[node name="Bunting4" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(420, 230, 460, 230, 440, 255)
+color = Color(0.95, 0.65, 0.15, 1)
+
+[node name="Bunting5" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(510, 230, 550, 230, 530, 255)
+color = Color(0.75, 0.12, 0.3, 1)
+
+[node name="Bunting6" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(600, 230, 640, 230, 620, 255)
+color = Color(0.95, 0.65, 0.15, 1)
+
+[node name="Bunting7" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(690, 230, 730, 230, 710, 255)
+color = Color(0.75, 0.12, 0.3, 1)
+
+[node name="Bunting8" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(780, 230, 820, 230, 800, 255)
+color = Color(0.95, 0.65, 0.15, 1)
+
+[node name="Bunting9" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(870, 230, 910, 230, 890, 255)
+color = Color(0.75, 0.12, 0.3, 1)
+
+[node name="FireworkCrate0" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(76, 390, 124, 390, 124, 430, 76, 430)
+color = Color(0.45, 0.24, 0.12, 1)
+
+[node name="Rocket0" type="Polygon2D" parent="TestCourse/Backdrop/FireworkCrate0"]
+polygon = PackedVector2Array(80, 388, 80, 365, 84, 355, 88, 365, 88, 388)
+color = Color(0.9, 0.2, 0.35, 1)
+
+[node name="Rocket1" type="Polygon2D" parent="TestCourse/Backdrop/FireworkCrate0"]
+polygon = PackedVector2Array(96, 388, 96, 365, 100, 355, 104, 365, 104, 388)
+color = Color(0.9, 0.2, 0.35, 1)
+
+[node name="Rocket2" type="Polygon2D" parent="TestCourse/Backdrop/FireworkCrate0"]
+polygon = PackedVector2Array(112, 388, 112, 365, 116, 355, 120, 365, 120, 388)
+color = Color(0.9, 0.2, 0.35, 1)
+
+[node name="FireworkCrate1" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(816, 390, 864, 390, 864, 430, 816, 430)
+color = Color(0.45, 0.24, 0.12, 1)
+
+[node name="Rocket0" type="Polygon2D" parent="TestCourse/Backdrop/FireworkCrate1"]
+polygon = PackedVector2Array(820, 388, 820, 365, 824, 355, 828, 365, 828, 388)
+color = Color(0.9, 0.2, 0.35, 1)
+
+[node name="Rocket1" type="Polygon2D" parent="TestCourse/Backdrop/FireworkCrate1"]
+polygon = PackedVector2Array(836, 388, 836, 365, 840, 355, 844, 365, 844, 388)
+color = Color(0.9, 0.2, 0.35, 1)
+
+[node name="Rocket2" type="Polygon2D" parent="TestCourse/Backdrop/FireworkCrate1"]
+polygon = PackedVector2Array(852, 388, 852, 365, 856, 355, 860, 365, 860, 388)
+color = Color(0.9, 0.2, 0.35, 1)
