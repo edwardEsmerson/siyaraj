@@ -1,0 +1,99 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Theme" path="res://resources/ui/siyaraj_theme.tres" id="1_theme"]
+[ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="2_pause"]
+[ext_resource type="Texture2D" path="res://assets/ui/divider.png" id="3_divider"]
+[ext_resource type="PackedScene" path="res://scenes/ui/settings_panel.tscn" id="4_settings"]
+[ext_resource type="PackedScene" path="res://scenes/ui/controls_panel.tscn" id="5_controls"]
+[ext_resource type="Script" path="res://scripts/ui/diya_cursor.gd" id="6_cursor"]
+[ext_resource type="Texture2D" path="res://assets/ui/diya.png" id="7_diya"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_theme")
+script = ExtResource("2_pause")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.08, 0.03, 0.1, 0.62)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="Column" type="VBoxContainer" parent="Center/Menu"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Header" type="Label" parent="Center/Menu/Column"]
+layout_mode = 2
+theme_type_variation = &"HeaderLabel"
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Divider" type="TextureRect" parent="Center/Menu/Column"]
+layout_mode = 2
+texture = ExtResource("3_divider")
+stretch_mode = 3
+
+[node name="Buttons" type="VBoxContainer" parent="Center/Menu/Column"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Resume" type="Button" parent="Center/Menu/Column/Buttons"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Checkpoint" type="Button" parent="Center/Menu/Column/Buttons"]
+layout_mode = 2
+text = "Back to last diya"
+
+[node name="Restart" type="Button" parent="Center/Menu/Column/Buttons"]
+layout_mode = 2
+text = "Restart level"
+
+[node name="Controls" type="Button" parent="Center/Menu/Column/Buttons"]
+layout_mode = 2
+text = "Controls"
+
+[node name="Settings" type="Button" parent="Center/Menu/Column/Buttons"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Title" type="Button" parent="Center/Menu/Column/Buttons"]
+layout_mode = 2
+text = "Quit to title"
+
+[node name="LevelSelect" type="Button" parent="Center/Menu/Column/Buttons"]
+layout_mode = 2
+text = "Level select (dev)"
+
+[node name="Settings" parent="Center" instance=ExtResource("4_settings")]
+visible = false
+layout_mode = 2
+
+[node name="Controls" parent="Center" instance=ExtResource("5_controls")]
+visible = false
+layout_mode = 2
+
+[node name="DiyaCursor" type="TextureRect" parent="." node_paths=PackedStringArray("menu")]
+layout_mode = 0
+texture = ExtResource("7_diya")
+script = ExtResource("6_cursor")
+menu = NodePath("../Center")

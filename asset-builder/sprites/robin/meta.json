@@ -1,0 +1,17 @@
+{
+  "name": "robin",
+  "brief": "Robin, Siya's bird companion: a small, original Indian-folk firebird inspired by Jatayu, the noble vulture-king of the Ramayana. Side view facing right, in flight, both wings raised high in a V, long tail plumes trailing down and back, talons tucked under the body. Vivid vermillion-red wings and back; each wing's long flight feathers tipped with cream and then emerald green; feathers decorated with small Madhubani-style dot and line patterns in marigold. A cream belly and a fluffy white ruff around the neck, like a vulture's. A noble head with a strongly hooked golden raptor beak, a sharp, friendly eye with a crimson eye-mask, and a curled golden crest. A fan of long marigold-gold and orange tail plumes. Slim, regal and colourful, with bold, clean shapes that read at a small size. Original design; the references guide mood and colours only.",
+  "key": "blue",
+  "role": "flyer",
+  "target": 48,
+  "size": "2K",
+  "anchor_mode": "center",
+  "canvas": [
+    80,
+    80
+  ],
+  "anchor": [
+    40,
+    40
+  ]
+}

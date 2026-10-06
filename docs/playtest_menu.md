@@ -1,6 +1,7 @@
 # Playtest menu and next level drafts
 
-Run the project with F5 to open the menu. F6 still runs the current scene directly.
+Run the project with F5 to open the title screen, then choose Playtest menu (shown
+in debug builds only). F6 still runs the current scene directly.
 
 Select Forest, River and ghats, or Temple and palace. Choose Beginning or a named
 checkpoint section, then Play selected level. New launches reset that level's
@@ -8,9 +9,11 @@ session progress. Turn off Enable enemy encounters to focus on traversal.
 Checkpoints require a fresh E press while grounded beside a diya. Death restores
 the last checkpoint with full health and weapon resources. R resets the level.
 
-Esc pauses any level or standalone playground. Resume, restart, or return to
+Esc pauses any level or standalone playground. Resume, go back to the last lit
+diya, restart, change settings, quit to the title, or (debug builds) return to
 level select. Time and gameplay stop while paused. Finishing the forest or river
-offers Enter to advance to the next level.
+offers Enter to advance to the next level. Finishing the palace offers Enter to
+face Ravan; defeating Ravan and pressing Enter opens the ending screen.
 
 ## Developer snapshots
 
@@ -64,7 +67,8 @@ mechanic. These are first traversal and encounter drafts; art, moving terrain,
 bosses and encounter gates remain future design work.
 
 `scripts/levels/draft_level.gd` shares checkpoint behavior between these drafts.
-`scripts/main/playtest_navigation.gd` owns pause and snapshot launches. Main HUD
+`scripts/main/playtest_navigation.gd` owns pausing and snapshot launches; the pause
+menu itself is `scenes/ui/pause_menu.tscn`. Main HUD
 and weapons use the same scripts as the forest. No movement values changed.
 
 Validate with `tests/next_levels_check.gd` and `tests/playtest_menu_check.gd` in

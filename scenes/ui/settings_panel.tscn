@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/settings_panel.gd" id="1_settings"]
+[ext_resource type="Texture2D" path="res://assets/ui/divider.png" id="2_divider"]
+
+[node name="SettingsPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(340, 0)
+script = ExtResource("1_settings")
+
+[node name="Column" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Header" type="Label" parent="Column"]
+layout_mode = 2
+theme_type_variation = &"HeaderLabel"
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="Divider" type="TextureRect" parent="Column"]
+layout_mode = 2
+texture = ExtResource("2_divider")
+stretch_mode = 3
+
+[node name="Fullscreen" type="CheckBox" parent="Column"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="VolumeRow" type="HBoxContainer" parent="Column"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Column/VolumeRow"]
+layout_mode = 2
+text = "Volume"
+
+[node name="Volume" type="HSlider" parent="Column/VolumeRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 0.8
+
+[node name="Back" type="Button" parent="Column"]
+layout_mode = 2
+text = "Back"

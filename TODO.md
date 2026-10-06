@@ -10,34 +10,40 @@ start-to-finish route, so section 1 comes first.
 
 Most of sections 2 to 4 depend on these.
 
-- [ ] **Check the jam rules:** deadline, platform (Windows, Web or Linux), upload
+- [x] **Check the jam rules:** deadline, platform (Windows, Web or Linux), upload
   format, and whether AI-generated art must be declared or is banned. Our sprites
   come from Nano Banana, so this one matters most.
-- [ ] **Match the story to what's built.** The proposal has Swaminathan, the Robin
+  - [ ] Need to submit to itch.io, AI everything is allowed no declarations needed
+- [x] **Match the story to what's built.** The proposal has Swaminathan, the Robin
   fight and the "Nathan Robin" twist. The code has Khara and Ravan as bosses and no
   Robin, Raj or Swaminathan. Either write a new story around Khara and Ravan, or add
   the Swaminathan/Robin fight. The proposal says the Robin fight and the lit-up
-  ending stay in no matter what.
-- [ ] **Fix the level order.** The proposal goes ghats → forest → palace. The code
+  ending stay in no matter what., 
+  - [ ] Ravan should be Swaminathan, we need to make a simple name change, we need
+- [x] **Fix the level order.** The proposal goes ghats → forest → palace. The code
   goes forest → river → palace (`next_level` in `scenes/main/forest.tscn` and
   `scenes/main/river.tscn`).
-- [ ] **Decide where each boss goes.** Khara and Ravan only exist in separate
+  - [ ] that doesn't matter
+- [x] **Decide where each boss goes.** Khara and Ravan only exist in separate
   arenas. None of the three levels leads into a boss fight.
+  - [ ] The last level should lead to a fight with Swaminathan and the second level to khara, we need to integrate that into the levels
 - [ ] **Write down the cuts from the proposal:** anar slam (skyshot took its place),
   Robin strike, the shielded enemy and the sparkler combo chain. Then the submission
   page and the theme explanation can match the game.
+  - [ ] This we'll do later
 
 ## 2. A playable game from start to finish
 
 The game currently opens on the developer playtest menu, and the palace finish
 leads nowhere.
 
-- [ ] **Add a title screen** with New Game, Controls, Settings and Quit. Right now
-  `run/main_scene` is the playtest menu.
-- [ ] **Hide the developer tools in release builds:** snapshots, the encounter toggle
-  and the checkpoint picker. One way is to check `OS.is_debug_build()` or a custom
-  export feature tag.
-- [ ] **Connect the levels:** level 1 → level 2 → level 3 → boss → ending.
+- [x] **Add a title screen** with New Game, Controls, Settings and Quit
+  (`scenes/main/title.tscn`, now `run/main_scene`). Pause menu restyled to match.
+- [x] **Hide the developer tools in release builds:** the title's Playtest menu button
+  and the pause menu's Level select only show when `OS.is_debug_build()`, so a
+  release export never reaches snapshots, the encounter toggle or the checkpoint
+  picker. Export the itch.io build with debug off.
+- [x] **Connect the levels:** level 1 → level 2 → level 3 → boss → ending.
 - [ ] **Add boss arenas to the levels**, with an entrance, a checkpoint before the
   fight, and a door or gate that unlocks after the win.
 - [ ] **Add an ending and credits:** the lit-up Diwali finale, Raj freed, then team

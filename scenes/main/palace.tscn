@@ -16,9 +16,10 @@ border_color = Color(0.8, 0.8, 0.8, 1)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_main")
 restart_delay = 0.35
+next_level = "res://scenes/bosses/ravan/ravan_arena.tscn"
 completion_title = "PALACE COMPLETE"
-completion_detail = "Throne landing reached"
-completion_status = "Draft route complete. Esc: level select / R: replay"
+completion_detail = "Ravan awaits in Lanka"
+completion_status = "The palace is clear. Enter: face Ravan / R: replay the palace."
 
 [node name="TestCourse" parent="." instance=ExtResource("2_course")]
 
