@@ -8,6 +8,8 @@ extends Node2D
 @export var completion_detail: String = "Guard defeated"
 @export var completion_status: String = "Guard defeated. Finish reached!"
 @export var next_level: String = ""
+@export var showdown_scene: String = ""
+@export var showdown_name: String = ""
 
 @onready var player: CharacterBody2D = $Player
 @onready var player_spawn: Marker2D = $TestCourse/PlayerSpawn
@@ -117,15 +119,26 @@ func _finish_course() -> void:
 	completed = true
 	$HUD/Completion.visible = true
 	$HUD/Completion/Message.text = "%s\n%s / %.1f seconds\nR to replay" % [completion_title, completion_detail, elapsed]
-	if not next_level.is_empty():
+	if not showdown_scene.is_empty() and PlaytestNavigation.enemies_enabled:
+		$HUD/Completion/Message.text = "TRAIL CLEARED\n%s awaits / %.1f seconds\nEnter: face %s / R: replay" % [showdown_name, elapsed, showdown_name]
+		combat_status.text = "Enter the showdown with fresh health and weapons. Death retries the fight."
+		return
+	elif not next_level.is_empty():
 		$HUD/Completion/Message.text += " / Enter: next level"
+	elif not showdown_scene.is_empty():
+		$HUD/Completion/Message.text += " / Enter: menu"
 	combat_status.text = completion_status
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if completed and not next_level.is_empty() and event.is_action_pressed("ui_accept"):
+	if completed and event.is_action_pressed("ui_accept") and (not next_level.is_empty() or not showdown_scene.is_empty()):
 		get_viewport().set_input_as_handled()
-		PlaytestNavigation.start_level(next_level)
+		if not showdown_scene.is_empty() and PlaytestNavigation.enemies_enabled:
+			PlaytestNavigation.start_level(showdown_scene)
+		elif not next_level.is_empty():
+			PlaytestNavigation.start_level(next_level)
+		else:
+			PlaytestNavigation.show_menu()
 		return
 	if event.is_action_pressed("restart"):
 		get_viewport().set_input_as_handled()

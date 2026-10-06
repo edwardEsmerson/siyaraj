@@ -7,17 +7,21 @@ sandbox (preset to each enemy), the Khara and Ravan boss arenas, terrain and
 canopy tests. Esc pauses any scene and offers restart or level select.
 See [playtest menu and draft editing](docs/playtest_menu.md).
 
-The river and palace are editable grey drafts, each 14,400 pixels long with five
-manual diya checkpoints. Completing the forest or river offers Enter to advance.
+The river and palace are editable grey levels, each 14,400 pixels long with five
+manual diya checkpoints. The forest exits into Khara's showdown, then the river
+leads into the palace and Ravan's showdown. Enter advances at each exit or victory.
+Boss fights start with fresh resources and retry inside the arena on death.
+Terrain-only playtests bypass bosses. The menu also offers both campaign showdowns
+directly, alongside the original isolated boss arenas.
 
 The forest level is `scenes/main/forest.tscn`. The current grey draft
-is 21,600 pixels long, with 59 route platforms, high root climbs, narrow
-landings, ceiling sections, a switchback climb and sustained dash chains.
+is 21,600 pixels long, with high root climbs, narrow landings, ceiling sections,
+a switchback climb, lower recovery routes and staged melee/ranged encounters.
 Stand beside a diya and press E to light it and secure a checkpoint. Passing
 one does not save. Death returns to the furthest lit diya with full health;
-R clears all checkpoints and restarts the forest. The clearing has a guard,
-the banyan approach has a ground shooter, and the shrine has a Brute.
-The root chamber also has a shooter; the canopy nest awaits a future encounter.
+R clears all checkpoints and restarts the forest. Eight main encounters lead
+through the clearing, hollow, canopy and shrine. The root chamber and canopy
+nest have their own enemy challenges, local checkpoints and guarded far exits.
 See [forest design and enemy handoff](docs/forest_level.md).
 
 The root ridge and banyan climb also have E doors into isolated root and

@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/bosses/ravan/ravan_arena.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/main/campaign_victory.tscn" id="2"]
+
+[node name="RavanArena" instance=ExtResource("1")]
+
+[node name="Sky" parent="Backdrop" index="0"]
+color = Color(0.08, 0.08, 0.08, 1)
+
+[node name="LankaTowers" parent="Backdrop" index="1"]
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="Body" parent="Ground" index="0"]
+color = Color(0.34, 0.34, 0.34, 1)
+
+[node name="Body" parent="LeftWall" index="0"]
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="Body" parent="RightWall" index="0"]
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="Body" parent="LedgeLeft" index="0"]
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Body" parent="LedgeRight" index="0"]
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Title" parent="HUD" index="0"]
+text = "SIYARAJ / palace showdown: Ravan"
+
+[node name="CampaignFlow" parent="." instance=ExtResource("2")]
+boss_path = NodePath("../Ravan")
+next_level = "res://scenes/main/ending.tscn"
+destination_name = "the ending"
