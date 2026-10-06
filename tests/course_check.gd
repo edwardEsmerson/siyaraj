@@ -60,7 +60,8 @@ func run_checks() -> void:
 		await ticks(12)
 		Input.action_press("dash")
 		await ticks(2)
-		check(player.get_node("DashTrail").samples.size() > 0, "Dashing must leave a visible trail")
+		check(not player.get_node("DashTrail").visible and player.get_node("DashTrail").samples.is_empty(), "Dashing must use the sprite without an extra trail")
+		check(not player.get_node("DashExhaust").visible, "Dashing must not show the prototype exhaust")
 		await ticks(7)
 		Input.action_release("dash")
 		await ticks(23)
@@ -68,7 +69,7 @@ func run_checks() -> void:
 		check(player.dash_available, "Landing between course gaps must restore the air dash")
 		release_inputs()
 		await ticks(12)
-		check(player.get_node("DashTrail").samples.is_empty(), "Dash trail must fade after the dash ends")
+		check(player.get_node("DashTrail").samples.is_empty(), "Dash must not leave trail samples after it ends")
 
 	await place_player(Vector2(4130, 400))
 	Input.action_press("dash")
