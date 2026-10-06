@@ -56,6 +56,22 @@ func run_checks() -> void:
 	await ticks(3)
 	check(player.is_on_floor(), "Player must spawn grounded")
 
+	check(ProjectSettings.get_setting("physics/common/physics_interpolation", false), "Movement must interpolate between physics ticks on high refresh displays")
+	check(current_scene.camera.process_callback == Camera2D.CAMERA2D_PROCESS_PHYSICS, "Camera must track on the physics clock")
+	# Several display frames without a physics tick must not move the camera.
+	var spawn := player.position
+	var camera_start: Vector2 = current_scene.camera.position
+	player.position.x = 700.0
+	for frame in range(4):
+		current_scene._process(1.0 / 200.0)
+	check(current_scene.camera.position == camera_start, "Idle frames must not chase a stepped physics position")
+	current_scene._physics_process(1.0 / 60.0)
+	check(current_scene.camera.position.x > camera_start.x, "Camera must follow on the next physics tick")
+	player.position = spawn
+	player.reset_physics_interpolation()
+	current_scene.camera.position = camera_start
+	current_scene.camera.reset_physics_interpolation()
+
 	Input.action_press("move_right")
 	await ticks(6)
 	check(is_equal_approx(player.velocity.x, 240.0), "Running should reach configured speed in 0.1 seconds")

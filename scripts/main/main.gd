@@ -26,6 +26,12 @@ var _course_width: int = 4200
 @onready var course: Node2D = $TestCourse
 
 
+func _enter_tree() -> void:
+	# Follow after player, companion and course physics have updated.
+	process_physics_priority = 10
+	$Camera2D.process_callback = Camera2D.CAMERA2D_PROCESS_PHYSICS
+
+
 func _ready() -> void:
 	PlaytestNavigation.configure_course(course)
 	if not PlaytestNavigation.snapshot.is_empty():
@@ -33,6 +39,7 @@ func _ready() -> void:
 	player.global_position = player_spawn.global_position
 	if course.has_method("restore_transition_state"):
 		course.restore_transition_state(player)
+	player.reset_physics_interpolation()
 	player.died.connect(_restart)
 	camera.position.x = player.global_position.x
 	camera.limit_left = 0
@@ -46,6 +53,7 @@ func _ready() -> void:
 	if course.has_method("camera_region"):
 		camera.position.y = clampf(player.position.y - 70.0, camera.limit_top + 270.0, camera.limit_bottom - 270.0)
 	camera.reset_smoothing()
+	camera.reset_physics_interpolation()
 	var enemy := course.get_node_or_null("Enemy")
 	if enemy != null:
 		var encounter_name: String = enemy.enemy_name
@@ -60,18 +68,6 @@ func _process(delta: float) -> void:
 	if course.has_method("hint_at"):
 		$HUD/Milestone.text = course.hint_at(player.global_position.x)
 		$HUD/InputStatus.text = "%.1f s" % elapsed
-	# Fixed vertical framing prevents jump/dash motion from moving the landing floor.
-	# Ease horizontal look-ahead when turning so the camera does not snap.
-	var target_x := clampf(player.global_position.x + player.facing_direction * camera_look_ahead, 480.0, _course_width - 480.0)
-	if not course.has_method("camera_region") or course.current_room == &"":
-		camera.position.x = lerpf(camera.position.x, target_x, 1.0 - exp(-camera_follow_speed * delta))
-	if course.has_method("camera_region"):
-		_update_camera_region()
-		if course.current_room != &"":
-			camera.position.x = lerpf(camera.position.x, clampf(player.position.x, camera.limit_left + 480.0, camera.limit_right - 480.0), 1.0 - exp(-camera_follow_speed * delta))
-			camera.position.y = lerpf(camera.position.y, clampf(player.position.y - 70.0, camera.limit_top + 270.0, camera.limit_bottom - 270.0), 1.0 - exp(-camera_follow_speed * delta))
-		else:
-			camera.position.y = 270.0
 	health_status.text = "Siya health: %d/%d" % [player.health, player.max_health]
 	var weapon_status := get_node_or_null("HUD/WeaponStatus") as Label
 	if weapon_status != null:
@@ -90,6 +86,22 @@ func _process(delta: float) -> void:
 	var death_y: float = course.death_boundary() if course.has_method("death_boundary") else fall_boundary
 	if player.global_position.y > death_y:
 		player.die()
+
+
+func _physics_process(delta: float) -> void:
+	# Track on the same clock as Siya and Robin; Godot interpolates between ticks.
+	# Fixed vertical framing prevents jump/dash motion from moving the landing floor.
+	# Ease horizontal look-ahead when turning so the camera does not snap.
+	var target_x := clampf(player.global_position.x + player.facing_direction * camera_look_ahead, 480.0, _course_width - 480.0)
+	if not course.has_method("camera_region") or course.current_room == &"":
+		camera.position.x = lerpf(camera.position.x, target_x, 1.0 - exp(-camera_follow_speed * delta))
+	if course.has_method("camera_region"):
+		_update_camera_region()
+		if course.current_room != &"":
+			camera.position.x = lerpf(camera.position.x, clampf(player.position.x, camera.limit_left + 480.0, camera.limit_right - 480.0), 1.0 - exp(-camera_follow_speed * delta))
+			camera.position.y = lerpf(camera.position.y, clampf(player.position.y - 70.0, camera.limit_top + 270.0, camera.limit_bottom - 270.0), 1.0 - exp(-camera_follow_speed * delta))
+		else:
+			camera.position.y = 270.0
 
 
 func _update_camera_region() -> void:

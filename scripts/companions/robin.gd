@@ -121,9 +121,7 @@ func _process_follow(delta: float) -> void:
 		return
 	var spot := _follow_spot()
 	if not _placed or global_position.distance_to(spot) > teleport_distance:
-		_placed = true
-		global_position = spot
-		velocity = Vector2.ZERO
+		snap_to(spot)
 		return
 	_fly_toward(spot, delta)
 	if player.state == player.State.DEAD:
@@ -323,5 +321,6 @@ func fly_to(at: Vector2, speed: float = point_speed) -> Signal:
 ## Place Robin immediately, e.g. at the start of a cutscene.
 func snap_to(at: Vector2) -> void:
 	global_position = at
+	reset_physics_interpolation()
 	velocity = Vector2.ZERO
 	_placed = true
