@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/ability_hud.gd" id="polished_hud"]
 
+[ext_resource type="Script" path="res://scripts/levels/world_skin.gd" id="world_skin"]
 [ext_resource type="Script" path="res://scripts/bosses/boss_arena.gd" id="1_arena"]
 [ext_resource type="PackedScene" path="res://scenes/bosses/dhoomketu.tscn" id="2_dhoomketu"]
 [ext_resource type="PackedScene" path="res://scenes/player/forest_player.tscn" id="3_player"]
@@ -368,3 +369,9 @@ color = Color(0.9, 0.2, 0.35, 1)
 [node name="Rocket2" type="Polygon2D" parent="TestCourse/Backdrop/FireworkCrate1"]
 polygon = PackedVector2Array(852, 388, 852, 365, 856, 355, 860, 365, 860, 388)
 color = Color(0.9, 0.2, 0.35, 1)
+
+[node name="WorldSkin" type="Node2D" parent="."]
+script = ExtResource("world_skin")
+biome = "river"
+direction = "titlematch"
+arena = true
