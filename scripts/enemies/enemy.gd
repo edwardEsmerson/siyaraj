@@ -24,11 +24,28 @@ var _hurt_remaining: float = 0.0
 var _hit_flash_remaining: float = 0.0
 
 @onready var body: Polygon2D = $Body
+@onready var art: Node2D = $Visuals/Art
+@onready var sprite: AnimatedSprite2D = $Visuals/Art/Sprite
 @onready var attack: Node2D = $MeleeAttack
 @onready var status: Label = $Name
 
 
+static func play_death_art(scene: Node, art: Node2D, world_position: Vector2) -> void:
+	if not is_instance_valid(scene) or not is_instance_valid(art):
+		return
+	var death_art := art.duplicate() as Node2D
+	scene.add_child(death_art)
+	death_art.global_position = world_position + art.position
+	var death_sprite := death_art.get_node("Sprite") as AnimatedSprite2D
+	death_sprite.animation = &"death"
+	death_sprite.frame = 0
+	death_sprite.modulate = Color.WHITE
+	death_sprite.animation_finished.connect(death_art.queue_free)
+	death_sprite.play()
+
+
 func _ready() -> void:
+	body.hide()
 	health = max_health
 	_home_x = global_position.x
 	_update_feedback()
@@ -78,27 +95,36 @@ func _physics_process(delta: float) -> void:
 
 
 func _update_feedback() -> void:
-	body.modulate = Color.WHITE
+	sprite.modulate = Color.WHITE
 	var action_hint := "PATROL"
 	match state:
 		State.HURT:
-			body.modulate = Color(2.0, 2.0, 2.0) if _hit_flash_remaining > 0.0 else Color(1.2, 0.8, 0.8)
+			sprite.modulate = Color(2.0, 2.0, 2.0) if _hit_flash_remaining > 0.0 else Color(1.2, 0.8, 0.8)
 			action_hint = "HIT"
 		State.ATTACK:
 			match attack.phase:
 				attack.Phase.WINDUP:
-					body.modulate = Color(2.0, 1.2, 0.35)
+					sprite.modulate = Color(2.0, 1.2, 0.35)
 					action_hint = "WIND-UP!"
 				attack.Phase.ACTIVE:
-					body.modulate = Color(2.2, 0.4, 0.3)
+					sprite.modulate = Color(2.2, 0.4, 0.3)
 					action_hint = "STRIKE!"
 				_:
-					body.modulate = Color(0.7, 0.75, 0.85)
+					sprite.modulate = Color(0.7, 0.75, 0.85)
 					action_hint = "RECOVERING"
 		State.CHASE:
-			body.modulate = Color(1.4, 1.1, 0.7)
+			sprite.modulate = Color(1.4, 1.1, 0.7)
 			action_hint = "APPROACHING"
 	status.text = "%s %d/%d\n%s" % [enemy_name, health, max_health, action_hint]
+	art.scale.x = -0.5 if _direction < 0 else 0.5
+	var animation: StringName = &"walk"
+	match state:
+		State.ATTACK:
+			animation = &"attack"
+		State.HURT:
+			animation = &"idle"
+	if sprite.animation != animation or not sprite.is_playing():
+		sprite.play(animation)
 
 
 func take_damage(amount: int, knockback: Vector2) -> void:
@@ -109,6 +135,7 @@ func take_damage(amount: int, knockback: Vector2) -> void:
 	attack.cancel()
 	if health == 0:
 		state = State.DEAD
+		play_death_art(get_tree().current_scene, art, global_position)
 		Burst.spawn(get_tree().current_scene, global_position + Vector2(0, -20), Color(1.0, 0.75, 0.25), "BOOM!", 38.0)
 		died.emit()
 		queue_free()
