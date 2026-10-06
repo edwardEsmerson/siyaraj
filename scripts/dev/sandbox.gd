@@ -15,7 +15,7 @@ const ENCOUNTERS := {
 	Encounter.FLYER: [preload("res://scenes/enemies/flying_enemy.tscn"), Vector2(500, 385), "Flyer",
 		"Orange charge: move away from the aimed shot.\nJump and press J to hit the flyer. Three hits defeat it."],
 	Encounter.SHOOTER: [preload("res://scenes/enemies/ground_shooter.tscn"), Vector2(540, 430), "Shooter",
-		"Purple bolts follow you: jump or air dash past them.\nJ interrupts the charge. Three hits defeat the shooter."],
+		"Purple bolts follow you: jump past them or dash through them.\nJ interrupts the charge. Three hits defeat the shooter."],
 }
 
 ## Overrides the inspector choice when set; kept across R/death reloads.

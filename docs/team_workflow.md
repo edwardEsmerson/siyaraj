@@ -3,8 +3,12 @@
 ## Agreed rules
 
 - Dash moves horizontally in Siya's facing direction.
-- Dash can only start while airborne. One air dash, restored on landing.
-- Dash stops at solid walls and gives no invulnerability.
+- Dash starts on the ground or in the air. One air dash, restored on landing;
+  ground dashes keep the air charge and use a short cooldown instead.
+- Dash stops at solid walls. It grants i-frames for its duration plus a short
+  grace: `take_damage` is ignored and enemy shots pass through. Damage sources
+  may query `is_invulnerable()`.
+- Dash cancels any sparkler phase; an attack pressed mid-dash swings when it ends.
 - Tapping and holding jump produce the same fixed jump height.
 - Jumping supports coyote time and jump buffering.
 - One sparkler swing damages each enemy at most once.

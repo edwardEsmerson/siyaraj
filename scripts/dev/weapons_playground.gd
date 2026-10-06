@@ -26,7 +26,7 @@ func _ready() -> void:
 	_add_platform(Rect2(2410, 425, 80, 35), Color(0.25, 0.35, 0.42))
 	_add_sign(Vector2(70, 185), "01 / GHATS / SPARKLER", "J: one lash. Jump + J: aerial lash.\nPractise here while your specials recharge.", Color(1, 0.45, 0.65))
 	_add_sign(Vector2(920, 185), "02 / FOREST / SKYSHOT", "L: fire ahead. Recoil pushes you back.\nFive shots per round. Death or next level refills.", Color(1, 0.7, 0.2))
-	_add_sign(Vector2(1740, 185), "RECOVERY LANE", "Space: jump the low blocks. Shift: air dash.\nRun back and forth while the HUD timers count down.", Color(0.6, 0.8, 0.9))
+	_add_sign(Vector2(1740, 185), "RECOVERY LANE", "Space: jump the low blocks. Shift: dash (also on the ground, dodges hits).\nRun back and forth while the HUD timers count down.", Color(0.6, 0.8, 0.9))
 	_add_sign(Vector2(2650, 185), "03 / PALACE / CHAKRI", "Stand on the ring. Hold K for 1 sec, then release.\nClear both sides. Cooldown: 30 sec; J stays available.", Color(0.2, 0.95, 0.8))
 	_add_sign(Vector2(3560, 185), "LIVE GUARD / MIXED PRACTICE", "Orange means wind-up. Dodge, land, then strike.\nUse specials when ready. R resets everything.", Color(0.8, 0.7, 1))
 	_add_dummy("SparklerDummy", Vector2(390, FLOOR_Y))
@@ -72,7 +72,7 @@ func _ready() -> void:
 	hud.add_child(heading)
 	var controls := Label.new()
 	controls.position = Vector2(30, 58)
-	controls.text = "A/D: move    Space: jump    Shift: air dash    J: sparkler    L: skyshot\nHold/release K: chakri    R: reset    Walk right through practice arenas and recovery lane"
+	controls.text = "A/D: move    Space: jump    Shift: dash    J: sparkler    L: skyshot\nHold/release K: chakri    R: reset    Walk right through practice arenas and recovery lane"
 	hud.add_child(controls)
 	status = Label.new()
 	status.position = Vector2(30, 112)
@@ -85,7 +85,7 @@ func _physics_process(_delta: float) -> void:
 		get_tree().reload_current_scene()
 		return
 	camera.position.x = clampf(player.position.x, 480.0, MAP_WIDTH - 480.0)
-	status.text = "Health %d/%d    Dash: %s    %s" % [player.health, player.max_health, "ready" if player.dash_available else "land to recharge", player.attack_status]
+	status.text = "Health %d/%d    Dash: %s    %s" % [player.health, player.max_health, "ready" if player.can_dash() else ("cooling" if player.dash_available or player.is_on_floor() else "land to recharge"), player.attack_status]
 	status.text += "\nSkyshot: %d/5 shots    Chakri: %s" % [player.skyshot_ammo, _cooldown_text(player.chakri_cooldown_remaining)]
 
 

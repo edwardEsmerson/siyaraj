@@ -119,7 +119,11 @@ func run_checks() -> void:
 	Input.action_release("dash")
 	check(player.state == player.State.DASH, "Damage interruption test must start during an air dash")
 	player.take_damage(1, Vector2(-100, -100))
-	check(player.health == 2 and player.state == player.State.HURT, "Damage must interrupt dash without granting dash immunity")
+	check(player.health == 3 and player.state == player.State.DASH, "Dash i-frames must ignore damage")
+	await ticks(14)
+	check(not player.is_invulnerable(), "Dash i-frames must expire shortly after the dash")
+	player.take_damage(1, Vector2(-100, -100))
+	check(player.health == 2 and player.state == player.State.HURT, "Damage must apply once dash i-frames end")
 	player.take_damage(1, Vector2.ZERO)
 	check(player.health == 2, "Repeated hits during protection must not drain health")
 	await ticks(50)
@@ -134,6 +138,67 @@ func run_checks() -> void:
 	enemy = current_scene.get_node("Enemy")
 	check(player.health == 3 and enemy.health == 3, "Restart must restore both combatants' health")
 
+	await check_dash_combat()
+
 	if failures == 0:
-		print("PASS: timed sparkler, one hit per swing, facing, enemy death, dash cancellation, chase/tell/strike/recovery, protection and death restart")
+		print("PASS: timed sparkler, one hit per swing, facing, enemy death, dash cancellation, chase/tell/strike/recovery, protection and death restart, ground dash i-frames, recovery dash-cancel and dash-attack")
 	quit(1 if failures > 0 else 0)
+
+
+func check_dash_combat() -> void:
+	# A grounded dash cancels sparkler recovery.
+	await reset_arena()
+	enemy.position.x = player.position.x - 200.0
+	await ticks(1)
+	await swing()
+	for frame in range(40):
+		if player.sparkler.phase == player.sparkler.Phase.RECOVERY:
+			break
+		await ticks(1)
+	check(player.sparkler.phase == player.sparkler.Phase.RECOVERY and player.is_on_floor(), "Dash-cancel test must reach grounded recovery")
+	Input.action_press("dash")
+	await ticks(1)
+	Input.action_release("dash")
+	check(player.state == player.State.DASH and not player.sparkler.is_busy(), "Ground dash must cancel sparkler recovery")
+
+	# An attack pressed mid-dash swings as the dash ends.
+	await reset_arena()
+	var start_x := player.position.x
+	enemy.position.x = start_x + 150.0
+	await ticks(1)
+	Input.action_press("dash")
+	await ticks(2)
+	Input.action_release("dash")
+	await swing()
+	check(player.state == player.State.DASH and not player.sparkler.is_busy(), "Attack pressed mid-dash must wait for the dash to end")
+	await ticks(8)
+	check(player.state == player.State.NORMAL and player.sparkler.is_busy(), "Buffered attack must start when the dash ends")
+	await ticks(30)
+	check(enemy.health == 2, "Dash-attack must hit the enemy ahead once")
+
+	# Dashing through the guard's strike avoids damage, with no contact damage.
+	await reset_arena(false)
+	var reached_windup := false
+	for frame in range(200):
+		await ticks(1)
+		if enemy.attack.phase == enemy.attack.Phase.WINDUP:
+			reached_windup = true
+			break
+	check(reached_windup, "Dodge test must reach the guard's wind-up")
+	while enemy.attack.phase == enemy.attack.Phase.WINDUP and enemy.attack._remaining > 0.1:
+		await ticks(1)
+	var side := signf(enemy.global_position.x - player.global_position.x)
+	if side < 0.0:
+		Input.action_press("move_left")
+	else:
+		Input.action_press("move_right")
+	await ticks(1)
+	Input.action_release("move_left")
+	Input.action_release("move_right")
+	Input.action_press("dash")
+	await ticks(1)
+	Input.action_release("dash")
+	check(player.state == player.State.DASH, "Dodge dash must start during the guard's wind-up")
+	await ticks(50)
+	check(player.health == 3, "Dashing through the guard's strike must avoid all damage")
+	check(signf(enemy.global_position.x - player.global_position.x) != side, "Dash must pass through the guard's body")

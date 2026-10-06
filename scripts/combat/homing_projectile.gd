@@ -6,6 +6,11 @@ extends "res://scripts/combat/enemy_projectile.gd"
 var target: CharacterBody2D
 
 
+func _on_dodged() -> void:
+	# A dodged bolt stops steering, so it cannot circle back harmlessly through Siya.
+	target = null
+
+
 func _update_direction(delta: float) -> void:
 	if is_instance_valid(target) and target.is_inside_tree() and target.health > 0:
 		var toward := target.global_position + Vector2(0, -20) - global_position

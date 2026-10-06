@@ -98,8 +98,7 @@ func _fire_skyshot() -> void:
 
 
 func _process_recoil(delta: float) -> void:
-	_protection_remaining = maxf(_protection_remaining - delta, 0.0)
-	_hit_flash_remaining = maxf(_hit_flash_remaining - delta, 0.0)
+	_tick_timers(delta)
 	_coyote_remaining = maxf(_coyote_remaining - delta, 0.0)
 	_jump_buffer_remaining = maxf(_jump_buffer_remaining - delta, 0.0)
 	if is_on_floor():
