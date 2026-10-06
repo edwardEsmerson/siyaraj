@@ -66,6 +66,23 @@ The world prompt reads `E: light diya` while interaction is available, then
 `SAVED`. Passing a diya, holding E before entering range, dashing or pressing
 E while airborne does not activate it. Only explicitly lit diyas show flames.
 
+On the main trail, all enemies authored before a diya must be defeated before
+it can be lit or passed freely. Siya can travel 120 game pixels past an
+uncleared diya before the return triggers, including during a jump or dash.
+Exceeding that leeway closes red curtains over 0.45 seconds. Their top edges
+lead the pull, with the curved lower edges trailing and settling after the
+top reaches the middle.
+While fully covered, Siya is moved to the uncleared diya she just passed.
+This does not light it or advance the saved death checkpoint. The curtains
+hold for 0.5 seconds and open over 0.45 seconds with the same delayed hem
+motion. Health, ammo, saved progress and enemy
+damage remain unchanged. Gameplay stops during the transition; Esc also
+pauses the curtains.
+The same rule applies to river and palace checkpoints. Enemy-free developer
+launches bypass it, and section snapshots start their requirements at the
+selected landing. Death reloads do not re-block a secured respawn with enemies
+behind it. Side rooms retain their separate sentinel-controlled exits.
+
 Diyas are at X=2450, 4590, 6800, 8650, 11000, 13350, 15950 and 18100.
 Death reloads at the furthest lit diya with full health and fresh movement
 state. Lighting an earlier diya does not rewind progress. R resets all saved
@@ -95,8 +112,8 @@ already fired can still reach a player moving toward a diya.
 
 Only the current area's enemies are instantiated. Room transitions and
 death reloads restore enemies with full health. The nest remains empty
-until its encounter is designed. Forest completion and room doors currently
-require traversal, so combat can be bypassed. No boss or defeat gate is added.
+until its encounter is designed. Main-route diyas now require clearing the
+preceding enemies. Side-room far exits require their sentinels, while entrance doors allow leaving early.
 The original prototype keeps its guard-controlled gate and both new enemies.
 The flying enemy already merged on GitHub is also available in that prototype
 and the dev sandbox. Terrain remains grey; enemy attack feedback uses

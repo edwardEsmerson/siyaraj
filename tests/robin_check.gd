@@ -51,6 +51,8 @@ func run_checks() -> void:
 	# Keep scene reloads out of the way; death reactions are checked directly.
 	player.died.disconnect(current_scene._restart)
 	current_scene.set_process(false)
+	# These probes teleport freely to isolate companion behavior from route gates.
+	current_scene.checkpoint_guard.enabled = false
 	for enemy in current_scene.course.get_node("Encounters").get_children():
 		enemy.set_physics_process(false)
 	await ticks(10)

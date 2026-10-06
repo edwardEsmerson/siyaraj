@@ -139,7 +139,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_type_variation = &"KeyLabel"
 theme_override_font_sizes/font_size = 12
-text = "Arrows to choose  ·  Enter to select  ·  Esc to go back"
+text = "Made with ❤️ by Ayaansh, Shourya, Atharva, Samhith, Nathan Robin"
 horizontal_alignment = 1
 
 [node name="DiyaCursor" type="TextureRect" parent="." node_paths=PackedStringArray("menu")]

@@ -39,6 +39,7 @@ godot --headless --path . --script res://tests/brute_check.gd
 godot --headless --path . --script res://tests/forest_check.gd
 godot --headless --path . --script res://tests/forest_rooms_check.gd
 godot --headless --path . --script res://tests/forest_encounters_check.gd
+godot --headless --path . --script res://tests/checkpoint_guard_check.gd
 godot --headless --path . --script res://tests/weapons_check.gd
 godot --headless --path . --script res://tests/weapons_map_check.gd
 godot --headless --path . --script res://tests/forest_weapons_check.gd

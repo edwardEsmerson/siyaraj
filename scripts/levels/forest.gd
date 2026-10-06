@@ -45,9 +45,11 @@ func _physics_process(_delta: float) -> void:
 			_use_portal(portal)
 			return
 	for checkpoint in _checkpoints():
+		var guard: CanvasLayer = get_parent().checkpoint_guard
+		var blocked: bool = guard != null and guard.blocked(checkpoint)
 		var saved := lit_checkpoints.has(checkpoint.name)
-		var can_light: bool = checkpoint.get_meta("room", &"") == current_room and not completed and player.state == player.State.NORMAL and player.is_on_floor() and checkpoint.overlaps_body(player)
-		checkpoint.get_node("Prompt").text = "SAVED" if saved else ("E: light diya" if can_light else "DIYA")
+		var can_light: bool = not blocked and checkpoint.get_meta("room", &"") == current_room and not completed and player.state == player.State.NORMAL and player.is_on_floor() and checkpoint.overlaps_body(player)
+		checkpoint.get_node("Prompt").text = "Defeat enemies before this diya" if blocked else ("SAVED" if saved else ("E: light diya" if can_light else "DIYA"))
 		if can_light and not saved and Input.is_action_just_pressed("interact"):
 			lit_checkpoints.append(checkpoint.name)
 			if current_room == &"":
