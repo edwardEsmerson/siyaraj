@@ -358,7 +358,6 @@ size = Vector2(40, 1600)
 [sub_resource type="RectangleShape2D" id="CanopyNestRightWallShape"]
 size = Vector2(40, 1600)
 
-
 [sub_resource type="RectangleShape2D" id="StoneCatchShape"]
 size = Vector2(160.0, 24)
 
@@ -405,7 +404,6 @@ metadata/room = &""
 position = Vector2(2200, -1450)
 detection_range = 180.0
 metadata/room = &"RootChamber"
-
 
 [node name="CanopyScout" parent="Encounters" instance=ExtResource("5_flyer")]
 position = Vector2(4300, 410)
@@ -495,6 +493,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("StartShape")
 
 [node name="Root1" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(470.0, 406.0)
 collision_layer = 1
 collision_mask = 0
@@ -512,6 +511,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("Root1Shape")
 
 [node name="Root2" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(610.0, 366.0)
 collision_layer = 1
 collision_mask = 0
@@ -529,6 +529,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("Root2Shape")
 
 [node name="Root3" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(750.0, 406.0)
 collision_layer = 1
 collision_mask = 0
@@ -597,6 +598,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("FirstClearingShape")
 
 [node name="Branch1" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(2970.0, 426.0)
 collision_layer = 1
 collision_mask = 0
@@ -614,6 +616,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("Branch1Shape")
 
 [node name="Branch2" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(3205.0, 426.0)
 collision_layer = 1
 collision_mask = 0
@@ -631,6 +634,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("Branch2Shape")
 
 [node name="Branch3" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(3410.0, 406.0)
 collision_layer = 1
 collision_mask = 0
@@ -648,6 +652,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("Branch3Shape")
 
 [node name="Branch4" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(3625.0, 426.0)
 collision_layer = 1
 collision_mask = 0
@@ -665,6 +670,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("Branch4Shape")
 
 [node name="Branch5" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(3890.0, 446.0)
 collision_layer = 1
 collision_mask = 0
@@ -699,6 +705,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("BranchExitShape")
 
 [node name="Ridge1" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(5085.0, 406.0)
 collision_layer = 1
 collision_mask = 0
@@ -716,6 +723,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("Ridge1Shape")
 
 [node name="Ridge2" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(5215.0, 366.0)
 collision_layer = 1
 collision_mask = 0
@@ -733,6 +741,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("Ridge2Shape")
 
 [node name="Ridge3" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(5345.0, 326.0)
 collision_layer = 1
 collision_mask = 0
@@ -750,6 +759,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("Ridge3Shape")
 
 [node name="Ridge4" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(5475.0, 286.0)
 collision_layer = 1
 collision_mask = 0
@@ -767,6 +777,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("Ridge4Shape")
 
 [node name="RidgeTop" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(5645.0, 286.0)
 collision_layer = 1
 collision_mask = 0
@@ -784,6 +795,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("RidgeTopShape")
 
 [node name="RidgeDrop1" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(5990.0, 346.0)
 collision_layer = 1
 collision_mask = 0
@@ -801,6 +813,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("RidgeDrop1Shape")
 
 [node name="RidgeDrop2" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(6400.0, 406.0)
 collision_layer = 1
 collision_mask = 0
@@ -835,6 +848,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("HollowEntryShape")
 
 [node name="HollowRoot" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(7240.0, 416.0)
 collision_layer = 1
 collision_mask = 0
@@ -1321,6 +1335,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("ShrineBranchShape")
 
 [node name="ShrineDrop" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "ground"
 position = Vector2(17330.0, 386.0)
 collision_layer = 1
 collision_mask = 0
@@ -1338,6 +1353,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("ShrineDropShape")
 
 [node name="FinalEntry" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "ground"
 position = Vector2(18015.0, 446.0)
 collision_layer = 1
 collision_mask = 0
@@ -1372,6 +1388,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("Final1Shape")
 
 [node name="Final2" type="StaticBody2D" parent="Terrain"]
+metadata/skin = "root"
 position = Vector2(19040.0, 386.0)
 collision_layer = 1
 collision_mask = 0
@@ -1491,6 +1508,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("RiverbankShape")
 
 [node name="HollowRoof1" type="StaticBody2D" parent="."]
+metadata/skin = "root"
 position = Vector2(6950.0, 357.5)
 collision_mask = 0
 
@@ -1502,6 +1520,7 @@ color = Color(0.34, 0.34, 0.34, 1)
 shape = SubResource("HollowRoof1Shape")
 
 [node name="HollowRoof2" type="StaticBody2D" parent="."]
+metadata/skin = "root"
 position = Vector2(7745.0, 357.5)
 collision_mask = 0
 
@@ -1765,7 +1784,6 @@ horizontal_alignment = 1
 theme_override_font_sizes/font_size = 15
 text = "DIYA"
 
-
 [node name="EncounterSpawns" type="Node2D" parent="."]
 
 [node name="ClearingGuard" type="Marker2D" parent="EncounterSpawns"]
@@ -1891,6 +1909,9 @@ position = Vector2(0, -40)
 shape = SubResource("PortalShape")
 
 [node name="Door" type="Polygon2D" parent="Portals/RootEntrance"]
+metadata/offset_x = 4.0
+metadata/size = 0.8
+metadata/piece = "decor/lm-hollow-door"
 polygon = PackedVector2Array(-22, 0, -22, -48, -12, -60, 12, -60, 22, -48, 22, 0)
 color = Color(0.22, 0.22, 0.22, 1)
 
@@ -1921,6 +1942,8 @@ position = Vector2(0, -40)
 shape = SubResource("PortalShape")
 
 [node name="Door" type="Polygon2D" parent="Portals/NestEntrance"]
+metadata/size = 1.0
+metadata/piece = "decor/nest-door"
 polygon = PackedVector2Array(-22, 0, -22, -48, -12, -60, 12, -60, 22, -48, 22, 0)
 color = Color(0.22, 0.22, 0.22, 1)
 
@@ -1951,9 +1974,12 @@ z_index = 2
 [node name="SideRooms" type="Node2D" parent="."]
 
 [node name="RootChamber" type="Node2D" parent="SideRooms"]
+metadata/skin = "root"
 position = Vector2(0, -2500)
 
 [node name="Backdrop" type="Polygon2D" parent="SideRooms/RootChamber"]
+metadata/kit_tint = Color(0.55, 0.55, 0.62, 1.0)
+metadata/kit_texture = "back-cave"
 z_index = -5
 polygon = PackedVector2Array(0, 0, 3300, 0, 3300, 1400, 0, 1400)
 color = Color(0.08, 0.08, 0.08, 1)
@@ -2286,6 +2312,9 @@ polygon = PackedVector2Array(0, 0, 2900, 0, 2900, 1600, 0, 1600)
 color = Color(0.08, 0.08, 0.08, 1)
 
 [node name="Trunk" type="Polygon2D" parent="SideRooms/CanopyNest"]
+metadata/kit_tint = Color(0.75, 0.7, 0.75, 1.0)
+metadata/kit_z = -6.0
+metadata/kit_texture = "fill-root"
 z_index = -2
 polygon = PackedVector2Array(620, 1400, 620, 370, 930, 370, 930, 1400)
 color = Color(0.17, 0.17, 0.17, 1)
@@ -3153,7 +3182,761 @@ text = "Purple bolts! Dash straight through them, or hit him to stop the shot."
 position = Vector2(15300, 430)
 text = "That brute is slow but hits hard. Wait for the swing, then strike."
 
+[node name="SkinZones" type="Node2D" parent="."]
+
+[node name="Edge" type="Marker2D" parent="SkinZones"]
+position = Vector2(0, 0)
+metadata/far = "far"
+metadata/mid = "mid"
+metadata/tint = Color(1.0, 0.92, 0.98, 1.0)
+metadata/mid_tint = Color(0.7, 0.62, 0.78, 1.0)
+
+[node name="Clearing" type="Marker2D" parent="SkinZones"]
+position = Vector2(1500, 0)
+metadata/far = "far"
+metadata/mid = "mid"
+metadata/tint = Color(1.08, 0.95, 0.88, 1.0)
+metadata/mid_tint = Color(0.82, 0.68, 0.7, 1.0)
+
+[node name="Canopy" type="Marker2D" parent="SkinZones"]
+position = Vector2(2850, 0)
+metadata/far = "far-moon"
+metadata/mid = "mid-calm"
+metadata/tint = Color(0.8, 0.86, 1.0, 1.0)
+metadata/mid_tint = Color(0.42, 0.48, 0.62, 1.0)
+
+[node name="Ridge" type="Marker2D" parent="SkinZones"]
+position = Vector2(4200, 0)
+metadata/far = "far"
+metadata/mid = "mid"
+metadata/tint = Color(1.0, 0.9, 0.85, 1.0)
+metadata/mid_tint = Color(0.78, 0.66, 0.62, 1.0)
+
+[node name="Hollow" type="Marker2D" parent="SkinZones"]
+position = Vector2(6450, 0)
+metadata/far = "far"
+metadata/mid = "mid-calm"
+metadata/tint = Color(0.7, 0.62, 0.72, 1.0)
+metadata/mid_tint = Color(0.7, 0.6, 0.66, 1.0)
+
+[node name="Stone" type="Marker2D" parent="SkinZones"]
+position = Vector2(8950, 0)
+metadata/far = "far-moon"
+metadata/mid = "mid-calm"
+metadata/tint = Color(0.82, 0.92, 0.98, 1.0)
+metadata/mid_tint = Color(0.62, 0.7, 0.76, 1.0)
+metadata/skin = "stone"
+
+[node name="Banyan" type="Marker2D" parent="SkinZones"]
+position = Vector2(10450, 0)
+metadata/far = "far"
+metadata/mid = "mid-banyan"
+metadata/tint = Color(1.0, 0.95, 0.9, 1.0)
+metadata/mid_tint = Color(0.75, 0.68, 0.74, 1.0)
+
+[node name="Ravine" type="Marker2D" parent="SkinZones"]
+position = Vector2(13100, 0)
+metadata/far = "far-moon"
+metadata/mid = "mid-calm"
+metadata/tint = Color(0.88, 0.88, 1.05, 1.0)
+metadata/mid_tint = Color(0.62, 0.62, 0.8, 1.0)
+
+[node name="Shrine" type="Marker2D" parent="SkinZones"]
+position = Vector2(15500, 0)
+metadata/far = "far-shrine"
+metadata/mid = "mid-shrine"
+metadata/tint = Color(1.02, 0.9, 1.0, 1.0)
+metadata/mid_tint = Color(0.78, 0.64, 0.76, 1.0)
+metadata/skin = "stone"
+
+[node name="Last" type="Marker2D" parent="SkinZones"]
+position = Vector2(17600, 0)
+metadata/far = "far-ember"
+metadata/mid = "mid-calm"
+metadata/tint = Color(0.95, 0.78, 0.78, 1.0)
+metadata/mid_tint = Color(0.62, 0.5, 0.55, 1.0)
+
+[node name="Khara" type="Marker2D" parent="SkinZones"]
+position = Vector2(20600, 0)
+metadata/far = "far-ember"
+metadata/mid = "mid-calm"
+metadata/tint = Color(1.0, 0.82, 0.75, 1.0)
+metadata/mid_tint = Color(0.7, 0.55, 0.52, 1.0)
+
+[node name="SkinDecor" type="Node2D" parent="."]
+
+[node name="Edge" type="Node2D" parent="SkinDecor"]
+
+[node name="LmGate0" type="Marker2D" parent="SkinDecor/Edge"]
+position = Vector2(215, 432)
+metadata/piece = "decor/lm-gate"
+metadata/layer = "landmark"
+metadata/size = 1.0
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="03P081" type="Marker2D" parent="SkinDecor/Edge"]
+position = Vector2(372, 431)
+metadata/piece = "decor/g/03-p08"
+metadata/layer = "body"
+
+[node name="DiyaA2" type="Marker2D" parent="SkinDecor/Edge"]
+position = Vector2(470, 391)
+metadata/piece = "decor/diya-a"
+metadata/layer = "body"
+
+[node name="DiyaB3" type="Marker2D" parent="SkinDecor/Edge"]
+position = Vector2(612, 351)
+metadata/piece = "decor/diya-b"
+metadata/layer = "body"
+
+[node name="DiyaC4" type="Marker2D" parent="SkinDecor/Edge"]
+position = Vector2(750, 391)
+metadata/piece = "decor/diya-c"
+metadata/layer = "body"
+
+[node name="TreeSmall5" type="Marker2D" parent="SkinDecor/Edge"]
+position = Vector2(1000, 432)
+metadata/piece = "decor/tree-small"
+metadata/layer = "landmark"
+metadata/size = 2.0
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="01P066" type="Marker2D" parent="SkinDecor/Edge"]
+position = Vector2(880, 431)
+metadata/piece = "props/01-p06"
+metadata/layer = "body"
+
+[node name="02P057" type="Marker2D" parent="SkinDecor/Edge"]
+position = Vector2(1120, 431)
+metadata/piece = "props/02-p05"
+metadata/layer = "body"
+
+[node name="FgLeaves8" type="Marker2D" parent="SkinDecor/Edge"]
+position = Vector2(1215, 560)
+metadata/piece = "decor/fg-leaves"
+metadata/layer = "front"
+metadata/size = 0.9
+metadata/tint = Color(0.32, 0.26, 0.36, 1.0)
+
+[node name="01P039" type="Marker2D" parent="SkinDecor/Edge"]
+position = Vector2(1300, 431)
+metadata/piece = "props/01-p03"
+metadata/layer = "body"
+
+[node name="03P0110" type="Marker2D" parent="SkinDecor/Edge"]
+position = Vector2(110, 431)
+metadata/piece = "decor/g/03-p01"
+metadata/layer = "body"
+
+[node name="01P0311" type="Marker2D" parent="SkinDecor/Edge"]
+position = Vector2(300, 431)
+metadata/piece = "decor/g/01-p03"
+metadata/layer = "body"
+
+[node name="02P0212" type="Marker2D" parent="SkinDecor/Edge"]
+position = Vector2(1395, 431)
+metadata/piece = "decor/g/02-p02"
+metadata/layer = "body"
+
+[node name="Clearing" type="Node2D" parent="SkinDecor"]
+
+[node name="LmSacredTree0" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(2060, 432)
+metadata/piece = "decor/lm-sacred-tree"
+metadata/layer = "landmark"
+metadata/size = 1.0
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="Garland1" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(1760, -6)
+metadata/piece = "decor/garland"
+metadata/hang = true
+metadata/layer = "landmark"
+metadata/size = 0.55
+metadata/tint = Color(0.78, 0.74, 0.8, 1.0)
+
+[node name="Garland2" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(2330, -6)
+metadata/piece = "decor/garland"
+metadata/hang = true
+metadata/layer = "landmark"
+metadata/size = 0.55
+metadata/tint = Color(0.78, 0.74, 0.8, 1.0)
+metadata/flip = true
+
+[node name="PotA3" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(1620, 431)
+metadata/piece = "decor/pot-a"
+metadata/layer = "body"
+
+[node name="PotC4" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(1648, 431)
+metadata/piece = "decor/pot-c"
+metadata/layer = "body"
+
+[node name="01P015" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(1880, 431)
+metadata/piece = "props/01-p01"
+metadata/layer = "body"
+
+[node name="01P106" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(2610, 431)
+metadata/piece = "decor/g/01-p10"
+metadata/layer = "body"
+
+[node name="02P067" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(2700, 431)
+metadata/piece = "props/02-p06"
+metadata/layer = "body"
+
+[node name="02P048" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(2770, 431)
+metadata/piece = "props/02-p04"
+metadata/layer = "body"
+
+[node name="03P019" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(1585, 431)
+metadata/piece = "decor/g/03-p01"
+metadata/layer = "body"
+
+[node name="02P0210" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(1615, 431)
+metadata/piece = "decor/g/02-p02"
+metadata/layer = "body"
+
+[node name="01P0311" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(1960, 431)
+metadata/piece = "decor/g/01-p03"
+metadata/layer = "body"
+
+[node name="01P0412" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(1990, 431)
+metadata/piece = "decor/g/01-p04"
+metadata/layer = "body"
+
+[node name="02P0413" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(2185, 431)
+metadata/piece = "decor/g/02-p04"
+metadata/layer = "body"
+
+[node name="01P0514" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(2215, 431)
+metadata/piece = "decor/g/01-p05"
+metadata/layer = "body"
+
+[node name="02P0115" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(2745, 431)
+metadata/piece = "decor/g/02-p01"
+metadata/layer = "body"
+
+[node name="BellShrine16" type="Marker2D" parent="SkinDecor/Clearing"]
+position = Vector2(1740, 432)
+metadata/piece = "decor/bell-shrine"
+metadata/layer = "landmark"
+metadata/size = 2.0
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="Canopy" type="Node2D" parent="SkinDecor"]
+
+[node name="LmFallenLog0" type="Marker2D" parent="SkinDecor/Canopy"]
+position = Vector2(4085, 552)
+metadata/piece = "decor/lm-fallen-log"
+metadata/layer = "landmark"
+metadata/size = 1.0
+metadata/tint = Color(0.8, 0.82, 0.95, 1.0)
+
+[node name="LanternSapling1" type="Marker2D" parent="SkinDecor/Canopy"]
+position = Vector2(3905, 431)
+metadata/piece = "decor/lantern-sapling"
+metadata/layer = "body"
+
+[node name="02P032" type="Marker2D" parent="SkinDecor/Canopy"]
+position = Vector2(2960, 411)
+metadata/piece = "props/02-p03"
+metadata/layer = "body"
+
+[node name="FgLeaves3" type="Marker2D" parent="SkinDecor/Canopy"]
+position = Vector2(3515, 565)
+metadata/piece = "decor/fg-leaves"
+metadata/layer = "front"
+metadata/size = 0.8
+metadata/tint = Color(0.32, 0.26, 0.36, 1.0)
+metadata/flip = true
+
+[node name="03P024" type="Marker2D" parent="SkinDecor/Canopy"]
+position = Vector2(4250, 431)
+metadata/piece = "decor/g/03-p02"
+metadata/layer = "body"
+
+[node name="Ridge" type="Node2D" parent="SkinDecor"]
+
+[node name="RootArch0" type="Marker2D" parent="SkinDecor/Ridge"]
+position = Vector2(4880, 432)
+metadata/piece = "decor/root-arch"
+metadata/layer = "landmark"
+metadata/size = 1.5
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="01P081" type="Marker2D" parent="SkinDecor/Ridge"]
+position = Vector2(4380, 431)
+metadata/piece = "props/01-p08"
+metadata/layer = "body"
+
+[node name="DiyaA2" type="Marker2D" parent="SkinDecor/Ridge"]
+position = Vector2(5980, 331)
+metadata/piece = "decor/diya-a"
+metadata/layer = "body"
+
+[node name="DiyaB3" type="Marker2D" parent="SkinDecor/Ridge"]
+position = Vector2(6420, 391)
+metadata/piece = "decor/diya-b"
+metadata/layer = "body"
+
+[node name="RootsCurtain4" type="Marker2D" parent="SkinDecor/Ridge"]
+position = Vector2(6200, -6)
+metadata/piece = "decor/roots-curtain"
+metadata/hang = true
+metadata/layer = "landmark"
+metadata/size = 0.7
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="02P015" type="Marker2D" parent="SkinDecor/Ridge"]
+position = Vector2(4470, 431)
+metadata/piece = "decor/g/02-p01"
+metadata/layer = "body"
+
+[node name="03P046" type="Marker2D" parent="SkinDecor/Ridge"]
+position = Vector2(4980, 431)
+metadata/piece = "decor/g/03-p04"
+metadata/layer = "body"
+
+[node name="Hollow" type="Node2D" parent="SkinDecor"]
+
+[node name="LmHollowStump0" type="Marker2D" parent="SkinDecor/Hollow"]
+position = Vector2(8460, 432)
+metadata/piece = "decor/lm-hollow-stump"
+metadata/layer = "landmark"
+metadata/size = 1.0
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="RootsCurtain1" type="Marker2D" parent="SkinDecor/Hollow"]
+position = Vector2(6950, -6)
+metadata/piece = "decor/roots-curtain"
+metadata/hang = true
+metadata/layer = "landmark"
+metadata/size = 0.8
+metadata/tint = Color(0.7, 0.62, 0.72, 1.0)
+
+[node name="01P042" type="Marker2D" parent="SkinDecor/Hollow"]
+position = Vector2(6560, 431)
+metadata/piece = "props/01-p04"
+metadata/layer = "body"
+
+[node name="01P103" type="Marker2D" parent="SkinDecor/Hollow"]
+position = Vector2(7560, 431)
+metadata/piece = "props/01-p10"
+metadata/layer = "body"
+
+[node name="FgLeaves4" type="Marker2D" parent="SkinDecor/Hollow"]
+position = Vector2(8130, 565)
+metadata/piece = "decor/fg-leaves"
+metadata/layer = "front"
+metadata/size = 0.9
+metadata/tint = Color(0.32, 0.26, 0.36, 1.0)
+
+[node name="02P035" type="Marker2D" parent="SkinDecor/Hollow"]
+position = Vector2(7050, 431)
+metadata/piece = "decor/g/02-p03"
+metadata/layer = "body"
+
+[node name="03P026" type="Marker2D" parent="SkinDecor/Hollow"]
+position = Vector2(7990, 431)
+metadata/piece = "decor/g/03-p02"
+metadata/layer = "body"
+
+[node name="01P087" type="Marker2D" parent="SkinDecor/Hollow"]
+position = Vector2(8300, 431)
+metadata/piece = "decor/g/01-p08"
+metadata/layer = "body"
+
+[node name="Stone" type="Node2D" parent="SkinDecor"]
+
+[node name="LmPillarsA0" type="Marker2D" parent="SkinDecor/Stone"]
+position = Vector2(9235, 552)
+metadata/piece = "decor/lm-pillars-a"
+metadata/layer = "landmark"
+metadata/size = 1.0
+metadata/tint = Color(0.78, 0.86, 0.92, 1.0)
+
+[node name="LmPillarsB1" type="Marker2D" parent="SkinDecor/Stone"]
+position = Vector2(10115, 552)
+metadata/piece = "decor/lm-pillars-b"
+metadata/layer = "landmark"
+metadata/size = 1.0
+metadata/tint = Color(0.78, 0.86, 0.92, 1.0)
+
+[node name="FallenPillar2" type="Marker2D" parent="SkinDecor/Stone"]
+position = Vector2(9550, 511)
+metadata/piece = "decor/fallen-pillar"
+metadata/layer = "body"
+
+[node name="Rock3" type="Marker2D" parent="SkinDecor/Stone"]
+position = Vector2(10320, 451)
+metadata/piece = "decor/rock"
+metadata/layer = "body"
+
+[node name="02P054" type="Marker2D" parent="SkinDecor/Stone"]
+position = Vector2(9060, 431)
+metadata/piece = "props/02-p05"
+metadata/layer = "body"
+
+[node name="03P055" type="Marker2D" parent="SkinDecor/Stone"]
+position = Vector2(9420, 411)
+metadata/piece = "decor/g/03-p05"
+metadata/layer = "body"
+
+[node name="02P026" type="Marker2D" parent="SkinDecor/Stone"]
+position = Vector2(10370, 451)
+metadata/piece = "decor/g/02-p02"
+metadata/layer = "body"
+
+[node name="Banyan" type="Node2D" parent="SkinDecor"]
+
+[node name="LmBanyan0" type="Marker2D" parent="SkinDecor/Banyan"]
+position = Vector2(11700, 556)
+metadata/piece = "decor/lm-banyan"
+metadata/layer = "landmark"
+metadata/size = 1.25
+metadata/tint = Color(0.66, 0.64, 0.74, 1.0)
+
+[node name="Gateway1" type="Marker2D" parent="SkinDecor/Banyan"]
+position = Vector2(10640, 432)
+metadata/piece = "decor/gateway"
+metadata/layer = "landmark"
+metadata/size = 2.0
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="Garland2" type="Marker2D" parent="SkinDecor/Banyan"]
+position = Vector2(12450, -6)
+metadata/piece = "decor/garland"
+metadata/hang = true
+metadata/layer = "landmark"
+metadata/size = 0.55
+metadata/tint = Color(0.78, 0.74, 0.8, 1.0)
+
+[node name="RootsCurtain3" type="Marker2D" parent="SkinDecor/Banyan"]
+position = Vector2(12160, -6)
+metadata/piece = "decor/roots-curtain"
+metadata/hang = true
+metadata/layer = "landmark"
+metadata/size = 0.55
+metadata/tint = Color(0.78, 0.74, 0.8, 1.0)
+
+[node name="01P124" type="Marker2D" parent="SkinDecor/Banyan"]
+position = Vector2(10760, 431)
+metadata/piece = "props/01-p12"
+metadata/layer = "body"
+
+[node name="02P025" type="Marker2D" parent="SkinDecor/Banyan"]
+position = Vector2(11300, 431)
+metadata/piece = "props/02-p02"
+metadata/layer = "body"
+
+[node name="03P016" type="Marker2D" parent="SkinDecor/Banyan"]
+position = Vector2(10540, 431)
+metadata/piece = "decor/g/03-p01"
+metadata/layer = "body"
+
+[node name="02P047" type="Marker2D" parent="SkinDecor/Banyan"]
+position = Vector2(11180, 431)
+metadata/piece = "decor/g/02-p04"
+metadata/layer = "body"
+
+[node name="01P058" type="Marker2D" parent="SkinDecor/Banyan"]
+position = Vector2(11480, 431)
+metadata/piece = "decor/g/01-p05"
+metadata/layer = "body"
+
+[node name="Ravine" type="Node2D" parent="SkinDecor"]
+
+[node name="LmFlags0" type="Marker2D" parent="SkinDecor/Ravine"]
+position = Vector2(14270, 412)
+metadata/piece = "decor/lm-flags"
+metadata/layer = "landmark"
+metadata/size = 1.0
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="LanternSapling1" type="Marker2D" parent="SkinDecor/Ravine"]
+position = Vector2(13540, 431)
+metadata/piece = "decor/lantern-sapling"
+metadata/layer = "body"
+
+[node name="02P032" type="Marker2D" parent="SkinDecor/Ravine"]
+position = Vector2(14900, 391)
+metadata/piece = "props/02-p03"
+metadata/layer = "body"
+
+[node name="03P013" type="Marker2D" parent="SkinDecor/Ravine"]
+position = Vector2(13200, 431)
+metadata/piece = "decor/g/03-p01"
+metadata/layer = "body"
+
+[node name="03P024" type="Marker2D" parent="SkinDecor/Ravine"]
+position = Vector2(14160, 411)
+metadata/piece = "decor/g/03-p02"
+metadata/layer = "body"
+
+[node name="02P105" type="Marker2D" parent="SkinDecor/Ravine"]
+position = Vector2(15280, 431)
+metadata/piece = "decor/g/02-p10"
+metadata/layer = "body"
+
+[node name="Shrine" type="Node2D" parent="SkinDecor"]
+
+[node name="LmTemple0" type="Marker2D" parent="SkinDecor/Shrine"]
+position = Vector2(16160, 432)
+metadata/piece = "decor/lm-temple"
+metadata/layer = "landmark"
+metadata/size = 1.0
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="BellShrine1" type="Marker2D" parent="SkinDecor/Shrine"]
+position = Vector2(16945, 312)
+metadata/piece = "decor/bell-shrine"
+metadata/layer = "landmark"
+metadata/size = 1.5
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="Garland2" type="Marker2D" parent="SkinDecor/Shrine"]
+position = Vector2(15800, -6)
+metadata/piece = "decor/garland"
+metadata/hang = true
+metadata/layer = "landmark"
+metadata/size = 0.55
+metadata/tint = Color(0.78, 0.74, 0.8, 1.0)
+
+[node name="01P013" type="Marker2D" parent="SkinDecor/Shrine"]
+position = Vector2(15640, 431)
+metadata/piece = "props/01-p01"
+metadata/layer = "body"
+
+[node name="02P014" type="Marker2D" parent="SkinDecor/Shrine"]
+position = Vector2(16060, 431)
+metadata/piece = "props/02-p01"
+metadata/layer = "body"
+
+[node name="01P055" type="Marker2D" parent="SkinDecor/Shrine"]
+position = Vector2(16330, 391)
+metadata/piece = "props/01-p05"
+metadata/layer = "body"
+
+[node name="02P116" type="Marker2D" parent="SkinDecor/Shrine"]
+position = Vector2(15610, 431)
+metadata/piece = "decor/g/02-p11"
+metadata/layer = "body"
+
+[node name="01P047" type="Marker2D" parent="SkinDecor/Shrine"]
+position = Vector2(16240, 431)
+metadata/piece = "decor/g/01-p04"
+metadata/layer = "body"
+
+[node name="03P038" type="Marker2D" parent="SkinDecor/Shrine"]
+position = Vector2(17300, 371)
+metadata/piece = "decor/g/03-p03"
+metadata/layer = "body"
+
+[node name="BellShrine9" type="Marker2D" parent="SkinDecor/Shrine"]
+position = Vector2(16170, 432)
+metadata/piece = "decor/bell-shrine"
+metadata/layer = "landmark"
+metadata/size = 2.2
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="Gateway10" type="Marker2D" parent="SkinDecor/Shrine"]
+position = Vector2(15720, 432)
+metadata/piece = "decor/gateway"
+metadata/layer = "landmark"
+metadata/size = 2.0
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="Last" type="Node2D" parent="SkinDecor"]
+
+[node name="LmTotem0" type="Marker2D" parent="SkinDecor/Last"]
+position = Vector2(18690, 412)
+metadata/piece = "decor/lm-totem"
+metadata/layer = "landmark"
+metadata/size = 1.0
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="LmTotem1" type="Marker2D" parent="SkinDecor/Last"]
+position = Vector2(19470, 412)
+metadata/piece = "decor/lm-totem"
+metadata/layer = "landmark"
+metadata/size = 1.0
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+metadata/flip = true
+
+[node name="LmTotem2" type="Marker2D" parent="SkinDecor/Last"]
+position = Vector2(20100, 412)
+metadata/piece = "decor/lm-totem"
+metadata/layer = "landmark"
+metadata/size = 1.0
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="02P113" type="Marker2D" parent="SkinDecor/Last"]
+position = Vector2(17760, 431)
+metadata/piece = "props/02-p11"
+metadata/layer = "body"
+
+[node name="FgLeaves4" type="Marker2D" parent="SkinDecor/Last"]
+position = Vector2(18480, 565)
+metadata/piece = "decor/fg-leaves"
+metadata/layer = "front"
+metadata/size = 0.9
+metadata/tint = Color(0.32, 0.26, 0.36, 1.0)
+
+[node name="03P055" type="Marker2D" parent="SkinDecor/Last"]
+position = Vector2(17700, 431)
+metadata/piece = "decor/g/03-p05"
+metadata/layer = "body"
+
+[node name="03P066" type="Marker2D" parent="SkinDecor/Last"]
+position = Vector2(18330, 431)
+metadata/piece = "decor/g/03-p06"
+metadata/layer = "body"
+
+[node name="02P077" type="Marker2D" parent="SkinDecor/Last"]
+position = Vector2(20420, 431)
+metadata/piece = "decor/g/02-p07"
+metadata/layer = "body"
+
+[node name="Khara" type="Node2D" parent="SkinDecor"]
+
+[node name="LmCampFence0" type="Marker2D" parent="SkinDecor/Khara"]
+position = Vector2(20820, 432)
+metadata/piece = "decor/lm-camp-fence"
+metadata/layer = "landmark"
+metadata/size = 1.0
+metadata/tint = Color(0.9, 0.82, 0.82, 1.0)
+
+[node name="LmCampGate1" type="Marker2D" parent="SkinDecor/Khara"]
+position = Vector2(21400, 432)
+metadata/piece = "decor/lm-camp-gate"
+metadata/layer = "landmark"
+metadata/size = 1.0
+metadata/tint = Color(0.95, 0.88, 0.86, 1.0)
+
+[node name="RootRoom" type="Node2D" parent="SkinDecor"]
+
+[node name="RootArch0" type="Marker2D" parent="SkinDecor/RootRoom"]
+position = Vector2(2050, -1448)
+metadata/piece = "decor/root-arch"
+metadata/layer = "landmark"
+metadata/size = 2.0
+metadata/tint = Color(0.8, 0.78, 0.85, 1.0)
+
+[node name="02P031" type="Marker2D" parent="SkinDecor/RootRoom"]
+position = Vector2(1850, -1449)
+metadata/piece = "decor/g/02-p03"
+metadata/layer = "body"
+
+[node name="03P042" type="Marker2D" parent="SkinDecor/RootRoom"]
+position = Vector2(2260, -1449)
+metadata/piece = "decor/g/03-p04"
+metadata/layer = "body"
+
+[node name="02P043" type="Marker2D" parent="SkinDecor/RootRoom"]
+position = Vector2(1530, -1599)
+metadata/piece = "decor/g/02-p04"
+metadata/layer = "body"
+
+[node name="LanternSapling4" type="Marker2D" parent="SkinDecor/RootRoom"]
+position = Vector2(520, -2049)
+metadata/piece = "decor/lantern-sapling"
+metadata/layer = "body"
+
+[node name="03P065" type="Marker2D" parent="SkinDecor/RootRoom"]
+position = Vector2(860, -1899)
+metadata/piece = "decor/g/03-p06"
+metadata/layer = "body"
+
+[node name="DiyaA6" type="Marker2D" parent="SkinDecor/RootRoom"]
+position = Vector2(1200, -1749)
+metadata/piece = "decor/diya-a"
+metadata/layer = "body"
+
+[node name="01P067" type="Marker2D" parent="SkinDecor/RootRoom"]
+position = Vector2(3180, -1929)
+metadata/piece = "decor/g/01-p06"
+metadata/layer = "body"
+
+[node name="RootsCurtain8" type="Marker2D" parent="SkinDecor/RootRoom"]
+position = Vector2(1000, -2500)
+metadata/piece = "decor/roots-curtain"
+metadata/hang = true
+metadata/layer = "landmark"
+metadata/size = 1.0
+metadata/tint = Color(0.75, 0.7, 0.8, 1.0)
+
+[node name="RootsCurtain9" type="Marker2D" parent="SkinDecor/RootRoom"]
+position = Vector2(2600, -2500)
+metadata/piece = "decor/roots-curtain"
+metadata/hang = true
+metadata/layer = "landmark"
+metadata/size = 1.0
+metadata/tint = Color(0.75, 0.7, 0.8, 1.0)
+metadata/flip = true
+
+[node name="Nest" type="Node2D" parent="SkinDecor"]
+
+[node name="NestSky0" type="Marker2D" parent="SkinDecor/Nest"]
+position = Vector2(960, -5000)
+metadata/piece = "decor/nest-sky"
+metadata/hang = true
+metadata/layer = "wall"
+metadata/size = 2.0
+metadata/tint = Color(0.8, 0.8, 0.9, 1.0)
+
+[node name="NestSky1" type="Marker2D" parent="SkinDecor/Nest"]
+position = Vector2(2880, -5000)
+metadata/piece = "decor/nest-sky"
+metadata/hang = true
+metadata/layer = "wall"
+metadata/size = 2.0
+metadata/tint = Color(0.8, 0.8, 0.9, 1.0)
+metadata/flip = true
+
+[node name="LanternSapling2" type="Marker2D" parent="SkinDecor/Nest"]
+position = Vector2(420, -3599)
+metadata/piece = "decor/lantern-sapling"
+metadata/layer = "body"
+
+[node name="Garland3" type="Marker2D" parent="SkinDecor/Nest"]
+position = Vector2(1375, -5000)
+metadata/piece = "decor/garland"
+metadata/hang = true
+metadata/layer = "landmark"
+metadata/size = 0.7
+metadata/tint = Color(0.85, 0.8, 0.85, 1.0)
+
+[node name="BellShrine4" type="Marker2D" parent="SkinDecor/Nest"]
+position = Vector2(2700, -4498)
+metadata/piece = "decor/bell-shrine"
+metadata/layer = "landmark"
+metadata/size = 1.5
+metadata/tint = Color(0.86, 0.84, 0.9, 1.0)
+
+[node name="03P035" type="Marker2D" parent="SkinDecor/Nest"]
+position = Vector2(1150, -4559)
+metadata/piece = "decor/g/03-p03"
+metadata/layer = "body"
+
+[node name="01P016" type="Marker2D" parent="SkinDecor/Nest"]
+position = Vector2(1620, -4559)
+metadata/piece = "decor/g/01-p01"
+metadata/layer = "body"
+
 [node name="WorldSkin" type="Node2D" parent="."]
 script = ExtResource("world_skin")
 biome = "forest"
-direction = "truckart"
+direction = "diyalit"
