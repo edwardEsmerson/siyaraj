@@ -1,6 +1,7 @@
 extends CharacterBody2D
 ## Ground patrol with an interruptible charge and a slowly steering projectile.
 const BURST = preload("res://scripts/effects/burst.gd")
+const ENEMY_VISUAL = preload("res://scripts/enemies/enemy.gd")
 const PROJECTILE_SCENE = preload("res://scenes/combat/homing_projectile.tscn")
 
 signal health_changed(remaining: int)
@@ -26,15 +27,21 @@ var _home_x: float
 var _direction: int = 1
 var _aim_direction: Vector2 = Vector2.RIGHT
 var _remaining: float = 0.0
+var _fire_animation_remaining: float = 0.0
 var _hit_flash_remaining: float = 0.0
 
 @onready var body: Polygon2D = $Body
 @onready var pupil: Polygon2D = $Pupil
+@onready var art: Node2D = $Visuals/Art
+@onready var sprite: AnimatedSprite2D = $Visuals/Art/Sprite
 @onready var status: Label = $Name
 @onready var shot_origin: Marker2D = $ShotOrigin
 
 
 func _ready() -> void:
+	body.hide()
+	$Eye.hide()
+	pupil.hide()
 	health = max_health
 	_home_x = global_position.x
 	_update_feedback()
@@ -44,6 +51,7 @@ func _physics_process(delta: float) -> void:
 	if state == State.DEAD:
 		return
 	_remaining = maxf(_remaining - delta, 0.0)
+	_fire_animation_remaining = maxf(_fire_animation_remaining - delta, 0.0)
 	_hit_flash_remaining = maxf(_hit_flash_remaining - delta, 0.0)
 	_process_attack()
 	if state == State.HURT:
@@ -114,26 +122,44 @@ func _fire(player: CharacterBody2D) -> void:
 	projectile.knockback = projectile_knockback
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = shot_origin.global_position
+	_fire_animation_remaining = 1.0 / 8.0
+	sprite.play(&"fire")
 	BURST.spawn(get_tree().current_scene, shot_origin.global_position, Color(0.8, 0.4, 1.0), "", 12.0)
 
 
 func _update_feedback() -> void:
-	body.modulate = Color.WHITE
+	sprite.modulate = Color.WHITE
 	var action_hint := "PATROL"
 	var look := Vector2(_direction, 0)
 	match state:
 		State.CHARGING:
-			body.modulate = Color(1.8, 1.1, 2.0)
+			sprite.modulate = Color(1.8, 1.1, 2.0)
 			action_hint = "HOMING CHARGE!"
 			look = _aim_direction
 		State.RECOVERY:
-			body.modulate = Color(0.7, 0.75, 0.85)
+			sprite.modulate = Color(0.7, 0.75, 0.85)
 			action_hint = "RELOADING"
 		State.HURT:
-			body.modulate = Color(2.0, 2.0, 2.0) if _hit_flash_remaining > 0.0 else Color(1.2, 0.8, 0.8)
+			sprite.modulate = Color(2.0, 2.0, 2.0) if _hit_flash_remaining > 0.0 else Color(1.2, 0.8, 0.8)
 			action_hint = "HIT"
 	pupil.position = Vector2(0, -26) + look * 5.0
 	status.text = "Shooter %d/%d\n%s" % [health, max_health, action_hint]
+	var facing := _direction
+	if state == State.CHARGING or state == State.RECOVERY:
+		facing = -1 if _aim_direction.x < 0.0 else 1
+	art.scale.x = -0.5 if facing < 0 else 0.5
+	var animation: StringName = &"walk"
+	match state:
+		State.CHARGING:
+			animation = &"charge"
+		State.RECOVERY:
+			animation = &"recovery"
+		State.HURT:
+			animation = &"recovery"
+	if state == State.RECOVERY and _fire_animation_remaining > 0.0:
+		animation = &"fire"
+	if sprite.animation != animation or not sprite.is_playing():
+		sprite.play(animation)
 	queue_redraw()
 
 
@@ -153,6 +179,7 @@ func take_damage(amount: int, knockback: Vector2) -> void:
 	health_changed.emit(health)
 	if health == 0:
 		state = State.DEAD
+		ENEMY_VISUAL.play_death_art(get_tree().current_scene, art, global_position)
 		BURST.spawn(get_tree().current_scene, shot_origin.global_position, Color(0.8, 0.4, 1.0), "BOOM!", 38.0)
 		died.emit()
 		queue_free()

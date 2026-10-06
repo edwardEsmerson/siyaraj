@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/ground_shooter.gd" id="1_enemy"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/ground-shooter/cast_frames.tres" id="2_frames"]
 
 [sub_resource type="RectangleShape2D" id="EnemyShape"]
 size = Vector2(32, 40)
@@ -28,6 +29,17 @@ position = Vector2(5, -26)
 polygon = PackedVector2Array(-3, -4, 3, -4, 3, 4, -3, 4)
 color = Color(0.18, 0.08, 0.25, 1)
 
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Art" type="Node2D" parent="Visuals"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Visuals/Art"]
+position = Vector2(-72, -135)
+centered = false
+sprite_frames = ExtResource("2_frames")
+animation = &"walk"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
 shape = SubResource("EnemyShape")
@@ -37,9 +49,9 @@ position = Vector2(0, -20)
 
 [node name="Name" type="Label" parent="."]
 offset_left = -85.0
-offset_top = -94.0
+offset_top = -122.0
 offset_right = 85.0
-offset_bottom = -48.0
+offset_bottom = -76.0
 theme_override_font_sizes/font_size = 14
 text = "Shooter"
 horizontal_alignment = 1
