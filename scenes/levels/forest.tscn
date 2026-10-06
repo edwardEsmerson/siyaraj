@@ -3227,7 +3227,7 @@ text = "One of Swaminathan's guards! J lashes him. When he winds up, step back."
 
 [node name="DiyaHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
 position = Vector2(2400, 430)
-text = "A diya! Press E to light it. If you fall, we start again from here."
+text = "A diya! Light it, and if you fall, we start again from here."
 
 [node name="CanopyHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
 position = Vector2(2950, 430)

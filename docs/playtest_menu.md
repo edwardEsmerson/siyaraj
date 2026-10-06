@@ -1,7 +1,9 @@
 # Playtest menu and next level drafts
 
-Run the project with F5 to open the title screen, then choose Playtest menu (shown
-in debug builds only). F6 still runs the current scene directly.
+Run the project with F5 to open the title screen. Developer links are hidden
+from the title and pause menus. To use the playtest menu, open
+`scenes/main/playtest_menu.tscn` in the editor and press F6. F6 also runs any
+other current scene directly.
 
 Select Forest, River and ghats, or Temple and palace. Choose Beginning or a named
 checkpoint section, then Play selected level. New launches reset that level's
@@ -10,8 +12,7 @@ Checkpoints require a fresh E press while grounded beside a diya. Death restores
 the last checkpoint with full health and weapon resources. R resets the level.
 
 Esc pauses any level or standalone playground. Resume, go back to the last lit
-diya, restart, change settings, quit to the title, or (debug builds) return to
-level select. Time and gameplay stop while paused. The forest exit offers Enter
+diya, restart, change settings, or quit to the title. Time and gameplay stop while paused. The forest exit offers Enter
 to face Khara, whose victory leads to the river. River completion offers
 Dhoomketu's showdown; his victory leads to the palace, whose exit offers
 Swaminathan's showdown. Defeating Swaminathan and pressing Enter

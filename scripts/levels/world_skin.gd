@@ -138,14 +138,6 @@ func _process(delta: float) -> void:
 		_blend_zones(to_local(camera.get_screen_center_position()).x)
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if Engine.is_editor_hint() or not InputMap.has_action("cycle_world_kit"):
-		return
-	if event.is_action_pressed("cycle_world_kit") and not event.is_echo():
-		get_viewport().set_input_as_handled()
-		cycle()
-
-
 ## The kit folder currently in use.
 func kit_dir() -> String:
 	return kit_override if kit_override != "" else KIT_ROOT.path_join(biome).path_join(direction)

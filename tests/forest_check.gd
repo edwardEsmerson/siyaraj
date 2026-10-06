@@ -142,7 +142,7 @@ func run_checks() -> void:
 	await press_interact()
 	check(current_scene.course.checkpoint_x == 160, "Diya interaction must require grounded normal movement")
 	await place(Vector2(2450, 430))
-	check(current_scene.course.get_node("Checkpoints/ClearingDiya/Prompt").text.contains("E:"), "Nearby unlit diya must show the interaction prompt")
+	check(current_scene.course.get_node("Checkpoints/ClearingDiya/Prompt").text == "E" and current_scene.course.get_node("Checkpoints/ClearingDiya/Prompt").visible, "Nearby unlit diya must show the interaction prompt")
 	await press_interact()
 	check(current_scene.course.checkpoint_x == 2450, "E must light and secure the nearby diya")
 	check(current_scene.course.get_node("Checkpoints/ClearingDiya/Flame").visible, "Lit diya must visibly change")

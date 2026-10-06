@@ -61,7 +61,7 @@ func run_checks() -> void:
 	player.position = Vector2(150, current_scene.FLOOR_Y)
 	player.velocity = Vector2.ZERO
 	player.skyshot_ammo = 3
-	player.chakri_cooldown_remaining = 30.0
+	player.chakri_cooldown_remaining = 10.0
 	await ticks(3)
 	Input.action_press("move_right")
 	var crossed_blocks: int = 0
@@ -82,7 +82,7 @@ func run_checks() -> void:
 	Input.action_release("move_right")
 	await ticks(5)
 	check(player.position.x > current_scene.MAP_WIDTH - 40 and crossed_blocks >= 3, "The whole revised map must be traversable with the existing jump")
-	check(player.skyshot_ammo == 3 and player.chakri_cooldown_remaining > 0, "Traversal must preserve ammo while making progress on chakri cooldown")
+	check(player.skyshot_ammo == 3 and is_zero_approx(player.chakri_cooldown_remaining), "Traversal must preserve ammo and finish the 10-second chakri recharge")
 	check(is_equal_approx(current_scene.camera.position.x, current_scene.MAP_WIDTH - 480.0), "Camera must frame the final arena within the new map boundary")
 	player.position.x = 12
 	player.velocity = Vector2.ZERO

@@ -28,6 +28,8 @@ func run_checks() -> void:
 		await ticks(8)
 		var enemy: CharacterBody2D = current_scene.enemy
 		var player: CharacterBody2D = current_scene.player
+		var health_bar: Node2D = enemy.get_node("HealthBar")
+		check(health_bar.visible and is_equal_approx(health_bar.health_fraction, 1.0), "Every ordinary enemy must spawn with a full health bar")
 		var visuals: Node2D = enemy.get_node("Visuals")
 		var sprite: AnimatedSprite2D = visuals.sprite
 		check(sprite.sprite_frames != null and sprite.scale == Vector2(0.5, 0.5), "Every live enemy must use native cast art at scale 0.5")
@@ -75,7 +77,10 @@ func run_checks() -> void:
 			enemy.take_damage(1, Vector2.ZERO)
 			await ticks(1)
 			check(enemy.state == enemy.State.HURT and sprite.animation not in [&"fire", &"dive", &"charge"], "Interrupted ranged attacks must clear their release pose")
+		enemy.take_damage(1, Vector2.ZERO)
+		check(health_bar.visible and is_equal_approx(health_bar.health_fraction, float(enemy.health) / enemy.max_health), "Damage must immediately shrink the enemy bar to its remaining health")
 		enemy.take_damage(100, Vector2.ZERO)
+		check(not health_bar.visible, "Lethal damage must immediately hide the enemy bar")
 		await ticks(2)
 		check(not is_instance_valid(enemy), "Art must preserve immediate gameplay enemy removal")
 		var corpses := get_nodes_in_group("enemy_defeat_visuals")
