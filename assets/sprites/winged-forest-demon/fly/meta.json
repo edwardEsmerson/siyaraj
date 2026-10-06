@@ -1,0 +1,40 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Wings fully raised above the body, body hovering level, legs tucked",
+    "Wings level and spread wide out to the sides, body level",
+    "Wings swept fully down below the body, body lifted slightly",
+    "Wings halfway up on the recovery, body level"
+  ],
+  "frame_count": 4,
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    71
+  ],
+  "source_canvas": [
+    128,
+    128
+  ],
+  "source_anchor": [
+    64,
+    71
+  ],
+  "models": {
+    "01": "flash",
+    "02": "pro",
+    "03": "pro",
+    "04": "pro"
+  },
+  "notes": "`poses/fly.txt`"
+}

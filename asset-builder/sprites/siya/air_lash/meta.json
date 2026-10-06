@@ -1,0 +1,37 @@
+{
+  "name": "siya",
+  "animation": "air_lash",
+  "size": "1K",
+  "view": "right-profile",
+  "subject": "full-body",
+  "anchor_mode": "feet",
+  "fps": 8,
+  "loop": "once",
+  "poses": [
+    "In the air, knees tucked, lit sparkler raised behind the head",
+    "In the air, arm whipped forward and down, sparkler pointing ahead at full reach, legs trailing"
+  ],
+  "expected_frames": 2,
+  "free_palette": true,
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "frames": [
+    "01",
+    "02"
+  ],
+  "problems": {},
+  "models": {
+    "01": "pro",
+    "02": "flash"
+  },
+  "canvas": [
+    143,
+    128
+  ],
+  "anchor": [
+    64,
+    112
+  ]
+}

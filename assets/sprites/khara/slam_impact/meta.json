@@ -1,0 +1,47 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "durations": [
+    0.96
+  ],
+  "poses": [
+    "Bent deep forward, both fists driven down to knee height in front of him, as if a mace has hit the ground about 50 units ahead. Empty fists, no weapon; Khara's gada is a separate component"
+  ],
+  "frame_count": 1,
+  "canvas": [
+    333,
+    320
+  ],
+  "anchor": [
+    173,
+    300
+  ],
+  "source_canvas": [
+    320,
+    320
+  ],
+  "source_anchor": [
+    160,
+    300
+  ],
+  "models": {
+    "01": "imagegen"
+  },
+  "notes": "0.12 s. \"Bent deep forward, both fists driven down to knee height in front of him, as if a mace has hit the ground about 50 units ahead\".",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 1.604878048780488,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-6a176b53-93e9-43ab-a454-c82dd6acbab7.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 3,
+    "first_cell": 3,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

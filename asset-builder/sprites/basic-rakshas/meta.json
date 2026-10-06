@@ -1,0 +1,17 @@
+{
+  "name": "basic-rakshas",
+  "role": "enemy",
+  "target": 88,
+  "brief": "Basic rakshas enemy: an ordinary adult male demon footsoldier for Siyaraj, about player height, sturdy compact build with natural humanoid proportions. Use the supplied painting as identity and costume reference, translated into simple readable gameplay pixels. Preserve dark muted plum-purple skin, black swept-back hair, a bold curled black moustache, prominent hooked nose, stern comic eye and a small visible fang. Short simplified pointed marigold-gold crown with one hot-pink jewel, fitted short-sleeve gold tunic, hot-pink and coral dhoti gathered just below the knees, a short turquoise shoulder drape, a few chunky gold cuffs and anklets, bare feet. Reduce the painting's intricate ornament to two or three bold shapes. One small marigold-gold oval-headed mace with a short wooden handle, held low in the forward hand and pointing slightly forward; the other hand stays clearly visible. Keep the mace design identical across variants. Strict right-facing side profile, neutral alert idle stance with knees softly bent and both feet readable. Standard non-boss silhouette: modest crown, short drape, ordinary limb thickness, 246 native pixels total height including crown in the selected cleaned sprite. Simplify away the reference's long overhead staff, shield, sword and raised-arm battle pose. Keep skin color, face identity, outfit colors, crown and mace stable across all five variations. Same identity with slightly stronger geometric tailoring and one simple Madhubani-inspired border.",
+  "key": "green",
+  "size": "2K",
+  "canvas": [
+    144,
+    144
+  ],
+  "anchor": [
+    72,
+    135
+  ],
+  "anchor_mode": "feet"
+}

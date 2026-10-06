@@ -1,0 +1,37 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "durations": [
+    0.4,
+    0.4,
+    0.4
+  ],
+  "poses": [
+    "Launch: gripping a lit rocket in both hands at arm's length, feet leaving the ground, body pulled forward",
+    "Ride: body stretched horizontal behind the rocket, both hands on it, legs trailing together, hair and sari streaming back",
+    "Brake: rocket gone, front foot planted and skidding, body upright, arms out for balance"
+  ],
+  "frame_count": 3,
+  "canvas": [
+    160,
+    128
+  ],
+  "anchor": [
+    64,
+    112
+  ],
+  "source_canvas": [
+    160,
+    128
+  ],
+  "source_anchor": [
+    64,
+    112
+  ],
+  "models": {
+    "01": "pro",
+    "02": "pro",
+    "03": "pro"
+  },
+  "notes": "The rocket dash. Used for ground and air dash. Use `--free-palette` for the flame. Poses: \"Launch: gripping a lit rocket in both hands at arm's length, feet leaving the ground, body pulled forward\" / \"Ride: body stretched horizontal behind the rocket, both hands on it, legs trailing together, hair and sari streaming back\" / \"Brake: rocket gone, front foot planted and skidding, body upright, arms out for balance\""
+}

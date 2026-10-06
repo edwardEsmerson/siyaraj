@@ -1,0 +1,24 @@
+[gd_resource type="SpriteFrames" load_steps=14 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/ground-shooter/sprite.png" id="base"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground-shooter/walk/01.png" id="walk_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground-shooter/walk/02.png" id="walk_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground-shooter/walk/03.png" id="walk_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground-shooter/walk/04.png" id="walk_04"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground-shooter/charge/01.png" id="charge_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground-shooter/charge/02.png" id="charge_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground-shooter/fire/01.png" id="fire_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground-shooter/recovery/01.png" id="recovery_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground-shooter/recovery/02.png" id="recovery_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground-shooter/death/01.png" id="death_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground-shooter/death/02.png" id="death_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground-shooter/death/03.png" id="death_03"]
+
+[resource]
+animations = [
+{"frames": [{"duration": 1.000000, "texture": ExtResource("walk_01")}, {"duration": 1.000000, "texture": ExtResource("walk_02")}, {"duration": 1.000000, "texture": ExtResource("walk_03")}, {"duration": 1.000000, "texture": ExtResource("walk_04")}], "loop": true, "name": &"walk", "speed": 8.0},
+{"frames": [{"duration": 2.600000, "texture": ExtResource("charge_01")}, {"duration": 2.600000, "texture": ExtResource("charge_02")}], "loop": true, "name": &"charge", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("fire_01")}], "loop": false, "name": &"fire", "speed": 8.0},
+{"frames": [{"duration": 6.400000, "texture": ExtResource("recovery_01")}, {"duration": 6.400000, "texture": ExtResource("recovery_02")}], "loop": true, "name": &"recovery", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("death_01")}, {"duration": 1.000000, "texture": ExtResource("death_02")}, {"duration": 1.000000, "texture": ExtResource("death_03")}], "loop": false, "name": &"death", "speed": 8.0}
+]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=131 format=3]
+[gd_scene load_steps=132 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/forest.gd" id="1_forest"]
 
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/ground_shooter.tscn" id="4_shooter"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/flying_enemy.tscn" id="5_flyer"]
 
+[ext_resource type="PackedScene" path="res://scenes/companions/robin_hint.tscn" id="5_robin_hint"]
+[ext_resource type="Script" path="res://scripts/levels/world_skin.gd" id="world_skin"]
 
 [sub_resource type="RectangleShape2D" id="StartShape"]
 size = Vector2(360, 32)
@@ -3120,3 +3122,38 @@ shape = SubResource("UpperRecover3Shape")
 position = Vector2(21060, 200)
 theme_override_font_sizes/font_size = 17
 text = "Light the diya before the showdown."
+
+[node name="RobinHints" type="Node2D" parent="."]
+
+[node name="StartHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(420, 430)
+text = "Raj went this way! Space jumps. Shift dashes, even in midair."
+
+[node name="GuardHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(1750, 430)
+text = "One of Swaminathan's guards! J lashes him. When he winds up, step back."
+
+[node name="DiyaHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(2400, 430)
+text = "A diya! Press E to light it. If you fall, we start again from here."
+
+[node name="CanopyHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(2950, 430)
+text = "Wide gaps. Jump, then dash across. You get one air dash until you land!"
+
+[node name="WeaponsHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(4700, 430)
+text = "L fires a skyshot, but you only have five. Hold K to charge a chakri spin."
+
+[node name="ShooterHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(10250, 430)
+text = "Purple bolts! Dash straight through them, or hit him to stop the shot."
+
+[node name="BruteHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(15300, 430)
+text = "That brute is slow but hits hard. Wait for the swing, then strike."
+
+[node name="WorldSkin" type="Node2D" parent="."]
+script = ExtResource("world_skin")
+biome = "forest"
+direction = "truckart"

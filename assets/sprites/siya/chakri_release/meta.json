@@ -1,0 +1,56 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "durations": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Wind-up: crouched, chakri held low at the side in the throwing hand",
+    "Fling: sidearm throw, arm extended low and forward, hand open, chakri leaving the hand",
+    "Recover: standing up, arm drawn back to the side, looking ahead"
+  ],
+  "frame_count": 3,
+  "canvas": [
+    160,
+    128
+  ],
+  "anchor": [
+    64,
+    112
+  ],
+  "source_canvas": [
+    144,
+    128
+  ],
+  "source_anchor": [
+    64,
+    112
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen"
+  },
+  "notes": "Released K. The chakri spins around her (`fx-chakri-spin`). Use `poses/chakri.txt`, with `--free-palette`.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 3.0875,
+    "calibration_cell": 6
+  },
+  "sheet": {
+    "source": "exec-6c83ac08-2f1d-44ed-b38e-6992f7fcf8f4.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 4,
+    "first_cell": 8,
+    "extraction": "connected subjects on common source canvas",
+    "effect_owners": {
+      "11": 10
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "poses": [
+    "Anticipation: weapon or striking arm pulled far back, body twisted away, weight on the back foot",
+    "Strike: weapon or arm swung fully forward at full extension, weight lunging onto the front foot",
+    "Follow-through: weapon past the target and low, body leaning forward, front knee bent",
+    "Recover: returning toward the neutral stance, weapon raised back to ready"
+  ],
+  "durations": [
+    3.6,
+    0.96,
+    2.6,
+    2.6
+  ],
+  "free_palette": false,
+  "name": "basic-rakshas",
+  "animation": "attack",
+  "size": "sheet",
+  "expected_frames": 4,
+  "frames": [
+    "01",
+    "02",
+    "03",
+    "04"
+  ],
+  "canvas": [
+    146,
+    144
+  ],
+  "anchor": [
+    72,
+    135
+  ],
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen",
+    "04": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 2.977272727272727,
+    "calibration_cell": 9
+  },
+  "sheet": {
+    "source": "exec-3ca437b1-f5a0-433c-a0bd-87e6a797f833.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 4,
+    "first_cell": 4,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

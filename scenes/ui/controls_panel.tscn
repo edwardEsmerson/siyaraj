@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/controls_panel.gd" id="1_controls"]
+[ext_resource type="Texture2D" path="res://assets/ui/divider.png" id="2_divider"]
+
+[node name="ControlsPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(340, 0)
+script = ExtResource("1_controls")
+
+[node name="Column" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Header" type="Label" parent="Column"]
+layout_mode = 2
+theme_type_variation = &"HeaderLabel"
+text = "Controls"
+horizontal_alignment = 1
+
+[node name="Divider" type="TextureRect" parent="Column"]
+layout_mode = 2
+texture = ExtResource("2_divider")
+stretch_mode = 3
+
+[node name="Grid" type="GridContainer" parent="Column"]
+layout_mode = 2
+theme_override_constants/h_separation = 18
+theme_override_constants/v_separation = 4
+columns = 2
+
+[node name="Back" type="Button" parent="Column"]
+layout_mode = 2
+text = "Back"

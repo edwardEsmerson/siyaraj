@@ -1,0 +1,4 @@
+# Rocket dash: Siya grips a rocket that pulls her forward; use --free-palette for flame
+Light: kneeling on one knee, holding the rocket ahead with both hands, lighting its fuse
+Launch: gripping the rocket with both arms outstretched, feet just leaving the ground, body pulled forward
+Ride: body stretched horizontally behind the rocket, both hands on it, legs trailing

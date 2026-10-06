@@ -45,7 +45,7 @@ func run_checks() -> void:
 		check(flow.won and flow.get_node("Victory").visible, "Boss's real death signal must unlock victory")
 		flow._unhandled_input(accept())
 		await scene_changed
-		check(current_scene.scene_file_path.ends_with("river.tscn") if level == "forest" else current_scene.scene_file_path == navigation.MENU, "Boss victory must advance to river or finish the run")
+		check(current_scene.scene_file_path.ends_with("river.tscn") if level == "forest" else current_scene.scene_file_path == "res://scenes/main/ending.tscn", "Boss victory must advance to river or the ending")
 	# Terrain-only launches deliberately bypass encounters and boss fights.
 	navigation.enemies_enabled = false
 	navigation.start_level("res://scenes/main/forest.tscn")

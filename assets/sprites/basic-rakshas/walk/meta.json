@@ -1,0 +1,56 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Contact: front leg extended forward with heel touching the ground, back leg straight behind on its toes, opposite arm swung forward",
+    "Down: front foot flat and knee bent taking the weight, back foot lifting off, body at its lowest",
+    "Passing: weight on the straight front leg, back leg passing under the body with knee lifted, arms near the sides",
+    "Up: pushing off the toes of the standing leg, body at its highest, free leg swinging forward"
+  ],
+  "frame_count": 4,
+  "canvas": [
+    170,
+    144
+  ],
+  "anchor": [
+    96,
+    135
+  ],
+  "source_canvas": [
+    144,
+    144
+  ],
+  "source_anchor": [
+    72,
+    135
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen",
+    "04": "imagegen"
+  },
+  "notes": "`poses/walk.txt`. Used for patrol and chase; speed up the playback in chase.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 2.977272727272727,
+    "calibration_cell": 9
+  },
+  "sheet": {
+    "source": "exec-3ca437b1-f5a0-433c-a0bd-87e6a797f833.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 4,
+    "first_cell": 0,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "raj",
+  "brief": "Raj, clean-shaven young adult man, slim and theatrical. Black hair in a tall dramatic quiff. Turquoise kurta with a gold placket and buttons, cream churidar, a long hot-pink stole over one shoulder, embroidered juttis. Strict right-facing side profile, standing upright with his chin raised and one hand on his chest. Vain, wounded expression. No moustache or beard.",
+  "key": "green",
+  "role": "hero",
+  "target": 80,
+  "size": "1K",
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "candidate_id": "04",
+  "model": "pro",
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    120
+  ],
+  "art_dimensions": [
+    27,
+    80
+  ],
+  "generation_pixel_size": 10.0375,
+  "problems": []
+}

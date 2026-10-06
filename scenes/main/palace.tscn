@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/main/main.gd" id="1_main"]
 [ext_resource type="PackedScene" path="res://scenes/levels/palace.tscn" id="2_course"]
 [ext_resource type="PackedScene" path="res://scenes/player/forest_player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/companions/robin.tscn" id="4_robin"]
 
 [sub_resource type="StyleBoxFlat" id="CompletionStyle"]
 bg_color = Color(0.08, 0.08, 0.08, 0.97)
@@ -18,12 +19,14 @@ restart_delay = 0.35
 showdown_scene = "res://scenes/main/palace_showdown.tscn"
 showdown_name = "Ravan"
 completion_title = "PALACE COMPLETE"
-completion_detail = "Throne landing reached"
-completion_status = "Draft route complete. Esc: level select / R: replay"
+completion_detail = "Ravan awaits in Lanka"
+completion_status = "The palace is clear. Enter: face Ravan / R: replay the palace."
 
 [node name="TestCourse" parent="." instance=ExtResource("2_course")]
 
 [node name="Player" parent="." instance=ExtResource("3_player")]
+
+[node name="Robin" parent="." instance=ExtResource("4_robin")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(480, 270)

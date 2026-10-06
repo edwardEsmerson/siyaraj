@@ -1,0 +1,27 @@
+{
+  "name": "swaminathan-head",
+  "brief": "One crowned rakshasa king's head on its own. A tall pointed gold crown with a single jewel, pointed ears with gold earrings, purple-black skin. A HUGE black handlebar moustache with curled tips, twice the width of the face. Heavy eyebrows, smug expression. Three-quarter view facing slightly down. A short neck stub at the bottom.",
+  "key": "blue",
+  "role": "prop",
+  "target": 76,
+  "size": "1K",
+  "anchor_mode": "center",
+  "view": "front-three-quarter",
+  "subject": "head",
+  "candidate_id": "03",
+  "model": "flash",
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    64
+  ],
+  "art_dimensions": [
+    64,
+    81
+  ],
+  "generation_pixel_size": 11.052631578947368,
+  "problems": []
+}

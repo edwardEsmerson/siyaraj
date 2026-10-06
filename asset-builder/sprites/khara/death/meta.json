@@ -1,0 +1,61 @@
+{
+  "fps": 8,
+  "loop": "hold",
+  "poses": [
+    "Staggering backward, eyes wide. Empty fists, no weapon; Khara's gada is a separate component",
+    "Toppling back, arms flailing. Empty fists, no weapon; Khara's gada is a separate component",
+    "Falling flat on his back. Empty fists, no weapon; Khara's gada is a separate component",
+    "Lying flat, eyes as X marks, moustache drooping. Empty fists, no weapon; Khara's gada is a separate component"
+  ],
+  "durations": [
+    2.8,
+    2.8,
+    2.8,
+    2.8
+  ],
+  "free_palette": false,
+  "name": "khara",
+  "animation": "death",
+  "size": "sheet",
+  "expected_frames": 4,
+  "frames": [
+    "01",
+    "02",
+    "03",
+    "04"
+  ],
+  "canvas": [
+    320,
+    320
+  ],
+  "anchor": [
+    160,
+    300
+  ],
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen",
+    "04": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 1.5951219512195123,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-4cfee8e8-12dd-4972-9533-5efe70fb4749.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 3,
+    "first_cell": 7,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

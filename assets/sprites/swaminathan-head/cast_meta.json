@@ -1,0 +1,564 @@
+{
+  "name": "swaminathan-head",
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    64
+  ],
+  "scale": 0.5,
+  "art_pixels_per_unit": 2,
+  "anchor_mode": "center",
+  "collider_units": [
+    34,
+    34
+  ],
+  "animations": {
+    "idle": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Smug, eyes open",
+        "Smug, blinking"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        64
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        64
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Poses: \"Smug, eyes open\" / \"Smug, blinking\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 2.962962962962963,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-189fd272-7694-40c4-8c3e-acab36a5084b.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 5,
+        "rows": 4,
+        "first_cell": 0,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "telegraph": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Mouth opening, eyes starting to glow, moustache tips curling up",
+        "Moustache tips twirled into tight spirals, eyes glowing",
+        "Mouth wide, eyes blazing"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        64
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        64
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "Use `--free-palette` for the eye glow. Poses: \"Mouth opening, eyes starting to glow, moustache tips curling up\" / \"Moustache tips twirled into tight spirals, eyes glowing\" / \"Mouth wide, eyes blazing\". Must read under gold, orange, purple, cyan and rose halos.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 2.962962962962963,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-189fd272-7694-40c4-8c3e-acab36a5084b.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 5,
+        "rows": 4,
+        "first_cell": 2,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "attack": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Mouth gaping wide, jaw forward (breath, spit or roar)",
+        "Same, eyes crackling with lightning"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        64
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        64
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Poses: \"Mouth gaping wide, jaw forward (breath, spit or roar)\" / \"Same, eyes crackling with lightning\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 2.962962962962963,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-189fd272-7694-40c4-8c3e-acab36a5084b.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 5,
+        "rows": 4,
+        "first_cell": 5,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "exhausted": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Drooping, eyes half closed, tongue out, moustache limp",
+        "Same, wobbling"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        64
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        64
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "The punish window. Poses: \"Drooping, eyes half closed, tongue out, moustache limp\" / \"Same, wobbling\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 2.962962962962963,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-189fd272-7694-40c4-8c3e-acab36a5084b.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 5,
+        "rows": 4,
+        "first_cell": 7,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "knocked_out": {
+      "fps": 8,
+      "loop": "hold",
+      "durations": [
+        1.0
+      ],
+      "poses": [
+        "Limp, eyes as X marks, mouth open, moustache drooping"
+      ],
+      "frame_count": 1,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        64
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        64
+      ],
+      "models": {
+        "01": "imagegen"
+      },
+      "notes": "\"Limp, eyes as X marks, mouth open, moustache drooping\". Code darkens and rotates it.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 2.962962962962963,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-189fd272-7694-40c4-8c3e-acab36a5084b.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 5,
+        "rows": 4,
+        "first_cell": 9,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "regrow": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Small glowing bud of a head",
+        "Head half formed, sparkles",
+        "Fully formed, smug"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        64
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        64
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "Use `--free-palette`. Poses: \"Small glowing bud of a head\" / \"Head half formed, sparkles\" / \"Fully formed, smug\". Code scales it from 0.3 to 1.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 2.962962962962963,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-189fd272-7694-40c4-8c3e-acab36a5084b.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 5,
+        "rows": 4,
+        "first_cell": 10,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "fury": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Eyes ablaze, teeth bared, moustache bristling",
+        "Same, flames at the crown"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        64
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        64
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Use `--free-palette`. Poses: \"Eyes ablaze, teeth bared, moustache bristling\" / \"Same, flames at the crown\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 2.962962962962963,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-189fd272-7694-40c4-8c3e-acab36a5084b.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 5,
+        "rows": 4,
+        "first_cell": 13,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "destroyed": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Head cracking with light",
+        "Bursting into firework sparks",
+        "Smoking crown falling"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        64
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        64
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "Use `--free-palette`. Poses: \"Head cracking with light\" / \"Bursting into firework sparks\" / \"Smoking crown falling\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 5.148148148148148,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-d368057a-20dc-4d30-8fc9-3ab4d43ece12.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 2,
+        "rows": 2,
+        "first_cell": 1,
+        "extraction": "connected subjects on common source canvas",
+        "effect_owners": {}
+      }
+    },
+    "faces": {
+      "fps": 8,
+      "loop": "none",
+      "durations": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Mada: smug",
+        "Krodha: furious",
+        "Lobha: grasping, licking his lips",
+        "Moha: hazy, half-lidded",
+        "Matsarya: glancing sideways, jealous",
+        "Ahamkara: haughty, nose up",
+        "Manas: restless, darting eyes",
+        "Kama: winking, alluring",
+        "Buddhi: calm",
+        "Chitta: stern"
+      ],
+      "frame_count": 10,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        64
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        64
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen",
+        "04": "imagegen",
+        "05": "imagegen",
+        "06": "imagegen",
+        "07": "imagegen",
+        "08": "imagegen",
+        "09": "imagegen",
+        "10": "imagegen"
+      },
+      "notes": "The per-head expressions from `Sprites_List.md`, one pose each. Used as each head's `idle`.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.7777777777777777,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-d924667a-bd0a-47f0-994d-be16e923ecbe.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 3,
+        "first_cell": 0,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "burnt": {
+      "fps": 8,
+      "loop": "none",
+      "durations": [
+        1.0
+      ],
+      "poses": [
+        "Same head, moustache singed to smoking stubs, furious"
+      ],
+      "frame_count": 1,
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        64
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        64
+      ],
+      "models": {
+        "01": "imagegen"
+      },
+      "notes": "Phase 3 option from the proposal: \"Same head, moustache singed to smoking stubs, furious\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 5.9753086419753085,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-4019cb8f-0603-419b-a3a4-92d9465fe4a2.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 2,
+        "rows": 2,
+        "first_cell": 1,
+        "extraction": "connected subjects on common source canvas",
+        "effect_owners": {}
+      }
+    }
+  },
+  "attachment": {},
+  "view": "front-three-quarter",
+  "subject": "head",
+  "art_px": 76,
+  "brief": "One crowned rakshasa king's head on its own. A tall pointed gold crown with a single jewel, pointed ears with gold earrings, purple-black skin. A HUGE black handlebar moustache with curled tips, twice the width of the face. Heavy eyebrows, smug expression. Three-quarter view facing slightly down. A short neck stub at the bottom.",
+  "generation": {
+    "model": "pro",
+    "size": "1K",
+    "batch": false,
+    "candidates": 4,
+    "jobs": 3,
+    "fallback": "flash"
+  },
+  "source": "asset-builder/sprites/swaminathan-head",
+  "approval": "approved"
+}

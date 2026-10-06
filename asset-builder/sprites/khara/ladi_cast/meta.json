@@ -1,0 +1,57 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "poses": [
+    "Crouching, unrolling a string of red firecrackers along the ground. Empty fists, no weapon; Khara's gada is a separate component",
+    "Crouched, holding a glowing incense stick to the end of the string. Empty fists, no weapon; Khara's gada is a separate component",
+    "Rising, incense stick held up. Empty fists, no weapon; Khara's gada is a separate component"
+  ],
+  "durations": [
+    1.6,
+    1.6,
+    0.8
+  ],
+  "free_palette": true,
+  "name": "khara",
+  "animation": "ladi_cast",
+  "size": "sheet",
+  "expected_frames": 3,
+  "frames": [
+    "01",
+    "02",
+    "03"
+  ],
+  "canvas": [
+    333,
+    320
+  ],
+  "anchor": [
+    173,
+    300
+  ],
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 1.604878048780488,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-6a176b53-93e9-43ab-a454-c82dd6acbab7.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 3,
+    "first_cell": 6,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

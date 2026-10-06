@@ -1,0 +1,53 @@
+{
+  "fps": 8,
+  "loop": "hold",
+  "durations": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Hit hard: knocked backward, arms flung up, shocked expression. A big comic flop",
+    "Collapse: knees buckling, body folding forward, arms limp. A big comic flop",
+    "Down: lying flat on the ground on the side, eyes closed, completely still. A big comic flop"
+  ],
+  "frame_count": 3,
+  "canvas": [
+    240,
+    208
+  ],
+  "anchor": [
+    104,
+    195
+  ],
+  "source_canvas": [
+    225,
+    208
+  ],
+  "source_anchor": [
+    104,
+    195
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen"
+  },
+  "notes": "`poses/death.txt`. Make it a big comic flop.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 2.4926470588235294,
+    "calibration_cell": 5
+  },
+  "sheet": {
+    "source": "exec-acd14fab-fe2c-430e-8abb-25e0b55febdc.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 3,
+    "rows": 3,
+    "first_cell": 6,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

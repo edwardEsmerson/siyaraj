@@ -31,3 +31,5 @@ text = "SIYARAJ / palace showdown: Ravan"
 
 [node name="CampaignFlow" parent="." instance=ExtResource("2")]
 boss_path = NodePath("../Ravan")
+next_level = "res://scenes/main/ending.tscn"
+destination_name = "the ending"

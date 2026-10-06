@@ -1,0 +1,34 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Hovering in place, wings raised, beak closed",
+    "Hovering, wings down, beak closed"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    80,
+    80
+  ],
+  "anchor": [
+    40,
+    40
+  ],
+  "source_canvas": [
+    80,
+    80
+  ],
+  "source_anchor": [
+    40,
+    40
+  ],
+  "models": {
+    "01": "pro",
+    "02": "flash"
+  },
+  "notes": "Poses: \"Hovering in place, wings raised, beak closed\" / \"Hovering, wings down, beak closed\"."
+}

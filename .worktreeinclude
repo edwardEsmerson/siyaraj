@@ -1,0 +1,4 @@
+# Carry this computer's local Codex permission default into managed worktrees.
+/.codex/config.toml
+/asset-builder/refs/
+/asset-builder/bin/

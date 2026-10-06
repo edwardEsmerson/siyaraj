@@ -1,0 +1,504 @@
+{
+  "name": "robin",
+  "canvas": [
+    80,
+    80
+  ],
+  "anchor": [
+    40,
+    40
+  ],
+  "scale": 0.5,
+  "art_pixels_per_unit": 2,
+  "anchor_mode": "center",
+  "collider_units": [
+    24,
+    24
+  ],
+  "animations": {
+    "fly": {
+      "fps": 10,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Wings fully raised above the body, body hovering level, legs tucked",
+        "Wings level and spread wide out to the sides, body level",
+        "Wings swept fully down below the body, body lifted slightly",
+        "Wings halfway up on the recovery, body level"
+      ],
+      "frame_count": 4,
+      "canvas": [
+        80,
+        80
+      ],
+      "anchor": [
+        40,
+        40
+      ],
+      "source_canvas": [
+        80,
+        80
+      ],
+      "source_anchor": [
+        40,
+        40
+      ],
+      "models": {},
+      "notes": "`poses/fly.txt`"
+    },
+    "hover": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Hovering in place, wings raised, beak closed",
+        "Hovering, wings down, beak closed"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        80,
+        80
+      ],
+      "anchor": [
+        40,
+        40
+      ],
+      "source_canvas": [
+        80,
+        80
+      ],
+      "source_anchor": [
+        40,
+        40
+      ],
+      "models": {
+        "01": "pro",
+        "02": "flash"
+      },
+      "notes": "Poses: \"Hovering in place, wings raised, beak closed\" / \"Hovering, wings down, beak closed\"."
+    },
+    "hint": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Hovering, one wing pointing forward, beak wide open talking",
+        "Hovering, wing pointing, beak closed, eyebrow raised"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        80,
+        80
+      ],
+      "anchor": [
+        40,
+        40
+      ],
+      "source_canvas": [
+        80,
+        80
+      ],
+      "source_anchor": [
+        40,
+        40
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Shown next to new hazards. Poses: \"Hovering, one wing pointing forward, beak wide open talking\" / \"Hovering, wing pointing, beak closed, eyebrow raised\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 4.854166666666667,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 5,
+        "rows": 4,
+        "first_cell": 0,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "perch": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Perched upright, wings folded neatly along the body, tail plumes hanging straight down behind, talons gripping below the belly, head up and proud, facing right",
+        "Identical to the perched pose facing right (head on the right, one tail fan hanging down on the left behind the body, wings folded), only the beak is open as if chirping and the crest is raised a little"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        80,
+        80
+      ],
+      "anchor": [
+        40,
+        40
+      ],
+      "source_canvas": [
+        80,
+        80
+      ],
+      "source_anchor": [
+        40,
+        40
+      ],
+      "models": {},
+      "notes": "Sitting on Siya's shoulder or a ledge in cutscenes. Poses: \"Perched, wings folded, feet gripping\" / \"Perched, head tilted, blinking\"."
+    },
+    "peck": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Wings pulled back, beak aimed forward, body coiled",
+        "Darting forward, beak jabbing, wings swept back",
+        "Bouncing back, wings flared"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        80,
+        80
+      ],
+      "anchor": [
+        40,
+        40
+      ],
+      "source_canvas": [
+        80,
+        80
+      ],
+      "source_anchor": [
+        40,
+        40
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "The Robin strike. Poses: \"Wings pulled back, beak aimed forward, body coiled\" / \"Darting forward, beak jabbing, wings swept back\" / \"Bouncing back, wings flared\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 4.854166666666667,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 5,
+        "rows": 4,
+        "first_cell": 2,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "dive": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Wings folded tight, diving steeply down-forward",
+        "Pulling out of the dive, wings flaring wide",
+        "Swooping level, wings spread"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        80,
+        80
+      ],
+      "anchor": [
+        40,
+        40
+      ],
+      "source_canvas": [
+        80,
+        80
+      ],
+      "source_anchor": [
+        40,
+        40
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "Boss fight. Poses: \"Wings folded tight, diving steeply down-forward\" / \"Pulling out of the dive, wings flaring wide\" / \"Swooping level, wings spread\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 4.854166666666667,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 5,
+        "rows": 4,
+        "first_cell": 5,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "drop_sparks": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Hovering, tail flicking down, a spray of sparks falling below",
+        "Wings up, sparks trailing"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        80,
+        80
+      ],
+      "anchor": [
+        40,
+        40
+      ],
+      "source_canvas": [
+        80,
+        80
+      ],
+      "source_anchor": [
+        40,
+        40
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Boss fight. Use `--free-palette`. Poses: \"Hovering, tail flicking down, a spray of sparks falling below\" / \"Wings up, sparks trailing\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 4.854166666666667,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 5,
+        "rows": 4,
+        "first_cell": 8,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "hypnotised": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Hovering stiffly, eyes replaced by purple spirals, beak open",
+        "Same, spirals turned the other way"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        80,
+        80
+      ],
+      "anchor": [
+        40,
+        40
+      ],
+      "source_canvas": [
+        80,
+        80
+      ],
+      "source_anchor": [
+        40,
+        40
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Use `--free-palette`. Poses: \"Hovering stiffly, eyes replaced by purple spirals, beak open\" / \"Same, spirals turned the other way\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 4.854166666666667,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 5,
+        "rows": 4,
+        "first_cell": 10,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "dizzy": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Wobbling in the air, eyes as X marks, feathers ruffled",
+        "Tumbling sideways, wings limp",
+        "Lying on his back on the ground, little stars circling (separate fx)"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        80,
+        80
+      ],
+      "anchor": [
+        40,
+        40
+      ],
+      "source_canvas": [
+        80,
+        80
+      ],
+      "source_anchor": [
+        40,
+        40
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "The dizzy meter is full. Poses: \"Wobbling in the air, eyes as X marks, feathers ruffled\" / \"Tumbling sideways, wings limp\" / \"Lying on his back on the ground, little stars circling (separate fx)\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 4.854166666666667,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 5,
+        "rows": 4,
+        "first_cell": 12,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "wake": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Sitting up, shaking his head",
+        "Hopping up, wings out, determined"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        80,
+        80
+      ],
+      "anchor": [
+        40,
+        40
+      ],
+      "source_canvas": [
+        80,
+        80
+      ],
+      "source_anchor": [
+        40,
+        40
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Poses: \"Sitting up, shaking his head\" / \"Hopping up, wings out, determined\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 4.854166666666667,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-3a86d153-6551-485e-a982-2460543362e6.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 5,
+        "rows": 4,
+        "first_cell": 15,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "point": {
+      "alias_of": "hint",
+      "fps": 8,
+      "loop": "loop"
+    },
+    "talk": {
+      "alias_of": "perch",
+      "fps": 5,
+      "loop": "loop"
+    }
+  },
+  "attachment": {},
+  "view": "right-profile",
+  "subject": "full-body",
+  "art_px": 48,
+  "brief": "Robin, Siya's bird companion: a small, original Indian-folk firebird inspired by Jatayu, the noble vulture-king of the Ramayana. Side view facing right, in flight, both wings raised high in a V, long tail plumes trailing down and back, talons tucked under the body. Vivid vermillion-red wings and back; each wing's long flight feathers tipped with cream and then emerald green; feathers decorated with small Madhubani-style dot and line patterns in marigold. A cream belly and a fluffy white ruff around the neck, like a vulture's. A noble head with a strongly hooked golden raptor beak, a sharp, friendly eye with a crimson eye-mask, and a curled golden crest. A fan of long marigold-gold and orange tail plumes. Slim, regal and colourful, with bold, clean shapes that read at a small size. Original design; the references guide mood and colours only.",
+  "generation": {
+    "model": "pro",
+    "size": "1K",
+    "batch": false,
+    "candidates": 4,
+    "jobs": 3,
+    "fallback": "flash"
+  },
+  "source": "asset-builder/sprites/robin",
+  "approval": "approved"
+}

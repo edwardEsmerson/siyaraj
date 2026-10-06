@@ -1,0 +1,44 @@
+[gd_resource type="SpriteFrames" load_steps=27 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/sprite.png" id="base"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/fly/01.png" id="fly_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/fly/02.png" id="fly_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/fly/03.png" id="fly_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/fly/04.png" id="fly_04"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/hover/01.png" id="hover_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/hover/02.png" id="hover_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/hint/01.png" id="hint_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/hint/02.png" id="hint_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/perch/01.png" id="perch_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/perch/02.png" id="perch_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/peck/01.png" id="peck_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/peck/02.png" id="peck_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/peck/03.png" id="peck_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/dive/01.png" id="dive_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/dive/02.png" id="dive_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/dive/03.png" id="dive_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/drop_sparks/01.png" id="drop_sparks_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/drop_sparks/02.png" id="drop_sparks_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/hypnotised/01.png" id="hypnotised_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/hypnotised/02.png" id="hypnotised_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/dizzy/01.png" id="dizzy_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/dizzy/02.png" id="dizzy_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/dizzy/03.png" id="dizzy_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/wake/01.png" id="wake_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robin/wake/02.png" id="wake_02"]
+
+[resource]
+animations = [
+{"frames": [{"duration": 1.000000, "texture": ExtResource("fly_01")}, {"duration": 1.000000, "texture": ExtResource("fly_02")}, {"duration": 1.000000, "texture": ExtResource("fly_03")}, {"duration": 1.000000, "texture": ExtResource("fly_04")}], "loop": true, "name": &"fly", "speed": 10.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("hover_01")}, {"duration": 1.000000, "texture": ExtResource("hover_02")}], "loop": true, "name": &"hover", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("hint_01")}, {"duration": 1.000000, "texture": ExtResource("hint_02")}], "loop": true, "name": &"hint", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("perch_01")}, {"duration": 1.000000, "texture": ExtResource("perch_02")}], "loop": true, "name": &"perch", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("peck_01")}, {"duration": 1.000000, "texture": ExtResource("peck_02")}, {"duration": 1.000000, "texture": ExtResource("peck_03")}], "loop": false, "name": &"peck", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("dive_01")}, {"duration": 1.000000, "texture": ExtResource("dive_02")}, {"duration": 1.000000, "texture": ExtResource("dive_03")}], "loop": false, "name": &"dive", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("drop_sparks_01")}, {"duration": 1.000000, "texture": ExtResource("drop_sparks_02")}], "loop": false, "name": &"drop_sparks", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("hypnotised_01")}, {"duration": 1.000000, "texture": ExtResource("hypnotised_02")}], "loop": true, "name": &"hypnotised", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("dizzy_01")}, {"duration": 1.000000, "texture": ExtResource("dizzy_02")}, {"duration": 1.000000, "texture": ExtResource("dizzy_03")}], "loop": false, "name": &"dizzy", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("wake_01")}, {"duration": 1.000000, "texture": ExtResource("wake_02")}], "loop": false, "name": &"wake", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("hint_01")}, {"duration": 1.000000, "texture": ExtResource("hint_02")}], "loop": true, "name": &"point", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("perch_01")}, {"duration": 1.000000, "texture": ExtResource("perch_02")}], "loop": true, "name": &"talk", "speed": 5.0}
+]

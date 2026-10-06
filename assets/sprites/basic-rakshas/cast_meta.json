@@ -1,0 +1,250 @@
+{
+  "name": "basic-rakshas",
+  "canvas": [
+    170,
+    144
+  ],
+  "anchor": [
+    96,
+    135
+  ],
+  "scale": 0.5,
+  "art_pixels_per_unit": 2,
+  "anchor_mode": "feet",
+  "collider_units": [
+    32,
+    40
+  ],
+  "animations": {
+    "walk": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Contact: front leg extended forward with heel touching the ground, back leg straight behind on its toes, opposite arm swung forward",
+        "Down: front foot flat and knee bent taking the weight, back foot lifting off, body at its lowest",
+        "Passing: weight on the straight front leg, back leg passing under the body with knee lifted, arms near the sides",
+        "Up: pushing off the toes of the standing leg, body at its highest, free leg swinging forward"
+      ],
+      "frame_count": 4,
+      "canvas": [
+        170,
+        144
+      ],
+      "anchor": [
+        96,
+        135
+      ],
+      "source_canvas": [
+        144,
+        144
+      ],
+      "source_anchor": [
+        72,
+        135
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen",
+        "04": "imagegen"
+      },
+      "notes": "`poses/walk.txt`. Used for patrol and chase; speed up the playback in chase.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 2.977272727272727,
+        "calibration_cell": 9
+      },
+      "sheet": {
+        "source": "exec-3ca437b1-f5a0-433c-a0bd-87e6a797f833.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 4,
+        "first_cell": 0,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "attack": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        3.6,
+        0.96,
+        2.6,
+        2.6
+      ],
+      "poses": [
+        "Anticipation: weapon or striking arm pulled far back, body twisted away, weight on the back foot",
+        "Strike: weapon or arm swung fully forward at full extension, weight lunging onto the front foot",
+        "Follow-through: weapon past the target and low, body leaning forward, front knee bent",
+        "Recover: returning toward the neutral stance, weapon raised back to ready"
+      ],
+      "frame_count": 4,
+      "canvas": [
+        170,
+        144
+      ],
+      "anchor": [
+        96,
+        135
+      ],
+      "source_canvas": [
+        146,
+        144
+      ],
+      "source_anchor": [
+        72,
+        135
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen",
+        "04": "imagegen"
+      },
+      "notes": "`poses/attack.txt`, mace swing. Strike is frame 2.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 2.977272727272727,
+        "calibration_cell": 9
+      },
+      "sheet": {
+        "source": "exec-3ca437b1-f5a0-433c-a0bd-87e6a797f833.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 4,
+        "first_cell": 4,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "idle": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Neutral stance, mace low",
+        "Same, twirling his moustache with the free hand"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        170,
+        144
+      ],
+      "anchor": [
+        96,
+        135
+      ],
+      "source_canvas": [
+        144,
+        144
+      ],
+      "source_anchor": [
+        72,
+        135
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Poses: \"Neutral stance, mace low\" / \"Same, twirling his moustache with the free hand\". The twirl is the comic tell from the proposal.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 2.977272727272727,
+        "calibration_cell": 9
+      },
+      "sheet": {
+        "source": "exec-3ca437b1-f5a0-433c-a0bd-87e6a797f833.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 4,
+        "first_cell": 8,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "death": {
+      "fps": 8,
+      "loop": "hold",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Hit hard: knocked backward, arms flung up, shocked expression",
+        "Collapse: knees buckling, body folding forward, arms limp",
+        "Down: lying flat on the ground on the side, eyes closed, completely still"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        170,
+        144
+      ],
+      "anchor": [
+        96,
+        135
+      ],
+      "source_canvas": [
+        168,
+        144
+      ],
+      "source_anchor": [
+        96,
+        135
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "`poses/death.txt`",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 2.977272727272727,
+        "calibration_cell": 9
+      },
+      "sheet": {
+        "source": "exec-3ca437b1-f5a0-433c-a0bd-87e6a797f833.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 4,
+        "first_cell": 10,
+        "extraction": "connected subjects on common source canvas"
+      }
+    }
+  },
+  "attachment": {},
+  "view": "right-profile",
+  "subject": "full-body",
+  "art_px": 88,
+  "brief": "Basic rakshas enemy: an ordinary adult male demon footsoldier for Siyaraj, about player height, sturdy compact build with natural humanoid proportions. Use the supplied painting as identity and costume reference, translated into simple readable gameplay pixels. Preserve dark muted plum-purple skin, black swept-back hair, a bold curled black moustache, prominent hooked nose, stern comic eye and a small visible fang. Short simplified pointed marigold-gold crown with one hot-pink jewel, fitted short-sleeve gold tunic, hot-pink and coral dhoti gathered just below the knees, a short turquoise shoulder drape, a few chunky gold cuffs and anklets, bare feet. Reduce the painting's intricate ornament to two or three bold shapes. One small marigold-gold oval-headed mace with a short wooden handle, held low in the forward hand and pointing slightly forward; the other hand stays clearly visible. Keep the mace design identical across variants. Strict right-facing side profile, neutral alert idle stance with knees softly bent and both feet readable. Standard non-boss silhouette: modest crown, short drape, ordinary limb thickness, 246 native pixels total height including crown in the selected cleaned sprite. Simplify away the reference's long overhead staff, shield, sword and raised-arm battle pose. Keep skin color, face identity, outfit colors, crown and mace stable across all five variations. Same identity with slightly stronger geometric tailoring and one simple Madhubani-inspired border.",
+  "generation": {
+    "model": "pro",
+    "size": "1K",
+    "batch": false,
+    "candidates": 4,
+    "jobs": 3,
+    "fallback": "flash"
+  },
+  "source": "asset-builder/sprites/basic-rakshas",
+  "approval": "approved"
+}

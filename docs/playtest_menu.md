@@ -1,6 +1,7 @@
 # Playtest menu and next level drafts
 
-Run the project with F5 to open the menu. F6 still runs the current scene directly.
+Run the project with F5 to open the title screen, then choose Playtest menu (shown
+in debug builds only). F6 still runs the current scene directly.
 
 Select Forest, River and ghats, or Temple and palace. Choose Beginning or a named
 checkpoint section, then Play selected level. New launches reset that level's
@@ -8,11 +9,13 @@ session progress. Turn off Enable enemy encounters to focus on traversal.
 Checkpoints require a fresh E press while grounded beside a diya. Death restores
 the last checkpoint with full health and weapon resources. R resets the level.
 
-Esc pauses any level or standalone playground. Resume, restart, or return to
+Esc pauses any level or standalone playground. Resume, go back to the last lit
+diya, restart, change settings, quit to the title, or (debug builds) return to
 level select. Time and gameplay stop while paused. The forest exit offers Enter
 to face Khara, whose victory leads to the river. River completion leads to the
-palace, whose exit offers Ravan's showdown. Boss death retries the fight with
-fresh resources. Terrain-only launches skip bosses. See [level iteration](level_iteration.md).
+palace, whose exit offers Ravan's showdown; defeating Ravan and pressing Enter
+opens the ending screen. Boss death retries the fight with fresh resources.
+Terrain-only launches skip bosses. See [level iteration](level_iteration.md).
 
 ## Developer snapshots
 
@@ -68,7 +71,8 @@ Art and moving terrain remain future design work. The existing bosses now finish
 the forest and palace, and forest detour guardians control the far return doors.
 
 `scripts/levels/draft_level.gd` shares checkpoint behavior between these drafts.
-`scripts/main/playtest_navigation.gd` owns pause and snapshot launches. Main HUD
+`scripts/main/playtest_navigation.gd` owns pausing and snapshot launches; the pause
+menu itself is `scenes/ui/pause_menu.tscn`. Main HUD
 and weapons use the same scripts as the forest. No movement values changed.
 
 Validate with `tests/next_levels_check.gd` and `tests/playtest_menu_check.gd` in

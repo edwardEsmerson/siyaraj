@@ -1,0 +1,429 @@
+{
+  "name": "swaminathan",
+  "canvas": [
+    420,
+    368
+  ],
+  "anchor": [
+    235,
+    345
+  ],
+  "scale": 0.5,
+  "art_pixels_per_unit": 2,
+  "anchor_mode": "feet",
+  "collider_units": [
+    100,
+    60
+  ],
+  "animations": {
+    "idle": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Hands on hips, arms fanned behind, chest raised. Headless; ten arms; keep the navel clear",
+        "Same, chest dropped slightly. Headless; ten arms; keep the navel clear"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        420,
+        368
+      ],
+      "anchor": [
+        235,
+        345
+      ],
+      "source_canvas": [
+        368,
+        368
+      ],
+      "source_anchor": [
+        184,
+        345
+      ],
+      "models": {
+        "01": "pro",
+        "02": "pro"
+      },
+      "notes": "Poses: \"Hands on hips, arms fanned behind, chest raised\" / \"Same, chest dropped slightly\"."
+    },
+    "exposed": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Slumped forward, arms hanging, knees buckled. Headless; ten arms; keep the navel clear",
+        "Same, swaying. Headless; ten arms; keep the navel clear"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        420,
+        368
+      ],
+      "anchor": [
+        235,
+        345
+      ],
+      "source_canvas": [
+        368,
+        368
+      ],
+      "source_anchor": [
+        184,
+        345
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Staggered and slumped, belly bare. Code moves him 6 units down. Poses: \"Slumped forward, arms hanging, knees buckled\" / \"Same, swaying\". Keep the navel clear.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.5020408163265306,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-bd086832-bbee-40f3-81f9-b7d9dc2fd138.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 1,
+        "extraction": "connected subjects on common source canvas",
+        "effect_owners": {}
+      }
+    },
+    "dying": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Arms flung up, recoiling. Headless; ten arms; keep the navel clear",
+        "Knees buckling. Headless; ten arms; keep the navel clear",
+        "Kneeling, arms limp. Headless; ten arms; keep the navel clear",
+        "Collapsing forward. Headless; ten arms; keep the navel clear"
+      ],
+      "frame_count": 4,
+      "canvas": [
+        420,
+        368
+      ],
+      "anchor": [
+        235,
+        345
+      ],
+      "source_canvas": [
+        420,
+        368
+      ],
+      "source_anchor": [
+        235,
+        345
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen",
+        "04": "imagegen"
+      },
+      "notes": "Poses: \"Arms flung up, recoiling\" / \"Knees buckling\" / \"Kneeling, arms limp\" / \"Collapsing forward\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.5020408163265306,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-bd086832-bbee-40f3-81f9-b7d9dc2fd138.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 3,
+        "extraction": "connected subjects on common source canvas",
+        "effect_owners": {}
+      }
+    },
+    "dead": {
+      "fps": 8,
+      "loop": "hold",
+      "durations": [
+        1.0
+      ],
+      "poses": [
+        "Collapsed in a heap, arms splayed. Headless; ten arms; keep the navel clear"
+      ],
+      "frame_count": 1,
+      "canvas": [
+        420,
+        368
+      ],
+      "anchor": [
+        235,
+        345
+      ],
+      "source_canvas": [
+        403,
+        368
+      ],
+      "source_anchor": [
+        219,
+        345
+      ],
+      "models": {
+        "01": "imagegen"
+      },
+      "notes": "\"Collapsed in a heap, arms splayed\". Code dims it.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.5020408163265306,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-bd086832-bbee-40f3-81f9-b7d9dc2fd138.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 7,
+        "extraction": "connected subjects on common source canvas",
+        "effect_owners": {}
+      }
+    },
+    "intro": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Seated low, arms folded. Headless; ten arms; keep the navel clear",
+        "Rising, arms spreading. Headless; ten arms; keep the navel clear",
+        "Standing tall, all arms fanned wide. Headless; ten arms; keep the navel clear"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        420,
+        368
+      ],
+      "anchor": [
+        235,
+        345
+      ],
+      "source_canvas": [
+        368,
+        368
+      ],
+      "source_anchor": [
+        184,
+        345
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "Poses: \"Seated low, arms folded\" / \"Rising, arms spreading\" / \"Standing tall, all arms fanned wide\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.2285714285714286,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-08fb00a2-9a7b-4634-9f90-00dc2c67dd9a.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 3,
+        "first_cell": 1,
+        "extraction": "connected subjects on common source canvas",
+        "effect_owners": {}
+      }
+    },
+    "roar": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Arms pulled in, clenched. Headless; ten arms; keep the navel clear",
+        "All arms flung out. Headless; ten arms; keep the navel clear",
+        "Arms raised high. Headless; ten arms; keep the navel clear"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        420,
+        368
+      ],
+      "anchor": [
+        235,
+        345
+      ],
+      "source_canvas": [
+        368,
+        368
+      ],
+      "source_anchor": [
+        184,
+        345
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "Phase transition. Poses: \"Arms pulled in, clenched\" / \"All arms flung out\" / \"Arms raised high\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.2285714285714286,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-08fb00a2-9a7b-4634-9f90-00dc2c67dd9a.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 3,
+        "first_cell": 4,
+        "extraction": "connected subjects on common source canvas",
+        "effect_owners": {}
+      }
+    },
+    "fury": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "All arms raised high, fists glowing. Headless; ten arms; keep the navel clear",
+        "Same, arms shifted. Headless; ten arms; keep the navel clear"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        420,
+        368
+      ],
+      "anchor": [
+        235,
+        345
+      ],
+      "source_canvas": [
+        368,
+        368
+      ],
+      "source_anchor": [
+        184,
+        345
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "Use `--free-palette`. Poses: \"All arms raised high, fists glowing\" / \"Same, arms shifted\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 1.8081632653061224,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-07d42b01-1580-4fca-95a9-0ef3449da610.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 2,
+        "rows": 2,
+        "first_cell": 1,
+        "extraction": "connected subjects on common source canvas",
+        "effect_owners": {}
+      }
+    }
+  },
+  "attachment": {
+    "sprite": "swaminathan-head",
+    "shoulder_units": -118,
+    "head_offsets_units": [
+      [
+        -198.0,
+        -150.0
+      ],
+      [
+        -154.0,
+        -161.9
+      ],
+      [
+        -110.0,
+        -170.7
+      ],
+      [
+        -66.0,
+        -176.7
+      ],
+      [
+        -22.0,
+        -179.6
+      ],
+      [
+        22.0,
+        -179.6
+      ],
+      [
+        66.0,
+        -176.7
+      ],
+      [
+        110.0,
+        -170.7
+      ],
+      [
+        154.0,
+        -161.9
+      ],
+      [
+        198.0,
+        -150.0
+      ]
+    ],
+    "neck_colour": "#552648"
+  },
+  "view": "front-three-quarter",
+  "subject": "headless-body",
+  "art_px": 260,
+  "brief": "Swaminathan, a vain rakshasa king, body only. A wide ornate gold collar sits where his heads will attach later. No head is drawn. Broad royal torso with a bare belly and a visible navel, eight arms fanned out behind two main arms held on his hips. Purple-black skin, gold armlets, a hot-pink and gold silk dhoti, a turquoise sash, heavy jewelled belt, pointed gold shoes. Front three-quarter stance, feet planted wide.",
+  "generation": {
+    "model": "pro",
+    "size": "4K",
+    "batch": false,
+    "candidates": 4,
+    "jobs": 2
+  },
+  "source": "asset-builder/sprites/swaminathan",
+  "approval": "approved"
+}

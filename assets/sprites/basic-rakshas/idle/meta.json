@@ -1,0 +1,50 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Neutral stance, mace low",
+    "Same, twirling his moustache with the free hand"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    170,
+    144
+  ],
+  "anchor": [
+    96,
+    135
+  ],
+  "source_canvas": [
+    144,
+    144
+  ],
+  "source_anchor": [
+    72,
+    135
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "notes": "Poses: \"Neutral stance, mace low\" / \"Same, twirling his moustache with the free hand\". The twirl is the comic tell from the proposal.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 2.977272727272727,
+    "calibration_cell": 9
+  },
+  "sheet": {
+    "source": "exec-3ca437b1-f5a0-433c-a0bd-87e6a797f833.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 4,
+    "first_cell": 8,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

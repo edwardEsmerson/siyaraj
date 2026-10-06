@@ -1,0 +1,19 @@
+{
+  "name": "swaminathan",
+  "brief": "Swaminathan, a vain rakshasa king, body only. A wide ornate gold collar sits where his heads will attach later. No head is drawn. Broad royal torso with a bare belly and a visible navel, eight arms fanned out behind two main arms held on his hips. Purple-black skin, gold armlets, a hot-pink and gold silk dhoti, a turquoise sash, heavy jewelled belt, pointed gold shoes. Front three-quarter stance, feet planted wide.",
+  "key": "blue",
+  "role": "big-boss",
+  "target": 260,
+  "size": "4K",
+  "anchor_mode": "feet",
+  "view": "front-three-quarter",
+  "subject": "headless-body",
+  "canvas": [
+    368,
+    368
+  ],
+  "anchor": [
+    184,
+    345
+  ]
+}

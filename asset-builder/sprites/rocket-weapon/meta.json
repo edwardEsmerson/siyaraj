@@ -1,0 +1,17 @@
+{
+  "name": "rocket-weapon",
+  "role": "prop",
+  "target": 40,
+  "brief": "Standalone unlit Indian Diwali stick rocket weapon for Siyaraj, based on the supplied product photograph. Horizontal right-facing side view. Red/hot-pink paper cone, short cylindrical red wrapper with marigold-gold bands and a sparse gold motif, long thin supporting stick with red, cream and navy spiral stripes, short gray unlit fuse emerging from the rear of the cylinder. Natural handmade paper-firework silhouette. Deep aubergine outline and two or three hard shade steps. No character or hand. No flame, spark, smoke, glow or lettering; keep the fuse readable for later ignition animation. Fixed proportions and colors across five wrapper variations. Same geometry and identity, wrapper has one bold small marigold-gold star in the red central panel between gold end bands.",
+  "key": "green",
+  "size": "2K",
+  "canvas": [
+    64,
+    64
+  ],
+  "anchor": [
+    32,
+    32
+  ],
+  "anchor_mode": "center"
+}
