@@ -29,8 +29,15 @@ func run_checks() -> void:
 			check(player.is_on_floor(), "%s diya must stand on solid ground" % checkpoint.name)
 			check(not checkpoint.get_node("Flame").visible, "Walking past must not light a diya")
 		var last: Vector2 = checkpoints[-1].position
+		player.health = 1
 		await press_interact()
 		check(checkpoints[-1].get_node("Flame").visible, "E must visibly light the checkpoint")
+		check(player.health == 2, "%s fresh diya must restore exactly one heart" % level)
+		await press_interact()
+		check(player.health == 2, "%s already lit diya must not heal again" % level)
+		await place(checkpoints[0].position)
+		await press_interact()
+		check(player.health == player.max_health, "%s diya healing must be capped at maximum health" % level)
 		player.die()
 		await scene_changed
 		await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
@@ -38,6 +45,9 @@ func run_checks() -> void:
 		await ticks(4)
 		check(player.position.distance_to(last) < 1, "Death must restore the saved diya")
 		check(player.health == 3 and player.skyshot_ammo == 5, "Death must restore player resources")
+		player.health = 1
+		await press_interact()
+		check(player.health == 1, "%s saved diya must stay spent after reloading" % level)
 		await place(Vector2(current_scene.course.get_node("Finish").position.x, 350))
 		await ticks(4)
 		check(current_scene.completed, "%s must finish without enemies" % level)

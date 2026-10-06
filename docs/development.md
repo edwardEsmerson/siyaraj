@@ -50,8 +50,10 @@ The forest now uses the three-weapon controller from PR #7. J performs a
 single ground or aerial lash. L fires a skyshot with recoil, using one of
 five shots. Hold K for a full charge, then release for a chakri spin.
 Chakri has a 30-second cooldown. Ammo and cooldowns appear on the HUD.
-Doors preserve health, remaining shots and cooldowns. Diyas only save your
-position. Death and R restore the five-shot loadout and reset cooldowns.
+Doors preserve health, remaining shots and cooldowns. Lighting a fresh diya saves your
+position and restores one heart, capped at maximum health, without refilling weapons.
+Already lit diyas and side-room diyas do not heal. Death and R restore the five-shot loadout
+and reset cooldowns.
 For isolated practice, open `scenes/dev/weapons_playground.tscn` with F6.
 
 Boss 1, Khara, has an isolated arena: open `scenes/bosses/khara_arena.tscn` with F6.
