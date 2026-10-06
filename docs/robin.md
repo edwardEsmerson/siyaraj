@@ -43,6 +43,20 @@ remain distinct. Story dialogue, Robin's final reveal and portraits are unchange
 Session memory uses the existing `seen_hints` dictionary and `forget_hints()` API;
 cross-session persistence belongs to the save/load system.
 
+The homing missile lesson plays at X=2280, after ClearingGuard and before
+ClearingRearShooter, the main route's first shooter. Like the guard and diya
+hints, it waits until the nearby clearing fight is over. An earlier optional
+Root Chamber visit teaches it at the room entry (450, -2050), before any of the
+chamber's enemies come into range. Both triggers share `homing_dash`,
+so players hear this advice once whichever route they take first. They use the
+same combat deferral and quiet-time policy as other tutorials. `{dash}` in hint
+text resolves to the named Dash action and its current keyboard/controller
+bindings through the controls panel's InputMap helpers when Robin speaks.
+The campaign shooter's missiles respect dash invulnerability, pass through Siya
+and stop steering after a dodge. `tests/homing_dash_hint_check.gd` verifies both
+first encounters, remapped prompts, deferral, reload/route repeat suppression,
+and damage with and without a real dash.
+
 `tests/robin_check.gd` enters authored triggers through the campaign, checks fresh
 lessons and skipped repeat topics, reloads levels, and exercises combat deferral,
 re-entry, automatic retry, bubble cancellation, weapon use and cooldown spacing.

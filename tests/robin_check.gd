@@ -68,7 +68,7 @@ func run_checks() -> void:
 			if already_seen:
 				check(robin.mode != Robin.Mode.POINT, "Later encounters must not repeat a learned topic: %s/%s" % [path, area.name])
 			else:
-				check(robin.mode == Robin.Mode.POINT and robin.bubble_label.text.replace("\n", " ") == area.text, "New lesson or progression hint must speak: %s/%s" % [path, area.name])
+				check(robin.mode == Robin.Mode.POINT and robin.bubble_label.text.replace("\n", " ") == area.formatted_text(), "New lesson or progression hint must speak: %s/%s" % [path, area.name])
 			check(Robin.seen_hints.has(area.hint_id()), "Authored hints must be remembered across death reloads")
 			check(not robin.point_out(area.to_global(area.point), area.text, area.hint_id()), "Authored hints must only show once")
 		var final_hint: Area2D = hints.get_children().back()
