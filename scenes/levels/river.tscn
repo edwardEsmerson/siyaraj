@@ -984,4 +984,4 @@ text = "TEMPLE APPROACH"
 [node name="WorldSkin" type="Node2D" parent="."]
 script = ExtResource("world_skin")
 biome = "river"
-direction = "titlematch"
+direction = "truckart"

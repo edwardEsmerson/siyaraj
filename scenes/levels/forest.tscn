@@ -2931,4 +2931,4 @@ text = "That brute is slow but hits hard. Wait for the swing, then strike."
 [node name="WorldSkin" type="Node2D" parent="."]
 script = ExtResource("world_skin")
 biome = "forest"
-direction = "diyalit"
+direction = "truckart"
