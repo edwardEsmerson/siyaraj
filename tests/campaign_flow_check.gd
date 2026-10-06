@@ -69,6 +69,8 @@ func run_checks() -> void:
 			check(cage.find_children("*", "CollisionObject2D", true, false).is_empty(), "Cage must not obstruct arena combat")
 		await ticks(4)
 		check(player.is_on_floor() and player.health == player.max_health and player.skyshot_ammo == 5, "Fight must start grounded with the arena's fresh loadout")
+		flow._unlock_exit()
+		check(flow.exit_zone == null and not current_scene.has_node("BossExit"), "Glow must stay absent while the boss is alive, even if an unlock is requested")
 		flow._unhandled_input(accept())
 		check(current_scene == showdown, "Enter must not skip a living boss")
 		if level == "palace":
@@ -84,6 +86,7 @@ func run_checks() -> void:
 		player = current_scene.get_node("Player")
 		await ticks(4)
 		check(not flow.won and boss.health == boss.max_health and player.health == player.max_health, "Retry must reset boss and player")
+		check(flow.exit_zone == null and not current_scene.has_node("BossExit"), "Restarting the fight must hide the glow until the boss is defeated again")
 		if level != "palace":
 			boss.take_damage(boss.max_health, Vector2.ZERO)
 		else:
@@ -92,34 +95,42 @@ func run_checks() -> void:
 			boss.set_head_count(1)
 			boss.take_damage(boss.health, Vector2.ZERO)
 			await ticks(600)
-		check(flow.won and flow.comic.visible and not player.can_process(), "Boss defeat must show the region transition with combat frozen")
-		check(not flow.get_node("Victory").visible, "Victory controls must wait for the story")
+		await ticks(4)
+		check(flow.won and (flow.comic == null or not flow.comic.visible) and player.can_process(), "Boss defeat must leave Siya free to walk to the exit without aftermath dialogue")
+		check(flow.exit_zone != null and not flow.get_node("Victory").visible, "Each campaign boss must unlock a glowing exit instead of result controls")
+		var wall: StaticBody2D = current_scene.get_node("RightWall" if level == "palace" else "TestCourse/RightWall")
+		var wall_shape: CollisionShape2D = wall.get_node("CollisionShape2D")
+		check(is_equal_approx(flow.exit_zone.position.x, wall.position.x - wall_shape.shape.size.x * 0.5), "Glow must sit flush with the right wall while its trigger remains reachable")
 		flow._unhandled_input(accept())
-		check(current_scene == flow.get_parent(), "Enter must not bypass the aftermath dialogue")
 		flow.get_node("Victory/Actions/Continue").pressed.emit()
-		check(current_scene == flow.get_parent(), "Result button must not bypass the aftermath dialogue")
-		await ticks(120)  # Boss corpses may finish freeing while the reader stays in the comic.
+		check(current_scene == flow.get_parent() and not flow._transitioning, "Enter and hidden result controls must not bypass the walk to the exit")
 		if level == "palace":
-			check(current_scene.get_node("RajCage").freed, "Swaminathan's defeat must open Raj's cage")
-			check(not current_scene.get_node("PalaceEscape").unlocked, "Palace gates must wait for Robin's reveal and the reunion dialogue")
+			check(current_scene.get_node("RajCage").freed and current_scene.get_node("PalaceEscape").unlocked, "Swaminathan's defeat must free Raj and open the gates before dialogue")
+		player.position = flow.exit_zone.position - Vector2(100, 0)
+		player.velocity = Vector2.ZERO
+		Input.action_press("move_right")
+		for frame in 120:
+			await ticks(1)
+			if flow._transitioning:
+				break
+		Input.action_release("move_right")
+		check(flow._transitioning and not player.can_process(), "Walking into the exit must freeze gameplay and start the curtains")
+		check(flow.curtains.coverage < 1.0 and (flow.comic == null or not flow.comic.visible), "Aftermath must wait until the curtains finish closing")
+		var coverage_before: float = flow.curtains.coverage
+		paused = true
+		await ticks(30)
+		check(is_equal_approx(flow.curtains.coverage, coverage_before), "Pause must suspend the curtain close")
+		paused = false
+		await ticks(40)
+		check(flow.comic.visible and is_equal_approx(flow.curtains.coverage, 1.0), "Closed curtains must precede the existing aftermath dialogue")
+		check(flow.comic._panels == story.aftermath(level), "Exit dialogue must preserve every existing story panel")
+		if level == "palace":
+			check(flow.comic._panels[3].text.contains("always served Swaminathan"), "Finale must preserve Robin's allegiance reveal")
+		flow._unhandled_input(accept())
+		check(current_scene == flow.get_parent(), "Campaign input must not skip the exit dialogue")
 		for panel in flow.comic._panels.size():
 			flow.comic._unhandled_input(accept())
-		if level == "palace":
-			var escape: Node = current_scene.get_node("PalaceEscape")
-			check(escape.unlocked and not flow.get_node("Victory").visible, "Final dialogue must unlock the escape instead of covering the gates")
-			check(story.aftermath("palace")[3].text.contains("always served Swaminathan"), "Finale must preserve Robin's allegiance reveal")
-			flow._unhandled_input(accept())
-			flow.get_node("Victory/Actions/Continue").pressed.emit()
-			check(current_scene == flow.get_parent(), "Enter and hidden result controls must not bypass the escape")
-			player.position = Vector2(800, 430)
-			player.velocity = Vector2.ZERO
-			Input.action_press("move_right")
-			await ticks(90)
-			Input.action_release("move_right")
-		else:
-			check(flow.get_node("Victory").visible, "Closing the aftermath must unlock the next stage")
-			flow._unhandled_input(accept())
-			await scene_changed
+		await scene_changed
 		var destination: String = {"forest": "river.tscn", "river": "palace.tscn", "palace": "ending.tscn"}[level]
 		check(current_scene.scene_file_path.ends_with(destination), "Boss victory must advance to the next campaign stage")
 	# Every ending action must work with mouse activation and focus navigation.

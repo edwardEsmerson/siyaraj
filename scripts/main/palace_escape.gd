@@ -2,10 +2,8 @@ extends Node2D
 ## Campaign-only escape. The isolated boss arena retains its result controls.
 
 var unlocked: bool = false
-var _leaving: bool = false
 var _doors: Array[Polygon2D] = []
 var _raj: AnimatedSprite2D
-var _exit: Area2D
 
 
 func _ready() -> void:
@@ -31,17 +29,6 @@ func _ready() -> void:
 		door.add_child(border)
 		add_child(door)
 		_doors.append(door)
-	_exit = Area2D.new()
-	_exit.position = Vector2(862, 395)
-	_exit.collision_layer = 0
-	_exit.collision_mask = 2
-	var shape := CollisionShape2D.new()
-	var rectangle := RectangleShape2D.new()
-	rectangle.size = Vector2(26, 100)
-	shape.shape = rectangle
-	_exit.add_child(shape)
-	add_child(_exit)
-	_exit.body_entered.connect(_enter_gate)
 
 
 func open() -> void:
@@ -63,14 +50,6 @@ func open() -> void:
 		boss_ui.hide()
 	get_parent().get_node("HUD/CombatStatus").text = "Raj is free. Walk right through the open gates to go home."
 	get_parent().get_node("HUD/Hint").text = "Swaminathan defeated. Leave together through the palace gates."
-	var prompt := Label.new()
-	prompt.text = "Raj is free! Walk right through the open gates to go home."
-	prompt.theme_type_variation = &"WorldPrompt"
-	prompt.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	prompt.position = Vector2(120, 480)
-	prompt.size = Vector2(720, 42)
-	prompt.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	get_parent().get_node("HUD").add_child(prompt)
 
 
 func _process(delta: float) -> void:
@@ -80,15 +59,3 @@ func _process(delta: float) -> void:
 	_raj.position.x = move_toward(_raj.position.x, clampf(player.position.x - 38.0, 65.0, 870.0), 240.0 * delta)
 	_raj.position.y = 430.0
 	_raj.flip_h = _raj.position.x > player.position.x
-	# Also handles Siya already standing at the exit when the dialogue closes.
-	if _exit.overlaps_body(player):
-		_enter_gate(player)
-
-
-func _enter_gate(body: Node2D) -> void:
-	if not unlocked or _leaving or body != get_parent().get_node("Player"):
-		return
-	if body.state == body.State.DEAD or get_tree().paused:
-		return
-	_leaving = true
-	get_parent().get_node("CampaignFlow").call_deferred("finish_escape")
