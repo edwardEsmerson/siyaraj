@@ -144,15 +144,24 @@ func check_damage_and_defeat() -> void:
 	await reset_arena()
 	var health_events: Array[int] = []
 	brute.health_changed.connect(func(remaining: int) -> void: health_events.append(remaining))
-	brute.attack.start(-1)
 	brute.take_damage(1, Vector2(180, -140))
-	check(brute.health == 5 and brute.state == brute.State.HURT and not brute.attack.is_busy(), "Player damage must interrupt the brute's wind-up")
+	check(brute.health == 5 and brute.state == brute.State.HURT and not brute.attack.is_busy(), "An idle brute must still stagger from the first hit")
 	check(brute.velocity.is_equal_approx(Vector2(99, -77)), "Brute must resist knockback while still reacting to damage")
 	check(health_events == [5], "Brute must emit the shared health signal")
+	await ticks(13)
 	brute.attack.start(1)
+	brute.take_damage(1, Vector2(180, -140))
+	check(brute.health == 4 and brute.attack.phase == brute.attack.Phase.WINDUP, "Damage must not interrupt the braced wind-up")
 	await ticks(44)
 	brute.take_damage(1, Vector2.ZERO)
-	check(brute.health == 4 and not brute.attack.is_busy(), "Damage must also cancel a heavy strike during its active window")
+	check(brute.health == 3 and brute.attack.phase == brute.attack.Phase.ACTIVE, "Damage must not cancel a committed heavy strike")
+	await ticks(10)
+	var recovery_remaining: float = brute.attack._remaining
+	brute.take_damage(1, Vector2(180, -140))
+	check(brute.health == 2 and brute.attack.phase == brute.attack.Phase.RECOVERY and brute.attack._remaining == recovery_remaining, "Recovery hits must deal damage without cancelling or extending the punish window")
+	brute.take_damage(2, Vector2.ZERO)
+	check(brute.state == brute.State.DEAD and not brute.attack.is_busy(), "Lethal damage must cancel even an armored attack")
+	await ticks(1)
 
 	await reset_arena()
 	player.facing_direction = 1
@@ -199,5 +208,5 @@ func run_checks() -> void:
 	await check_course_integration()
 	release_inputs()
 	if failures == 0:
-		print("PASS: brute size, strength, patrol, edges, walls, chase, tells, dodge, reach, facing, one hit per swing, interruption, resistance, defeat, restart and course integration")
+		print("PASS: brute size, strength, patrol, edges, walls, chase, tells, dodge, reach, facing, one hit per swing, attack armor, recovery punishment, resistance, defeat, restart and course integration")
 	quit(1 if failures > 0 else 0)
