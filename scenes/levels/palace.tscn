@@ -2077,22 +2077,27 @@ direction = "diyalit"
 [node name="GateHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(620, 430)
 text = "Climb the gate steps, then dash over the broken lintel. Lower ledges catch falls."
+topic = &"air_dash"
 
 [node name="GalleryHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(3410, 430)
 text = "Column bases block shots. Vault them to close in, or take the upper gallery."
+topic = &"cover"
 
 [node name="RoofHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(5780, 430)
 text = "Broken roofs ahead! Dash between them. The lower courts lead back up."
+topic = &"air_dash"
 
 [node name="HallHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(9140, 430)
 text = "The balcony passes above both guards. Choose where to drop, and watch their windups."
+topic = &"guard"
 
 [node name="SanctumHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(11520, 430)
 text = "A brute waits atop these steps. Dodge his swing, then strike during recovery."
+topic = &"brute"
 
 [node name="BossHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(13630, 430)

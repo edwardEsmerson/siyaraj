@@ -10,15 +10,19 @@ so he is a guide only.
 - **Follows** Siya, hovering behind her head and mirroring her facing. He flies on a
   spring, so dashes pull him along quickly. After a long jump (a room change or a
   respawn) he snaps straight to her.
-- **Perches** on Siya's head after she stands still for 2 seconds. If she stays
-  still for longer he makes an idle comment. He takes off as soon as she moves.
-- **Points out hints.** Each `RobinHint` area in a level sends him to a spot to
-  explain something there. A hint shows once per session, and death reloads do not
-  repeat it.
-- **Warns** once about each live enemy that comes within 260 px of Siya. An enemy
-  that a hint already covers does not get a second warning.
-- **Reacts** when Siya takes damage or goes down. The lines are in `Robin.LINES`;
-  edit them freely.
+- **Perches** on Siya's head after she stands still for 2 seconds. He takes off
+  as soon as she moves; idle pauses no longer trigger chatter.
+- **Points out hints.** Each `RobinHint` area sends him to a spot to explain a
+  new lesson or essential progression step. Hints show once per session, including
+  death reloads. Shared `topic` keys also suppress repeated lessons across levels.
+- **Stays quiet in combat.** Automatic enemy warnings and damage comments are
+  disabled. Tutorials wait while Siya dashes, is hurt, uses a weapon, or has living
+  enemy bodies or hostile hitboxes within 320 px. Starting combat clears a tutorial
+  bubble. Defeat reactions remain.
+- **Spaces tutorials.** A bubble must finish before another hint, followed by
+  two seconds of quiet. A deferred hint retries while Siya stays in its area;
+  leaving cancels that pending request without marking the lesson seen.
+- **Obeys story scripts.** `say()` and scripted control keep their existing behavior.
 
 ## Adding hints
 
@@ -26,16 +30,22 @@ Instance `scenes/companions/robin_hint.tscn` in a level and set its `text`. The
 trigger is a tall 64x480 column above the node, and its shape is local to each
 instance, so it can be resized in the editor. `point` is where Robin hovers, relative
 to the hint. The forest's hints are under `RobinHints` in `scenes/levels/forest.tscn`.
-The river and palace each have six hints under their own `RobinHints`: crossings,
-recovery routes, cover and encounters, then the final diya. The forest's last diya
-introduces Khara's ground waves; the palace's last diya introduces Swaminathan's
-active heads and core. Hints use action names where possible so they also make
-sense on a controller; the Controls panel lists both keyboard and gamepad inputs.
+The river and palace each have six hints under their own `RobinHints`. Repeated
+jump/dash, guard, brute and cover advice shares a `topic` with its first introduction.
+A direct level playtest can still teach these lessons, while a campaign run skips
+lessons already learned. Leave `topic` empty for unique progression guidance such
+as the bridge's four planks and each boss approach. `once = false` remains available
+for deliberately repeatable hints, with the same spacing and combat gates.
 
-Rendered examples: [river cover hint](screenshots/river-robin-hint.png) and
-[palace boss hint](screenshots/palace-robin-hint.png). The regression suite enters
-each new trigger with Siya and checks its speech, one-shot behavior and persistence
-after reloading the level.
+The forest introduces movement, air dash, guards, checkpoints, weapons, shooters
+and brutes. The river adds cover and bridge construction. All three boss approaches
+remain distinct. Story dialogue, Robin's final reveal and portraits are unchanged.
+Session memory uses the existing `seen_hints` dictionary and `forget_hints()` API;
+cross-session persistence belongs to the save/load system.
+
+`tests/robin_check.gd` enters authored triggers through the campaign, checks fresh
+lessons and skipped repeat topics, reloads levels, and exercises combat deferral,
+re-entry, automatic retry, bubble cancellation, weapon use and cooldown spacing.
 
 ## Art
 

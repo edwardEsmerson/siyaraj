@@ -3224,6 +3224,7 @@ text = "Raj went this way! Space jumps. Shift dashes, even in midair."
 [node name="GuardHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
 position = Vector2(1750, 430)
 text = "One of Swaminathan's guards! J lashes him. When he winds up, step back."
+topic = &"guard"
 
 [node name="DiyaHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
 position = Vector2(2400, 430)
@@ -3232,6 +3233,7 @@ text = "A diya! Light it, and if you fall, we start again from here."
 [node name="CanopyHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
 position = Vector2(2950, 430)
 text = "Wide gaps. Jump, then dash across. You get one air dash until you land!"
+topic = &"air_dash"
 
 [node name="WeaponsHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
 position = Vector2(4700, 430)
@@ -3244,6 +3246,7 @@ text = "Purple bolts! Dash straight through them, or hit him to stop the shot."
 [node name="BruteHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
 position = Vector2(15300, 430)
 text = "That brute is slow but hits hard. Wait for the swing, then strike."
+topic = &"brute"
 
 [node name="SkinZones" type="Node2D" parent="."]
 

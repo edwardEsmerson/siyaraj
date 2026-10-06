@@ -1,5 +1,5 @@
 extends SceneTree
-## Robin follows, perches, points out one-shot hints, warns about enemies, reacts and obeys scripts.
+## Robin follows, perches, points out one-shot hints, stays quiet in combat, reacts and obeys scripts.
 
 const Robin = preload("res://scripts/companions/robin.gd")
 
@@ -38,7 +38,12 @@ func hold(at: Vector2) -> void:
 
 func run_checks() -> void:
 	Robin.forget_hints()
-	for path in ["res://scenes/main/river.tscn", "res://scenes/main/palace.tscn"]:
+	var levels := ["res://scenes/main/forest.tscn", "res://scenes/main/river.tscn", "res://scenes/main/palace.tscn"]
+	for index in range(5):
+		# First traverse the campaign, then test fresh direct river/palace launches.
+		if index >= 3:
+			Robin.forget_hints()
+		var path: String = levels[index if index < 3 else index - 2]
 		change_scene_to_file(path)
 		await scene_changed
 		await ticks(2)
@@ -50,15 +55,20 @@ func run_checks() -> void:
 		current_scene.checkpoint_guard.enabled = false
 		for enemy in current_scene.course.get_node("Encounters").get_children():
 			enemy.set_physics_process(false)
+			enemy.collision_layer = 0
 		var hints: Node2D = current_scene.course.get_node("RobinHints")
 		check(hints.get_child_count() >= 6, "River and palace must guide each new hazard section")
 		for area in hints.get_children():
-			# Approach from outside to exercise the actual body_entered trigger.
+			var already_seen: bool = Robin.seen_hints.has(area.hint_id())
+			# Leave each bubble's cooldown intact, then enter the real trigger.
 			hold(area.global_position + Vector2(-100, -20))
-			await ticks(2)
+			await ticks(roundi((robin.hint_cooldown + area.duration + 1.0) * 60.0))
 			hold(area.global_position + Vector2(0, -20))
 			await ticks(3)
-			check(robin.mode == Robin.Mode.POINT and robin.bubble_label.text.replace("\n", " ") == area.text, "Authored hint must speak on contact: %s/%s" % [path, area.name])
+			if already_seen:
+				check(robin.mode != Robin.Mode.POINT, "Later encounters must not repeat a learned topic: %s/%s" % [path, area.name])
+			else:
+				check(robin.mode == Robin.Mode.POINT and robin.bubble_label.text.replace("\n", " ") == area.text, "New lesson or progression hint must speak: %s/%s" % [path, area.name])
 			check(Robin.seen_hints.has(area.hint_id()), "Authored hints must be remembered across death reloads")
 			check(not robin.point_out(area.to_global(area.point), area.text, area.hint_id()), "Authored hints must only show once")
 		var final_hint: Area2D = hints.get_children().back()
@@ -132,24 +142,104 @@ func run_checks() -> void:
 	await ticks(3)
 	check(robin.mode != Robin.Mode.POINT, "A hint must not repeat")
 
-	# The first sight of a live enemy gets one warning.
+	# Ordinary enemies, damage and long idle pauses must not produce chatter.
 	var guard: Node2D = current_scene.course.get_node("Encounters/ClearingGuard")
-	robin._warned.erase(guard.get_instance_id())
 	robin._bubble_remaining = 0.0
-	robin._warn_remaining = 0.0
 	spoken.clear()
-	hold(guard.global_position + Vector2(-150, -60))
+	hold(guard.global_position + Vector2(-100, -20))
 	await ticks(20)
-	check(robin._warned.has(guard.get_instance_id()), "Robin must notice a nearby enemy")
-	check(spoken.size() == 1 and Robin.LINES[&"enemy"].has(spoken[0]), "Robin must warn about a new enemy once")
-
-	# Reactions to damage and defeat.
-	spoken.clear()
-	robin._reaction_remaining = 0.0
+	check(spoken.is_empty(), "Ordinary encounters must not get automatic warnings")
 	player.take_damage(1, Vector2.ZERO)
-	check(spoken.size() == 1 and Robin.LINES[&"hurt"].has(spoken[0]), "Robin must react when Siya is hurt")
+	check(spoken.is_empty(), "Damage must not interrupt combat with chatter")
+	player.state = player.State.NORMAL
+	player.set_physics_process(false)
+	var hint_id := "combat-deferred"
+	var lesson := "Read this once it is safe."
+	check(not robin.point_out(robin.global_position, lesson, hint_id), "Nearby live enemies must defer tutorials")
+	check(not Robin.seen_hints.has(hint_id), "Deferred hints must remain unseen for a retry")
+
+	# Exercise a real trigger while fighting, leaving, re-entering and recovering.
+	hold(Vector2(8650, 420))
+	await ticks(roundi((robin.hint_cooldown + 5.0) * 60.0))
+	var pending: Area2D = current_scene.course.get_node("RobinHints/GuardHint")
+	Robin.seen_hints.erase(pending.hint_id())
+	var guard_position: Vector2 = guard.global_position
+	guard.global_position = pending.global_position + Vector2(100, 0)
+	hold(pending.global_position + Vector2(-100, -20))
+	await ticks(2)
+	hold(pending.global_position + Vector2(0, -20))
+	await ticks(3)
+	check(not Robin.seen_hints.has(pending.hint_id()), "Combat entry must not consume the first enemy introduction")
+	hold(pending.global_position + Vector2(-100, -20))
+	await ticks(3)
+	guard.global_position = guard_position + Vector2(1000, 0)
+	await ticks(3)
+	check(not Robin.seen_hints.has(pending.hint_id()), "Leaving a blocked hint must cancel its pending bubble")
+	hold(pending.global_position + Vector2(0, -20))
+	await ticks(3)
+	check(Robin.seen_hints.has(pending.hint_id()), "Re-entry after combat must show the first enemy introduction")
+	guard.global_position = player.global_position + Vector2(100, 0)
+	await ticks(3)
+	check(not robin.bubble.visible, "Combat starting must clear the tutorial bubble")
+	# An unseen tutorial entered during combat should speak without another entry
+	# if Siya remains in its area when the enemy is gone.
+	Robin.seen_hints.erase(pending.hint_id())
+	hold(pending.global_position + Vector2(-100, -20))
+	await ticks(roundi((robin.hint_cooldown + pending.duration + 1.0) * 60.0))
+	hold(pending.global_position + Vector2(0, -20))
+	await ticks(3)
+	guard.global_position = guard_position + Vector2(1000, 0)
+	await ticks(3)
+	check(Robin.seen_hints.has(pending.hint_id()), "Remaining inside a hint must retry automatically after combat")
+	guard.global_position = guard_position
+
+	# Hurt, weapon use and spacing defer an unseen lesson without overwriting speech.
+	hold(Vector2(8650, 420))
+	await ticks(roundi((robin.hint_cooldown + pending.duration + 1.0) * 60.0))
+	var bolt: CharacterBody2D = load("res://scenes/combat/enemy_projectile.tscn").instantiate()
+	current_scene.add_child(bolt)
+	bolt.set_physics_process(false)
+	bolt.global_position = player.global_position + Vector2(100, -20)
+	await ticks(2)
+	check(not robin.point_out(robin.global_position, lesson, hint_id), "Hostile shots must defer tutorials even after the shooter is gone")
+	bolt.queue_free()
+	await ticks(2)
+	var health_before: int = guard.health
+	guard.global_position = player.global_position + Vector2(100, 0)
+	guard.health = 0
+	await ticks(2)
+	check(not robin.combat_is_near(), "Defeated enemy bodies must not block tutorials")
+	guard.global_position = guard_position
+	guard.health = health_before
+	await ticks(2)
+	player.state = player.State.HURT
+	check(not robin.point_out(robin.global_position, lesson, hint_id), "Hurt state must defer tutorials")
+	player.state = player.State.NORMAL
+	player.charging = true
+	check(not robin.point_out(robin.global_position, lesson, hint_id), "Chakri charge must defer tutorials")
+	player.charging = false
+	player.sparkler.start(1)
+	check(not robin.point_out(robin.global_position, lesson, hint_id), "Sparkler swing must defer tutorials")
+	player.sparkler.cancel()
+	check(robin.point_out(robin.global_position, lesson, hint_id), "An unseen lesson must be available once combat ends")
+	player.state = player.State.DASH
+	await ticks(2)
+	check(robin.bubble.visible, "Traversal dashes without combat must not cut off a lesson")
+	player.state = player.State.NORMAL
+	check(not robin.point_out(robin.global_position, "Another lesson", "spacing-test"), "Tutorials must not overwrite a bubble")
+	await ticks(220)
+	check(not robin.point_out(robin.global_position, "Another lesson", "spacing-test"), "Tutorial cooldown must leave quiet time after speech")
+	await ticks(500)
+	check(robin.point_out(robin.global_position, "Another lesson", "spacing-test"), "Tutorials must resume after the cooldown")
+	await ticks(900)
+	hold(Vector2(80, 430))
+	player.set_physics_process(true)
+	await ticks(180)
+	spoken.clear()
+	await ticks(900)
+	check(spoken.is_empty(), "Long idle pauses must stay quiet")
 	player.die()
-	check(spoken.size() == 2 and Robin.LINES[&"down"].has(spoken[1]), "Robin must react when Siya goes down")
+	check(spoken.size() == 1 and Robin.LINES[&"down"].has(spoken[0]), "Robin must still react to defeat")
 
 	# Scripted control for cutscenes and the boss fight.
 	var arrived := [false]
@@ -162,11 +252,14 @@ func run_checks() -> void:
 	await ticks(30)
 	check(robin.global_position == target, "Scripted Robin must hold still until released")
 	check(not robin.point_out(target, "ignored", "scripted-test"), "Hints must not interrupt scripted scenes")
+	robin.say("Story dialogue", 2.0)
+	await ticks(3)
+	check(robin.bubble.visible and robin.bubble_label.text == "Story dialogue", "Scripted speech must bypass combat and tutorial cooldowns")
 	robin.release_control()
 	check(robin.mode == Robin.Mode.FOLLOW, "release_control must hand Robin back to following")
 
 	Robin.forget_hints()
 	release_inputs()
 	if failures == 0:
-		print("PASS: Robin follows, perches, gives one-shot hints, warns, reacts and accepts scripted control")
+		print("PASS: Robin follows, perches, gives spaced one-shot lessons, stays quiet in combat, reacts and accepts scripted control")
 	quit(1 if failures > 0 else 0)
