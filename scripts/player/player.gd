@@ -165,7 +165,8 @@ func _process_dash(delta: float) -> void:
 		dash_available = true
 	if is_on_wall() or _dash_remaining <= 0.00001:
 		state = State.NORMAL
-		velocity.x = 0.0 if is_on_wall() else _dash_direction * movement_settings.run_speed
+		var exit_speed := movement_settings.run_speed if is_on_floor() else movement_settings.air_dash_exit_speed
+		velocity.x = 0.0 if is_on_wall() else _dash_direction * exit_speed
 
 
 func _update_feedback() -> void:

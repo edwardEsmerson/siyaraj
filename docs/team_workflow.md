@@ -4,6 +4,9 @@
 
 - Dash moves horizontally in Siya's facing direction.
 - Dash preserves vertical momentum, with normal rise/fall gravity throughout.
+  An air dash ends at `air_dash_exit_speed` (780 px/s) and eases back to run
+  speed, which restores the reach the hover used to give. Dash before the apex
+  for the longest jumps.
 - Dash starts on the ground or in the air. One air dash, restored on landing;
   ground dashes keep the air charge and use a short cooldown instead.
 - Dash stops at solid walls. It grants i-frames for its duration plus a short
@@ -140,6 +143,7 @@ playtest before integrating the sparkler attack.
   `resources/player/default_movement.tres` through the Inspector.
 - Dash suspends gravity, locks its direction, consumes one air charge, and
   restores the charge on landing. Holding Shift does not automatically dash again.
+  (Gravity during dash was later restored; see Agreed rules.)
 - Solid walls end the dash immediately. Normal dash completion returns to running
   speed; releasing movement then uses the existing deceleration.
 - Siya turns gold with an orange exhaust during dash and dims when its charge

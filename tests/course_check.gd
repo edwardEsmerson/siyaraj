@@ -56,7 +56,8 @@ func run_checks() -> void:
 		Input.action_press("move_right")
 		await ticks(7)
 		Input.action_press("jump")
-		await ticks(20)
+		# Dash keeps the jump arc, so it buys reach while rising, not by hovering late.
+		await ticks(12)
 		Input.action_press("dash")
 		await ticks(2)
 		check(player.get_node("DashTrail").samples.size() > 0, "Dashing must leave a visible trail")
