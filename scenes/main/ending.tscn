@@ -1,6 +1,21 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="Script" path="res://scripts/main/ending_screen.gd" id="1_ending"]
+[ext_resource type="Theme" path="res://resources/ui/siyaraj_theme.tres" id="1_theme"]
+[ext_resource type="Script" path="res://scripts/main/ending_screen.gd" id="2_ending"]
+[ext_resource type="Script" path="res://scripts/effects/fireworks.gd" id="3_fireworks"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/title_skyline.png" id="4_skyline"]
+[ext_resource type="Texture2D" path="res://assets/ui/divider.png" id="5_divider"]
+[ext_resource type="Script" path="res://scripts/ui/diya_cursor.gd" id="6_cursor"]
+[ext_resource type="Texture2D" path="res://assets/ui/diya.png" id="7_diya"]
+
+[sub_resource type="Gradient" id="Gradient_dusk"]
+offsets = PackedFloat32Array(0, 0.5, 0.8, 1)
+colors = PackedColorArray(0.07, 0.03, 0.11, 1, 0.27, 0.07, 0.25, 1, 0.62, 0.17, 0.33, 1, 0.95, 0.47, 0.2, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dusk"]
+gradient = SubResource("Gradient_dusk")
+fill_from = Vector2(0, 0)
+fill_to = Vector2(0, 1)
 
 [node name="Ending" type="Control"]
 layout_mode = 3
@@ -9,43 +24,83 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ending")
+theme = ExtResource("1_theme")
+script = ExtResource("2_ending")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Sky" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color(0.075, 0.045, 0.09, 1)
+texture = SubResource("GradientTexture2D_dusk")
+expand_mode = 1
+
+[node name="Fireworks" type="Node2D" parent="."]
+script = ExtResource("3_fireworks")
+interval = Vector2(0.25, 0.6)
+
+[node name="Skyline" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("4_skyline")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="Center" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Content" type="VBoxContainer" parent="Center"]
 layout_mode = 2
-theme_override_constants/separation = 22
+theme_override_constants/separation = 10
 
 [node name="Title" type="Label" parent="Center/Content"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1.0, 0.78, 0.37, 1)
-theme_override_font_sizes/font_size = 42
-text = "THE LIGHTS RETURN"
+theme_type_variation = &"TitleLabel"
+text = "The lights return"
 horizontal_alignment = 1
+
+[node name="Divider" type="TextureRect" parent="Center/Content"]
+layout_mode = 2
+texture = ExtResource("5_divider")
+stretch_mode = 3
 
 [node name="Message" type="Label" parent="Center/Content"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.94, 0.9, 0.86, 1)
-theme_override_font_sizes/font_size = 22
-text = "The journey across the forest, river, and palace is complete.\nThank you for playing Siyaraj."
+text = "The journey across the forest, river, and palace is complete.
+Thank you for playing Siyaraj."
 horizontal_alignment = 1
 
-[node name="ReturnButton" type="Button" parent="Center/Content"]
+[node name="Spacer" type="Control" parent="Center/Content"]
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
-custom_minimum_size = Vector2(280, 48)
+
+[node name="ReturnButton" type="Button" parent="Center/Content"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_horizontal = 4
 text = "Return to title"
+
+[node name="DiyaCursor" type="TextureRect" parent="." node_paths=PackedStringArray("menu")]
+layout_mode = 0
+texture = ExtResource("7_diya")
+script = ExtResource("6_cursor")
+menu = NodePath("../Center")
+
+[node name="Fade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.05, 0.02, 0.07, 1)
