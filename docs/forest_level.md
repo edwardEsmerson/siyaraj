@@ -19,7 +19,7 @@ Existing player dash/hurt feedback is still shared with the tuning scenes.
 | First clearing | 1600-2800 | Encounter space and the first manual diya |
 | Broken canopy | 2800-4800 | Staggered branch jumps, 120-180 px landings, then a 220 px dash gap |
 | Root ridge | 4800-6500 | Four 40 px climbs to Y=270, followed by descending gap jumps |
-| Hollow trunks | 6500-8900 | Two low roofs, a raised takeoff, then 200/230 px dash gaps |
+| Hollow trunks | 6500-8900 | Two low roofs, a raised takeoff, then 200/207 px dash gaps |
 | Stone crossing | 8900-11200 | 100-180 px platforms and mixed 100-220 px gaps; brake between jumps |
 | Banyan climb | 11200-13600 | Five stacked jump-through branches, alternating right and left, then a descending dash chain |
 | Upper ravine | 13600-16100 | 180-220 px gaps with higher and lower landing platforms |
