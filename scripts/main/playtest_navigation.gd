@@ -11,6 +11,11 @@ var boss_introduction_seen: bool = false
 var panel: Control
 var respawn_transition: CanvasLayer
 
+func _enter_tree() -> void:
+	# Keep the named action for developer checks, but bind no release shortcut.
+	if not OS.is_debug_build():
+		InputMap.action_erase_events(&"restart")
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	layer = 100

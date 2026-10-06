@@ -32,7 +32,7 @@ offset_left = 32.0
 offset_top = 76.0
 offset_right = 928.0
 offset_bottom = 106.0
-text = "A/D or arrows: move    Space: jump    Shift: dash    J: sparkler    R: restart"
+text = "A/D or arrows: move    Space: jump    Shift: dash    J: sparkler"
 
 [node name="Milestone" type="Label" parent="HUD"]
 texture_filter = 2

@@ -47,7 +47,7 @@ func _ready() -> void:
 		$HUD/Title.text = "SIYARAJ / sandbox / %s" % setup[2].to_lower()
 		$HUD/Hint.text = setup[3]
 		enemy.died.connect(func() -> void:
-			$HUD/CombatStatus.text = "%s defeated! R to replay." % setup[2]
+			$HUD/CombatStatus.text = "%s defeated! Use Restart in the pause menu to replay." % setup[2]
 		)
 
 
@@ -73,6 +73,6 @@ func _restart() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("restart"):
+	if OS.is_debug_build() and event.is_action_pressed("restart"):
 		get_viewport().set_input_as_handled()
 		_restart()

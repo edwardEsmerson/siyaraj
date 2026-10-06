@@ -132,7 +132,7 @@ theme_override_font_sizes/font_size = 20
 
 [node name="Controls" type="Label" parent="HUD"]
 texture_filter = 2
-text = "A/D: move   Space: jump   Shift: dash   J: lash   L: skyshot   hold K: chakri   R: restart"
+text = "A/D: move   Space: jump   Shift: dash   J: lash   L: skyshot   hold K: chakri"
 
 offset_left = 24.0
 offset_top = 44.0
