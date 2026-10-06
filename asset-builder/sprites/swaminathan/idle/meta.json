@@ -1,0 +1,37 @@
+{
+  "name": "swaminathan",
+  "animation": "idle",
+  "size": "4K",
+  "view": "front-three-quarter",
+  "subject": "headless-body",
+  "anchor_mode": "feet",
+  "fps": 8,
+  "loop": "loop",
+  "poses": [
+    "Hands on hips, arms fanned behind, chest raised. Headless; ten arms; keep the navel clear",
+    "Same, chest dropped slightly. Headless; ten arms; keep the navel clear"
+  ],
+  "expected_frames": 2,
+  "free_palette": false,
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "frames": [
+    "01",
+    "02"
+  ],
+  "problems": {},
+  "canvas": [
+    368,
+    368
+  ],
+  "anchor": [
+    184,
+    345
+  ],
+  "models": {
+    "01": "pro",
+    "02": "pro"
+  }
+}

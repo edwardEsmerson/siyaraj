@@ -1,0 +1,50 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Eyes ablaze, teeth bared, moustache bristling",
+    "Same, flames at the crown"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    64
+  ],
+  "source_canvas": [
+    128,
+    128
+  ],
+  "source_anchor": [
+    64,
+    64
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "notes": "Use `--free-palette`. Poses: \"Eyes ablaze, teeth bared, moustache bristling\" / \"Same, flames at the crown\".",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 2.962962962962963,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-189fd272-7694-40c4-8c3e-acab36a5084b.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 5,
+    "rows": 4,
+    "first_cell": 13,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

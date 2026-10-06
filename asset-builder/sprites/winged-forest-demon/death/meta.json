@@ -1,0 +1,53 @@
+{
+  "fps": 8,
+  "loop": "hold",
+  "poses": [
+    "Wings crumpled, tumbling",
+    "Spiralling down, eyes as X marks"
+  ],
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "free_palette": false,
+  "name": "winged-forest-demon",
+  "animation": "death",
+  "size": "sheet",
+  "expected_frames": 2,
+  "frames": [
+    "01",
+    "02"
+  ],
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    71
+  ],
+  "anchor_mode": "center",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 3.265625,
+    "calibration_cell": null
+  },
+  "sheet": {
+    "source": "exec-5f31ebd3-de51-4752-8944-de4f2bfb0761.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 3,
+    "rows": 3,
+    "first_cell": 6,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

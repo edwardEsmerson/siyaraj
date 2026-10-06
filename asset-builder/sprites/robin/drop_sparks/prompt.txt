@@ -1,0 +1,22 @@
+Use case: identity-preserve. Asset type: pixel-art game animation sheet for Siyaraj, robin remaining. The attached image is the exact APPROVED BASE IDENTITY, not just a style example. Create exactly 17 different keyframe sprites, 5 columns by 4 rows on a true transparent 2048x2048 PNG. Read cells left to right then top to bottom. Leave the last 3 unused cells entirely blank. No text, labels, lines or borders.
+Identity: Robin, Siya's bird companion: a small, original Indian-folk firebird inspired by Jatayu, the noble vulture-king of the Ramayana. Side view facing right, in flight, both wings raised high in a V, long tail plumes trailing down and back, talons tucked under the body. Vivid vermillion-red wings and back; each wing's long flight feathers tipped with cream and then emerald green; feathers decorated with small Madhubani-style dot and line patterns in marigold. A cream belly and a fluffy white ruff around the neck, like a vulture's. A noble head with a strongly hooked golden raptor beak, a sharp, friendly eye with a crimson eye-mask, and a curled golden crest. A fan of long marigold-gold and orange tail plumes. Slim, regal and colourful, with bold, clean shapes that read at a small size. Original design; the references guide mood and colours only.
+Composition: right-profile; ONE complete isolated flying subject per occupied cell. Preserve exact original face, hair, crown, clothing, ornament, palette, outline weight and body proportions. Aubergine outlines, 2 or 3 flat tones per material, crisp native square pixels. Every occupied cell has ample transparent margin. SAME CAMERA SCALE in every frame: neutral upright subject height is 192 source pixels, each native art pixel is a 4x4 square. Keep identical physical body size: crouches, fallen poses and extended wings MUST NOT zoom to fill their cell. Feet on the same baseline within their cell; flying subjects and heads centered within the cell. Body rotations vary only when requested by the pose.
+FRAME POSES:
+Cell 1 (hint): Hovering, one wing pointing forward, beak wide open talking
+Cell 2 (hint): Hovering, wing pointing, beak closed, eyebrow raised
+Cell 3 (peck): Wings pulled back, beak aimed forward, body coiled
+Cell 4 (peck): Darting forward, beak jabbing, wings swept back
+Cell 5 (peck): Bouncing back, wings flared
+Cell 6 (dive): Wings folded tight, diving steeply down-forward
+Cell 7 (dive): Pulling out of the dive, wings flaring wide
+Cell 8 (dive): Swooping level, wings spread
+Cell 9 (drop_sparks): Hovering, tail flicking down, a spray of sparks falling below
+Cell 10 (drop_sparks): Wings up, sparks trailing
+Cell 11 (hypnotised): Hovering stiffly, eyes replaced by purple spirals, beak open
+Cell 12 (hypnotised): Same, spirals turned the other way
+Cell 13 (dizzy): Wobbling in the air, eyes as X marks, feathers ruffled
+Cell 14 (dizzy): Tumbling sideways, wings limp
+Cell 15 (dizzy): Lying on his back on the ground, little stars circling (separate fx)
+Cell 16 (wake): Sitting up, shaking his head
+Cell 17 (wake): Hopping up, wings out, determined
+Only add sparks/flame/coloured eyes/ash where those frame poses explicitly ask; other frames keep the approved colours. Comic defeats, no blood or gore. Entire limbs, props and wings inside their cell. No scenery, floor, shadows, backdrop, checkerboard, blurry anti-aliasing, smooth gradients, baked glow, motion streaks or duplicate characters per cell. Use real alpha transparency. Each listed pose must be illustrated exactly, in order. Do not repeat a neutral pose instead of the action.

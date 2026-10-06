@@ -1,0 +1,57 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "poses": [
+    "Small glowing bud of a head",
+    "Head half formed, sparkles",
+    "Fully formed, smug"
+  ],
+  "durations": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "free_palette": true,
+  "name": "swaminathan-head",
+  "animation": "regrow",
+  "size": "sheet",
+  "expected_frames": 3,
+  "frames": [
+    "01",
+    "02",
+    "03"
+  ],
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    64
+  ],
+  "anchor_mode": "center",
+  "view": "front-three-quarter",
+  "subject": "head",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 2.962962962962963,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-189fd272-7694-40c4-8c3e-acab36a5084b.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 5,
+    "rows": 4,
+    "first_cell": 10,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "poses": [
+    "Anticipation crouch: knees deeply bent, arms swung back, body low and coiled",
+    "Take-off: legs fully extended pushing off the toes, arms thrown upward, body stretched tall",
+    "Apex: in the air, knees tucked up, arms out for balance",
+    "Fall: in the air, legs extended down reaching for the ground, arms raised slightly",
+    "Landing: knees deeply bent absorbing impact, arms forward for balance, feet planted"
+  ],
+  "durations": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "free_palette": false,
+  "name": "siya",
+  "animation": "jump",
+  "size": "sheet",
+  "expected_frames": 5,
+  "frames": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05"
+  ],
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    112
+  ],
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen",
+    "04": "imagegen",
+    "05": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 3.25,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-f0524f52-25a1-4c3f-b460-5f4dd1e47db6.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 4,
+    "first_cell": 3,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

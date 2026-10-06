@@ -1,0 +1,8 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/khara-gada/sprite.png" id="base"]
+
+[resource]
+animations = [
+{"frames": [{"duration": 1.000000, "texture": ExtResource("base")}], "loop": false, "name": &"base", "speed": 8.0}
+]

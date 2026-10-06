@@ -1,0 +1,57 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "durations": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Arms flung up, recoiling. Headless; ten arms; keep the navel clear",
+    "Knees buckling. Headless; ten arms; keep the navel clear",
+    "Kneeling, arms limp. Headless; ten arms; keep the navel clear",
+    "Collapsing forward. Headless; ten arms; keep the navel clear"
+  ],
+  "frame_count": 4,
+  "canvas": [
+    420,
+    368
+  ],
+  "anchor": [
+    235,
+    345
+  ],
+  "source_canvas": [
+    420,
+    368
+  ],
+  "source_anchor": [
+    235,
+    345
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen",
+    "04": "imagegen"
+  },
+  "notes": "Poses: \"Arms flung up, recoiling\" / \"Knees buckling\" / \"Kneeling, arms limp\" / \"Collapsing forward\".",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 1.5020408163265306,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-bd086832-bbee-40f3-81f9-b7d9dc2fd138.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 3,
+    "rows": 3,
+    "first_cell": 3,
+    "extraction": "connected subjects on common source canvas",
+    "effect_owners": {}
+  }
+}

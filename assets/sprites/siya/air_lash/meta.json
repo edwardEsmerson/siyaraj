@@ -1,0 +1,34 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "In the air, knees tucked, lit sparkler raised behind the head",
+    "In the air, arm whipped forward and down, sparkler pointing ahead at full reach, legs trailing"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    160,
+    128
+  ],
+  "anchor": [
+    64,
+    112
+  ],
+  "source_canvas": [
+    143,
+    128
+  ],
+  "source_anchor": [
+    64,
+    112
+  ],
+  "models": {
+    "01": "pro",
+    "02": "flash"
+  },
+  "notes": "The J whip in the air. Poses: \"In the air, knees tucked, lit sparkler raised behind the head\" / \"In the air, arm whipped forward and down, sparkler pointing ahead at full reach, legs trailing\". Use `--free-palette`."
+}

@@ -1,0 +1,56 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "durations": [
+    5.6,
+    1.28,
+    3.8,
+    3.8
+  ],
+  "poses": [
+    "Anticipation: weapon or striking arm pulled far back, body twisted away, weight on the back foot",
+    "Strike: weapon or arm swung fully forward at full extension, weight lunging onto the front foot",
+    "Follow-through: weapon past the target and low, body leaning forward, front knee bent",
+    "Recover: panting, club dragging, clear punish window"
+  ],
+  "frame_count": 4,
+  "canvas": [
+    240,
+    208
+  ],
+  "anchor": [
+    104,
+    195
+  ],
+  "source_canvas": [
+    240,
+    208
+  ],
+  "source_anchor": [
+    104,
+    195
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen",
+    "04": "imagegen"
+  },
+  "notes": "`poses/attack.txt` with the club. Hold frame 1 for the long wind-up (code tints it orange). Strike is frame 2. Frame 4 should read as \"panting, club dragging\", which is the punish window.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 2.4926470588235294,
+    "calibration_cell": 5
+  },
+  "sheet": {
+    "source": "exec-acd14fab-fe2c-430e-8abb-25e0b55febdc.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 3,
+    "rows": 3,
+    "first_cell": 0,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

@@ -1,0 +1,24 @@
+[gd_resource type="SpriteFrames" load_steps=15 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/brute/sprite.png" id="base"]
+[ext_resource type="Texture2D" path="res://assets/sprites/brute/walk/01.png" id="walk_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/brute/walk/02.png" id="walk_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/brute/walk/03.png" id="walk_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/brute/walk/04.png" id="walk_04"]
+[ext_resource type="Texture2D" path="res://assets/sprites/brute/attack/01.png" id="attack_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/brute/attack/02.png" id="attack_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/brute/attack/03.png" id="attack_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/brute/attack/04.png" id="attack_04"]
+[ext_resource type="Texture2D" path="res://assets/sprites/brute/idle/01.png" id="idle_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/brute/idle/02.png" id="idle_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/brute/death/01.png" id="death_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/brute/death/02.png" id="death_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/brute/death/03.png" id="death_03"]
+
+[resource]
+animations = [
+{"frames": [{"duration": 1.000000, "texture": ExtResource("walk_01")}, {"duration": 1.000000, "texture": ExtResource("walk_02")}, {"duration": 1.000000, "texture": ExtResource("walk_03")}, {"duration": 1.000000, "texture": ExtResource("walk_04")}], "loop": true, "name": &"walk", "speed": 8.0},
+{"frames": [{"duration": 5.600000, "texture": ExtResource("attack_01")}, {"duration": 1.280000, "texture": ExtResource("attack_02")}, {"duration": 3.800000, "texture": ExtResource("attack_03")}, {"duration": 3.800000, "texture": ExtResource("attack_04")}], "loop": false, "name": &"attack", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("idle_01")}, {"duration": 1.000000, "texture": ExtResource("idle_02")}], "loop": true, "name": &"idle", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("death_01")}, {"duration": 1.000000, "texture": ExtResource("death_02")}, {"duration": 1.000000, "texture": ExtResource("death_03")}], "loop": false, "name": &"death", "speed": 8.0}
+]

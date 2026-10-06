@@ -25,26 +25,40 @@ def ref_roles(roles):
     return " ".join(lines) + " Never copy a reference's background, scene, lighting or rendering style. "
 
 
-def sprite(brief, key, roles, px):
+VIEWS = {"right-profile": "facing RIGHT in strict side profile (orthographic side view)",
+         "front-three-quarter": "front three-quarter view, facing slightly right",
+         "front": "front view, facing the camera"}
+SUBJECTS = {"full-body": "full body with feet, hands and props",
+            "head": "ONE isolated head and a short neck stub only; no body, hands or shoulders",
+            "headless-body": "headless body with feet and all arms; no face, crown or head",
+            "prop": "ONE isolated prop only; no character, hand or body"}
+
+
+def composition(view, subject):
+    return f"{VIEWS[view]}. Composition: {SUBJECTS[subject]}."
+
+
+def sprite(brief, key, roles, px, view="right-profile", subject="full-body"):
     return (f"{background(key)}\n"
             f"Draw ONE pixel-art game sprite: {brief}\n"
-            "Single subject, facing RIGHT in strict side profile (orthographic side view), full body with feet, "
-            "hands and props fully inside the frame; the subject's longest side is about 65% of the image, with "
+            f"Single subject, {composition(view, subject)} Everything fully inside the frame; "
+            "the subject's longest side is about 65% of the image, with "
             "empty background all around. Neutral idle pose. "
             f"Pixel art drawn on a {px}x{px} source-pixel grid (each art pixel is a {px}x{px} square block).\n"
             f"{ref_roles(roles)}\n{STYLE}\n{background(key)}")
 
 
-def frame(name, brief, pose, key, extra_roles=()):
+def frame(name, brief, pose, key, extra_roles=(), view="right-profile", subject="full-body", framing=""):
     roles = [f"the approved sprite of {name}: the identity to keep", *extra_roles]
     return (f"{background(key)}\n"
-            f"Redraw the exact character from attached image 1 in a new pose. {ref_roles(roles)}\n"
+            f"Redraw the exact subject from attached image 1 in a new pose. {ref_roles(roles)}\n"
             f"Character: {brief}\n"
             f"POSE: {pose}\n"
             "Keep identical: face, hair, outfit, colours, props, outline weight, pixel-block size, body size and "
-            "camera distance. Same right-facing side view. Only the pose changes. Keep the whole body inside "
+            f"camera distance. Keep this view and composition: {composition(view, subject)} "
+            "Only the pose changes. Keep the entire subject inside "
             "the frame with empty margin. No motion lines, speed trails or extra effects unless the pose asks.\n"
-            f"{STYLE}\n{background(key)}")
+            f"{framing}\n{STYLE}\n{background(key)}")
 
 
 def ui(brief, key, roles, kind):

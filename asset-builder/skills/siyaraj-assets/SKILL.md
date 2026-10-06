@@ -1,22 +1,21 @@
 ---
 name: siyaraj-assets
-description: Generate Siyaraj game art with Nano Banana on Vertex AI - new character/enemy/boss/prop sprites, animation keyframes for approved sprites, map textures (fills, caps, transitions, concepts), parallax layers and UI art, live or via cheaper Vertex batch jobs. Use for any sprite, keyframe, texture, background or UI generation in asset-builder/.
+description: Generate Siyaraj game art with Nano Banana on Vertex AI - new character/enemy/boss/prop sprites, animation keyframes for approved sprites, and map textures / parallax layers. Use for any sprite, keyframe, texture or background generation in asset-builder/.
 ---
 
 # Siyaraj assets
 
 Work in `asset-builder/`. Run everything with `~/ml/bin/python -m ab ...` (`-h` on any command).
-Every command is idempotent: raw generations are cached in `out/`, so re-running only re-cleans
-(free). `--only 2,4` regenerates just those ids. Live prices per image: pro ~Rs12 (1K/2K), ~Rs22 (4K);
-flash ~Rs6 (1K), ~Rs9 (2K), ~Rs14 (4K). Batch (`--batch`) is half that.
+Raw generations are cached in `out/`, so re-running re-cleans completed requests for free and
+generates only missing raws. `--only 2,4` regenerates just those ids. Generation costs ~Rs12/image
+(1K/2K Pro live), ~Rs6 (1K Pro batch), ~Rs22 (4K Pro live).
 
 ## Layout
 - `sprites/<name>/` approved art: `sprite.png` (native), `meta.json` (brief, px, canvas, anchor, key),
   `<anim>/` kept keyframes. Re-snapped to the canonical scale below. `python -m ab ls` lists them. These are the style + identity source of truth.
 - `refs/` inspiration images (characters/, weapons/, hud/, style/). `textures/<area>/` kept map art.
 - `poses/<anim>.txt` reusable keyframe pose lists (idle, walk, run, jump, dash, attack, throw, hurt, death, fly; Siya weapons: fuljadi, rocket, chakri).
-- `out/` scratch (gitignored; `out/batch/` = batch queue + job records). `ab/` the tool: `prompts.py` holds ALL
-  prompt text, `pixel.py` cleanup, `batch.py` Vertex batch jobs.
+- `out/` scratch (gitignored). `ab/` the tool: `prompts.py` holds ALL prompt text, `pixel.py` cleanup.
 - Boss/enemy design notes for briefs: `../docs/bosses/*.md`.
 
 ## Canonical scale (decided 2026-10-06; everything follows this)
@@ -29,7 +28,7 @@ so every sprite/texture goes in Godot at **scale 0.5** (pixel-perfect on 1080p+ 
 | hero | 80 | 40 | Siya (collider 24x40), Raj, Swaminathan |
 | enemy | 88 | 44 | basic rakshas / ground shooter (32x40) |
 | brute | 136 | 68 | brute (48x64) |
-| flyer | 80 | 40 | winged demon (32x28 + wings), Robin smaller (`--height 40`) |
+| flyer | 80 | 40 | winged demon (32x28 + wings), approved Robin smaller (`--height 48`) |
 | boss | 200 | 100 | Khara (56x92) |
 | big-boss | 280 | 140 | Ravan (100x60 body + heads) |
 | prop | 40 | 20 | weapons, thrown fireworks |
@@ -55,7 +54,13 @@ python -m ab pick ravan 03            # after the user chooses from out/ravan/sh
 - `--style` = approved sprites to match pixel style (default `siya`; they never define identity).
   `-r` = design references for the new subject (photos/paintings are fine).
 - Always pass the right `--role` (see the table); `--height N` overrides. Above 150px it generates at 4K
-  automatically. Flyers/props/projectiles: `--anchor center`.
+  automatically in live mode. Flyers/props/projectiles: `--anchor center`.
+- `--view right-profile|front-three-quarter|front` and
+  `--subject full-body|head|headless-body|prop` set composition. Defaults retain the existing
+  full-body right profile. Animation prompts preserve the approved base's choices.
+- `--batch` resolves to 1K before preparing prompts/references; explicit 2K/4K batches are
+  rejected. Queue with `--batch`, then `ab batch submit`, `status`, and `fetch`. Do not change
+  a prepared queue's resolution. Live boss bodies remain 4K.
 - `--key magenta` (or blue) if the subject is green; the key must not appear on the subject.
 - Brief: role, silhouette, build, face/hair, outfit colours, prop + which hand, relative size. Keep it
   concrete and short; style/background/framing text is added automatically.
@@ -72,17 +77,41 @@ python -m ab keep siya run                         # -> sprites/siya/run/ (frame
 - Review `out/<name>/<anim>/sheet.png` + `preview.gif`; regenerate bad poses with `--only`.
 - These are keyframes: 2-5 strong poses per action. Write poses as concrete body positions (limbs,
   weight, facing), not feelings. Add a reusable list to `poses/` when a new action repeats across sprites.
+- `--fps`, `--loop loop|once|hold|none`, and `--durations` (one positive duration in 1/FPS units
+  per frame) preserve timing in metadata and GIFs. Expanded poses share padding around the anchor;
+  no individual frame is resized. `keep` refuses incomplete frame sequences.
+
+## Cast production and packaging
+
+`cast_manifest.json` is the tracked character plan: seven new bases, 73 sets / 195 frames,
+including Robin's existing fly/perch. Swaminathan's headless body is 260px and his separate
+head is 76px; Khara is 200px and his separate gada is 120px. See
+`../docs/art/character_library.md` for generation, attachment registration and F6 preview.
+
+`ab cast prepare --base` or `--wave movement|combat|story` prints the existing sprite/frames
+commands; `--execute` runs them. Review candidates with `ab cast review`, then let the user
+choose before `pick`. Review wave sheets/GIFs before `keep`. `ab cast export` packages only
+approved sources. `--complete` validates the entire requested library, including hand/pivot
+registration. Finish a successful fetched 1K pilot before expanding the animation queue.
+
+Scratch outputs and batch records remain worktree-local. Cloud jobs have unique prefixes.
+Re-running `batch submit` resumes unsent model lanes, and `batch fetch` retries downloads
+without discarding completed raws or treating missing rows as rejected images.
+
+`ab cast import-sheet` imports a generated transparent sheet using one fixed source
+camera grid. A neutral `--calibration-cell` establishes scale once for the whole sheet;
+`--start-cell` skips it in the animation output. Connected extraction preserves limbs
+across mathematical cell borders. Reviewed `--effect-owner SOURCE:DESTINATION` values
+attach detached effects to their intended actor. Review sheets/GIFs before `keep`.
+Record every Khara hand using `ab cast attach`; `--hide` marks actions with busy hands.
+Actual source models/grid metadata remain separate from preferred generation settings.
 
 ## 3. Map textures and parallax layers
 ```bash
-python -m ab texture forest-concept "dusk forest level, ..." --mode concept -n 4  # pick an art direction first
-python -m ab texture forest-earth "dark mossy earth, roots ..." --mode tile --tile 128   # platform fill
-python -m ab texture forest-earth-cap "moss lip with grass tufts" --mode cap --cap-height 32  # top-edge strip
+python -m ab texture ghat-stone "worn sandstone ghat steps, ..." --mode tile --tile 128
 python -m ab texture forest-far "dusk forest silhouettes, ..." --mode layer --aspect 21:9    # opaque, 1080px tall
 python -m ab texture forest-near "hanging vines and roots" --mode cutout                    # transparent shapes
-cp out/textures/forest-earth/01.png textures/forest/forest-earth.png
-python -m ab blend textures/forest/forest-earth.png textures/forest/forest-rock.png --keep  # A__B transition
-python -m ab board forest                         # -> out/textures/board.png, mock side view of the area
+cp out/textures/forest-far/01.png textures/forest/forest-far.png
 ```
 - Modes: `tile` seamless square fill (128 art px = 64 units); `cap` transparent strip along a platform's
   top edge, full-width seamless, `--cap-height` art px tall (default 32), the walking surface a third of
@@ -124,36 +153,12 @@ flat backgrounds (muted green, grey, white) are handled; what it can't fix and f
 - art touching the edge -> clipped; regenerate.
 - size drift on frames -> fine for crouch/stretch poses, otherwise regenerate.
 
-## Speed, rate limits and batch
-Pro image models on Vertex use Dynamic Shared Quota: 429 RESOURCE_EXHAUSTED means Google's shared pool
-is busy, not a per-project cap, so extra keys/projects don't help. The tool backs off and retries (up to
-~5 min). Three ways around it, all flags on `sprite`, `frames`, `texture` and `ui`:
-- `--split pro,flash`: alternate candidates between Pro and Flash so both capacity pools work at once;
-  sheets label Flash-made candidates `NN flash`. Good default when iterating live on a big run.
-- `--fallback flash`: stay on Pro, switch a request to Flash only after its retries run out (also labelled).
-- `--batch`: Vertex batch prediction, **half price and no 429s**, but results take minutes to hours.
-  Use it for big queues (a whole animation list, many textures, overnight); use live for quick single
-  iterations where you need to see the result now.
-
-```bash
-python -m ab frames siya run --batch               # queue (pending raws only); prints count + cost
-python -m ab texture forest-earth "..." -n 6 --split pro,flash --batch   # one job per model on submit
-python -m ab batch submit                          # cap check, upload, one Vertex job per model
-python -m ab batch status                          # queue + job states/counts
-python -m ab batch wait                            # poll, then fetch    (or: python -m ab batch fetch)
-```
-- Queue: `out/batch/queue.jsonl` (`ab batch clear` drops it); `submit --model flash` runs the whole queue
-  on one model. Jobs run in location `global` from `gs://<project>-ab-batch` (made by `setup.sh`,
-  objects deleted after 7 days); job records in `out/batch/jobs.json`.
-- `fetch` writes each image to its raw path, then re-runs every queued command (cleaning only: sheets,
-  previews, strips appear as usual). Failed requests are refunded in the ledger and land back on the
-  queue for the next submit. Safe to run repeatedly. Batch runs never auto-regenerate problem
-  candidates (`--retry`); queue a redo with `--only N --batch`.
-- Spend: batch cost is charged to the ledger at submit (half the live price), so `doctor` stays truthful.
-
-Never upgrade billing, buy provisioned throughput, or use AI Studio keys (trial credits cover Vertex
-only). Spend is capped by `~/nanobanana/gen.py` (ledger `~/nanobanana/spend.json`); `python -m ab doctor`
-shows spend, the batch bucket and unfetched batch jobs.
+## Rate limits (429 RESOURCE_EXHAUSTED)
+Pro image models on Vertex use Dynamic Shared Quota: 429 means Google's shared pool is busy, not a
+per-project cap, so extra keys/projects don't help. The tool backs off and retries automatically
+(up to ~5 min). If it persists: `--jobs 1`, or `--fallback flash` (separate capacity, slightly lower
+quality), or try later. Never upgrade billing or use AI Studio keys (trial credits cover Vertex only).
+Spend is capped by `~/nanobanana/gen.py` (ledger `~/nanobanana/spend.json`); `python -m ab doctor` shows it.
 
 ## Using art in the game
 Copy chosen PNGs into the Godot project (e.g. `assets/sprites/<name>/`); asset-builder has a

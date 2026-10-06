@@ -1,0 +1,43 @@
+[gd_resource type="SpriteFrames" load_steps=28 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/sprite.png" id="base"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/idle/01.png" id="idle_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/idle/02.png" id="idle_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/walk/01.png" id="walk_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/walk/02.png" id="walk_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/walk/03.png" id="walk_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/walk/04.png" id="walk_04"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/slam_windup/01.png" id="slam_windup_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/slam_windup/02.png" id="slam_windup_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/slam_impact/01.png" id="slam_impact_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/slam_recovery/01.png" id="slam_recovery_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/slam_recovery/02.png" id="slam_recovery_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/ladi_cast/01.png" id="ladi_cast_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/ladi_cast/02.png" id="ladi_cast_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/ladi_cast/03.png" id="ladi_cast_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/ladi_recovery/01.png" id="ladi_recovery_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/ladi_recovery/02.png" id="ladi_recovery_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/intro_roar/01.png" id="intro_roar_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/intro_roar/02.png" id="intro_roar_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/intro_roar/03.png" id="intro_roar_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/phase_shift_roar/01.png" id="phase_shift_roar_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/phase_shift_roar/02.png" id="phase_shift_roar_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/phase_shift_roar/03.png" id="phase_shift_roar_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/death/01.png" id="death_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/death/02.png" id="death_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/death/03.png" id="death_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/khara/death/04.png" id="death_04"]
+
+[resource]
+animations = [
+{"frames": [{"duration": 1.000000, "texture": ExtResource("idle_01")}, {"duration": 1.000000, "texture": ExtResource("idle_02")}], "loop": true, "name": &"idle", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("walk_01")}, {"duration": 1.000000, "texture": ExtResource("walk_02")}, {"duration": 1.000000, "texture": ExtResource("walk_03")}, {"duration": 1.000000, "texture": ExtResource("walk_04")}], "loop": true, "name": &"walk", "speed": 8.0},
+{"frames": [{"duration": 3.400000, "texture": ExtResource("slam_windup_01")}, {"duration": 3.400000, "texture": ExtResource("slam_windup_02")}], "loop": false, "name": &"slam_windup", "speed": 8.0},
+{"frames": [{"duration": 0.960000, "texture": ExtResource("slam_impact_01")}], "loop": false, "name": &"slam_impact", "speed": 8.0},
+{"frames": [{"duration": 4.400000, "texture": ExtResource("slam_recovery_01")}, {"duration": 4.400000, "texture": ExtResource("slam_recovery_02")}], "loop": true, "name": &"slam_recovery", "speed": 8.0},
+{"frames": [{"duration": 1.600000, "texture": ExtResource("ladi_cast_01")}, {"duration": 1.600000, "texture": ExtResource("ladi_cast_02")}, {"duration": 0.800000, "texture": ExtResource("ladi_cast_03")}], "loop": false, "name": &"ladi_cast", "speed": 8.0},
+{"frames": [{"duration": 2.400000, "texture": ExtResource("ladi_recovery_01")}, {"duration": 2.400000, "texture": ExtResource("ladi_recovery_02")}], "loop": false, "name": &"ladi_recovery", "speed": 8.0},
+{"frames": [{"duration": 2.666667, "texture": ExtResource("intro_roar_01")}, {"duration": 2.666667, "texture": ExtResource("intro_roar_02")}, {"duration": 2.666667, "texture": ExtResource("intro_roar_03")}], "loop": false, "name": &"intro_roar", "speed": 8.0},
+{"frames": [{"duration": 3.200000, "texture": ExtResource("phase_shift_roar_01")}, {"duration": 3.200000, "texture": ExtResource("phase_shift_roar_02")}, {"duration": 3.200000, "texture": ExtResource("phase_shift_roar_03")}], "loop": false, "name": &"phase_shift_roar", "speed": 8.0},
+{"frames": [{"duration": 2.800000, "texture": ExtResource("death_01")}, {"duration": 2.800000, "texture": ExtResource("death_02")}, {"duration": 2.800000, "texture": ExtResource("death_03")}, {"duration": 2.800000, "texture": ExtResource("death_04")}], "loop": false, "name": &"death", "speed": 8.0}
+]

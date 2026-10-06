@@ -1,0 +1,50 @@
+{
+  "fps": 8,
+  "loop": "hold",
+  "poses": [
+    "Collapsed in a heap, arms splayed. Headless; ten arms; keep the navel clear"
+  ],
+  "durations": [
+    1.0
+  ],
+  "free_palette": false,
+  "name": "swaminathan",
+  "animation": "dead",
+  "size": "sheet",
+  "expected_frames": 1,
+  "frames": [
+    "01"
+  ],
+  "canvas": [
+    403,
+    368
+  ],
+  "anchor": [
+    219,
+    345
+  ],
+  "anchor_mode": "feet",
+  "view": "front-three-quarter",
+  "subject": "headless-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 1.5020408163265306,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-bd086832-bbee-40f3-81f9-b7d9dc2fd138.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 3,
+    "rows": 3,
+    "first_cell": 7,
+    "extraction": "connected subjects on common source canvas",
+    "effect_owners": {}
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "poses": [
+    "Beating his chest with both fists. Empty fists, no weapon; Khara's gada is a separate component",
+    "Fist raised to the sky, roaring. Empty fists, no weapon; Khara's gada is a separate component",
+    "Back to a heavy stance, glaring. Empty fists, no weapon; Khara's gada is a separate component"
+  ],
+  "durations": [
+    2.666667,
+    2.666667,
+    2.666667
+  ],
+  "free_palette": false,
+  "name": "khara",
+  "animation": "intro_roar",
+  "size": "sheet",
+  "expected_frames": 3,
+  "frames": [
+    "01",
+    "02",
+    "03"
+  ],
+  "canvas": [
+    320,
+    320
+  ],
+  "anchor": [
+    160,
+    300
+  ],
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 1.5951219512195123,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-4cfee8e8-12dd-4972-9533-5efe70fb4749.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 3,
+    "first_cell": 1,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

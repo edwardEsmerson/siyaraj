@@ -1,0 +1,782 @@
+{
+  "name": "siya",
+  "canvas": [
+    160,
+    128
+  ],
+  "anchor": [
+    64,
+    112
+  ],
+  "scale": 0.5,
+  "art_pixels_per_unit": 2,
+  "anchor_mode": "feet",
+  "collider_units": [
+    24,
+    40
+  ],
+  "animations": {
+    "idle": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Relaxed neutral stance, weight centred, arms loose at the sides, feet planted. Unlit sparkler held loosely in the front hand",
+        "Small inhale: chest and shoulders lifted slightly, head up a touch, feet planted. Unlit sparkler held loosely in the front hand",
+        "Exhale: shoulders dropped slightly, knees a little softer, feet planted. Unlit sparkler held loosely in the front hand"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        160,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        112
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "`poses/idle.txt`. Unlit sparkler held loosely in the front hand.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.25,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-f0524f52-25a1-4c3f-b460-5f4dd1e47db6.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 4,
+        "first_cell": 0,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "run": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Contact: leaning forward, front foot striking the ground ahead, back leg extended behind, arms pumping opposite",
+        "Down: front knee bent absorbing the landing, body lowest, back leg starting to swing forward",
+        "Push-off: back leg fully extended pushing off the toes, front knee driven high, body leaning forward",
+        "Flight: both feet off the ground, legs split front and back, arms pumping, body leaning forward"
+      ],
+      "frame_count": 4,
+      "canvas": [
+        160,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        112
+      ],
+      "models": {
+        "01": "gemini-3-pro-image",
+        "02": "gemini-3-pro-image",
+        "03": "gemini-3-pro-image",
+        "04": "gemini-3-pro-image"
+      },
+      "notes": "`poses/run.txt`"
+    },
+    "jump": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Anticipation crouch: knees deeply bent, arms swung back, body low and coiled",
+        "Take-off: legs fully extended pushing off the toes, arms thrown upward, body stretched tall",
+        "Apex: in the air, knees tucked up, arms out for balance",
+        "Fall: in the air, legs extended down reaching for the ground, arms raised slightly",
+        "Landing: knees deeply bent absorbing impact, arms forward for balance, feet planted"
+      ],
+      "frame_count": 5,
+      "canvas": [
+        160,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        112
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen",
+        "04": "imagegen",
+        "05": "imagegen"
+      },
+      "notes": "`poses/jump.txt`. In Godot, choose the frame by vertical velocity: 1-2 take-off, 3 apex, 4 fall, 5 land.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.25,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-f0524f52-25a1-4c3f-b460-5f4dd1e47db6.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 4,
+        "first_cell": 3,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "dash": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        0.4,
+        0.4,
+        0.4
+      ],
+      "poses": [
+        "Launch: gripping a lit rocket in both hands at arm's length, feet leaving the ground, body pulled forward",
+        "Ride: body stretched horizontal behind the rocket, both hands on it, legs trailing together, hair and sari streaming back",
+        "Brake: rocket gone, front foot planted and skidding, body upright, arms out for balance"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        160,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "source_canvas": [
+        160,
+        128
+      ],
+      "source_anchor": [
+        64,
+        112
+      ],
+      "models": {
+        "01": "pro",
+        "02": "pro",
+        "03": "pro"
+      },
+      "notes": "The rocket dash. Used for ground and air dash. Use `--free-palette` for the flame. Poses: \"Launch: gripping a lit rocket in both hands at arm's length, feet leaving the ground, body pulled forward\" / \"Ride: body stretched horizontal behind the rocket, both hands on it, legs trailing together, hair and sari streaming back\" / \"Brake: rocket gone, front foot planted and skidding, body upright, arms out for balance\""
+    },
+    "lash": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        0.64,
+        0.8,
+        2.88
+      ],
+      "poses": [
+        "Ready: lit sparkler held up behind the shoulder, weight on the back foot",
+        "Lash: arm whipped forward and down, sparkler pointing ahead at full reach, weight on the front foot",
+        "Follow-through: arm low across the body, sparkler trailing behind, leaning forward"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        160,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        112
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "The J sparkler whip, on the ground. `poses/fuljadi.txt`, with `--free-palette` for the sparks. Hit timing is on frame 2.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.0875,
+        "calibration_cell": 6
+      },
+      "sheet": {
+        "source": "exec-6c83ac08-2f1d-44ed-b38e-6992f7fcf8f4.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 4,
+        "first_cell": 0,
+        "extraction": "connected subjects on common source canvas",
+        "effect_owners": {
+          "11": 10
+        }
+      }
+    },
+    "air_lash": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "In the air, knees tucked, lit sparkler raised behind the head",
+        "In the air, arm whipped forward and down, sparkler pointing ahead at full reach, legs trailing"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        160,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "source_canvas": [
+        143,
+        128
+      ],
+      "source_anchor": [
+        64,
+        112
+      ],
+      "models": {
+        "01": "pro",
+        "02": "flash"
+      },
+      "notes": "The J whip in the air. Poses: \"In the air, knees tucked, lit sparkler raised behind the head\" / \"In the air, arm whipped forward and down, sparkler pointing ahead at full reach, legs trailing\". Use `--free-palette`."
+    },
+    "skyshot": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Holding a rocket level at hip height in both hands like a launcher, fuse lit, leaning in",
+        "Rocket leaving her hands forward with a flash, her body jolted back by the recoil, back foot sliding",
+        "Recovering upright, hands still forward, slight smile"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        160,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "source_canvas": [
+        130,
+        128
+      ],
+      "source_anchor": [
+        64,
+        112
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "The L key. She fires one rocket forward and gets recoil. Use `--free-palette`. Poses: \"Holding a rocket level at hip height in both hands like a launcher, fuse lit, leaning in\" / \"Rocket leaving her hands forward with a flash, her body jolted back by the recoil, back foot sliding\" / \"Recovering upright, hands still forward, slight smile\". The flying rocket is `fx-skyshot`.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.0875,
+        "calibration_cell": 6
+      },
+      "sheet": {
+        "source": "exec-6c83ac08-2f1d-44ed-b38e-6992f7fcf8f4.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 4,
+        "first_cell": 3,
+        "extraction": "connected subjects on common source canvas",
+        "effect_owners": {
+          "11": 10
+        }
+      }
+    },
+    "chakri_charge": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Crouched, spinning a chakri on one raised fingertip above her head, other hand on her hip",
+        "Same crouch, chakri lower and tilted, sparks flying"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        160,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        112
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "The K key, held for up to 1 s. Use `--free-palette`. Poses: \"Crouched, spinning a chakri on one raised fingertip above her head, other hand on her hip\" / \"Same crouch, chakri lower and tilted, sparks flying\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.0875,
+        "calibration_cell": 6
+      },
+      "sheet": {
+        "source": "exec-6c83ac08-2f1d-44ed-b38e-6992f7fcf8f4.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 4,
+        "first_cell": 6,
+        "extraction": "connected subjects on common source canvas",
+        "effect_owners": {
+          "11": 10
+        }
+      }
+    },
+    "chakri_release": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Wind-up: crouched, chakri held low at the side in the throwing hand",
+        "Fling: sidearm throw, arm extended low and forward, hand open, chakri leaving the hand",
+        "Recover: standing up, arm drawn back to the side, looking ahead"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        160,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "source_canvas": [
+        144,
+        128
+      ],
+      "source_anchor": [
+        64,
+        112
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "Released K. The chakri spins around her (`fx-chakri-spin`). Use `poses/chakri.txt`, with `--free-palette`.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.0875,
+        "calibration_cell": 6
+      },
+      "sheet": {
+        "source": "exec-6c83ac08-2f1d-44ed-b38e-6992f7fcf8f4.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 4,
+        "first_cell": 8,
+        "extraction": "connected subjects on common source canvas",
+        "effect_owners": {
+          "11": 10
+        }
+      }
+    },
+    "hurt": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Hit: head and torso snapped backward, arms flung out, pained expression, one foot lifted",
+        "Stagger: hunched forward, one hand clutching the stomach, knees bent, wincing"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        160,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        112
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "`poses/hurt.txt`. Code adds the knockback and blink.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.25,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-f0524f52-25a1-4c3f-b460-5f4dd1e47db6.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 4,
+        "first_cell": 8,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "death": {
+      "fps": 8,
+      "loop": "hold",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Hit hard: knocked backward, arms flung up, shocked expression",
+        "Collapse: knees buckling, body folding forward, arms limp",
+        "Down: lying flat on the ground on the side, eyes closed, completely still. Dazed swirl eyes, comic rather than grim"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        160,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        112
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "`poses/death.txt`. Comic, not grim: add \"dazed swirl eyes\" to the last pose.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.25,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-f0524f52-25a1-4c3f-b460-5f4dd1e47db6.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 4,
+        "rows": 4,
+        "first_cell": 10,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "light_diya": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Kneeling on one knee, touching the lit sparkler tip to a small diya on the ground in front of her",
+        "Standing back up, smiling, sparkler raised"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        160,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        112
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "The E key at a diya, while grounded. Poses: \"Kneeling on one knee, touching the lit sparkler tip to a small diya on the ground in front of her\" / \"Standing back up, smiling, sparkler raised\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 4.0,
+        "calibration_cell": 5
+      },
+      "sheet": {
+        "source": "exec-f59bec21-ad2c-4ea1-b279-cc95b6f5a2d4.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 0,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "victory": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Both arms raised, sparkler held high, jumping with joy",
+        "Landing, fist pump, grinning",
+        "Hands on hips, proud"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        160,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        112
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "Level finish and boss win. Poses: \"Both arms raised, sparkler held high, jumping with joy\" / \"Landing, fist pump, grinning\" / \"Hands on hips, proud\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 4.0,
+        "calibration_cell": 5
+      },
+      "sheet": {
+        "source": "exec-f59bec21-ad2c-4ea1-b279-cc95b6f5a2d4.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 2,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "talk": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Standing, one hand gesturing while talking, mouth open",
+        "Same, mouth closed"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        160,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        112
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "For cutscenes. Poses: \"Standing, one hand gesturing while talking, mouth open\" / \"Same, mouth closed\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 4.0,
+        "calibration_cell": 5
+      },
+      "sheet": {
+        "source": "exec-f59bec21-ad2c-4ea1-b279-cc95b6f5a2d4.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 5,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "shocked": {
+      "fps": 8,
+      "loop": "hold",
+      "durations": [
+        1.0
+      ],
+      "poses": [
+        "Leaning back, both hands up, eyes wide, mouth open in shock"
+      ],
+      "frame_count": 1,
+      "canvas": [
+        160,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "source_canvas": [
+        128,
+        128
+      ],
+      "source_anchor": [
+        64,
+        112
+      ],
+      "models": {
+        "01": "imagegen"
+      },
+      "notes": "For cutscenes. \"Leaning back, both hands up, eyes wide, mouth open in shock\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 4.0,
+        "calibration_cell": 5
+      },
+      "sheet": {
+        "source": "exec-f59bec21-ad2c-4ea1-b279-cc95b6f5a2d4.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 3,
+        "first_cell": 7,
+        "extraction": "connected subjects on common source canvas"
+      }
+    }
+  },
+  "attachment": {},
+  "view": "right-profile",
+  "subject": "full-body",
+  "art_px": 80,
+  "brief": "Siya, clean-shaven young adult heroine of Siyaraj and daughter of a fireworks maker. Lean, graceful, expressive side-view game character based on the two user identity references: warm medium-brown skin, long black hair tied back with a loose curl, tiny bindi, simple gold jewelry, marigold-orange sari with crimson red-and-gold pallu, readable hands and feet, holding one unlit sparkler. The approved Basic Rakshas image is a style reference only. Same identity and pose: use a slightly more angular pallu edge with one broad, simple geometric gold border motif; keep all ornament large and sparse.",
+  "generation": {
+    "model": "pro",
+    "size": "1K",
+    "batch": false,
+    "candidates": 4,
+    "jobs": 3,
+    "fallback": "flash"
+  },
+  "source": "asset-builder/sprites/siya",
+  "approval": "approved"
+}

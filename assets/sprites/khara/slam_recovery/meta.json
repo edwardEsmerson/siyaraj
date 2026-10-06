@@ -1,0 +1,50 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    4.4,
+    4.4
+  ],
+  "poses": [
+    "Bent forward, pulling backward with both fists low, straining. Empty fists, no weapon; Khara's gada is a separate component",
+    "Same, leaning further back, sweating, tongue out. Empty fists, no weapon; Khara's gada is a separate component"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    333,
+    320
+  ],
+  "anchor": [
+    173,
+    300
+  ],
+  "source_canvas": [
+    320,
+    320
+  ],
+  "source_anchor": [
+    160,
+    300
+  ],
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "notes": "1.1 s, the punish window. Poses: \"Bent forward, pulling backward with both fists low, straining\" / \"Same, leaning further back, sweating, tongue out\".",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 1.604878048780488,
+    "calibration_cell": 1
+  },
+  "sheet": {
+    "source": "exec-6a176b53-93e9-43ab-a454-c82dd6acbab7.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 4,
+    "rows": 3,
+    "first_cell": 4,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

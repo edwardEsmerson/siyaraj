@@ -1,0 +1,27 @@
+{
+  "name": "ground-shooter",
+  "brief": "Same rakshas footsoldier family as attachment 1: plum-purple skin, curled black moustache, hooked nose, small gold crown. Leaner build. Violet and turquoise dhoti and drape instead of pink. No mace. He holds a short bamboo blowpipe with a brass mouthpiece in both hands, level and pointing forward. Strict right-facing profile, knees bent, alert.",
+  "key": "green",
+  "role": "enemy",
+  "target": 88,
+  "size": "1K",
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "candidate_id": "03",
+  "model": "pro",
+  "canvas": [
+    144,
+    144
+  ],
+  "anchor": [
+    72,
+    135
+  ],
+  "art_dimensions": [
+    58,
+    88
+  ],
+  "generation_pixel_size": 8.806818181818182,
+  "problems": []
+}

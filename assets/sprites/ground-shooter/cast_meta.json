@@ -1,0 +1,283 @@
+{
+  "name": "ground-shooter",
+  "canvas": [
+    144,
+    144
+  ],
+  "anchor": [
+    72,
+    135
+  ],
+  "scale": 0.5,
+  "art_pixels_per_unit": 2,
+  "anchor_mode": "feet",
+  "collider_units": [
+    32,
+    40
+  ],
+  "animations": {
+    "walk": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Contact: front leg extended forward with heel touching the ground, back leg straight behind on its toes, opposite arm swung forward. Blowpipe held across the body",
+        "Down: front foot flat and knee bent taking the weight, back foot lifting off, body at its lowest. Blowpipe held across the body",
+        "Passing: weight on the straight front leg, back leg passing under the body with knee lifted, arms near the sides. Blowpipe held across the body",
+        "Up: pushing off the toes of the standing leg, body at its highest, free leg swinging forward. Blowpipe held across the body"
+      ],
+      "frame_count": 4,
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        135
+      ],
+      "source_canvas": [
+        144,
+        144
+      ],
+      "source_anchor": [
+        72,
+        135
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen",
+        "04": "imagegen"
+      },
+      "notes": "`poses/walk.txt`, blowpipe held across the body.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 4.863636363636363,
+        "calibration_cell": 1
+      },
+      "sheet": {
+        "source": "exec-83a2d495-6ed5-4948-a64c-1f9f17d785e5.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "columns": 3,
+        "rows": 2,
+        "first_cell": 1,
+        "extraction": "connected subjects on common source canvas"
+      }
+    },
+    "charge": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        2.6,
+        2.6
+      ],
+      "poses": [
+        "Planted, blowpipe raised to his lips aimed forward, cheeks puffing up",
+        "Same, cheeks fully ballooned, eyes squeezed"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        135
+      ],
+      "source_canvas": [
+        144,
+        144
+      ],
+      "source_anchor": [
+        72,
+        135
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "0.65 s wind-up, which J can interrupt. Poses: \"Planted, blowpipe raised to his lips aimed forward, cheeks puffing up\" / \"Same, cheeks fully ballooned, eyes squeezed\". The purple charge ring is code or fx.",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.46484375
+      },
+      "sheet": {
+        "source": "exec-1c674787-ca92-478d-8654-9403a3587e5f.png",
+        "dimensions": [
+          1774,
+          887
+        ],
+        "columns": 4,
+        "rows": 2,
+        "first_cell": 0
+      }
+    },
+    "fire": {
+      "fps": 8,
+      "loop": "once",
+      "durations": [
+        1.0
+      ],
+      "poses": [
+        "Blowpipe aimed forward, cheeks deflated, recoiling back a step"
+      ],
+      "frame_count": 1,
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        135
+      ],
+      "source_canvas": [
+        144,
+        144
+      ],
+      "source_anchor": [
+        72,
+        135
+      ],
+      "models": {
+        "01": "imagegen"
+      },
+      "notes": "\"Blowpipe aimed forward, cheeks deflated, recoiling back a step\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.46484375
+      },
+      "sheet": {
+        "source": "exec-1c674787-ca92-478d-8654-9403a3587e5f.png",
+        "dimensions": [
+          1774,
+          887
+        ],
+        "columns": 4,
+        "rows": 2,
+        "first_cell": 2
+      }
+    },
+    "recovery": {
+      "fps": 8,
+      "loop": "loop",
+      "durations": [
+        6.4,
+        6.4
+      ],
+      "poses": [
+        "Bent over, coughing, blowpipe lowered",
+        "Same, loading a dart into the blowpipe"
+      ],
+      "frame_count": 2,
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        135
+      ],
+      "source_canvas": [
+        144,
+        144
+      ],
+      "source_anchor": [
+        72,
+        135
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen"
+      },
+      "notes": "1.6 s reload. Poses: \"Bent over, coughing, blowpipe lowered\" / \"Same, loading a dart into the blowpipe\".",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.46484375
+      },
+      "sheet": {
+        "source": "exec-1c674787-ca92-478d-8654-9403a3587e5f.png",
+        "dimensions": [
+          1774,
+          887
+        ],
+        "columns": 4,
+        "rows": 2,
+        "first_cell": 3
+      }
+    },
+    "death": {
+      "fps": 8,
+      "loop": "hold",
+      "durations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "poses": [
+        "Hit hard: knocked backward, arms flung up, shocked expression",
+        "Collapse: knees buckling, body folding forward, arms limp",
+        "Down: lying flat on the ground on the side, eyes closed, completely still"
+      ],
+      "frame_count": 3,
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        135
+      ],
+      "source_canvas": [
+        144,
+        144
+      ],
+      "source_anchor": [
+        72,
+        135
+      ],
+      "models": {
+        "01": "imagegen",
+        "02": "imagegen",
+        "03": "imagegen"
+      },
+      "notes": "`poses/death.txt`",
+      "grid": {
+        "mode": "uniform",
+        "source_pixel_spacing": 3.46484375
+      },
+      "sheet": {
+        "source": "exec-1c674787-ca92-478d-8654-9403a3587e5f.png",
+        "dimensions": [
+          1774,
+          887
+        ],
+        "columns": 4,
+        "rows": 2,
+        "first_cell": 5
+      }
+    }
+  },
+  "attachment": {},
+  "view": "right-profile",
+  "subject": "full-body",
+  "art_px": 88,
+  "brief": "Same rakshas footsoldier family as attachment 1: plum-purple skin, curled black moustache, hooked nose, small gold crown. Leaner build. Violet and turquoise dhoti and drape instead of pink. No mace. He holds a short bamboo blowpipe with a brass mouthpiece in both hands, level and pointing forward. Strict right-facing profile, knees bent, alert.",
+  "generation": {
+    "model": "pro",
+    "size": "1K",
+    "batch": false,
+    "candidates": 4,
+    "jobs": 3,
+    "fallback": "flash"
+  },
+  "source": "asset-builder/sprites/ground-shooter",
+  "approval": "approved"
+}

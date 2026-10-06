@@ -51,14 +51,14 @@ roughly half through batch.
 ## 1. Characters
 
 - [x] **Siya** (`siya`, hero 80). Approved.
-- [ ] **P1 Robin** (`robin`, flyer, `--height 40 --anchor center`)
+- [x] **P1 Robin** (`robin`, flyer, `--height 48 --anchor center`). Approved firebird design.
   - Siya's small bird companion. Later he gets hypnotised and becomes a boss.
   - Brief: "Robin, a tiny plump songbird companion. Round body, short tail cocked up,
     big expressive eye with a white highlight, short pointed beak. Warm marigold-orange
     breast and face. Warm brown back. Turquoise wing tips and tail tip. Tiny hot-pink
     scarf knotted at the neck. Two thin legs tucked. Side profile facing right, hovering
     with the wings half raised. Cheeky, alert expression."
-- [ ] **P1 Raj** (`raj`, hero 80)
+- [x] **P1 Raj** (`raj`, hero 80)
   - The captive and comic foil. He is the only clean-shaven man in the game, and he
     sulks about it.
   - Brief: "Raj, clean-shaven young adult man, slim and theatrical. Black hair in a
@@ -78,7 +78,7 @@ these, so keep them readable and comic rather than scary.
   - Code: `scenes/enemies/enemy.tscn`. Uses the mace.
 - [x] **Winged forest demon** (`winged-forest-demon`, flyer 80, blue key). Approved.
   - Code: `scenes/enemies/flying_enemy.tscn`.
-- [ ] **P0 Ground shooter** (`ground-shooter`, enemy 88)
+- [x] **P0 Ground shooter** (`ground-shooter`, enemy 88)
   - Code: `scenes/enemies/ground_shooter.tscn`. It stops, charges, then fires a slow
     purple homing bolt. The placeholder is pink with a purple charge ring.
   - Make it a variant of the basic rakshas, so the two read as one family.
@@ -88,7 +88,7 @@ these, so keep them readable and comic rather than scary.
     dhoti and drape instead of pink. No mace. He holds a short bamboo blowpipe with a
     brass mouthpiece in both hands, level and pointing forward. Strict right-facing
     profile, knees bent, alert."
-- [ ] **P0 Brute** (`brute`, brute 136)
+- [x] **P0 Brute** (`brute`, brute 136)
   - Code: `scenes/enemies/brute.tscn`, using the `enemy.gd` script. 6 HP. A long orange
     wind-up, then a heavy 2-damage strike. The placeholder has a belt, a buckle and
     bracers.
@@ -108,7 +108,7 @@ these, so keep them readable and comic rather than scary.
 
 ### Khara (mid boss, `docs/bosses/boss1-khara.md`)
 
-- [ ] **P0 Khara body** (`khara`, boss 200; 4K is automatic)
+- [x] **P0 Khara body** (`khara`, boss 200; 4K is automatic)
   - About 96 game units tall, and his horns reach 110. That is about 200 to 220 art px.
     His feet are at the root, and he faces right.
   - **Draw him without the gada.** The gada is a separate sprite that code rotates
@@ -121,7 +121,7 @@ these, so keep them readable and comic rather than scary.
     heavy gold anklets. His forward right fist is raised to chest height, closed around
     nothing, as if gripping a weapon handle. His left hand hangs open. No weapon.
     Strict right-facing profile, heavy planted stance."
-- [ ] **P0 Khara's gada** (`khara-gada`, `--height 120 --anchor center`)
+- [x] **P0 Khara's gada** (`khara-gada`, `--height 120 --anchor center`)
   - Brief: "Bronze gada mace on its own: a large ribbed round head with a pointed top
     finial and a long bronze handle with a grip wrap. Vertical, head up. No hand."
   - In Godot it pivots at Khara's fist: `Visual/Gada`, 14 units forward and 70 up. Set
@@ -132,7 +132,7 @@ these, so keep them readable and comic rather than scary.
 Ten heads on necks over one body. Code draws the necks as lines. The heads and the
 body are separate nodes and separate sprites.
 
-- [ ] **P0 Swaminathan body** (`swaminathan`, big-boss, `--height 260`)
+- [x] **P0 Swaminathan body** (`swaminathan`, big-boss, `--height 260`)
   - Body canvas 192 x 160 game units, which is about 384 x 320 art px. The origin is
     at the bottom centre, between his feet.
   - Keep his navel clear: code draws the amrit glow at (0, -36) units, which is
@@ -147,7 +147,7 @@ body are separate nodes and separate sprites.
     stance, feet planted wide."
   - If a headless result keeps failing, generate him with one head and erase it by
     hand. The `exposed` frames need the belly bare.
-- [ ] **P0 Swaminathan head, base** (`swaminathan-head`, `--height 76 --anchor center`)
+- [x] **P0 Swaminathan head, base** (`swaminathan-head`, `--height 76 --anchor center`)
   - Code canvas 48 x 48 game units (96 art px). The origin is the face centre, and the
     mouth is 10 units (20 art px) below it. The hurtbox is a 17 unit circle.
   - Brief: "One crowned rakshasa king's head on its own. A tall pointed gold crown

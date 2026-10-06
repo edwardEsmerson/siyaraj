@@ -1,0 +1,31 @@
+{
+  "fps": 8,
+  "loop": "loop",
+  "durations": [
+    1.0,
+    1.0
+  ],
+  "poses": [
+    "Perched upright, wings folded neatly along the body, tail plumes hanging straight down behind, talons gripping below the belly, head up and proud, facing right",
+    "Identical to the perched pose facing right (head on the right, one tail fan hanging down on the left behind the body, wings folded), only the beak is open as if chirping and the crest is raised a little"
+  ],
+  "frame_count": 2,
+  "canvas": [
+    80,
+    80
+  ],
+  "anchor": [
+    40,
+    40
+  ],
+  "source_canvas": [
+    80,
+    80
+  ],
+  "source_anchor": [
+    40,
+    40
+  ],
+  "models": {},
+  "notes": "Sitting on Siya's shoulder or a ledge in cutscenes. Poses: \"Perched, wings folded, feet gripping\" / \"Perched, head tilted, blinking\"."
+}

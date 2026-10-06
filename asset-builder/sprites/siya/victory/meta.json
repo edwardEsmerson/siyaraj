@@ -1,0 +1,57 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "poses": [
+    "Both arms raised, sparkler held high, jumping with joy",
+    "Landing, fist pump, grinning",
+    "Hands on hips, proud"
+  ],
+  "durations": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "free_palette": false,
+  "name": "siya",
+  "animation": "victory",
+  "size": "sheet",
+  "expected_frames": 3,
+  "frames": [
+    "01",
+    "02",
+    "03"
+  ],
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    112
+  ],
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen",
+    "03": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 4.0,
+    "calibration_cell": 5
+  },
+  "sheet": {
+    "source": "exec-f59bec21-ad2c-4ea1-b279-cc95b6f5a2d4.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 3,
+    "rows": 3,
+    "first_cell": 2,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

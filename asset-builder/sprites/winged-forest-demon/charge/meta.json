@@ -1,0 +1,53 @@
+{
+  "fps": 8,
+  "loop": "once",
+  "poses": [
+    "Wings raised high, body drawn back, claws forward, glaring",
+    "Same, wings at peak, mouth open in a screech"
+  ],
+  "durations": [
+    1.8,
+    1.8
+  ],
+  "free_palette": false,
+  "name": "winged-forest-demon",
+  "animation": "charge",
+  "size": "sheet",
+  "expected_frames": 2,
+  "frames": [
+    "01",
+    "02"
+  ],
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    71
+  ],
+  "anchor_mode": "center",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "imagegen",
+    "02": "imagegen"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 3.265625,
+    "calibration_cell": null
+  },
+  "sheet": {
+    "source": "exec-5f31ebd3-de51-4752-8944-de4f2bfb0761.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "columns": 3,
+    "rows": 3,
+    "first_cell": 0,
+    "extraction": "connected subjects on common source canvas"
+  }
+}

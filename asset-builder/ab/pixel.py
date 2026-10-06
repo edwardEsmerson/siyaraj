@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 HOLE = (255, 0, 255)  # placeholder colour for transparent pixels while snapping
 
 
-def remove_background(image, tol=40, step=6, single=False):
+def remove_background(image, tol=40, step=6, single=False, key=None):
     """Cut out whatever flat-ish background the model actually drew.
 
     The model often ignores the requested key (muted green, grey, white, a fake
@@ -52,6 +52,13 @@ def remove_background(image, tol=40, step=6, single=False):
         if near[y, x] and not mask[y + 1, x + 1]:
             cv2.floodFill(rgb, mask, (x, y), 0, (step,) * 3, (step,) * 3, flags)
     background |= mask[1:-1, 1:-1].astype(bool)
+    if key is not None:
+        # Image models sometimes texture the forbidden key colour. Remove its hue as well.
+        hsv = cv2.cvtColor(rgb, cv2.COLOR_RGB2HSV)
+        key_hue = int(cv2.cvtColor(np.uint8([[key]]), cv2.COLOR_RGB2HSV)[0, 0, 0])
+        hue_delta = np.abs(hsv[:, :, 0].astype(int) - key_hue)
+        hue_delta = np.minimum(hue_delta, 180 - hue_delta)
+        background |= (hue_delta <= 10) & (hsv[:, :, 1] >= 100) & (hsv[:, :, 2] >= 75)
 
     # 3) Enclosed holes (between arm and body) that closely match the background.
     tight = ((distance <= tol // 2) & ~background).astype(np.uint8)
@@ -77,7 +84,7 @@ def remove_background(image, tol=40, step=6, single=False):
     greys = [s for s in seeds if np.ptp(s) < 20]
     if len(seeds) == 2 and len(greys) == 2 and min(counts[np.argsort(-counts)[:2]]) > 0.25 * len(ring):
         problems.append("fake transparency checkerboard background (grey parts of the art may be lost)")
-    elif border_bg < 0.97 or len(seeds) > 2:
+    elif border_bg < 0.97 or (len(seeds) > 2 and key is None):
         problems.append("messy background (scene/gradient bleed) — check the cutout")
     report["problems"] = problems
     return Image.fromarray(rgba), report
@@ -113,6 +120,92 @@ def snap(cutout, px=None, colours=32, palette=None):
     out[hole] = 0
     out[~hole, 3] = 255
     return Image.fromarray(out)
+
+
+def snap_fixed(cutout, px, colours=32, palette=None):
+    """Sample the entire generation canvas at one fixed art-pixel spacing.
+
+    Pixel Snapper's elastic edge walker changes its cell count with the pose,
+    even with --pixel-size. Animation sources must instead share a uniform grid.
+    This does not fit or resize a subject: the same source camera/grid applies
+    to every frame, including extended limbs, crouches and weapons.
+    """
+    if px <= 0:
+        raise ValueError('source pixel spacing must be positive')
+    data = np.array(cutout.convert('RGBA')).astype(np.float32)
+    alpha = data[:, :, 3] / 255.0
+    size = (max(1, round(cutout.width / px)), max(1, round(cutout.height / px)))
+    rgb = cv2.resize(data[:, :, :3] * alpha[:, :, None], size, interpolation=cv2.INTER_AREA)
+    alpha = cv2.resize(alpha, size, interpolation=cv2.INTER_AREA)
+    rgb = np.clip(rgb / np.maximum(alpha, 1e-6)[:, :, None], 0, 255).astype(np.uint8)
+    opaque = alpha >= 0.5
+    if palette:
+        swatches = np.array([tuple(bytes.fromhex(c)) for c in palette], dtype=np.int16)
+        pixels = rgb[opaque].astype(np.int16)
+        if len(pixels):
+            distance = ((pixels[:, None, :].astype(np.int32) - swatches[None, :, :]) ** 2).sum(2)
+            rgb[opaque] = swatches[distance.argmin(1)]
+    else:
+        flat = Image.fromarray(rgb).quantize(colours, method=Image.Quantize.MEDIANCUT, kmeans=2)
+        rgb = np.array(flat.convert('RGB'))
+    out = np.dstack([rgb, np.where(opaque, 255, 0).astype(np.uint8)])
+    out[~opaque] = 0
+    return Image.fromarray(out)
+
+
+def sheet_cells(source, columns, rows, count, effect_owners=None):
+    """Isolate transparent sheet subjects without cutting off grid-crossing limbs.
+
+    The generated layout may miss mathematical cell boundaries by a few pixels.
+    Connected subjects belong to the cell containing their centroid. Detached
+    effects follow their nearby subject. Return full source canvases: extraction
+    preserves a common source grid and never fits a pose to a target size.
+    """
+    data = np.array(source.convert('RGBA'))
+    foreground = (data[:, :, 3] >= 128).astype(np.uint8)
+    number, labels, stats, centers = cv2.connectedComponentsWithStats(foreground, connectivity=8)
+    groups = [[] for _ in range(count)]
+    cell_w, cell_h = source.width / columns, source.height / rows
+    candidates = []
+    for label in range(1, number):
+        if stats[label, cv2.CC_STAT_AREA] < 8:
+            continue  # isolated antialias fragments rather than an art pixel
+        x, y = centers[label]
+        cell = min(rows-1, int(y / cell_h)) * columns + min(columns-1, int(x / cell_w))
+        if cell >= count:
+            # A detached effect can spill into a final unused cell.
+            cell = min(range(count), key=lambda i: ((x-(i%columns+.5)*cell_w)/cell_w)**2 +
+                       ((y-(i//columns+.5)*cell_h)/cell_h)**2)
+        groups[cell].append(label)
+        candidates.append(label)
+    # A detached projectile can cross an imaginary cell edge. Associate it with
+    # the nearest full subject instead of adding it to the next cell's actor.
+    primary = [(cell, max(group, key=lambda i: stats[i, cv2.CC_STAT_AREA]))
+               for cell, group in enumerate(groups) if group]
+    groups = [[] for _ in range(count)]
+    for label in candidates:
+        x, y = centers[label]
+        def distance(entry):
+            cell, owner = entry
+            left, top, width, height = stats[owner, :4]
+            dx = max(left-x, 0, x-(left+width)) / cell_w
+            dy = max(top-y, 0, y-(top+height)) / cell_h
+            ox, oy = centers[owner]
+            return dx*dx + dy*dy + 1e-3 * (((x-ox)/cell_w)**2 + ((y-oy)/cell_h)**2)
+        cell, _ = min(primary, key=distance)
+        initial = min(rows-1, int(y / cell_h)) * columns + min(columns-1, int(x / cell_w))
+        # Reviewed ownership resolves detached projectiles between two actors.
+        # Never move the actor itself; only detached components are reassigned.
+        if effect_owners and initial in effect_owners and label not in {p[1] for p in primary}:
+            cell = effect_owners[initial]
+        groups[cell].append(label)
+    cells = []
+    for group in groups:
+        mask = np.isin(labels, group)
+        isolated = data.copy()
+        isolated[~mask] = 0
+        cells.append(Image.fromarray(isolated))
+    return cells
 
 
 def resize_art(image, scale, colours=32):
@@ -154,9 +247,40 @@ def place(art, canvas, anchor):
     return result, problem
 
 
+def pose_origin(art, mode="feet"):
+    if mode == "center":
+        return (art.width // 2, art.height // 2)
+    alpha = np.array(art.getchannel("A"))
+    # Use the soles, rather than the entire silhouette (a forward weapon can double its width).
+    band = alpha[max(0, art.height - min(3, max(1, art.height // 20))):] > 0
+    xs = np.where(band.any(axis=0))[0]
+    x = int((xs[0] + xs[-1] + 1) // 2) if len(xs) else art.width // 2
+    return (x, art.height)
+
+
+def place_registered(arts, canvas, anchor, mode="feet", origin_offset=(0, 0)):
+    """Expand one shared canvas around the original origin; never resize or clamp poses."""
+    origins = [pose_origin(a, mode) for a in arts]
+    offsets = [(anchor[0] + origin_offset[0] - origin[0],
+                anchor[1] + origin_offset[1] - origin[1]) for origin in origins]
+    left = min([0] + [x for x, _ in offsets])
+    top = min([0] + [y for _, y in offsets])
+    right = max([canvas[0]] + [x + a.width for a, (x, _) in zip(arts, offsets)])
+    bottom = max([canvas[1]] + [y + a.height for a, (_, y) in zip(arts, offsets)])
+    size = (right - left, bottom - top)
+    origin = (anchor[0] - left, anchor[1] - top)
+    frames = []
+    for art, (x, y) in zip(arts, offsets):
+        frame = Image.new("RGBA", size)
+        frame.paste(art, (x - left, y - top))
+        frames.append(frame)
+    return frames, None, size, origin
+
+
 def anchor_of(image, mode="feet"):
     x0, y0, x1, y1 = image.getchannel("A").getbbox()
-    return ((x0 + x1) // 2, y1 if mode == "feet" else (y0 + y1) // 2)
+    x, y = pose_origin(image.crop((x0, y0, x1, y1)), mode)
+    return (x0 + x, y0 + y)
 
 
 def colours_of(image):
@@ -222,10 +346,19 @@ def strip(frames, out, padding=0):
     sheet.save(out)
 
 
-def gif(frames, out, ms=120, scale=3):
+def gif(frames, out, ms=120, scale=3, loop=True):
     tiles = []
     for frame in frames:
         tile = checker(frame.size)
         tile.alpha_composite(frame)
         tiles.append(tile.convert("RGB").resize((frame.width * scale, frame.height * scale), Image.Resampling.NEAREST))
-    tiles[0].save(out, save_all=True, append_images=tiles[1:], duration=ms, loop=0, disposal=2)
+    # GIF stores durations in 10ms units; distribute rounding so an 8 FPS cycle remains 500ms.
+    durations = ms if isinstance(ms, list) else [ms] * len(frames)
+    rounded, elapsed, stored = [], 0.0, 0
+    for duration in durations:
+        elapsed += duration
+        boundary = max(stored + 10, round(elapsed / 10) * 10)
+        rounded.append(boundary - stored)
+        stored = boundary
+    opts = {"loop": 0} if loop else {}
+    tiles[0].save(out, save_all=True, append_images=tiles[1:], duration=rounded, disposal=2, **opts)

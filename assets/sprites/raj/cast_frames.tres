@@ -1,0 +1,17 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/raj/sprite.png" id="base"]
+[ext_resource type="Texture2D" path="res://assets/sprites/raj/sulk/01.png" id="sulk_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/raj/sulk/02.png" id="sulk_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/raj/dramatic/01.png" id="dramatic_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/raj/dramatic/02.png" id="dramatic_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/raj/dramatic/03.png" id="dramatic_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/raj/freed/01.png" id="freed_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/raj/freed/02.png" id="freed_02"]
+
+[resource]
+animations = [
+{"frames": [{"duration": 1.000000, "texture": ExtResource("sulk_01")}, {"duration": 1.000000, "texture": ExtResource("sulk_02")}], "loop": true, "name": &"sulk", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("dramatic_01")}, {"duration": 1.000000, "texture": ExtResource("dramatic_02")}, {"duration": 1.000000, "texture": ExtResource("dramatic_03")}], "loop": true, "name": &"dramatic", "speed": 8.0},
+{"frames": [{"duration": 1.000000, "texture": ExtResource("freed_01")}, {"duration": 1.000000, "texture": ExtResource("freed_02")}], "loop": false, "name": &"freed", "speed": 8.0}
+]
