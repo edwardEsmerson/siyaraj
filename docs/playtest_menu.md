@@ -9,7 +9,8 @@ Select Forest, River and ghats, or Temple and palace. Choose Beginning or a name
 checkpoint section, then Play selected level. New launches reset that level's
 session progress. Turn off Enable enemy encounters to focus on traversal.
 Checkpoints require a fresh E press while grounded beside a diya. Death restores
-the last checkpoint with full health and weapon resources. R resets the level.
+the last checkpoint with full health and weapon resources. Debug builds also
+allow R to reset the level.
 
 Esc pauses any level or standalone playground. Resume, go back to the last lit
 diya, restart, change settings, or quit to the title. Time and gameplay stop while paused. The forest exit offers Enter
@@ -54,8 +55,10 @@ Add a row there to register a new snapshot. The smoke preset includes all
 runtime resources, so newly referenced scenes and art are packed automatically.
 
 Terrain and canopy snapshots omit encounters. Pause-menu restart repeats the
-chosen snapshot, including the sandbox preset. R also repeats terrain and canopy snapshots. Other playgrounds
-retain their own R behavior. No extra playable character exists yet; the character
+chosen snapshot, including the sandbox preset. In debug builds, R also repeats
+terrain and canopy snapshots. Other playgrounds retain their own debug-only R
+behavior. Release gameplay uses the menu restart and Play Again buttons.
+No extra playable character exists yet; the character
 snapshot uses the current Siya controller. Snapshots are launch presets, not
 copies of gameplay scripts, so friends' controller updates apply to them too.
 

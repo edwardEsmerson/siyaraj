@@ -1,5 +1,5 @@
 extends CharacterBody2D
-## Ground patrol with an interruptible charge and a slowly steering projectile.
+## Ground patrol with a stagger-resistant charge and a slowly steering projectile.
 const BURST = preload("res://scripts/effects/burst.gd")
 const PROJECTILE_SCENE = preload("res://scenes/combat/homing_projectile.tscn")
 
@@ -12,13 +12,14 @@ signal shot_fired
 @export var patrol_radius: float = 70.0
 @export var gravity: float = 1800.0
 @export var detection_range: float = 260.0
-@export var windup_time: float = 0.65
+@export var windup_time: float = 0.55
 @export var recovery_time: float = 1.6
 @export var projectile_speed: float = 170.0
 @export var projectile_turn_speed: float = 2.4
 @export var projectile_damage: int = 1
 @export var projectile_lifetime: float = 2.8
 @export var projectile_knockback: Vector2 = Vector2(180, -120)
+@export var stagger_cooldown: float = 1.4
 
 enum State { PATROL, CHARGING, RECOVERY, HURT, DEAD }
 var state: State = State.PATROL
@@ -28,6 +29,7 @@ var _direction: int = 1
 var _aim_direction: Vector2 = Vector2.RIGHT
 var _remaining: float = 0.0
 var _hit_flash_remaining: float = 0.0
+var _stagger_cooldown_remaining: float = 0.0
 
 @onready var body: Polygon2D = $Body
 @onready var pupil: Polygon2D = $Pupil
@@ -46,6 +48,7 @@ func _physics_process(delta: float) -> void:
 		return
 	_remaining = maxf(_remaining - delta, 0.0)
 	_hit_flash_remaining = maxf(_hit_flash_remaining - delta, 0.0)
+	_stagger_cooldown_remaining = maxf(_stagger_cooldown_remaining - delta, 0.0)
 	_process_attack()
 	if state == State.HURT:
 		velocity.x = move_toward(velocity.x, 0.0, 400.0 * delta)
@@ -135,6 +138,8 @@ func _update_feedback() -> void:
 		State.HURT:
 			body.modulate = Color(2.0, 2.0, 2.0) if _hit_flash_remaining > 0.0 else Color(1.2, 0.8, 0.8)
 			action_hint = "HIT"
+	if _hit_flash_remaining > 0.0 and state != State.HURT:
+		body.modulate = body.modulate.lerp(Color(2.0, 2.0, 2.0), 0.35)
 	pupil.position = Vector2(0, -26) + look * 5.0
 	status.text = "Shooter %d/%d\n%s" % [health, max_health, action_hint]
 	queue_redraw()
@@ -160,8 +165,11 @@ func take_damage(amount: int, knockback: Vector2) -> void:
 		died.emit()
 		queue_free()
 		return
-	state = State.HURT
-	velocity = knockback
-	_remaining = 0.20
 	_hit_flash_remaining = 0.09
+	# Follow-up hits still deal damage, but cannot restart hurt or reload timers.
+	if _stagger_cooldown_remaining <= 0.0 and state != State.RECOVERY:
+		state = State.HURT
+		velocity = knockback
+		_remaining = 0.12
+		_stagger_cooldown_remaining = stagger_cooldown
 	_update_feedback()

@@ -55,11 +55,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		PlaytestNavigation.start_level(ENDING)
 		return
-	if event.is_action_pressed("restart"):
+	if OS.is_debug_build() and event.is_action_pressed("restart"):
 		get_viewport().set_input_as_handled()
 		_restart()
 
 
 func _on_ravan_defeated() -> void:
 	completed = true
-	$HUD/CombatStatus.text = "Swaminathan defeated! Enter: continue to the ending / R: replay."
+	$HUD/CombatStatus.text = "Swaminathan defeated! Enter: continue to the ending."

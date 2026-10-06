@@ -32,7 +32,7 @@ func _on_finish_entered(body: Node2D) -> void:
 
 func hint_at(x: float) -> String:
 	if completed:
-		return "Course complete! R to replay."
+		return "Course complete! Use Play Again to replay."
 	if x < 560.0:
 		return "1 / Run, release to stop, and reverse direction."
 	if x < 1040.0:

@@ -46,8 +46,10 @@ func run_checks() -> void:
 		var wounded_health: int = wounded.health
 		check(guard.blocked(first), "First diya must require its encounter: %s" % level)
 		await place(first.position)
+		player.health = 1
 		await press_interact()
 		check(not first.get_node("Flame").visible, "An uncleared diya must not save a bypass")
+		check(player.health == 1, "Blocked diyas must not heal Siya")
 		check(not first.get_node("Prompt").visible, "Blocked diya must hide its interaction keycap")
 		player.set_physics_process(false)
 		player.position = first.position + Vector2(guard.PASS_LEEWAY, -80)

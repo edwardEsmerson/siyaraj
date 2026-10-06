@@ -25,6 +25,7 @@ var _flash: float = 0.0
 var _anim_time: float = 0.0
 var _cast_time: float = 0.0
 var _cast_kind: int = 0
+var _death_complete: bool = false
 ## Cast animations by attack index: rockets, chakri, anaar.
 const ATTACK_ANIMATIONS: Array[StringName] = [&"rocket_salvo", &"chakri_throw", &"anaar_plant"]
 @onready var status: Label = $Status
@@ -35,6 +36,8 @@ const ATTACK_ANIMATIONS: Array[StringName] = [&"rocket_salvo", &"chakri_throw", 
 func _ready() -> void:
 	health = max_health
 	add_to_group("bosses")
+	art.animation_finished.connect(_finish_death)
+	_update_art()
 
 
 func _physics_process(delta: float) -> void:
@@ -123,10 +126,10 @@ func take_damage(amount: int, _knockback: Vector2 = Vector2.ZERO) -> void:
 	health_changed.emit(health)
 	if health == 0:
 		state = State.DEAD
+		velocity = Vector2.ZERO
 		collision_layer = 0
 		_clear_hazards()
 		status.text = "DHOOMKETU DEFEATED"
-		died.emit()
 	elif phase == 1 and health <= max_health / 2:
 		phase = 2
 		_clear_hazards()
@@ -135,6 +138,13 @@ func take_damage(amount: int, _knockback: Vector2 = Vector2.ZERO) -> void:
 		status.text = "LIGHT EVERY FUSE!"
 		phase_changed.emit(phase)
 	_update_art()
+
+
+func _finish_death() -> void:
+	if state != State.DEAD or art.animation != &"death" or _death_complete:
+		return
+	_death_complete = true
+	died.emit()
 
 
 func _clear_hazards() -> void:

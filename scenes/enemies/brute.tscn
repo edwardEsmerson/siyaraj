@@ -23,6 +23,8 @@ detection_range = 160.0
 attack_range = 68.0
 edge_probe_distance = 32.0
 knockback_multiplier = 0.55
+armored_attacks = true
+hurt_time = 0.2
 
 [node name="Body" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-10, -64, 10, -64, 10, -52, 24, -50, 24, -22, 16, -18, 16, 0, 3, 0, 0, -17, -3, 0, -16, 0, -16, -18, -24, -22, -24, -50, -10, -52)

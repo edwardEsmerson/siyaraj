@@ -56,15 +56,19 @@ func _physics_process(_delta: float) -> void:
 		InteractionPrompt.set_available(checkpoint.get_node("Prompt"), can_light and not saved)
 		if can_light and not saved and Input.is_action_just_pressed("interact"):
 			lit_checkpoints.append(checkpoint.name)
+			# Detour lamps reset on each visit and are not campaign-persistent.
+			if current_room == &"":
+				player.heal_from_diya()
 			get_node("/root/AudioDirector").play_cue(&"checkpoint")
 			if current_room == &"":
 				checkpoint_x = maxf(checkpoint_x, checkpoint.position.x)
 			else:
 				room_spawn = checkpoint.global_position
+			get_node("/root/CampaignSave").capture()
 			checkpoint.get_node("Flame").visible = true
 			InteractionPrompt.set_available(checkpoint.get_node("Prompt"), false)
 			player.get_node("Visuals").play_story(&"light_diya")
-			get_parent().combat_status.text = "Diya lit. Death returns here. R resets the whole forest, including side rooms."
+			get_parent().combat_status.text = "Diya lit. Death returns here. Restart in the pause menu resets the whole forest."
 
 
 func _checkpoints() -> Array[Node]:
@@ -101,6 +105,7 @@ func _use_portal(portal: Area2D) -> void:
 			get_node("/root/AudioDirector").play_cue(&"discovery")
 		current_room = &""
 		pending_return = true
+	get_node("/root/CampaignSave").capture()
 	get_tree().call_deferred("reload_current_scene")
 
 
@@ -145,7 +150,7 @@ func hint_at(x: float) -> String:
 	if current_room == &"CanopyNest":
 		return "Canopy nest / Changing branch lanes lead to two combat rests. Defeat the nest sentinel to return."
 	if completed:
-		return "Khara clearing reached. R to replay the forest."
+		return "Khara clearing reached."
 	if x < 1600.0:
 		return "Forest edge / Climb the roots. Control your landing before the next jump."
 	if x < 2800.0:

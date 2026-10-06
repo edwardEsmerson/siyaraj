@@ -18,7 +18,7 @@ showdown_name = "Khara"
 automatic_showdown = true
 completion_title = "FOREST COMPLETE"
 completion_detail = "Riverbank reached"
-completion_status = "Next stop: the river. R to replay the forest."
+completion_status = "Next stop: the river."
 
 [node name="TestCourse" parent="." instance=ExtResource("2_course")]
 
@@ -57,7 +57,7 @@ text = "SIYARAJ / forest trail"
 texture_filter = 2
 offset_left = 24.0
 offset_top = 48.0
-text = "A/D: move   Space: jump   Shift: dash   J: lash   L: skyshot   K: chakri   E: use   R: reset"
+text = "A/D: move   Space: jump   Shift: dash   J: lash   L: skyshot   K: chakri   E: use"
 
 [node name="Milestone" type="Label" parent="HUD"]
 texture_filter = 2
@@ -87,7 +87,7 @@ text = "Siya health: 3/3"
 texture_filter = 2
 offset_left = 24.0
 offset_top = 503.0
-text = "Press E beside a diya to secure a checkpoint. R resets this level. Esc pauses."
+text = "Press E beside a diya to secure a checkpoint. Esc pauses; use Restart to reset this level."
 
 [node name="WeaponStatus" type="Label" parent="HUD"]
 texture_filter = 2

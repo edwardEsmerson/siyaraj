@@ -32,7 +32,10 @@ At half health, Dhoomketu clears hazards and pauses for 1.2 s to "LIGHT EVERY
 FUSE!" Phase 2 uses four staggered rockets, a faster chakri plus a delayed
 spinner from the opposite edge, and three anaar lanes. Fuses shorten to
 0.765 s; recovery keeps its full duration. Defeat disables the boss body and
-clears hazards before campaign victory appears.
+clears hazards immediately. The existing death keyframes play once over
+1.55 s and hold the seated slump; campaign victory waits for the animation's
+completion. The last two images are duplicates, so a distinct lying-flat
+corpse remains an art gap. See [boss death playback](../boss_death_animations.md).
 
 The boss uses the generic health bar and shared arena/restart scripts.
 Tune health, warning, recovery, rocket speed/stagger, chakri speed and fountain
@@ -53,9 +56,6 @@ bypass. The export list includes the hazard script for packed-game launches.
 Manual playtesting is still needed to judge rocket warning readability, the
 second-phase chakri timing and counterattack opportunities with all weapons.
 
-Godot 4.7.2 verification passes the boss, campaign and developer menu checks.
-The smoke pack exports and the packed ghats showdown launches without script
-errors. The full regression run also reproduces failures in unchanged movement
-routes in `dash_check.gd`, `forest_check.gd`, `forest_rooms_check.gd` and
-`next_levels_check.gd`. `course_check.gd` fails its dash-gap assertions, accesses
-a freed scene and times out. Those routes need separate movement work.
+Godot 4.7.2 verification covers the boss, campaign and developer menu checks,
+each death pose, paused playback and deferred victory. The smoke pack exports;
+the packed scene checks also verify that the gameplay and death textures ship.
