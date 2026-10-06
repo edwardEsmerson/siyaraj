@@ -7,10 +7,10 @@
 [ext_resource type="Script" path="res://scripts/bosses/ravan/ravan_head_indicators.gd" id="5_heads"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
-size = Vector2(120, 130)
+size = Vector2(120, 116)
 
 [sub_resource type="RectangleShape2D" id="HeadRowShape"]
-size = Vector2(440, 80)
+size = Vector2(226, 66)
 
 [node name="Ravan" type="Node2D" groups=["bosses"]]
 script = ExtResource("1_boss")
@@ -28,11 +28,11 @@ collision_mask = 0
 script = ExtResource("3_hurtbox")
 
 [node name="BodyShape" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, -65)
+position = Vector2(0, -58)
 shape = SubResource("BodyShape")
 
 [node name="HeadRowShape" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, -170)
+position = Vector2(1, -157)
 shape = SubResource("HeadRowShape")
 
 [node name="BossUI" type="CanvasLayer" parent="."]

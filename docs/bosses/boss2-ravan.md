@@ -68,7 +68,7 @@ standing (phase 3) carry the attacks that escalate in phase 3.
 | 9 | Chitta | Will | Lightning | Cyan | As for Mada |
 
 Attack details. All of them deal 1 damage, and Siya's 0.8 s damage protection
-applies. Every attack leaves from the head's mouth, 10 px below its face centre.
+applies. Every attack leaves from the head's mouth, 8 px below its face centre.
 
 - **Fire breath** draws a 330 x 34 px beam from the mouth toward Siya. Its aim
   locks when the beam appears. It shows an outline for 0.45 s, then burns for
@@ -161,7 +161,7 @@ Below the pips: the phase and `HEADS n/10`, plus `SPENT - STRIKE!` after Fury.
   `ravan_hazard.gd` (telegraphed beam, column and pillar), `ravan_shockwave.gd`
   and `ravan_head_indicators.gd`.
 - `Ravan/Hurtbox` is one StaticBody2D on the enemy body layer (bit 4) with two
-  shapes: the body (120 x 130) and the head row (440 x 80). The existing lash,
+  shapes sized to the art: the body (120 x 116) and the head row (226 x 66). The existing lash,
   skyshot and chakri work unchanged and hit him once per swing.
 - Signals: `health_changed`, `head_lost(index, remaining)`, `phase_changed`,
   `fury_started`, `fury_ended` and `died`. `max_health` and `health` meet the
@@ -172,39 +172,44 @@ Below the pips: the phase and `HEADS n/10`, plus `SPENT - STRIKE!` after Fury.
 - Ground dash i-frames apply to every Swaminathan hazard and projectile, which makes
   Fury and lightning easier to dodge. The safe-gap timing does not rely on it.
 
-## Art handoff: body state sprites
+## Art: body state sprites
 
-Swaminathan is drawn as **one full-body sprite per head state**. Heads are severed
-right to left, so state *n* shows the leftmost *n* heads. The same body, crown,
-moustache and pose must hold across all states: generate state 10 first, get
-it approved, then derive the others from it.
+Ravan is drawn as **one full-body sprite per head state**, built from the
+approved Swaminathan model (`asset-builder/sprites/swaminathan` headless body,
+`swaminathan-head` and its ten `faces`). Heads are severed right to left, so
+state *n* shows the leftmost *n* heads.
 
-- **Files:** `assets/sprites/swaminathan-states/state_10.png` (ten heads) down
-  to `state_01.png` (one head) and `state_00.png` (headless, used for the
-  death beat). `ravan_body.gd` loads whichever exist and falls back to the
-  code-drawn placeholder for the rest, so states can land one at a time.
-- **Canvas:** 880 x 480 px, the same for every state, transparent background.
-  Swaminathan's feet sit at the bottom centre of the canvas, which is the boss
-  origin. It is placed at scale 0.5 (1 game unit = 2 art px), so in game it
-  spans 440 x 240 units.
-- **Head positions:** heads must sit where the code fires from. The single
-  source is `HEAD_OFFSETS` in `scripts/bosses/ravan/ravan_body.gd`: the face
-  centre of each head in game units from the feet, left to right. The
-  placeholder arc is x = -198 to 198 (art px -396 to 396 from the centre) and
-  y = -150 (outer heads) to -180 (centre heads), i.e. art px 300 to 360 above
-  the bottom edge. Either draw the heads there, or, once state 10 is approved,
-  measure its face centres and update `HEAD_OFFSETS` (art px / 2). The mouth,
-  where attacks spawn, is 10 units below each face centre (`MOUTH_OFFSET`).
-- **Lost heads:** show a neck stump or nothing where a head was; the code adds
-  the pop and flash. Keep the remaining heads exactly in place between states.
-- **Optional extras**, only if time allows: a hurt flash per state (code
-  already flashes the sprite white), and fury or dying poses. The code tints
-  the body red during Fury, grey while staggered or spent, and flashes and
-  dims it on death.
+- **State 10** is `asset-builder/sprites/swaminathan-full` (`sprite.png`,
+  `meta.json`): generated with `ab sprite` from a layout reference that placed
+  the approved body and the ten approved faces (Mada to Chitta, left to right)
+  on curving necks over the gold collar. Its body matches the approved body's
+  scale (about 225 art px feet to collar); the heads are about 45 art px wide.
+- **States 9 to 0** are not generated. `tools/swaminathan_states.py` derives
+  them from state 10 by pixel editing: each head is segmented (watershed seeded
+  on its face, crown and upper neck), removed with its neck down to a fixed cut,
+  and the stump gets a flesh-coloured cap in the sprite's palette. Body, pose
+  and the remaining heads are pixel-identical in every state; `state_00` is the
+  headless body with ten stumps. Sources: `swaminathan-full/states/`.
+- **Files:** `assets/sprites/swaminathan-states/state_10.png` to
+  `state_00.png`, 464 x 384 art px each, transparent, with Ravan's feet
+  (midway between them) at the bottom centre, which is the boss origin. Placed
+  at scale 0.5, so 232 x 192 game units. `ravan_body.gd` falls back to a
+  minimal code drawing only if a state is missing.
+- **Head positions:** `HEAD_OFFSETS` in `scripts/bosses/ravan/ravan_body.gd`
+  holds the face centres measured from state 10 (the script prints them):
+  x = -94.5 to 98, y = -138 (outer heads) to -166.5 (centre heads). The mouth
+  (`MOUTH_OFFSET`) is 8 units below. Telegraph glows, attack origins, the
+  sever pop and Fury aim lines all use them.
+- **Effects stay in code:** the sprite flashes white when hit, tints red during
+  Fury, greys while staggered or spent, and flashes and dims on death (all
+  `modulate` on `Body`). No extra animation sets.
 - **Review:** `xvfb-run -a godot --path . --resolution 960x540 -s
   tools/ravan_shots.gd` renders `docs/screenshots/swaminathan_states.png` (all
-  11 states), `swaminathan_fight.png` (telegraph glows and the head UI) and
-  `swaminathan_sever.png` (the head-loss beat) with whatever art is present.
+  11 states), `swaminathan_fight.png` (telegraph glows on a left and the
+  rightmost living head, with the head UI) and `swaminathan_sever.png` (the
+  head-loss beat). If state 10 is ever replaced, re-measure the constants at
+  the top of `tools/swaminathan_states.py`, re-run it, and paste the printed
+  offsets into `HEAD_OFFSETS`.
 
 ### Effects
 

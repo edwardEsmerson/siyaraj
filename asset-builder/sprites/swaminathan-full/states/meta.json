@@ -1,0 +1,15 @@
+{
+  "name": "swaminathan-full",
+  "animation": "states",
+  "frames": ["state_00", "state_01", "state_02", "state_03", "state_04", "state_05", "state_06", "state_07", "state_08", "state_09", "state_10"],
+  "description": "Body state per living head count: state_n keeps the leftmost n heads (index 0..n-1, Mada to Chitta). Derived from sprite.png by pixel editing (tools/swaminathan_states.py), not generated, so body and remaining heads are identical in every state; severed necks end in a flesh-coloured cap.",
+  "canvas": [656, 656],
+  "anchor": [328, 615],
+  "game_export": {
+    "path": "assets/sprites/swaminathan-states/state_NN.png",
+    "crop": [144, 231, 608, 615],
+    "canvas": [464, 384],
+    "feet": [232, 384],
+    "scale": 0.5
+  }
+}

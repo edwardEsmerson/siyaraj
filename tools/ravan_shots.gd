@@ -2,14 +2,14 @@ extends SceneTree
 ## Renders Ravan's body states and a mid-fight frame for art review:
 ##   xvfb-run -a godot --path . --resolution 960x540 -s tools/ravan_shots.gd
 ## Writes docs/screenshots/swaminathan_states.png (a contact sheet of states 10 to 0,
-## the real state_NN.png art where it exists, else the placeholder),
+## the real state_NN.png art where it exists, else the fallback),
 ## swaminathan_fight.png (head telegraphs and the heads-remaining UI) and
 ## swaminathan_sever.png (the beat when a head is severed).
 
 const ARENA: String = "res://scenes/bosses/ravan/ravan_arena.tscn"
 const OUT: String = "res://docs/screenshots"
 ## Area around Ravan in the 960 x 540 arena, scaled up 2x on the sheet.
-const CROP: Rect2i = Rect2i(240, 170, 480, 280)
+const CROP: Rect2i = Rect2i(340, 225, 280, 220)
 const COLUMNS: int = 4
 
 
@@ -57,12 +57,13 @@ func _init() -> void:
 	_save(sheet, "swaminathan_states.png")
 	layer.queue_free()
 
-	# Mid-fight: phase 2 with seven heads, two heads charging, all UI showing.
+	# Mid-fight: phase 2 with seven heads; the rightmost living head and one on
+	# the left are charging, all UI showing.
 	for index in range(scenery.size()):
 		scenery[index].visible = was_visible[index]
 	boss.set_head_count(7)
 	boss._banner_remaining = 0.0
-	boss.activate_head(3)
+	boss.activate_head(6)
 	boss.activate_head(1)
 	await _frames(40)
 	_save(_grab(), "swaminathan_fight.png")

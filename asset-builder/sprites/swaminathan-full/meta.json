@@ -1,0 +1,27 @@
+{
+  "name": "swaminathan-full",
+  "brief": "Swaminathan (Ravan, Dashanan), the ten-headed rakshasa king boss, redrawn cleanly from the attached design reference: the SAME layout, proportions, pose, colours and pixel size. Exactly TEN crowned heads in a wide shallow arc high above his gold collar, five left and five right of centre, evenly spaced and clearly separate, each held up on its own long curving purple-black neck that rises from the collar behind the raised fists. All ten heads are the same man: tall pointed gold crown with one red jewel, pointed ears, gold earrings, purple-black skin, heavy eyebrows, a HUGE black curled handlebar moustache, a gold ring at the base of the neck. Expressions left to right: smug, furious, licking his lips greedily, hazy half-lidded, jealous sideways glance, haughty nose up, restless darting eyes, winking, calm, stern. Body: broad royal torso, bare belly with navel, gold collar, ten arms (eight fanned out with raised fists behind two main arms on his hips), gold armlets, hot-pink and gold silk dhoti, turquoise sash, jewelled belt, pointed gold shoes, feet planted wide. The heads are small next to the big body, exactly as in the reference.",
+  "key": "blue",
+  "role": "big-boss",
+  "target": 410,
+  "size": "4K",
+  "anchor_mode": "feet",
+  "view": "front-three-quarter",
+  "subject": "full-body",
+  "candidate_id": "04",
+  "model": "flash",
+  "canvas": [
+    656,
+    656
+  ],
+  "anchor": [
+    328,
+    615
+  ],
+  "art_dimensions": [
+    437,
+    375
+  ],
+  "generation_pixel_size": 9.68780487804878,
+  "problems": []
+}
