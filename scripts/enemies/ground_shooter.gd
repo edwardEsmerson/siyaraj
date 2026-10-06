@@ -5,6 +5,7 @@ const PROJECTILE_SCENE = preload("res://scenes/combat/homing_projectile.tscn")
 
 signal health_changed(remaining: int)
 signal died
+signal shot_fired
 
 @export var max_health: int = 3
 @export var patrol_speed: float = 45.0
@@ -113,6 +114,7 @@ func _fire(player: CharacterBody2D) -> void:
 	projectile.lifetime = projectile_lifetime
 	projectile.knockback = projectile_knockback
 	get_tree().current_scene.add_child(projectile)
+	shot_fired.emit()
 	projectile.global_position = shot_origin.global_position
 	BURST.spawn(get_tree().current_scene, shot_origin.global_position, Color(0.8, 0.4, 1.0), "", 12.0)
 

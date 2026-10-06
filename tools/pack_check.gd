@@ -36,5 +36,18 @@ func run_checks() -> void:
 		var player: Node = current_scene.get_node_or_null("Player")
 		if player != null:
 			check(player.get_node("Visuals/Sprite").sprite_frames.get_animation_names().size() == 15, "%s must ship Siya's animation library" % path)
+		if path == "res://scenes/dev/cast_preview.tscn":
+			for subject in ["basic-rakshas", "brute", "ground-shooter", "winged-forest-demon", "khara", "robin", "raj"]:
+				current_scene.select_subject(subject)
+				check(current_scene.art.sprite_frames != null, "Pack must include %s's cast frames and metadata" % subject)
+			current_scene.select_subject("khara")
+			check(current_scene.gada.texture != null, "Pack must include Khara's separate gada")
+		if path == "res://scenes/main/ending.tscn":
+			check(current_scene.get_node("Center/Content/RajStage/Raj").sprite_frames.has_animation("freed"), "Pack must include Raj's rescue animation")
+		for actor in current_scene.find_children("*", "CharacterBody2D", true, false):
+			if actor.has_node("Visuals/Sprite") and actor.has_node("Body") and actor != player:
+				check(not actor.get_node("Body").visible, "%s must use cast art in gameplay" % actor.name)
+			if actor.has_node("Visual/CastVisuals"):
+				check(actor.get_node("Visual/CastVisuals").sprite.sprite_frames.has_animation("slam_impact"), "Pack must include Khara's gameplay animations")
 	print("Pack checks: %s (%d scenes)" % ["PASS" if failures == 0 else "FAIL", paths.size()])
 	quit(0 if failures == 0 else 1)

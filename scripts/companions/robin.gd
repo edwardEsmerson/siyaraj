@@ -236,6 +236,10 @@ func _update_visuals() -> void:
 		wing.scale.y = 0.35 if perched else 0.4 + absf(sin(_time * 18.0)) * 0.9
 	elif sprite.visible:
 		var animation: StringName = &"perch" if perched else &"fly"
+		if not perched and velocity.length() < 20.0:
+			animation = &"hover"
+		if not perched and _bubble_remaining > 0.0:
+			animation = &"hint"
 		# The talk frames are drawn perched; in flight he talks with his wings.
 		if perched and _bubble_remaining > 0.0 and sprite.sprite_frames.has_animation(&"talk"):
 			animation = &"talk"

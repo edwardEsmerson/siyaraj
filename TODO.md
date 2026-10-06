@@ -6,7 +6,7 @@ art and animation included, sorted by who should pick it up:
 - **A. You (a human):** decisions, reviews, playtests and the submission itself.
 - **B. A good LLM:** well-scoped work that follows patterns already in the repo.
 - **C. A really good LLM:** cross-cutting work that needs design judgement, touches
-  many systems, or could easily break the 29 regression suites.
+  many systems, or could easily break the 30 regression suites.
 
 Per-asset briefs, sizes and generation commands live in
 `asset-builder/Sprites_List.md` and `asset-builder/Animations-List.md`. This file
@@ -20,14 +20,16 @@ says *what* is left and *who* does it, and points there for the *how*.
 - **Done:** title screen, themed pause menu, controls panel, settings (master volume
   and fullscreen), debug-only playtest tools, Robin as a guide in all three levels, blocked-diya
   curtain transition (placeholder art), and `docs/.gdignore`.
-- **Art exists but isn't in the game.** 73 approved animation sets (195 frames)
-  sit in `assets/sprites/` for Siya, Robin, Raj, all four enemies, Khara with her
-  gada, and Swaminathan. **Siya and Robin** are wired into gameplay. The enemies
-  and both bosses still draw code placeholders.
+- **Gameplay cast art:** Siya, Robin, all four enemies and Khara with his registered
+  gada now use the approved sprites in live gameplay. Raj uses all three rescue
+  animations in the ending. The cast preview remains a library, including future
+  Robin combat poses and the explicitly rejected old Swaminathan art. Swaminathan
+  still needs replacement body-state art; Dhoomketu has no supplied sprite set.
+  See `docs/cast_gameplay.md` for the integration and remaining asset decisions.
 - **World kits:** levels and both boss arenas are dressed through `WorldSkin` in all
   six styles (press V in a level to cycle). Merged in #15 and #19. Dhoomketu uses his authored placeholder arena.
-- **All 29 suites pass** again after B0 (air dashes now exit at 780 px/s and ease
-  back to run speed, restoring the jump + dash reach lost in #17).
+- **All 30 suites pass**, including cast gameplay checks. B0 air dashes exit at 780 px/s and ease
+  back to run speed, restoring the jump + dash reach lost in #17.
 - **No audio plays.** There are no `AudioStreamPlayer` nodes and no buses.
   The catalog and `assets/Audio/` files are tracked and shared; playback remains B4.
 - **Only export preset:** "Linux smoke test".
@@ -144,13 +146,13 @@ Open the file, judge it, then reply "fine" or "redo X".
   slide shut, fully cover the screen for the 0.5-second hold, then slide open. Keep
   the top-led pull, the curved trailing hem and the delayed settling
   (`scripts/levels/checkpoint_guard.gd`).
-- [ ] **B13. Wire the four enemies' sprites** (`basic-rakshas`, `brute`,
+- [x] **B13. Wire the four enemies' sprites** (`basic-rakshas`, `brute`,
   `ground-shooter`, `winged-forest-demon`). Map walk, idle, attack/charge/fire,
   recovery and death to each enemy's existing states. Keep the colliders, and time
   the attack frames to the existing hitbox windows.
 - [ ] **B14. Palace guard palette:** recolour `basic-rakshas` and `ground-shooter`
   for the palace (no new art).
-- [ ] **B15. Raj on the ending screen:** use the `sulk`, `dramatic` and `freed`
+- [x] **B15. Raj on the ending screen:** use the `sulk`, `dramatic` and `freed`
   animations.
 - [ ] **B16. Tidy the art checklists.** Tick off the textures in `Sprites_List.md`
   §7 that the world kits already cover, so the remaining list is accurate.
@@ -189,7 +191,7 @@ Open the file, judge it, then reply "fine" or "redo X".
   dash, combat and weapons suites must still pass. Hand over a short clip or
   screenshots for review. Done: `docs/player_animation.md` and
   `docs/screenshots/siya/review-sheet.png`; talk/shocked have a cutscene API.
-- [ ] **C3. Wire Khara's sprite and her separate gada.** The gada pivots on its
+- [x] **C3. Wire Khara's sprite and her separate gada.** The gada pivots on its
   handle, uses the 26 hand registrations and hides during two-handed actions and
   defeat. It has to line up with the existing slam and shockwave hitboxes and the
   phase-2 flame crown. `tests/khara_boss_check.gd` must pass.

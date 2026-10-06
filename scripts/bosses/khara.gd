@@ -315,7 +315,8 @@ func _die() -> void:
 
 func _process_death(delta: float) -> void:
 	_death_time += delta
-	visual.rotation = -facing * minf(_death_time * 1.2, 1.4)
+	# The authored death frames already contain the fall.
+	visual.rotation = 0.0
 	visual.modulate.a = clampf(1.4 - _death_time, 0.0, 1.0)
 	if fmod(_death_time, 0.25) < delta:
 		Burst.spawn(get_tree().current_scene, global_position + Vector2(randf_range(-30, 30), randf_range(-80, -10)), Color(1.0, 0.6, 0.2), "", 30.0)

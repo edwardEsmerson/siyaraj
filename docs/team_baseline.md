@@ -89,6 +89,7 @@ Playtest changed sections yourself; automated route checks do not judge how the 
 ## Remaining work
 
 `TODO.md` remains the shared task list. Swaminathan's replacement body-state art,
-enemy and Khara animation integration, audio playback, story work and release
-exports are still open. Those tasks are separate from branch consolidation.
+audio playback, story work and release exports are still open.
+Enemy and Khara animation integration and Raj's ending were completed after
+this tagged baseline; see `docs/cast_gameplay.md`.
 Keep the existing boss placeholder fallback until the replacement art is ready.

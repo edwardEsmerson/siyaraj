@@ -94,7 +94,7 @@ func run_checks() -> void:
 	check(current_scene.course.get_node("RobinHints/BossHint").text.contains("Khara"), "Forest approach must introduce Khara")
 	check(get_first_node_in_group("robin") == robin, "Robin must register in the robin group")
 	check(robin.global_position.distance_to(robin._follow_spot()) < 30.0, "Robin must start beside Siya")
-	check(robin.sprite.visible and not robin.placeholder.visible and robin.sprite.animation == &"fly", "Robin's sprite art must replace the placeholder")
+	check(robin.sprite.visible and not robin.placeholder.visible and robin.sprite.animation in [&"fly", &"hover", &"hint"], "Robin's sprite art must replace the placeholder")
 
 	# Standing still lets him perch on her head; moving sends him back into the air.
 	await ticks(roundi((robin.perch_delay + 0.8) * 60.0))

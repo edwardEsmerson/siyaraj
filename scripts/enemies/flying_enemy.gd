@@ -5,6 +5,7 @@ const PROJECTILE_SCENE = preload("res://scenes/combat/enemy_projectile.tscn")
 
 signal health_changed(remaining: int)
 signal died
+signal shot_fired
 
 @export var max_health: int = 3
 @export var patrol_speed: float = 60.0
@@ -102,6 +103,7 @@ func _fire() -> void:
 	projectile.knockback = projectile_knockback
 	# Scene ownership keeps existing shots alive after this enemy is defeated.
 	get_tree().current_scene.add_child(projectile)
+	shot_fired.emit()
 	projectile.global_position = shot_origin.global_position
 	BURST.spawn(get_tree().current_scene, shot_origin.global_position, Color(1.0, 0.5, 0.2), "", 12.0)
 

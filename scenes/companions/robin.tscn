@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/companions/robin.gd" id="1_robin"]
-[ext_resource type="SpriteFrames" path="res://assets/sprites/robin/robin_frames.tres" id="2_frames"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/robin/cast_frames.tres" id="2_frames"]
 
 [sub_resource type="StyleBoxFlat" id="BubbleStyle"]
 bg_color = Color(0.98, 0.95, 0.86, 0.96)
@@ -54,6 +54,8 @@ polygon = PackedVector2Array(-6, 0, 5, 0, -4, -11)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Visuals"]
 scale = Vector2(0.5, 0.5)
+centered = false
+offset = Vector2(-40, -40)
 sprite_frames = ExtResource("2_frames")
 animation = &"fly"
 autoplay = "fly"

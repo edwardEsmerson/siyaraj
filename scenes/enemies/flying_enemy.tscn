@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/flying_enemy.gd" id="1_enemy"]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy_visuals.gd" id="cast_visuals"]
 
 [sub_resource type="RectangleShape2D" id="EnemyShape"]
 size = Vector2(32, 28)
@@ -47,3 +49,7 @@ offset_bottom = -42.0
 theme_override_font_sizes/font_size = 14
 text = "Flyer"
 horizontal_alignment = 1
+
+[node name="Visuals" type="Node2D" parent="."]
+script = ExtResource("cast_visuals")
+subject = "winged-forest-demon"

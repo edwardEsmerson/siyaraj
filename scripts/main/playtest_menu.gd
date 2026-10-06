@@ -6,6 +6,8 @@ const LEVELS: PackedStringArray = ["res://scenes/main/forest.tscn", "res://scene
 ## Developer snapshots, in selector order. `encounter` presets the dev sandbox
 ## (-1 keeps the inspector choice). Terrain snapshots omit encounters.
 const SNAPSHOTS: Array[Dictionary] = [
+	{"label": "Art / cast and animation preview", "path": "res://scenes/dev/cast_preview.tscn"},
+	{"label": "Story / Raj rescued ending", "path": "res://scenes/main/ending.tscn"},
 	{"label": "Weapons / three-weapon playground", "path": "res://scenes/dev/weapons_playground.tscn"},
 	{"label": "Character / movement and dash", "path": "res://scenes/main/movement_playground.tscn"},
 	{"label": "Enemy / Brute", "path": SANDBOX, "encounter": Sandbox.Encounter.BRUTE},

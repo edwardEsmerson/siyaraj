@@ -17,7 +17,7 @@ func run_checks() -> void:
 	await scene_changed
 	var menu: Control = current_scene
 	var snapshots: Array[Dictionary] = menu.SNAPSHOTS
-	check(snapshots.size() == 18 and menu.get_node("Layout/Lab").item_count == snapshots.size(), "Menu must offer all developer snapshots")
+	check(snapshots.size() == 20 and menu.get_node("Layout/Lab").item_count == snapshots.size(), "Menu must offer all developer snapshots")
 	for wanted in ["res://scenes/dev/sandbox.tscn", "res://scenes/dev/weapons_playground.tscn", "res://scenes/bosses/khara_arena.tscn", "res://scenes/bosses/dhoomketu_arena.tscn", "res://scenes/bosses/ravan/ravan_arena.tscn"]:
 		check(snapshots.any(func(entry: Dictionary) -> bool: return entry.path == wanted), "Menu must offer %s" % wanted)
 	for entry in snapshots:
@@ -58,7 +58,7 @@ func run_checks() -> void:
 		menu.get_node("Layout/OpenLab").pressed.emit()
 		await scene_changed
 		await ticks(4)
-		check(current_scene != null and current_scene is Node2D, "Snapshot %d must enter a gameplay scene" % index)
+		check(current_scene != null and (current_scene is Node2D or current_scene is Control), "Snapshot %d must enter its scene" % index)
 		check(current_scene.scene_file_path == entry.path, "Snapshot %d must open %s" % [index, entry.path])
 		if entry.has("encounter") and entry.encounter >= 0:
 			var enemy: Node = current_scene.get_node_or_null("Enemy")
@@ -68,7 +68,7 @@ func run_checks() -> void:
 			check(current_scene.course.current_room == &"CanopyNest", "Canopy snapshot must enter the isolated climb")
 			check(current_scene.player.is_on_floor(), "Canopy snapshot must spawn grounded")
 		await escape()
-		check(paused, "Every snapshot must support pause")
+		check(paused if current_scene is Node2D else not paused, "Gameplay snapshots pause; ending screens remain interactive")
 		# Pause-menu restart repeats every snapshot, including sandbox presets.
 		var path: String = current_scene.scene_file_path
 		var enemy_path: String = current_scene.get_node("Enemy").scene_file_path if current_scene.has_node("Enemy") else ""

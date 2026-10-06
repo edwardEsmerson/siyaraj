@@ -8,8 +8,11 @@ Select the forest, river/ghats, or temple/palace;
 start at the beginning or a checkpoint section, and toggle enemy encounters.
 The developer snapshots selector opens the weapons playground, movement, the dev
 sandbox (preset to each enemy), the Khara, Dhoomketu and Swaminathan boss arenas, terrain and
-canopy tests. Esc pauses any scene and offers restart or level select.
+canopy tests, the full cast preview and Raj's ending. Esc pauses gameplay scenes
+and offers restart or level select.
 See [playtest menu and draft editing](docs/playtest_menu.md).
+The enemies and Khara now use their approved cast animations in gameplay;
+see [cast integration and remaining assets](docs/cast_gameplay.md).
 
 Gamepad controls are available throughout gameplay and menus. Open Controls from
 the title or pause menu for keyboard and controller bindings; see the
@@ -142,7 +145,7 @@ python tools/run_checks.py
 ```
 
 Set `GODOT_BIN` to your Godot 4.7.2 executable first. The runner discovers all
-29 suites and rejects script errors even when Godot exits with code zero.
+30 suites and rejects script errors even when Godot exits with code zero.
 See [the shared baseline](docs/team_baseline.md) for platform commands.
 
 See [the team workflow](docs/team_workflow.md) for ownership, agreed rules,
