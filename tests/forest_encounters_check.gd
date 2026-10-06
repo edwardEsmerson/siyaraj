@@ -10,9 +10,10 @@ func run_checks() -> void:
 		player = current_scene.player
 		await ticks(8)
 		var enemies: Array[Node] = current_scene.course.get_node("Encounters").get_children()
-		check(enemies.size() == (3 if room == &"" else (1 if room == &"RootChamber" else 0)), "Only the current area's encounters must be active")
+		check(enemies.size() == (8 if room == &"" else (2 if room == &"RootChamber" else 4)), "Only the current area's authored encounters must be active")
 		for enemy in enemies:
-			check(enemy.is_on_floor(), "Authored enemy must settle on supported floor: %s" % enemy.name)
+			if not enemy.get_meta("airborne", false):
+				check(enemy.is_on_floor(), "Authored ground enemy must settle on supported floor: %s" % enemy.name)
 			check(enemy.get_meta("room") == room, "Enemy must belong to the active room")
 			var start_health: int = enemy.health
 			enemy.take_damage(1, Vector2.ZERO)

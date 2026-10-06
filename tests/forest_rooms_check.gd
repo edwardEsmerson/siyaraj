@@ -47,6 +47,12 @@ func run_checks() -> void:
 		check(player.position.distance_to(saved_position) < 1, "Death must return to the local diya")
 		var exit: Area2D = current_scene.course.get_node("Portals/RootReturn" if room == &"RootChamber" else "Portals/NestReturn")
 		await place(exit.position)
+		freeze_encounters()
+		await press_interact()
+		check(forest.current_room == room, "The guarded far exit must require defeating its sentinel")
+		var sentinel: Node = current_scene.course.get_node("Encounters/" + str(exit.get_meta("guard")))
+		sentinel.take_damage(sentinel.health, Vector2.ZERO)
+		await ticks(2)
 		await press_interact()
 		await ticks(6)
 		player = current_scene.player
