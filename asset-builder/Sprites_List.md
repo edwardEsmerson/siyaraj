@@ -389,13 +389,21 @@ and a **top-edge** strip.
 - [ ] **P1 Title screen background** (`title-bg`): Siya on the ghats at dusk, looking
   at the palace far away, with fireworks.
 
-## 8. Comic cutscene panels (P1, needs a small tool change)
+## 8. Comic cutscene panels (P1)
 
 The proposal wants static comic panels with speech bubbles. `ab texture --mode layer`
-asks for a horizontally seamless strip, which is wrong for panels. Add a `panel` mode
-to `ab/prompts.py`: a single framed illustration, not seamless, 16:9. Get the user's
-approval on the prompt first. Pass the approved sprites with `-r` for identity. Leave the
-speech bubbles out of the art; the game draws them.
+asks for a horizontally seamless strip, which is wrong for panels. `ab texture --mode
+panel` makes one framed 16:9 illustration, not a seamless layer. Get the user's
+approval on the prompt first. Pass approved sprites with repeated `-r` flags for
+identity. Leave speech bubbles and text out of the art; the game draws them.
+
+```bash
+python -m ab texture intro-1 "Raj poses dramatically by the river on the eve of Diwali" \
+  --mode panel -r sprites/raj/sprite.png
+```
+
+Review `out/panels/<name>/sheet.png` and let the user pick. Copy only the chosen
+`NN.png` to `assets/cutscenes/<name>.png`.
 
 - [ ] **Intro 1:** The ghats on the eve of Diwali. Raj poses heroically by the river.
 - [ ] **Intro 2:** Swaminathan's guards grab Raj, who swoons dramatically.

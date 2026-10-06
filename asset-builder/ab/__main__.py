@@ -365,10 +365,19 @@ def cmd_keep(a):
 
 def cmd_texture(a):
     resolve_size(a, "2K")
-    run = OUT / "textures" / a.name
-    aspect = {"tile": "1:1", "cap": "21:9", "fringe": "21:9", "concept": "16:9", "piece": "1:1", "props": "1:1"}.get(a.mode, a.aspect)
+    run = OUT / ("panels" if a.mode == "panel" else "textures") / a.name
+    aspect = {
+        "tile": "1:1", "cap": "21:9", "fringe": "21:9", "concept": "16:9", "panel": "16:9",
+        "piece": "1:1", "props": "1:1",
+    }.get(a.mode, a.aspect)
     refs = [ref_bytes(r, a.key, a.size) for r in a.ref]
-    roles = [f"style/content reference ({Path(r).stem})" for r in a.ref]
+    if a.mode == "panel":
+        roles = [
+            f"the exact approved character identity for {Path(r).parent.name}; keep its appearance recognizable"
+            for r in a.ref
+        ]
+    else:
+        roles = [f"style/content reference ({Path(r).stem})" for r in a.ref]
     prompt = prompts.texture(a.brief, a.key, roles, a.mode)
     ids = prepare(run, a.only, a.n)
     (run / "prompt.txt").write_text(prompt)
@@ -401,7 +410,7 @@ def cmd_texture(a):
         if a.mode not in ("cutout", "cap", "fringe"):
             native.putalpha(255)
         native.save(run / f"{job['id']}.png")
-        if a.mode == "concept":
+        if a.mode in ("concept", "panel"):
             previews[job["id"]] = native
             return native, problems
         axes = [0, 1] if a.mode == "tile" else [0]
@@ -416,7 +425,7 @@ def cmd_texture(a):
         return native, problems
 
     results = run_jobs(a, jobs, process)
-    if a.mode == "concept":
+    if a.mode in ("concept", "panel"):
         shown = [previews[i] for i, (r, _) in results.items() if r]
         pixel.contact_sheet([im.resize((960, 540)) for im in shown], labels(results, a), run / "sheet.png", scale=1,
                             columns=2)
@@ -778,9 +787,11 @@ def parser():
     c = sub.add_parser("texture", help="tileable texture or parallax layer for maps")
     c.add_argument("name")
     c.add_argument("brief")
-    c.add_argument("--mode", default="tile", choices=["tile", "cap", "fringe", "piece", "props", "layer", "cutout", "concept"],
+    c.add_argument("--mode", default="tile",
+                   choices=["tile", "cap", "fringe", "piece", "props", "layer", "cutout", "concept", "panel"],
                    help="tile: seamless square fill; cap: platform top-edge strip (transparent); layer: opaque "
-                        "parallax; cutout: parallax shapes with transparency; concept: 16:9 mock level screen; fringe: strip "
+                        "parallax; cutout: parallax shapes with transparency; concept: 16:9 mock level screen; "
+                        "panel: 16:9 comic illustration; fringe: strip "
                         "hung under platforms; piece: one isolated object; props: sheet split into one PNG per prop")
     c.add_argument("--tile", type=int, default=128, help="tile size in art px (128 = 64 game units)")
     c.add_argument("--height", type=int, default=1080, help="layer height in art px (1080 = full screen)")
