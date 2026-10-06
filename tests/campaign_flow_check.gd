@@ -14,16 +14,26 @@ func run_checks() -> void:
 		navigation.start_level("res://scenes/main/%s.tscn" % level)
 		await scene_changed
 		current_scene._finish_course()
-		check(current_scene.get_node("HUD/Completion/Message").text.contains("face"), "Campaign exit must clearly offer the boss fight")
-		if level == "palace":
-			check(current_scene.showdown_name == "Swaminathan" and current_scene.get_node("HUD/Completion/Message").text.contains("face Swaminathan"), "Palace exit must name Swaminathan")
-		current_scene._unhandled_input(accept())
+		if level == "river":
+			check(current_scene.get_node("HUD/Completion/Message").text.contains("face"), "River exit must offer its boss fight")
+			current_scene._unhandled_input(accept())
 		await scene_changed
 		check(current_scene.scene_file_path == "res://scenes/main/%s_showdown.tscn" % level, "Exit must enter its own showdown")
 		var showdown: Node = current_scene
 		var flow: CanvasLayer = showdown.get_node("CampaignFlow")
 		var boss: Node = flow.get_node(flow.boss_path)
 		player = showdown.get_node("Player")
+		if level != "river":
+			check(flow.comic.visible and not player.can_process() and not boss.can_process(), "Comic entry must freeze both combatants")
+			var health_before: int = player.health
+			var boss_timer: float = boss.state_remaining if level == "forest" else boss._state_remaining
+			await ticks(90)
+			check(player.health == health_before and get_nodes_in_group("boss_hazards").is_empty(), "Comic entry must not allow attacks or damage")
+			check(is_equal_approx(boss_timer, boss.state_remaining if level == "forest" else boss._state_remaining), "Comic entry must preserve the boss intro timer")
+			check(flow.comic.featured_art.texture != null and flow.comic.panel_art.texture != null, "Boss comic must show existing character and background art")
+			for panel in flow.introduction.size():
+				flow.comic._unhandled_input(accept())
+			check(not flow.comic.visible and player.can_process() and boss.can_process(), "Closing the comic must release combat")
 		await ticks(4)
 		check(player.is_on_floor() and player.health == player.max_health and player.skyshot_ammo == 5, "Fight must start grounded with the arena's fresh loadout")
 		flow._unhandled_input(accept())
@@ -33,6 +43,7 @@ func run_checks() -> void:
 		check(current_scene.scene_file_path.ends_with("%s_showdown.tscn" % level), "Death must retry the boss, not the long level")
 		flow = current_scene.get_node("CampaignFlow")
 		boss = flow.get_node(flow.boss_path)
+		check(flow.comic == null and current_scene.can_process(), "Death must retry immediately without replaying the comic")
 		player = current_scene.get_node("Player")
 		await ticks(4)
 		check(not flow.won and boss.health == boss.max_health and player.health == player.max_health, "Retry must reset boss and player")

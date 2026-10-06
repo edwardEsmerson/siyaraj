@@ -70,13 +70,19 @@ var _hit_flash_remaining: float = 0.0
 var _slam_targets: Dictionary = {}
 var _death_time: float = 0.0
 var _anim_time: float = 0.0
+var _state_duration: float = 0.0
+var _attachment_frames: Dictionary = {}
 
 @onready var visual: Node2D = $Visual
 @onready var gada: Node2D = $Visual/Gada
 @onready var status: Label = $Status
+@onready var art: AnimatedSprite2D = $Visual/Art
 
 
 func _ready() -> void:
+	var metadata: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/sprites/khara/cast_meta.json"))
+	_attachment_frames = metadata["attachment"]["frames"]
+	art.frame_changed.connect(_update_gada_art)
 	health = max_health
 	add_to_group("bosses")
 	_enter(State.INTRO, intro_time)
@@ -107,6 +113,7 @@ func current_ladi_fuse() -> float:
 func _enter(next: State, duration: float = 0.0) -> void:
 	state = next
 	state_remaining = duration
+	_state_duration = duration
 
 
 func _find_player() -> CharacterBody2D:
@@ -315,8 +322,7 @@ func _die() -> void:
 
 func _process_death(delta: float) -> void:
 	_death_time += delta
-	visual.rotation = -facing * minf(_death_time * 1.2, 1.4)
-	visual.modulate.a = clampf(1.4 - _death_time, 0.0, 1.0)
+	_update_art()
 	if fmod(_death_time, 0.25) < delta:
 		Burst.spawn(get_tree().current_scene, global_position + Vector2(randf_range(-30, 30), randf_range(-80, -10)), Color(1.0, 0.6, 0.2), "", 30.0)
 	if _death_time >= 1.4:
@@ -363,9 +369,45 @@ func _update_feedback() -> void:
 		tint = Color(2.2, 2.2, 2.2)
 	visual.modulate = Color(tint, visual.modulate.a)
 	gada.rotation = gada_angle
+	_update_art()
 	status.text = hint
 	status.modulate = SLAM_COLOR if state == State.SLAM_WINDUP else (LADI_COLOR if state == State.LADI_CAST else Color.WHITE)
 	queue_redraw()
+
+
+func _update_art() -> void:
+	var animation: StringName = &"idle"
+	match state:
+		State.INTRO: animation = &"intro_roar"
+		State.APPROACH: animation = &"walk"
+		State.SLAM_WINDUP: animation = &"slam_windup"
+		State.SLAM_ACTIVE: animation = &"slam_impact"
+		State.SLAM_RECOVERY: animation = &"slam_recovery"
+		State.LADI_CAST: animation = &"ladi_cast"
+		State.LADI_RECOVERY: animation = &"ladi_recovery"
+		State.PHASE_SHIFT: animation = &"phase_shift_roar"
+		State.DEAD: animation = &"death"
+	if art.animation != animation:
+		art.play(animation)
+	if state not in [State.IDLE, State.APPROACH]:
+		# Pose timing follows combat, including tuned phase-two durations.
+		art.pause()
+		var progress := _death_time / 1.4 if state == State.DEAD else 1.0 - state_remaining / maxf(_state_duration, 0.001)
+		var count := art.sprite_frames.get_frame_count(animation)
+		art.frame = clampi(int(progress * count), 0, count - 1)
+	_update_gada_art()
+
+
+func _update_gada_art() -> void:
+	var frames: Array = _attachment_frames.get(art.animation, [])
+	if art.frame >= frames.size():
+		gada.hide()
+		return
+	var attachment: Dictionary = frames[art.frame]
+	var hand: Array = attachment["hand_from_anchor_px"]
+	gada.position = Vector2(float(hand[0]), float(hand[1])) * 0.5
+	gada.rotation = deg_to_rad(float(attachment["rotation_degrees"]))
+	gada.visible = attachment["visible"]
 
 
 func _draw() -> void:

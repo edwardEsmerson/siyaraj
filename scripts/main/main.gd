@@ -10,6 +10,7 @@ extends Node2D
 @export var next_level: String = ""
 @export var showdown_scene: String = ""
 @export var showdown_name: String = ""
+@export var automatic_showdown: bool = false
 
 @onready var player: CharacterBody2D = $Player
 @onready var player_spawn: Marker2D = $TestCourse/PlayerSpawn
@@ -134,6 +135,9 @@ func _finish_course() -> void:
 	if completed or _restarting:
 		return
 	completed = true
+	if automatic_showdown and not showdown_scene.is_empty() and PlaytestNavigation.enemies_enabled:
+		PlaytestNavigation.call_deferred("start_level", showdown_scene)
+		return
 	$HUD/Completion.visible = true
 	$HUD/Completion/Message.text = "%s\n%s / %.1f seconds\nR to replay" % [completion_title, completion_detail, elapsed]
 	if not showdown_scene.is_empty() and PlaytestNavigation.enemies_enabled:
@@ -148,6 +152,8 @@ func _finish_course() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if completed and automatic_showdown and PlaytestNavigation.enemies_enabled:
+		return
 	if completed and event.is_action_pressed("ui_accept") and (not next_level.is_empty() or not showdown_scene.is_empty()):
 		get_viewport().set_input_as_handled()
 		if not showdown_scene.is_empty() and PlaytestNavigation.enemies_enabled:

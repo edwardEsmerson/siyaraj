@@ -9,6 +9,7 @@ const ADVANCE_ACTION: StringName = &"ui_accept"
 
 @onready var backdrop: ColorRect = $Backdrop
 @onready var panel_art: TextureRect = $PanelArt
+@onready var featured_art: TextureRect = $FeaturedArt
 @onready var bubble: PanelContainer = $DialogueBubble
 @onready var portrait: TextureRect = $DialogueBubble/Contents/Portrait
 @onready var speaker_label: Label = $DialogueBubble/Contents/Words/Speaker
@@ -71,12 +72,14 @@ func _show_current_panel() -> void:
 	var panel: Dictionary = _panels[_index]
 	panel_art.texture = _load_texture(panel.get("texture"))
 	panel_art.visible = not _hint_mode and panel_art.texture != null
+	featured_art.texture = _load_texture(panel.get("subject"))
+	featured_art.visible = not _hint_mode and featured_art.texture != null
 	speaker_label.text = str(panel.get("speaker", ""))
 	speaker_label.visible = not speaker_label.text.is_empty()
 	dialogue_label.text = str(panel.get("text", ""))
 	portrait.texture = _load_texture(panel.get("portrait"))
 	portrait.visible = portrait.texture != null
-	advance_label.text = "Enter: dismiss" if _hint_mode else "Enter: continue"
+	advance_label.text = "Enter / A: dismiss" if _hint_mode else "Enter / A: continue"
 	bubble.show()
 	bubble_tail.show()
 	bubble_tail_inner.show()
@@ -92,7 +95,7 @@ func _load_texture(value: Variant) -> Texture2D:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not visible or not event.is_action_pressed(ADVANCE_ACTION):
+	if not visible or get_tree().paused or event.is_echo() or not event.is_action_pressed(ADVANCE_ACTION):
 		return
 	get_viewport().set_input_as_handled()
 	if _hint_mode:

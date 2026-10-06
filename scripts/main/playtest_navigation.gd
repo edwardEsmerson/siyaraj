@@ -7,6 +7,7 @@ const TITLE: String = "res://scenes/main/title.tscn"
 var enemies_enabled: bool = true
 var pending_section: int = -1
 var snapshot: Dictionary = {}
+var boss_introduction_seen: bool = false
 var panel: Control
 
 func _ready() -> void:
@@ -55,6 +56,7 @@ func show_title() -> void:
 	get_tree().change_scene_to_file(TITLE)
 
 func start_level(path: String, section: int = 0, room: StringName = &"", as_snapshot: bool = false) -> void:
+	boss_introduction_seen = false
 	snapshot = {"path": path, "section": section, "room": room} if as_snapshot else {}
 	# Reset before the new course's _ready restores its session checkpoint.
 	if path == "res://scenes/main/forest.tscn":

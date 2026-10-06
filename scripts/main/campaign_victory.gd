@@ -4,12 +4,26 @@ extends CanvasLayer
 @export var boss_path: NodePath
 @export var next_level: String = ""
 @export var destination_name: String = "level select"
+@export var introduction: Array[Dictionary] = []
 var won: bool = false
+var comic: CanvasLayer
+var _arena_process_mode: ProcessMode
 
 func _ready() -> void:
 	if not PlaytestNavigation.snapshot.is_empty():
 		destination_name = "level select"
 	get_node(boss_path).died.connect(_on_defeated)
+	if not introduction.is_empty() and not PlaytestNavigation.boss_introduction_seen:
+		comic = preload("res://scenes/ui/comic_cutscene.tscn").instantiate()
+		add_child(comic)
+		_arena_process_mode = get_parent().process_mode
+		get_parent().process_mode = Node.PROCESS_MODE_DISABLED
+		comic.finished.connect(_finish_introduction)
+		comic.play(introduction)
+
+func _finish_introduction() -> void:
+	PlaytestNavigation.boss_introduction_seen = true
+	get_parent().process_mode = _arena_process_mode
 
 func _on_defeated() -> void:
 	won = true

@@ -109,6 +109,13 @@ func run_checks() -> void:
 	current_scene._unhandled_input(accept)
 	await scene_changed
 	check(current_scene.scene_file_path == "res://scenes/main/palace_showdown.tscn", "Palace completion must advance to Ravan")
+	var flow: CanvasLayer = current_scene.get_node("CampaignFlow")
+	if flow.comic != null:
+		for panel in flow.introduction.size():
+			var advance := InputEventAction.new()
+			advance.action = &"ui_accept"
+			advance.pressed = true
+			flow.comic._unhandled_input(advance)
 	var arena: Node2D = current_scene
 	arena._unhandled_input(accept)
 	await ticks(2)

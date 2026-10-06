@@ -103,6 +103,7 @@ func check_structure() -> void:
 	check(lead.size() == 5, "The five leftmost heads, the last to fall, must cover every attack type")
 	var body: Node2D = boss.get_node("Body")
 	check(body.has_node("Art") and body.head_count == 10, "Body must own the art slot and show ten heads")
+	check(body.has_art() and body.art.scale == Vector2(0.5, 0.5), "Swaminathan must render the committed art at gameplay scale")
 	check(hurtbox().collision_layer == 4 and hurtbox().get_child_count() >= 2, "One enemy-body hurtbox must cover body and head row")
 	var bar: Control = boss.get_node("BossUI/HealthBar")
 	check(bar.boss == boss and bar.visible, "Boss health bar must bind to Ravan")

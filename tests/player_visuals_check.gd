@@ -178,6 +178,13 @@ func run_checks() -> void:
 	for level in ["forest", "river", "palace"]:
 		navigation.start_level("res://scenes/main/%s_showdown.tscn" % level)
 		await scene_changed
+		var flow: CanvasLayer = current_scene.get_node("CampaignFlow")
+		if flow.comic != null:
+			for panel in flow.introduction.size():
+				var advance := InputEventAction.new()
+				advance.action = &"ui_accept"
+				advance.pressed = true
+				flow.comic._unhandled_input(advance)
 		player = current_scene.get_node("Player")
 		sprite = player.get_node("Visuals/Sprite")
 		var boss: Node2D = current_scene.get_node("Ravan" if level == "palace" else "TestCourse/Boss")

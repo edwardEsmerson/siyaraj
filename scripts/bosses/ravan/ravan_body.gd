@@ -1,7 +1,7 @@
 extends Node2D
 ## Ravan's body: one full-body sprite per head state (10 heads down to 0). Heads
-## are lost right to left, so state n shows the leftmost n heads. Until the art
-## exists, a code-drawn placeholder shows the same body and heads.
+## are lost right to left, so state n shows the leftmost n heads. When state
+## textures are absent, compose the approved body and face sprites at scale 0.5.
 ##
 ## Art: res://assets/sprites/swaminathan-states/state_10.png ... state_00.png,
 ## all the same canvas size, with Ravan's feet at the bottom centre. Placed at
@@ -36,6 +36,8 @@ var head_count: int = HEAD_COUNT:
 		_apply_state()
 
 var _textures: Array[Texture2D] = []
+const BODY_ART = preload("res://assets/sprites/swaminathan/sprite.png")
+const HEAD_ART = preload("res://assets/sprites/swaminathan-head/cast_frames.tres")
 
 @onready var art: Sprite2D = $Art
 
@@ -49,6 +51,8 @@ func _ready() -> void:
 		var path := STATE_PATH % state
 		_textures.append(load(path) as Texture2D if ResourceLoader.exists(path) else null)
 	art.scale = Vector2(0.5, 0.5)
+	art.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	_apply_state()
 
 
@@ -60,16 +64,28 @@ func _apply_state() -> void:
 	if not is_node_ready():
 		return
 	var texture: Texture2D = _textures[head_count]
-	art.texture = texture
-	art.visible = texture != null
+	art.texture = texture if texture != null else BODY_ART
+	art.visible = true
 	if texture != null:
 		# Feet at the node origin: the canvas's bottom centre.
+		art.centered = true
 		art.offset = Vector2(0, -texture.get_height() * 0.5)
+	else:
+		# Approved body art has a registered foot anchor rather than a centred canvas.
+		art.centered = false
+		art.offset = Vector2(-235, -345)
 	queue_redraw()
 
 
 func _draw() -> void:
 	if has_art():
+		if _textures[head_count] == null:
+			# The merged state-art PR omitted its PNGs. Compose the committed cast art.
+			for index in range(head_count):
+				var head := HEAD_OFFSETS[index]
+				draw_line(Vector2(head.x * 0.3, SHOULDER_Y), head, Color("552648"), 7.0)
+				var face := HEAD_ART.get_frame_texture(&"faces", index)
+				draw_texture_rect(face, Rect2(head - Vector2(32, 32), Vector2(64, 64)), false)
 		return
 	# Placeholder body, feet at the origin.
 	draw_colored_polygon(PackedVector2Array([Vector2(-50, -118), Vector2(-68, -112), Vector2(-78, -52), Vector2(-62, -48), Vector2(-50, -98)]), ARM)
