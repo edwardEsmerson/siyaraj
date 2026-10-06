@@ -270,7 +270,7 @@ func check_melee_and_restart() -> void:
 	flyer.set_physics_process(false)
 	old_scene = current_scene
 	player.take_damage(3, Vector2.ZERO)
-	await ticks(3)
+	await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
 	check(current_scene != old_scene, "Lethal player damage must restart the flying encounter")
 
 

@@ -65,6 +65,9 @@ func _restart() -> void:
 	if _restarting:
 		return
 	_restarting = true
+	if player.state == player.State.DEAD:
+		get_node("/root/PlaytestNavigation").call_deferred("respawn", self)
+		return
 	# Deferred so death can also be requested during a physics tick.
 	get_tree().call_deferred("reload_current_scene")
 

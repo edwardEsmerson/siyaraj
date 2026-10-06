@@ -17,12 +17,12 @@ Existing player dash/hurt feedback is still shared with the tuning scenes.
 | --- | --- | --- |
 | Forest edge | 40-1600 | Two 40 px root climbs, a descent and two short gaps |
 | First clearing | 1600-2800 | Encounter space and the first manual diya |
-| Broken canopy | 2800-4800 | Staggered branch jumps, 120-180 px landings, then a 220 px dash gap |
+| Broken canopy | 2800-4800 | Staggered branch jumps, 120-202 px landings, then a 198 px dash gap |
 | Root ridge | 4800-6500 | Four 40 px climbs to Y=270, followed by descending gap jumps |
 | Hollow trunks | 6500-8900 | Two low roofs, a raised takeoff, then 200/207 px dash gaps |
-| Stone crossing | 8900-11200 | 100-180 px platforms and mixed 100-220 px gaps; brake between jumps |
+| Stone crossing | 8900-11200 | 120-180 px platforms and mixed 100-198 px gaps; brake between jumps |
 | Banyan climb | 11200-13600 | Five stacked jump-through branches, alternating right and left, then a descending dash chain |
-| Upper ravine | 13600-16100 | 180-220 px gaps with higher and lower landing platforms |
+| Upper ravine | 13600-16100 | 90-198 px gaps with higher and lower landing platforms |
 | Old shrine | 16100-18400 | Three 40 px climbs, elevated crossings, and a descent to a clearing |
 | Last crossing | 18400-21000 | Seven narrow landings across 200-230 px gaps, with changing elevation |
 | River approach | 21000-21560 | Final 100 px jump and the exit flag |
@@ -126,7 +126,8 @@ weapon PR's controller and single-lash component. J attacks on the ground
 or in the air. L fires a two-damage skyshot with recoil, consuming one of
 five shots. Holding K for one second and releasing produces a full chakri
 spin for three damage; a shorter charge produces a smaller, weaker spin.
-Chakri has a 30-second cooldown. The HUD shows ammunition and cooldown.
+Chakri has a 10-second cooldown. The bottom-right orange circle drains with
+skyshot ammunition; the blue circle refills as Chakri recharges.
 
 Door transitions preserve current health, ammunition, chakri cooldown and
 shot recovery. Entering or leaving an optional room cannot refill weapons

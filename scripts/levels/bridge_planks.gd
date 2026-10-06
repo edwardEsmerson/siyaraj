@@ -1,6 +1,8 @@
 extends Node2D
 ## Carry one board at a time. Built boards survive death, while carried boards return.
 
+const InteractionPrompt = preload("res://scripts/ui/interaction_prompt.gd")
+
 const PLANK_COUNT: int = 4
 const PLANK_LENGTH: float = 60.0
 const DECK_END: Vector2 = Vector2(8470, 350)
@@ -19,7 +21,7 @@ func _ready() -> void:
 	prompt = Label.new()
 	prompt.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	prompt.position = SUPPLY_START + Vector2(-85, -85)
-	prompt.add_theme_font_size_override("font_size", 15)
+	InteractionPrompt.configure(prompt)
 	add_child(prompt)
 	var course := get_parent()
 	var saved: Dictionary = course.progress.get(course.level_id, {})
@@ -46,13 +48,9 @@ func _physics_process(_delta: float) -> void:
 				nearby_supply = index
 				break
 	var can_place: bool = can_interact and carried_index >= 0 and player.global_position.distance_to(build_edge()) <= PLACE_RANGE
-	prompt.position = build_edge() + Vector2(-140, -85) if carried_index >= 0 or placed_count == PLANK_COUNT else SUPPLY_START + Vector2(-85, -85)
-	if placed_count == PLANK_COUNT:
-		prompt.text = "4/4 PLANKS / Jump + dash!"
-	elif carried_index >= 0:
-		prompt.text = "E: place plank (%d/4)" % placed_count if can_place else "Carry plank to the bridge edge (%d/4)" % placed_count
-	else:
-		prompt.text = "E: pick up plank (%d/4)" % placed_count if nearby_supply >= 0 else "4 PLANKS / E: pick up, E: place (%d/4)" % placed_count
+	var prompt_at: Vector2 = build_edge() if carried_index >= 0 else supply_position(maxi(nearby_supply, 0))
+	prompt.position = prompt_at + Vector2(-13, -65)
+	InteractionPrompt.set_available(prompt, placed_count < PLANK_COUNT and (can_place or nearby_supply >= 0))
 	if Input.is_action_just_pressed("interact"):
 		if can_place:
 			carried_index = -1

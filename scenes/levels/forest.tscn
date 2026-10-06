@@ -44,7 +44,7 @@ size = Vector2(120, 32)
 size = Vector2(130, 32)
 
 [sub_resource type="RectangleShape2D" id="Branch5Shape"]
-size = Vector2(180, 32)
+size = Vector2(202, 32)
 
 [sub_resource type="RectangleShape2D" id="BranchExitShape"]
 size = Vector2(820, 32)
@@ -65,7 +65,7 @@ size = Vector2(130, 32)
 size = Vector2(210, 32)
 
 [sub_resource type="RectangleShape2D" id="RidgeDrop1Shape"]
-size = Vector2(180, 32)
+size = Vector2(202, 32)
 
 [sub_resource type="RectangleShape2D" id="RidgeDrop2Shape"]
 size = Vector2(200, 32)
@@ -89,10 +89,10 @@ size = Vector2(140, 32)
 size = Vector2(140, 32)
 
 [sub_resource type="RectangleShape2D" id="Stone3Shape"]
-size = Vector2(120, 32)
+size = Vector2(142, 32)
 
 [sub_resource type="RectangleShape2D" id="Stone4Shape"]
-size = Vector2(100, 32)
+size = Vector2(121, 32)
 
 [sub_resource type="RectangleShape2D" id="Stone5Shape"]
 size = Vector2(180, 32)
@@ -116,16 +116,16 @@ size = Vector2(120, 12)
 size = Vector2(260, 12)
 
 [sub_resource type="RectangleShape2D" id="BanyanDrop1Shape"]
-size = Vector2(160, 12)
+size = Vector2(183, 12)
 
 [sub_resource type="RectangleShape2D" id="BanyanDrop2Shape"]
 size = Vector2(200, 12)
 
 [sub_resource type="RectangleShape2D" id="BanyanDrop3Shape"]
-size = Vector2(180, 12)
+size = Vector2(202, 12)
 
 [sub_resource type="RectangleShape2D" id="UpperEntryShape"]
-size = Vector2(440, 32)
+size = Vector2(462, 32)
 
 [sub_resource type="RectangleShape2D" id="Upper1Shape"]
 size = Vector2(140, 32)
@@ -140,7 +140,7 @@ size = Vector2(120, 32)
 size = Vector2(220.0, 32)
 
 [sub_resource type="RectangleShape2D" id="Upper5Shape"]
-size = Vector2(150, 32)
+size = Vector2(172, 32)
 
 [sub_resource type="RectangleShape2D" id="ShrineEntryShape"]
 size = Vector2(740, 32)
@@ -155,10 +155,10 @@ size = Vector2(120, 32)
 size = Vector2(120, 32)
 
 [sub_resource type="RectangleShape2D" id="ShrineBranchShape"]
-size = Vector2(190, 32)
+size = Vector2(211, 32)
 
 [sub_resource type="RectangleShape2D" id="ShrineDropShape"]
-size = Vector2(160, 32)
+size = Vector2(182, 32)
 
 [sub_resource type="RectangleShape2D" id="FinalEntryShape"]
 size = Vector2(770, 32)
@@ -341,7 +341,7 @@ size = Vector2(220.0, 12)
 size = Vector2(220.0, 12)
 
 [sub_resource type="RectangleShape2D" id="CrownRestShape"]
-size = Vector2(650, 32)
+size = Vector2(671, 32)
 
 [sub_resource type="RectangleShape2D" id="OuterBranch1Shape"]
 size = Vector2(170, 32)
@@ -671,17 +671,17 @@ shape = SubResource("Branch4Shape")
 
 [node name="Branch5" type="StaticBody2D" parent="Terrain"]
 metadata/skin = "root"
-position = Vector2(3890.0, 446.0)
+position = Vector2(3901, 446.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 11
 
 [node name="Body" type="Polygon2D" parent="Terrain/Branch5"]
-polygon = PackedVector2Array(-90.0, -16.0, 90.0, -16.0, 90.0, 16.0, -90.0, 16.0)
+polygon = PackedVector2Array(-101.0, -16.0, 101.0, -16.0, 101.0, 16.0, -101.0, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/Branch5"]
-polygon = PackedVector2Array(-90.0, -16.0, 90.0, -16.0, 90.0, -13.0, -90.0, -13.0)
+polygon = PackedVector2Array(-101.0, -16.0, 101.0, -16.0, 101.0, -13.0, -101.0, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Branch5"]
@@ -796,17 +796,17 @@ shape = SubResource("RidgeTopShape")
 
 [node name="RidgeDrop1" type="StaticBody2D" parent="Terrain"]
 metadata/skin = "root"
-position = Vector2(5990.0, 346.0)
+position = Vector2(6001, 346.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 18
 
 [node name="Body" type="Polygon2D" parent="Terrain/RidgeDrop1"]
-polygon = PackedVector2Array(-90.0, -16.0, 90.0, -16.0, 90.0, 16.0, -90.0, 16.0)
+polygon = PackedVector2Array(-101.0, -16.0, 101.0, -16.0, 101.0, 16.0, -101.0, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/RidgeDrop1"]
-polygon = PackedVector2Array(-90.0, -16.0, 90.0, -16.0, 90.0, -13.0, -90.0, -13.0)
+polygon = PackedVector2Array(-101.0, -16.0, 101.0, -16.0, 101.0, -13.0, -101.0, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/RidgeDrop1"]
@@ -934,17 +934,17 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("Stone2Shape")
 
 [node name="Stone3" type="StaticBody2D" parent="Terrain"]
-position = Vector2(9630.0, 446.0)
+position = Vector2(9641, 446.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 26
 
 [node name="Body" type="Polygon2D" parent="Terrain/Stone3"]
-polygon = PackedVector2Array(-60.0, -16.0, 60.0, -16.0, 60.0, 16.0, -60.0, 16.0)
+polygon = PackedVector2Array(-71.0, -16.0, 71.0, -16.0, 71.0, 16.0, -71.0, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/Stone3"]
-polygon = PackedVector2Array(-60.0, -16.0, 60.0, -16.0, 60.0, -13.0, -60.0, -13.0)
+polygon = PackedVector2Array(-71.0, -16.0, 71.0, -16.0, 71.0, -13.0, -71.0, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Stone3"]
@@ -952,17 +952,17 @@ one_way_collision = true
 shape = SubResource("Stone3Shape")
 
 [node name="Stone4" type="StaticBody2D" parent="Terrain"]
-position = Vector2(9960.0, 446.0)
+position = Vector2(9970.5, 446.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 27
 
 [node name="Body" type="Polygon2D" parent="Terrain/Stone4"]
-polygon = PackedVector2Array(-50.0, -16.0, 50.0, -16.0, 50.0, 16.0, -50.0, 16.0)
+polygon = PackedVector2Array(-60.5, -16.0, 60.5, -16.0, 60.5, 16.0, -60.5, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/Stone4"]
-polygon = PackedVector2Array(-50.0, -16.0, 50.0, -16.0, 50.0, -13.0, -50.0, -13.0)
+polygon = PackedVector2Array(-60.5, -16.0, 60.5, -16.0, 60.5, -13.0, -60.5, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Stone4"]
@@ -1093,17 +1093,17 @@ shape = SubResource("Banyan5Shape")
 one_way_collision = true
 
 [node name="BanyanDrop1" type="StaticBody2D" parent="Terrain"]
-position = Vector2(12060.0, 256.0)
+position = Vector2(12071.5, 256.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 35
 
 [node name="Body" type="Polygon2D" parent="Terrain/BanyanDrop1"]
-polygon = PackedVector2Array(-80.0, -6.0, 80.0, -6.0, 80.0, 6.0, -80.0, 6.0)
+polygon = PackedVector2Array(-91.5, -6.0, 91.5, -6.0, 91.5, 6.0, -91.5, 6.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/BanyanDrop1"]
-polygon = PackedVector2Array(-80.0, -6.0, 80.0, -6.0, 80.0, -3.0, -80.0, -3.0)
+polygon = PackedVector2Array(-91.5, -6.0, 91.5, -6.0, 91.5, -3.0, -91.5, -3.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/BanyanDrop1"]
@@ -1129,17 +1129,17 @@ shape = SubResource("BanyanDrop2Shape")
 one_way_collision = true
 
 [node name="BanyanDrop3" type="StaticBody2D" parent="Terrain"]
-position = Vector2(12850.0, 376.0)
+position = Vector2(12861, 376.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 37
 
 [node name="Body" type="Polygon2D" parent="Terrain/BanyanDrop3"]
-polygon = PackedVector2Array(-90.0, -6.0, 90.0, -6.0, 90.0, 6.0, -90.0, 6.0)
+polygon = PackedVector2Array(-101.0, -6.0, 101.0, -6.0, 101.0, 6.0, -101.0, 6.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/BanyanDrop3"]
-polygon = PackedVector2Array(-90.0, -6.0, 90.0, -6.0, 90.0, -3.0, -90.0, -3.0)
+polygon = PackedVector2Array(-101.0, -6.0, 101.0, -6.0, 101.0, -3.0, -101.0, -3.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/BanyanDrop3"]
@@ -1147,17 +1147,17 @@ shape = SubResource("BanyanDrop3Shape")
 one_way_collision = true
 
 [node name="UpperEntry" type="StaticBody2D" parent="Terrain"]
-position = Vector2(13380.0, 446.0)
+position = Vector2(13391, 446.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 38
 
 [node name="Body" type="Polygon2D" parent="Terrain/UpperEntry"]
-polygon = PackedVector2Array(-220.0, -16.0, 220.0, -16.0, 220.0, 16.0, -220.0, 16.0)
+polygon = PackedVector2Array(-231.0, -16.0, 231.0, -16.0, 231.0, 16.0, -231.0, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/UpperEntry"]
-polygon = PackedVector2Array(-220.0, -16.0, 220.0, -16.0, 220.0, -13.0, -220.0, -13.0)
+polygon = PackedVector2Array(-231.0, -16.0, 231.0, -16.0, 231.0, -13.0, -231.0, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/UpperEntry"]
@@ -1233,17 +1233,17 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("Upper4Shape")
 
 [node name="Upper5" type="StaticBody2D" parent="Terrain"]
-position = Vector2(15265.0, 446.0)
+position = Vector2(15276, 446.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 43
 
 [node name="Body" type="Polygon2D" parent="Terrain/Upper5"]
-polygon = PackedVector2Array(-75.0, -16.0, 75.0, -16.0, 75.0, 16.0, -75.0, 16.0)
+polygon = PackedVector2Array(-86.0, -16.0, 86.0, -16.0, 86.0, 16.0, -86.0, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/Upper5"]
-polygon = PackedVector2Array(-75.0, -16.0, 75.0, -16.0, 75.0, -13.0, -75.0, -13.0)
+polygon = PackedVector2Array(-86.0, -16.0, 86.0, -16.0, 86.0, -13.0, -86.0, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Upper5"]
@@ -1318,17 +1318,17 @@ color = Color(0.56, 0.56, 0.56, 1)
 shape = SubResource("ShrineRoot3Shape")
 
 [node name="ShrineBranch" type="StaticBody2D" parent="Terrain"]
-position = Vector2(16945.0, 326.0)
+position = Vector2(16955.5, 326.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 48
 
 [node name="Body" type="Polygon2D" parent="Terrain/ShrineBranch"]
-polygon = PackedVector2Array(-95.0, -16.0, 95.0, -16.0, 95.0, 16.0, -95.0, 16.0)
+polygon = PackedVector2Array(-105.5, -16.0, 105.5, -16.0, 105.5, 16.0, -105.5, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/ShrineBranch"]
-polygon = PackedVector2Array(-95.0, -16.0, 95.0, -16.0, 95.0, -13.0, -95.0, -13.0)
+polygon = PackedVector2Array(-105.5, -16.0, 105.5, -16.0, 105.5, -13.0, -105.5, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/ShrineBranch"]
@@ -1336,17 +1336,17 @@ shape = SubResource("ShrineBranchShape")
 
 [node name="ShrineDrop" type="StaticBody2D" parent="Terrain"]
 metadata/skin = "ground"
-position = Vector2(17330.0, 386.0)
+position = Vector2(17341, 386.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 49
 
 [node name="Body" type="Polygon2D" parent="Terrain/ShrineDrop"]
-polygon = PackedVector2Array(-80.0, -16.0, 80.0, -16.0, 80.0, 16.0, -80.0, 16.0)
+polygon = PackedVector2Array(-91.0, -16.0, 91.0, -16.0, 91.0, 16.0, -91.0, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/ShrineDrop"]
-polygon = PackedVector2Array(-80.0, -16.0, 80.0, -16.0, 80.0, -13.0, -80.0, -13.0)
+polygon = PackedVector2Array(-91.0, -16.0, 91.0, -16.0, 91.0, -13.0, -91.0, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/ShrineDrop"]
@@ -2808,16 +2808,16 @@ shape = SubResource("TrunkBranch24Shape")
 one_way_collision = true
 
 [node name="CrownRest" type="StaticBody2D" parent="SideRooms/CanopyNest/Terrain"]
-position = Vector2(1375.0, 456.0)
+position = Vector2(1385.5, 456.0)
 collision_mask = 0
 metadata/route_order = 25
 
 [node name="Body" type="Polygon2D" parent="SideRooms/CanopyNest/Terrain/CrownRest"]
-polygon = PackedVector2Array(-325.0, -16.0, 325.0, -16.0, 325.0, 16.0, -325.0, 16.0)
+polygon = PackedVector2Array(-335.5, -16.0, 335.5, -16.0, 335.5, 16.0, -335.5, 16.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="SideRooms/CanopyNest/Terrain/CrownRest"]
-polygon = PackedVector2Array(-325.0, -16.0, 325.0, -16.0, 325.0, -13.0, -325.0, -13.0)
+polygon = PackedVector2Array(-335.5, -16.0, 335.5, -16.0, 335.5, -13.0, -335.5, -13.0)
 color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SideRooms/CanopyNest/Terrain/CrownRest"]
@@ -3227,7 +3227,7 @@ text = "One of Swaminathan's guards! J lashes him. When he winds up, step back."
 
 [node name="DiyaHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
 position = Vector2(2400, 430)
-text = "A diya! Press E to light it. If you fall, we start again from here."
+text = "A diya! Light it, and if you fall, we start again from here."
 
 [node name="CanopyHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
 position = Vector2(2950, 430)

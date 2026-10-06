@@ -70,7 +70,6 @@ opens the pause menu. Keyboard bindings remain available.
 | Light diya / use door | B / Circle |
 | Pause / back | Menu / Start |
 | Restart level or snapshot | View / Select |
-| Cycle scenery (developer tool) | Right stick click |
 
 The left stick has a 0.2 deadzone. Controller checks in `tests/menus_check.gd`
 cover axis direction and drift, menu navigation, confirm, pause/resume and the
@@ -100,3 +99,21 @@ Frames are mirrored to four identical corners and rebuilt as a 9-slice
 `margins.json` and axis stretch `TILE_FIT`. The title skyline came from
 `python -m ab texture title-skyline ... --mode cutout --aspect 16:9 --key blue`,
 cropped to 1920x1080 and halved to 960x540.
+
+## Gameplay HUD
+
+Campaign levels and boss arenas use `scripts/ui/ability_hud.gd`. Health is shown
+as hearts at the top left. Two circles at the bottom right show skyshot ammo
+in orange and Chakri readiness in blue. Chakri recharges over 10 seconds.
+Legacy status nodes remain hidden so controllers can still write to them.
+Developer menu links, scenery cycling, section signs and enemy state labels
+are hidden or disabled in gameplay. Dev scenes remain available through F6.
+
+`scripts/ui/interaction_prompt.gd` styles a 26px square E keycap above diyas,
+doors and bridge planks. The keycap appears only when Siya can use that object.
+Lit diyas and blocked interactions hide the prompt.
+
+Ordinary guards, brutes, flyers and ground shooters use
+`scripts/ui/enemy_health_bar.gd`: a small red bar above their art, updated by
+`health_changed` and hidden on defeat. Brutes have a wider bar. Bosses retain
+the shared boss health bar.

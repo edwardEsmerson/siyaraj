@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/ability_hud.gd" id="polished_hud"]
 
 [ext_resource type="Script" path="res://scripts/main/main.gd" id="1_main"]
 [ext_resource type="PackedScene" path="res://scenes/levels/forest.tscn" id="2_course"]
@@ -28,6 +30,7 @@ completion_status = "Next stop: the river. R to replay the forest."
 position = Vector2(480, 270)
 
 [node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("polished_hud")
 
 [node name="Backdrop" type="ColorRect" parent="HUD"]
 offset_right = 960.0

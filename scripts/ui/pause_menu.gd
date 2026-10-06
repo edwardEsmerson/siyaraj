@@ -1,6 +1,6 @@
 extends Control
 ## In-game pause menu, owned by the PlaytestNavigation autoload (which pauses the
-## tree and routes Esc here). Level select only appears in debug builds.
+## tree and routes Esc here). Developer level select is hidden from the game.
 
 @onready var menu: Control = $Center/Menu
 @onready var buttons: VBoxContainer = $Center/Menu/Column/Buttons
@@ -19,7 +19,7 @@ func _ready() -> void:
 	buttons.get_node("Settings").pressed.connect(_open_sub.bind(settings, buttons.get_node("Settings")))
 	buttons.get_node("Title").pressed.connect(navigation.show_title)
 	buttons.get_node("LevelSelect").pressed.connect(navigation.show_menu)
-	buttons.get_node("LevelSelect").visible = OS.is_debug_build()
+	buttons.get_node("LevelSelect").visible = false
 	settings.closed.connect(_close_sub)
 	controls.closed.connect(_close_sub)
 	hide()

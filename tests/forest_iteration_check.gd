@@ -29,7 +29,7 @@ func run_checks() -> void:
 	await press_interact()
 	check(forest.checkpoint_x == 21200, "The Khara approach must have an explicit final diya")
 	player.die()
-	await ticks(30)
+	await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
 	player = current_scene.player
 	check(player.position.distance_to(Vector2(21200, 430)) < 1, "Preboss death must return to the quiet final landing")
 	for setup in [

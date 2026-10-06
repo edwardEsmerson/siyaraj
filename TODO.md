@@ -31,12 +31,12 @@ says *what* is left and *who* does it, and points there for the *how*.
   six styles (press V in a level to cycle). PR #33 adds authored dressing and
   section palettes: forest/palace default to diyalit, river to titlematch.
   Dhoomketu uses his authored placeholder arena.
-- **All 32 suites pass**, including cast gameplay checks. B0 air dashes exit at 780 px/s and ease
+- **All 33 suites are available**, including cast gameplay checks. B0 air dashes exit at 780 px/s and ease
   back to run speed, restoring the jump + dash reach lost in #17.
 - **Audio plays throughout the campaign.** Music enters prominently and settles
   down; milestone melodies, original action effects and saved per-bus sliders
   are wired. See `AUDIO_CATALOG.md` for placement and the recorded preview.
-- **Only export preset:** "Linux smoke test".
+- **Release preparation:** Linux smoke test and Web presets are available. See docs/submission_checklist.md for current release status.
 
 ---
 

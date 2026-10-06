@@ -14,7 +14,11 @@ func run_checks() -> void:
 	await ticks(4)
 	freeze_encounters()
 	check(player.skyshot_ammo == 5, "Forest must begin with five skyshots")
-	check(current_scene.get_node("HUD/WeaponStatus").text.contains("5/5"), "Forest HUD must show ammo")
+	var indicators: Control = current_scene.get_node("HUD/AbilityIndicators")
+	check(is_equal_approx(indicators.skyshot_fraction, 1.0) and is_equal_approx(indicators.chakri_fraction, 1.0), "Fresh abilities must show full circles")
+	for node_name in ["Controls", "InputStatus", "Milestone", "WeaponStatus", "DashStatus", "CombatStatus", "Backdrop", "StatusBackdrop"]:
+		check(not current_scene.get_node("HUD/" + node_name).visible, "Gameplay must hide debug HUD: " + node_name)
+	check(indicators.size == root.get_visible_rect().size, "Ability HUD must follow the viewport")
 	var guard: CharacterBody2D = current_scene.course.get_node("Encounters/ClearingGuard")
 	await place(Vector2(1900, 430))
 	player.facing_direction = 1
@@ -28,6 +32,7 @@ func run_checks() -> void:
 	Input.parse_input_event(event)
 	await ticks(20)
 	check(player.skyshot_ammo == 4 and guard.health == 1, "Physical L must fire a two-damage shot at the forest guard")
+	check(is_equal_approx(indicators.skyshot_fraction, 0.8), "One shot must drain one fifth of the orange circle")
 	await place(Vector2(2010, 430))
 	await press(&"attack")
 	await ticks(25)
@@ -39,7 +44,11 @@ func run_checks() -> void:
 	Input.action_release("special")
 	await ticks(3)
 	check(brute.health == 3, "Full chakri must deal three damage to the forest Brute")
-	check(player.chakri_cooldown_remaining > 29, "Chakri must begin its 30-second cooldown")
+	check(player.chakri_cooldown_remaining > 9, "Chakri must begin its 10-second cooldown")
+	check(indicators.chakri_fraction < 0.02, "Released chakri must empty the blue circle")
+	var fraction_before: float = indicators.chakri_fraction
+	await ticks(30)
+	check(indicators.chakri_fraction > fraction_before + 0.04, "Blue circle must refill as cooldown elapses")
 	# Nonlethal damage and lighting a diya never refill specials.
 	player.take_damage(1, Vector2.ZERO)
 	await ticks(16)
@@ -63,9 +72,9 @@ func run_checks() -> void:
 	await ticks(6)
 	player = current_scene.player
 	check(player.skyshot_ammo == 4 and player.health == 2, "Returning to the trail must preserve ammo and health")
-	check(player.chakri_cooldown_remaining > 25, "Returning must not reset chakri cooldown")
+	check(player.chakri_cooldown_remaining > 5, "Returning must not reset chakri cooldown")
 	player.die()
-	await ticks(30)
+	await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
 	player = current_scene.player
 	check(player.skyshot_ammo == 5 and player.health == 3 and player.chakri_cooldown_remaining == 0, "Death must restore health, ammo and chakri at the secured forest diya")
 	check(absf(player.position.x - 2450) < 1, "Weapon death must retain forest checkpoint flow")
