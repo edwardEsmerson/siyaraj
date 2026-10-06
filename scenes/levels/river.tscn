@@ -1,120 +1,176 @@
-[gd_scene load_steps=44 format=3]
+[gd_scene load_steps=62 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/draft_level.gd" id="Script"]
+
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="enemy"]
+
 [ext_resource type="PackedScene" path="res://scenes/enemies/ground_shooter.tscn" id="ground_shooter"]
+
 [ext_resource type="PackedScene" path="res://scenes/enemies/brute.tscn" id="brute"]
 
+[ext_resource type="PackedScene" path="res://scenes/enemies/flying_enemy.tscn" id="flying_enemy"]
+
 [sub_resource type="RectangleShape2D" id="Bank"]
-size = Vector2(600, 32)
+size = Vector2(560, 24)
 
 [sub_resource type="RectangleShape2D" id="LandingStep"]
-size = Vector2(140, 32)
+size = Vector2(180, 24)
 
 [sub_resource type="RectangleShape2D" id="Dock"]
-size = Vector2(400, 32)
+size = Vector2(420, 24)
 
 [sub_resource type="RectangleShape2D" id="BrokenDock1"]
-size = Vector2(190, 32)
+size = Vector2(230, 24)
 
 [sub_resource type="RectangleShape2D" id="BrokenDock2"]
-size = Vector2(170, 32)
+size = Vector2(200, 24)
 
 [sub_resource type="RectangleShape2D" id="FerryLanding"]
-size = Vector2(850, 32)
+size = Vector2(810, 24)
 
 [sub_resource type="RectangleShape2D" id="Stone1"]
-size = Vector2(180, 32)
+size = Vector2(240, 24)
 
 [sub_resource type="RectangleShape2D" id="Stone2"]
-size = Vector2(160, 32)
+size = Vector2(220, 24)
 
 [sub_resource type="RectangleShape2D" id="Stone3"]
-size = Vector2(150, 32)
+size = Vector2(220, 24)
 
-[sub_resource type="RectangleShape2D" id="Stone4"]
-size = Vector2(170, 32)
+[sub_resource type="RectangleShape2D" id="StoneCombat"]
+size = Vector2(500, 24)
 
 [sub_resource type="RectangleShape2D" id="Stone5"]
-size = Vector2(160, 32)
+size = Vector2(140, 24)
 
 [sub_resource type="RectangleShape2D" id="GhatRest"]
-size = Vector2(780, 32)
+size = Vector2(800, 24)
 
 [sub_resource type="RectangleShape2D" id="GhatStep1"]
-size = Vector2(120, 32)
+size = Vector2(130, 24)
 
 [sub_resource type="RectangleShape2D" id="GhatStep2"]
-size = Vector2(120, 32)
+size = Vector2(130, 24)
 
 [sub_resource type="RectangleShape2D" id="GhatStep3"]
-size = Vector2(120, 32)
+size = Vector2(130, 24)
 
-[sub_resource type="RectangleShape2D" id="GhatStep4"]
-size = Vector2(120, 32)
+[sub_resource type="RectangleShape2D" id="GhatCourt"]
+size = Vector2(560, 24)
 
-[sub_resource type="RectangleShape2D" id="GhatTop"]
-size = Vector2(260, 32)
+[sub_resource type="RectangleShape2D" id="GhatDrop1"]
+size = Vector2(210, 24)
 
-[sub_resource type="RectangleShape2D" id="HighPier"]
-size = Vector2(200, 32)
-
-[sub_resource type="RectangleShape2D" id="LowPier"]
-size = Vector2(210, 32)
+[sub_resource type="RectangleShape2D" id="GhatDrop2"]
+size = Vector2(210, 24)
 
 [sub_resource type="RectangleShape2D" id="BridgeRest"]
-size = Vector2(900, 32)
+size = Vector2(800, 24)
 
 [sub_resource type="RectangleShape2D" id="BridgeStep1"]
-size = Vector2(120, 32)
+size = Vector2(130, 24)
 
 [sub_resource type="RectangleShape2D" id="BridgeStep2"]
-size = Vector2(120, 32)
-
-[sub_resource type="RectangleShape2D" id="BridgeStep3"]
-size = Vector2(120, 32)
+size = Vector2(130, 24)
 
 [sub_resource type="RectangleShape2D" id="BridgeDeck"]
-size = Vector2(370, 32)
+size = Vector2(370, 24)
 
 [sub_resource type="RectangleShape2D" id="BridgeGap1"]
-size = Vector2(170, 32)
+size = Vector2(210, 24)
 
 [sub_resource type="RectangleShape2D" id="BridgeGap2"]
-size = Vector2(180, 32)
+size = Vector2(210, 24)
 
 [sub_resource type="RectangleShape2D" id="BridgeFall"]
-size = Vector2(220, 32)
+size = Vector2(220, 24)
 
-[sub_resource type="RectangleShape2D" id="AqueductRest"]
-size = Vector2(970, 32)
+[sub_resource type="RectangleShape2D" id="AqueductCourt"]
+size = Vector2(1210, 24)
 
-[sub_resource type="RectangleShape2D" id="Channel1"]
-size = Vector2(160, 32)
+[sub_resource type="RectangleShape2D" id="ChannelStep1"]
+size = Vector2(120, 24)
 
-[sub_resource type="RectangleShape2D" id="Channel2"]
-size = Vector2(160, 32)
+[sub_resource type="RectangleShape2D" id="ChannelStep2"]
+size = Vector2(120, 24)
 
-[sub_resource type="RectangleShape2D" id="Channel3"]
-size = Vector2(160, 32)
+[sub_resource type="RectangleShape2D" id="ChannelPier1"]
+size = Vector2(200, 24)
 
-[sub_resource type="RectangleShape2D" id="Channel4"]
-size = Vector2(160, 32)
+[sub_resource type="RectangleShape2D" id="ChannelPier2"]
+size = Vector2(230, 24)
 
-[sub_resource type="RectangleShape2D" id="Channel5"]
-size = Vector2(160, 32)
+[sub_resource type="RectangleShape2D" id="ChannelPier3"]
+size = Vector2(200, 24)
 
-[sub_resource type="RectangleShape2D" id="TempleApproach"]
-size = Vector2(470, 32)
+[sub_resource type="RectangleShape2D" id="ProcessionCourt"]
+size = Vector2(1180, 24)
 
 [sub_resource type="RectangleShape2D" id="TempleStep1"]
-size = Vector2(120, 32)
+size = Vector2(120, 24)
 
 [sub_resource type="RectangleShape2D" id="TempleStep2"]
-size = Vector2(120, 32)
+size = Vector2(120, 24)
 
 [sub_resource type="RectangleShape2D" id="TempleLanding"]
-size = Vector2(480, 32)
+size = Vector2(380, 24)
+
+[sub_resource type="RectangleShape2D" id="FerryRecovery"]
+size = Vector2(690, 24)
+
+[sub_resource type="RectangleShape2D" id="FerryRecoveryExit"]
+size = Vector2(70, 24)
+
+[sub_resource type="RectangleShape2D" id="StoneRecovery"]
+size = Vector2(1600, 24)
+
+[sub_resource type="RectangleShape2D" id="StoneRecoveryStep"]
+size = Vector2(120, 24)
+
+[sub_resource type="RectangleShape2D" id="GhatUpper1"]
+size = Vector2(130, 24)
+
+[sub_resource type="RectangleShape2D" id="GhatUpper2"]
+size = Vector2(160, 24)
+
+[sub_resource type="RectangleShape2D" id="GhatBalcony"]
+size = Vector2(290, 24)
+
+[sub_resource type="RectangleShape2D" id="GhatUpperExit"]
+size = Vector2(160, 24)
+
+[sub_resource type="RectangleShape2D" id="BridgeRecovery1"]
+size = Vector2(400, 24)
+
+[sub_resource type="RectangleShape2D" id="BridgeRecovery2"]
+size = Vector2(400, 24)
+
+[sub_resource type="RectangleShape2D" id="BridgeRecoveryExit"]
+size = Vector2(110, 24)
+
+[sub_resource type="RectangleShape2D" id="ChannelRecovery1"]
+size = Vector2(410, 24)
+
+[sub_resource type="RectangleShape2D" id="ChannelRecovery2"]
+size = Vector2(350, 24)
+
+[sub_resource type="RectangleShape2D" id="ChannelRecoveryExit"]
+size = Vector2(60, 24)
+
+[sub_resource type="RectangleShape2D" id="FerryCrate"]
+size = Vector2(70, 40)
+
+[sub_resource type="RectangleShape2D" id="BridgeCrate"]
+size = Vector2(70, 40)
+
+[sub_resource type="RectangleShape2D" id="AqueductCrate"]
+size = Vector2(70, 40)
+
+[sub_resource type="RectangleShape2D" id="AqueductExitCrate"]
+size = Vector2(70, 40)
+
+[sub_resource type="RectangleShape2D" id="ProcessionCrate"]
+size = Vector2(70, 40)
 
 [sub_resource type="RectangleShape2D" id="Checkpoint"]
 size = Vector2(80, 100)
@@ -122,660 +178,933 @@ size = Vector2(80, 100)
 [sub_resource type="RectangleShape2D" id="Finish"]
 size = Vector2(64, 160)
 
-[node name="RiverCourse" type="Node2D"]
+[node name="River" type="Node2D"]
 script = ExtResource("Script")
 level_id = "river"
-sections = PackedStringArray("Riverbank / Broken docks lead into the crossing.", "Stepping stones / Land before spending the next dash.", "Ghat climb / Rise above the river and drop onto the piers.", "Broken bridge / Keep enough space to launch on each deck.", "Aqueduct crossing / Short landings and alternating heights.", "Temple approach / Climb the final steps.")
-section_starts = PackedInt32Array(0, 2900, 5560, 8150, 11200, 13170)
+course_width = 14400
+sections = PackedStringArray("FERRY LANDING / use the landing room to dash past a windup", "STONE FORDS / upper combat stones or the lower recovery dock", "GHAT COURTYARD / step climb, brute duel or balcony bypass", "BROKEN BRIDGE / close on the shooter; low flyer is lash reachable", "AQUEDUCT / crates stop shots; jump over cover to close the distance", "TEMPLE PROCESSION / recover at the last diya before the palace")
+section_starts = PackedInt32Array(0, 2820, 5600, 8100, 9990, 12560)
 
-[node name="Background" type="Polygon2D" parent="."]
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(160, 430)
+
+[node name="RiverLine" type="Polygon2D" parent="."]
 z_index = -5
-polygon = PackedVector2Array(0, 0, 14400, 0, 14400, 540, 0, 540)
-color = Color(0.08, 0.08, 0.08, 1)
-
-[node name="WaterLine" type="Polygon2D" parent="."]
-z_index = -3
-polygon = PackedVector2Array(0, 495, 14400, 495, 14400, 540, 0, 540)
-color = Color(0.19, 0.19, 0.19, 1)
-
-[node name="WaterHint" type="Label" parent="."]
-position = Vector2(850, 450)
-text = "WATER / falling resets to your diya"
-theme_override_font_sizes/font_size = 15
+polygon = PackedVector2Array(0, 514, 14400, 514, 14400, 518, 0, 518)
+color = Color(0.24, 0.24, 0.24, 1)
 
 [node name="Terrain" type="Node2D" parent="."]
 
 [node name="Bank" type="StaticBody2D" parent="Terrain"]
-position = Vector2(340.0, 446)
+position = Vector2(320.0, 442.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 0
 
 [node name="Body" type="Polygon2D" parent="Terrain/Bank"]
-polygon = PackedVector2Array(-300.0, -16, 300.0, -16, 300.0, 16, -300.0, 16)
+polygon = PackedVector2Array(-280.0, -12.0, 280.0, -12.0, 280.0, 12.0, -280.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/Bank"]
-polygon = PackedVector2Array(-300.0, -16, 300.0, -16, 300.0, -13, -300.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-280.0, -12.0, 280.0, -12.0, 280.0, -9.0, -280.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Bank"]
 shape = SubResource("Bank")
 
 [node name="LandingStep" type="StaticBody2D" parent="Terrain"]
-position = Vector2(710.0, 406)
+position = Vector2(690.0, 402.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 1
 
 [node name="Body" type="Polygon2D" parent="Terrain/LandingStep"]
-polygon = PackedVector2Array(-70.0, -16, 70.0, -16, 70.0, 16, -70.0, 16)
+polygon = PackedVector2Array(-90.0, -12.0, 90.0, -12.0, 90.0, 12.0, -90.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/LandingStep"]
-polygon = PackedVector2Array(-70.0, -16, 70.0, -16, 70.0, -13, -70.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-90.0, -12.0, 90.0, -12.0, 90.0, -9.0, -90.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/LandingStep"]
 shape = SubResource("LandingStep")
 
 [node name="Dock" type="StaticBody2D" parent="Terrain"]
-position = Vector2(980.0, 406)
+position = Vector2(990.0, 402.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 2
 
 [node name="Body" type="Polygon2D" parent="Terrain/Dock"]
-polygon = PackedVector2Array(-200.0, -16, 200.0, -16, 200.0, 16, -200.0, 16)
+polygon = PackedVector2Array(-210.0, -12.0, 210.0, -12.0, 210.0, 12.0, -210.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/Dock"]
-polygon = PackedVector2Array(-200.0, -16, 200.0, -16, 200.0, -13, -200.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-210.0, -12.0, 210.0, -12.0, 210.0, -9.0, -210.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Dock"]
 shape = SubResource("Dock")
 
 [node name="BrokenDock1" type="StaticBody2D" parent="Terrain"]
-position = Vector2(1415.0, 426)
+position = Vector2(1435.0, 402.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 3
 
 [node name="Body" type="Polygon2D" parent="Terrain/BrokenDock1"]
-polygon = PackedVector2Array(-95.0, -16, 95.0, -16, 95.0, 16, -95.0, 16)
+polygon = PackedVector2Array(-115.0, -12.0, 115.0, -12.0, 115.0, 12.0, -115.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/BrokenDock1"]
-polygon = PackedVector2Array(-95.0, -16, 95.0, -16, 95.0, -13, -95.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-115.0, -12.0, 115.0, -12.0, 115.0, -9.0, -115.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/BrokenDock1"]
 shape = SubResource("BrokenDock1")
 
 [node name="BrokenDock2" type="StaticBody2D" parent="Terrain"]
-position = Vector2(1775.0, 446)
+position = Vector2(1810.0, 442.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 4
 
 [node name="Body" type="Polygon2D" parent="Terrain/BrokenDock2"]
-polygon = PackedVector2Array(-85.0, -16, 85.0, -16, 85.0, 16, -85.0, 16)
+polygon = PackedVector2Array(-100.0, -12.0, 100.0, -12.0, 100.0, 12.0, -100.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/BrokenDock2"]
-polygon = PackedVector2Array(-85.0, -16, 85.0, -16, 85.0, -13, -85.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-100.0, -12.0, 100.0, -12.0, 100.0, -9.0, -100.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/BrokenDock2"]
 shape = SubResource("BrokenDock2")
 
 [node name="FerryLanding" type="StaticBody2D" parent="Terrain"]
-position = Vector2(2475.0, 446)
+position = Vector2(2415.0, 442.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 5
 
 [node name="Body" type="Polygon2D" parent="Terrain/FerryLanding"]
-polygon = PackedVector2Array(-425.0, -16, 425.0, -16, 425.0, 16, -425.0, 16)
+polygon = PackedVector2Array(-405.0, -12.0, 405.0, -12.0, 405.0, 12.0, -405.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/FerryLanding"]
-polygon = PackedVector2Array(-425.0, -16, 425.0, -16, 425.0, -13, -425.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-405.0, -12.0, 405.0, -12.0, 405.0, -9.0, -405.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/FerryLanding"]
 shape = SubResource("FerryLanding")
 
 [node name="Stone1" type="StaticBody2D" parent="Terrain"]
-position = Vector2(3120.0, 426)
+position = Vector2(3040.0, 442.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 6
 
 [node name="Body" type="Polygon2D" parent="Terrain/Stone1"]
-polygon = PackedVector2Array(-90.0, -16, 90.0, -16, 90.0, 16, -90.0, 16)
+polygon = PackedVector2Array(-120.0, -12.0, 120.0, -12.0, 120.0, 12.0, -120.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/Stone1"]
-polygon = PackedVector2Array(-90.0, -16, 90.0, -16, 90.0, -13, -90.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-120.0, -12.0, 120.0, -12.0, 120.0, -9.0, -120.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Stone1"]
 shape = SubResource("Stone1")
 
 [node name="Stone2" type="StaticBody2D" parent="Terrain"]
-position = Vector2(3460.0, 446)
+position = Vector2(3390.0, 402.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 7
 
 [node name="Body" type="Polygon2D" parent="Terrain/Stone2"]
-polygon = PackedVector2Array(-80.0, -16, 80.0, -16, 80.0, 16, -80.0, 16)
+polygon = PackedVector2Array(-110.0, -12.0, 110.0, -12.0, 110.0, 12.0, -110.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/Stone2"]
-polygon = PackedVector2Array(-80.0, -16, 80.0, -16, 80.0, -13, -80.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-110.0, -12.0, 110.0, -12.0, 110.0, -9.0, -110.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Stone2"]
 shape = SubResource("Stone2")
 
 [node name="Stone3" type="StaticBody2D" parent="Terrain"]
-position = Vector2(3815.0, 426)
+position = Vector2(3760.0, 362.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 8
 
 [node name="Body" type="Polygon2D" parent="Terrain/Stone3"]
-polygon = PackedVector2Array(-75.0, -16, 75.0, -16, 75.0, 16, -75.0, 16)
+polygon = PackedVector2Array(-110.0, -12.0, 110.0, -12.0, 110.0, 12.0, -110.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/Stone3"]
-polygon = PackedVector2Array(-75.0, -16, 75.0, -16, 75.0, -13, -75.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-110.0, -12.0, 110.0, -12.0, 110.0, -9.0, -110.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Stone3"]
 shape = SubResource("Stone3")
 
-[node name="Stone4" type="StaticBody2D" parent="Terrain"]
-position = Vector2(4165.0, 446)
+[node name="StoneCombat" type="StaticBody2D" parent="Terrain"]
+position = Vector2(4220.0, 402.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 9
 
-[node name="Body" type="Polygon2D" parent="Terrain/Stone4"]
-polygon = PackedVector2Array(-85.0, -16, 85.0, -16, 85.0, 16, -85.0, 16)
+[node name="Body" type="Polygon2D" parent="Terrain/StoneCombat"]
+polygon = PackedVector2Array(-250.0, -12.0, 250.0, -12.0, 250.0, 12.0, -250.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
-[node name="Edge" type="Polygon2D" parent="Terrain/Stone4"]
-polygon = PackedVector2Array(-85.0, -16, 85.0, -16, 85.0, -13, -85.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+[node name="Edge" type="Polygon2D" parent="Terrain/StoneCombat"]
+polygon = PackedVector2Array(-250.0, -12.0, 250.0, -12.0, 250.0, -9.0, -250.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Stone4"]
-shape = SubResource("Stone4")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/StoneCombat"]
+shape = SubResource("StoneCombat")
 
 [node name="Stone5" type="StaticBody2D" parent="Terrain"]
-position = Vector2(4520.0, 426)
+position = Vector2(4640.0, 442.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 10
 
 [node name="Body" type="Polygon2D" parent="Terrain/Stone5"]
-polygon = PackedVector2Array(-80.0, -16, 80.0, -16, 80.0, 16, -80.0, 16)
+polygon = PackedVector2Array(-70.0, -12.0, 70.0, -12.0, 70.0, 12.0, -70.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/Stone5"]
-polygon = PackedVector2Array(-80.0, -16, 80.0, -16, 80.0, -13, -80.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-70.0, -12.0, 70.0, -12.0, 70.0, -9.0, -70.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Stone5"]
 shape = SubResource("Stone5")
 
 [node name="GhatRest" type="StaticBody2D" parent="Terrain"]
-position = Vector2(5170.0, 446)
+position = Vector2(5200.0, 442.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 11
 
 [node name="Body" type="Polygon2D" parent="Terrain/GhatRest"]
-polygon = PackedVector2Array(-390.0, -16, 390.0, -16, 390.0, 16, -390.0, 16)
+polygon = PackedVector2Array(-400.0, -12.0, 400.0, -12.0, 400.0, 12.0, -400.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/GhatRest"]
-polygon = PackedVector2Array(-390.0, -16, 390.0, -16, 390.0, -13, -390.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-400.0, -12.0, 400.0, -12.0, 400.0, -9.0, -400.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/GhatRest"]
 shape = SubResource("GhatRest")
 
 [node name="GhatStep1" type="StaticBody2D" parent="Terrain"]
-position = Vector2(5620.0, 406)
+position = Vector2(5665.0, 402.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 12
 
 [node name="Body" type="Polygon2D" parent="Terrain/GhatStep1"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, 16, -60.0, 16)
+polygon = PackedVector2Array(-65.0, -12.0, 65.0, -12.0, 65.0, 12.0, -65.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/GhatStep1"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, -13, -60.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-65.0, -12.0, 65.0, -12.0, 65.0, -9.0, -65.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/GhatStep1"]
 shape = SubResource("GhatStep1")
 
 [node name="GhatStep2" type="StaticBody2D" parent="Terrain"]
-position = Vector2(5740.0, 366)
+position = Vector2(5795.0, 362.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 13
 
 [node name="Body" type="Polygon2D" parent="Terrain/GhatStep2"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, 16, -60.0, 16)
+polygon = PackedVector2Array(-65.0, -12.0, 65.0, -12.0, 65.0, 12.0, -65.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/GhatStep2"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, -13, -60.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-65.0, -12.0, 65.0, -12.0, 65.0, -9.0, -65.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/GhatStep2"]
 shape = SubResource("GhatStep2")
 
 [node name="GhatStep3" type="StaticBody2D" parent="Terrain"]
-position = Vector2(5860.0, 326)
+position = Vector2(5925.0, 322.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 14
 
 [node name="Body" type="Polygon2D" parent="Terrain/GhatStep3"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, 16, -60.0, 16)
+polygon = PackedVector2Array(-65.0, -12.0, 65.0, -12.0, 65.0, 12.0, -65.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/GhatStep3"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, -13, -60.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-65.0, -12.0, 65.0, -12.0, 65.0, -9.0, -65.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/GhatStep3"]
 shape = SubResource("GhatStep3")
 
-[node name="GhatStep4" type="StaticBody2D" parent="Terrain"]
-position = Vector2(5980.0, 286)
+[node name="GhatCourt" type="StaticBody2D" parent="Terrain"]
+position = Vector2(6270.0, 322.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 15
 
-[node name="Body" type="Polygon2D" parent="Terrain/GhatStep4"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, 16, -60.0, 16)
+[node name="Body" type="Polygon2D" parent="Terrain/GhatCourt"]
+polygon = PackedVector2Array(-280.0, -12.0, 280.0, -12.0, 280.0, 12.0, -280.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
-[node name="Edge" type="Polygon2D" parent="Terrain/GhatStep4"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, -13, -60.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+[node name="Edge" type="Polygon2D" parent="Terrain/GhatCourt"]
+polygon = PackedVector2Array(-280.0, -12.0, 280.0, -12.0, 280.0, -9.0, -280.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/GhatStep4"]
-shape = SubResource("GhatStep4")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/GhatCourt"]
+shape = SubResource("GhatCourt")
 
-[node name="GhatTop" type="StaticBody2D" parent="Terrain"]
-position = Vector2(6170.0, 286)
+[node name="GhatDrop1" type="StaticBody2D" parent="Terrain"]
+position = Vector2(6805.0, 362.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 16
 
-[node name="Body" type="Polygon2D" parent="Terrain/GhatTop"]
-polygon = PackedVector2Array(-130.0, -16, 130.0, -16, 130.0, 16, -130.0, 16)
+[node name="Body" type="Polygon2D" parent="Terrain/GhatDrop1"]
+polygon = PackedVector2Array(-105.0, -12.0, 105.0, -12.0, 105.0, 12.0, -105.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
-[node name="Edge" type="Polygon2D" parent="Terrain/GhatTop"]
-polygon = PackedVector2Array(-130.0, -16, 130.0, -16, 130.0, -13, -130.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+[node name="Edge" type="Polygon2D" parent="Terrain/GhatDrop1"]
+polygon = PackedVector2Array(-105.0, -12.0, 105.0, -12.0, 105.0, -9.0, -105.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/GhatTop"]
-shape = SubResource("GhatTop")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/GhatDrop1"]
+shape = SubResource("GhatDrop1")
 
-[node name="HighPier" type="StaticBody2D" parent="Terrain"]
-position = Vector2(6580.0, 306)
+[node name="GhatDrop2" type="StaticBody2D" parent="Terrain"]
+position = Vector2(7135.0, 402.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 17
 
-[node name="Body" type="Polygon2D" parent="Terrain/HighPier"]
-polygon = PackedVector2Array(-100.0, -16, 100.0, -16, 100.0, 16, -100.0, 16)
+[node name="Body" type="Polygon2D" parent="Terrain/GhatDrop2"]
+polygon = PackedVector2Array(-105.0, -12.0, 105.0, -12.0, 105.0, 12.0, -105.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
-[node name="Edge" type="Polygon2D" parent="Terrain/HighPier"]
-polygon = PackedVector2Array(-100.0, -16, 100.0, -16, 100.0, -13, -100.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+[node name="Edge" type="Polygon2D" parent="Terrain/GhatDrop2"]
+polygon = PackedVector2Array(-105.0, -12.0, 105.0, -12.0, 105.0, -9.0, -105.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/HighPier"]
-shape = SubResource("HighPier")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/GhatDrop2"]
+shape = SubResource("GhatDrop2")
 
-[node name="LowPier" type="StaticBody2D" parent="Terrain"]
-position = Vector2(6965.0, 366)
+[node name="BridgeRest" type="StaticBody2D" parent="Terrain"]
+position = Vector2(7700.0, 442.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 18
 
-[node name="Body" type="Polygon2D" parent="Terrain/LowPier"]
-polygon = PackedVector2Array(-105.0, -16, 105.0, -16, 105.0, 16, -105.0, 16)
-color = Color(0.34, 0.34, 0.34, 1)
-
-[node name="Edge" type="Polygon2D" parent="Terrain/LowPier"]
-polygon = PackedVector2Array(-105.0, -16, 105.0, -16, 105.0, -13, -105.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/LowPier"]
-shape = SubResource("LowPier")
-
-[node name="BridgeRest" type="StaticBody2D" parent="Terrain"]
-position = Vector2(7700.0, 446)
-collision_layer = 1
-collision_mask = 0
-metadata/route_order = 19
-
 [node name="Body" type="Polygon2D" parent="Terrain/BridgeRest"]
-polygon = PackedVector2Array(-450.0, -16, 450.0, -16, 450.0, 16, -450.0, 16)
+polygon = PackedVector2Array(-400.0, -12.0, 400.0, -12.0, 400.0, 12.0, -400.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/BridgeRest"]
-polygon = PackedVector2Array(-450.0, -16, 450.0, -16, 450.0, -13, -450.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-400.0, -12.0, 400.0, -12.0, 400.0, -9.0, -400.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/BridgeRest"]
 shape = SubResource("BridgeRest")
 
 [node name="BridgeStep1" type="StaticBody2D" parent="Terrain"]
-position = Vector2(8210.0, 406)
+position = Vector2(8165.0, 402.0)
 collision_layer = 1
 collision_mask = 0
-metadata/route_order = 20
+metadata/route_order = 19
 
 [node name="Body" type="Polygon2D" parent="Terrain/BridgeStep1"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, 16, -60.0, 16)
+polygon = PackedVector2Array(-65.0, -12.0, 65.0, -12.0, 65.0, 12.0, -65.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/BridgeStep1"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, -13, -60.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-65.0, -12.0, 65.0, -12.0, 65.0, -9.0, -65.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/BridgeStep1"]
 shape = SubResource("BridgeStep1")
 
 [node name="BridgeStep2" type="StaticBody2D" parent="Terrain"]
-position = Vector2(8330.0, 366)
+position = Vector2(8295.0, 362.0)
 collision_layer = 1
 collision_mask = 0
-metadata/route_order = 21
+metadata/route_order = 20
 
 [node name="Body" type="Polygon2D" parent="Terrain/BridgeStep2"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, 16, -60.0, 16)
+polygon = PackedVector2Array(-65.0, -12.0, 65.0, -12.0, 65.0, 12.0, -65.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/BridgeStep2"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, -13, -60.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-65.0, -12.0, 65.0, -12.0, 65.0, -9.0, -65.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/BridgeStep2"]
 shape = SubResource("BridgeStep2")
 
-[node name="BridgeStep3" type="StaticBody2D" parent="Terrain"]
-position = Vector2(8450.0, 326)
-collision_layer = 1
-collision_mask = 0
-metadata/route_order = 22
-
-[node name="Body" type="Polygon2D" parent="Terrain/BridgeStep3"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, 16, -60.0, 16)
-color = Color(0.34, 0.34, 0.34, 1)
-
-[node name="Edge" type="Polygon2D" parent="Terrain/BridgeStep3"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, -13, -60.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/BridgeStep3"]
-shape = SubResource("BridgeStep3")
-
 [node name="BridgeDeck" type="StaticBody2D" parent="Terrain"]
-position = Vector2(8695.0, 326)
+position = Vector2(8545.0, 362.0)
 collision_layer = 1
 collision_mask = 0
-metadata/route_order = 23
+metadata/route_order = 21
 
 [node name="Body" type="Polygon2D" parent="Terrain/BridgeDeck"]
-polygon = PackedVector2Array(-185.0, -16, 185.0, -16, 185.0, 16, -185.0, 16)
+polygon = PackedVector2Array(-185.0, -12.0, 185.0, -12.0, 185.0, 12.0, -185.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/BridgeDeck"]
-polygon = PackedVector2Array(-185.0, -16, 185.0, -16, 185.0, -13, -185.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-185.0, -12.0, 185.0, -12.0, 185.0, -9.0, -185.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/BridgeDeck"]
 shape = SubResource("BridgeDeck")
 
 [node name="BridgeGap1" type="StaticBody2D" parent="Terrain"]
-position = Vector2(9165.0, 326)
+position = Vector2(8995.0, 362.0)
 collision_layer = 1
 collision_mask = 0
-metadata/route_order = 24
+metadata/route_order = 22
 
 [node name="Body" type="Polygon2D" parent="Terrain/BridgeGap1"]
-polygon = PackedVector2Array(-85.0, -16, 85.0, -16, 85.0, 16, -85.0, 16)
+polygon = PackedVector2Array(-105.0, -12.0, 105.0, -12.0, 105.0, 12.0, -105.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/BridgeGap1"]
-polygon = PackedVector2Array(-85.0, -16, 85.0, -16, 85.0, -13, -85.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-105.0, -12.0, 105.0, -12.0, 105.0, -9.0, -105.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/BridgeGap1"]
 shape = SubResource("BridgeGap1")
 
 [node name="BridgeGap2" type="StaticBody2D" parent="Terrain"]
-position = Vector2(9520.0, 346)
+position = Vector2(9395.0, 362.0)
 collision_layer = 1
 collision_mask = 0
-metadata/route_order = 25
+metadata/route_order = 23
 
 [node name="Body" type="Polygon2D" parent="Terrain/BridgeGap2"]
-polygon = PackedVector2Array(-90.0, -16, 90.0, -16, 90.0, 16, -90.0, 16)
+polygon = PackedVector2Array(-105.0, -12.0, 105.0, -12.0, 105.0, 12.0, -105.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/BridgeGap2"]
-polygon = PackedVector2Array(-90.0, -16, 90.0, -16, 90.0, -13, -90.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-105.0, -12.0, 105.0, -12.0, 105.0, -9.0, -105.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/BridgeGap2"]
 shape = SubResource("BridgeGap2")
 
 [node name="BridgeFall" type="StaticBody2D" parent="Terrain"]
-position = Vector2(9930.0, 406)
+position = Vector2(9770.0, 402.0)
 collision_layer = 1
 collision_mask = 0
-metadata/route_order = 26
+metadata/route_order = 24
 
 [node name="Body" type="Polygon2D" parent="Terrain/BridgeFall"]
-polygon = PackedVector2Array(-110.0, -16, 110.0, -16, 110.0, 16, -110.0, 16)
+polygon = PackedVector2Array(-110.0, -12.0, 110.0, -12.0, 110.0, 12.0, -110.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/BridgeFall"]
-polygon = PackedVector2Array(-110.0, -16, 110.0, -16, 110.0, -13, -110.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-110.0, -12.0, 110.0, -12.0, 110.0, -9.0, -110.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/BridgeFall"]
 shape = SubResource("BridgeFall")
 
-[node name="AqueductRest" type="StaticBody2D" parent="Terrain"]
-position = Vector2(10715.0, 446)
+[node name="AqueductCourt" type="StaticBody2D" parent="Terrain"]
+position = Vector2(10595.0, 442.0)
+collision_layer = 1
+collision_mask = 0
+metadata/route_order = 25
+
+[node name="Body" type="Polygon2D" parent="Terrain/AqueductCourt"]
+polygon = PackedVector2Array(-605.0, -12.0, 605.0, -12.0, 605.0, 12.0, -605.0, 12.0)
+color = Color(0.34, 0.34, 0.34, 1)
+
+[node name="Edge" type="Polygon2D" parent="Terrain/AqueductCourt"]
+polygon = PackedVector2Array(-605.0, -12.0, 605.0, -12.0, 605.0, -9.0, -605.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/AqueductCourt"]
+shape = SubResource("AqueductCourt")
+
+[node name="ChannelStep1" type="StaticBody2D" parent="Terrain"]
+position = Vector2(11260.0, 402.0)
+collision_layer = 1
+collision_mask = 0
+metadata/route_order = 26
+
+[node name="Body" type="Polygon2D" parent="Terrain/ChannelStep1"]
+polygon = PackedVector2Array(-60.0, -12.0, 60.0, -12.0, 60.0, 12.0, -60.0, 12.0)
+color = Color(0.34, 0.34, 0.34, 1)
+
+[node name="Edge" type="Polygon2D" parent="Terrain/ChannelStep1"]
+polygon = PackedVector2Array(-60.0, -12.0, 60.0, -12.0, 60.0, -9.0, -60.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/ChannelStep1"]
+shape = SubResource("ChannelStep1")
+
+[node name="ChannelStep2" type="StaticBody2D" parent="Terrain"]
+position = Vector2(11380.0, 362.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 27
 
-[node name="Body" type="Polygon2D" parent="Terrain/AqueductRest"]
-polygon = PackedVector2Array(-485.0, -16, 485.0, -16, 485.0, 16, -485.0, 16)
+[node name="Body" type="Polygon2D" parent="Terrain/ChannelStep2"]
+polygon = PackedVector2Array(-60.0, -12.0, 60.0, -12.0, 60.0, 12.0, -60.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
-[node name="Edge" type="Polygon2D" parent="Terrain/AqueductRest"]
-polygon = PackedVector2Array(-485.0, -16, 485.0, -16, 485.0, -13, -485.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+[node name="Edge" type="Polygon2D" parent="Terrain/ChannelStep2"]
+polygon = PackedVector2Array(-60.0, -12.0, 60.0, -12.0, 60.0, -9.0, -60.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/AqueductRest"]
-shape = SubResource("AqueductRest")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/ChannelStep2"]
+shape = SubResource("ChannelStep2")
 
-[node name="Channel1" type="StaticBody2D" parent="Terrain"]
-position = Vector2(11470.0, 446)
+[node name="ChannelPier1" type="StaticBody2D" parent="Terrain"]
+position = Vector2(11540.0, 362.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 28
 
-[node name="Body" type="Polygon2D" parent="Terrain/Channel1"]
-polygon = PackedVector2Array(-80.0, -16, 80.0, -16, 80.0, 16, -80.0, 16)
+[node name="Body" type="Polygon2D" parent="Terrain/ChannelPier1"]
+polygon = PackedVector2Array(-100.0, -12.0, 100.0, -12.0, 100.0, 12.0, -100.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
-[node name="Edge" type="Polygon2D" parent="Terrain/Channel1"]
-polygon = PackedVector2Array(-80.0, -16, 80.0, -16, 80.0, -13, -80.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+[node name="Edge" type="Polygon2D" parent="Terrain/ChannelPier1"]
+polygon = PackedVector2Array(-100.0, -12.0, 100.0, -12.0, 100.0, -9.0, -100.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Channel1"]
-shape = SubResource("Channel1")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/ChannelPier1"]
+shape = SubResource("ChannelPier1")
 
-[node name="Channel2" type="StaticBody2D" parent="Terrain"]
-position = Vector2(11830.0, 426)
+[node name="ChannelPier2" type="StaticBody2D" parent="Terrain"]
+position = Vector2(11935.0, 362.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 29
 
-[node name="Body" type="Polygon2D" parent="Terrain/Channel2"]
-polygon = PackedVector2Array(-80.0, -16, 80.0, -16, 80.0, 16, -80.0, 16)
+[node name="Body" type="Polygon2D" parent="Terrain/ChannelPier2"]
+polygon = PackedVector2Array(-115.0, -12.0, 115.0, -12.0, 115.0, 12.0, -115.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
-[node name="Edge" type="Polygon2D" parent="Terrain/Channel2"]
-polygon = PackedVector2Array(-80.0, -16, 80.0, -16, 80.0, -13, -80.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+[node name="Edge" type="Polygon2D" parent="Terrain/ChannelPier2"]
+polygon = PackedVector2Array(-115.0, -12.0, 115.0, -12.0, 115.0, -9.0, -115.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Channel2"]
-shape = SubResource("Channel2")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/ChannelPier2"]
+shape = SubResource("ChannelPier2")
 
-[node name="Channel3" type="StaticBody2D" parent="Terrain"]
-position = Vector2(12180.0, 446)
+[node name="ChannelPier3" type="StaticBody2D" parent="Terrain"]
+position = Vector2(12350.0, 402.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 30
 
-[node name="Body" type="Polygon2D" parent="Terrain/Channel3"]
-polygon = PackedVector2Array(-80.0, -16, 80.0, -16, 80.0, 16, -80.0, 16)
+[node name="Body" type="Polygon2D" parent="Terrain/ChannelPier3"]
+polygon = PackedVector2Array(-100.0, -12.0, 100.0, -12.0, 100.0, 12.0, -100.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
-[node name="Edge" type="Polygon2D" parent="Terrain/Channel3"]
-polygon = PackedVector2Array(-80.0, -16, 80.0, -16, 80.0, -13, -80.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+[node name="Edge" type="Polygon2D" parent="Terrain/ChannelPier3"]
+polygon = PackedVector2Array(-100.0, -12.0, 100.0, -12.0, 100.0, -9.0, -100.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Channel3"]
-shape = SubResource("Channel3")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/ChannelPier3"]
+shape = SubResource("ChannelPier3")
 
-[node name="Channel4" type="StaticBody2D" parent="Terrain"]
-position = Vector2(12550.0, 426)
+[node name="ProcessionCourt" type="StaticBody2D" parent="Terrain"]
+position = Vector2(13150.0, 442.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 31
 
-[node name="Body" type="Polygon2D" parent="Terrain/Channel4"]
-polygon = PackedVector2Array(-80.0, -16, 80.0, -16, 80.0, 16, -80.0, 16)
+[node name="Body" type="Polygon2D" parent="Terrain/ProcessionCourt"]
+polygon = PackedVector2Array(-590.0, -12.0, 590.0, -12.0, 590.0, 12.0, -590.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
-[node name="Edge" type="Polygon2D" parent="Terrain/Channel4"]
-polygon = PackedVector2Array(-80.0, -16, 80.0, -16, 80.0, -13, -80.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+[node name="Edge" type="Polygon2D" parent="Terrain/ProcessionCourt"]
+polygon = PackedVector2Array(-590.0, -12.0, 590.0, -12.0, 590.0, -9.0, -590.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Channel4"]
-shape = SubResource("Channel4")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/ProcessionCourt"]
+shape = SubResource("ProcessionCourt")
 
-[node name="Channel5" type="StaticBody2D" parent="Terrain"]
-position = Vector2(12900.0, 446)
+[node name="TempleStep1" type="StaticBody2D" parent="Terrain"]
+position = Vector2(13800.0, 402.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 32
 
-[node name="Body" type="Polygon2D" parent="Terrain/Channel5"]
-polygon = PackedVector2Array(-80.0, -16, 80.0, -16, 80.0, 16, -80.0, 16)
-color = Color(0.34, 0.34, 0.34, 1)
-
-[node name="Edge" type="Polygon2D" parent="Terrain/Channel5"]
-polygon = PackedVector2Array(-80.0, -16, 80.0, -16, 80.0, -13, -80.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Channel5"]
-shape = SubResource("Channel5")
-
-[node name="TempleApproach" type="StaticBody2D" parent="Terrain"]
-position = Vector2(13405.0, 446)
-collision_layer = 1
-collision_mask = 0
-metadata/route_order = 33
-
-[node name="Body" type="Polygon2D" parent="Terrain/TempleApproach"]
-polygon = PackedVector2Array(-235.0, -16, 235.0, -16, 235.0, 16, -235.0, 16)
-color = Color(0.34, 0.34, 0.34, 1)
-
-[node name="Edge" type="Polygon2D" parent="Terrain/TempleApproach"]
-polygon = PackedVector2Array(-235.0, -16, 235.0, -16, 235.0, -13, -235.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/TempleApproach"]
-shape = SubResource("TempleApproach")
-
-[node name="TempleStep1" type="StaticBody2D" parent="Terrain"]
-position = Vector2(13700.0, 406)
-collision_layer = 1
-collision_mask = 0
-metadata/route_order = 34
-
 [node name="Body" type="Polygon2D" parent="Terrain/TempleStep1"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, 16, -60.0, 16)
+polygon = PackedVector2Array(-60.0, -12.0, 60.0, -12.0, 60.0, 12.0, -60.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/TempleStep1"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, -13, -60.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-60.0, -12.0, 60.0, -12.0, 60.0, -9.0, -60.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/TempleStep1"]
 shape = SubResource("TempleStep1")
 
 [node name="TempleStep2" type="StaticBody2D" parent="Terrain"]
-position = Vector2(13820.0, 366)
+position = Vector2(13920.0, 362.0)
 collision_layer = 1
 collision_mask = 0
-metadata/route_order = 35
+metadata/route_order = 33
 
 [node name="Body" type="Polygon2D" parent="Terrain/TempleStep2"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, 16, -60.0, 16)
+polygon = PackedVector2Array(-60.0, -12.0, 60.0, -12.0, 60.0, 12.0, -60.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/TempleStep2"]
-polygon = PackedVector2Array(-60.0, -16, 60.0, -16, 60.0, -13, -60.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-60.0, -12.0, 60.0, -12.0, 60.0, -9.0, -60.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/TempleStep2"]
 shape = SubResource("TempleStep2")
 
 [node name="TempleLanding" type="StaticBody2D" parent="Terrain"]
-position = Vector2(14120.0, 366)
+position = Vector2(14170.0, 322.0)
 collision_layer = 1
 collision_mask = 0
-metadata/route_order = 36
+metadata/route_order = 34
 
 [node name="Body" type="Polygon2D" parent="Terrain/TempleLanding"]
-polygon = PackedVector2Array(-240.0, -16, 240.0, -16, 240.0, 16, -240.0, 16)
+polygon = PackedVector2Array(-190.0, -12.0, 190.0, -12.0, 190.0, 12.0, -190.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/TempleLanding"]
-polygon = PackedVector2Array(-240.0, -16, 240.0, -16, 240.0, -13, -240.0, -13)
-color = Color(0.56, 0.56, 0.56, 1)
+polygon = PackedVector2Array(-190.0, -12.0, 190.0, -12.0, 190.0, -9.0, -190.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/TempleLanding"]
 shape = SubResource("TempleLanding")
 
-[node name="PlayerSpawn" type="Marker2D" parent="."]
-position = Vector2(160, 430)
+[node name="AlternateRoutes" type="Node2D" parent="."]
+
+[node name="FerryRecovery" type="StaticBody2D" parent="AlternateRoutes"]
+position = Vector2(1595.0, 512.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="AlternateRoutes/FerryRecovery"]
+polygon = PackedVector2Array(-345.0, -12.0, 345.0, -12.0, 345.0, 12.0, -345.0, 12.0)
+color = Color(0.30, 0.30, 0.30, 1)
+
+[node name="Edge" type="Polygon2D" parent="AlternateRoutes/FerryRecovery"]
+polygon = PackedVector2Array(-345.0, -12.0, 345.0, -12.0, 345.0, -9.0, -345.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlternateRoutes/FerryRecovery"]
+shape = SubResource("FerryRecovery")
+
+[node name="FerryRecoveryExit" type="StaticBody2D" parent="AlternateRoutes"]
+position = Vector2(1975.0, 472.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="AlternateRoutes/FerryRecoveryExit"]
+polygon = PackedVector2Array(-35.0, -12.0, 35.0, -12.0, 35.0, 12.0, -35.0, 12.0)
+color = Color(0.30, 0.30, 0.30, 1)
+
+[node name="Edge" type="Polygon2D" parent="AlternateRoutes/FerryRecoveryExit"]
+polygon = PackedVector2Array(-35.0, -12.0, 35.0, -12.0, 35.0, -9.0, -35.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlternateRoutes/FerryRecoveryExit"]
+shape = SubResource("FerryRecoveryExit")
+
+[node name="StoneRecovery" type="StaticBody2D" parent="AlternateRoutes"]
+position = Vector2(3670.0, 512.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="AlternateRoutes/StoneRecovery"]
+polygon = PackedVector2Array(-800.0, -12.0, 800.0, -12.0, 800.0, 12.0, -800.0, 12.0)
+color = Color(0.30, 0.30, 0.30, 1)
+
+[node name="Edge" type="Polygon2D" parent="AlternateRoutes/StoneRecovery"]
+polygon = PackedVector2Array(-800.0, -12.0, 800.0, -12.0, 800.0, -9.0, -800.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlternateRoutes/StoneRecovery"]
+shape = SubResource("StoneRecovery")
+
+[node name="StoneRecoveryStep" type="StaticBody2D" parent="AlternateRoutes"]
+position = Vector2(4530.0, 472.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="AlternateRoutes/StoneRecoveryStep"]
+polygon = PackedVector2Array(-60.0, -12.0, 60.0, -12.0, 60.0, 12.0, -60.0, 12.0)
+color = Color(0.30, 0.30, 0.30, 1)
+
+[node name="Edge" type="Polygon2D" parent="AlternateRoutes/StoneRecoveryStep"]
+polygon = PackedVector2Array(-60.0, -12.0, 60.0, -12.0, 60.0, -9.0, -60.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlternateRoutes/StoneRecoveryStep"]
+shape = SubResource("StoneRecoveryStep")
+
+[node name="GhatUpper1" type="StaticBody2D" parent="AlternateRoutes"]
+position = Vector2(5805.0, 282.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="AlternateRoutes/GhatUpper1"]
+polygon = PackedVector2Array(-65.0, -12.0, 65.0, -12.0, 65.0, 12.0, -65.0, 12.0)
+color = Color(0.30, 0.30, 0.30, 1)
+
+[node name="Edge" type="Polygon2D" parent="AlternateRoutes/GhatUpper1"]
+polygon = PackedVector2Array(-65.0, -12.0, 65.0, -12.0, 65.0, -9.0, -65.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlternateRoutes/GhatUpper1"]
+shape = SubResource("GhatUpper1")
+one_way_collision = true
+one_way_collision_margin = 4.0
+
+[node name="GhatUpper2" type="StaticBody2D" parent="AlternateRoutes"]
+position = Vector2(6040.0, 242.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="AlternateRoutes/GhatUpper2"]
+polygon = PackedVector2Array(-80.0, -12.0, 80.0, -12.0, 80.0, 12.0, -80.0, 12.0)
+color = Color(0.30, 0.30, 0.30, 1)
+
+[node name="Edge" type="Polygon2D" parent="AlternateRoutes/GhatUpper2"]
+polygon = PackedVector2Array(-80.0, -12.0, 80.0, -12.0, 80.0, -9.0, -80.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlternateRoutes/GhatUpper2"]
+shape = SubResource("GhatUpper2")
+one_way_collision = true
+one_way_collision_margin = 4.0
+
+[node name="GhatBalcony" type="StaticBody2D" parent="AlternateRoutes"]
+position = Vector2(6355.0, 242.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="AlternateRoutes/GhatBalcony"]
+polygon = PackedVector2Array(-145.0, -12.0, 145.0, -12.0, 145.0, 12.0, -145.0, 12.0)
+color = Color(0.30, 0.30, 0.30, 1)
+
+[node name="Edge" type="Polygon2D" parent="AlternateRoutes/GhatBalcony"]
+polygon = PackedVector2Array(-145.0, -12.0, 145.0, -12.0, 145.0, -9.0, -145.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlternateRoutes/GhatBalcony"]
+shape = SubResource("GhatBalcony")
+one_way_collision = true
+one_way_collision_margin = 4.0
+
+[node name="GhatUpperExit" type="StaticBody2D" parent="AlternateRoutes"]
+position = Vector2(6670.0, 282.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="AlternateRoutes/GhatUpperExit"]
+polygon = PackedVector2Array(-80.0, -12.0, 80.0, -12.0, 80.0, 12.0, -80.0, 12.0)
+color = Color(0.30, 0.30, 0.30, 1)
+
+[node name="Edge" type="Polygon2D" parent="AlternateRoutes/GhatUpperExit"]
+polygon = PackedVector2Array(-80.0, -12.0, 80.0, -12.0, 80.0, -9.0, -80.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlternateRoutes/GhatUpperExit"]
+shape = SubResource("GhatUpperExit")
+one_way_collision = true
+one_way_collision_margin = 4.0
+
+[node name="BridgeRecovery1" type="StaticBody2D" parent="AlternateRoutes"]
+position = Vector2(8950.0, 472.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="AlternateRoutes/BridgeRecovery1"]
+polygon = PackedVector2Array(-200.0, -12.0, 200.0, -12.0, 200.0, 12.0, -200.0, 12.0)
+color = Color(0.30, 0.30, 0.30, 1)
+
+[node name="Edge" type="Polygon2D" parent="AlternateRoutes/BridgeRecovery1"]
+polygon = PackedVector2Array(-200.0, -12.0, 200.0, -12.0, 200.0, -9.0, -200.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlternateRoutes/BridgeRecovery1"]
+shape = SubResource("BridgeRecovery1")
+
+[node name="BridgeRecovery2" type="StaticBody2D" parent="AlternateRoutes"]
+position = Vector2(9450.0, 472.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="AlternateRoutes/BridgeRecovery2"]
+polygon = PackedVector2Array(-200.0, -12.0, 200.0, -12.0, 200.0, 12.0, -200.0, 12.0)
+color = Color(0.30, 0.30, 0.30, 1)
+
+[node name="Edge" type="Polygon2D" parent="AlternateRoutes/BridgeRecovery2"]
+polygon = PackedVector2Array(-200.0, -12.0, 200.0, -12.0, 200.0, -9.0, -200.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlternateRoutes/BridgeRecovery2"]
+shape = SubResource("BridgeRecovery2")
+
+[node name="BridgeRecoveryExit" type="StaticBody2D" parent="AlternateRoutes"]
+position = Vector2(9585.0, 442.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="AlternateRoutes/BridgeRecoveryExit"]
+polygon = PackedVector2Array(-55.0, -12.0, 55.0, -12.0, 55.0, 12.0, -55.0, 12.0)
+color = Color(0.30, 0.30, 0.30, 1)
+
+[node name="Edge" type="Polygon2D" parent="AlternateRoutes/BridgeRecoveryExit"]
+polygon = PackedVector2Array(-55.0, -12.0, 55.0, -12.0, 55.0, -9.0, -55.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlternateRoutes/BridgeRecoveryExit"]
+shape = SubResource("BridgeRecoveryExit")
+
+[node name="ChannelRecovery1" type="StaticBody2D" parent="AlternateRoutes"]
+position = Vector2(11865.0, 472.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="AlternateRoutes/ChannelRecovery1"]
+polygon = PackedVector2Array(-205.0, -12.0, 205.0, -12.0, 205.0, 12.0, -205.0, 12.0)
+color = Color(0.30, 0.30, 0.30, 1)
+
+[node name="Edge" type="Polygon2D" parent="AlternateRoutes/ChannelRecovery1"]
+polygon = PackedVector2Array(-205.0, -12.0, 205.0, -12.0, 205.0, -9.0, -205.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlternateRoutes/ChannelRecovery1"]
+shape = SubResource("ChannelRecovery1")
+
+[node name="ChannelRecovery2" type="StaticBody2D" parent="AlternateRoutes"]
+position = Vector2(12325.0, 472.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="AlternateRoutes/ChannelRecovery2"]
+polygon = PackedVector2Array(-175.0, -12.0, 175.0, -12.0, 175.0, 12.0, -175.0, 12.0)
+color = Color(0.30, 0.30, 0.30, 1)
+
+[node name="Edge" type="Polygon2D" parent="AlternateRoutes/ChannelRecovery2"]
+polygon = PackedVector2Array(-175.0, -12.0, 175.0, -12.0, 175.0, -9.0, -175.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlternateRoutes/ChannelRecovery2"]
+shape = SubResource("ChannelRecovery2")
+
+[node name="ChannelRecoveryExit" type="StaticBody2D" parent="AlternateRoutes"]
+position = Vector2(12530.0, 442.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="AlternateRoutes/ChannelRecoveryExit"]
+polygon = PackedVector2Array(-30.0, -12.0, 30.0, -12.0, 30.0, 12.0, -30.0, 12.0)
+color = Color(0.30, 0.30, 0.30, 1)
+
+[node name="Edge" type="Polygon2D" parent="AlternateRoutes/ChannelRecoveryExit"]
+polygon = PackedVector2Array(-30.0, -12.0, 30.0, -12.0, 30.0, -9.0, -30.0, -9.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlternateRoutes/ChannelRecoveryExit"]
+shape = SubResource("ChannelRecoveryExit")
+
+[node name="Cover" type="Node2D" parent="."]
+
+[node name="FerryCrate" type="StaticBody2D" parent="Cover"]
+position = Vector2(2055.0, 410.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="Cover/FerryCrate"]
+polygon = PackedVector2Array(-35.0, -20.0, 35.0, -20.0, 35.0, 20.0, -35.0, 20.0)
+color = Color(0.34, 0.34, 0.34, 1)
+
+[node name="Edge" type="Polygon2D" parent="Cover/FerryCrate"]
+polygon = PackedVector2Array(-35.0, -20.0, 35.0, -20.0, 35.0, -17.0, -35.0, -17.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cover/FerryCrate"]
+shape = SubResource("FerryCrate")
+
+[node name="BridgeCrate" type="StaticBody2D" parent="Cover"]
+position = Vector2(7395.0, 410.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="Cover/BridgeCrate"]
+polygon = PackedVector2Array(-35.0, -20.0, 35.0, -20.0, 35.0, 20.0, -35.0, 20.0)
+color = Color(0.34, 0.34, 0.34, 1)
+
+[node name="Edge" type="Polygon2D" parent="Cover/BridgeCrate"]
+polygon = PackedVector2Array(-35.0, -20.0, 35.0, -20.0, 35.0, -17.0, -35.0, -17.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cover/BridgeCrate"]
+shape = SubResource("BridgeCrate")
+
+[node name="AqueductCrate" type="StaticBody2D" parent="Cover"]
+position = Vector2(10125.0, 410.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="Cover/AqueductCrate"]
+polygon = PackedVector2Array(-35.0, -20.0, 35.0, -20.0, 35.0, 20.0, -35.0, 20.0)
+color = Color(0.34, 0.34, 0.34, 1)
+
+[node name="Edge" type="Polygon2D" parent="Cover/AqueductCrate"]
+polygon = PackedVector2Array(-35.0, -20.0, 35.0, -20.0, 35.0, -17.0, -35.0, -17.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cover/AqueductCrate"]
+shape = SubResource("AqueductCrate")
+
+[node name="AqueductExitCrate" type="StaticBody2D" parent="Cover"]
+position = Vector2(10545.0, 410.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="Cover/AqueductExitCrate"]
+polygon = PackedVector2Array(-35.0, -20.0, 35.0, -20.0, 35.0, 20.0, -35.0, 20.0)
+color = Color(0.34, 0.34, 0.34, 1)
+
+[node name="Edge" type="Polygon2D" parent="Cover/AqueductExitCrate"]
+polygon = PackedVector2Array(-35.0, -20.0, 35.0, -20.0, 35.0, -17.0, -35.0, -17.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cover/AqueductExitCrate"]
+shape = SubResource("AqueductExitCrate")
+
+[node name="ProcessionCrate" type="StaticBody2D" parent="Cover"]
+position = Vector2(12665.0, 410.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="Cover/ProcessionCrate"]
+polygon = PackedVector2Array(-35.0, -20.0, 35.0, -20.0, 35.0, 20.0, -35.0, 20.0)
+color = Color(0.34, 0.34, 0.34, 1)
+
+[node name="Edge" type="Polygon2D" parent="Cover/ProcessionCrate"]
+polygon = PackedVector2Array(-35.0, -20.0, 35.0, -20.0, 35.0, -17.0, -35.0, -17.0)
+color = Color(0.60, 0.60, 0.60, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cover/ProcessionCrate"]
+shape = SubResource("ProcessionCrate")
 
 [node name="Checkpoints" type="Node2D" parent="."]
 
@@ -914,25 +1243,60 @@ text = "DIYA"
 [node name="EncounterSpawns" type="Node2D" parent="."]
 
 [node name="FerryGuard" parent="Encounters" instance=ExtResource("enemy")]
-position = Vector2(2220, 430)
+position = Vector2(2250, 430)
 patrol_radius = 65.0
 
 [node name="FerryGuard" type="Marker2D" parent="EncounterSpawns"]
-position = Vector2(2220, 430)
+position = Vector2(2250, 430)
+
+[node name="StoneGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(4190, 390)
+patrol_radius = 60.0
+
+[node name="StoneGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(4190, 390)
+
+[node name="GhatBrute" parent="Encounters" instance=ExtResource("brute")]
+position = Vector2(6320, 310)
+patrol_radius = 70.0
+
+[node name="GhatBrute" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(6320, 310)
 
 [node name="BridgeShooter" parent="Encounters" instance=ExtResource("ground_shooter")]
-position = Vector2(7430, 430)
-patrol_radius = 65.0
+position = Vector2(7560, 430)
+patrol_radius = 60.0
 
 [node name="BridgeShooter" type="Marker2D" parent="EncounterSpawns"]
-position = Vector2(7430, 430)
+position = Vector2(7560, 430)
+
+[node name="BridgeFlyer" parent="Encounters" instance=ExtResource("flying_enemy")]
+position = Vector2(8990, 337)
+patrol_radius = 55.0
+
+[node name="BridgeFlyer" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(8990, 337)
+
+[node name="AqueductShooter" parent="Encounters" instance=ExtResource("ground_shooter")]
+position = Vector2(10310, 430)
+patrol_radius = 55.0
+
+[node name="AqueductShooter" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(10310, 430)
 
 [node name="AqueductBrute" parent="Encounters" instance=ExtResource("brute")]
-position = Vector2(10420, 430)
-patrol_radius = 65.0
+position = Vector2(10650, 430)
+patrol_radius = 40.0
 
 [node name="AqueductBrute" type="Marker2D" parent="EncounterSpawns"]
-position = Vector2(10420, 430)
+position = Vector2(10650, 430)
+
+[node name="ProcessionGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(12980, 430)
+patrol_radius = 65.0
+
+[node name="ProcessionGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(12980, 430)
 
 [node name="Finish" type="Area2D" parent="."]
 position = Vector2(14200, 270)
@@ -943,39 +1307,64 @@ collision_mask = 2
 shape = SubResource("Finish")
 
 [node name="Post" type="Polygon2D" parent="Finish"]
-polygon = PackedVector2Array(-3, -55, 3, -55, 3, 80, -3, 80)
+polygon = PackedVector2Array(-3, -55, 3, -55, 3, 40, -3, 40)
 color = Color(0.6, 0.6, 0.6, 1)
 
 [node name="Flag" type="Polygon2D" parent="Finish"]
 polygon = PackedVector2Array(3, -55, 48, -55, 36, -30, 3, -30)
 color = Color(0.9, 0.9, 0.9, 1)
 
-[node name="Section0" type="Label" parent="."]
-position = Vector2(100, 155)
-theme_override_font_sizes/font_size = 17
-text = "RIVERBANK"
+[node name="RouteNote0" type="Label" parent="."]
+position = Vector2(100, 160)
+theme_override_font_sizes/font_size = 15
+text = "FERRY LANDING"
 
-[node name="Section1" type="Label" parent="."]
-position = Vector2(2940, 155)
-theme_override_font_sizes/font_size = 17
-text = "STEPPING STONES"
+[node name="RouteNote1" type="Label" parent="."]
+position = Vector2(2910, 200)
+theme_override_font_sizes/font_size = 15
+text = "STONE FORDS / lower dock catches a missed jump"
 
-[node name="Section2" type="Label" parent="."]
-position = Vector2(5600, 155)
-theme_override_font_sizes/font_size = 17
-text = "GHAT CLIMB"
+[node name="RouteNote2" type="Label" parent="."]
+position = Vector2(5640, 160)
+theme_override_font_sizes/font_size = 15
+text = "GHAT COURTYARD / upper balcony bypass"
 
-[node name="Section3" type="Label" parent="."]
-position = Vector2(8190, 155)
-theme_override_font_sizes/font_size = 17
-text = "BROKEN BRIDGE"
+[node name="RouteNote3" type="Label" parent="."]
+position = Vector2(8180, 160)
+theme_override_font_sizes/font_size = 15
+text = "BROKEN BRIDGE / recovery shelves below"
 
-[node name="Section4" type="Label" parent="."]
-position = Vector2(11240, 155)
-theme_override_font_sizes/font_size = 17
-text = "AQUEDUCT CROSSING"
+[node name="RouteNote4" type="Label" parent="."]
+position = Vector2(10010, 160)
+theme_override_font_sizes/font_size = 15
+text = "AQUEDUCT / jump crates to close on the shooter"
 
-[node name="Section5" type="Label" parent="."]
-position = Vector2(13210, 155)
-theme_override_font_sizes/font_size = 17
-text = "TEMPLE APPROACH"
+[node name="RouteNote5" type="Label" parent="."]
+position = Vector2(12600, 160)
+theme_override_font_sizes/font_size = 15
+text = "TEMPLE PROCESSION"
+
+[node name="RouteNote6" type="Label" parent="."]
+position = Vector2(800, 452)
+theme_override_font_sizes/font_size = 15
+text = "River below / a missed landing returns to your diya"
+
+[node name="RouteNote7" type="Label" parent="."]
+position = Vector2(1260, 466)
+theme_override_font_sizes/font_size = 15
+text = "RECOVERY DOCK"
+
+[node name="RouteNote8" type="Label" parent="."]
+position = Vector2(2870, 466)
+theme_override_font_sizes/font_size = 15
+text = "RECOVERY DOCK"
+
+[node name="RouteNote9" type="Label" parent="."]
+position = Vector2(8750, 427)
+theme_override_font_sizes/font_size = 15
+text = "RECOVERY SHELVES"
+
+[node name="RouteNote10" type="Label" parent="."]
+position = Vector2(11660, 426)
+theme_override_font_sizes/font_size = 15
+text = "LOWER CHANNEL"
