@@ -1,5 +1,7 @@
 [gd_scene load_steps=79 format=3]
 
+[ext_resource type="PackedScene" path="res://scenes/props/checkpoint_diya_flame.tscn" id="checkpoint_diya_flame"]
+[ext_resource type="PackedScene" path="res://scenes/props/checkpoint_diya.tscn" id="checkpoint_diya"]
 [ext_resource type="Script" path="res://scripts/levels/draft_level.gd" id="Script"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="enemy"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/ground_shooter.tscn" id="ground_shooter"]
@@ -1498,13 +1500,9 @@ collision_mask = 2
 position = Vector2(0, -50)
 shape = SubResource("Checkpoint")
 
-[node name="Bowl" type="Polygon2D" parent="Checkpoints/CourtyardDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.78, 0.5, 0.22, 1)
+[node name="Diya" parent="Checkpoints/CourtyardDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="Checkpoints/CourtyardDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(1, 0.74, 0.28, 1)
+[node name="Flame" parent="Checkpoints/CourtyardDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="Checkpoints/CourtyardDiya"]
 texture_filter = 2
@@ -1526,13 +1524,9 @@ collision_mask = 2
 position = Vector2(0, -50)
 shape = SubResource("Checkpoint")
 
-[node name="Bowl" type="Polygon2D" parent="Checkpoints/GalleryDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.78, 0.5, 0.22, 1)
+[node name="Diya" parent="Checkpoints/GalleryDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="Checkpoints/GalleryDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(1, 0.74, 0.28, 1)
+[node name="Flame" parent="Checkpoints/GalleryDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="Checkpoints/GalleryDiya"]
 texture_filter = 2
@@ -1554,13 +1548,9 @@ collision_mask = 2
 position = Vector2(0, -50)
 shape = SubResource("Checkpoint")
 
-[node name="Bowl" type="Polygon2D" parent="Checkpoints/RoofDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.78, 0.5, 0.22, 1)
+[node name="Diya" parent="Checkpoints/RoofDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="Checkpoints/RoofDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(1, 0.74, 0.28, 1)
+[node name="Flame" parent="Checkpoints/RoofDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="Checkpoints/RoofDiya"]
 texture_filter = 2
@@ -1582,13 +1572,9 @@ collision_mask = 2
 position = Vector2(0, -50)
 shape = SubResource("Checkpoint")
 
-[node name="Bowl" type="Polygon2D" parent="Checkpoints/SanctumDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.78, 0.5, 0.22, 1)
+[node name="Diya" parent="Checkpoints/SanctumDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="Checkpoints/SanctumDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(1, 0.74, 0.28, 1)
+[node name="Flame" parent="Checkpoints/SanctumDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="Checkpoints/SanctumDiya"]
 texture_filter = 2
@@ -1610,13 +1596,9 @@ collision_mask = 2
 position = Vector2(0, -50)
 shape = SubResource("Checkpoint")
 
-[node name="Bowl" type="Polygon2D" parent="Checkpoints/ThroneDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.78, 0.5, 0.22, 1)
+[node name="Diya" parent="Checkpoints/ThroneDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="Checkpoints/ThroneDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(1, 0.74, 0.28, 1)
+[node name="Flame" parent="Checkpoints/ThroneDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="Checkpoints/ThroneDiya"]
 texture_filter = 2

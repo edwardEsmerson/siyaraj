@@ -43,7 +43,7 @@ story_key = "palace"
 versus_texture = "res://assets/cutscenes/boss-versus/swaminathan.png"
 
 [node name="RajCage" type="Node2D" parent="."]
-position = Vector2(770, 310)
+position = Vector2(812, 310)
 script = ExtResource("3_cage")
 
 [node name="PalaceEscape" type="Node2D" parent="."]

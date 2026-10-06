@@ -28,7 +28,29 @@
   ],
   "models": {
     "01": "pro",
-    "02": "flash"
+    "02": "pro"
   },
-  "notes": "Poses: \"Hovering in place, wings raised, beak closed\" / \"Hovering, wings down, beak closed\"."
+  "notes": "Poses: \"Hovering in place, wings raised, beak closed\" / \"Hovering, wings down, beak closed\".",
+  "grid": {
+    "mode": "uniform",
+    "calibration_cell": 1,
+    "registration": "body, via the sheet's calibration cell",
+    "source_pixel_spacing": {
+      "01": 8.0,
+      "02": 8.0
+    }
+  },
+  "sheet": {
+    "sources": {
+      "01": "F1.png cell 5",
+      "02": "F1.png cell 6"
+    },
+    "dimensions": [
+      2048,
+      2048
+    ],
+    "columns": 3,
+    "rows": 3,
+    "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
+  }
 }

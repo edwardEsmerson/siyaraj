@@ -2,12 +2,16 @@ extends Node2D
 ## Telegraphed damage area. It warns first, then hurts the player on active ticks.
 ## Player damage protection stops one hazard dealing repeated damage.
 const Burst = preload("res://scripts/effects/burst.gd")
+const RavanFx = preload("res://scripts/bosses/ravan/ravan_fx.gd")
 
 signal activated
 signal finished
 
 ## BEAM extends along local +X from the origin (fire breath). COLUMN and PILLAR
 ## rise from the origin, which sits on the floor (lightning and Dashanan Fury).
+## Generated effect art (RavanFx, scale 0.5) is used where it is packaged: the
+## fire-breath jet with its floor splash, and the lightning marker, bolt and flash.
+## Styles without art yet (the Fury pillar) keep the code-drawn shapes.
 enum Style { BEAM, COLUMN, PILLAR }
 
 const PLAYER_BODY_MASK: int = 2
@@ -51,6 +55,7 @@ func _physics_process(delta: float) -> void:
 		if not _was_active:
 			_was_active = true
 			activated.emit()
+			_spawn_impact()
 		_hurt_overlaps()
 	elif age >= telegraph_time + active_time:
 		set_physics_process(false)
@@ -80,9 +85,56 @@ func _hurt_overlaps() -> void:
 			Burst.spawn(get_tree().current_scene, (target as Node2D).global_position + Vector2(0, -20), color, "BURN!" if style != Style.COLUMN else "ZAP!")
 
 
+func _spawn_impact() -> void:
+	var scene_root := get_tree().current_scene
+	if style == Style.COLUMN:
+		RavanFx.burst(scene_root, &"lightning-flash", global_position)
+	elif style == Style.BEAM and size.x < 329.0:
+		# The breath was cut short by the floor: it splashes there.
+		RavanFx.burst(scene_root, &"fire-splash", to_global(Vector2(size.x - 12.0, 0.0)))
+
+
+## Draws a long effect at art scale, cut to the hazard's area: a beam keeps its
+## mouth end, a column keeps its floor end.
+func _draw_strip(effect: StringName, time: float, tint: Color) -> void:
+	var tex := RavanFx.texture_at(effect, time)
+	var pivot := RavanFx.pivot(effect)
+	var art := tex.get_size()
+	var source: Rect2
+	var at: Vector2
+	if style == Style.BEAM:
+		var length := minf(size.x * 2.0 + 8.0, art.x)
+		source = Rect2(0.0, 0.0, length, art.y)
+		at = Vector2(0.0, -pivot.y)
+	else:
+		var height := minf(size.y * 2.0, pivot.y + 1.0)
+		source = Rect2(0.0, pivot.y + 1.0 - height, art.x, height)
+		at = Vector2(-pivot.x, -height)
+	# Art scale (0.5), but a column is never drawn wider than its hitbox.
+	var squeeze := 0.5 if style == Style.BEAM else minf(0.5, size.x / art.x)
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2(squeeze, 0.5))
+	draw_texture_rect_region(tex, Rect2(at, source.size), source, tint)
+	draw_set_transform(Vector2.ZERO)
+
+
 func _draw() -> void:
 	var rect := local_rect()
 	var pulse := 0.5 + 0.5 * sin(age * 18.0)
+	var ramp := clampf(age / maxf(telegraph_time, 0.001), 0.0, 1.0)
+	if style == Style.COLUMN and RavanFx.has(&"lightning-bolt") and RavanFx.has(&"lightning-mark"):
+		if is_telegraphing():
+			# The floor marker crackles faster and brightens as the strike nears.
+			RavanFx.draw(self, &"lightning-mark", RavanFx.texture_at(&"lightning-mark", age * (1.0 + 2.0 * ramp)), Vector2.ZERO, Color(1, 1, 1, 0.5 + 0.5 * ramp))
+		elif is_active():
+			_draw_strip(&"lightning-bolt", age, Color.WHITE)
+		return
+	if style == Style.BEAM and RavanFx.has(&"fire-breath"):
+		if is_telegraphing():
+			# A faint ghost of the jet shows where it will burn.
+			_draw_strip(&"fire-breath", age, Color(1, 1, 1, 0.12 + 0.2 * ramp + 0.08 * pulse))
+		elif is_active():
+			_draw_strip(&"fire-breath", age, Color.WHITE)
+		return
 	if is_telegraphing():
 		var progress := clampf(age / maxf(telegraph_time, 0.001), 0.0, 1.0)
 		var warn := color

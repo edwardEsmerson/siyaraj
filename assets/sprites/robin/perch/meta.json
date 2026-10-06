@@ -26,6 +26,31 @@
     40,
     40
   ],
-  "models": {},
-  "notes": "Sitting on Siya's shoulder or a ledge in cutscenes. Poses: \"Perched, wings folded, feet gripping\" / \"Perched, head tilted, blinking\"."
+  "models": {
+    "01": "pro",
+    "02": "pro"
+  },
+  "notes": "Sitting on Siya's shoulder or a ledge in cutscenes. Poses: \"Perched, wings folded, feet gripping\" / \"Perched, head tilted, blinking\".",
+  "grid": {
+    "mode": "uniform",
+    "calibration_cell": 1,
+    "registration": "body, via the sheet's calibration cell",
+    "source_pixel_spacing": {
+      "01": 8.0,
+      "02": 8.0
+    }
+  },
+  "sheet": {
+    "sources": {
+      "01": "F2.png cell 2",
+      "02": "F2.png cell 3"
+    },
+    "dimensions": [
+      2048,
+      2048
+    ],
+    "columns": 3,
+    "rows": 3,
+    "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
+  }
 }

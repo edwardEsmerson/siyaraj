@@ -37,8 +37,10 @@ func run_checks() -> void:
 		for action: String in meta.animations:
 			if meta.animations[action].has("alias_of"):
 				continue
-			set_count += 1
-			frame_count += frames.get_frame_count(action)
+			# Gameplay-only boss poses sit outside the 73-set library total.
+			if meta.animations[action].get("scope", "library") == "library":
+				set_count += 1
+				frame_count += frames.get_frame_count(action)
 			check(frames.get_frame_count(action) == meta.animations[action].frame_count, name_ + "/" + action + " must retain its ordered frame count")
 		for action: StringName in frames.get_animation_names():
 			for n in frames.get_frame_count(action):

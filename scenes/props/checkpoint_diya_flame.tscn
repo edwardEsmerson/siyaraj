@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/checkpoint_diya_flame.gd" id="1_flame"]
+[ext_resource type="Texture2D" path="res://assets/sprites/diya/flame.png" id="2_flame"]
+
+[node name="Flame" type="Sprite2D"]
+texture_filter = 1
+position = Vector2(12.75, -15.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_flame")
+centered = false
+offset = Vector2(-7.5, -28)
+script = ExtResource("1_flame")

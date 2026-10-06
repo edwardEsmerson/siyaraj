@@ -1,5 +1,7 @@
-[gd_scene load_steps=132 format=3]
+[gd_scene load_steps=134 format=3]
 
+[ext_resource type="PackedScene" path="res://scenes/props/checkpoint_diya_flame.tscn" id="checkpoint_diya_flame"]
+[ext_resource type="PackedScene" path="res://scenes/props/checkpoint_diya.tscn" id="checkpoint_diya"]
 [ext_resource type="Script" path="res://scripts/levels/forest.gd" id="1_forest"]
 
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="2_guard"]
@@ -1559,13 +1561,9 @@ collision_mask = 2
 position = Vector2(0, -50)
 shape = SubResource("CheckpointShape")
 
-[node name="Bowl" type="Polygon2D" parent="Checkpoints/ClearingDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+[node name="Diya" parent="Checkpoints/ClearingDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="Checkpoints/ClearingDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+[node name="Flame" parent="Checkpoints/ClearingDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="Checkpoints/ClearingDiya"]
 texture_filter = 2
@@ -1587,13 +1585,9 @@ collision_mask = 2
 position = Vector2(0, -50)
 shape = SubResource("CheckpointShape")
 
-[node name="Bowl" type="Polygon2D" parent="Checkpoints/RidgeDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+[node name="Diya" parent="Checkpoints/RidgeDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="Checkpoints/RidgeDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+[node name="Flame" parent="Checkpoints/RidgeDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="Checkpoints/RidgeDiya"]
 texture_filter = 2
@@ -1615,13 +1609,9 @@ collision_mask = 2
 position = Vector2(0, -50)
 shape = SubResource("CheckpointShape")
 
-[node name="Bowl" type="Polygon2D" parent="Checkpoints/HollowDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+[node name="Diya" parent="Checkpoints/HollowDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="Checkpoints/HollowDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+[node name="Flame" parent="Checkpoints/HollowDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="Checkpoints/HollowDiya"]
 texture_filter = 2
@@ -1643,13 +1633,9 @@ collision_mask = 2
 position = Vector2(0, -50)
 shape = SubResource("CheckpointShape")
 
-[node name="Bowl" type="Polygon2D" parent="Checkpoints/StoneDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+[node name="Diya" parent="Checkpoints/StoneDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="Checkpoints/StoneDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+[node name="Flame" parent="Checkpoints/StoneDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="Checkpoints/StoneDiya"]
 texture_filter = 2
@@ -1671,13 +1657,9 @@ collision_mask = 2
 position = Vector2(0, -50)
 shape = SubResource("CheckpointShape")
 
-[node name="Bowl" type="Polygon2D" parent="Checkpoints/BanyanDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+[node name="Diya" parent="Checkpoints/BanyanDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="Checkpoints/BanyanDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+[node name="Flame" parent="Checkpoints/BanyanDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="Checkpoints/BanyanDiya"]
 texture_filter = 2
@@ -1699,13 +1681,9 @@ collision_mask = 2
 position = Vector2(0, -50)
 shape = SubResource("CheckpointShape")
 
-[node name="Bowl" type="Polygon2D" parent="Checkpoints/UpperDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+[node name="Diya" parent="Checkpoints/UpperDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="Checkpoints/UpperDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+[node name="Flame" parent="Checkpoints/UpperDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="Checkpoints/UpperDiya"]
 texture_filter = 2
@@ -1727,13 +1705,9 @@ collision_mask = 2
 position = Vector2(0, -50)
 shape = SubResource("CheckpointShape")
 
-[node name="Bowl" type="Polygon2D" parent="Checkpoints/ShrineDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+[node name="Diya" parent="Checkpoints/ShrineDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="Checkpoints/ShrineDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+[node name="Flame" parent="Checkpoints/ShrineDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="Checkpoints/ShrineDiya"]
 texture_filter = 2
@@ -1755,13 +1729,9 @@ collision_mask = 2
 position = Vector2(0, -50)
 shape = SubResource("CheckpointShape")
 
-[node name="Bowl" type="Polygon2D" parent="Checkpoints/FinalDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+[node name="Diya" parent="Checkpoints/FinalDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="Checkpoints/FinalDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+[node name="Flame" parent="Checkpoints/FinalDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="Checkpoints/FinalDiya"]
 texture_filter = 2
@@ -1783,13 +1753,9 @@ collision_mask = 2
 position = Vector2(0, -50)
 shape = SubResource("CheckpointShape")
 
-[node name="Bowl" type="Polygon2D" parent="Checkpoints/KharaDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+[node name="Diya" parent="Checkpoints/KharaDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="Checkpoints/KharaDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+[node name="Flame" parent="Checkpoints/KharaDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="Checkpoints/KharaDiya"]
 texture_filter = 2
@@ -3033,13 +2999,9 @@ metadata/room = &"RootChamber"
 position = Vector2(0, -50)
 shape = SubResource("CheckpointShape")
 
-[node name="Bowl" type="Polygon2D" parent="RoomCheckpoints/RootBedDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+[node name="Diya" parent="RoomCheckpoints/RootBedDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="RoomCheckpoints/RootBedDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+[node name="Flame" parent="RoomCheckpoints/RootBedDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="RoomCheckpoints/RootBedDiya"]
 texture_filter = 2
@@ -3062,13 +3024,9 @@ metadata/room = &"CanopyNest"
 position = Vector2(0, -50)
 shape = SubResource("CheckpointShape")
 
-[node name="Bowl" type="Polygon2D" parent="RoomCheckpoints/TrunkDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+[node name="Diya" parent="RoomCheckpoints/TrunkDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="RoomCheckpoints/TrunkDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+[node name="Flame" parent="RoomCheckpoints/TrunkDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="RoomCheckpoints/TrunkDiya"]
 texture_filter = 2
@@ -3091,13 +3049,9 @@ metadata/room = &"CanopyNest"
 position = Vector2(0, -50)
 shape = SubResource("CheckpointShape")
 
-[node name="Bowl" type="Polygon2D" parent="RoomCheckpoints/CrownDiya"]
-polygon = PackedVector2Array(-14, -7, 14, -7, 8, 0, -8, 0)
-color = Color(0.6, 0.6, 0.6, 1)
+[node name="Diya" parent="RoomCheckpoints/CrownDiya" instance=ExtResource("checkpoint_diya")]
 
-[node name="Flame" type="Polygon2D" parent="RoomCheckpoints/CrownDiya"]
-polygon = PackedVector2Array(0, -28, 7, -12, 0, -6, -7, -12)
-color = Color(0.95, 0.95, 0.95, 1)
+[node name="Flame" parent="RoomCheckpoints/CrownDiya" instance=ExtResource("checkpoint_diya_flame")]
 
 [node name="Prompt" type="Label" parent="RoomCheckpoints/CrownDiya"]
 texture_filter = 2
