@@ -196,9 +196,9 @@ func run_checks() -> void:
 			await ticks(2)
 			boss.set_head_count(1)
 		boss.take_damage(999, Vector2.ZERO)
-		if level == "palace":
-			boss.set_physics_process(true)
-			await boss.died
+		check(sprite.animation != &"victory", "%s must show the boss dying before Siya celebrates" % level)
+		boss.set_physics_process(true)
+		await boss.died
 		if flow.comic != null and flow.comic.visible:
 			check(not player.can_process(), "Aftermath dialogue must freeze the player's animation clock")
 			for panel in flow.comic._panels.size():

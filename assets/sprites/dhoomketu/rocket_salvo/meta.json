@@ -1,0 +1,41 @@
+{
+  "fps": 8,
+  "loop": "hold",
+  "durations": [
+    2.4,
+    2.4,
+    2.4
+  ],
+  "poses": [
+    "Twisting his torso back, head turned to look over his back shoulder, right arm reaching up behind his head to touch the brass fuse-lighter to the rockets in the rack on his back, left hand on hip",
+    "Leaning back with chest out, left arm pointing straight forward and upward at 45 degrees like a commander ordering fire, right hand holding the brass fuse-lighter raised beside his head, mouth open shouting; the three rockets still in the rack on his back",
+    "Bracing in a wide stance with knees bent as if from recoil, left arm still pointing forward and up, right fist with fuse-lighter pulled to his chest, grinning"
+  ],
+  "frame_count": 3,
+  "canvas": [
+    352,
+    304
+  ],
+  "anchor": [
+    152,
+    285
+  ],
+  "source_canvas": [
+    304,
+    304
+  ],
+  "source_anchor": [
+    152,
+    285
+  ],
+  "models": {
+    "01": "flash",
+    "02": "pro",
+    "03": "pro"
+  },
+  "notes": "CAST attack 0: light the rack, order fire as rockets launch, brace.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 13.473684210526315
+  }
+}

@@ -140,9 +140,12 @@ rule. Jumping does not avoid the pillars, because they cover the full height.
 
 The final hit severs the last head (with its pop) and removes every Swaminathan
 projectile and hazard still in the arena, so no stray hit can follow the win.
-The banner shows `RAVAN FALLS`. The headless body shakes and flashes white and
-red for 0.9 s, then a large `DEFEATED` burst plays, the body dims and the
-`died` signal fires. The arena then shows the victory prompt.
+The banner shows `SWAMINATHAN FALLS`. The hurtbox switches off immediately.
+The headless body plays the four existing `swaminathan/dying` poses over
+0.9 s: recoiling, buckling, kneeling and collapsing. It then holds the
+`swaminathan/dead` corpse, a large `DEFEATED` burst plays, the body dims and
+the `died` signal fires. Victory controls, the palace exit and Raj's rescue
+wait for this collapse to finish. See [boss death playback](../boss_death_animations.md).
 
 ## Boss UI
 
@@ -204,8 +207,10 @@ state *n* shows the leftmost *n* heads.
   (`MOUTH_OFFSET`) is 8 units below. Telegraph glows, attack origins, the
   sever pop and Fury aim lines all use them.
 - **Effects stay in code:** the sprite flashes white when hit, tints red during
-  Fury, greys while staggered or spent, and flashes and dims on death (all
-  `modulate` on `Body`). No extra animation sets.
+  Fury, greys while staggered or spent, and dims after death (all `modulate`
+  on `Body`). Death switches to the existing headless cast animation at scale
+  0.5 and its shared anchor (235, 345 art px); living head states keep their
+  original sprite and measured attack origins.
 - **Review:** `xvfb-run -a godot --path . --resolution 960x540 -s
   tools/ravan_shots.gd` renders `docs/screenshots/swaminathan_states.png` (all
   11 states), `swaminathan_fight.png` (telegraph glows on a left and the
