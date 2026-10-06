@@ -71,7 +71,7 @@ func run_checks() -> void:
 	player = current_scene.player
 	await ticks(4)
 	course = current_scene.course
-	check(course.get_node("Encounters").get_child_count() == 12, "Palace has twelve staged encounters")
+	check(course.get_node("Encounters").get_child_count() == 24, "Palace has twenty-four staged encounters")
 	for enemy: CharacterBody2D in course.get_node("Encounters").get_children():
 		if not enemy.get_meta("airborne", false):
 			check(enemy.is_on_floor(), "%s must stand on reachable solid ground" % enemy.name)
