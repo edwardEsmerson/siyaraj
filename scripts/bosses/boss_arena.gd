@@ -3,7 +3,7 @@ extends "res://scripts/main/main.gd"
 ## generic BossHealthBar to the `TestCourse/Boss` node.
 
 @export var arena_width: int = 960
-@export var phase_two_message: String = "Enraged: faster slams, double shockwaves and a ladi pincer."
+@export var phase_two_message: String = "Enraged: faster slams and shorter firecracker fuses. Dash behind him to dodge."
 
 @onready var boss: CharacterBody2D = $TestCourse/Boss
 @onready var boss_bar: Control = $HUD/BossHealthBar

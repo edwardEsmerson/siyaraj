@@ -35,7 +35,7 @@ signal died
 @export var slam_active: float = 0.12
 @export var slam_recovery: float = 1.1
 @export var phase_two_slam_recovery: float = 0.8
-@export var slam_damage: int = 2
+@export var slam_damage: int = 1
 @export var slam_reach: float = 64.0
 @export var slam_hitbox: Vector2 = Vector2(120, 80)
 @export var slam_knockback: Vector2 = Vector2(360, -220)
@@ -52,9 +52,6 @@ signal died
 @export var ladi_segments: int = 12
 @export var phase_two_ladi_segments: int = 14
 @export var ladi_origin_offset: float = 44.0
-## Phase 2 pincer: a second, shorter ladi from the wall on the player's side.
-@export var pincer_fuse_delay: float = 1.6
-@export var pincer_segments: int = 10
 
 enum State { INTRO, IDLE, APPROACH, SLAM_WINDUP, SLAM_ACTIVE, SLAM_RECOVERY, LADI_CAST, LADI_RECOVERY, PHASE_SHIFT, DEAD }
 
@@ -71,7 +68,6 @@ var slams_since_ladi: int = 0
 var _approach_time: float = 0.0
 var _hit_flash_remaining: float = 0.0
 var _slam_targets: Dictionary = {}
-var _combo_ladi: bool = false
 var _death_time: float = 0.0
 var _anim_time: float = 0.0
 
@@ -164,13 +160,7 @@ func _physics_process(delta: float) -> void:
 				_enter(State.SLAM_RECOVERY, current_slam_recovery() + state_remaining)
 		State.SLAM_RECOVERY:
 			if state_remaining <= 0.0:
-				if _combo_ladi and ladi_cooldown_remaining <= 0.0:
-					_combo_ladi = false
-					_face(player)
-					start_ladi()
-				else:
-					_combo_ladi = false
-					_enter(State.IDLE, _idle_duration())
+				_enter(State.IDLE, _idle_duration())
 		State.LADI_CAST:
 			if state_remaining <= 0.0:
 				_place_ladis(player)
@@ -188,6 +178,8 @@ func _idle_duration() -> float:
 
 
 func _decide(player: CharacterBody2D) -> void:
+	if _has_active_hazards():
+		return
 	_face(player)
 	var distance := absf(player.global_position.x - global_position.x)
 	if ladi_cooldown_remaining <= 0.0 and (distance > slam_range * 2.0 or slams_since_ladi >= 2):
@@ -199,13 +191,20 @@ func _decide(player: CharacterBody2D) -> void:
 		_enter(State.APPROACH)
 
 
+## Let each attack finish before beginning another, including burning ladi fuses.
+func _has_active_hazards() -> bool:
+	for hazard in get_tree().get_nodes_in_group("boss_hazards"):
+		if not hazard.is_queued_for_deletion():
+			return true
+	return false
+
+
 ## Begin the gada slam. Facing locks for the whole swing.
 func start_slam(direction: int) -> void:
-	if state == State.DEAD:
+	if state == State.DEAD or _has_active_hazards():
 		return
 	facing = 1 if direction >= 0 else -1
 	_slam_targets.clear()
-	_combo_ladi = is_phase_two()
 	_enter(State.SLAM_WINDUP, current_slam_windup())
 
 
@@ -215,8 +214,6 @@ func _slam_impact() -> void:
 	var parent := get_tree().current_scene
 	Burst.spawn(parent, global_position + Vector2(facing * 50, -6), SLAM_COLOR, "DHAM!", 46.0)
 	spawn_shockwave(facing)
-	if is_phase_two():
-		spawn_shockwave(-facing)
 	_hit_slam_overlaps()
 
 
@@ -253,7 +250,7 @@ func _hit_slam_overlaps() -> void:
 
 ## Begin placing ladi fireworks; they are laid when the cast finishes.
 func start_ladi() -> void:
-	if state == State.DEAD:
+	if state == State.DEAD or _has_active_hazards():
 		return
 	_enter(State.LADI_CAST, ladi_cast_time)
 
@@ -265,10 +262,6 @@ func _place_ladis(player: CharacterBody2D) -> void:
 	_face(player)
 	var origin := global_position + Vector2(facing * ladi_origin_offset, 0)
 	place_ladi(origin, facing, current_ladi_fuse(), phase_two_ladi_segments if is_phase_two() else ladi_segments)
-	if is_phase_two():
-		# Pincer: a later, shorter ladi from the far wall bursts back toward Khara.
-		var wall_x := _wall_x(facing)
-		place_ladi(Vector2(wall_x - facing * 20.0, global_position.y), -facing, current_ladi_fuse() + pincer_fuse_delay, pincer_segments)
 
 
 func place_ladi(origin: Vector2, direction: int, fuse: float = -1.0, segments: int = -1) -> Node2D:
@@ -280,16 +273,6 @@ func place_ladi(origin: Vector2, direction: int, fuse: float = -1.0, segments: i
 	ladi.position = parent.to_local(origin)
 	parent.add_child(ladi)
 	return ladi
-
-
-func _wall_x(direction: int) -> float:
-	var from := global_position + Vector2(0, -10)
-	var query := PhysicsRayQueryParameters2D.create(from, from + Vector2(direction * 2000.0, 0), 1)
-	query.exclude = [get_rid()]
-	var hit := get_world_2d().direct_space_state.intersect_ray(query)
-	if hit.is_empty():
-		return global_position.x + direction * 600.0
-	return hit.position.x
 
 
 func take_damage(amount: int, _knockback: Vector2) -> void:
@@ -309,7 +292,6 @@ func take_damage(amount: int, _knockback: Vector2) -> void:
 
 func _enter_phase_two() -> void:
 	phase = 2
-	_combo_ladi = false
 	# The roar cancels any pending swing and opens with fireworks.
 	_enter(State.PHASE_SHIFT, phase_shift_time)
 	ladi_cooldown_remaining = 0.0
