@@ -1,0 +1,27 @@
+{
+  "name": "dhoomketu",
+  "brief": "Dhoomketu, the Firework Commander boss: a wiry, tall, lean military trickster villain, narrow shoulders, long thin legs, upright cocky posture. Muted dusky-purple skin, single head, sharp hooked nose, huge swept-up black handlebar moustache, thick scowling brows. Plum-purple turban with a brass band and a small round gold crest at the front. Long plum military frock coat to the knees with a high collar and a dark charcoal chest panel with small brass buttons, dark trousers, pointed black boots. A diagonal brass bandolier across the chest from shoulder to hip, holding a row of short cylindrical pink-and-gold firework tubes. Strapped on his back, a rack of exactly three plum rockets with gold pointed tips, angled up behind the back shoulder, tips rising just above the turban. His forward right hand holds a short brass fuse-lighter stick (portfire) upright at chest height; his left hand rests on his hip. No horns, no crown, no mace, no blue skin, no armour plates. Strict right-facing side profile, full body, standing.",
+  "key": "green",
+  "role": "boss",
+  "target": 200,
+  "size": "4K",
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "full-body",
+  "candidate_id": "04",
+  "model": "pro",
+  "canvas": [
+    304,
+    304
+  ],
+  "anchor": [
+    152,
+    285
+  ],
+  "art_dimensions": [
+    108,
+    200
+  ],
+  "generation_pixel_size": 18.415,
+  "problems": []
+}

@@ -1,10 +1,11 @@
 extends Node2D
-## Low roar shockwave that rolls along the floor. Jump over it; walls stop it.
+## Low roar shockwave: a harmless floor tell, then rolling damage. Jump or dash.
 const Burst = preload("res://scripts/effects/burst.gd")
 const RavanFx = preload("res://scripts/bosses/ravan/ravan_fx.gd")
 
 const PLAYER_BODY_MASK: int = 2
 const WORLD_MASK: int = 1
+const TELEGRAPH_TIME: float = 0.4
 
 var direction: int = 1
 var speed: float = 280.0
@@ -34,8 +35,16 @@ func _ready() -> void:
 		add_child(art)
 
 
+func is_telegraphing() -> bool:
+	return _age < TELEGRAPH_TIME
+
+
 func _physics_process(delta: float) -> void:
+	var was_telegraphing := is_telegraphing()
 	_age += delta
+	if was_telegraphing:
+		queue_redraw()
+		return
 	var step := direction * speed * delta
 	# The wave hugs the floor; a solid wall or ledge face ahead ends it.
 	var from := global_position + Vector2(0, -8)
@@ -46,12 +55,14 @@ func _physics_process(delta: float) -> void:
 		return
 	global_position.x += step
 	_hurt_overlaps()
-	if _age >= lifetime:
+	if _age >= TELEGRAPH_TIME + lifetime:
 		queue_free()
 	queue_redraw()
 
 
 func _hurt_overlaps() -> void:
+	if is_telegraphing():
+		return
 	_shape.size = size
 	var params := PhysicsShapeQueryParameters2D.new()
 	params.shape = _shape
@@ -73,6 +84,13 @@ func _draw() -> void:
 		return
 	var half := size.x * 0.5
 	var crest := PackedVector2Array([Vector2(-half, 0), Vector2(-half * 0.3, -size.y), Vector2(half * 0.4 * direction, -size.y * 0.6), Vector2(half, 0)])
+	if is_telegraphing():
+		var warning := color
+		warning.a = 0.35 + 0.5 * clampf(_age / TELEGRAPH_TIME, 0.0, 1.0)
+		draw_polyline(PackedVector2Array([crest[0], crest[1], crest[2], crest[3]]), warning, 2.0)
+		draw_line(Vector2.ZERO, Vector2(direction * 42.0, 0), color, 3.0)
+		draw_polyline(PackedVector2Array([Vector2(direction * 32.0, -7), Vector2(direction * 42.0, 0), Vector2(direction * 32.0, 7)]), color, 3.0)
+		return
 	draw_colored_polygon(crest, color)
 	var trail := color
 	for index in range(3):

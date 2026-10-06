@@ -47,7 +47,7 @@ func _ready() -> void:
 		completion.menu_requested.connect(PlaytestNavigation.show_title)
 	PlaytestNavigation.configure_course(course)
 	if not PlaytestNavigation.snapshot.is_empty():
-		combat_status.text = "E: light diya / R: repeat this snapshot / Esc: pause and developer menu"
+		combat_status.text = "E: light diya / Esc: pause and developer menu"
 	player.global_position = player_spawn.global_position
 	if course.has_method("restore_transition_state"):
 		course.restore_transition_state(player)
@@ -70,7 +70,7 @@ func _ready() -> void:
 	if enemy != null:
 		var encounter_name: String = enemy.enemy_name
 		enemy.died.connect(func() -> void:
-			combat_status.text = "%s defeated! Exit open; reach the flag." % encounter_name if course.has_signal("finished") else "%s defeated! R to replay." % encounter_name
+			combat_status.text = "%s defeated! Exit open; reach the flag." % encounter_name if course.has_signal("finished") else "%s defeated! Use Restart in the pause menu to replay." % encounter_name
 		)
 
 	if course.has_node("Checkpoints") and course.has_node("Encounters"):
@@ -184,13 +184,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		_continue_course()
 		return
-	if event.is_action_pressed("restart"):
+	if OS.is_debug_build() and event.is_action_pressed("restart"):
 		get_viewport().set_input_as_handled()
 		if PlaytestNavigation.snapshot.get("path", "") == scene_file_path:
 			PlaytestNavigation._restart()
 			return
 		if course.has_method("reset_progress"):
 			course.reset_progress()
+		CampaignSave.capture()
 		_restart()
 		return
 	if course.has_method("hint_at"):

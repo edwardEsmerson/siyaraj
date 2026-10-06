@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scripts/bosses/ravan/ravan_boss.gd" id="1_boss"]
 [ext_resource type="Script" path="res://scripts/bosses/ravan/ravan_body.gd" id="2_body"]

@@ -1,5 +1,5 @@
 extends CharacterBody2D
-## Patrol and shooting run together. Hits interrupt firing, never flight altitude.
+## Patrol and shooting run together. Staggers interrupt firing, never flight altitude.
 const BURST = preload("res://scripts/effects/burst.gd")
 const PROJECTILE_SCENE = preload("res://scenes/combat/enemy_projectile.tscn")
 
@@ -17,6 +17,7 @@ signal shot_fired
 @export var projectile_damage: int = 1
 @export var projectile_lifetime: float = 3.0
 @export var projectile_knockback: Vector2 = Vector2(180, -120)
+@export var stagger_cooldown: float = 1.4
 
 enum State { PATROL, CHARGING, RECOVERY, HURT, DEAD }
 var state: State = State.PATROL
@@ -26,6 +27,7 @@ var _direction: int = 1
 var _aim_direction: Vector2 = Vector2.RIGHT
 var _remaining: float = 0.0
 var _hit_flash_remaining: float = 0.0
+var _stagger_cooldown_remaining: float = 0.0
 
 @onready var body: Polygon2D = $Body
 @onready var pupil: Polygon2D = $Pupil
@@ -43,6 +45,7 @@ func _physics_process(delta: float) -> void:
 	if state == State.DEAD:
 		return
 	_hit_flash_remaining = maxf(_hit_flash_remaining - delta, 0.0)
+	_stagger_cooldown_remaining = maxf(_stagger_cooldown_remaining - delta, 0.0)
 	_remaining = maxf(_remaining - delta, 0.0)
 	if global_position.x >= _home.x + patrol_radius:
 		_direction = -1
@@ -125,6 +128,8 @@ func _update_feedback() -> void:
 		State.HURT:
 			body.modulate = Color(2.0, 2.0, 2.0) if _hit_flash_remaining > 0.0 else Color(1.2, 0.8, 0.8)
 			action_hint = "HIT"
+	if _hit_flash_remaining > 0.0 and state != State.HURT:
+		body.modulate = body.modulate.lerp(Color(2.0, 2.0, 2.0), 0.35)
 	pupil.position = Vector2(0, -20) + look * 5.0
 	status.text = "Flyer %d/%d\n%s" % [health, max_health, action_hint]
 	queue_redraw()
@@ -150,8 +155,11 @@ func take_damage(amount: int, knockback: Vector2) -> void:
 		died.emit()
 		queue_free()
 		return
-	state = State.HURT
-	velocity = Vector2(knockback.x, 0.0)
-	_remaining = 0.20
 	_hit_flash_remaining = 0.09
+	# Follow-up hits still deal damage, but cannot restart hurt or reload timers.
+	if _stagger_cooldown_remaining <= 0.0 and state != State.RECOVERY:
+		state = State.HURT
+		velocity = Vector2(knockback.x, 0.0)
+		_remaining = 0.20
+		_stagger_cooldown_remaining = stagger_cooldown
 	_update_feedback()

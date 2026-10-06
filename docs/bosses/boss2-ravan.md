@@ -68,7 +68,7 @@ standing (phase 3) carry the attacks that escalate in phase 3.
 | 9 | Chitta | Will | Lightning | Cyan | As for Mada |
 
 Attack details. All of them deal 1 damage, and Siya's 0.8 s damage protection
-applies. Every attack leaves from the head's mouth, 8 px below its face centre.
+applies. Ranged attacks leave from the head's mouth, 8 px below its face centre.
 
 - **Fire breath** draws a 330 x 34 px beam from the mouth toward Siya. Its aim
   locks when the beam appears. It shows an outline for 0.45 s, then burns for
@@ -76,8 +76,11 @@ applies. Every attack leaves from the head's mouth, 8 px below its face centre.
 - **Homing orb** reuses `homing_projectile.tscn`: 160 px/s, 2.2 rad/s turning,
   3.2 s lifetime. Phase 3 fires two orbs, 0.35 rad apart.
 - **Roar shockwave** sends two waves along the floor from below the head, one
-  in each direction. Each wave is 26 x 22 px and travels at 280 px/s. Walls and
-  ledge faces stop it.
+  in each direction. During the existing head telegraph, gold floor arrows and
+  `ROAR - JUMP!` mark that fixed origin. The waves then show harmless outlines
+  at the origin for 0.4 s before moving and dealing damage, giving Siya time to
+  jump or dash even while attacking beside him. They never track Siya. Each
+  wave is 26 x 22 px and travels at 280 px/s. Walls and ledge faces stop it.
 - **Lightning** marks a 44 px column at Siya's x position for 0.7 s, then
   strikes for 0.18 s. Phase 3 adds a second strike on the same spot at 1.15 s,
   so move and do not step back.
@@ -137,9 +140,12 @@ rule. Jumping does not avoid the pillars, because they cover the full height.
 
 The final hit severs the last head (with its pop) and removes every Swaminathan
 projectile and hazard still in the arena, so no stray hit can follow the win.
-The banner shows `RAVAN FALLS`. The headless body shakes and flashes white and
-red for 0.9 s, then a large `DEFEATED` burst plays, the body dims and the
-`died` signal fires. The arena then shows the victory prompt.
+The banner shows `SWAMINATHAN FALLS`. The hurtbox switches off immediately.
+The headless body plays the four existing `swaminathan/dying` poses over
+0.9 s: recoiling, buckling, kneeling and collapsing. It then holds the
+`swaminathan/dead` corpse, a large `DEFEATED` burst plays, the body dims and
+the `died` signal fires. Victory controls, the palace exit and Raj's rescue
+wait for this collapse to finish. See [boss death playback](../boss_death_animations.md).
 
 ## Boss UI
 
@@ -201,8 +207,10 @@ state *n* shows the leftmost *n* heads.
   (`MOUTH_OFFSET`) is 8 units below. Telegraph glows, attack origins, the
   sever pop and Fury aim lines all use them.
 - **Effects stay in code:** the sprite flashes white when hit, tints red during
-  Fury, greys while staggered or spent, and flashes and dims on death (all
-  `modulate` on `Body`). No extra animation sets.
+  Fury, greys while staggered or spent, and dims after death (all `modulate`
+  on `Body`). Death switches to the existing headless cast animation at scale
+  0.5 and its shared anchor (235, 345 art px); living head states keep their
+  original sprite and measured attack origins.
 - **Review:** `xvfb-run -a godot --path . --resolution 960x540 -s
   tools/ravan_shots.gd` renders `docs/screenshots/swaminathan_states.png` (all
   11 states), `swaminathan_fight.png` (telegraph glows on a left and the

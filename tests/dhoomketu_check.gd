@@ -113,12 +113,32 @@ func run_checks() -> void:
 	await ticks(1)
 	boss.start_attack(2, 480)
 	check(get_nodes_in_group("dhoomketu_hazards").size() == 3, "Phase two must mark three anaar lanes")
+	var died_count := [0]
+	boss.died.connect(func() -> void: died_count[0] += 1)
 	boss.take_damage(14, Vector2.ZERO)
 	await ticks(1)
 	check(boss.state == boss.State.DEAD and boss.collision_layer == 0 and bar.health == 0, "Death must disable the boss and empty its health bar")
+	check(boss.art.animation == &"death" and boss.art.frame == 0 and died_count[0] == 0, "Dhoomketu must begin his drawn death before victory")
 	check(get_nodes_in_group("dhoomketu_hazards").is_empty(), "Defeat must clear hazards before campaign victory")
 	boss.take_damage(1, Vector2.ZERO)
 	check(boss.health == 0, "Dead bosses must ignore further damage")
+	await ticks(25)
+	check(boss.art.frame == 1 and died_count[0] == 0, "Dhoomketu must show his toppling pose")
+	var death_frame: int = boss.art.frame
+	var death_progress: float = boss.art.frame_progress
+	paused = true
+	await ticks(30)
+	check(boss.art.frame == death_frame and is_equal_approx(boss.art.frame_progress, death_progress), "Pause must suspend Dhoomketu's death animation")
+	paused = false
+	await ticks(22)
+	check(boss.art.frame == 2 and died_count[0] == 0, "Dhoomketu must visibly slump before victory")
+	await ticks(24)
+	check(boss.art.frame == 3 and died_count[0] == 0, "Dhoomketu must hold his last death pose before victory")
+	await ticks(30)
+	check(died_count[0] == 1 and not boss.art.is_playing(), "Dhoomketu must finish the animation and announce victory once")
+	boss.take_damage(1, Vector2.ZERO)
+	await ticks(5)
+	check(died_count[0] == 1 and boss.art.frame == 3, "Dhoomketu must retain his final pose without replaying victory")
 	await reset_dhoomketu()
 	player.set_physics_process(false)
 	player.position = Vector2(50, 250)

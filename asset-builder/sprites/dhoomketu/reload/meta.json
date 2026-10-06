@@ -1,0 +1,46 @@
+{
+  "name": "dhoomketu",
+  "animation": "reload",
+  "size": "4K",
+  "view": "right-profile",
+  "subject": "full-body",
+  "anchor_mode": "feet",
+  "fps": 8,
+  "loop": "loop",
+  "poses": [
+    "Hunched over with both hands reaching back over his shoulder fumbling with the rockets in the rack on his back, head turned back to look at them, one knee bent, off balance, sweating",
+    "Patting the bandolier on his chest with both hands, looking down at it in panic, shoulders hunched, knees bent, sweat drop on his brow, fuse-lighter clenched in the right hand"
+  ],
+  "expected_frames": 2,
+  "free_palette": false,
+  "durations": [
+    2.8,
+    2.8
+  ],
+  "frames": [
+    "01",
+    "02"
+  ],
+  "problems": {
+    "02": [
+      "art touches the image edge (clipped, or background not removed)",
+      "size drift +31% vs approved sprite (crouch/stretch poses can be fine)"
+    ]
+  },
+  "models": {
+    "01": "flash",
+    "02": "flash"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 13.473684210526315
+  },
+  "canvas": [
+    304,
+    304
+  ],
+  "anchor": [
+    152,
+    285
+  ]
+}

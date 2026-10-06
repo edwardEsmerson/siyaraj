@@ -1,0 +1,34 @@
+[gd_resource type="SpriteFrames" load_steps=22 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/sprite.png" id="base"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/idle/01.png" id="idle_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/idle/02.png" id="idle_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/intro_taunt/01.png" id="intro_taunt_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/intro_taunt/02.png" id="intro_taunt_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/intro_taunt/03.png" id="intro_taunt_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/rocket_salvo/01.png" id="rocket_salvo_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/rocket_salvo/02.png" id="rocket_salvo_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/rocket_salvo/03.png" id="rocket_salvo_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/chakri_throw/01.png" id="chakri_throw_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/chakri_throw/02.png" id="chakri_throw_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/chakri_throw/03.png" id="chakri_throw_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/anaar_plant/01.png" id="anaar_plant_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/anaar_plant/02.png" id="anaar_plant_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/anaar_plant/03.png" id="anaar_plant_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/reload/01.png" id="reload_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/reload/02.png" id="reload_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/death/01.png" id="death_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/death/02.png" id="death_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/death/03.png" id="death_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dhoomketu/death/04.png" id="death_04"]
+
+[resource]
+animations = [
+{"frames": [{"duration": 4.000000, "texture": ExtResource("idle_01")}, {"duration": 4.000000, "texture": ExtResource("idle_02")}], "loop": true, "name": &"idle", "speed": 8.0},
+{"frames": [{"duration": 2.667000, "texture": ExtResource("intro_taunt_01")}, {"duration": 2.667000, "texture": ExtResource("intro_taunt_02")}, {"duration": 2.667000, "texture": ExtResource("intro_taunt_03")}], "loop": false, "name": &"intro_taunt", "speed": 8.0},
+{"frames": [{"duration": 2.400000, "texture": ExtResource("rocket_salvo_01")}, {"duration": 2.400000, "texture": ExtResource("rocket_salvo_02")}, {"duration": 2.400000, "texture": ExtResource("rocket_salvo_03")}], "loop": false, "name": &"rocket_salvo", "speed": 8.0},
+{"frames": [{"duration": 2.400000, "texture": ExtResource("chakri_throw_01")}, {"duration": 2.400000, "texture": ExtResource("chakri_throw_02")}, {"duration": 2.400000, "texture": ExtResource("chakri_throw_03")}], "loop": false, "name": &"chakri_throw", "speed": 8.0},
+{"frames": [{"duration": 2.400000, "texture": ExtResource("anaar_plant_01")}, {"duration": 2.400000, "texture": ExtResource("anaar_plant_02")}, {"duration": 2.400000, "texture": ExtResource("anaar_plant_03")}], "loop": false, "name": &"anaar_plant", "speed": 8.0},
+{"frames": [{"duration": 2.800000, "texture": ExtResource("reload_01")}, {"duration": 2.800000, "texture": ExtResource("reload_02")}], "loop": true, "name": &"reload", "speed": 8.0},
+{"frames": [{"duration": 2.800000, "texture": ExtResource("death_01")}, {"duration": 2.800000, "texture": ExtResource("death_02")}, {"duration": 2.800000, "texture": ExtResource("death_03")}, {"duration": 4.000000, "texture": ExtResource("death_04")}], "loop": false, "name": &"death", "speed": 8.0}
+]

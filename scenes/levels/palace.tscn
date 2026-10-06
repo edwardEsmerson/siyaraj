@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="enemy"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/ground_shooter.tscn" id="ground_shooter"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/brute.tscn" id="brute"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/flying_enemy.tscn" id="flying_enemy"]
 [ext_resource type="Script" path="res://scripts/levels/world_skin.gd" id="world_skin"]
+[ext_resource type="Script" path="res://scripts/effects/fireworks.gd" id="fireworks"]
 
 [ext_resource type="PackedScene" path="res://scenes/companions/robin_hint.tscn" id="robin_hint"]
 
@@ -229,6 +231,26 @@ section_starts = PackedInt32Array(0, 3260, 5540, 8910, 11260, 13400)
 z_index = -5
 polygon = PackedVector2Array(0, 0, 14400, 0, 14400, 540, 0, 540)
 color = Color(0.08, 0.08, 0.08, 1)
+
+[node name="FestivalSky" type="Parallax2D" parent="."]
+z_index = -95
+scroll_scale = Vector2(0, 0)
+
+[node name="SkyWindow" type="Control" parent="FestivalSky"]
+clip_contents = true
+offset_top = 116.0
+offset_right = 960.0
+offset_bottom = 230.0
+mouse_filter = 2
+
+[node name="Fireworks" type="Node2D" parent="FestivalSky/SkyWindow"]
+modulate = Color(1, 1, 1, 0.45)
+scale = Vector2(0.65, 0.65)
+script = ExtResource("fireworks")
+width = 1476.9231
+launch_y = 175.0
+burst_y = Vector2(25, 85)
+interval = Vector2(2.4, 3.6)
 
 [node name="Terrain" type="Node2D" parent="."]
 
@@ -2058,24 +2080,176 @@ direction = "diyalit"
 [node name="GateHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(620, 430)
 text = "Climb the gate steps, then dash over the broken lintel. Lower ledges catch falls."
+topic = &"air_dash"
 
 [node name="GalleryHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(3410, 430)
 text = "Column bases block shots. Vault them to close in, or take the upper gallery."
+topic = &"cover"
 
 [node name="RoofHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(5780, 430)
 text = "Broken roofs ahead! Dash between them. The lower courts lead back up."
+topic = &"air_dash"
 
 [node name="HallHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(9140, 430)
 text = "The balcony passes above both guards. Choose where to drop, and watch their windups."
+topic = &"guard"
 
 [node name="SanctumHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(11520, 430)
 text = "A brute waits atop these steps. Dodge his swing, then strike during recovery."
+topic = &"brute"
 
 [node name="BossHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(13630, 430)
 text = "Light the last diya! Swaminathan waits beyond. Knock out his active heads to expose his core."
 duration = 5.0
+
+[node name="GateGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(490, 430)
+patrol_radius = 50.0
+detection_range = 160.0
+
+[node name="GateGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(490, 430)
+
+[node name="GalleryEntranceGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(3500, 430)
+patrol_radius = 40.0
+detection_range = 150.0
+
+[node name="GalleryEntranceGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(3500, 430)
+
+[node name="GalleryExitGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(4780, 430)
+patrol_radius = 45.0
+detection_range = 160.0
+
+[node name="GalleryExitGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(4780, 430)
+
+[node name="RoofLookoutScout" parent="Encounters" instance=ExtResource("flying_enemy")]
+position = Vector2(6360, 217)
+patrol_radius = 35.0
+detection_range = 170.0
+metadata/airborne = true
+
+[node name="RoofLookoutScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(6360, 217)
+
+[node name="InnerEntryBrute" parent="Encounters" instance=ExtResource("brute")]
+position = Vector2(9100, 430)
+patrol_radius = 40.0
+detection_range = 140.0
+
+[node name="InnerEntryBrute" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(9100, 430)
+
+[node name="InnerHallGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(10800, 430)
+patrol_radius = 45.0
+detection_range = 150.0
+
+[node name="InnerHallGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(10800, 430)
+
+[node name="GateLintelShooter" parent="Encounters" instance=ExtResource("ground_shooter")]
+position = Vector2(1405, 270)
+patrol_radius = 25.0
+detection_range = 110.0
+
+[node name="GateLintelShooter" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(1405, 270)
+
+[node name="GateDescentGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(2150, 365)
+patrol_radius = 20.0
+detection_range = 100.0
+
+[node name="GateDescentGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(2150, 365)
+
+[node name="CourtyardRearGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(2820, 430)
+patrol_radius = 25.0
+detection_range = 100.0
+
+[node name="CourtyardRearGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(2820, 430)
+
+[node name="WestColumnGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(3755, 390)
+patrol_radius = 10.0
+detection_range = 90.0
+
+[node name="WestColumnGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(3755, 390)
+
+[node name="GalleryRearShooter" parent="Encounters" instance=ExtResource("ground_shooter")]
+position = Vector2(5060, 430)
+patrol_radius = 25.0
+detection_range = 110.0
+
+[node name="GalleryRearShooter" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(5060, 430)
+
+[node name="RoofStairGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(5995, 270)
+patrol_radius = 10.0
+detection_range = 90.0
+
+[node name="RoofStairGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(5995, 270)
+
+[node name="BrokenRoofGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(6820, 250)
+patrol_radius = 20.0
+detection_range = 100.0
+
+[node name="BrokenRoofGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(6820, 250)
+
+[node name="BrokenRoofScout" parent="Encounters" instance=ExtResource("flying_enemy")]
+position = Vector2(7585, 317)
+patrol_radius = 20.0
+detection_range = 100.0
+metadata/airborne = true
+
+[node name="BrokenRoofScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(7585, 317)
+
+[node name="RoofCourtRearGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(8750, 430)
+patrol_radius = 15.0
+detection_range = 100.0
+
+[node name="RoofCourtRearGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(8750, 430)
+
+[node name="InnerWestScout" parent="Encounters" instance=ExtResource("flying_enemy")]
+position = Vector2(9455, 370)
+patrol_radius = 10.0
+detection_range = 100.0
+metadata/airborne = true
+
+[node name="InnerWestScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(9455, 370)
+
+[node name="InnerEastGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(10025, 390)
+patrol_radius = 10.0
+detection_range = 90.0
+
+[node name="InnerEastGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(10025, 390)
+
+[node name="ThroneRoofGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(12880, 320)
+patrol_radius = 20.0
+detection_range = 110.0
+
+[node name="ThroneRoofGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(12880, 320)

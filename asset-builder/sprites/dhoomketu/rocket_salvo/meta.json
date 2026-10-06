@@ -1,0 +1,59 @@
+{
+  "name": "dhoomketu",
+  "animation": "rocket_salvo",
+  "size": "4K",
+  "view": "right-profile",
+  "subject": "full-body",
+  "anchor_mode": "feet",
+  "fps": 8,
+  "loop": "hold",
+  "poses": [
+    "Twisting his torso back, head turned to look over his back shoulder, right arm reaching up behind his head to touch the brass fuse-lighter to the rockets in the rack on his back, left hand on hip",
+    "Leaning back with chest out, left arm pointing straight forward and upward at 45 degrees like a commander ordering fire, right hand holding the brass fuse-lighter raised beside his head, mouth open shouting; the three rockets still in the rack on his back",
+    "Bracing in a wide stance with knees bent as if from recoil, left arm still pointing forward and up, right fist with fuse-lighter pulled to his chest, grinning"
+  ],
+  "expected_frames": 3,
+  "free_palette": false,
+  "durations": [
+    2.4,
+    2.4,
+    2.4
+  ],
+  "frames": [
+    "01",
+    "02",
+    "03"
+  ],
+  "problems": {
+    "01": [
+      "art touches the image edge (clipped, or background not removed)",
+      "size drift +34% vs approved sprite (crouch/stretch poses can be fine)"
+    ],
+    "02": [
+      "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': 'RESOURCE_EXHAUSTED'}}"
+    ],
+    "03": [
+      "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': 'RESOURCE_EXHAUSTED'}}"
+    ]
+  },
+  "models": {
+    "01": "flash",
+    "02": "pro",
+    "03": "pro"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 13.473684210526315
+  },
+  "canvas": [
+    304,
+    304
+  ],
+  "anchor": [
+    152,
+    285
+  ],
+  "holds": {
+    "03": "rocket_salvo/02.png"
+  }
+}

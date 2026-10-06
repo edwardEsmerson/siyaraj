@@ -35,11 +35,13 @@ func _update_diyas(player: CharacterBody2D) -> void:
 		if nearby and Input.is_action_just_pressed("interact"):
 			if not saved.lit.has(checkpoint.name):
 				saved.lit.append(checkpoint.name)
+				player.heal_from_diya()
 				get_node("/root/AudioDirector").play_cue(&"checkpoint")
 				player.get_node("Visuals").play_story(&"light_diya")
 			if checkpoint.position.x >= saved.spawn.x:
 				saved.spawn = checkpoint.position
 			progress[level_id] = saved
+			get_node("/root/CampaignSave").capture()
 		checkpoint.get_node("Flame").visible = saved.lit.has(checkpoint.name)
 		InteractionPrompt.set_available(checkpoint.get_node("Prompt"), nearby and not saved.lit.has(checkpoint.name))
 

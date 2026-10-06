@@ -1,9 +1,11 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/bosses/ravan/ravan_arena.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/main/campaign_victory.tscn" id="2"]
 
 [ext_resource type="Script" path="res://scripts/main/raj_cage.gd" id="3_cage"]
+
+[ext_resource type="Script" path="res://scripts/main/palace_escape.gd" id="4_escape"]
 
 [node name="RavanArena" instance=ExtResource("1")]
 
@@ -43,3 +45,6 @@ versus_texture = "res://assets/cutscenes/boss-versus/swaminathan.png"
 [node name="RajCage" type="Node2D" parent="."]
 position = Vector2(812, 310)
 script = ExtResource("3_cage")
+
+[node name="PalaceEscape" type="Node2D" parent="."]
+script = ExtResource("4_escape")

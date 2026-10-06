@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" path="res://resources/ui/siyaraj_theme.tres" id="1_theme"]
 [ext_resource type="Script" path="res://scripts/main/ending_screen.gd" id="2_ending"]
-[ext_resource type="Script" path="res://scripts/effects/fireworks.gd" id="3_fireworks"]
+[ext_resource type="PackedScene" path="res://scenes/effects/victory_fireworks.tscn" id="3_fireworks"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/title_skyline.png" id="4_skyline"]
 [ext_resource type="Texture2D" path="res://assets/ui/divider.png" id="5_divider"]
 [ext_resource type="Script" path="res://scripts/ui/diya_cursor.gd" id="6_cursor"]
@@ -39,9 +39,8 @@ mouse_filter = 2
 texture = SubResource("GradientTexture2D_dusk")
 expand_mode = 1
 
-[node name="Fireworks" type="Node2D" parent="."]
-script = ExtResource("3_fireworks")
-interval = Vector2(0.25, 0.6)
+[node name="Fireworks" parent="." instance=ExtResource("3_fireworks")]
+layout_mode = 1
 
 [node name="Skyline" type="TextureRect" parent="."]
 layout_mode = 1
@@ -71,7 +70,7 @@ theme_override_constants/separation = 10
 texture_filter = 2
 layout_mode = 2
 theme_type_variation = &"TitleLabel"
-text = "The lights return"
+text = "Victory! The lights return"
 horizontal_alignment = 1
 
 [node name="Divider" type="TextureRect" parent="Center/Content"]
@@ -89,8 +88,8 @@ scale = Vector2(0.5, 0.5)
 centered = false
 offset = Vector2(-64, -120)
 sprite_frames = ExtResource("8_raj")
-animation = &"sulk"
-autoplay = "sulk"
+animation = &"freed"
+autoplay = "freed"
 
 [node name="Siya" type="AnimatedSprite2D" parent="Center/Content/RajStage"]
 scale = Vector2(0.5, 0.5)
@@ -118,6 +117,20 @@ custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Return to title"
+
+[node name="NewJourney" type="Button" parent="Center/Content"]
+texture_filter = 2
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Start a new journey"
+
+[node name="ReplayFinale" type="Button" parent="Center/Content"]
+texture_filter = 2
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Replay the final showdown"
 
 [node name="DiyaCursor" type="TextureRect" parent="." node_paths=PackedStringArray("menu")]
 layout_mode = 0

@@ -29,7 +29,7 @@ func _ready() -> void:
 	_add_sign(Vector2(920, 185), "02 / FOREST / SKYSHOT", "L: fire ahead. Recoil pushes you back.\nFive shots per round. Death or next level refills.", Color(1, 0.7, 0.2))
 	_add_sign(Vector2(1740, 185), "RECOVERY LANE", "Space: jump the low blocks. Shift: dash (also on the ground, dodges hits).\nRun back and forth while the HUD timers count down.", Color(0.6, 0.8, 0.9))
 	_add_sign(Vector2(2650, 185), "03 / PALACE / CHAKRI", "Stand on the ring. Hold K for 1 sec, then release.\nClear both sides. Cooldown: 30 sec; J stays available.", Color(0.2, 0.95, 0.8))
-	_add_sign(Vector2(3560, 185), "LIVE GUARD / MIXED PRACTICE", "Orange means wind-up. Dodge, land, then strike.\nUse specials when ready. R resets everything.", Color(0.8, 0.7, 1))
+	_add_sign(Vector2(3560, 185), "LIVE GUARD / MIXED PRACTICE", "Orange means wind-up. Dodge, land, then strike.\nUse specials when ready.", Color(0.8, 0.7, 1))
 	_add_dummy("SparklerDummy", Vector2(390, FLOOR_Y))
 	_add_dummy("SparklerPractice", Vector2(600, FLOOR_Y), false, 3)
 	_add_dummy("SkyshotTarget", Vector2(1210, FLOOR_Y), false, 4)
@@ -74,7 +74,7 @@ func _ready() -> void:
 	hud.add_child(heading)
 	var controls := Label.new()
 	controls.position = Vector2(30, 58)
-	controls.text = "A/D: move    Space: jump    Shift: dash    J: sparkler    L: skyshot\nHold/release K: chakri    R: reset    Walk right through practice arenas and recovery lane"
+	controls.text = "A/D: move    Space: jump    Shift: dash    J: sparkler    L: skyshot\nHold/release K: chakri    Walk right through practice arenas and recovery lane"
 	hud.add_child(controls)
 	status = Label.new()
 	status.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
@@ -84,7 +84,7 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_just_pressed("restart"):
+	if OS.is_debug_build() and Input.is_action_just_pressed("restart"):
 		PlaytestNavigation.respawn_transition.cancel()
 		get_tree().reload_current_scene()
 		return

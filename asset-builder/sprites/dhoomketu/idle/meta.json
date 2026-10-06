@@ -1,0 +1,45 @@
+{
+  "name": "dhoomketu",
+  "animation": "idle",
+  "size": "4K",
+  "view": "right-profile",
+  "subject": "full-body",
+  "anchor_mode": "feet",
+  "fps": 8,
+  "loop": "loop",
+  "poses": [
+    "Base stance: left hand on hip, brass fuse-lighter held upright at chest height in the forward right hand, feet planted, scowling",
+    "Same stance, chest and shoulders lifted slightly on an inhale, chin raised, moustache lifted"
+  ],
+  "expected_frames": 2,
+  "free_palette": false,
+  "durations": [
+    4.0,
+    4.0
+  ],
+  "frames": [
+    "01",
+    "02"
+  ],
+  "problems": {
+    "02": [
+      "size drift +36% vs approved sprite (crouch/stretch poses can be fine)"
+    ]
+  },
+  "models": {
+    "01": "pro",
+    "02": "pro"
+  },
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 13.473684210526315
+  },
+  "canvas": [
+    304,
+    304
+  ],
+  "anchor": [
+    152,
+    285
+  ]
+}

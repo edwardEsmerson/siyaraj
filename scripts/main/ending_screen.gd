@@ -1,19 +1,34 @@
 extends Control
-## Ending screen: the title's Diwali dusk with a busier fireworks show, then back to the title.
+## Campaign result with the rescued pair and explicit routes to play again.
 
 
 func _ready() -> void:
 	$Center/Content/ReturnButton.pressed.connect(PlaytestNavigation.show_title)
+	$Center/Content/NewJourney.pressed.connect(_new_journey)
+	$Center/Content/ReplayFinale.pressed.connect(_replay_finale)
 	$Center/Content/ReturnButton.grab_focus()
 	$Fade.show()
 	create_tween().tween_property($Fade, "modulate:a", 0.0, 1.2).from(1.0)
 	$Center/Content/RajStage.resized.connect(_place_raj)
 	_place_raj()
-	var rescue := create_tween()
-	rescue.tween_interval(1.2)
-	rescue.tween_callback(func() -> void: $Center/Content/RajStage/Raj.play(&"dramatic"))
-	rescue.tween_interval(1.0)
-	rescue.tween_callback(func() -> void: $Center/Content/RajStage/Raj.play(&"freed"))
+	# Raj was freed in the palace. Hold the reunion pose at home.
+	$Center/Content/RajStage/Raj.play(&"freed")
+
+
+func _new_journey() -> void:
+	PlaytestNavigation.enemies_enabled = true
+	PlaytestNavigation.start_level("res://scenes/main/prologue.tscn")
+
+
+func _replay_finale() -> void:
+	PlaytestNavigation.enemies_enabled = true
+	PlaytestNavigation.start_level("res://scenes/main/palace_showdown.tscn")
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel") and not event.is_echo():
+		get_viewport().set_input_as_handled()
+		PlaytestNavigation.show_title()
 
 
 func _place_raj() -> void:

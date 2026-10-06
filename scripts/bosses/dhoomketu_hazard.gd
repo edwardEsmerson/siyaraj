@@ -15,6 +15,9 @@ var bounces_remaining: int = 1
 var _hit_targets: Dictionary = {}
 const GOLD := Color(1.0, 0.72, 0.18)
 const PINK := Color(1.0, 0.3, 0.5)
+## Approved asset-builder props (64 px canvases, centred), drawn at the usual 0.5 sprite scale.
+const ROCKET_ART := preload("res://assets/sprites/rocket-weapon/sprite.png")
+const CHAKRI_ART := preload("res://assets/sprites/chakri-weapon/sprite.png")
 
 
 func _ready() -> void:
@@ -89,15 +92,18 @@ func _draw() -> void:
 			draw_line(Vector2(spread * 0.8, -size.y * rise + 8), Vector2(spread, -size.y * rise), Color(1, 0.85, 0.35, 1.0 - rise * 0.5), 2)
 	elif kind == Kind.CHAKRI:
 		var center := Vector2(0, -size.y * 0.5)
-		draw_arc(center, size.y * 0.5, age * 18, age * 18 + TAU * 0.85, 20, GOLD, 3)
-		for index in range(6):
+		for index in range(6):  # sparks thrown off the rim
 			var ray := Vector2.from_angle(age * 18 + index * TAU / 6)
-			draw_line(center + ray * 4, center + ray * 12, PINK, 2)
+			draw_line(center + ray * 10, center + ray * 15, Color(GOLD, 0.8), 2)
+		draw_set_transform(center, age * 18 * direction, Vector2(0.5, 0.5))
+		draw_texture(CHAKRI_ART, -CHAKRI_ART.get_size() * 0.5)
+		draw_set_transform(Vector2.ZERO)
 	elif kind == Kind.ROCKET:
 		var center := Vector2(0, -size.y * 0.5)
-		var normal := heading.orthogonal()
-		draw_colored_polygon(PackedVector2Array([center + heading * 12, center - heading * 9 + normal * 5, center - heading * 9 - normal * 5]), PINK)
-		draw_line(center - heading * 10, center - heading * (20 + 6 * absf(sin(age * 50))), GOLD, 4)
+		draw_line(center - heading * 8, center - heading * (18 + 6 * absf(sin(age * 50))), GOLD, 4)
+		draw_set_transform(center, heading.angle(), Vector2(0.5, 0.5))
+		draw_texture(ROCKET_ART, -ROCKET_ART.get_size() * 0.5)
+		draw_set_transform(Vector2.ZERO)
 	if kind == Kind.ANAAR:
 		draw_colored_polygon(PackedVector2Array([Vector2(-10, 0), Vector2(0, -14), Vector2(10, 0)]), Color(0.65, 0.1, 0.3))
 		if warning:

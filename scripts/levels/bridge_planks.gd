@@ -61,6 +61,7 @@ func _physics_process(_delta: float) -> void:
 			var saved: Dictionary = course.progress.get(course.level_id, {"spawn": Vector2(160, 430), "lit": []})
 			saved["bridge_planks"] = placed_count
 			course.progress[course.level_id] = saved
+			get_node("/root/CampaignSave").capture()
 		elif nearby_supply >= 0:
 			carried_index = nearby_supply
 			_show_carried_plank()

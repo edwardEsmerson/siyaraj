@@ -1,0 +1,41 @@
+{
+  "fps": 8,
+  "loop": "hold",
+  "durations": [
+    2.4,
+    2.4,
+    2.4
+  ],
+  "poses": [
+    "Holding a small clay cone-shaped firework (anaar) in his right hand at chest height and touching its fuse with the brass fuse-lighter held in his left hand, looking down at it, slight crouch",
+    "Overhand lob: right arm fully extended forward and up at shoulder height, hand open having just released the cone firework (cone gone from his hand), left hand with fuse-lighter low at his side, weight on the front foot, back heel lifted",
+    "Standing tall with both fists on his hips, chest puffed out, chin raised, laughing with mouth open, fuse-lighter in the right fist"
+  ],
+  "frame_count": 3,
+  "canvas": [
+    352,
+    304
+  ],
+  "anchor": [
+    152,
+    285
+  ],
+  "source_canvas": [
+    304,
+    304
+  ],
+  "source_anchor": [
+    152,
+    285
+  ],
+  "models": {
+    "01": "pro",
+    "02": "pro",
+    "03": "pro"
+  },
+  "notes": "CAST attack 2: light the cone, lob as the fuses expire, gloat while fountains burn.",
+  "grid": {
+    "mode": "uniform",
+    "source_pixel_spacing": 13.473684210526315
+  }
+}

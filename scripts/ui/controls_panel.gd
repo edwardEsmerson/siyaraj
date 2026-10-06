@@ -15,7 +15,7 @@ const ACTIONS: Array[Array] = [
 	[&"interact", "Light diya"],
 	[&"ui_accept", "Confirm / continue"],
 	[&"ui_cancel", "Pause / back"],
-	[&"restart", "Restart level"],
+	[&"restart", "Restart level (debug only)"],
 ]
 
 const JOYPAD_NAMES: Dictionary = {
@@ -38,6 +38,8 @@ func _ready() -> void:
 	for heading in ["Action", "Keyboard", "Controller"]:
 		_add_label(grid, heading, true)
 	for entry in ACTIONS:
+		if entry[0] == &"restart" and not OS.is_debug_build():
+			continue
 		_add_label(grid, entry[1])
 		_add_label(grid, key_text(entry[0]))
 		_add_label(grid, joypad_text(entry[0]))

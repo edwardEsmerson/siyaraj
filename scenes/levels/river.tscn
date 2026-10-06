@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" path="res://scenes/props/checkpoint_diya_flame.tscn" id="checkpoint_diya_flame"]
 [ext_resource type="PackedScene" path="res://scenes/props/checkpoint_diya.tscn" id="checkpoint_diya"]
 [ext_resource type="Script" path="res://scripts/levels/draft_level.gd" id="Script"]
+[ext_resource type="Script" path="res://scripts/levels/interactive_scenery.gd" id="scenery"]
 
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="enemy"]
 
@@ -1412,6 +1413,7 @@ texture = ExtResource("rv14")
 centered = false
 
 [node name="bell_arch_1" type="Sprite2D" parent="Decor/titlematch/Props"]
+script = ExtResource("scenery")
 position = Vector2(4419.5, 360.0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("rv22")
@@ -1475,6 +1477,9 @@ texture = ExtResource("rv23")
 centered = false
 
 [node name="bell_stand_1" type="Sprite2D" parent="Decor/titlematch/Props"]
+script = ExtResource("scenery")
+hit_center = Vector2(30, 39)
+hit_size = Vector2(30, 34)
 position = Vector2(6024.8, 271.5)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("rv27")
@@ -1591,18 +1596,26 @@ texture = ExtResource("rv15")
 centered = false
 
 [node name="pot_1" type="Sprite2D" parent="Decor/titlematch/Props"]
+script = ExtResource("scenery")
+bell = false
+hit_center = Vector2(17, 18)
 position = Vector2(10021.2, 412.0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("rv32")
 centered = false
 
 [node name="pots_two_1" type="Sprite2D" parent="Decor/titlematch/Props"]
+script = ExtResource("scenery")
+bell = false
+hit_center = Vector2(25, 15)
+hit_size = Vector2(44, 26)
 position = Vector2(10227.5, 415.0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("rv33")
 centered = false
 
 [node name="bell_arch_2" type="Sprite2D" parent="Decor/titlematch/Props"]
+script = ExtResource("scenery")
 position = Vector2(10409.5, 400.0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("rv22")
@@ -1745,6 +1758,9 @@ texture = ExtResource("rv13")
 centered = false
 
 [node name="bell_stand_2" type="Sprite2D" parent="Decor/titlematch/Props"]
+script = ExtResource("scenery")
+hit_center = Vector2(30, 39)
+hit_size = Vector2(30, 34)
 position = Vector2(14304.8, 271.5)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("rv27")
@@ -2177,14 +2193,17 @@ direction = "titlematch"
 [node name="DockHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(1000, 430)
 text = "Broken docks ahead! Jump, then dash across. The lower dock can catch a fall."
+topic = &"air_dash"
 
 [node name="FordsHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(3020, 430)
 text = "Take the high stones, or use the lower dock. Both paths rejoin at the diya."
+topic = &"air_dash"
 
 [node name="GhatHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(5800, 430)
 text = "A brute guards the court. Bait his swing, or climb the balconies to pass above."
+topic = &"brute"
 
 [node name="BridgeHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(8350, 430)
@@ -2193,6 +2212,7 @@ text = "Carry four planks from the lower approach to the bridge edge. Then jump 
 [node name="CoverHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(10020, 430)
 text = "Crates stop the purple bolts. Jump over cover, then dash in to reach the shooter."
+topic = &"cover"
 
 [node name="TempleHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(13520, 430)
@@ -2200,3 +2220,167 @@ text = "Light this last diya before the temple climb. Dhoomketu guards the ghats
 
 [node name="BridgePlanks" type="Node2D" parent="."]
 script = ExtResource("bridge_planks")
+
+[node name="DockGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(1010, 390)
+patrol_radius = 45.0
+detection_range = 160.0
+
+[node name="DockGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(1010, 390)
+
+[node name="GhatRestGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(4910, 430)
+patrol_radius = 45.0
+detection_range = 150.0
+
+[node name="GhatRestGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(4910, 430)
+
+[node name="GhatEntryShooter" parent="Encounters" instance=ExtResource("ground_shooter")]
+position = Vector2(5510, 430)
+patrol_radius = 30.0
+detection_range = 160.0
+
+[node name="GhatEntryShooter" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(5510, 430)
+
+[node name="ChannelScout" parent="Encounters" instance=ExtResource("flying_enemy")]
+position = Vector2(11540, 337)
+patrol_radius = 30.0
+detection_range = 160.0
+metadata/airborne = true
+
+[node name="ChannelScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(11540, 337)
+
+[node name="ProcessionBrute" parent="Encounters" instance=ExtResource("brute")]
+position = Vector2(13200, 430)
+patrol_radius = 35.0
+detection_range = 140.0
+
+[node name="ProcessionBrute" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(13200, 430)
+
+[node name="BankGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(480, 430)
+patrol_radius = 20.0
+detection_range = 120.0
+
+[node name="BankGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(480, 430)
+
+[node name="DockShooter" parent="Encounters" instance=ExtResource("ground_shooter")]
+position = Vector2(1160, 390)
+patrol_radius = 10.0
+detection_range = 90.0
+
+[node name="DockShooter" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(1160, 390)
+
+[node name="BrokenDockGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(1435, 390)
+patrol_radius = 20.0
+detection_range = 100.0
+
+[node name="BrokenDockGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(1435, 390)
+
+[node name="BrokenDockScout" parent="Encounters" instance=ExtResource("flying_enemy")]
+position = Vector2(1810, 410)
+patrol_radius = 15.0
+detection_range = 100.0
+metadata/airborne = true
+
+[node name="BrokenDockScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(1810, 410)
+
+[node name="FerryRearGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(2780, 430)
+patrol_radius = 10.0
+detection_range = 90.0
+
+[node name="FerryRearGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(2780, 430)
+
+[node name="StoneBankGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(3040, 430)
+patrol_radius = 20.0
+detection_range = 100.0
+
+[node name="StoneBankGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(3040, 430)
+
+[node name="StoneHighScout" parent="Encounters" instance=ExtResource("flying_enemy")]
+position = Vector2(3760, 337)
+patrol_radius = 20.0
+detection_range = 110.0
+metadata/airborne = true
+
+[node name="StoneHighScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(3760, 337)
+
+[node name="StoneCourtShooter" parent="Encounters" instance=ExtResource("ground_shooter")]
+position = Vector2(4380, 390)
+patrol_radius = 20.0
+detection_range = 100.0
+
+[node name="StoneCourtShooter" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(4380, 390)
+
+[node name="GhatWestScout" parent="Encounters" instance=ExtResource("flying_enemy")]
+position = Vector2(5100, 410)
+patrol_radius = 20.0
+detection_range = 110.0
+metadata/airborne = true
+
+[node name="GhatWestScout" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(5100, 410)
+
+[node name="GhatCourtGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(6070, 310)
+patrol_radius = 20.0
+detection_range = 100.0
+
+[node name="GhatCourtGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(6070, 310)
+
+[node name="GhatExitGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(6805, 350)
+patrol_radius = 20.0
+detection_range = 110.0
+
+[node name="GhatExitGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(6805, 350)
+
+[node name="BridgeDescentGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(7135, 390)
+patrol_radius = 20.0
+detection_range = 110.0
+
+[node name="BridgeDescentGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(7135, 390)
+
+[node name="BridgeFarGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(9395, 350)
+patrol_radius = 20.0
+detection_range = 100.0
+
+[node name="BridgeFarGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(9395, 350)
+
+[node name="ChannelMiddleGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(11935, 350)
+patrol_radius = 20.0
+detection_range = 110.0
+
+[node name="ChannelMiddleGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(11935, 350)
+
+[node name="ChannelExitShooter" parent="Encounters" instance=ExtResource("ground_shooter")]
+position = Vector2(12350, 390)
+patrol_radius = 20.0
+detection_range = 100.0
+
+[node name="ChannelExitShooter" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(12350, 390)

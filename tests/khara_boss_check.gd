@@ -349,13 +349,29 @@ func check_damage_and_defeat() -> void:
 	var died_count := [0]
 	boss.died.connect(func() -> void: died_count[0] += 1)
 	boss.take_damage(30, Vector2.ZERO)
-	check(boss.health == 0 and boss.state == boss.State.DEAD and died_count[0] == 1, "Khara must die once at zero health")
+	check(boss.health == 0 and boss.state == boss.State.DEAD and died_count[0] == 0, "Lethal damage must start Khara's death before announcing victory")
+	check(boss.art.animation == &"death" and boss.art.frame == 0, "Khara must start at the first death pose")
+	check(boss.visual.modulate == Color.WHITE, "Khara's death art must not retain the lethal hit's white flash")
+	boss.take_damage(30, Vector2.ZERO)
 	check(boss.collision_layer == 0, "Defeated Khara must stop receiving hits")
 	await ticks(2)
 	check(ladis().is_empty(), "Defeat must defuse remaining ladis")
-	check(current_scene.get_node("HUD/CombatStatus").text.contains("Khara defeated"), "Arena must announce the defeat")
-	await ticks(100)
+	await ticks(24)
+	check(boss.art.frame == 1 and died_count[0] == 0, "Khara must visibly topple before victory")
+	var death_before_pause: float = boss._death_time
+	paused = true
+	await ticks(20)
+	check(is_equal_approx(boss._death_time, death_before_pause), "Pause must suspend Khara's death")
+	paused = false
+	await ticks(20)
+	check(boss.art.frame == 2, "Khara must show his falling pose")
+	await ticks(24)
+	check(boss.art.frame == 3 and died_count[0] == 0, "Khara must hold his fallen pose before victory")
+	await ticks(20)
 	check(not is_instance_valid(boss), "Khara must be removed after the death animation")
+	check(died_count[0] == 1, "Khara must announce victory exactly once after collapsing")
+	check(current_scene.get_node("HUD/CombatStatus").text.contains("Khara defeated"), "Arena must announce the defeat")
+	await ticks(80)
 	check(not bar.visible, "Boss health bar must fade out after defeat")
 	var old_scene := current_scene
 	var restart := InputEventAction.new()
