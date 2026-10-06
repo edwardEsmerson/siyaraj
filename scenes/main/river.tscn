@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/main/main.gd" id="1_main"]
-[ext_resource type="PackedScene" path="res://scenes/levels/forest.tscn" id="2_course"]
+[ext_resource type="PackedScene" path="res://scenes/levels/river.tscn" id="2_course"]
 [ext_resource type="PackedScene" path="res://scenes/player/forest_player.tscn" id="3_player"]
 
 [sub_resource type="StyleBoxFlat" id="CompletionStyle"]
@@ -15,10 +15,10 @@ border_color = Color(0.8, 0.8, 0.8, 1)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_main")
 restart_delay = 0.35
-next_level = "res://scenes/main/river.tscn"
-completion_title = "FOREST COMPLETE"
-completion_detail = "Riverbank reached"
-completion_status = "Next stop: the river. R to replay the forest."
+next_level = "res://scenes/main/palace.tscn"
+completion_title = "RIVER COMPLETE"
+completion_detail = "Temple steps reached"
+completion_status = "Enter: palace / R: replay"
 
 [node name="TestCourse" parent="." instance=ExtResource("2_course")]
 
@@ -39,7 +39,7 @@ color = Color(0.06, 0.06, 0.06, 0.93)
 offset_left = 24.0
 offset_top = 12.0
 theme_override_font_sizes/font_size = 24
-text = "SIYARAJ / forest trail"
+text = "SIYARAJ / river ghats"
 
 [node name="Controls" type="Label" parent="HUD"]
 offset_left = 24.0
@@ -51,7 +51,7 @@ text = "A/D: move   Space: jump   Shift: dash   J: lash   L: skyshot   K: chakri
 offset_left = 24.0
 offset_top = 82.0
 theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
-text = "Forest edge / Climb the roots. Control your landing before the next jump."
+text = "Riverbank / Broken docks lead into the crossing."
 
 [node name="InputStatus" type="Label" parent="HUD"]
 offset_left = 870.0

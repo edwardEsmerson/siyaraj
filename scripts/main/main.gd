@@ -7,6 +7,7 @@ extends Node2D
 @export var completion_title: String = "COURSE COMPLETE"
 @export var completion_detail: String = "Guard defeated"
 @export var completion_status: String = "Guard defeated. Finish reached!"
+@export var next_level: String = ""
 
 @onready var player: CharacterBody2D = $Player
 @onready var player_spawn: Marker2D = $TestCourse/PlayerSpawn
@@ -24,6 +25,9 @@ var _course_width: int = 4200
 
 
 func _ready() -> void:
+	PlaytestNavigation.configure_course(course)
+	if not PlaytestNavigation.snapshot.is_empty():
+		combat_status.text = "E: light diya / R: repeat this snapshot / Esc: pause and developer menu"
 	player.global_position = player_spawn.global_position
 	if course.has_method("restore_transition_state"):
 		course.restore_transition_state(player)
@@ -31,7 +35,7 @@ func _ready() -> void:
 	camera.position.x = player.global_position.x
 	camera.limit_left = 0
 	if course.has_signal("finished"):
-		_course_width = course.COURSE_WIDTH
+		_course_width = course.level_width() if course.has_method("level_width") else course.COURSE_WIDTH
 		course.finished.connect(_finish_course)
 	camera.limit_right = _course_width
 	camera.limit_top = 0
@@ -110,12 +114,21 @@ func _finish_course() -> void:
 	completed = true
 	$HUD/Completion.visible = true
 	$HUD/Completion/Message.text = "%s\n%s / %.1f seconds\nR to replay" % [completion_title, completion_detail, elapsed]
+	if not next_level.is_empty():
+		$HUD/Completion/Message.text += " / Enter: next level"
 	combat_status.text = completion_status
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if completed and not next_level.is_empty() and event.is_action_pressed("ui_accept"):
+		get_viewport().set_input_as_handled()
+		PlaytestNavigation.start_level(next_level)
+		return
 	if event.is_action_pressed("restart"):
 		get_viewport().set_input_as_handled()
+		if PlaytestNavigation.snapshot.get("path", "") == scene_file_path:
+			PlaytestNavigation._restart()
+			return
 		if course.has_method("reset_progress"):
 			course.reset_progress()
 		_restart()

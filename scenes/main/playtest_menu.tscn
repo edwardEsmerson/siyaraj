@@ -1,0 +1,111 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/main/playtest_menu.gd" id="Script"]
+
+[node name="PlaytestMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("Script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.08, 0.08, 0.08, 1)
+
+[node name="Layout" type="VBoxContainer" parent="."]
+offset_left = 200.0
+offset_top = 26.0
+offset_right = 760.0
+offset_bottom = 455.0
+theme_override_constants/separation = 9
+
+[node name="Title" type="Label" parent="Layout"]
+layout_mode = 2
+text = "SIYARAJ / PLAYTEST"
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Layout"]
+layout_mode = 2
+text = "Grey level drafts. Choose a level and a starting section."
+horizontal_alignment = 1
+
+[node name="Level" type="OptionButton" parent="Layout"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 38)
+item_count = 3
+selected = 0
+popup/item_0/text = "01 / Forest"
+popup/item_0/id = 0
+popup/item_1/text = "02 / River and ghats"
+popup/item_1/id = 1
+popup/item_2/text = "03 / Temple and palace"
+popup/item_2/id = 2
+
+[node name="Section" type="OptionButton" parent="Layout"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 36)
+
+[node name="Enemies" type="CheckButton" parent="Layout"]
+layout_mode = 2
+text = "Enable enemy encounters"
+button_pressed = true
+
+[node name="Start" type="Button" parent="Layout"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 42)
+text = "Play selected level"
+
+[node name="Separator" type="HSeparator" parent="Layout"]
+layout_mode = 2
+
+[node name="SnapshotsTitle" type="Label" parent="Layout"]
+layout_mode = 2
+text = "Developer snapshots"
+horizontal_alignment = 1
+
+[node name="Lab" type="OptionButton" parent="Layout"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 36)
+item_count = 11
+selected = 0
+popup/item_0/text = "Weapons / three-weapon playground"
+popup/item_0/id = 0
+popup/item_1/text = "Character / movement and dash"
+popup/item_1/id = 1
+popup/item_2/text = "Enemy / Brute"
+popup/item_2/id = 2
+popup/item_3/text = "Enemy / ground shooter"
+popup/item_3/id = 3
+popup/item_4/text = "Enemy / flying enemy"
+popup/item_4/id = 4
+popup/item_5/text = "Enemy / melee guard"
+popup/item_5/id = 5
+popup/item_6/text = "Mechanic / original combat course"
+popup/item_6/id = 6
+popup/item_7/text = "Terrain / sampler"
+popup/item_7/id = 7
+popup/item_8/text = "Terrain / river stepping stones"
+popup/item_8/id = 8
+popup/item_9/text = "Terrain / palace gallery and roofs"
+popup/item_9/id = 9
+popup/item_10/text = "Mechanic / canopy climb"
+popup/item_10/id = 10
+
+[node name="OpenLab" type="Button" parent="Layout"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 38)
+text = "Open developer snapshot"
+
+[node name="Controls" type="Label" parent="Layout"]
+layout_mode = 2
+text = "A/D: move   Space: jump   Shift: dash   J/L/K: weapons
+E: light diya   R: reset level   Esc: pause / level select"
+horizontal_alignment = 1
