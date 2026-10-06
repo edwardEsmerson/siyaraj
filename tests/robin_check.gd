@@ -100,6 +100,10 @@ func run_checks() -> void:
 	current_scene.checkpoint_guard.enabled = false
 	for enemy in current_scene.course.get_node("Encounters").get_children():
 		enemy.set_physics_process(false)
+		# Companion probes control ClearingGuard explicitly below. Other authored
+		# encounters must not turn the supposed quiet areas into combat tests.
+		if enemy.name != &"ClearingGuard":
+			enemy.collision_layer = 0
 	await ticks(10)
 	check(current_scene.course.get_node("RobinHints/BossHint").text.contains("Khara"), "Forest approach must introduce Khara")
 	check(get_first_node_in_group("robin") == robin, "Robin must register in the robin group")

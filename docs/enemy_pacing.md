@@ -1,6 +1,8 @@
 # Enemy pacing pass
 
-Branch `feat/level-enemy-pacing`, based on `82110e9`. This pass changes placements
+The first pass was `feat/level-enemy-pacing`, based on `82110e9`. The doubling
+follow-up is `feat/level-enemy-pacing-double`, based on current main `6b15432`.
+This pass changes placements
 only, using the existing guard, brute, shooter and flyer scenes and their approved
 art. Enemy combat, movement, bosses, checkpoints, bridge repair and Robin are
 unchanged.
@@ -151,7 +153,10 @@ shooter cover, checkpoints and forest room isolation.
 
 The forest finish regression reloads terrain mode after toggling enemies; the
 toggle applies during scene loading. This keeps finish/restart probes independent
-of the new final encounters.
+of the new final encounters. Robin's isolated companion probes now hide all
+uncontrolled enemy bodies from combat queries, retaining ClearingGuard for the
+explicit combat checks. This removes assumptions about quiet authored locations
+without changing Robin's behavior or weakening those checks.
 
 Validation uses the existing Godot `4.7.2.stable.official.ed1daf0bf` executable at
 `/home/sdixit/Downloads/Godot_v4.7.2-stable_linux.x86_64`, set as `GODOT_BIN`.
@@ -162,3 +167,7 @@ Graphical encounter captures provide visual QA, not a complete manual campaign
 playthrough. Cumulative damage, combat fatigue and the added fights before each
 diya still need a sustained player run. Generated `.godot/` and `builds/` output
 is ignored and excluded from the change.
+
+Rendered examples from the doubling pass are [forest clearing](screenshots/enemy-pacing/forest-clearing.png),
+[river stone court](screenshots/enemy-pacing/river-stone-court.png), and
+[palace roof](screenshots/enemy-pacing/palace-roof.png).
