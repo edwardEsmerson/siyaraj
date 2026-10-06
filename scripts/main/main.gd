@@ -4,6 +4,9 @@ extends Node2D
 @export var camera_look_ahead: float = 20.0
 @export var camera_follow_speed: float = 8.0
 @export var restart_delay: float = 0.0
+@export var completion_title: String = "COURSE COMPLETE"
+@export var completion_detail: String = "Guard defeated"
+@export var completion_status: String = "Guard defeated. Finish reached!"
 
 @onready var player: CharacterBody2D = $Player
 @onready var player_spawn: Marker2D = $TestCourse/PlayerSpawn
@@ -31,11 +34,15 @@ func _ready() -> void:
 	camera.limit_right = _course_width
 	camera.limit_top = 0
 	camera.limit_bottom = 540
+	_update_camera_region()
+	if course.has_method("camera_region"):
+		camera.position.y = clampf(player.position.y - 70.0, camera.limit_top + 270.0, camera.limit_bottom - 270.0)
 	camera.reset_smoothing()
-	var enemy := $TestCourse/Enemy
-	enemy.died.connect(func() -> void:
-		combat_status.text = "Guard defeated! Exit open; reach the flag." if course.has_signal("finished") else "Guard defeated! R to replay."
-	)
+	var enemy := course.get_node_or_null("Enemy")
+	if enemy != null:
+		enemy.died.connect(func() -> void:
+			combat_status.text = "Guard defeated! Exit open; reach the flag." if course.has_signal("finished") else "Guard defeated! R to replay."
+		)
 
 
 func _process(delta: float) -> void:
@@ -47,7 +54,15 @@ func _process(delta: float) -> void:
 	# Fixed vertical framing prevents jump/dash motion from moving the landing floor.
 	# Ease horizontal look-ahead when turning so the camera does not snap.
 	var target_x := clampf(player.global_position.x + player.facing_direction * camera_look_ahead, 480.0, _course_width - 480.0)
-	camera.position.x = lerpf(camera.position.x, target_x, 1.0 - exp(-camera_follow_speed * delta))
+	if not course.has_method("camera_region") or course.current_room == &"":
+		camera.position.x = lerpf(camera.position.x, target_x, 1.0 - exp(-camera_follow_speed * delta))
+	if course.has_method("camera_region"):
+		_update_camera_region()
+		if course.current_room != &"":
+			camera.position.x = lerpf(camera.position.x, clampf(player.position.x, camera.limit_left + 480.0, camera.limit_right - 480.0), 1.0 - exp(-camera_follow_speed * delta))
+			camera.position.y = lerpf(camera.position.y, clampf(player.position.y - 70.0, camera.limit_top + 270.0, camera.limit_bottom - 270.0), 1.0 - exp(-camera_follow_speed * delta))
+		else:
+			camera.position.y = 270.0
 	health_status.text = "Siya health: %d/%d" % [player.health, player.max_health]
 	if player.is_on_floor():
 		dash_status.text = "Rocket dash: jump to dash"
@@ -56,8 +71,19 @@ func _process(delta: float) -> void:
 	dash_status.modulate = Color(1.0, 0.72, 0.2) if player.dash_available else Color(0.65, 0.68, 0.74)
 	if _restarting:
 		return
-	if player.global_position.y > fall_boundary:
+	var death_y: float = course.death_boundary() if course.has_method("death_boundary") else fall_boundary
+	if player.global_position.y > death_y:
 		player.die()
+
+
+func _update_camera_region() -> void:
+	if not course.has_method("camera_region"):
+		return
+	var region: Rect2 = course.camera_region()
+	camera.limit_left = int(region.position.x)
+	camera.limit_right = int(region.end.x)
+	camera.limit_top = int(region.position.y)
+	camera.limit_bottom = int(region.end.y)
 
 
 func _restart() -> void:
@@ -76,13 +102,15 @@ func _finish_course() -> void:
 		return
 	completed = true
 	$HUD/Completion.visible = true
-	$HUD/Completion/Message.text = "COURSE COMPLETE\nGuard defeated / %.1f seconds\nR to replay" % elapsed
-	combat_status.text = "Guard defeated. Finish reached!"
+	$HUD/Completion/Message.text = "%s\n%s / %.1f seconds\nR to replay" % [completion_title, completion_detail, elapsed]
+	combat_status.text = completion_status
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("restart"):
 		get_viewport().set_input_as_handled()
+		if course.has_method("reset_progress"):
+			course.reset_progress()
 		_restart()
 		return
 	if course.has_method("hint_at"):

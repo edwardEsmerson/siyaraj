@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/main/main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://scenes/levels/forest.tscn" id="2_course"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+
+[sub_resource type="StyleBoxFlat" id="CompletionStyle"]
+bg_color = Color(0.08, 0.08, 0.08, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+restart_delay = 0.35
+completion_title = "FOREST COMPLETE"
+completion_detail = "Riverbank reached"
+completion_status = "Next stop: the river. R to replay the forest."
+
+[node name="TestCourse" parent="." instance=ExtResource("2_course")]
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 270)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Backdrop" type="ColorRect" parent="HUD"]
+offset_right = 960.0
+offset_bottom = 116.0
+mouse_filter = 2
+color = Color(0.06, 0.06, 0.06, 0.93)
+
+[node name="Title" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 12.0
+theme_override_font_sizes/font_size = 24
+text = "SIYARAJ / forest trail"
+
+[node name="Controls" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 48.0
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+text = "A/D: move    Space: jump    Shift: dash    J: attack    E: diya / door    R: restart"
+
+[node name="Milestone" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 82.0
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+text = "Forest edge / Climb the roots. Control your landing before the next jump."
+
+[node name="InputStatus" type="Label" parent="HUD"]
+offset_left = 870.0
+offset_top = 82.0
+text = "0.0 s"
+
+[node name="DashStatus" type="Label" parent="HUD"]
+offset_left = 660.0
+offset_top = 12.0
+text = "Rocket dash: jump to dash"
+
+[node name="HealthStatus" type="Label" parent="HUD"]
+offset_left = 490.0
+offset_top = 12.0
+text = "Siya health: 3/3"
+
+[node name="CombatStatus" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 503.0
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+text = "Press E beside a diya to secure a checkpoint. R restarts the whole forest."
+
+[node name="DeathMessage" type="Label" parent="HUD"]
+visible = false
+offset_left = 300.0
+offset_top = 185.0
+offset_right = 660.0
+offset_bottom = 250.0
+theme_override_font_sizes/font_size = 28
+text = "SIYA DOWN\nRestarting..."
+horizontal_alignment = 1
+
+[node name="Completion" type="Panel" parent="HUD"]
+visible = false
+offset_left = 250.0
+offset_top = 160.0
+offset_right = 710.0
+offset_bottom = 285.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("CompletionStyle")
+
+[node name="Message" type="Label" parent="HUD/Completion"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 444.0
+offset_bottom = 109.0
+theme_override_font_sizes/font_size = 24
+text = "COURSE COMPLETE\nR to replay"
+horizontal_alignment = 1

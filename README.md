@@ -1,5 +1,22 @@
 # Siyaraj
 
+F5 opens the forest level, `scenes/main/forest.tscn`. The current grey-box draft
+is 21,600 pixels long, with 59 route platforms, high root climbs, narrow
+landings, ceiling sections, a switchback climb and sustained dash chains.
+Stand beside a diya and press E to light it and secure a checkpoint. Passing
+one does not save. Death returns to the furthest lit diya with full health;
+R clears all eight checkpoints and restarts the forest. No enemies are placed.
+See [forest design and enemy handoff](docs/forest_level.md).
+
+The root ridge and banyan climb also have E doors into isolated root and
+canopy challenges. Their local diyas save within the room; the far door
+returns to the forest entrance. The entrance door allows leaving early.
+The nest has a tall trunk climb with vertical camera follow. See the
+[Guacamelee footage and map notes](docs/guacamelee_research.md).
+
+The earlier prototype course remains available at `scenes/main/main.tscn` with F6.
+Its guard and finish-gate behaviour described below are unchanged.
+
 A Godot 4.7.2 2D platformer prototype. Open `project.godot` and press F6 to run
 the current scene or F5 to run the main scene.
 
@@ -38,6 +55,8 @@ godot --headless --path . --script res://tests/movement_check.gd
 godot --headless --path . --script res://tests/dash_check.gd
 godot --headless --path . --script res://tests/combat_check.gd
 godot --headless --path . --script res://tests/course_check.gd
+godot --headless --path . --script res://tests/forest_check.gd
+godot --headless --path . --script res://tests/forest_rooms_check.gd
 ```
 
 See [the team workflow](docs/team_workflow.md) for ownership, agreed rules,
