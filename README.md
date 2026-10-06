@@ -50,7 +50,8 @@ For isolated practice, open `scenes/dev/weapons_playground.tscn` with F6.
 Boss 1, Khara, has an isolated arena: open `scenes/bosses/khara_arena.tscn` with F6.
 He telegraphs an orange gada slam with a ground shockwave, and lays ladi firecracker
 strings that pop along the ground toward Siya. Yellow chevrons show the direction.
-At half health he enrages and adds a second ladi from the far wall. See
+At half health he enrages, but attacks remain separate: one shockwave or ladi
+sequence at a time, with no pincer. Slams deal one damage. See
 [the Khara design doc](docs/bosses/boss1-khara.md). The forest exit opens his showdown.
 
 Boss 2, Dhoomketu, guards the ghats in `scenes/bosses/dhoomketu_arena.tscn`.
@@ -141,7 +142,7 @@ python tools/run_checks.py
 ```
 
 Set `GODOT_BIN` to your Godot 4.7.2 executable first. The runner discovers all
-28 suites and rejects script errors even when Godot exits with code zero.
+29 suites and rejects script errors even when Godot exits with code zero.
 See [the shared baseline](docs/team_baseline.md) for platform commands.
 
 See [the team workflow](docs/team_workflow.md) for ownership, agreed rules,

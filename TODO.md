@@ -6,7 +6,7 @@ art and animation included, sorted by who should pick it up:
 - **A. You (a human):** decisions, reviews, playtests and the submission itself.
 - **B. A good LLM:** well-scoped work that follows patterns already in the repo.
 - **C. A really good LLM:** cross-cutting work that needs design judgement, touches
-  many systems, or could easily break the 28 regression suites.
+  many systems, or could easily break the 29 regression suites.
 
 Per-asset briefs, sizes and generation commands live in
 `asset-builder/Sprites_List.md` and `asset-builder/Animations-List.md`. This file
@@ -26,7 +26,7 @@ says *what* is left and *who* does it, and points there for the *how*.
   and both bosses still draw code placeholders.
 - **World kits:** levels and both boss arenas are dressed through `WorldSkin` in all
   six styles (press V in a level to cycle). Merged in #15 and #19. Dhoomketu uses his authored placeholder arena.
-- **All 28 suites pass** again after B0 (air dashes now exit at 780 px/s and ease
+- **All 29 suites pass** again after B0 (air dashes now exit at 780 px/s and ease
   back to run speed, restoring the jump + dash reach lost in #17).
 - **No audio plays.** There are no `AudioStreamPlayer` nodes and no buses.
   The catalog and `assets/Audio/` files are tracked and shared; playback remains B4.

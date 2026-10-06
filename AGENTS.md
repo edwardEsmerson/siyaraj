@@ -33,7 +33,7 @@ python tools/run_checks.py
 ```
 
 Set `GODOT_BIN` to your Godot 4.7.2 executable first. The runner discovers all
-28 suites and rejects script errors even when Godot exits with code zero.
+29 suites and rejects script errors even when Godot exits with code zero.
 See [the shared baseline](docs/team_baseline.md) for platform commands.
 
 `GODOT_BIN=godot ./tools/smoke_build.sh` imports resources and exports `builds/linux/siyaraj.pck`. `GODOT_BIN=godot ./tools/run_smoke_build.sh --headless --quit-after 120` launches that pack outside the editor. Substitute the executable path when needed. Standalone Linux exports require matching export templates.

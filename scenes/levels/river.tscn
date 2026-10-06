@@ -575,7 +575,7 @@ color = Color(0.60, 0.60, 0.60, 1)
 shape = SubResource("BridgeDeck")
 
 [node name="BridgeGap1" type="StaticBody2D" parent="Terrain"]
-position = Vector2(8995.0, 362.0)
+position = Vector2(9055.0, 362.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 22
@@ -1411,7 +1411,7 @@ text = "A brute guards the court. Bait his swing, or climb the balconies to pass
 
 [node name="BridgeHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(8350, 430)
-text = "A low flyer guards the bridge. Jump and lash it; save your skyshots."
+text = "Carry four planks from the lower approach. E picks one up and E at the bridge edge places it. Then jump and dash across."
 
 [node name="CoverHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(10020, 430)
@@ -1419,7 +1419,7 @@ text = "Crates stop the purple bolts. Jump over cover, then dash in to reach the
 
 [node name="TempleHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(13520, 430)
-text = "Light this last diya before the temple climb. The palace is just ahead!"
+text = "Light this last diya before the temple climb. Dhoomketu guards the ghats; beat him to reach the palace!"
 
 [node name="BridgePlanks" type="Node2D" parent="."]
 script = ExtResource("bridge_planks")

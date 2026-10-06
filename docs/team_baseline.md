@@ -15,6 +15,8 @@ Keep new changes on a feature branch and open a PR back to `main`.
 | #26, `feat/swaminathan-hp-heads` | One health pool, permanent head loss, living-head attacks and phase healing for the final boss. |
 | #27, `t3/add-level-2-ghats-boss` | Dhoomketu and the river showdown. This had reached the health-regeneration branch but had not reached `main`. |
 | #28, `feat/siya-animations` | Siya's gameplay animations across the shared player variants. |
+| #29, `t3/level-two-plank-bridge` | Four-board bridge repair with grounded E pickup/placement, persistent built planks and the final jump/dash crossing. |
+| `feat/easier-khara` | One-damage slams, one shockwave and ladi sequence at a time, and corrected burst interpolation. |
 | `feat/semantic-audio-names` | Audio files and their catalog, now tracked so teammates receive them. Playback is still a task in `TODO.md`. |
 
 The combined campaign is title, forest, Khara, river, Dhoomketu, palace,
@@ -24,7 +26,8 @@ showdowns. Terrain-only runs bypass bosses.
 Integration fixes cover standalone level initialization, Siya's victory animation
 in every boss arena, the final boss's updated HUD instructions, and checkpoint
 tests waiting for the curtain tween's completion before checking the teleport.
-HUD backdrops keep the status text readable over the world art. The smoke preset
+The river bridge opening was adjusted for the restored air-dash reach so all
+four planks are needed before the final crossing. HUD backdrops keep the status text readable over the world art. The smoke preset
 includes runtime-loaded assets, and `tools/pack_check.gd` verifies the exported
 scenes and art from outside the repository.
 The new boss fight takes precedence over the older regrowth/weak-point design.
@@ -71,7 +74,7 @@ python tools/run_checks.py
 
 The runner discovers every `tests/*_check.gd`, runs each at 60 fixed FPS, and
 fails on a nonzero exit, a script error, missing success output or a timeout.
-Logs stay in ignored `.godot/checks/`. The baseline has 28 suites covering
+Logs stay in ignored `.godot/checks/`. The baseline has 29 suites covering
 movement, weapons, enemies, checkpoints, all levels, bosses, campaign navigation,
 menus, companion hints, character assets, world skins and player animation.
 
