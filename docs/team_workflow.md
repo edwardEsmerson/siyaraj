@@ -234,3 +234,34 @@ GODOT_BIN=godot tools/run_smoke_build.sh --headless --quit-after 120
 Next is the fresh-player test. Record first-play duration, misunderstood controls,
 missed jumps and unreadable attacks. Automated traversal checks do not establish
 movement feel or a two-minute first-play completion time.
+
+## Flying enemy handoff
+
+- Combat owns the reusable flying enemy and projectile scenes/controllers and
+  the isolated `scenes/combat/flying_enemy_arena.tscn` encounter. Level integration
+  places a flyer before the guard in the combined prototype course; no player
+  controller or main-scene changes are required. The guard still opens the exit.
+- The flyer has three health and uses the existing `take_damage` API plus
+  `health_changed` and `died` signals. It patrols at 60 px/s within 90 px of spawn,
+  reverses at walls, and keeps its spawn altitude even after knockback.
+- Detection requires a living player within 300 px and a clear world-only ray.
+  A 0.45 s orange charge locks the shot direction toward the player's body center.
+  Patrol continues during charging and the 1.2 s reload. Damage, lost visibility,
+  or leaving range cancels a charge. Shots travel straight without homing.
+- Projectiles are enemy attacks on layer 5 (bit 16), sweeping against world and
+  player bodies (mask 3). Each shot moves at 220 px/s, deals one damage through
+  the player controller, and disappears on its first impact or after 3 s.
+  Player protection consumes a shot without further damage. Existing shots
+  survive their shooter and are cleared when the scene restarts.
+- Jump + J reaches the flyer at its default placement. Contact damage remains
+  absent. Tune patrol, detection, charge/reload, and projectile values on the
+  flying enemy root in the Inspector.
+- Run `tests/flying_enemy_check.gd` alongside the four existing checks. It covers
+  flight bounds/altitude/walls, moving charge/reload, locked aim and dodging,
+  interruption, swept collisions, protection, projectile expiry, jumping melee,
+  death/restart, and the guard-controlled gate. The smoke export includes the
+  flying arena and projectile dependencies.
+
+Manual checkpoint: play the flying arena with F6, then the whole course with F5.
+Check that the orange charge and shot are readable, jumping hits feel reachable,
+and the flyer/guard encounter is fair with the existing three-health player.

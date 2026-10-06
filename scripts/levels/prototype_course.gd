@@ -43,6 +43,8 @@ func hint_at(x: float) -> String:
 		return "4 / Low ceiling. Keep moving after a head collision."
 	if x < 3330.0:
 		return "5 / Jump, then Shift near the apex. Land to recharge."
+	if x < 3630.0 and is_instance_valid(get_node_or_null("FlyingEnemy")):
+		return "6 / Flyer: dodge the orange charge, then jump + J to strike."
 	if not guard_defeated:
 		return "6 / J to strike. Orange wind-up: step away or jump past."
 	return "7 / Exit open. Jump the last gap and reach the flag."
