@@ -295,15 +295,23 @@ func check_phases_and_fury() -> void:
 	await reset_arena()
 	var phases: Array[int] = []
 	boss.phase_changed.connect(func(value: int) -> void: phases.append(value))
+	var health_updates: Array[int] = []
+	player.health_changed.connect(func(value: int) -> void: health_updates.append(value))
+	player.health = 2
 	for step in range(3):
 		hurtbox().take_damage(8, Vector2.ZERO)
 		if step < 2:
 			check(boss.state == boss.State.FIGHT and boss.is_staggered(), "Losing a head must stagger Ravan")
+			check(player.health == 2 and health_updates.is_empty(), "Losing a head inside a phase must not heal Siya")
 			await ticks(40)
 	check(boss.heads_alive == 7 and boss.phase == 2 and phases == [2], "Phase 2 must start with seven heads left")
+	check(player.health == player.max_health and health_updates == [player.max_health], "Clearing phase 1 must fully heal Siya and notify the HUD once")
 	check(boss.state == boss.State.TRANSITION, "Phase change must roar first")
 	hurtbox().take_damage(5, Vector2.ZERO)
 	check(boss.health == 56, "Ravan must be guarded while he roars")
+	check(health_updates.size() == 1, "Hits during a phase transition must not repeat healing")
+	await ticks(1)
+	check(current_scene.get_node("HUD/HealthStatus").text == "Siya health: 5/5", "Phase healing must update the health HUD on the next frame")
 	await ticks(80)
 	check(boss.state == boss.State.FURY and boss.fury_waves.size() == 5, "Phase 2 must open with a five-wave Dashanan Fury")
 	hurtbox().take_damage(5, Vector2.ZERO)
@@ -332,9 +340,11 @@ func check_phases_and_fury() -> void:
 	check(boss.state == boss.State.FIGHT and boss.is_spent() and boss.active_count() == 0, "Surviving Fury must leave Ravan spent")
 	hurtbox().take_damage(1, Vector2.ZERO)
 	check(boss.health == 55, "Spent Ravan must take damage")
+	health_updates.clear()
 	for step in range(4):
 		sever_next()
 	check(boss.heads_alive == 3 and boss.phase == 3 and phases == [2, 3], "Phase 3 must start with three heads left")
+	check(player.health == player.max_health and health_updates == [player.max_health], "Clearing phase 2 must fully heal Siya and notify the HUD once")
 
 	# Phase 3 repeats the super move on a timer, with one wave per living head.
 	await reset_arena()
@@ -352,7 +362,9 @@ func check_death_and_restart() -> void:
 	boss.activate_head(0)
 	await ticks(58)
 	check(not attacks().is_empty(), "The last head must be mid-attack for this check")
+	player.health = 1
 	hurtbox().take_damage(boss.health, Vector2.ZERO)
+	check(player.health == player.max_health, "Defeating Ravan must fully heal Siya")
 	await ticks(1)
 	check(boss.state == boss.State.DYING and boss.heads_alive == 0 and attacks().is_empty(), "Final hit must sever the last head, start the death and clear attacks")
 	check(boss.get_node("Body").head_count == 0, "Body must show the headless state")

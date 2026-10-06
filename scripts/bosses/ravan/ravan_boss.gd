@@ -388,10 +388,12 @@ func _lose_head() -> void:
 	Burst.spawn(scene_root, at + Vector2(0, -6), Color(1.0, 0.9, 0.6), "SEVERED!", 26.0)
 	head_lost.emit(lost.index, heads_alive)
 	if heads_alive <= 0:
+		_restore_player_health()
 		_begin_death()
 		return
 	var next_phase := phase_for(heads_alive)
 	if next_phase > phase:
+		_restore_player_health()
 		_begin_transition(next_phase)
 		return
 	# A brief stagger: pending telegraphs are cancelled and no head starts for a moment.
@@ -402,6 +404,15 @@ func _lose_head() -> void:
 	_stagger_remaining = stagger_time
 	_activation_cooldown = maxf(_activation_cooldown, stagger_time)
 	_show_banner("%s SEVERED - %d HEADS LEFT" % [lost.head_name.to_upper(), heads_alive], 1.2)
+
+
+## Clearing a phase, or defeating Ravan, fully restores Siya's health.
+func _restore_player_health() -> void:
+	var player := _player()
+	if not is_instance_valid(player) or player.health <= 0:
+		return
+	player.health = player.max_health
+	player.health_changed.emit(player.health)
 
 
 func _begin_transition(next_phase: int) -> void:

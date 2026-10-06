@@ -96,6 +96,9 @@ applies. Every attack leaves from the head's mouth, 10 px below its face centre.
 attacks twice in a row while another living head can. When only one head is
 left, it attacks alone.
 
+Clearing each phase fully restores Siya's health, including the final defeat.
+The health HUD updates immediately. Losing a head inside a phase does not heal her.
+
 Losing the head that leaves 7 or 3 heads starts the next phase. Ravan roars
 for 1.2 s with the banner `PHASE N - DASHANAN AWAKENS`, then performs Dashanan
 Fury. Phase 3 repeats Fury every 30 s of normal fighting. Ravan is guarded
