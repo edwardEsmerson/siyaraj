@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Siyaraj"
-run/main_scene="res://scenes/main/forest.tscn"
+run/main_scene="res://scenes/main/playtest_menu.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+PlaytestNavigation="*res://scripts/main/playtest_navigation.gd"
 
 [display]
 

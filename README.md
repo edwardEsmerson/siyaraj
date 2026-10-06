@@ -1,6 +1,15 @@
 # Siyaraj
 
-F5 opens the forest level, `scenes/main/forest.tscn`. The current grey-box draft
+F5 opens the playtest menu. Select the forest, river/ghats, or temple/palace;
+start at the beginning or a checkpoint section, and toggle enemy encounters.
+The developer snapshots selector opens weapon, player movement, enemy, terrain
+and canopy tests. Esc pauses any scene and offers restart or level select.
+See [playtest menu and draft editing](docs/playtest_menu.md).
+
+The river and palace are editable grey drafts, each 14,400 pixels long with five
+manual diya checkpoints. Completing the forest or river offers Enter to advance.
+
+The forest level is `scenes/main/forest.tscn`. The current grey draft
 is 21,600 pixels long, with 59 route platforms, high root climbs, narrow
 landings, ceiling sections, a switchback climb and sustained dash chains.
 Stand beside a diya and press E to light it and secure a checkpoint. Passing

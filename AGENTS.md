@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-Siyaraj is a Godot 4.7.2 2D platformer using the Compatibility renderer. Open `project.godot`; the entry scene is `scenes/main/forest.tscn`. The original prototype is `scenes/main/main.tscn`.
+Siyaraj is a Godot 4.7.2 2D platformer using the Compatibility renderer. Open `project.godot`; the entry scene is `scenes/main/playtest_menu.tscn`. Forest, river and palace drafts and developer snapshots are available from this menu. The original prototype is `scenes/main/main.tscn`. See `docs/playtest_menu.md` for launch and editing details.
 
 - `scripts/` groups GDScript by player, combat, enemies, bosses, UI, levels, effects, dev tools, and main integration.
 - `scenes/` contains corresponding `.tscn` scenes. `scenes/dev/` holds the dev-only sandbox (one selectable enemy, for isolated encounter work) and the weapons playground; `scenes/bosses/` holds each boss and its isolated arena; `scenes/main/movement_playground.tscn` remains for movement tuning.
@@ -13,7 +13,7 @@ Siyaraj is a Godot 4.7.2 2D platformer using the Compatibility renderer. Open `p
 
 ## Build, Test, and Development Commands
 
-Use Godot 4.7.2. Run `godot --path . --editor`, then F5 for the main course or F6 for the current scene.
+Use Godot 4.7.2. Run `godot --path . --editor`, then F5 for the playtest menu or F6 for the current scene.
 
 On the Linux workstation, Godot 4.7.2 is installed persistently at
 `/home/solan/.local/share/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64`.
@@ -43,6 +43,8 @@ godot --headless --path . --script res://tests/weapons_map_check.gd
 godot --headless --path . --script res://tests/forest_weapons_check.gd
 godot --headless --path . --script res://tests/khara_boss_check.gd
 godot --headless --path . --script res://tests/ravan_check.gd
+godot --headless --path . --script res://tests/next_levels_check.gd
+godot --headless --path . --script res://tests/playtest_menu_check.gd
 ```
 
 `GODOT_BIN=godot ./tools/smoke_build.sh` imports resources and exports `builds/linux/siyaraj.pck`. `GODOT_BIN=godot ./tools/run_smoke_build.sh --headless --quit-after 120` launches that pack outside the editor. Substitute the executable path when needed. Standalone Linux exports require matching export templates.
