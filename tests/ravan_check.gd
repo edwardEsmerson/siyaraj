@@ -265,10 +265,20 @@ func check_phases_and_fury() -> void:
 	await reset_arena()
 	var phases: Array[int] = []
 	boss.phase_changed.connect(func(value: int) -> void: phases.append(value))
+	var health_updates: Array[int] = []
+	player.health_changed.connect(func(value: int) -> void: health_updates.append(value))
+	player.health = 2
 	knock_out([0, 4, 9])
 	await ticks(2)
+	boss.get_node("Core").take_damage(1, Vector2.ZERO)
+	check(player.health == 2 and health_updates.is_empty(), "Ordinary core damage must not heal Siya")
 	boss.get_node("Core").take_damage(15, Vector2.ZERO)
 	check(boss.core_health == 20 and boss.phase == 2 and phases == [2], "Phase damage must clamp at 20 and start phase 2")
+	check(player.health == player.max_health and health_updates == [player.max_health], "Clearing phase 1 must fully heal Siya and notify the HUD once")
+	boss.get_node("Core").take_damage(15, Vector2.ZERO)
+	check(health_updates.size() == 1, "Hits during a phase transition must not repeat healing")
+	await ticks(1)
+	check(current_scene.get_node("HUD/HealthStatus").text == "Siya health: 5/5", "Phase healing must update the health HUD on the next frame")
 	check(boss.state == boss.State.TRANSITION and boss.knocked_out_count() == 0, "Phase change must close the navel and regrow heads")
 	await ticks(80)
 	check(boss.state == boss.State.FURY, "Phase 2 must open with Dashanan Fury")
@@ -297,8 +307,10 @@ func check_phases_and_fury() -> void:
 	boss.fury_time = boss.fury_duration() - 0.02
 	await ticks(4)
 	check(boss.state == boss.State.EXPOSED and head(0).state == head(0).HeadState.IDLE, "Surviving Fury must leave Ravan briefly exposed")
+	health_updates.clear()
 	boss.get_node("Core").take_damage(15, Vector2.ZERO)
 	check(boss.core_health == 10 and boss.phase == 3 and phases == [2, 3], "Phase 3 must begin at 10 core health")
+	check(player.health == player.max_health and health_updates == [player.max_health], "Clearing phase 2 must fully heal Siya and notify the HUD once")
 
 	# Phase 3 repeats the super move on a timer.
 	await reset_arena()
@@ -317,7 +329,9 @@ func check_death_and_restart() -> void:
 	knock_out([0, 1, 2, 3, 9])
 	await ticks(2)
 	check(boss.is_exposed(), "Five knockouts must expose the navel in phase 3")
+	player.health = 1
 	boss.get_node("Core").take_damage(2, Vector2.ZERO)
+	check(player.health == player.max_health, "Clearing the final phase must fully heal Siya")
 	await ticks(1)
 	check(boss.state == boss.State.DYING and attacks().is_empty(), "Final navel hit must start the death sequence and clear attacks")
 	await ticks(200)

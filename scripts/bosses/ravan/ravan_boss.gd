@@ -266,9 +266,19 @@ func damage_core(amount: int) -> void:
 	_flash_remaining = 0.1
 	health_changed.emit(core_health)
 	if core_health <= 0:
+		_restore_player_health()
 		_begin_death()
 	elif core_health <= floor_health:
+		_restore_player_health()
 		_begin_transition()
+
+
+func _restore_player_health() -> void:
+	var player := _player()
+	if not is_instance_valid(player) or player.health <= 0:
+		return
+	player.health = player.max_health
+	player.health_changed.emit(player.health)
 
 
 func _begin_transition() -> void:
