@@ -1,6 +1,7 @@
-[gd_scene load_steps=106 format=3]
+[gd_scene load_steps=107 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/draft_level.gd" id="Script"]
+[ext_resource type="Script" path="res://scripts/levels/interactive_scenery.gd" id="scenery"]
 
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="enemy"]
 
@@ -1410,6 +1411,7 @@ texture = ExtResource("rv14")
 centered = false
 
 [node name="bell_arch_1" type="Sprite2D" parent="Decor/titlematch/Props"]
+script = ExtResource("scenery")
 position = Vector2(4419.5, 360.0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("rv22")
@@ -1473,6 +1475,9 @@ texture = ExtResource("rv23")
 centered = false
 
 [node name="bell_stand_1" type="Sprite2D" parent="Decor/titlematch/Props"]
+script = ExtResource("scenery")
+hit_center = Vector2(30, 39)
+hit_size = Vector2(30, 34)
 position = Vector2(6024.8, 271.5)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("rv27")
@@ -1589,18 +1594,26 @@ texture = ExtResource("rv15")
 centered = false
 
 [node name="pot_1" type="Sprite2D" parent="Decor/titlematch/Props"]
+script = ExtResource("scenery")
+bell = false
+hit_center = Vector2(17, 18)
 position = Vector2(10021.2, 412.0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("rv32")
 centered = false
 
 [node name="pots_two_1" type="Sprite2D" parent="Decor/titlematch/Props"]
+script = ExtResource("scenery")
+bell = false
+hit_center = Vector2(25, 15)
+hit_size = Vector2(44, 26)
 position = Vector2(10227.5, 415.0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("rv33")
 centered = false
 
 [node name="bell_arch_2" type="Sprite2D" parent="Decor/titlematch/Props"]
+script = ExtResource("scenery")
 position = Vector2(10409.5, 400.0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("rv22")
@@ -1743,6 +1756,9 @@ texture = ExtResource("rv13")
 centered = false
 
 [node name="bell_stand_2" type="Sprite2D" parent="Decor/titlematch/Props"]
+script = ExtResource("scenery")
+hit_center = Vector2(30, 39)
+hit_size = Vector2(30, 34)
 position = Vector2(14304.8, 271.5)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("rv27")
