@@ -37,7 +37,7 @@ func run_checks() -> void:
 	var menu: Control = title.get_node("Menu")
 	var first_level: String = title.FIRST_LEVEL
 	check(root.gui_get_focus_owner() == menu.get_node("NewGame"), "New game must start focused")
-	check(menu.get_node("Playtest").visible == OS.is_debug_build(), "Playtest menu must only show in debug builds")
+	check(not menu.get_node("Playtest").visible, "The game menu must hide developer playtests")
 	await escape()
 	check(not paused and not navigation.panel.visible, "Esc must not pause the title screen")
 
@@ -108,7 +108,7 @@ func run_checks() -> void:
 	check(paused and pause.visible, "Esc must pause the level")
 	check(root.gui_get_focus_owner() == buttons.get_node("Resume"), "Pause must focus Resume")
 	check(buttons.get_node("Checkpoint").visible, "Levels must offer the last diya")
-	check(buttons.get_node("LevelSelect").visible == OS.is_debug_build(), "Level select must only show in debug builds")
+	check(not buttons.get_node("LevelSelect").visible, "Pause must hide developer level select")
 	buttons.get_node("Settings").pressed.emit()
 	await escape()
 	check(paused and pause.get_node("Center/Menu").visible and not pause.get_node("Center/Settings").visible, "Esc must close a pause sub-panel before resuming")

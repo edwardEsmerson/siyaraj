@@ -104,14 +104,14 @@ func run_checks() -> void:
 	await ticks(40)
 	for target in crowd:
 		check(target.health == 9, "Chakri visual must not repeatedly damage targets")
-	check(player.chakri_cooldown_remaining > 29.0 and player.chakri_cooldown_remaining < 30.0, "Chakri must start a 30-second cooldown on release")
+	check(player.chakri_cooldown_remaining > 9.0 and player.chakri_cooldown_remaining < 10.0, "Chakri must start a 10-second cooldown on release")
 	Input.action_press("special")
 	await ticks(4)
 	Input.action_release("special")
 	await ticks(2)
 	check(not player.charging and crowd[1].health == 9, "Chakri must reject another charge while cooling down")
-	check(current_scene.status.text.contains("Chakri: 30s"), "HUD must show chakri's remaining cooldown")
-	# Keep targets frozen while checking expiry, without waiting 30 wall seconds.
+	check(current_scene.status.text.contains("Chakri: 10s"), "HUD must show chakri's remaining cooldown")
+	# Keep targets frozen while checking expiry, without waiting 10 wall seconds.
 	player.chakri_cooldown_remaining = 0.04
 	await ticks(4)
 	Input.action_press("special")
@@ -184,9 +184,9 @@ func check_chakri_dashes() -> void:
 	await ticks(2)
 	check(player.state == player.State.DASH and player.charging and player.chakri_cooldown_remaining == 0.0, "Releasing mid-dash must keep the charge until the dash ends")
 	await ticks(12)
-	check(not player.charging and is_equal_approx(player.effect_radius, player.chakri_radius) and player.chakri_cooldown_remaining > 29.9, "A mid-dash release must fire a full chakri after the dash")
+	check(not player.charging and is_equal_approx(player.effect_radius, player.chakri_radius) and player.chakri_cooldown_remaining > 9.9, "A mid-dash release must fire a full chakri after the dash")
 	await ticks(40)
-	check(player.chakri_cooldown_remaining < 29.5, "A queued chakri release must fire only once")
+	check(player.chakri_cooldown_remaining < 9.5, "A queued chakri release must fire only once")
 
 
 func fire_shot() -> void:
@@ -286,7 +286,7 @@ func check_skyshots() -> void:
 	await ticks(65)
 	Input.action_release("special")
 	await ticks(2)
-	check(player.chakri_cooldown_remaining > 29.9, "Empty ammo must leave chakri available")
+	check(player.chakri_cooldown_remaining > 9.9, "Empty ammo must leave chakri available")
 
 	await reset_playground()
 	await fire_shot()

@@ -16,7 +16,6 @@ const ACTIONS: Array[Array] = [
 	[&"ui_accept", "Confirm / continue"],
 	[&"ui_cancel", "Pause / back"],
 	[&"restart", "Restart level"],
-	[&"cycle_world_kit", "Cycle scenery (dev)"],
 ]
 
 const JOYPAD_NAMES: Dictionary = {

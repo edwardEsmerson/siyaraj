@@ -1,5 +1,5 @@
 extends Control
-## Title screen. The developer playtest menu is offered only in debug builds, and
+## Title screen. The developer playtest menu is hidden from the game, and
 ## Quit is hidden on web, where a game cannot close its tab.
 
 const FIRST_LEVEL: String = "res://scenes/main/forest.tscn"
@@ -19,7 +19,7 @@ func _ready() -> void:
 	menu.get_node("Controls").pressed.connect(_open_sub.bind(controls, menu.get_node("Controls")))
 	menu.get_node("Settings").pressed.connect(_open_sub.bind(settings, menu.get_node("Settings")))
 	menu.get_node("Playtest").pressed.connect(PlaytestNavigation.show_menu)
-	menu.get_node("Playtest").visible = OS.is_debug_build()
+	menu.get_node("Playtest").visible = false
 	menu.get_node("Quit").pressed.connect(get_tree().quit)
 	menu.get_node("Quit").visible = not OS.has_feature("web")
 	settings.closed.connect(_close_sub)

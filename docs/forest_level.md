@@ -126,7 +126,8 @@ weapon PR's controller and single-lash component. J attacks on the ground
 or in the air. L fires a two-damage skyshot with recoil, consuming one of
 five shots. Holding K for one second and releasing produces a full chakri
 spin for three damage; a shorter charge produces a smaller, weaker spin.
-Chakri has a 30-second cooldown. The HUD shows ammunition and cooldown.
+Chakri has a 10-second cooldown. The bottom-right orange circle drains with
+skyshot ammunition; the blue circle refills as Chakri recharges.
 
 Door transitions preserve current health, ammunition, chakri cooldown and
 shot recovery. Entering or leaving an optional room cannot refill weapons

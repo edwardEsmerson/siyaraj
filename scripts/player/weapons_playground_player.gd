@@ -10,7 +10,7 @@ const MAX_SKYSHOT_AMMO: int = 5
 @export var recoil_duration: float = 0.12
 @export var full_charge_time: float = 1.0
 @export var chakri_radius: float = 110.0
-@export var chakri_cooldown: float = 30.0
+@export var chakri_cooldown: float = 10.0
 
 var charging: bool = false
 var charge_time: float = 0.0

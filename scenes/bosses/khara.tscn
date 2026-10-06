@@ -109,6 +109,7 @@ position = Vector2(0, -46)
 shape = SubResource("KharaShape")
 
 [node name="Status" type="Label" parent="."]
+visible = false
 offset_left = -110.0
 offset_top = -176.0
 offset_right = 110.0

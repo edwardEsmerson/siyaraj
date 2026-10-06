@@ -1,4 +1,6 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/ability_hud.gd" id="polished_hud"]
 
 [ext_resource type="Script" path="res://scripts/bosses/boss_arena.gd" id="1_arena"]
 [ext_resource type="PackedScene" path="res://scenes/bosses/dhoomketu.tscn" id="2_dhoomketu"]
@@ -98,6 +100,7 @@ position = Vector2(720, 430)
 position = Vector2(480, 270)
 
 [node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("polished_hud")
 
 [node name="Title" type="Label" parent="HUD"]
 offset_left = 24.0

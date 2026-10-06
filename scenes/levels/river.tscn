@@ -2174,7 +2174,7 @@ text = "A brute guards the court. Bait his swing, or climb the balconies to pass
 
 [node name="BridgeHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(8350, 430)
-text = "Carry four planks from the lower approach. E picks one up and E at the bridge edge places it. Then jump and dash across."
+text = "Carry four planks from the lower approach to the bridge edge. Then jump and dash across."
 
 [node name="CoverHint" parent="RobinHints" instance=ExtResource("robin_hint")]
 position = Vector2(10020, 430)

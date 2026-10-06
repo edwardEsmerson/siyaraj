@@ -1,4 +1,6 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/ability_hud.gd" id="polished_hud"]
 
 [ext_resource type="Script" path="res://scripts/levels/world_skin.gd" id="world_skin"]
 [ext_resource type="Script" path="res://scripts/bosses/ravan/ravan_arena.gd" id="1_arena"]
@@ -96,6 +98,7 @@ position = Vector2(220, 430)
 max_health = 5
 
 [node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("polished_hud")
 
 [node name="HUDShade" type="ColorRect" parent="HUD"]
 offset_right = 960.0
