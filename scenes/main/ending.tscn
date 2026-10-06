@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" path="res://resources/ui/siyaraj_theme.tres" id="1_theme"]
 [ext_resource type="Script" path="res://scripts/main/ending_screen.gd" id="2_ending"]
-[ext_resource type="Script" path="res://scripts/effects/fireworks.gd" id="3_fireworks"]
+[ext_resource type="PackedScene" path="res://scenes/effects/victory_fireworks.tscn" id="3_fireworks"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/title_skyline.png" id="4_skyline"]
 [ext_resource type="Texture2D" path="res://assets/ui/divider.png" id="5_divider"]
 [ext_resource type="Script" path="res://scripts/ui/diya_cursor.gd" id="6_cursor"]
@@ -39,9 +39,8 @@ mouse_filter = 2
 texture = SubResource("GradientTexture2D_dusk")
 expand_mode = 1
 
-[node name="Fireworks" type="Node2D" parent="."]
-script = ExtResource("3_fireworks")
-interval = Vector2(0.25, 0.6)
+[node name="Fireworks" parent="." instance=ExtResource("3_fireworks")]
+layout_mode = 1
 
 [node name="Skyline" type="TextureRect" parent="."]
 layout_mode = 1
