@@ -137,6 +137,6 @@ func run_checks() -> void:
 	check(return_button.has_focus(), "Ending return button must support keyboard navigation")
 	return_button.pressed.emit()
 	await scene_changed
-	check(current_scene.scene_file_path == navigation.MENU and not paused, "Ending must return to the playable menu")
+	check(current_scene.scene_file_path == navigation.TITLE and not paused, "Ending must return to the title screen")
 	print("Playtest menu checks: %s" % ("PASS" if failures == 0 else "FAIL (%d)" % failures))
 	quit(0 if failures == 0 else 1)

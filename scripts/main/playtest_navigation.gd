@@ -1,49 +1,29 @@
 extends CanvasLayer
-## One pause menu also serves the team's standalone tuning scenes.
+## Pauses gameplay scenes (Esc) and moves between the title, levels and the
+## developer playtest menu. The pause menu itself is scenes/ui/pause_menu.tscn.
 
 const MENU: String = "res://scenes/main/playtest_menu.tscn"
+const TITLE: String = "res://scenes/main/title.tscn"
 var enemies_enabled: bool = true
 var pending_section: int = -1
 var snapshot: Dictionary = {}
-var panel: PanelContainer
+var panel: Control
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	layer = 100
-	panel = PanelContainer.new()
-	panel.position = Vector2(310, 140)
-	panel.custom_minimum_size = Vector2(340, 250)
+	panel = load("res://scenes/ui/pause_menu.tscn").instantiate()
 	add_child(panel)
-	var column := VBoxContainer.new()
-	column.add_theme_constant_override("separation", 12)
-	panel.add_child(column)
-	var title := Label.new()
-	title.text = "PAUSED"
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size", 28)
-	column.add_child(title)
-	_add_button(column, "Resume / Esc", _resume)
-	_add_button(column, "Restart from beginning", _restart)
-	_add_button(column, "Level select", show_menu)
-	panel.hide()
-
-func _add_button(parent: Node, title: String, action: Callable) -> void:
-	var button := Button.new()
-	button.text = title
-	button.custom_minimum_size.y = 42
-	button.pressed.connect(action)
-	parent.add_child(button)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel") and not event.is_echo() and get_tree().current_scene != null and get_tree().current_scene.scene_file_path != MENU:
+	# Title, menus and the ending are Controls; only gameplay scenes (Node2D) pause.
+	if event.is_action_pressed("ui_cancel") and not event.is_echo() and get_tree().current_scene is Node2D:
 		get_viewport().set_input_as_handled()
 		if panel.visible:
-			_resume()
+			panel.back()
 		else:
 			get_tree().paused = true
-			panel.get_child(0).get_child(2).text = "Restart snapshot" if not snapshot.is_empty() else "Restart from beginning"
-			panel.show()
-			panel.get_child(0).get_child(1).grab_focus()
+			panel.open(not snapshot.is_empty())
 
 func _resume() -> void:
 	panel.hide()
@@ -59,10 +39,20 @@ func _restart() -> void:
 	_resume()
 	get_tree().reload_current_scene()
 
+## Reload keeps the level's session checkpoint, so Siya returns to the last lit diya.
+func restart_checkpoint() -> void:
+	_resume()
+	get_tree().reload_current_scene()
+
 func show_menu() -> void:
 	snapshot.clear()
 	_resume()
 	get_tree().change_scene_to_file(MENU)
+
+func show_title() -> void:
+	snapshot.clear()
+	_resume()
+	get_tree().change_scene_to_file(TITLE)
 
 func start_level(path: String, section: int = 0, room: StringName = &"", as_snapshot: bool = false) -> void:
 	snapshot = {"path": path, "section": section, "room": room} if as_snapshot else {}
