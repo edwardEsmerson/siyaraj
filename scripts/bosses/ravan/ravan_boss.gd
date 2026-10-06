@@ -632,19 +632,19 @@ func _draw_overlay() -> void:
 			var color := head.attack_color()
 			var progress := head.telegraph_progress() if head.state == HeadState.TELEGRAPH else 1.0
 			color.a = 0.25 + 0.2 * progress
-			_overlay.draw_circle(at, 20.0 + progress * 8.0, color)
+			_overlay.draw_circle(at, 13.0 + progress * 6.0, color)
 			color.a = 1.0
-			_overlay.draw_arc(at, 28.0, -PI * 0.5, -PI * 0.5 + TAU * maxf(progress, 0.01), 28, color, 3.0)
-			_overlay.draw_string_outline(font, at + Vector2(-60, -36), head.attack_word() + "!", HORIZONTAL_ALIGNMENT_CENTER, 120, 13, 4, Color(0.08, 0.03, 0.03))
-			_overlay.draw_string(font, at + Vector2(-60, -36), head.attack_word() + "!", HORIZONTAL_ALIGNMENT_CENTER, 120, 13, color)
+			_overlay.draw_arc(at, 19.0, -PI * 0.5, -PI * 0.5 + TAU * maxf(progress, 0.01), 28, color, 3.0)
+			_overlay.draw_string_outline(font, at + Vector2(-60, -30), head.attack_word() + "!", HORIZONTAL_ALIGNMENT_CENTER, 120, 13, 4, Color(0.08, 0.03, 0.03))
+			_overlay.draw_string(font, at + Vector2(-60, -30), head.attack_word() + "!", HORIZONTAL_ALIGNMENT_CENTER, 120, 13, color)
 			# A white flash marks the moment the attack leaves the mouth.
 			if head.state == HeadState.ATTACK and head.remaining > head.attack_time - 0.12:
-				_overlay.draw_circle(at, 16.0, Color(1.0, 1.0, 0.9, 0.8))
+				_overlay.draw_circle(at, 11.0, Color(1.0, 1.0, 0.9, 0.8))
 		elif state == State.FURY and head.fury_lit:
 			if head.fury_silent:
-				_overlay.draw_circle(at, 18.0, Color(0.1, 0.25, 0.25, 0.55))
+				_overlay.draw_circle(at, 12.0, Color(0.1, 0.25, 0.25, 0.55))
 				continue
-			_overlay.draw_circle(at, 24.0, Color(1.0, 0.25, 0.1, 0.35))
+			_overlay.draw_circle(at, 15.0, Color(1.0, 0.25, 0.1, 0.35))
 			# Each lit head aims at the lanes it will burn.
 			var aim := FURY_COLOR
 			aim.a = 0.35
