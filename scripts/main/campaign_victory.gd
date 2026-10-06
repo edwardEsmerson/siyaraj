@@ -7,6 +7,8 @@ extends CanvasLayer
 var won: bool = false
 
 func _ready() -> void:
+	if not PlaytestNavigation.snapshot.is_empty():
+		destination_name = "level select"
 	get_node(boss_path).died.connect(_on_defeated)
 
 func _on_defeated() -> void:

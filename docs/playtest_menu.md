@@ -9,8 +9,10 @@ Checkpoints require a fresh E press while grounded beside a diya. Death restores
 the last checkpoint with full health and weapon resources. R resets the level.
 
 Esc pauses any level or standalone playground. Resume, restart, or return to
-level select. Time and gameplay stop while paused. Finishing the forest or river
-offers Enter to advance to the next level.
+level select. Time and gameplay stop while paused. The forest exit offers Enter
+to face Khara, whose victory leads to the river. River completion leads to the
+palace, whose exit offers Ravan's showdown. Boss death retries the fight with
+fresh resources. Terrain-only launches skip bosses. See [level iteration](level_iteration.md).
 
 ## Developer snapshots
 
@@ -33,6 +35,8 @@ controllers and tuning resources:
 | River stepping stones | Actual river route starting at the ferry checkpoint |
 | Palace gallery and roofs | Actual palace route starting below the gallery climb |
 | Canopy climb | Forest nest room, alternating branches, local diyas and return door |
+| Forest showdown | Campaign Khara fight and victory navigation |
+| Palace showdown | Campaign Ravan fight and victory navigation |
 
 The four enemy snapshots open the one dev sandbox with that enemy preselected
 (through `Sandbox.next_encounter`, which survives R and death reloads); the
@@ -50,18 +54,18 @@ copies of gameplay scripts, so friends' controller updates apply to them too.
 
 ## Editable drafts
 
-Both new full levels span 14,400 pixels, with five manual checkpoints and three
-draft encounters each. River has 37 route platforms covering docks, stepping
-stones, ghat steps, high piers, a broken bridge and the temple approach. Palace
-has 43 platforms covering the gate, pillar court, gallery stairs, roof descent,
-terraces, sanctum ascent and throne landing. The compact terrain sampler has
+Both new full levels span 14,400 pixels, with five manual checkpoints each.
+River has eight encounters, recovery paths, ghat climbs and ranged cover pockets.
+Palace has six encounters, 43 primary platforms and 25 alternate platforms covering
+the courtyard, gallery, roof routes and throne approach. The compact terrain sampler has
 13 platforms and two diyas over 4,200 pixels.
 
 Edit the native scenes under `scenes/levels/`. Each route platform has
 `metadata/route_order`; `Checkpoints`, `Encounters`, and `EncounterSpawns` are
-separate editable groups. Grey river water is a fall zone, with no swimming
-mechanic. These are first traversal and encounter drafts; art, moving terrain,
-bosses and encounter gates remain future design work.
+separate editable groups. `AlternateRoutes` separates optional geometry from the
+ordered primary route. Grey river water is a fall zone, with no swimming mechanic.
+Art and moving terrain remain future design work. The existing bosses now finish
+the forest and palace, and forest detour guardians control the far return doors.
 
 `scripts/levels/draft_level.gd` shares checkpoint behavior between these drafts.
 `scripts/main/playtest_navigation.gd` owns pause and snapshot launches. Main HUD
