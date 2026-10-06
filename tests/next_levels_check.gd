@@ -14,6 +14,9 @@ func run_checks() -> void:
 		player.died.disconnect(current_scene._restart)
 		current_scene.set_process(false)
 		var route: Array[Node] = current_scene.course.get_node("Terrain").get_children()
+		if level == "river":
+			await repair_river_bridge()
+			route.insert(route.find(current_scene.course.get_node("Terrain/BridgeGap1")), current_scene.course.get_node("BridgePlanks").placed_planks[-1])
 		for index in range(route.size() - 1):
 			var passed := await traverse(route[index], route[index + 1])
 			check(passed, "%s unreachable: %s -> %s" % [level, route[index].name, route[index + 1].name])
@@ -45,7 +48,7 @@ func run_checks() -> void:
 		player = current_scene.player
 		await ticks(4)
 		var course: Node2D = current_scene.course
-		check(course.get_node("Encounters").get_child_count() == (8 if level == "river" else 6), "%s must include its revised encounter composition" % level)
+		check(course.get_node("Encounters").get_child_count() == (10 if level == "river" else 6), "%s must include its revised encounter composition" % level)
 		for enemy in course.get_node("Encounters").get_children():
 			if not enemy.scene_file_path.ends_with("flying_enemy.tscn"):
 				check(enemy.is_on_floor(), "%s encounter must stand on terrain" % enemy.name)

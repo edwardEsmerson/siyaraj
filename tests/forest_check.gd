@@ -44,13 +44,15 @@ func bounds(platform: Node2D) -> Rect2:
 	var collider: CollisionShape2D = platform.get_node("CollisionShape2D")
 	return Rect2(collider.global_position - collider.shape.size * 0.5, collider.shape.size)
 
-func traverse(source: Node2D, target: Node2D) -> bool:
+func traverse(source: Node2D, target: Node2D, allow_dash: bool = true) -> bool:
 	var start := bounds(source)
 	var end := bounds(target)
 	var direction := 1 if end.get_center().x > start.get_center().x else -1
 	var edge := start.end.x if direction == 1 else start.position.x
 	var gap := end.position.x - start.end.x if direction == 1 else start.position.x - end.end.x
 	var delays := [14, 20, -1, 8] if gap > 110 else [-1, 14, 20, 8]
+	if not allow_dash:
+		delays = [-1]
 	for delay in delays:
 		for margin in [24.0, 12.0, 36.0]:
 			await place(Vector2(edge - direction * (margin + 14), start.position.y))
@@ -74,6 +76,16 @@ func traverse(source: Node2D, target: Node2D) -> bool:
 					break
 	release_inputs()
 	return false
+
+func repair_river_bridge() -> void:
+	var bridge: Node2D = current_scene.course.get_node("BridgePlanks")
+	for index in range(bridge.placed_count, bridge.PLANK_COUNT):
+		await place(bridge.supply_position(index))
+		await press_interact()
+		check(bridge.carried_index == index, "E must pick up one plank")
+		await place(bridge.build_edge() - Vector2(20, 0))
+		await press_interact()
+		check(bridge.placed_count == index + 1 and bridge.carried_index == -1, "A second E must place the carried plank")
 
 func press_interact() -> void:
 	var event := InputEventKey.new()
@@ -160,4 +172,3 @@ func run_checks() -> void:
 	if failures == 0:
 		print("PASS: every forest route connection, manual E checkpoints, hold/air restrictions, death recovery, completion and replay")
 	quit(1 if failures > 0 else 0)
-
