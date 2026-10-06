@@ -75,6 +75,7 @@ var _dressing: Node2D
 var _hidden: Array[CanvasItem] = []
 var _cache: Dictionary = {}
 var _water: Sprite2D
+var _surface: Sprite2D
 var _toast: Label
 var _toast_tween: Tween
 
@@ -107,6 +108,8 @@ func _notification(what: int) -> void:
 func _process(delta: float) -> void:
 	if _water:
 		_water.region_rect.position.x = fmod(_water.region_rect.position.x + WATER_DRIFT * delta, _water.texture.get_width())
+	if _surface:
+		_surface.region_rect.position.x = fmod(_surface.region_rect.position.x + WATER_DRIFT * 1.5 * delta, _surface.texture.get_width())
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -150,6 +153,7 @@ func clear() -> void:
 		_dressing.free()
 	_dressing = null
 	_water = null
+	_surface = null
 	set_process(false)
 
 
@@ -174,12 +178,19 @@ func apply() -> void:
 		if not composed:  # hand-placed decor replaces the scattered landmarks, props and recess walls
 			var keep_clear: Array[Vector2] = _keep_clear(level)
 			var pieces: Dictionary = _setpieces(kit)
-			_place_landmarks(pieces.landmarks, platforms, keep_clear)
+			if level.get_node_or_null("LandmarkSpots"):
+				_spot_landmarks(pieces.landmarks, level.get_node("LandmarkSpots"))
+			else:
+				_place_landmarks(pieces.landmarks, platforms, keep_clear)
 			_scatter_props(kit, platforms, keep_clear, pieces.small)
 			_recesses(kit, platforms)
 		_rooms(level, kit)
 	_doors(level, kit)
 	_backdrop(level, kit)
+	# Hand-placed dressing for one direction lives under `Decor/<direction>`; only the kit on show is visible.
+	for decor: Node in level.get_node("Decor").get_children() if level.has_node("Decor") else []:
+		if decor is CanvasItem:
+			decor.visible = decor.name == direction and kit_override == ""
 
 
 func _reapply() -> void:
@@ -202,7 +213,7 @@ func _collect(node: Node, platforms: Array[Dictionary]) -> void:
 			for point: Vector2 in points:
 				rect = rect.expand(point)
 			platforms.append({"body": child, "rect": rect, "column": rect, "one_way": one_way, "foundation": false,
-					"role": str(child.get_meta("kit", ""))})
+					"skin": str(child.get_meta("skin", child.get_meta("kit", "")))})
 		elif not (child is CollisionObject2D):
 			_collect(child, platforms)
 
@@ -281,10 +292,11 @@ func _dress(p: Dictionary, kit: String, platforms: Array[Dictionary]) -> void:
 		_hide(body.get_node("Edge"))
 
 
-## A platform's kit piece: `<name>-<role>.png` when the platform's `kit` meta names a role the kit has, else `<name>.png`.
-func _part(kit: String, name: String, p: Dictionary) -> Texture2D:
-	var variant: Texture2D = _tex(kit, "%s-%s" % [name, p.role]) if p.role != "" else null
-	return variant if variant else _tex(kit, name)
+## A platform part (`cap`, `fill`, `end`, `fringe`, `oneway`, `back` under it): `<part>-<skin>.png` when the platform's
+## `skin` (or `kit`) meta names a variant the kit has, otherwise the kit's plain `<part>.png`.
+func _part(kit: String, part: String, p: Dictionary) -> Texture2D:
+	var variant: Texture2D = _tex(kit, "%s-%s" % [part, p.skin]) if p.skin != "" else null
+	return variant if variant else _tex(kit, part)
 
 
 ## False when a neighbouring platform (or its foundation) continues the surface past this corner.
@@ -387,6 +399,27 @@ func _place_landmarks(pieces: Array[Dictionary], platforms: Array[Dictionary], k
 				break
 			if not placed_one:
 				x += 48.0
+
+
+## Hand-chosen landmark spots: each Marker2D under the level's `LandmarkSpots` stands one set piece on its
+## position (bottom centre). `metadata/piece` picks the piece by its order on the sheet (top to bottom, then
+## left to right), otherwise the spots take the pieces in turn; a negative x scale mirrors it.
+func _spot_landmarks(pieces: Array[Dictionary], spots: Node) -> void:
+	if pieces.is_empty():
+		return
+	var next: int = 0
+	for spot: Node in spots.get_children():
+		if not (spot is Node2D):
+			continue
+		var piece: Dictionary = pieces[int(spot.get_meta("piece", next)) % pieces.size()]
+		next += 1
+		var size: Vector2 = piece.size * ART_SCALE * landmark_scale
+		var at: Vector2 = to_local(spot.global_position)
+		var sprite: Sprite2D = _sprite(piece.tex, Z_LANDMARK)
+		sprite.texture_repeat = CanvasItem.TEXTURE_REPEAT_DISABLED
+		sprite.scale = Vector2.ONE * ART_SCALE * landmark_scale
+		sprite.flip_h = spot.scale.x < 0.0
+		sprite.position = at - Vector2(size.x * 0.5, size.y)
 
 
 func _landmark_fits(area: Rect2, p: Dictionary, platforms: Array[Dictionary], keep_clear: Array[Vector2], placed: Array[Rect2]) -> bool:
@@ -504,10 +537,10 @@ func _decor(level: Node, kit: String) -> bool:
 ## The space under a ceiling (a roof, balcony or gallery above a floor) gets the kit's back wall,
 ## from the ceiling down behind the floor, so covered stretches read as interiors.
 func _recesses(kit: String, platforms: Array[Dictionary]) -> void:
-	var back: Texture2D = _tex(kit, "back")
-	if back == null:
-		return
 	for ceiling: Dictionary in platforms:
+		var back: Texture2D = _part(kit, "back", ceiling)  # `back-<skin>.png` follows the ceiling's skin
+		if back == null:
+			continue
 		for below: Dictionary in platforms:
 			var gap: float = below.rect.position.y - ceiling.rect.end.y
 			var left: float = maxf(ceiling.rect.position.x, below.rect.position.x)
@@ -629,6 +662,9 @@ func _backdrop(level: Node, kit: String) -> void:
 		# The line marks where a missed jump lands; the surface sits a little above it and runs off the bottom.
 		var top: float = rect.position.y - WATER_ABOVE_LINE
 		_water = _strip(water, Rect2(rect.position.x, top, rect.size.x, maxf(course_bottom, rect.end.y) - top), Z_WATER)
+		var surface: Texture2D = _tex(kit, "water-top")  # ripple line along the surface, over submerged steps
+		if surface:
+			_surface = _strip(surface, Rect2(rect.position.x, top - surface.get_height() * ART_SCALE * cap_surface, rect.size.x, surface.get_height() * ART_SCALE), Z_BODY)
 		_hide(line)
 		set_process(not Engine.is_editor_hint())
 
