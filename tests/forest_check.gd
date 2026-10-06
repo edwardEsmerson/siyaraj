@@ -154,7 +154,7 @@ func run_checks() -> void:
 	check(current_scene.course.checkpoint_x == 18100, "Lighting an older diya must not rewind progress")
 	var old_scene := current_scene
 	player.die()
-	await ticks(30)
+	await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
 	check(current_scene != old_scene, "Death must reload the level")
 	player = current_scene.player
 	check(absf(player.position.x - 18100) < 1 and player.health == 3, "Death must restore the latest secured checkpoint and health")

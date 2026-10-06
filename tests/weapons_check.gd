@@ -310,7 +310,7 @@ func check_skyshots() -> void:
 	check(target.health == 4 and player.skyshot_ammo == 3, "Target defeat and respawn must not refill ammo")
 	var previous_scene := current_scene
 	player.take_damage(3, Vector2.ZERO)
-	await ticks(45)
+	await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
 	check(current_scene != previous_scene and current_scene.get_node("Player").skyshot_ammo == 5, "Death must start a fresh round with five shots")
 	player = current_scene.get_node("Player")
 	await fire_shot()

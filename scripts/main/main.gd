@@ -134,9 +134,11 @@ func _restart() -> void:
 	if _restarting:
 		return
 	_restarting = true
-	if restart_delay > 0.0 and player.state == player.State.DEAD:
-		$HUD/DeathMessage.visible = true
-		await get_tree().create_timer(restart_delay).timeout
+	if player.state == player.State.DEAD:
+		if restart_delay > 0.0:
+			$HUD/DeathMessage.visible = true
+		PlaytestNavigation.call_deferred("respawn", self, restart_delay)
+		return
 	# Scene changes are deferred so death can also be requested during a physics tick.
 	get_tree().call_deferred("reload_current_scene")
 
@@ -173,6 +175,8 @@ func _continue_course() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _restarting:
+		return
 	if completed and automatic_showdown and PlaytestNavigation.enemies_enabled:
 		return
 	if completed and event.is_action_pressed("ui_accept") and (not next_level.is_empty() or not showdown_scene.is_empty()):

@@ -84,9 +84,12 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_just_pressed("restart") or player.position.y > 620:
+	if Input.is_action_just_pressed("restart"):
+		PlaytestNavigation.respawn_transition.cancel()
 		get_tree().reload_current_scene()
 		return
+	if player.position.y > 620:
+		player.die()
 	camera.position.x = clampf(player.position.x, 480.0, MAP_WIDTH - 480.0)
 	status.text = "Health %d/%d    Dash: %s    %s" % [player.health, player.max_health, "ready" if player.can_dash() else ("cooling" if player.dash_available or player.is_on_floor() else "land to recharge"), player.attack_status]
 	status.text += "\nSkyshot: %d/5 shots    Chakri: %s" % [player.skyshot_ammo, _cooldown_text(player.chakri_cooldown_remaining)]
@@ -97,8 +100,7 @@ func _cooldown_text(remaining: float) -> String:
 
 
 func _on_player_died() -> void:
-	await get_tree().create_timer(0.6).timeout
-	get_tree().reload_current_scene()
+	PlaytestNavigation.call_deferred("respawn", self, 0.6)
 
 
 func _add_platform(rect: Rect2, color: Color) -> void:

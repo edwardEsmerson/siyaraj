@@ -65,7 +65,7 @@ func run_checks() -> void:
 	check(player.skyshot_ammo == 4 and player.health == 2, "Returning to the trail must preserve ammo and health")
 	check(player.chakri_cooldown_remaining > 25, "Returning must not reset chakri cooldown")
 	player.die()
-	await ticks(30)
+	await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
 	player = current_scene.player
 	check(player.skyshot_ammo == 5 and player.health == 3 and player.chakri_cooldown_remaining == 0, "Death must restore health, ammo and chakri at the secured forest diya")
 	check(absf(player.position.x - 2450) < 1, "Weapon death must retain forest checkpoint flow")

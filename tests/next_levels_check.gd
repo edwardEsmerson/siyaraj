@@ -33,6 +33,7 @@ func run_checks() -> void:
 		check(checkpoints[-1].get_node("Flame").visible, "E must visibly light the checkpoint")
 		player.die()
 		await scene_changed
+		await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
 		player = current_scene.player
 		await ticks(4)
 		check(player.position.distance_to(last) < 1, "Death must restore the saved diya")

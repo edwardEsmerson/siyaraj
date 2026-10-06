@@ -132,7 +132,7 @@ func run_checks() -> void:
 	await ticks(50)
 	var old_scene := current_scene
 	player.take_damage(1, Vector2.ZERO)
-	await ticks(3)
+	await preload("res://tests/respawn_test_helpers.gd").wait_for_respawn(self)
 	check(current_scene != old_scene, "Lethal damage must restart the encounter")
 	player = current_scene.get_node("Player")
 	enemy = current_scene.get_node("Enemy")
