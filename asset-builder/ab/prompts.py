@@ -25,26 +25,40 @@ def ref_roles(roles):
     return " ".join(lines) + " Never copy a reference's background, scene, lighting or rendering style. "
 
 
-def sprite(brief, key, roles, px):
+VIEWS = {"right-profile": "facing RIGHT in strict side profile (orthographic side view)",
+         "front-three-quarter": "front three-quarter view, facing slightly right",
+         "front": "front view, facing the camera"}
+SUBJECTS = {"full-body": "full body with feet, hands and props",
+            "head": "ONE isolated head and a short neck stub only; no body, hands or shoulders",
+            "headless-body": "headless body with feet and all arms; no face, crown or head",
+            "prop": "ONE isolated prop only; no character, hand or body"}
+
+
+def composition(view, subject):
+    return f"{VIEWS[view]}. Composition: {SUBJECTS[subject]}."
+
+
+def sprite(brief, key, roles, px, view="right-profile", subject="full-body"):
     return (f"{background(key)}\n"
             f"Draw ONE pixel-art game sprite: {brief}\n"
-            "Single subject, facing RIGHT in strict side profile (orthographic side view), full body with feet, "
-            "hands and props fully inside the frame; the subject's longest side is about 65% of the image, with "
+            f"Single subject, {composition(view, subject)} Everything fully inside the frame; "
+            "the subject's longest side is about 65% of the image, with "
             "empty background all around. Neutral idle pose. "
             f"Pixel art drawn on a {px}x{px} source-pixel grid (each art pixel is a {px}x{px} square block).\n"
             f"{ref_roles(roles)}\n{STYLE}\n{background(key)}")
 
 
-def frame(name, brief, pose, key, extra_roles=()):
+def frame(name, brief, pose, key, extra_roles=(), view="right-profile", subject="full-body", framing=""):
     roles = [f"the approved sprite of {name}: the identity to keep", *extra_roles]
     return (f"{background(key)}\n"
-            f"Redraw the exact character from attached image 1 in a new pose. {ref_roles(roles)}\n"
+            f"Redraw the exact subject from attached image 1 in a new pose. {ref_roles(roles)}\n"
             f"Character: {brief}\n"
             f"POSE: {pose}\n"
             "Keep identical: face, hair, outfit, colours, props, outline weight, pixel-block size, body size and "
-            "camera distance. Same right-facing side view. Only the pose changes. Keep the whole body inside "
+            f"camera distance. Keep this view and composition: {composition(view, subject)} "
+            "Only the pose changes. Keep the entire subject inside "
             "the frame with empty margin. No motion lines, speed trails or extra effects unless the pose asks.\n"
-            f"{STYLE}\n{background(key)}")
+            f"{framing}\n{STYLE}\n{background(key)}")
 
 
 def ui(brief, key, roles, kind):
@@ -64,12 +78,29 @@ def ui(brief, key, roles, kind):
 def texture(brief, key, roles, mode):
     if mode == "tile":
         layout = ("A seamless, tileable square pixel-art texture that fills the ENTIRE image edge to edge "
-                  "(left edge continues into right edge, top into bottom). Flat game-texture view, no perspective, "
-                  "no border, no single object in the centre.")
+                  "(left edge continues into right edge, top into bottom). It is the inside of a solid platform or "
+                  "wall in a side-scroller, seen straight from the side: flat front view, no perspective, no top "
+                  "surface, no border, no single object in the centre, even detail density everywhere.")
         bg = ""
+    elif mode == "cap":  # the lip drawn along the top edge of every platform, over the fill
+        layout = ("A long horizontal pixel-art border strip that runs across the FULL image width, edge to edge, "
+                  "horizontally seamless (the left end continues into the right end), centred vertically and about "
+                  "a third of the image tall, with flat key colour above and below it. It is the top edge of a "
+                  "platform in a side-scroller, side view: the upper third pokes up above the walking surface "
+                  "(tufts, ledge lip), the rest hangs down over the platform face with a ragged, irregular bottom "
+                  "edge. Detail is evenly spread, no single object, no perspective.")
+        bg = background(key) + "\n"
     elif mode == "layer":
         layout = ("A wide side-scrolling parallax background layer. Horizontally seamless: the left edge "
                   "continues into the right edge. Side view, no characters, no UI, no text.")
+        bg = ""
+    elif mode == "concept":  # art-direction mock: one framed screen, not seamless
+        layout = ("A mock in-game screenshot of a 2D side-scrolling platformer level, 16:9, orthographic side "
+                  "view, no perspective, no HUD, no text, no UI. Show the level's terrain kit clearly: a ground "
+                  "floor along the bottom, two or three floating platforms at different heights, one tall ledge "
+                  "or wall, one thin jump-through platform, decorative props sitting on surfaces, and a calmer "
+                  "background behind. Terrain reads clearly against the background; characters stay the "
+                  "brightest, most saturated things on screen.")
         bg = ""
     else:  # cutout layer: shapes over a key colour (foreground parallax, props, platforms)
         layout = ("A wide side-scrolling parallax layer of silhouettes/shapes placed over a flat key colour, "

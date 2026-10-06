@@ -1,0 +1,2725 @@
+{
+  "schema_version": 1,
+  "art_pixels_per_unit": 2,
+  "display_scale": 0.5,
+  "default_fps": 8,
+  "budget_cap_inr": 25000,
+  "expected": {
+    "new_bases": 7,
+    "sets": 73,
+    "frames": 195,
+    "new_sets": 71,
+    "new_frames": 189
+  },
+  "subjects": {
+    "siya": {
+      "brief": "Siya, clean-shaven young adult heroine of Siyaraj and daughter of a fireworks maker. Lean, graceful, expressive side-view game character based on the two user identity references: warm medium-brown skin, long black hair tied back with a loose curl, tiny bindi, simple gold jewelry, marigold-orange sari with crimson red-and-gold pallu, readable hands and feet, holding one unlit sparkler. The approved Basic Rakshas image is a style reference only. Same identity and pose: use a slightly more angular pallu edge with one broad, simple geometric gold border motif; keep all ornament large and sparse.",
+      "role": "hero",
+      "art_px": 80,
+      "anchor_mode": "feet",
+      "view": "right-profile",
+      "subject": "full-body",
+      "references": [],
+      "style": [
+        "siya"
+      ],
+      "key": "green",
+      "generation": {
+        "model": "pro",
+        "size": "1K",
+        "batch": false,
+        "candidates": 4,
+        "jobs": 3,
+        "fallback": "flash"
+      },
+      "approval": "approved",
+      "collider_units": [
+        24,
+        40
+      ],
+      "animations": {
+        "idle": {
+          "frame_count": 3,
+          "poses": [
+            "Relaxed neutral stance, weight centred, arms loose at the sides, feet planted. Unlit sparkler held loosely in the front hand",
+            "Small inhale: chest and shoulders lifted slightly, head up a touch, feet planted. Unlit sparkler held loosely in the front hand",
+            "Exhale: shoulders dropped slightly, knees a little softer, feet planted. Unlit sparkler held loosely in the front hand"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "`poses/idle.txt`. Unlit sparkler held loosely in the front hand.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 3.25,
+            "calibration_cell": 1
+          }
+        },
+        "run": {
+          "frame_count": 4,
+          "poses": [
+            "Contact: leaning forward, front foot striking the ground ahead, back leg extended behind, arms pumping opposite",
+            "Down: front knee bent absorbing the landing, body lowest, back leg starting to swing forward",
+            "Push-off: back leg fully extended pushing off the toes, front knee driven high, body leaning forward",
+            "Flight: both feet off the ground, legs split front and back, arms pumping, body leaning forward"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "movement",
+          "notes": "`poses/run.txt`",
+          "source_models": {
+            "01": "gemini-3-pro-image",
+            "02": "gemini-3-pro-image",
+            "03": "gemini-3-pro-image",
+            "04": "gemini-3-pro-image"
+          },
+          "source_grid": {}
+        },
+        "jump": {
+          "frame_count": 5,
+          "poses": [
+            "Anticipation crouch: knees deeply bent, arms swung back, body low and coiled",
+            "Take-off: legs fully extended pushing off the toes, arms thrown upward, body stretched tall",
+            "Apex: in the air, knees tucked up, arms out for balance",
+            "Fall: in the air, legs extended down reaching for the ground, arms raised slightly",
+            "Landing: knees deeply bent absorbing impact, arms forward for balance, feet planted"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "`poses/jump.txt`. In Godot, choose the frame by vertical velocity: 1-2 take-off, 3 apex, 4 fall, 5 land.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen",
+            "04": "imagegen",
+            "05": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 3.25,
+            "calibration_cell": 1
+          }
+        },
+        "dash": {
+          "frame_count": 3,
+          "poses": [
+            "Launch: gripping a lit rocket in both hands at arm's length, feet leaving the ground, body pulled forward",
+            "Ride: body stretched horizontal behind the rocket, both hands on it, legs trailing together, hair and sari streaming back",
+            "Brake: rocket gone, front foot planted and skidding, body upright, arms out for balance"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            0.4,
+            0.4,
+            0.4
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "The rocket dash. Used for ground and air dash. Use `--free-palette` for the flame. Poses: \"Launch: gripping a lit rocket in both hands at arm's length, feet leaving the ground, body pulled forward\" / \"Ride: body stretched horizontal behind the rocket, both hands on it, legs trailing together, hair and sari streaming back\" / \"Brake: rocket gone, front foot planted and skidding, body upright, arms out for balance\""
+        },
+        "lash": {
+          "frame_count": 3,
+          "poses": [
+            "Ready: lit sparkler held up behind the shoulder, weight on the back foot",
+            "Lash: arm whipped forward and down, sparkler pointing ahead at full reach, weight on the front foot",
+            "Follow-through: arm low across the body, sparkler trailing behind, leaning forward"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            0.64,
+            0.8,
+            2.88
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "The J sparkler whip, on the ground. `poses/fuljadi.txt`, with `--free-palette` for the sparks. Hit timing is on frame 2.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 3.0875,
+            "calibration_cell": 6
+          }
+        },
+        "air_lash": {
+          "frame_count": 2,
+          "poses": [
+            "In the air, knees tucked, lit sparkler raised behind the head",
+            "In the air, arm whipped forward and down, sparkler pointing ahead at full reach, legs trailing"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "The J whip in the air. Poses: \"In the air, knees tucked, lit sparkler raised behind the head\" / \"In the air, arm whipped forward and down, sparkler pointing ahead at full reach, legs trailing\". Use `--free-palette`."
+        },
+        "skyshot": {
+          "frame_count": 3,
+          "poses": [
+            "Holding a rocket level at hip height in both hands like a launcher, fuse lit, leaning in",
+            "Rocket leaving her hands forward with a flash, her body jolted back by the recoil, back foot sliding",
+            "Recovering upright, hands still forward, slight smile"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "The L key. She fires one rocket forward and gets recoil. Use `--free-palette`. Poses: \"Holding a rocket level at hip height in both hands like a launcher, fuse lit, leaning in\" / \"Rocket leaving her hands forward with a flash, her body jolted back by the recoil, back foot sliding\" / \"Recovering upright, hands still forward, slight smile\". The flying rocket is `fx-skyshot`.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 3.0875,
+            "calibration_cell": 6
+          }
+        },
+        "chakri_charge": {
+          "frame_count": 2,
+          "poses": [
+            "Crouched, spinning a chakri on one raised fingertip above her head, other hand on her hip",
+            "Same crouch, chakri lower and tilted, sparks flying"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "The K key, held for up to 1 s. Use `--free-palette`. Poses: \"Crouched, spinning a chakri on one raised fingertip above her head, other hand on her hip\" / \"Same crouch, chakri lower and tilted, sparks flying\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 3.0875,
+            "calibration_cell": 6
+          }
+        },
+        "chakri_release": {
+          "frame_count": 3,
+          "poses": [
+            "Wind-up: crouched, chakri held low at the side in the throwing hand",
+            "Fling: sidearm throw, arm extended low and forward, hand open, chakri leaving the hand",
+            "Recover: standing up, arm drawn back to the side, looking ahead"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "Released K. The chakri spins around her (`fx-chakri-spin`). Use `poses/chakri.txt`, with `--free-palette`.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 3.0875,
+            "calibration_cell": 6
+          }
+        },
+        "hurt": {
+          "frame_count": 2,
+          "poses": [
+            "Hit: head and torso snapped backward, arms flung out, pained expression, one foot lifted",
+            "Stagger: hunched forward, one hand clutching the stomach, knees bent, wincing"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "`poses/hurt.txt`. Code adds the knockback and blink.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 3.25,
+            "calibration_cell": 1
+          }
+        },
+        "death": {
+          "frame_count": 3,
+          "poses": [
+            "Hit hard: knocked backward, arms flung up, shocked expression",
+            "Collapse: knees buckling, body folding forward, arms limp",
+            "Down: lying flat on the ground on the side, eyes closed, completely still. Dazed swirl eyes, comic rather than grim"
+          ],
+          "loop": "hold",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "`poses/death.txt`. Comic, not grim: add \"dazed swirl eyes\" to the last pose.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 3.25,
+            "calibration_cell": 1
+          }
+        },
+        "light_diya": {
+          "frame_count": 2,
+          "poses": [
+            "Kneeling on one knee, touching the lit sparkler tip to a small diya on the ground in front of her",
+            "Standing back up, smiling, sparkler raised"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "The E key at a diya, while grounded. Poses: \"Kneeling on one knee, touching the lit sparkler tip to a small diya on the ground in front of her\" / \"Standing back up, smiling, sparkler raised\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 4.0,
+            "calibration_cell": 5
+          }
+        },
+        "victory": {
+          "frame_count": 3,
+          "poses": [
+            "Both arms raised, sparkler held high, jumping with joy",
+            "Landing, fist pump, grinning",
+            "Hands on hips, proud"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "Level finish and boss win. Poses: \"Both arms raised, sparkler held high, jumping with joy\" / \"Landing, fist pump, grinning\" / \"Hands on hips, proud\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 4.0,
+            "calibration_cell": 5
+          }
+        },
+        "talk": {
+          "frame_count": 2,
+          "poses": [
+            "Standing, one hand gesturing while talking, mouth open",
+            "Same, mouth closed"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "For cutscenes. Poses: \"Standing, one hand gesturing while talking, mouth open\" / \"Same, mouth closed\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 4.0,
+            "calibration_cell": 5
+          }
+        },
+        "shocked": {
+          "frame_count": 1,
+          "poses": [
+            "Leaning back, both hands up, eyes wide, mouth open in shock"
+          ],
+          "loop": "hold",
+          "fps": 8,
+          "durations": [
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "For cutscenes. \"Leaning back, both hands up, eyes wide, mouth open in shock\".",
+          "source_models": {
+            "01": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 4.0,
+            "calibration_cell": 5
+          }
+        }
+      },
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        112
+      ],
+      "base_source_model": "pro",
+      "base_art_dimensions": [
+        41,
+        80
+      ]
+    },
+    "robin": {
+      "brief": "Robin, Siya's bird companion: a small, original Indian-folk firebird inspired by Jatayu, the noble vulture-king of the Ramayana. Side view facing right, in flight, both wings raised high in a V, long tail plumes trailing down and back, talons tucked under the body. Vivid vermillion-red wings and back; each wing's long flight feathers tipped with cream and then emerald green; feathers decorated with small Madhubani-style dot and line patterns in marigold. A cream belly and a fluffy white ruff around the neck, like a vulture's. A noble head with a strongly hooked golden raptor beak, a sharp, friendly eye with a crimson eye-mask, and a curled golden crest. A fan of long marigold-gold and orange tail plumes. Slim, regal and colourful, with bold, clean shapes that read at a small size. Original design; the references guide mood and colours only.",
+      "role": "flyer",
+      "art_px": 48,
+      "anchor_mode": "center",
+      "view": "right-profile",
+      "subject": "full-body",
+      "references": [],
+      "style": [
+        "siya"
+      ],
+      "key": "blue",
+      "generation": {
+        "model": "pro",
+        "size": "1K",
+        "batch": false,
+        "candidates": 4,
+        "jobs": 3,
+        "fallback": "flash"
+      },
+      "approval": "approved",
+      "collider_units": [
+        24,
+        24
+      ],
+      "animations": {
+        "fly": {
+          "frame_count": 4,
+          "poses": [
+            "Wings fully raised above the body, body hovering level, legs tucked",
+            "Wings level and spread wide out to the sides, body level",
+            "Wings swept fully down below the body, body lifted slightly",
+            "Wings halfway up on the recovery, body level"
+          ],
+          "loop": "loop",
+          "fps": 10,
+          "durations": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "reuse",
+          "notes": "`poses/fly.txt`"
+        },
+        "hover": {
+          "frame_count": 2,
+          "poses": [
+            "Hovering in place, wings raised, beak closed",
+            "Hovering, wings down, beak closed"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "movement",
+          "notes": "Poses: \"Hovering in place, wings raised, beak closed\" / \"Hovering, wings down, beak closed\"."
+        },
+        "hint": {
+          "frame_count": 2,
+          "poses": [
+            "Hovering, one wing pointing forward, beak wide open talking",
+            "Hovering, wing pointing, beak closed, eyebrow raised"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "Shown next to new hazards. Poses: \"Hovering, one wing pointing forward, beak wide open talking\" / \"Hovering, wing pointing, beak closed, eyebrow raised\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 4.854166666666667,
+            "calibration_cell": 1
+          }
+        },
+        "perch": {
+          "frame_count": 2,
+          "poses": [
+            "Perched upright, wings folded neatly along the body, tail plumes hanging straight down behind, talons gripping below the belly, head up and proud, facing right",
+            "Identical to the perched pose facing right (head on the right, one tail fan hanging down on the left behind the body, wings folded), only the beak is open as if chirping and the crest is raised a little"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "reuse",
+          "notes": "Sitting on Siya's shoulder or a ledge in cutscenes. Poses: \"Perched, wings folded, feet gripping\" / \"Perched, head tilted, blinking\"."
+        },
+        "peck": {
+          "frame_count": 3,
+          "poses": [
+            "Wings pulled back, beak aimed forward, body coiled",
+            "Darting forward, beak jabbing, wings swept back",
+            "Bouncing back, wings flared"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "The Robin strike. Poses: \"Wings pulled back, beak aimed forward, body coiled\" / \"Darting forward, beak jabbing, wings swept back\" / \"Bouncing back, wings flared\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 4.854166666666667,
+            "calibration_cell": 1
+          }
+        },
+        "dive": {
+          "frame_count": 3,
+          "poses": [
+            "Wings folded tight, diving steeply down-forward",
+            "Pulling out of the dive, wings flaring wide",
+            "Swooping level, wings spread"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "Boss fight. Poses: \"Wings folded tight, diving steeply down-forward\" / \"Pulling out of the dive, wings flaring wide\" / \"Swooping level, wings spread\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 4.854166666666667,
+            "calibration_cell": 1
+          }
+        },
+        "drop_sparks": {
+          "frame_count": 2,
+          "poses": [
+            "Hovering, tail flicking down, a spray of sparks falling below",
+            "Wings up, sparks trailing"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "Boss fight. Use `--free-palette`. Poses: \"Hovering, tail flicking down, a spray of sparks falling below\" / \"Wings up, sparks trailing\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 4.854166666666667,
+            "calibration_cell": 1
+          }
+        },
+        "hypnotised": {
+          "frame_count": 2,
+          "poses": [
+            "Hovering stiffly, eyes replaced by purple spirals, beak open",
+            "Same, spirals turned the other way"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "Use `--free-palette`. Poses: \"Hovering stiffly, eyes replaced by purple spirals, beak open\" / \"Same, spirals turned the other way\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 4.854166666666667,
+            "calibration_cell": 1
+          }
+        },
+        "dizzy": {
+          "frame_count": 3,
+          "poses": [
+            "Wobbling in the air, eyes as X marks, feathers ruffled",
+            "Tumbling sideways, wings limp",
+            "Lying on his back on the ground, little stars circling (separate fx)"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "The dizzy meter is full. Poses: \"Wobbling in the air, eyes as X marks, feathers ruffled\" / \"Tumbling sideways, wings limp\" / \"Lying on his back on the ground, little stars circling (separate fx)\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 4.854166666666667,
+            "calibration_cell": 1
+          }
+        },
+        "wake": {
+          "frame_count": 2,
+          "poses": [
+            "Sitting up, shaking his head",
+            "Hopping up, wings out, determined"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "Poses: \"Sitting up, shaking his head\" / \"Hopping up, wings out, determined\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 4.854166666666667,
+            "calibration_cell": 1
+          }
+        }
+      },
+      "canvas": [
+        80,
+        80
+      ],
+      "anchor": [
+        40,
+        40
+      ],
+      "aliases": {
+        "point": "hint",
+        "talk": "perch"
+      },
+      "approval_source": "approved sprite and kept fly/perch from main 8e6c0a8",
+      "base_art_dimensions": [
+        44,
+        48
+      ]
+    },
+    "raj": {
+      "brief": "Raj, clean-shaven young adult man, slim and theatrical. Black hair in a tall dramatic quiff. Turquoise kurta with a gold placket and buttons, cream churidar, a long hot-pink stole over one shoulder, embroidered juttis. Strict right-facing side profile, standing upright with his chin raised and one hand on his chest. Vain, wounded expression. No moustache or beard.",
+      "role": "hero",
+      "art_px": 80,
+      "anchor_mode": "feet",
+      "view": "right-profile",
+      "subject": "full-body",
+      "references": [],
+      "style": [
+        "basic-rakshas",
+        "siya"
+      ],
+      "key": "green",
+      "generation": {
+        "model": "pro",
+        "size": "1K",
+        "batch": false,
+        "candidates": 4,
+        "jobs": 3,
+        "fallback": "flash"
+      },
+      "approval": "approved",
+      "collider_units": [
+        24,
+        40
+      ],
+      "animations": {
+        "sulk": {
+          "frame_count": 2,
+          "poses": [
+            "Sitting cross-legged with arms folded, pouting, looking away",
+            "Same, sighing, shoulders dropped"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "Poses: \"Sitting cross-legged with arms folded, pouting, looking away\" / \"Same, sighing, shoulders dropped\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 6.8,
+            "calibration_cell": 3
+          }
+        },
+        "dramatic": {
+          "frame_count": 3,
+          "poses": [
+            "Standing, back of one hand pressed to his forehead, swooning backward",
+            "Kneeling, both hands clasped, pleading upward",
+            "Gripping imaginary bars, face pressed forward, crying comically"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "movement",
+          "notes": "Poses: \"Standing, back of one hand pressed to his forehead, swooning backward\" / \"Kneeling, both hands clasped, pleading upward\" / \"Gripping imaginary bars, face pressed forward, crying comically\"."
+        },
+        "freed": {
+          "frame_count": 2,
+          "poses": [
+            "Arms flung wide in relief, beaming",
+            "Bowing theatrically to Siya"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "Poses: \"Arms flung wide in relief, beaming\" / \"Bowing theatrically to Siya\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 6.8,
+            "calibration_cell": 3
+          }
+        }
+      },
+      "candidate": "04",
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        120
+      ],
+      "base_source_model": "pro",
+      "base_art_dimensions": [
+        27,
+        80
+      ]
+    },
+    "basic-rakshas": {
+      "brief": "Basic rakshas enemy: an ordinary adult male demon footsoldier for Siyaraj, about player height, sturdy compact build with natural humanoid proportions. Use the supplied painting as identity and costume reference, translated into simple readable gameplay pixels. Preserve dark muted plum-purple skin, black swept-back hair, a bold curled black moustache, prominent hooked nose, stern comic eye and a small visible fang. Short simplified pointed marigold-gold crown with one hot-pink jewel, fitted short-sleeve gold tunic, hot-pink and coral dhoti gathered just below the knees, a short turquoise shoulder drape, a few chunky gold cuffs and anklets, bare feet. Reduce the painting's intricate ornament to two or three bold shapes. One small marigold-gold oval-headed mace with a short wooden handle, held low in the forward hand and pointing slightly forward; the other hand stays clearly visible. Keep the mace design identical across variants. Strict right-facing side profile, neutral alert idle stance with knees softly bent and both feet readable. Standard non-boss silhouette: modest crown, short drape, ordinary limb thickness, 246 native pixels total height including crown in the selected cleaned sprite. Simplify away the reference's long overhead staff, shield, sword and raised-arm battle pose. Keep skin color, face identity, outfit colors, crown and mace stable across all five variations. Same identity with slightly stronger geometric tailoring and one simple Madhubani-inspired border.",
+      "role": "enemy",
+      "art_px": 88,
+      "anchor_mode": "feet",
+      "view": "right-profile",
+      "subject": "full-body",
+      "references": [],
+      "style": [
+        "basic-rakshas",
+        "siya"
+      ],
+      "key": "green",
+      "generation": {
+        "model": "pro",
+        "size": "1K",
+        "batch": false,
+        "candidates": 4,
+        "jobs": 3,
+        "fallback": "flash"
+      },
+      "approval": "approved",
+      "collider_units": [
+        32,
+        40
+      ],
+      "animations": {
+        "walk": {
+          "frame_count": 4,
+          "poses": [
+            "Contact: front leg extended forward with heel touching the ground, back leg straight behind on its toes, opposite arm swung forward",
+            "Down: front foot flat and knee bent taking the weight, back foot lifting off, body at its lowest",
+            "Passing: weight on the straight front leg, back leg passing under the body with knee lifted, arms near the sides",
+            "Up: pushing off the toes of the standing leg, body at its highest, free leg swinging forward"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "movement",
+          "notes": "`poses/walk.txt`. Used for patrol and chase; speed up the playback in chase.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen",
+            "04": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 2.977272727272727,
+            "calibration_cell": 9
+          }
+        },
+        "attack": {
+          "frame_count": 4,
+          "poses": [
+            "Anticipation: weapon or striking arm pulled far back, body twisted away, weight on the back foot",
+            "Strike: weapon or arm swung fully forward at full extension, weight lunging onto the front foot",
+            "Follow-through: weapon past the target and low, body leaning forward, front knee bent",
+            "Recover: returning toward the neutral stance, weapon raised back to ready"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            3.6,
+            0.96,
+            2.6,
+            2.6
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "`poses/attack.txt`, mace swing. Strike is frame 2.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen",
+            "04": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 2.977272727272727,
+            "calibration_cell": 9
+          }
+        },
+        "idle": {
+          "frame_count": 2,
+          "poses": [
+            "Neutral stance, mace low",
+            "Same, twirling his moustache with the free hand"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "Poses: \"Neutral stance, mace low\" / \"Same, twirling his moustache with the free hand\". The twirl is the comic tell from the proposal.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 2.977272727272727,
+            "calibration_cell": 9
+          }
+        },
+        "death": {
+          "frame_count": 3,
+          "poses": [
+            "Hit hard: knocked backward, arms flung up, shocked expression",
+            "Collapse: knees buckling, body folding forward, arms limp",
+            "Down: lying flat on the ground on the side, eyes closed, completely still"
+          ],
+          "loop": "hold",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "`poses/death.txt`",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 2.977272727272727,
+            "calibration_cell": 9
+          }
+        }
+      },
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        135
+      ],
+      "base_art_dimensions": [
+        48,
+        88
+      ]
+    },
+    "ground-shooter": {
+      "brief": "Same rakshas footsoldier family as attachment 1: plum-purple skin, curled black moustache, hooked nose, small gold crown. Leaner build. Violet and turquoise dhoti and drape instead of pink. No mace. He holds a short bamboo blowpipe with a brass mouthpiece in both hands, level and pointing forward. Strict right-facing profile, knees bent, alert.",
+      "role": "enemy",
+      "art_px": 88,
+      "anchor_mode": "feet",
+      "view": "right-profile",
+      "subject": "full-body",
+      "references": [
+        "sprites/basic-rakshas/sprite.png"
+      ],
+      "style": [
+        "basic-rakshas",
+        "siya"
+      ],
+      "key": "green",
+      "generation": {
+        "model": "pro",
+        "size": "1K",
+        "batch": false,
+        "candidates": 4,
+        "jobs": 3,
+        "fallback": "flash"
+      },
+      "approval": "approved",
+      "collider_units": [
+        32,
+        40
+      ],
+      "animations": {
+        "walk": {
+          "frame_count": 4,
+          "poses": [
+            "Contact: front leg extended forward with heel touching the ground, back leg straight behind on its toes, opposite arm swung forward. Blowpipe held across the body",
+            "Down: front foot flat and knee bent taking the weight, back foot lifting off, body at its lowest. Blowpipe held across the body",
+            "Passing: weight on the straight front leg, back leg passing under the body with knee lifted, arms near the sides. Blowpipe held across the body",
+            "Up: pushing off the toes of the standing leg, body at its highest, free leg swinging forward. Blowpipe held across the body"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "movement",
+          "notes": "`poses/walk.txt`, blowpipe held across the body.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen",
+            "04": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 4.863636363636363,
+            "calibration_cell": 1
+          }
+        },
+        "charge": {
+          "frame_count": 2,
+          "poses": [
+            "Planted, blowpipe raised to his lips aimed forward, cheeks puffing up",
+            "Same, cheeks fully ballooned, eyes squeezed"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            2.6,
+            2.6
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "0.65 s wind-up, which J can interrupt. Poses: \"Planted, blowpipe raised to his lips aimed forward, cheeks puffing up\" / \"Same, cheeks fully ballooned, eyes squeezed\". The purple charge ring is code or fx."
+        },
+        "fire": {
+          "frame_count": 1,
+          "poses": [
+            "Blowpipe aimed forward, cheeks deflated, recoiling back a step"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "\"Blowpipe aimed forward, cheeks deflated, recoiling back a step\"."
+        },
+        "recovery": {
+          "frame_count": 2,
+          "poses": [
+            "Bent over, coughing, blowpipe lowered",
+            "Same, loading a dart into the blowpipe"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            6.4,
+            6.4
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "1.6 s reload. Poses: \"Bent over, coughing, blowpipe lowered\" / \"Same, loading a dart into the blowpipe\"."
+        },
+        "death": {
+          "frame_count": 3,
+          "poses": [
+            "Hit hard: knocked backward, arms flung up, shocked expression",
+            "Collapse: knees buckling, body folding forward, arms limp",
+            "Down: lying flat on the ground on the side, eyes closed, completely still"
+          ],
+          "loop": "hold",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "`poses/death.txt`"
+        }
+      },
+      "candidate": "03",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        135
+      ],
+      "base_source_model": "pro",
+      "base_art_dimensions": [
+        58,
+        88
+      ]
+    },
+    "brute": {
+      "brief": "Rakshas brute, same family as attachment 1 but huge. Broad hunched shoulders, thick arms, round belly, short legs. Deep maroon skin, two short curved ivory horns, a thick bushy black moustache, angry underbite with two tusks. Wide gold belt with a big round buckle, chunky gold bracers on both forearms, marigold and hot-pink dhoti. Holds a heavy wooden club studded with brass, resting on his forward shoulder. Strict right-facing profile, wide stance.",
+      "role": "brute",
+      "art_px": 136,
+      "anchor_mode": "feet",
+      "view": "right-profile",
+      "subject": "full-body",
+      "references": [
+        "sprites/basic-rakshas/sprite.png"
+      ],
+      "style": [
+        "basic-rakshas",
+        "siya"
+      ],
+      "key": "green",
+      "generation": {
+        "model": "pro",
+        "size": "1K",
+        "batch": false,
+        "candidates": 4,
+        "jobs": 3,
+        "fallback": "flash"
+      },
+      "approval": "approved",
+      "collider_units": [
+        48,
+        64
+      ],
+      "animations": {
+        "walk": {
+          "frame_count": 4,
+          "poses": [
+            "Contact: front leg extended forward with heel touching the ground, back leg straight behind on its toes, opposite arm swung forward. A heavy stomp",
+            "Down: front foot flat and knee bent taking the weight, back foot lifting off, body at its lowest. A heavy stomp",
+            "Passing: weight on the straight front leg, back leg passing under the body with knee lifted, arms near the sides. A heavy stomp",
+            "Up: pushing off the toes of the standing leg, body at its highest, free leg swinging forward. A heavy stomp"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "movement",
+          "notes": "`poses/walk.txt`, a heavy stomp.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen",
+            "04": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 3.1029411764705883,
+            "calibration_cell": 1
+          }
+        },
+        "attack": {
+          "frame_count": 4,
+          "poses": [
+            "Anticipation: weapon or striking arm pulled far back, body twisted away, weight on the back foot",
+            "Strike: weapon or arm swung fully forward at full extension, weight lunging onto the front foot",
+            "Follow-through: weapon past the target and low, body leaning forward, front knee bent",
+            "Recover: panting, club dragging, clear punish window"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            5.6,
+            1.28,
+            3.8,
+            3.8
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "`poses/attack.txt` with the club. Hold frame 1 for the long wind-up (code tints it orange). Strike is frame 2. Frame 4 should read as \"panting, club dragging\", which is the punish window.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen",
+            "04": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 2.4926470588235294,
+            "calibration_cell": 5
+          }
+        },
+        "idle": {
+          "frame_count": 2,
+          "poses": [
+            "Club on shoulder, chest heaving",
+            "Same, scratching his belly"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "Poses: \"Club on shoulder, chest heaving\" / \"Same, scratching his belly\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 2.4926470588235294,
+            "calibration_cell": 5
+          }
+        },
+        "death": {
+          "frame_count": 3,
+          "poses": [
+            "Hit hard: knocked backward, arms flung up, shocked expression. A big comic flop",
+            "Collapse: knees buckling, body folding forward, arms limp. A big comic flop",
+            "Down: lying flat on the ground on the side, eyes closed, completely still. A big comic flop"
+          ],
+          "loop": "hold",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "`poses/death.txt`. Make it a big comic flop.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 2.4926470588235294,
+            "calibration_cell": 5
+          }
+        }
+      },
+      "candidate": "04",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        195
+      ],
+      "base_source_model": "pro",
+      "base_art_dimensions": [
+        99,
+        136
+      ]
+    },
+    "winged-forest-demon": {
+      "brief": "Winged forest demon creature for Siyaraj, adapted from attachment 1. A lean adult gargoyle-like imp with moss/olive-green skin, angular hunched torso, long pointed swept-back ears, two slim curved head horns, one sharp right-facing hooked muzzle, a single visible marigold eye and small ivory fang. Two arms with long three-fingered claws and two digitigrade legs with three-toed talons; exactly four limbs plus two separate bat wings. The near leathery bat wing rises behind the shoulders and arcs to the left/back, with three clear ribs and a scalloped lower edge; the far wing is partially visible offset behind it. Keep the head and forward claw unobscured in a strict right-facing profile. A compact alert crouch with both taloned feet at one baseline, elbows bent and forward claws lowered; no front-facing symmetric spread. Deep aubergine outline and dark olive wing membranes, lighter moss-green ribs, sparse hot-pink sash at the waist, one marigold wrist band and one tiny ivory skull charm hung at the waist. Natural sinewy anatomy, no armor, crown, mace or human clothing. Omit the painting background, branch, hanging bones and scenery. Total creature including wing tips is approximately 90 native pixels tall and 92 native pixels wide. Body without wings is about 60 native pixels tall. Keep horns, muzzle, eye, fang, claws and wing ribs as bold separated pixel clusters. Fixed across variants: green skin, face, horns, crouching anatomy, wing count, sash and charm. Only wing-edge shape, minimal accent motifs and facial expression may vary. Same identity with a slightly hooked upper wing tip and two deeper lower-edge scallops; spare marigold wrist band.",
+      "role": "flyer",
+      "art_px": 80,
+      "anchor_mode": "center",
+      "view": "right-profile",
+      "subject": "full-body",
+      "references": [],
+      "style": [
+        "basic-rakshas",
+        "siya"
+      ],
+      "key": "blue",
+      "generation": {
+        "model": "pro",
+        "size": "1K",
+        "batch": false,
+        "candidates": 4,
+        "jobs": 3,
+        "fallback": "flash"
+      },
+      "approval": "approved",
+      "collider_units": [
+        32,
+        28
+      ],
+      "animations": {
+        "fly": {
+          "frame_count": 4,
+          "poses": [
+            "Wings fully raised above the body, body hovering level, legs tucked",
+            "Wings level and spread wide out to the sides, body level",
+            "Wings swept fully down below the body, body lifted slightly",
+            "Wings halfway up on the recovery, body level"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "movement",
+          "notes": "`poses/fly.txt`"
+        },
+        "charge": {
+          "frame_count": 2,
+          "poses": [
+            "Wings raised high, body drawn back, claws forward, glaring",
+            "Same, wings at peak, mouth open in a screech"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.8,
+            1.8
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "0.45 s wind-up. Poses: \"Wings raised high, body drawn back, claws forward, glaring\" / \"Same, wings at peak, mouth open in a screech\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 3.265625,
+            "calibration_cell": null
+          }
+        },
+        "dive": {
+          "frame_count": 2,
+          "poses": [
+            "Body stretched forward like a dart, wings swept back, claws extended",
+            "Same, wings tucked tighter"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "Poses: \"Body stretched forward like a dart, wings swept back, claws extended\" / \"Same, wings tucked tighter\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 3.265625,
+            "calibration_cell": null
+          }
+        },
+        "recovery": {
+          "frame_count": 2,
+          "poses": [
+            "Flapping upward clumsily, dazed, wings uneven",
+            "Wings down, shaking head"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "Poses: \"Flapping upward clumsily, dazed, wings uneven\" / \"Wings down, shaking head\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 3.265625,
+            "calibration_cell": null
+          }
+        },
+        "death": {
+          "frame_count": 2,
+          "poses": [
+            "Wings crumpled, tumbling",
+            "Spiralling down, eyes as X marks"
+          ],
+          "loop": "hold",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "Poses: \"Wings crumpled, tumbling\" / \"Spiralling down, eyes as X marks\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 3.265625,
+            "calibration_cell": null
+          }
+        }
+      },
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        71
+      ],
+      "base_art_dimensions": [
+        81,
+        81
+      ]
+    },
+    "khara": {
+      "brief": "Khara, rakshasa lord of the forest outpost. Massive heavy brawler, barrel chest, thick neck, slightly bowed legs. Dark indigo-blue skin. Two large curved bull horns. Wild black hair, a huge upturned moustache, a scowl and fangs. Bronze armour plates on the shoulders and chest, a tiger-skin waist wrap, marigold dhoti, heavy gold anklets. His forward right fist is raised to chest height, closed around nothing, as if gripping a weapon handle. His left hand hangs open. No weapon. Strict right-facing profile, heavy planted stance.",
+      "role": "boss",
+      "art_px": 200,
+      "anchor_mode": "feet",
+      "view": "right-profile",
+      "subject": "full-body",
+      "references": [
+        "refs/characters/rakshasa-court-painting.webp"
+      ],
+      "style": [
+        "basic-rakshas",
+        "siya"
+      ],
+      "key": "green",
+      "generation": {
+        "model": "pro",
+        "size": "4K",
+        "batch": false,
+        "candidates": 4,
+        "jobs": 2
+      },
+      "approval": "approved",
+      "collider_units": [
+        56,
+        92
+      ],
+      "animations": {
+        "idle": {
+          "frame_count": 2,
+          "poses": [
+            "Heavy stance, fist forward at chest height, chest heaving. Empty fists, no weapon; Khara's gada is a separate component",
+            "Same, shoulders lifted on an inhale. Empty fists, no weapon; Khara's gada is a separate component"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "Poses: \"Heavy stance, fist forward at chest height, chest heaving\" / \"Same, shoulders lifted on an inhale\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.8097560975609757,
+            "calibration_cell": 1
+          }
+        },
+        "walk": {
+          "frame_count": 4,
+          "poses": [
+            "Contact: front leg extended forward with heel touching the ground, back leg straight behind on its toes, opposite arm swung forward. Empty fists, no weapon; Khara's gada is a separate component",
+            "Down: front foot flat and knee bent taking the weight, back foot lifting off, body at its lowest. Empty fists, no weapon; Khara's gada is a separate component",
+            "Passing: weight on the straight front leg, back leg passing under the body with knee lifted, arms near the sides. Empty fists, no weapon; Khara's gada is a separate component",
+            "Up: pushing off the toes of the standing leg, body at its highest, free leg swinging forward. Empty fists, no weapon; Khara's gada is a separate component"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "movement",
+          "notes": "`poses/walk.txt`. Slow stomp at 75 units/s; play 1.4x faster in phase 2.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen",
+            "04": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.8097560975609757,
+            "calibration_cell": 1
+          }
+        },
+        "slam_windup": {
+          "frame_count": 2,
+          "poses": [
+            "Both fists lifted high behind his head, gripping, knees starting to bend. Empty fists, no weapon; Khara's gada is a separate component",
+            "Fists at the top of the swing behind his head, back arched, knees bent, teeth gritted. Empty fists, no weapon; Khara's gada is a separate component"
+          ],
+          "loop": "hold",
+          "fps": 8,
+          "durations": [
+            3.4,
+            3.4
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "0.85 s. Poses: \"Both fists lifted high behind his head, gripping, knees starting to bend\" / \"Fists at the top of the swing behind his head, back arched, knees bent, teeth gritted\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.604878048780488,
+            "calibration_cell": 1
+          }
+        },
+        "slam_impact": {
+          "frame_count": 1,
+          "poses": [
+            "Bent deep forward, both fists driven down to knee height in front of him, as if a mace has hit the ground about 50 units ahead. Empty fists, no weapon; Khara's gada is a separate component"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            0.96
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "0.12 s. \"Bent deep forward, both fists driven down to knee height in front of him, as if a mace has hit the ground about 50 units ahead\".",
+          "source_models": {
+            "01": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.604878048780488,
+            "calibration_cell": 1
+          }
+        },
+        "slam_recovery": {
+          "frame_count": 2,
+          "poses": [
+            "Bent forward, pulling backward with both fists low, straining. Empty fists, no weapon; Khara's gada is a separate component",
+            "Same, leaning further back, sweating, tongue out. Empty fists, no weapon; Khara's gada is a separate component"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            4.4,
+            4.4
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "1.1 s, the punish window. Poses: \"Bent forward, pulling backward with both fists low, straining\" / \"Same, leaning further back, sweating, tongue out\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.604878048780488,
+            "calibration_cell": 1
+          }
+        },
+        "ladi_cast": {
+          "frame_count": 3,
+          "poses": [
+            "Crouching, unrolling a string of red firecrackers along the ground. Empty fists, no weapon; Khara's gada is a separate component",
+            "Crouched, holding a glowing incense stick to the end of the string. Empty fists, no weapon; Khara's gada is a separate component",
+            "Rising, incense stick held up. Empty fists, no weapon; Khara's gada is a separate component"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.6,
+            1.6,
+            0.8
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "0.5 s. Use `--free-palette` for the ember. Poses: \"Crouching, unrolling a string of red firecrackers along the ground\" / \"Crouched, holding a glowing incense stick to the end of the string\" / \"Rising, incense stick held up\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.604878048780488,
+            "calibration_cell": 1
+          }
+        },
+        "ladi_recovery": {
+          "frame_count": 2,
+          "poses": [
+            "Standing, both fingers jammed in his ears, eyes squeezed shut. Empty fists, no weapon; Khara's gada is a separate component",
+            "Same, peeking with one eye. Empty fists, no weapon; Khara's gada is a separate component"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            2.4,
+            2.4
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "0.6 s. Poses: \"Standing, both fingers jammed in his ears, eyes squeezed shut\" / \"Same, peeking with one eye\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.604878048780488,
+            "calibration_cell": 1
+          }
+        },
+        "intro_roar": {
+          "frame_count": 3,
+          "poses": [
+            "Beating his chest with both fists. Empty fists, no weapon; Khara's gada is a separate component",
+            "Fist raised to the sky, roaring. Empty fists, no weapon; Khara's gada is a separate component",
+            "Back to a heavy stance, glaring. Empty fists, no weapon; Khara's gada is a separate component"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            2.666667,
+            2.666667,
+            2.666667
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "1.0 s. Poses: \"Beating his chest with both fists\" / \"Fist raised to the sky, roaring\" / \"Back to a heavy stance, glaring\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.5951219512195123,
+            "calibration_cell": 1
+          }
+        },
+        "phase_shift_roar": {
+          "frame_count": 3,
+          "poses": [
+            "Hunched, fists clenched, shaking with rage. Empty fists, no weapon; Khara's gada is a separate component",
+            "Arms flung wide, roaring at the sky, steam from his nostrils. Empty fists, no weapon; Khara's gada is a separate component",
+            "Settled into a lower, angrier stance. Empty fists, no weapon; Khara's gada is a separate component"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            3.2,
+            3.2,
+            3.2
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "1.2 s. Poses: \"Hunched, fists clenched, shaking with rage\" / \"Arms flung wide, roaring at the sky, steam from his nostrils\" / \"Settled into a lower, angrier stance\". Pair with the `fx-flame-crown` overlay.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.5951219512195123,
+            "calibration_cell": 1
+          }
+        },
+        "death": {
+          "frame_count": 4,
+          "poses": [
+            "Staggering backward, eyes wide. Empty fists, no weapon; Khara's gada is a separate component",
+            "Toppling back, arms flailing. Empty fists, no weapon; Khara's gada is a separate component",
+            "Falling flat on his back. Empty fists, no weapon; Khara's gada is a separate component",
+            "Lying flat, eyes as X marks, moustache drooping. Empty fists, no weapon; Khara's gada is a separate component"
+          ],
+          "loop": "hold",
+          "fps": 8,
+          "durations": [
+            2.8,
+            2.8,
+            2.8,
+            2.8
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "1.4 s. Poses: \"Staggering backward, eyes wide\" / \"Toppling back, arms flailing\" / \"Falling flat on his back\" / \"Lying flat, eyes as X marks, moustache drooping\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen",
+            "04": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.5951219512195123,
+            "calibration_cell": 1
+          }
+        }
+      },
+      "attachment": {
+        "sprite": "khara-gada",
+        "base_hand_units": [
+          37,
+          -68
+        ],
+        "frames": {
+          "idle": [
+            {
+              "hand_from_anchor_px": [
+                65,
+                -133
+              ],
+              "rotation_degrees": 0,
+              "visible": true
+            },
+            {
+              "hand_from_anchor_px": [
+                65,
+                -130
+              ],
+              "rotation_degrees": 0,
+              "visible": true
+            }
+          ],
+          "walk": [
+            {
+              "hand_from_anchor_px": [
+                86,
+                -124
+              ],
+              "rotation_degrees": -5,
+              "visible": true
+            },
+            {
+              "hand_from_anchor_px": [
+                62,
+                -119
+              ],
+              "rotation_degrees": 4,
+              "visible": true
+            },
+            {
+              "hand_from_anchor_px": [
+                18,
+                -108
+              ],
+              "rotation_degrees": 0,
+              "visible": true
+            },
+            {
+              "hand_from_anchor_px": [
+                78,
+                -136
+              ],
+              "rotation_degrees": -8,
+              "visible": true
+            }
+          ],
+          "slam_windup": [
+            {
+              "hand_from_anchor_px": [
+                -29,
+                -216
+              ],
+              "rotation_degrees": -65,
+              "visible": true
+            },
+            {
+              "hand_from_anchor_px": [
+                -26,
+                -207
+              ],
+              "rotation_degrees": -70,
+              "visible": true
+            }
+          ],
+          "slam_impact": [
+            {
+              "hand_from_anchor_px": [
+                55,
+                -30
+              ],
+              "rotation_degrees": 90,
+              "visible": true
+            }
+          ],
+          "slam_recovery": [
+            {
+              "hand_from_anchor_px": [
+                -27,
+                -57
+              ],
+              "rotation_degrees": 65,
+              "visible": true
+            },
+            {
+              "hand_from_anchor_px": [
+                39,
+                -66
+              ],
+              "rotation_degrees": 35,
+              "visible": true
+            }
+          ],
+          "ladi_cast": [
+            {
+              "hand_from_anchor_px": [
+                -55,
+                -22
+              ],
+              "rotation_degrees": 0,
+              "visible": false
+            },
+            {
+              "hand_from_anchor_px": [
+                -29,
+                -22
+              ],
+              "rotation_degrees": 0,
+              "visible": false
+            },
+            {
+              "hand_from_anchor_px": [
+                82,
+                -204
+              ],
+              "rotation_degrees": 0,
+              "visible": false
+            }
+          ],
+          "ladi_recovery": [
+            {
+              "hand_from_anchor_px": [
+                33,
+                -158
+              ],
+              "rotation_degrees": 0,
+              "visible": false
+            },
+            {
+              "hand_from_anchor_px": [
+                33,
+                -157
+              ],
+              "rotation_degrees": 0,
+              "visible": false
+            }
+          ],
+          "intro_roar": [
+            {
+              "hand_from_anchor_px": [
+                31,
+                -122
+              ],
+              "rotation_degrees": 0,
+              "visible": false
+            },
+            {
+              "hand_from_anchor_px": [
+                42,
+                -232
+              ],
+              "rotation_degrees": 0,
+              "visible": true
+            },
+            {
+              "hand_from_anchor_px": [
+                64,
+                -71
+              ],
+              "rotation_degrees": 0,
+              "visible": true
+            }
+          ],
+          "phase_shift_roar": [
+            {
+              "hand_from_anchor_px": [
+                82,
+                -77
+              ],
+              "rotation_degrees": 0,
+              "visible": true
+            },
+            {
+              "hand_from_anchor_px": [
+                86,
+                -132
+              ],
+              "rotation_degrees": 70,
+              "visible": false
+            },
+            {
+              "hand_from_anchor_px": [
+                78,
+                -84
+              ],
+              "rotation_degrees": 0,
+              "visible": true
+            }
+          ],
+          "death": [
+            {
+              "hand_from_anchor_px": [
+                48,
+                -167
+              ],
+              "rotation_degrees": 0,
+              "visible": false
+            },
+            {
+              "hand_from_anchor_px": [
+                24,
+                -133
+              ],
+              "rotation_degrees": 0,
+              "visible": false
+            },
+            {
+              "hand_from_anchor_px": [
+                -43,
+                -134
+              ],
+              "rotation_degrees": 0,
+              "visible": false
+            },
+            {
+              "hand_from_anchor_px": [
+                -34,
+                -16
+              ],
+              "rotation_degrees": 0,
+              "visible": false
+            }
+          ]
+        },
+        "approval": "approved",
+        "notes": "Reviewed native hand offsets and swing rotations for every frame. Gada is hidden while hands place fireworks, cover ears, pound the chest, or during defeat."
+      },
+      "candidate": "02",
+      "canvas": [
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        300
+      ],
+      "base_art_dimensions": [
+        180,
+        205
+      ]
+    },
+    "khara-gada": {
+      "brief": "Bronze gada mace on its own: a large ribbed round head with a pointed top finial and a long bronze handle with a grip wrap. Vertical, head up. No hand.",
+      "role": "prop",
+      "art_px": 120,
+      "anchor_mode": "center",
+      "view": "front",
+      "subject": "prop",
+      "references": [],
+      "style": [
+        "basic-rakshas",
+        "siya"
+      ],
+      "key": "green",
+      "generation": {
+        "model": "pro",
+        "size": "1K",
+        "batch": false,
+        "candidates": 4,
+        "jobs": 3,
+        "fallback": "flash"
+      },
+      "approval": "approved",
+      "collider_units": [
+        0,
+        0
+      ],
+      "animations": {},
+      "attachment": {
+        "pivot": "handle_bottom",
+        "approval": "approved",
+        "anchor": [
+          96,
+          130
+        ]
+      },
+      "candidate": "01",
+      "canvas": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        96
+      ],
+      "base_source_model": "flash",
+      "base_art_dimensions": [
+        45,
+        120
+      ]
+    },
+    "swaminathan": {
+      "brief": "Swaminathan, a vain rakshasa king, body only. A wide ornate gold collar sits where his heads will attach later. No head is drawn. Broad royal torso with a bare belly and a visible navel, eight arms fanned out behind two main arms held on his hips. Purple-black skin, gold armlets, a hot-pink and gold silk dhoti, a turquoise sash, heavy jewelled belt, pointed gold shoes. Front three-quarter stance, feet planted wide.",
+      "role": "big-boss",
+      "art_px": 260,
+      "anchor_mode": "feet",
+      "view": "front-three-quarter",
+      "subject": "headless-body",
+      "references": [
+        "refs/characters/trishiras-three-headed-rakshasa.jpg"
+      ],
+      "style": [
+        "basic-rakshas",
+        "siya"
+      ],
+      "key": "blue",
+      "generation": {
+        "model": "pro",
+        "size": "4K",
+        "batch": false,
+        "candidates": 4,
+        "jobs": 2
+      },
+      "approval": "approved",
+      "collider_units": [
+        100,
+        60
+      ],
+      "animations": {
+        "idle": {
+          "frame_count": 2,
+          "poses": [
+            "Hands on hips, arms fanned behind, chest raised. Headless; ten arms; keep the navel clear",
+            "Same, chest dropped slightly. Headless; ten arms; keep the navel clear"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "movement",
+          "notes": "Poses: \"Hands on hips, arms fanned behind, chest raised\" / \"Same, chest dropped slightly\".",
+          "source_models": {
+            "01": "pro",
+            "02": "pro"
+          },
+          "source_grid": {}
+        },
+        "exposed": {
+          "frame_count": 2,
+          "poses": [
+            "Slumped forward, arms hanging, knees buckled. Headless; ten arms; keep the navel clear",
+            "Same, swaying. Headless; ten arms; keep the navel clear"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "Staggered and slumped, belly bare. Code moves him 6 units down. Poses: \"Slumped forward, arms hanging, knees buckled\" / \"Same, swaying\". Keep the navel clear.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.5020408163265306,
+            "calibration_cell": 1
+          }
+        },
+        "dying": {
+          "frame_count": 4,
+          "poses": [
+            "Arms flung up, recoiling. Headless; ten arms; keep the navel clear",
+            "Knees buckling. Headless; ten arms; keep the navel clear",
+            "Kneeling, arms limp. Headless; ten arms; keep the navel clear",
+            "Collapsing forward. Headless; ten arms; keep the navel clear"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "Poses: \"Arms flung up, recoiling\" / \"Knees buckling\" / \"Kneeling, arms limp\" / \"Collapsing forward\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen",
+            "04": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.5020408163265306,
+            "calibration_cell": 1
+          }
+        },
+        "dead": {
+          "frame_count": 1,
+          "poses": [
+            "Collapsed in a heap, arms splayed. Headless; ten arms; keep the navel clear"
+          ],
+          "loop": "hold",
+          "fps": 8,
+          "durations": [
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "\"Collapsed in a heap, arms splayed\". Code dims it.",
+          "source_models": {
+            "01": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.5020408163265306,
+            "calibration_cell": 1
+          }
+        },
+        "intro": {
+          "frame_count": 3,
+          "poses": [
+            "Seated low, arms folded. Headless; ten arms; keep the navel clear",
+            "Rising, arms spreading. Headless; ten arms; keep the navel clear",
+            "Standing tall, all arms fanned wide. Headless; ten arms; keep the navel clear"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "Poses: \"Seated low, arms folded\" / \"Rising, arms spreading\" / \"Standing tall, all arms fanned wide\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.2285714285714286,
+            "calibration_cell": 1
+          }
+        },
+        "roar": {
+          "frame_count": 3,
+          "poses": [
+            "Arms pulled in, clenched. Headless; ten arms; keep the navel clear",
+            "All arms flung out. Headless; ten arms; keep the navel clear",
+            "Arms raised high. Headless; ten arms; keep the navel clear"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "Phase transition. Poses: \"Arms pulled in, clenched\" / \"All arms flung out\" / \"Arms raised high\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.2285714285714286,
+            "calibration_cell": 1
+          }
+        },
+        "fury": {
+          "frame_count": 2,
+          "poses": [
+            "All arms raised high, fists glowing. Headless; ten arms; keep the navel clear",
+            "Same, arms shifted. Headless; ten arms; keep the navel clear"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "Use `--free-palette`. Poses: \"All arms raised high, fists glowing\" / \"Same, arms shifted\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 1.8081632653061224,
+            "calibration_cell": 1
+          }
+        }
+      },
+      "attachment": {
+        "sprite": "swaminathan-head",
+        "shoulder_units": -118,
+        "head_offsets_units": [
+          [
+            -198.0,
+            -150.0
+          ],
+          [
+            -154.0,
+            -161.9
+          ],
+          [
+            -110.0,
+            -170.7
+          ],
+          [
+            -66.0,
+            -176.7
+          ],
+          [
+            -22.0,
+            -179.6
+          ],
+          [
+            22.0,
+            -179.6
+          ],
+          [
+            66.0,
+            -176.7
+          ],
+          [
+            110.0,
+            -170.7
+          ],
+          [
+            154.0,
+            -161.9
+          ],
+          [
+            198.0,
+            -150.0
+          ]
+        ],
+        "neck_colour": "#552648"
+      },
+      "candidate": "02",
+      "canvas": [
+        368,
+        368
+      ],
+      "anchor": [
+        184,
+        345
+      ],
+      "base_art_dimensions": [
+        245,
+        245
+      ]
+    },
+    "swaminathan-head": {
+      "brief": "One crowned rakshasa king's head on its own. A tall pointed gold crown with a single jewel, pointed ears with gold earrings, purple-black skin. A HUGE black handlebar moustache with curled tips, twice the width of the face. Heavy eyebrows, smug expression. Three-quarter view facing slightly down. A short neck stub at the bottom.",
+      "role": "prop",
+      "art_px": 76,
+      "anchor_mode": "center",
+      "view": "front-three-quarter",
+      "subject": "head",
+      "references": [],
+      "style": [
+        "basic-rakshas",
+        "siya"
+      ],
+      "key": "blue",
+      "generation": {
+        "model": "pro",
+        "size": "1K",
+        "batch": false,
+        "candidates": 4,
+        "jobs": 3,
+        "fallback": "flash"
+      },
+      "approval": "approved",
+      "collider_units": [
+        34,
+        34
+      ],
+      "animations": {
+        "idle": {
+          "frame_count": 2,
+          "poses": [
+            "Smug, eyes open",
+            "Smug, blinking"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "movement",
+          "notes": "Poses: \"Smug, eyes open\" / \"Smug, blinking\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 2.962962962962963,
+            "calibration_cell": 1
+          }
+        },
+        "telegraph": {
+          "frame_count": 3,
+          "poses": [
+            "Mouth opening, eyes starting to glow, moustache tips curling up",
+            "Moustache tips twirled into tight spirals, eyes glowing",
+            "Mouth wide, eyes blazing"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "Use `--free-palette` for the eye glow. Poses: \"Mouth opening, eyes starting to glow, moustache tips curling up\" / \"Moustache tips twirled into tight spirals, eyes glowing\" / \"Mouth wide, eyes blazing\". Must read under gold, orange, purple, cyan and rose halos.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 2.962962962962963,
+            "calibration_cell": 1
+          }
+        },
+        "attack": {
+          "frame_count": 2,
+          "poses": [
+            "Mouth gaping wide, jaw forward (breath, spit or roar)",
+            "Same, eyes crackling with lightning"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "Poses: \"Mouth gaping wide, jaw forward (breath, spit or roar)\" / \"Same, eyes crackling with lightning\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 2.962962962962963,
+            "calibration_cell": 1
+          }
+        },
+        "exhausted": {
+          "frame_count": 2,
+          "poses": [
+            "Drooping, eyes half closed, tongue out, moustache limp",
+            "Same, wobbling"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "The punish window. Poses: \"Drooping, eyes half closed, tongue out, moustache limp\" / \"Same, wobbling\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 2.962962962962963,
+            "calibration_cell": 1
+          }
+        },
+        "knocked_out": {
+          "frame_count": 1,
+          "poses": [
+            "Limp, eyes as X marks, mouth open, moustache drooping"
+          ],
+          "loop": "hold",
+          "fps": 8,
+          "durations": [
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "\"Limp, eyes as X marks, mouth open, moustache drooping\". Code darkens and rotates it.",
+          "source_models": {
+            "01": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 2.962962962962963,
+            "calibration_cell": 1
+          }
+        },
+        "regrow": {
+          "frame_count": 3,
+          "poses": [
+            "Small glowing bud of a head",
+            "Head half formed, sparkles",
+            "Fully formed, smug"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "Use `--free-palette`. Poses: \"Small glowing bud of a head\" / \"Head half formed, sparkles\" / \"Fully formed, smug\". Code scales it from 0.3 to 1.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 2.962962962962963,
+            "calibration_cell": 1
+          }
+        },
+        "fury": {
+          "frame_count": 2,
+          "poses": [
+            "Eyes ablaze, teeth bared, moustache bristling",
+            "Same, flames at the crown"
+          ],
+          "loop": "loop",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "Use `--free-palette`. Poses: \"Eyes ablaze, teeth bared, moustache bristling\" / \"Same, flames at the crown\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 2.962962962962963,
+            "calibration_cell": 1
+          }
+        },
+        "destroyed": {
+          "frame_count": 3,
+          "poses": [
+            "Head cracking with light",
+            "Bursting into firework sparks",
+            "Smoking crown falling"
+          ],
+          "loop": "once",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "combat",
+          "notes": "Use `--free-palette`. Poses: \"Head cracking with light\" / \"Bursting into firework sparks\" / \"Smoking crown falling\".",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 5.148148148148148,
+            "calibration_cell": 1
+          }
+        },
+        "faces": {
+          "frame_count": 10,
+          "poses": [
+            "Mada: smug",
+            "Krodha: furious",
+            "Lobha: grasping, licking his lips",
+            "Moha: hazy, half-lidded",
+            "Matsarya: glancing sideways, jealous",
+            "Ahamkara: haughty, nose up",
+            "Manas: restless, darting eyes",
+            "Kama: winking, alluring",
+            "Buddhi: calm",
+            "Chitta: stern"
+          ],
+          "loop": "none",
+          "fps": 8,
+          "durations": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "free_palette": false,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "The per-head expressions from `Sprites_List.md`, one pose each. Used as each head's `idle`.",
+          "source_models": {
+            "01": "imagegen",
+            "02": "imagegen",
+            "03": "imagegen",
+            "04": "imagegen",
+            "05": "imagegen",
+            "06": "imagegen",
+            "07": "imagegen",
+            "08": "imagegen",
+            "09": "imagegen",
+            "10": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 3.7777777777777777,
+            "calibration_cell": 1
+          }
+        },
+        "burnt": {
+          "frame_count": 1,
+          "poses": [
+            "Same head, moustache singed to smoking stubs, furious"
+          ],
+          "loop": "none",
+          "fps": 8,
+          "durations": [
+            1.0
+          ],
+          "free_palette": true,
+          "approval": "approved",
+          "wave": "story",
+          "notes": "Phase 3 option from the proposal: \"Same head, moustache singed to smoking stubs, furious\".",
+          "source_models": {
+            "01": "imagegen"
+          },
+          "source_grid": {
+            "mode": "uniform",
+            "source_pixel_spacing": 5.9753086419753085,
+            "calibration_cell": 1
+          }
+        }
+      },
+      "candidate": "03",
+      "canvas": [
+        128,
+        128
+      ],
+      "anchor": [
+        64,
+        64
+      ],
+      "base_source_model": "flash",
+      "base_art_dimensions": [
+        64,
+        81
+      ]
+    }
+  },
+  "batch_pilot": {
+    "subject": "siya",
+    "animation": "run",
+    "resolution": "1K",
+    "frames": 4,
+    "fetch": "succeeded",
+    "geometry": "128x128 common canvas, feet registered; no cleanup flags",
+    "visual_approval": "approved"
+  },
+  "review_policy": "Agent selects, reviews and keeps all remaining art; user requested no further approvals and will test in game.",
+  "production_policy": "Successful Vertex Pro/Flash outputs retained; remaining actions generated as imagegen transparent sheets after persistent Vertex 429 capacity errors. Actual models and uniform source grid are recorded per animation."
+}
