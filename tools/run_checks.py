@@ -18,6 +18,10 @@ def main():
     for check in checks:
         command = [GODOT, "--headless", "--fixed-fps", "60", "--path", str(ROOT),
                    "--script", "res://tests/" + check.name]
+        # Physics/UI suites need no mixer thread. The dedicated audio suite runs
+        # playback and drains it before quitting (Godot's asynchronous teardown).
+        if check.name != "audio_check.gd":
+            command += ["--", "--silent-audio"]
         try:
             result = subprocess.run(command, stdout=subprocess.PIPE,
                                     stderr=subprocess.STDOUT, text=True,

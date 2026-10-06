@@ -15,6 +15,15 @@ func check(condition: bool, message: String) -> void:
 
 func run_checks() -> void:
 	check(not ResourceLoader.exists("res://tests/movement_check.gd"), "Pack must exclude regression scripts")
+	var audio: Node = root.get_node("AudioDirector")
+	for track: Dictionary in audio.MUSIC.values():
+		var file: String = track.file
+		var path := "res://assets/Audio/extended_exploration.mp3" if file == "extended_exploration" else "res://assets/Audio/music/%s.ogg" % file
+		check(load(path) is AudioStream, "Pack must ship music: %s" % file)
+	for effect: String in audio.SFX:
+		check(load("res://assets/Audio/sfx/%s.wav" % effect) is AudioStreamWAV, "Pack must ship effect: %s" % effect)
+	for cue: Dictionary in audio.CUES.values():
+		check(load("res://assets/Audio/%s.mp3" % cue.file) is AudioStreamMP3, "Pack must ship milestone cue: %s" % cue.file)
 	var menu_script: Script = load("res://scripts/main/playtest_menu.gd")
 	var paths: PackedStringArray = ["res://scenes/main/title.tscn", "res://scenes/main/prologue.tscn", "res://scenes/main/ending.tscn", "res://scenes/main/playtest_menu.tscn"]
 	paths.append_array(menu_script.LEVELS)
@@ -59,4 +68,5 @@ func run_checks() -> void:
 			var body: Node = final_boss.get_node("Body")
 			check(body._textures.size() == 11 and body._textures.all(func(texture: Texture2D) -> bool: return texture != null), "Pack must ship all eleven Swaminathan head-state sprites")
 	print("Pack checks: %s (%d scenes)" % ["PASS" if failures == 0 else "FAIL", paths.size()])
+	await audio.shutdown()
 	quit(0 if failures == 0 else 1)

@@ -120,6 +120,7 @@ func _physics_process(_delta: float) -> void:
 
 func _return_to_diya(destination: Vector2) -> void:
 	returning = true
+	get_node("/root/AudioDirector").play_sfx(&"curtain")
 	var previous_mode: ProcessMode = _main.process_mode
 	_main.process_mode = Node.PROCESS_MODE_DISABLED
 	curtains.opening = false
@@ -135,6 +136,7 @@ func _return_to_diya(destination: Vector2) -> void:
 	_main.camera.force_update_scroll()
 	await get_tree().create_timer(HOLD_TIME, false).timeout
 	curtains.opening = true
+	get_node("/root/AudioDirector").play_sfx(&"curtain")
 	var opening := create_tween()
 	opening.tween_property(curtains, "coverage", 0.0, OPEN_TIME)
 	await opening.finished

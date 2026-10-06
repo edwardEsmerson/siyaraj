@@ -58,6 +58,7 @@ func _physics_process(_delta: float) -> void:
 			carried_index = -1
 			carried_visual.hide()
 			_add_plank()
+			get_node("/root/AudioDirector").play_cue(&"discovery" if placed_count == PLANK_COUNT else &"bridge")
 			var course := get_parent()
 			var saved: Dictionary = course.progress.get(course.level_id, {"spawn": Vector2(160, 430), "lit": []})
 			saved["bridge_planks"] = placed_count

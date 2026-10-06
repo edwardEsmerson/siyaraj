@@ -64,6 +64,7 @@ func _physics_process(delta: float) -> void:
 	if special_recovery <= 0.0 and chakri_cooldown_remaining <= 0.0 and Input.is_action_just_pressed("special") and not charging:
 		sparkler.cancel()
 		charging = true
+		get_node("/root/AudioDirector").play_sfx(&"charge", global_position)
 		charge_time = 0.0
 	if charging:
 		charge_time = minf(charge_time + delta, full_charge_time)
@@ -94,6 +95,7 @@ func _fire_skyshot() -> void:
 	recoil_direction = -facing_direction
 	attack_status = "SKYSHOT: fired"
 	weapon_used.emit(&"skyshot", shot_recovery_time)
+	get_node("/root/AudioDirector").play_sfx(&"skyshot", global_position)
 	var projectile := Skyshot.new()
 	projectile.direction = facing_direction
 	# Start inside Siya's body, which the shot ignores. A muzzle outside the
@@ -137,6 +139,7 @@ func _release_chakri() -> void:
 	charging = false
 	special_recovery = 0.35 + strength * 0.20
 	weapon_used.emit(&"chakri_release", special_recovery)
+	get_node("/root/AudioDirector").play_sfx(&"spin", global_position)
 	effect_kind = "chakri"
 	effect_time = 0.30
 	effect_radius = lerpf(42.0, chakri_radius, strength)

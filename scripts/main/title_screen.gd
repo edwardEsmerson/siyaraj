@@ -20,7 +20,7 @@ func _ready() -> void:
 	menu.get_node("Settings").pressed.connect(_open_sub.bind(settings, menu.get_node("Settings")))
 	menu.get_node("Playtest").pressed.connect(PlaytestNavigation.show_menu)
 	menu.get_node("Playtest").visible = OS.is_debug_build()
-	menu.get_node("Quit").pressed.connect(get_tree().quit)
+	menu.get_node("Quit").pressed.connect(get_node("/root/AudioDirector").quit_game)
 	menu.get_node("Quit").visible = not OS.has_feature("web")
 	settings.closed.connect(_close_sub)
 	controls.closed.connect(_close_sub)
