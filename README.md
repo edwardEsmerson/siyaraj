@@ -24,6 +24,13 @@ Doors preserve health, remaining shots and cooldowns. Diyas only save your
 position. Death and R restore the five-shot loadout and reset cooldowns.
 For isolated practice, open `scenes/dev/weapons_playground.tscn` with F6.
 
+Boss 1, Khara, has an isolated arena: open `scenes/bosses/khara_arena.tscn` with F6.
+He telegraphs an orange gada slam with a ground shockwave, and lays ladi firecracker
+strings that pop along the ground toward Siya. Yellow chevrons show the direction.
+At half health he enrages and adds a second ladi from the far wall. See
+[the Khara design doc](docs/bosses/boss1-khara.md). The reusable boss health bar is
+`scenes/ui/boss_health_bar.tscn`. Khara is not yet placed in the forest.
+
 The earlier prototype course remains available at `scenes/main/main.tscn` with F6.
 Its guard and finish-gate behaviour described below are unchanged.
 
@@ -103,6 +110,7 @@ godot --headless --path . --script res://tests/ground_shooter_check.gd
 godot --headless --path . --script res://tests/weapons_check.gd
 godot --headless --path . --script res://tests/weapons_map_check.gd
 godot --headless --path . --script res://tests/forest_weapons_check.gd
+godot --headless --path . --script res://tests/khara_boss_check.gd
 ```
 
 See [the team workflow](docs/team_workflow.md) for ownership, agreed rules,
@@ -124,7 +132,7 @@ The smoke build exports a PCK and runs it with the installed Godot executable,
 outside the editor. It is not a standalone distributable executable.
 Generated files go in the ignored `builds/linux/` directory. The export preset
 packs the forest, prototype course, movement playground, dev sandbox, weapons
-playground, burst effect and their dependencies, excluding the
+playground, Khara boss arena, burst effect and their dependencies, excluding the
 proposal, regression checks and team docs. To run the sandbox (default Guard
 encounter) from the pack:
 

@@ -4,8 +4,8 @@
 
 Siyaraj is a Godot 4.7.2 2D platformer using the Compatibility renderer. Open `project.godot`; the entry scene is `scenes/main/forest.tscn`. The original prototype is `scenes/main/main.tscn`.
 
-- `scripts/` groups GDScript by player, combat, enemies, levels, effects, and main integration.
-- `scenes/` contains corresponding `.tscn` scenes. `scenes/dev/` holds the dev-only sandbox (one selectable enemy, for isolated encounter work) and the weapons playground; `scenes/main/movement_playground.tscn` remains for movement tuning.
+- `scripts/` groups GDScript by player, combat, enemies, bosses, UI, levels, effects, dev tools, and main integration.
+- `scenes/` contains corresponding `.tscn` scenes. `scenes/dev/` holds the dev-only sandbox (one selectable enemy, for isolated encounter work) and the weapons playground; `scenes/bosses/` holds each boss and its isolated arena; `scenes/main/movement_playground.tscn` remains for movement tuning.
 - `resources/player/default_movement.tres` stores shared movement tuning.
 - `tests/` contains physics regression scripts; `tools/` contains smoke-build helpers.
 - `docs/team_workflow.md` records ownership and gameplay contracts. `asset-builder/` contains local sprite tooling and reference images; current gameplay uses scene/script placeholders.
@@ -40,6 +40,7 @@ godot --headless --path . --script res://tests/forest_encounters_check.gd
 godot --headless --path . --script res://tests/weapons_check.gd
 godot --headless --path . --script res://tests/weapons_map_check.gd
 godot --headless --path . --script res://tests/forest_weapons_check.gd
+godot --headless --path . --script res://tests/khara_boss_check.gd
 ```
 
 `GODOT_BIN=godot ./tools/smoke_build.sh` imports resources and exports `builds/linux/siyaraj.pck`. `GODOT_BIN=godot ./tools/run_smoke_build.sh --headless --quit-after 120` launches that pack outside the editor. Substitute the executable path when needed. Standalone Linux exports require matching export templates.

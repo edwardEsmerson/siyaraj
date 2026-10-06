@@ -372,3 +372,29 @@ original player scene. `forest_weapons_check.gd` validates this integration.
   Enemy checks select an encounter through `Sandbox.next_encounter`.
 - The weapons playground and its dummies moved to `scenes/dev/` and
   `scripts/dev/`. The movement playground remains for the movement and dash checks.
+
+## Boss 1 (Khara) handoff
+
+- Combat owns `scenes/bosses/khara.tscn` and `scripts/bosses/` (the Khara
+  controller, ladi and shockwave hazards, and the arena script). The isolated
+  `scenes/bosses/khara_arena.tscn` uses the forest player with all three weapons.
+  There are no player, main-scene or forest changes. The full moveset is in
+  `docs/bosses/boss1-khara.md`.
+- Khara has 24 health, poise (no knockback or interruption) and no contact damage.
+  - Gada slam: 0.85 s orange wind-up with a ground zone, 2 damage, then a 1.1 s
+    recovery. It releases a low shockwave that Siya can jump.
+  - Ladi: 1.2 s fuse, then pops travel along the ground toward Siya's side.
+    Yellow chevrons show the direction.
+  - Phase 2 starts at 12 health: faster, double shockwave, a second ladi from the far
+    wall, and a slam followed by a ladi.
+- `scenes/ui/boss_health_bar.tscn` is a generic bar. Call `bind(boss)` on any node
+  with `max_health`, `health` and `health_changed`. It also uses `died`,
+  `phase_changed`, `boss_name` and `boss_title` when they exist.
+- Hazards join the `boss_hazards` group. Ladis also join `boss_ladis`. Defeat frees them all.
+- `tests/khara_boss_check.gd` covers ladi direction, fuse safety, sequential pops,
+  wall clipping, jumping a ladi, slam tell, damage, reach and recovery, shockwaves,
+  the 50% phase change, the phase 2 pincer, AI choices, real weapon damage, the health
+  bar, defeat and restart.
+
+Manual checkpoint: play the Khara arena with F6. Check that the orange and yellow tells
+read clearly at gameplay speed, and that the phase 2 pincer is fair with three health.
