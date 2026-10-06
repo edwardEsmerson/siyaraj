@@ -101,6 +101,9 @@ and its super move are played.
 The attack itself always lasts 0.5 s. The same head never activates twice in
 a row.
 
+Clearing each phase fully restores Siya's health, including the final defeat.
+The health HUD updates immediately. Ordinary core hits and head knockouts do not heal her.
+
 A phase change closes the navel and regrows all heads. Ravan roars for 1.2 s,
 showing the banner `PHASE N - DASHANAN AWAKENS`, then performs Dashanan Fury.
 Phase 3 repeats Fury every 30 s of normal fighting. All values are in the
