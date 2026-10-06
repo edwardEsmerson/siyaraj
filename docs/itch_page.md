@@ -28,7 +28,7 @@ Team: Ayaansh Solanki, Atharva Desai, Jonathan Robin, Shourya Dixit, and Samhith
 
 Source code: https://github.com/edwardEsmerson/siyaraj
 
-This build is silent. It has no music or sound effects. The developer playtest
+Campaign music and gameplay sound effects are included. Resolve the supplied soundtrack licensing before publishing. The developer playtest
 menu is hidden in the release build. Browser reloads start the game again;
 diya checkpoints are for the current session.
 

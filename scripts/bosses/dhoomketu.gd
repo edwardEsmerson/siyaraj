@@ -84,6 +84,7 @@ func start_attack(index: int, target_x: float) -> void:
 		return
 	facing = 1 if target_x > position.x else -1
 	state = State.CAST
+	get_node("/root/AudioDirector").play_sfx(&"tell", global_position)
 	state_remaining = 0.0
 	match index:
 		0:

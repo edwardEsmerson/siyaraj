@@ -10,7 +10,7 @@ charged chakris, and rocket dashes.
 browser-playable URL before submission. Do not submit the GitHub URL to the bot.
 
 Source: [edwardEsmerson/siyaraj](https://github.com/edwardEsmerson/siyaraj).
-This release is silent. Checkpoints last for the current play session.
+Campaign music and gameplay effects play automatically; Settings saves separate Master, Music and Effects volumes. Checkpoints last for the current play session.
 A browser refresh starts over. First-playthrough duration has not been measured.
 
 ## Team
@@ -116,5 +116,5 @@ The team reports Nano Banana for assets and AI assistance for code. Repository
 metadata also records imagegen and gemini-3-pro-image, and commit trailers
 credit Claude Opus 5.5. OpenAI Codex assisted with this release preparation.
 Additional tools must be confirmed by the
-team before publication. Previously tracked unlicensed audio is excluded from
-this release and retained only in ignored local storage and earlier Git history.
+team before publication. The supplied third-party audio requires a redistribution license before
+public release. PR #39 restores it to the source tree and exports.

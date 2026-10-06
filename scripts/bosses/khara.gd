@@ -213,10 +213,12 @@ func start_slam(direction: int) -> void:
 	facing = 1 if direction >= 0 else -1
 	_slam_targets.clear()
 	_enter(State.SLAM_WINDUP, current_slam_windup())
+	get_node("/root/AudioDirector").play_sfx(&"tell", global_position)
 
 
 func _slam_impact() -> void:
 	_enter(State.SLAM_ACTIVE, slam_active + state_remaining)
+	get_node("/root/AudioDirector").play_sfx(&"slam", global_position)
 	slams_since_ladi += 1
 	var parent := get_tree().current_scene
 	Burst.spawn(parent, global_position + Vector2(facing * 50, -6), SLAM_COLOR, "DHAM!", 46.0)
@@ -260,6 +262,7 @@ func start_ladi() -> void:
 	if state == State.DEAD or _has_active_hazards():
 		return
 	_enter(State.LADI_CAST, ladi_cast_time)
+	get_node("/root/AudioDirector").play_sfx(&"tell", global_position)
 
 
 func _place_ladis(player: CharacterBody2D) -> void:

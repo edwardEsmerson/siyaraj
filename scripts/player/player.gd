@@ -85,6 +85,7 @@ func _physics_process(delta: float) -> void:
 		sparkler.cancel()
 		var grounded := is_on_floor()
 		state = State.DASH
+		get_node("/root/AudioDirector").play_sfx(&"dash", global_position)
 		if grounded:
 			# Ground dashes keep the air charge; a cooldown stops back-to-back spam.
 			_dash_cooldown_remaining = movement_settings.dash_duration + movement_settings.ground_dash_cooldown
@@ -144,6 +145,7 @@ func is_invulnerable() -> bool:
 
 
 func _start_jump() -> void:
+	get_node("/root/AudioDirector").play_sfx(&"jump", global_position)
 	velocity.y = movement_settings.jump_velocity
 	_coyote_remaining = 0.0
 	_jump_buffer_remaining = 0.0
@@ -211,6 +213,7 @@ func take_damage(amount: int, knockback: Vector2) -> void:
 	if health == 0:
 		die()
 	else:
+		get_node("/root/AudioDirector").play_sfx(&"hit", global_position)
 		apply_knockback(knockback)
 
 

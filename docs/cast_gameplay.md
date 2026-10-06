@@ -46,8 +46,8 @@ JSON metadata needed by Khara and the preview. Screenshots are under
 - **Robin combat poses:** peck, dive, sparks, hypnosis, dizzy and wake are
   reserved for the undecided Robin boss/story sequence. The current companion
   has no combat or hypnosis state to attach them to.
-- **Audio:** the tracked catalog awaits the ownership/licensing decision in
-  `TODO.md` before playback. Its presence does not mean every track is cleared.
+- **Audio:** playback is integrated (see `AUDIO_CATALOG.md`); public-release
+  licensing remains a separate decision in `TODO.md`.
 - **Comic panels, curtain illustrations and remaining props/effects:** the
   briefs are tasks for creating assets, not completed illustrations waiting to
   be wired into the game.

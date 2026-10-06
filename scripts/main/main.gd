@@ -150,6 +150,7 @@ func _finish_course() -> void:
 	if automatic_showdown and not showdown_scene.is_empty() and PlaytestNavigation.enemies_enabled:
 		PlaytestNavigation.call_deferred("start_level", showdown_scene)
 		return
+	get_node("/root/AudioDirector").play_cue(&"victory")
 	var title := completion_title.capitalize()
 	var detail := "%s / %.1f seconds" % [completion_detail, elapsed]
 	var destination := "Next level" if not next_level.is_empty() else "Menu"

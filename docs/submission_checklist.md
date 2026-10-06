@@ -1,5 +1,8 @@
 # Submission checklist
 
+PR #39 restores campaign music and effects. The silent-build validation below
+is historical; rebuild and resolve the supplied soundtrack licensing before submission.
+
 ## Prepared locally
 
 Game source revision: `2a30b612f2489e23a00cf22108c5589542fde721`, the final
@@ -10,7 +13,7 @@ credits and font notices and exclusion of local build storage and audio.
 - Team name and five supplied names recorded; General Track confirmed by the team.
 - Root credits and MIT project license added. Fonts retain their OFL notices.
 - AI art and coding assistance disclosed with known provenance and remaining gaps.
-- Unlicensed audio removed from the submitted source tree and moved to ignored local storage.
+- Audio was removed during submission preparation and restored by PR #39.
 - Web release preset added with threads off and an `index.html` entry point.
 - Itch.io page copy, controls, and hints prepared in `docs/itch_page.md`.
 
@@ -21,6 +24,7 @@ credits and font notices and exclusion of local build storage and audio.
 - [ ] Confirm the public repository is accessible while signed out. Push the prepared documentation, export configuration, and audio removals without rewriting history.
 - [ ] Preserve the Hour 12 scope form and proposal, and compare the submitted game with that locked plan. `proposal.pdf` exists locally; submission of the official form has not been verified.
 - [ ] Resolve the deadline discrepancy with the organisers. The pasted announcement says 6 October at 4pm, but the team reports that the freeze has not taken effect. This checkout contains commits after that time. Never backdate commits or uploads.
+- [ ] Resolve redistribution licensing for the restored soundtrack, or replace it with licensed audio.
 - [ ] Export and inspect the browser ZIP. Confirm the build report identifies the intended source revision and file hashes.
 - [ ] Run the browser build and check New Game, the full campaign, deaths/retries, all bosses, the ending, controls, pause, fullscreen, and browser reload behavior.
 - [ ] Have a first-time player finish the campaign. Record the real duration. The target is 10 to 15 minutes; first playthroughs over 20 minutes are not fully evaluated. No timing has been measured by release preparation.

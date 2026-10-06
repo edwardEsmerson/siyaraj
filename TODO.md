@@ -6,7 +6,7 @@ art and animation included, sorted by who should pick it up:
 - **A. You (a human):** decisions, reviews, playtests and the submission itself.
 - **B. A good LLM:** well-scoped work that follows patterns already in the repo.
 - **C. A really good LLM:** cross-cutting work that needs design judgement, touches
-  many systems, or could easily break the 30 regression suites.
+  many systems, or could easily break the 32 regression suites.
 
 Per-asset briefs, sizes and generation commands live in
 `asset-builder/Sprites_List.md` and `asset-builder/Animations-List.md`. This file
@@ -14,11 +14,11 @@ says *what* is left and *who* does it, and points there for the *how*.
 
 ## Where things stand
 
-- **Playable route:** title → forest → Khara → river → Dhoomketu → palace → Swaminathan → ending.
+- **Playable route:** title → opening story → forest → Khara → river → Dhoomketu → palace → Swaminathan → ending.
   Each boss is a separate showdown scene. Forest and palace enter their boss
   comics automatically; river retains its completion prompt. Death retries skip
   the already-seen comic.
-- **Done:** title screen, themed pause menu, controls panel, settings (master volume
+- **Done:** title screen, themed pause menu, controls panel, settings (Master/Music/Effects volumes
   and fullscreen), debug-only playtest tools, Robin as a guide in all three levels, blocked-diya
   curtain transition (placeholder art), and `docs/.gdignore`.
 - **Gameplay cast art:** Siya, Robin, all four enemies and Khara with his registered
@@ -31,10 +31,11 @@ says *what* is left and *who* does it, and points there for the *how*.
   six styles (press V in a level to cycle). PR #33 adds authored dressing and
   section palettes: forest/palace default to diyalit, river to titlematch.
   Dhoomketu uses his authored placeholder arena.
-- **All 30 suites pass**, including cast gameplay checks. B0 air dashes exit at 780 px/s and ease
+- **All 33 suites are available**, including cast gameplay checks. B0 air dashes exit at 780 px/s and ease
   back to run speed, restoring the jump + dash reach lost in #17.
-- **No audio plays.** There are no `AudioStreamPlayer` nodes and no buses.
-  The old unlicensed audio is quarantined in ignored local build storage. The submission build is silent.
+- **Audio plays throughout the campaign.** Music enters prominently and settles
+  down; milestone melodies, original action effects and saved per-bus sliders
+  are wired. See `AUDIO_CATALOG.md` for placement and the recorded preview.
 - **Release preparation:** Linux smoke test and Web presets are available. See docs/submission_checklist.md for current release status.
 
 ---
@@ -48,9 +49,10 @@ says *what* is left and *who* does it, and points there for the *how*.
   head; **no regrowth**; only living heads attack. Dashanan Fury uses only the
   heads still alive (the suggested default, not explicitly confirmed: one Fury
   wave per living head). Implemented in C1's code half.
-- [x] **Music licensing.** The unlicensed Diamond Rush and Prince of Persia tracks
-  were removed from the submission source tree and excluded from exports.
-  Local copies remain in ignored `builds/quarantined-audio/`. The release is silent.
+- [ ] **Music licensing.** The tracks in `assets/Audio/` are from Diamond Rush and
+  Prince of Persia: The Forgotten Sands, which are copyrighted. Decide whether to
+  ship them, which risks a takedown on itch.io, or swap them for royalty-free/CC0
+  music. The files are now tracked for team work; the shipping choice remains open.
 - [ ] **The twist.** The final boss is now named Swaminathan. Is that the twist? Or does the
   Robin fight / "Nathan Robin" reveal from the proposal stay in? The answer decides
   whether C6 happens.
@@ -87,7 +89,8 @@ Open the file, judge it, then reply "fine" or "redo X".
 - [ ] **Run the release build on a machine without Godot.**
 - [ ] **Call the bug bash, then the feature freeze.** The proposal keeps the last 10%
   of the time for "bug fixes and the build. No new features."
-- [ ] **Create the itch.io page** (AI tools must be fully disclosed). Upload a test build early, then the final one.
+- [ ] **Create the itch.io page** (the jam allows AI everything, no declaration
+  needed). Upload a test build early, then the final one.
 - [ ] **Write the credits:** team names and roles, plus any third-party music or
   fonts.
 
@@ -113,15 +116,15 @@ Open the file, judge it, then reply "fine" or "redo X".
 - [x] **B3. Gamepad bindings.** Every custom action has joypad bindings; menus
   confirm with A/Cross and pause/back with Start. The shared Controls panel shows
   keyboard and controller columns. See `docs/ui.md`.
-- [ ] **B4. Audio plumbing:** Music and SFX buses, an `Audio` autoload with
-  crossfading music, and per-bus volume sliders in `settings_panel`, keeping the
-  existing master volume. Then play music per level, boss, title and ending.
-  Starting cue choices are in `AUDIO_CATALOG.md`; wait for A's licensing decision
-  before using them.
-- [ ] **B5. SFX at gameplay events:** lash, skyshot, chakri charge and release, dash,
-  Siya hit, enemy wind-up, enemy death, boss tells, diya lit, curtain, death and
-  level complete. We have no SFX files yet: source CC0 ones (for example Kenney or
-  freesound CC0), list them in `AUDIO_CATALOG.md`, then wire them.
+- [x] **B4. Audio plumbing:** `AudioDirector`, crossfading looping music, title/level/
+  boss/ending tracks, loud entrances that settle, ducking and a Master limiter.
+  Master/Music/Effects sliders save separately; all playback assets ship in the PCK.
+  Integrated the supplied tracks at the user's explicit request; public-release
+  licensing remains the separate decision in A.
+- [x] **B5. SFX at gameplay events:** brief original synthesized lash, skyshot,
+  chakri charge/release, jump, dash, hit, enemy death, attack tell, slam, curtain
+  and menu sounds, plus Diamond Rush checkpoint, hint, room, bridge, death and
+  victory cues. Assets, rebuild tools, regression checks and preview are included.
 - [ ] **B6. Death and quit behaviour:** remember the furthest level reached during
   the session and offer "Continue" on the title screen.
 - [ ] **B7. Export presets:** add Windows and Web presets for itch.io, release (not

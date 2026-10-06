@@ -56,6 +56,7 @@ func _physics_process(_delta: float) -> void:
 		InteractionPrompt.set_available(checkpoint.get_node("Prompt"), can_light and not saved)
 		if can_light and not saved and Input.is_action_just_pressed("interact"):
 			lit_checkpoints.append(checkpoint.name)
+			get_node("/root/AudioDirector").play_cue(&"checkpoint")
 			if current_room == &"":
 				checkpoint_x = maxf(checkpoint_x, checkpoint.position.x)
 			else:
@@ -87,6 +88,7 @@ func _use_portal(portal: Area2D) -> void:
 	}
 	if current_room == &"":
 		current_room = portal.get_meta("destination")
+		get_node("/root/AudioDirector").play_cue(&"portal")
 		return_point = portal.global_position
 		room_spawn = get_node("RoomStarts/" + str(current_room)).position
 		# Each visit starts at the entrance; a local diya applies only to that visit.
@@ -96,6 +98,7 @@ func _use_portal(portal: Area2D) -> void:
 	else:
 		if portal.get_meta("complete", false) and not completed_rooms.has(current_room):
 			completed_rooms.append(current_room)
+			get_node("/root/AudioDirector").play_cue(&"discovery")
 		current_room = &""
 		pending_return = true
 	get_tree().call_deferred("reload_current_scene")

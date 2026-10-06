@@ -23,4 +23,5 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	var robin := get_tree().get_first_node_in_group("robin")
 	if robin != null:
-		robin.point_out(to_global(point), text, hint_id() if once else "", duration)
+		if robin.point_out(to_global(point), text, hint_id() if once else "", duration):
+			get_node("/root/AudioDirector").play_cue(&"hint")

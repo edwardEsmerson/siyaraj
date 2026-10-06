@@ -2,7 +2,7 @@
 
 Every retained non-import asset file under assets/ is listed below.
 AI-generated art is credited by group in the root CREDITS.md. Fonts keep their OFL licenses.
-The excluded audio collection is absent from this inventory and the release.
+This inventory predates PR #39. Restored audio is catalogued separately in AUDIO_CATALOG.md.
 
 | File | Credit group |
 | --- | --- |

@@ -100,9 +100,11 @@ python tools/run_checks.py
 
 The runner discovers every `tests/*_check.gd`, runs each at 60 fixed FPS, and
 fails on a nonzero exit, a script error, missing success output or a timeout.
-Logs stay in ignored `.godot/checks/`. The refreshed baseline has 30 suites covering
+Logs stay in ignored `.godot/checks/`. The current branch has 32 suites covering
 movement, weapons, enemies, checkpoints, all levels, bosses, campaign navigation,
-menus, companion hints, character assets, world skins and player animation.
+menus, companion hints, character assets, world skins, player animation,
+typography and audio. Physics/UI suites run without playback; the dedicated audio
+suite runs and drains the mixer before quitting.
 
 The baseline also passed the exported-pack check across all 18 distinct menu
 scenes and rendered checks of menus, levels and all three boss arenas.
@@ -114,7 +116,7 @@ Playtest changed sections yourself; automated route checks do not judge how the 
 
 ## Remaining work
 
-`TODO.md` remains the shared task list. Dhoomketu character artwork, audio
-playback, remaining story illustrations, art review and release exports remain
+`TODO.md` remains the shared task list. Dhoomketu character artwork, remaining
+story illustrations, art review and release exports remain
 open. Swaminathan's eleven state sprites are now present and used in gameplay;
 their review and 80-HP fight tuning are still listed separately.

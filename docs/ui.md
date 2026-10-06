@@ -80,7 +80,9 @@ viewport on both the title and pause menus.
 ## Settings
 
 `GameSettings` (autoload, `scripts/main/game_settings.gd`) saves fullscreen and
-master volume to `user://settings.cfg` and applies them at startup.
+Master, Music and Effects volumes to `user://settings.cfg` and applies them at startup.
+Music and menu feedback remain available while gameplay is paused. See
+[`AUDIO_CATALOG.md`](../AUDIO_CATALOG.md) for track placement and mixing.
 
 ## Making UI art
 
