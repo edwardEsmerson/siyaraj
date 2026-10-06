@@ -103,5 +103,40 @@ func run_checks() -> void:
 	current_scene._unhandled_input(accept)
 	await scene_changed
 	check(current_scene.scene_file_path.ends_with("palace.tscn"), "River completion must advance to palace")
+	current_scene._finish_course()
+	current_scene._unhandled_input(accept)
+	await scene_changed
+	check(current_scene.scene_file_path == "res://scenes/bosses/ravan/ravan_arena.tscn", "Palace completion must advance to Ravan")
+	var arena: Node2D = current_scene
+	arena._unhandled_input(accept)
+	await ticks(2)
+	check(current_scene == arena and not arena.completed, "Enter must not skip a living Ravan")
+	# Use the real final hit and death animation to unlock the route onward.
+	var boss: Node2D = arena.get_node("Ravan")
+	boss.auto_activate = false
+	boss.start_fight()
+	await ticks(3)
+	boss.phase = 3
+	boss.core_health = 1
+	for index in [0, 1, 2, 3, 9]:
+		boss.activate_head(index)
+		var head: Node2D = boss.heads[index]
+		head.take_damage(head.max_health, Vector2.ZERO)
+	await ticks(2)
+	check(boss.is_exposed(), "Final-phase head knockouts must expose Ravan's core")
+	boss.get_node("Core").take_damage(1, Vector2.ZERO)
+	arena._unhandled_input(accept)
+	await ticks(1)
+	check(current_scene == arena and not arena.completed, "Enter must wait for Ravan's death sequence to finish")
+	await ticks(200)
+	check(arena.completed, "Ravan's defeat signal must unlock the ending")
+	arena._unhandled_input(accept)
+	await scene_changed
+	check(current_scene.scene_file_path == "res://scenes/main/ending.tscn", "Ravan victory must advance to the ending")
+	var return_button: Button = current_scene.get_node("Center/Content/ReturnButton")
+	check(return_button.has_focus(), "Ending return button must support keyboard navigation")
+	return_button.pressed.emit()
+	await scene_changed
+	check(current_scene.scene_file_path == navigation.MENU and not paused, "Ending must return to the playable menu")
 	print("Playtest menu checks: %s" % ("PASS" if failures == 0 else "FAIL (%d)" % failures))
 	quit(0 if failures == 0 else 1)

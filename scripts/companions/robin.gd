@@ -73,8 +73,8 @@ static func forget_hints() -> void:
 func _ready() -> void:
 	add_to_group("robin")
 	bubble.visible = false
-	# Final art drops into $Visuals/Sprite as SpriteFrames with "fly" and "perch"
-	# animations (optional: "talk", "point"). Until then the polygons stand in.
+	# Art lives in $Visuals/Sprite as SpriteFrames with "fly" and "perch" animations
+	# (optional: "talk" while perched, "point"). Without frames the polygons stand in.
 	var has_art := sprite.sprite_frames != null
 	sprite.visible = has_art
 	placeholder.visible = not has_art
@@ -238,7 +238,8 @@ func _update_visuals() -> void:
 		wing.scale.y = 0.35 if perched else 0.4 + absf(sin(_time * 18.0)) * 0.9
 	elif sprite.visible:
 		var animation: StringName = &"perch" if perched else &"fly"
-		if _bubble_remaining > 0.0 and sprite.sprite_frames.has_animation(&"talk"):
+		# The talk frames are drawn perched; in flight he talks with his wings.
+		if perched and _bubble_remaining > 0.0 and sprite.sprite_frames.has_animation(&"talk"):
 			animation = &"talk"
 		if mode == Mode.POINT and sprite.sprite_frames.has_animation(&"point"):
 			animation = &"point"
