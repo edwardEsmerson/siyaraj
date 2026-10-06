@@ -1,35 +1,23 @@
 {
-  "name": "robin",
-  "animation": "hover",
-  "size": "1K",
-  "view": "right-profile",
-  "subject": "full-body",
-  "anchor_mode": "center",
   "fps": 8,
   "loop": "loop",
   "poses": [
     "Hovering in place, wings raised, beak closed",
     "Hovering, wings down, beak closed"
   ],
-  "expected_frames": 2,
-  "free_palette": false,
   "durations": [
     1.0,
     1.0
   ],
+  "free_palette": false,
+  "name": "robin",
+  "animation": "hover",
+  "size": "sheet",
+  "expected_frames": 2,
   "frames": [
     "01",
     "02"
   ],
-  "problems": {
-    "01": [
-      "size drift +38% vs approved sprite (crouch/stretch poses can be fine)"
-    ]
-  },
-  "models": {
-    "01": "pro",
-    "02": "flash"
-  },
   "canvas": [
     80,
     80
@@ -37,5 +25,35 @@
   "anchor": [
     40,
     40
-  ]
+  ],
+  "anchor_mode": "center",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "pro",
+    "02": "pro"
+  },
+  "grid": {
+    "mode": "uniform",
+    "calibration_cell": 1,
+    "registration": "body, via the sheet's calibration cell",
+    "source_pixel_spacing": {
+      "01": 8.0,
+      "02": 8.0
+    }
+  },
+  "sheet": {
+    "sources": {
+      "01": "F1.png cell 5",
+      "02": "F1.png cell 6"
+    },
+    "dimensions": [
+      2048,
+      2048
+    ],
+    "columns": 3,
+    "rows": 3,
+    "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
+  }
 }

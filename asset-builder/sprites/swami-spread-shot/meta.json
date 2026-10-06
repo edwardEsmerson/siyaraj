@@ -1,0 +1,27 @@
+{
+  "name": "swami-spread-shot",
+  "brief": "a small spit of rose-pink fire: a round hot-pink and rose flame ball with a white-pink core and a tiny flame tail to the LEFT (it flies to the right). Dark crimson outline. No character.",
+  "key": "green",
+  "role": "hero",
+  "target": 32,
+  "size": "2K",
+  "anchor_mode": "center",
+  "view": "right-profile",
+  "subject": "prop",
+  "candidate_id": "01",
+  "model": "flash",
+  "canvas": [
+    48,
+    48
+  ],
+  "anchor": [
+    24,
+    24
+  ],
+  "art_dimensions": [
+    29,
+    21
+  ],
+  "generation_pixel_size": 42.75,
+  "problems": []
+}

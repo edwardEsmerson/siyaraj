@@ -178,50 +178,33 @@ Below the pips: the phase and `HEADS n/10`, plus `SPENT - STRIKE!` after Fury.
 - Ground dash i-frames apply to every Swaminathan hazard and projectile, which makes
   Fury and lightning easier to dodge. The safe-gap timing does not rely on it.
 
-## Art: body state sprites
+## Art: animated body, separate heads, effect sprites
 
-Ravan is drawn as **one full-body sprite per head state**, built from the
-approved Swaminathan model (`asset-builder/sprites/swaminathan` headless body,
-`swaminathan-head` and its ten `faces`). Heads are severed right to left, so
-state *n* shows the leftmost *n* heads.
+Swaminathan is drawn from the approved cast library, all at scale 0.5 (nearest):
 
-- **State 10** is `asset-builder/sprites/swaminathan-full` (`sprite.png`,
-  `meta.json`): generated with `ab sprite` from a layout reference that placed
-  the approved body and the ten approved faces (Mada to Chitta, left to right)
-  on curving necks over the gold collar. Its body matches the approved body's
-  scale (about 225 art px feet to collar); the heads are about 45 art px wide.
-- **States 9 to 0** are not generated. `tools/swaminathan_states.py` derives
-  them from state 10 by pixel editing: each head is segmented (watershed seeded
-  on its face, crown and upper neck), removed with its neck down to a fixed cut,
-  and the stump gets a flesh-coloured cap in the sprite's palette. Body, pose
-  and the remaining heads are pixel-identical in every state; `state_00` is the
-  headless body with ten stumps. Sources: `swaminathan-full/states/`.
-- **Files:** `assets/sprites/swaminathan-states/state_10.png` to
-  `state_00.png`, 464 x 384 art px each, transparent, with Ravan's feet
-  (midway between them) at the bottom centre, which is the boss origin. Placed
-  at scale 0.5, so 232 x 192 game units. `ravan_body.gd` falls back to a
-  minimal code drawing only if a state is missing.
-- **Head positions:** `HEAD_OFFSETS` in `scripts/bosses/ravan/ravan_body.gd`
-  holds the face centres measured from state 10 (the script prints them):
-  x = -94.5 to 98, y = -138 (outer heads) to -166.5 (centre heads). The mouth
-  (`MOUTH_OFFSET`) is 8 units below. Telegraph glows, attack origins, the
-  sever pop and Fury aim lines all use them.
-- **Effects stay in code:** the sprite flashes white when hit, tints red during
-  Fury, greys while staggered or spent, and dims after death (all `modulate`
-  on `Body`). Death switches to the existing headless cast animation at scale
-  0.5 and its shared anchor (235, 345 art px); living head states keep their
-  original sprite and measured attack origins.
-- **Review:** `xvfb-run -a godot --path . --resolution 960x540 -s
-  tools/ravan_shots.gd` renders `docs/screenshots/swaminathan_states.png` (all
-  11 states), `swaminathan_fight.png` (telegraph glows on a left and the
-  rightmost living head, with the head UI) and `swaminathan_sever.png` (the
-  head-loss beat). If state 10 is ever replaced, re-measure the constants at
-  the top of `tools/swaminathan_states.py`, re-run it, and paste the printed
-  offsets into `HEAD_OFFSETS`.
-
-### Effects
-
-Code currently draws all of these: the fire-breath beam, homing orb and spread
-shot, roar shockwave, lightning marker and bolt, Fury pillar with its floor
-stripe and teal safe-lane marker, the telegraph halo and charge ring, and the
-head-loss pop. Optional: a Lanka palace backdrop (960 x 540) for the arena.
+- **Body:** `assets/sprites/swaminathan/cast_frames.tres` (headless body) on
+  `Body/Art` (AnimatedSprite2D, feet on the boss origin). `ravan_boss.gd`
+  (`_update_poses`) picks the animation per state: `intro` (intro), `idle` (fight),
+  `exposed` (stagger after a lost head, and spent after Fury), `roar` (phase roar),
+  `fury` (Dashanan Fury), `dying` and `dead`. `cast` (head attack wind-up/strike)
+  and `slam` (roar shockwave) are wired and play as soon as those sets are in
+  the cast export; until then the body stays on `idle` during head attacks.
+- **Heads:** ten `assets/sprites/swaminathan-head` sprites at `HEAD_OFFSETS`
+  (unchanged attack origins): each idles on its own `faces` frame, and plays
+  `telegraph`, `attack`, `exhausted` (stagger/spent), `fury` (lit in Fury, dimmed
+  when its lanes are safe) and `destroyed` (the head-loss pop). Necks are Line2Ds
+  from the collar to each head; severed necks are short stumps. If
+  `attachment.collar_from_anchor_px` is present in `cast_meta.json`
+  (`tools/swaminathan_effects.py --collars`), the head row follows the collar in
+  every body frame.
+- **Effects:** `assets/sprites/swaminathan/effects/` (`effects_frames.tres`,
+  loaded by `ravan_fx.gd`), packaged by `tools/swaminathan_effects.py` from
+  `asset-builder/sprites/swami-*`: `homing-orb`, `spread-shot`, `roar-ring`,
+  `shockwave`, `lightning-mark`, `lightning-bolt`, `lightning-flash` and
+  `fire-splash`. Still code-drawn: the fire-breath beam, the Fury pillars, floor
+  stripes and safe lanes, the telegraph halo on a head, and the neck lines.
+- **Review:** `xvfb-run -a godot --path . --resolution 1920x1080 -s
+  tools/swaminathan_shots.gd` writes `docs/screenshots/swaminathan/`;
+  `tools/swaminathan_effects_sheet.py` writes `effects-sheet.png` there.
+- The older one-sprite-per-head-count art (`assets/sprites/swaminathan-states`,
+  `tools/swaminathan_states.py`) is no longer used by the boss.

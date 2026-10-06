@@ -1,0 +1,27 @@
+{
+  "name": "ladi-spark",
+  "brief": "A small sputtering firecracker fuse spark effect, front view, centred: a bright white-hot core dot with a ring of short spiky yellow and marigold-orange spark rays bursting out unevenly in all directions, a few tiny detached orange ember pixels flying off. Hard-edged chunky pixel effect, no soft glow or gradients, no outline on the light. ONLY the spark: no fuse, no cracker, no object, no character, no smoke, nothing below it.",
+  "key": "blue",
+  "role": "pickup",
+  "target": 24,
+  "size": "2K",
+  "anchor_mode": "center",
+  "view": "front",
+  "subject": "prop",
+  "candidate_id": "02",
+  "model": "flash",
+  "canvas": [
+    48,
+    48
+  ],
+  "anchor": [
+    24,
+    24
+  ],
+  "art_dimensions": [
+    22,
+    22
+  ],
+  "generation_pixel_size": 51.25,
+  "problems": []
+}

@@ -76,7 +76,8 @@ The ending shows Siya and Raj together beneath her parents' fireworks.
 Panels reuse the approved sprites and existing region backgrounds. The parents,
 workshop and abduction action are conveyed through dialogue and narration because
 dedicated artwork is unavailable. Dhoomketu's introduction shows Siya at the ghats;
-his dedicated character art is still pending. The cage uses Godot drawing commands
+his dedicated character art is still pending. The cage uses generated layered sprites
+(`assets/sprites/raj-cage/`, built by `tools/raj_cage_art.py`; only its chain is still drawn in code)
 and adds no collision to the arena. Enter or gamepad A advances each panel.
 
 Khara uses the approved cast animations and registered gada hand positions.

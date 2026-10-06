@@ -1,0 +1,71 @@
+{
+  "fps": 10,
+  "loop": "loop",
+  "poses": [
+    "Wings fully raised above the body, body hovering level, legs tucked",
+    "Wings level and spread wide out to the sides, body level",
+    "Wings swept fully down below the body, body lifted slightly",
+    "Wings halfway up on the recovery, body level"
+  ],
+  "durations": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "free_palette": false,
+  "name": "robin",
+  "animation": "fly",
+  "size": "sheet",
+  "expected_frames": 4,
+  "frames": [
+    "01",
+    "02",
+    "03",
+    "04"
+  ],
+  "canvas": [
+    80,
+    80
+  ],
+  "anchor": [
+    40,
+    40
+  ],
+  "anchor_mode": "center",
+  "view": "right-profile",
+  "subject": "full-body",
+  "problems": {},
+  "models": {
+    "01": "approved-base",
+    "02": "pro",
+    "03": "pro",
+    "04": "pro"
+  },
+  "grid": {
+    "mode": "uniform",
+    "calibration_cell": 1,
+    "registration": "body, via the sheet's calibration cell",
+    "source_pixel_spacing": {
+      "01": null,
+      "02": 8.0,
+      "03": 8.0,
+      "04": 8.0
+    }
+  },
+  "sheet": {
+    "sources": {
+      "01": "base",
+      "02": "F1.png cell 2",
+      "03": "F1.png cell 3",
+      "04": "F1.png cell 4"
+    },
+    "dimensions": [
+      2048,
+      2048
+    ],
+    "columns": 3,
+    "rows": 3,
+    "extraction": "approved base repainted in place per cell; one calibrated camera grid per sheet"
+  }
+}

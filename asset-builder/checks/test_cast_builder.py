@@ -242,8 +242,8 @@ class BatchChecks(unittest.TestCase):
 class ManifestChecks(unittest.TestCase):
     def test_scope_and_existing_robin_identity(self):
         manifest = cast.load()
-        self.assertEqual(sum(len(s['animations']) for s in manifest['subjects'].values()), 73)
-        self.assertEqual(sum(a['frame_count'] for s in manifest['subjects'].values() for a in s['animations'].values()), 195)
+        self.assertEqual(sum(cast.library(a) for s in manifest['subjects'].values() for a in s['animations'].values()), 73)
+        self.assertEqual(sum(a['frame_count'] for s in manifest['subjects'].values() for a in s['animations'].values() if cast.library(a)), 195)
         self.assertEqual(manifest['subjects']['robin']['art_px'], 48)
         self.assertEqual(manifest['subjects']['robin']['animations']['fly']['fps'], 10)
         cast.validate(SimpleNamespace(complete=False))
@@ -320,6 +320,8 @@ class ManifestChecks(unittest.TestCase):
                     self.assertEqual(len(list((folder/anim).glob('[0-9][0-9].png'))), data['frame_count'])
                     total += data['frame_count']
                     self.assertIn(f'"name": &"{anim}"', resource)
+                    if not cast.library(data):
+                        total -= data['frame_count']
                 if name == 'robin':
                     self.assertIn('"name": &"point"', resource)
                     self.assertIn('"name": &"talk"', resource)

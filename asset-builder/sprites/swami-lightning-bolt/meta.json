@@ -1,0 +1,27 @@
+{
+  "name": "swami-lightning-bolt",
+  "brief": "one tall jagged vertical bolt of lightning from the very top straight down to the very bottom, bright white core with cyan edges and a deep blue outline, a few short side forks. About ten times taller than wide. No clouds, no character.",
+  "key": "magenta",
+  "role": "hero",
+  "target": 840,
+  "size": "4K",
+  "anchor_mode": "feet",
+  "view": "right-profile",
+  "subject": "prop",
+  "candidate_id": "02",
+  "model": "pro",
+  "canvas": [
+    1328,
+    1328
+  ],
+  "anchor": [
+    664,
+    1245
+  ],
+  "art_dimensions": [
+    287,
+    884
+  ],
+  "generation_pixel_size": 4.144047619047619,
+  "problems": []
+}

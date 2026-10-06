@@ -143,11 +143,17 @@ def prepare(a):
             subprocess.run([sys.executable, '-m', 'ab', *argv], cwd=ROOT, check=True)
 
 
+def library(data):
+    """Library sets count toward the 73/195 plan; `"scope": "gameplay"` sets (extra boss attack
+    poses added later) are validated and exported the same way but are outside that total."""
+    return data.get('scope', 'library') == 'library'
+
+
 def status(a):
     manifest = load()
     sets = frames = bases = 0
     for name, subject in manifest['subjects'].items():
-        approved = [d for d in subject['animations'].values() if d['approval'] == 'approved']
+        approved = [d for d in subject['animations'].values() if d['approval'] == 'approved' and library(d)]
         sets += len(approved)
         frames += sum(d['frame_count'] for d in approved)
         bases += subject['approval'] == 'approved'
@@ -183,8 +189,8 @@ def animation_data(subject, anim, data):
 def validate(a):
     manifest = load()
     errors = []
-    sets = sum(len(s['animations']) for s in manifest['subjects'].values())
-    frames = sum(d['frame_count'] for s in manifest['subjects'].values() for d in s['animations'].values())
+    sets = sum(library(d) for s in manifest['subjects'].values() for d in s['animations'].values())
+    frames = sum(d['frame_count'] for s in manifest['subjects'].values() for d in s['animations'].values() if library(d))
     if (sets, frames) != (73, 195):
         errors.append(f'manifest totals: {sets} sets, {frames} frames')
     for name, subject in manifest['subjects'].items():
@@ -265,7 +271,7 @@ def export_subject(name, subject, dest):
             im.save(folder / f'{n:02}.png')
         pixel.strip(padded, folder / 'strip.png')
         pixel.gif(padded, folder / 'preview.gif', ms=[round(d / data['fps'] * 1000) for d in data['durations']], loop=data['loop'] == 'loop')
-        exported = {k: data[k] for k in ('fps', 'loop', 'durations', 'poses', 'frame_count')}
+        exported = {k: data[k] for k in ('fps', 'loop', 'durations', 'poses', 'frame_count', 'scope') if k in data}
         exported.update(canvas=canvas, anchor=anchor, source_canvas=meta['canvas'], source_anchor=meta['anchor'])
         exported['models'] = meta.get('models', {})
         exported['notes'] = data.get('notes', '')

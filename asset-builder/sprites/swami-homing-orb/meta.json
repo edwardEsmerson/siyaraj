@@ -1,0 +1,27 @@
+{
+  "name": "swami-homing-orb",
+  "brief": "a magic fireball of violet and magenta flame with a round bright pink-white core and a short flickering flame tail trailing to the LEFT (it flies to the right). Dark purple outline. No character.",
+  "key": "green",
+  "role": "hero",
+  "target": 48,
+  "size": "2K",
+  "anchor_mode": "center",
+  "view": "right-profile",
+  "subject": "prop",
+  "candidate_id": "02",
+  "model": "flash",
+  "canvas": [
+    80,
+    80
+  ],
+  "anchor": [
+    40,
+    40
+  ],
+  "art_dimensions": [
+    45,
+    39
+  ],
+  "generation_pixel_size": 32.854166666666664,
+  "problems": []
+}

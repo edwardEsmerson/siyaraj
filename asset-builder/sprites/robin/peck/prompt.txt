@@ -1,22 +1,16 @@
-Use case: identity-preserve. Asset type: pixel-art game animation sheet for Siyaraj, robin remaining. The attached image is the exact APPROVED BASE IDENTITY, not just a style example. Create exactly 17 different keyframe sprites, 5 columns by 4 rows on a true transparent 2048x2048 PNG. Read cells left to right then top to bottom. Leave the last 3 unused cells entirely blank. No text, labels, lines or borders.
-Identity: Robin, Siya's bird companion: a small, original Indian-folk firebird inspired by Jatayu, the noble vulture-king of the Ramayana. Side view facing right, in flight, both wings raised high in a V, long tail plumes trailing down and back, talons tucked under the body. Vivid vermillion-red wings and back; each wing's long flight feathers tipped with cream and then emerald green; feathers decorated with small Madhubani-style dot and line patterns in marigold. A cream belly and a fluffy white ruff around the neck, like a vulture's. A noble head with a strongly hooked golden raptor beak, a sharp, friendly eye with a crimson eye-mask, and a curled golden crest. A fan of long marigold-gold and orange tail plumes. Slim, regal and colourful, with bold, clean shapes that read at a small size. Original design; the references guide mood and colours only.
-Composition: right-profile; ONE complete isolated flying subject per occupied cell. Preserve exact original face, hair, crown, clothing, ornament, palette, outline weight and body proportions. Aubergine outlines, 2 or 3 flat tones per material, crisp native square pixels. Every occupied cell has ample transparent margin. SAME CAMERA SCALE in every frame: neutral upright subject height is 192 source pixels, each native art pixel is a 4x4 square. Keep identical physical body size: crouches, fallen poses and extended wings MUST NOT zoom to fill their cell. Feet on the same baseline within their cell; flying subjects and heads centered within the cell. Body rotations vary only when requested by the pose.
-FRAME POSES:
-Cell 1 (hint): Hovering, one wing pointing forward, beak wide open talking
-Cell 2 (hint): Hovering, wing pointing, beak closed, eyebrow raised
-Cell 3 (peck): Wings pulled back, beak aimed forward, body coiled
-Cell 4 (peck): Darting forward, beak jabbing, wings swept back
-Cell 5 (peck): Bouncing back, wings flared
-Cell 6 (dive): Wings folded tight, diving steeply down-forward
-Cell 7 (dive): Pulling out of the dive, wings flaring wide
-Cell 8 (dive): Swooping level, wings spread
-Cell 9 (drop_sparks): Hovering, tail flicking down, a spray of sparks falling below
-Cell 10 (drop_sparks): Wings up, sparks trailing
-Cell 11 (hypnotised): Hovering stiffly, eyes replaced by purple spirals, beak open
-Cell 12 (hypnotised): Same, spirals turned the other way
-Cell 13 (dizzy): Wobbling in the air, eyes as X marks, feathers ruffled
-Cell 14 (dizzy): Tumbling sideways, wings limp
-Cell 15 (dizzy): Lying on his back on the ground, little stars circling (separate fx)
-Cell 16 (wake): Sitting up, shaking his head
-Cell 17 (wake): Hopping up, wings out, determined
-Only add sparks/flame/coloured eyes/ash where those frame poses explicitly ask; other frames keep the approved colours. Comic defeats, no blood or gore. Entire limbs, props and wings inside their cell. No scenery, floor, shadows, backdrop, checkerboard, blurry anti-aliasing, smooth gradients, baked glow, motion streaks or duplicate characters per cell. Use real alpha transparency. Each listed pose must be illustrated exactly, in order. Do not repeat a neutral pose instead of the action.
+BACKGROUND: the entire background is one flat solid pure blue #0000FF colour, every background pixel identical. No checkerboard or transparency pattern, no floor, ground line, cast shadow, scenery, vignette, frame or text. Do not use blue anywhere on the subject.
+Attached image 1 is a pixel-art sprite sheet: 9 identical copies of the approved sprite of Robin, a small bird, laid out in an invisible grid of 3 columns and 3 rows, read left to right, top to bottom. Attached image 2 is the same sprite enlarged, for detail.
+Edit attached image 1 into an animation sheet. Cell 1 (top-left) is the reference: leave it completely unchanged. Repaint the bird in each other cell, in place, into the pose listed for that cell. Return the full sheet with the same layout: every bird at the same position in its cell and at exactly the same size as now. Do not enlarge or zoom the birds.
+Character: Robin, Siya's small bird companion: a compact Indian-folk firebird, small and chunky like a little hawk or robin (NOT a vulture, NOT a peacock, NOT a phoenix with long plumes). Small rounded red head with a short, strongly hooked golden beak, a dark friendly eye in a crimson eye-mask and a small curled golden crest. Short neck with a small cream-white ruff; cream belly. Vermillion-red back and wings; each wing has a cream leading edge and emerald-green feather tips, with marigold dot details. Tail: ONE SHORT, compact, rounded fan of marigold-orange feathers, about as long as the head, never long trailing plumes. Tiny talons tucked under the belly. Deep aubergine outline. Exactly the same small bird, size and proportions as attached image 1.
+Cell 1: unchanged reference copy.
+Cell 2: PERCH 1: perched upright as if standing on a ledge, wings folded neatly along the body, short tail fan angled down behind, small talons under the belly, head up
+Cell 3: PERCH 2: the identical perched pose, beak open chirping, crest raised a little
+Cell 4: PECK 1: wind-up in the air, wings pulled back tight along the body, head drawn back, beak aimed forward, body coiled
+Cell 5: PECK 2: lunging forward in the air, neck and beak jabbing to the right, wings swept back
+Cell 6: PECK 3: bouncing back after the strike, wings flared up and open
+Cell 7: DIVE 1: diving steeply down-forward, body pointing down-right at 45 degrees, wings folded tight against the body, beak leading
+Cell 8: DIVE 2: pulling out of the dive, body angled down-right, both wings flaring wide open
+Cell 9: DIVE 3: swooping level to the right, wings spread wide, body horizontal
+RULES: Every bird is the exact same character at the exact same camera scale as cell 1: pixel blocks of 8x8 image pixels on the same pixel grid, the same small head, hooked golden beak, curled golden crest, eye, white ruff, cream belly, torso size, wing feather pattern, short compact rounded orange tail fan, palette and thin aubergine outline. The head and torso must NOT get bigger or smaller in any cell, also when the wings are folded: a bird with folded wings is simply a smaller shape with more empty blue around it. Wherever the pose allows, keep the head and torso exactly where they are and redraw only the wings, tail and face. The bird faces right in side view in every cell. No grid lines, cell borders, numbers, labels, text, shadows, ground, perches or scenery. 
+Style: Siyaraj, a playful Indian Diwali 2D side-scrolling pixel-art platformer. Clean folk-art shapes, readable silhouette, comic expression. Hot pink, turquoise and marigold accents, deep aubergine outlines, two or three flat shading tones per material, sparse simplified rangoli / truck-art / Madhubani motifs. Crisp square pixels: no anti-aliasing, gradients, blur, painterly texture, glow or dithering noise.
+BACKGROUND: the entire background is one flat solid pure blue #0000FF colour, every background pixel identical. No checkerboard or transparency pattern, no floor, ground line, cast shadow, scenery, vignette, frame or text. Do not use blue anywhere on the subject.
