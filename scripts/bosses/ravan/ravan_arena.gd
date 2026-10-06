@@ -12,11 +12,11 @@ var completed: bool = false
 
 func _ready() -> void:
 	player.died.connect(_restart)
-	ravan.exposure_started.connect(func() -> void:
-		$HUD/CombatStatus.text = "His navel is open: strike the amrit!"
+	ravan.head_lost.connect(func(_index: int, remaining: int) -> void:
+		$HUD/CombatStatus.text = "A head falls! %d left." % remaining if remaining > 0 else "The last head falls!"
 	)
-	ravan.exposure_ended.connect(func() -> void:
-		$HUD/CombatStatus.text = "Hit the glowing head while it lunges."
+	ravan.fury_ended.connect(func() -> void:
+		$HUD/CombatStatus.text = "He is spent: strike him now!"
 	)
 	ravan.phase_changed.connect(func(phase: int) -> void:
 		$HUD/CombatStatus.text = "Phase %d. Watch the lit heads and find the safe lanes." % phase
