@@ -1,0 +1,171 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/bosses/boss_arena.gd" id="1_arena"]
+[ext_resource type="PackedScene" path="res://scenes/bosses/khara.tscn" id="2_khara"]
+[ext_resource type="PackedScene" path="res://scenes/player/forest_player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/boss_health_bar.tscn" id="4_bar"]
+
+[sub_resource type="RectangleShape2D" id="FloorShape"]
+size = Vector2(960, 48)
+
+[sub_resource type="RectangleShape2D" id="WallShape"]
+size = Vector2(24, 540)
+
+[sub_resource type="RectangleShape2D" id="CeilingShape"]
+size = Vector2(960, 24)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_arena")
+restart_delay = 0.6
+
+[node name="TestCourse" type="Node2D" parent="."]
+
+[node name="Backdrop" type="Polygon2D" parent="TestCourse"]
+z_index = -10
+polygon = PackedVector2Array(0, 0, 960, 0, 960, 430, 0, 430)
+color = Color(0.07, 0.11, 0.1, 1)
+
+[node name="TrunkLeft" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(90, 0, 140, 0, 150, 430, 70, 430)
+color = Color(0.1, 0.16, 0.13, 1)
+
+[node name="TrunkMiddle" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(430, 0, 470, 0, 480, 430, 420, 430)
+color = Color(0.09, 0.14, 0.12, 1)
+
+[node name="TrunkRight" type="Polygon2D" parent="TestCourse/Backdrop"]
+polygon = PackedVector2Array(800, 0, 845, 0, 860, 430, 780, 430)
+color = Color(0.1, 0.16, 0.13, 1)
+
+[node name="Ground" type="StaticBody2D" parent="TestCourse"]
+position = Vector2(480, 454)
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="TestCourse/Ground"]
+polygon = PackedVector2Array(-480, -24, 480, -24, 480, 24, -480, 24)
+color = Color(0.27, 0.24, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestCourse/Ground"]
+shape = SubResource("FloorShape")
+
+[node name="LeftWall" type="StaticBody2D" parent="TestCourse"]
+position = Vector2(12, 270)
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="TestCourse/LeftWall"]
+polygon = PackedVector2Array(-12, -270, 12, -270, 12, 270, -12, 270)
+color = Color(0.2, 0.18, 0.16, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestCourse/LeftWall"]
+shape = SubResource("WallShape")
+
+[node name="RightWall" type="StaticBody2D" parent="TestCourse"]
+position = Vector2(948, 270)
+collision_mask = 0
+
+[node name="Body" type="Polygon2D" parent="TestCourse/RightWall"]
+polygon = PackedVector2Array(-12, -270, 12, -270, 12, 270, -12, 270)
+color = Color(0.2, 0.18, 0.16, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestCourse/RightWall"]
+shape = SubResource("WallShape")
+
+[node name="Ceiling" type="StaticBody2D" parent="TestCourse"]
+position = Vector2(480, -12)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestCourse/Ceiling"]
+shape = SubResource("CeilingShape")
+
+[node name="PlayerSpawn" type="Marker2D" parent="TestCourse"]
+position = Vector2(200, 430)
+
+[node name="Boss" parent="TestCourse" instance=ExtResource("2_khara")]
+position = Vector2(720, 430)
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 270)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Title" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 14.0
+offset_right = 936.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 22
+text = "SIYARAJ / boss arena: Khara"
+
+[node name="Controls" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 936.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 14
+text = "A/D: move    Space: jump    Shift: dash    J: sparkler    L: skyshot    hold K: chakri    R: restart"
+
+[node name="Milestone" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 72.0
+offset_right = 936.0
+offset_bottom = 112.0
+theme_override_font_sizes/font_size = 14
+text = "Orange ground strip: gada slam. Run or dash through him, then jump the shockwave.
+Yellow chevrons: the ladi bursts that way. Stand behind the spark or jump each pop."
+
+[node name="HealthStatus" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 116.0
+offset_right = 936.0
+offset_bottom = 136.0
+theme_override_font_sizes/font_size = 14
+text = "Siya health: 3/3"
+
+[node name="DashStatus" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 136.0
+offset_right = 936.0
+offset_bottom = 156.0
+theme_override_font_sizes/font_size = 14
+text = "Rocket dash: READY"
+
+[node name="WeaponStatus" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 156.0
+offset_right = 936.0
+offset_bottom = 176.0
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 14
+text = "Skyshot: 5/5    Chakri: READY    Hold K to charge; release to spin."
+
+[node name="CombatStatus" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 176.0
+offset_right = 936.0
+offset_bottom = 196.0
+theme_override_font_sizes/font_size = 14
+text = "Khara blocks the path. Strike while his gada is stuck in the ground."
+
+[node name="InputStatus" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 196.0
+offset_right = 936.0
+offset_bottom = 216.0
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_font_sizes/font_size = 12
+text = "Input received: none"
+
+[node name="DeathMessage" type="Label" parent="HUD"]
+visible = false
+offset_left = 300.0
+offset_top = 220.0
+offset_right = 660.0
+offset_bottom = 285.0
+theme_override_font_sizes/font_size = 28
+text = "SIYA DOWN
+Restarting..."
+horizontal_alignment = 1
+
+[node name="BossHealthBar" parent="HUD" instance=ExtResource("4_bar")]

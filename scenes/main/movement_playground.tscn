@@ -36,7 +36,7 @@ offset_left = 32.0
 offset_top = 116.0
 offset_right = 928.0
 offset_bottom = 170.0
-text = "Jump, then dash across the long gaps. Dash stops at walls.\nOne air dash, restored on landing. Falling restarts the course."
+text = "Jump, then dash across the long gaps. Dash stops at walls.\nDash on the ground too. One air dash, restored on landing. Falling restarts the course."
 
 [node name="InputStatus" type="Label" parent="HUD"]
 offset_left = 32.0

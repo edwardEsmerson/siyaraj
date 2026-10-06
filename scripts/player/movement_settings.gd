@@ -13,3 +13,6 @@ extends Resource
 @export var jump_buffer_time: float = 0.12
 @export var dash_speed: float = 720.0
 @export var dash_duration: float = 0.15
+## Seconds after a ground dash's full duration before any dash can start again.
+## Air dashes are limited by their single charge instead.
+@export var ground_dash_cooldown: float = 0.25

@@ -1,5 +1,6 @@
 extends SceneTree
 ## Exercise the heavy melee variant through real physics, timed hits and scene reloads.
+const Sandbox = preload("res://scripts/dev/sandbox.gd")
 
 var failures: int = 0
 var player: CharacterBody2D
@@ -29,10 +30,11 @@ func release_inputs() -> void:
 
 func reset_arena(freeze_brute: bool = true) -> void:
 	release_inputs()
-	change_scene_to_file("res://scenes/combat/brute_arena.tscn")
+	Sandbox.next_encounter = Sandbox.Encounter.BRUTE
+	change_scene_to_file("res://scenes/dev/sandbox.tscn")
 	await scene_changed
 	player = current_scene.get_node("Player")
-	brute = current_scene.get_node("TestCourse/Enemy")
+	brute = current_scene.get_node("Enemy")
 	brute.set_physics_process(not freeze_brute)
 	await ticks(3)
 
@@ -171,7 +173,7 @@ func check_damage_and_defeat() -> void:
 	restart.pressed = true
 	Input.parse_input_event(restart)
 	await ticks(3)
-	check(current_scene != old_scene and current_scene.get_node("TestCourse/Enemy").health == 6, "Restart must restore the brute encounter")
+	check(current_scene != old_scene and current_scene.get_node("Enemy").health == 6, "Restart must restore the brute encounter")
 
 
 func check_course_integration() -> void:

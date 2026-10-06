@@ -1,5 +1,6 @@
 extends SceneTree
 ## Real flight, aimed shots, swept collisions, jumping melee, and scene recovery.
+const Sandbox = preload("res://scripts/dev/sandbox.gd")
 const PROJECTILE_SCENE = preload("res://scenes/combat/enemy_projectile.tscn")
 
 var failures: int = 0
@@ -30,10 +31,11 @@ func release_inputs() -> void:
 
 func reset_arena(freeze_flyer: bool = true) -> void:
 	release_inputs()
-	change_scene_to_file("res://scenes/combat/flying_enemy_arena.tscn")
+	Sandbox.next_encounter = Sandbox.Encounter.FLYER
+	change_scene_to_file("res://scenes/dev/sandbox.tscn")
 	await scene_changed
 	player = current_scene.get_node("Player")
-	flyer = current_scene.get_node("FlyingEnemy")
+	flyer = current_scene.get_node("Enemy")
 	flyer.set_physics_process(not freeze_flyer)
 	await ticks(3)
 
@@ -216,6 +218,19 @@ func check_projectiles() -> void:
 	await ticks(9)
 	check(not is_instance_valid(projectile) and shots().is_empty(), "Unobstructed projectiles must expire at their lifetime")
 
+	# A dashing player passes through an incoming shot, which flies on and ignores her.
+	await reset_arena()
+	projectile = spawn_shot(player.global_position + Vector2(70, -20), Vector2.LEFT, 400.0)
+	Input.action_press("dash")
+	await ticks(1)
+	Input.action_release("dash")
+	check(player.state == player.State.DASH, "Shot dodge must start a grounded dash")
+	await ticks(12)
+	check(player.health == 3, "Dash i-frames must let a shot pass through without damage")
+	check(is_instance_valid(projectile) and projectile.global_position.x < player.global_position.x, "Dodged shot must continue past the player")
+	await ticks(20)
+	check(player.health == 3, "Dodged shot must not hit the player after i-frames end")
+
 
 func check_melee_and_restart() -> void:
 	await reset_arena()
@@ -250,7 +265,7 @@ func check_melee_and_restart() -> void:
 	await ticks(3)
 	check(current_scene != old_scene, "R must restart the flying enemy arena")
 	player = current_scene.get_node("Player")
-	flyer = current_scene.get_node("FlyingEnemy")
+	flyer = current_scene.get_node("Enemy")
 	check(player.health == 3 and flyer.health == 3 and shots().is_empty(), "Restart must restore both combatants and clear projectiles")
 	flyer.set_physics_process(false)
 	old_scene = current_scene

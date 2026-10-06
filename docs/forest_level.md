@@ -94,7 +94,7 @@ until its encounter is designed. Forest completion and room doors currently
 require traversal, so combat can be bypassed. No boss or defeat gate is added.
 The original prototype keeps its guard-controlled gate and both new enemies.
 The flying enemy already merged on GitHub is also available in that prototype
-and its isolated arena. Terrain remains grey; enemy attack feedback uses
+and the dev sandbox. Terrain remains grey; enemy attack feedback uses
 the shared combat scenes.
 
 ## Weapon integration
@@ -110,7 +110,7 @@ Door transitions preserve current health, ammunition, chakri cooldown and
 shot recovery. Entering or leaving an optional room cannot refill weapons
 or heal Siya. Lighting a diya also leaves these values alone. Death and R
 restore the loadout, health and cooldowns at the appropriate saved position.
-The dedicated weapons playground remains available with F6, and the original
+The weapons playground (`scenes/dev/`) remains available with F6, and the original
 prototype/tuning scenes continue using their original player controller.
 
 `forest_weapons_check.gd` fires through physical L input at a real forest

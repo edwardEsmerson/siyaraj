@@ -24,7 +24,7 @@ func ticks(count: int) -> void:
 func reset_playground() -> void:
 	for action in [&"attack", &"skyshot", &"special", &"dash", &"jump", &"restart", &"move_left", &"move_right"]:
 		Input.action_release(action)
-	change_scene_to_file("res://scenes/combat/weapons_playground.tscn")
+	change_scene_to_file("res://scenes/dev/weapons_playground.tscn")
 	await scene_changed
 	player = current_scene.get_node("Player")
 	dummy = current_scene.get_node("SparklerDummy")
@@ -277,7 +277,7 @@ func check_skyshots() -> void:
 	player = current_scene.get_node("Player")
 	await fire_shot()
 	await ticks(10)
-	change_scene_to_file("res://scenes/combat/weapons_playground.tscn")
+	change_scene_to_file("res://scenes/dev/weapons_playground.tscn")
 	await scene_changed
 	await ticks(3)
 	player = current_scene.get_node("Player")

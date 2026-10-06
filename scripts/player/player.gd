@@ -18,12 +18,19 @@ var _coyote_remaining: float = 0.0
 var _jump_buffer_remaining: float = 0.0
 @export var max_health: int = 3
 @export var damage_protection_time: float = 0.8
+## Dash i-frames cover the dash plus this grace, so a hit landing on the final tick still misses.
+@export var dash_invulnerability_grace: float = 0.05
+## An attack pressed during a dash fires when it ends, if the swing can start within this window.
+@export var attack_buffer_time: float = 0.12
 
 signal health_changed(remaining: int)
 
 var health: int
 var _protection_remaining: float = 0.0
 var _hit_flash_remaining: float = 0.0
+var _invulnerable_remaining: float = 0.0
+var _dash_cooldown_remaining: float = 0.0
+var _attack_buffer_remaining: float = 0.0
 
 @onready var attack_origin: Marker2D = $AttackOrigin
 @onready var facing_marker: Polygon2D = $FacingMarker
@@ -38,11 +45,13 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	_protection_remaining = maxf(_protection_remaining - delta, 0.0)
-	_hit_flash_remaining = maxf(_hit_flash_remaining - delta, 0.0)
+	_tick_timers(delta)
 	if state == State.DEAD:
 		return
 	if state == State.DASH:
+		# Attack presses during a dash are held until it ends, giving a dash-attack.
+		if Input.is_action_just_pressed("attack"):
+			_attack_buffer_remaining = attack_buffer_time
 		_process_dash(delta)
 		_update_feedback()
 		return
@@ -68,15 +77,23 @@ func _physics_process(delta: float) -> void:
 		attack_origin.position.x = 18.0 * facing_direction
 		facing_marker.position.x = 7.0 * facing_direction
 
-	if Input.is_action_just_pressed("attack"):
-		sparkler.start(facing_direction)
+	if Input.is_action_just_pressed("attack") or _attack_buffer_remaining > 0.0:
+		if sparkler.start(facing_direction):
+			_attack_buffer_remaining = 0.0
 
-	if Input.is_action_just_pressed("dash") and dash_available and not is_on_floor():
+	# Dashing cancels any swing phase, including recovery.
+	if Input.is_action_just_pressed("dash") and can_dash():
 		sparkler.cancel()
+		var grounded := is_on_floor()
 		state = State.DASH
-		dash_available = false
+		if grounded:
+			# Ground dashes keep the air charge; a cooldown stops back-to-back spam.
+			_dash_cooldown_remaining = movement_settings.dash_duration + movement_settings.ground_dash_cooldown
+		else:
+			dash_available = false
 		_dash_direction = facing_direction
 		_dash_remaining = movement_settings.dash_duration
+		_invulnerable_remaining = movement_settings.dash_duration + dash_invulnerability_grace
 		Burst.spawn(get_tree().current_scene, global_position + Vector2(0, -20), Color(1.0, 0.7, 0.2), "", 18.0)
 		_coyote_remaining = 0.0
 		_jump_buffer_remaining = 0.0
@@ -106,6 +123,28 @@ func _physics_process(delta: float) -> void:
 		_start_jump()
 
 
+func _tick_timers(delta: float) -> void:
+	_protection_remaining = maxf(_protection_remaining - delta, 0.0)
+	_hit_flash_remaining = maxf(_hit_flash_remaining - delta, 0.0)
+	_invulnerable_remaining = maxf(_invulnerable_remaining - delta, 0.0)
+	_dash_cooldown_remaining = maxf(_dash_cooldown_remaining - delta, 0.0)
+	if state != State.DASH:
+		_attack_buffer_remaining = maxf(_attack_buffer_remaining - delta, 0.0)
+
+
+## Grounded dashes only wait for the cooldown; airborne dashes also need the air charge.
+func can_dash() -> bool:
+	if state == State.DEAD or _dash_cooldown_remaining > 0.0:
+		return false
+	return is_on_floor() or dash_available
+
+
+## True during dash i-frames. Damage sources should let Siya pass through untouched.
+func is_invulnerable() -> bool:
+	# Same epsilon as the dash timer, so summed frame deltas do not add a stray frame.
+	return state != State.DEAD and _invulnerable_remaining > 0.00001
+
+
 func _start_jump() -> void:
 	velocity.y = movement_settings.jump_velocity
 	_coyote_remaining = 0.0
@@ -133,13 +172,15 @@ func _update_feedback() -> void:
 		body.modulate = Color(2.0, 0.65, 0.65)
 	elif _protection_remaining > 0.0:
 		body.modulate.a = 0.4 if int(_protection_remaining * 15.0) % 2 == 0 else 1.0
+	elif _invulnerable_remaining > 0.0:
+		body.modulate = Color(1.35, 1.35, 1.35, 0.7)
 	exhaust.visible = state == State.DASH
 	exhaust.scale.x = float(_dash_direction)
 	if state == State.DEAD:
 		body.color = Color(0.7, 0.2, 0.2)
 	elif state == State.DASH:
 		body.color = Color(1.0, 0.72, 0.2)
-	elif dash_available:
+	elif dash_available and _dash_cooldown_remaining <= 0.0:
 		body.color = Color(0.76, 0.78, 0.82)
 	else:
 		body.color = Color(0.44, 0.48, 0.55)
@@ -153,13 +194,16 @@ func apply_knockback(impulse: Vector2, duration: float = 0.15) -> void:
 	velocity = impulse
 	_hurt_remaining = maxf(duration, 0.0)
 	_dash_remaining = 0.0
+	# Dash i-frames belong to the dash; forced knockback ends both.
+	_invulnerable_remaining = 0.0
+	_attack_buffer_remaining = 0.0
 	_coyote_remaining = 0.0
 	_jump_buffer_remaining = 0.0
 	_update_feedback()
 
 
 func take_damage(amount: int, knockback: Vector2) -> void:
-	if state == State.DEAD or _protection_remaining > 0.0 or amount <= 0:
+	if state == State.DEAD or _protection_remaining > 0.0 or is_invulnerable() or amount <= 0:
 		return
 	health = maxi(health - amount, 0)
 	_protection_remaining = damage_protection_time
