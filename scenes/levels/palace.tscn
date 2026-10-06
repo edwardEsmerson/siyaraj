@@ -1,10 +1,12 @@
-[gd_scene load_steps=76 format=3]
+[gd_scene load_steps=77 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/draft_level.gd" id="Script"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="enemy"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/ground_shooter.tscn" id="ground_shooter"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/brute.tscn" id="brute"]
 [ext_resource type="Script" path="res://scripts/levels/world_skin.gd" id="world_skin"]
+
+[ext_resource type="PackedScene" path="res://scenes/companions/robin_hint.tscn" id="robin_hint"]
 
 [sub_resource type="RectangleShape2D" id="GateApproach"]
 size = Vector2(720, 40)
@@ -218,7 +220,7 @@ size = Vector2(64, 160)
 [node name="PalaceCourse" type="Node2D"]
 script = ExtResource("Script")
 level_id = "palace"
-sections = PackedStringArray("Palace gates / Climb the broken lintel. Lower ledges catch missed jumps.", "Column gallery / Vault the bases for cover, or take the upper gallery.", "Broken roofs / Dash between roofs. Lower courtyards offer a second route.", "Inner hall / Dash past a swing; flank the shooter from the balcony.", "Sanctum / Fight on the broad platform before the final roof crossing.", "Throne approach / Light the last diya, then enter Ravan's arena.")
+sections = PackedStringArray("Palace gates / Climb the broken lintel. Lower ledges catch missed jumps.", "Column gallery / Vault the bases for cover, or take the upper gallery.", "Broken roofs / Dash between roofs. Lower courtyards offer a second route.", "Inner hall / Dash past a swing; flank the shooter from the balcony.", "Sanctum / Fight on the broad platform before the final roof crossing.", "Throne approach / Light the last diya, then enter Swaminathan's arena.")
 section_starts = PackedInt32Array(0, 3260, 5540, 8910, 11260, 13400)
 
 [node name="Background" type="Polygon2D" parent="."]
@@ -1652,3 +1654,30 @@ text = "THRONE APPROACH"
 script = ExtResource("world_skin")
 biome = "palace"
 direction = "carved"
+
+[node name="RobinHints" type="Node2D" parent="."]
+
+[node name="GateHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(620, 430)
+text = "Climb the gate steps, then dash over the broken lintel. Lower ledges catch falls."
+
+[node name="GalleryHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(3410, 430)
+text = "Column bases block shots. Vault them to close in, or take the upper gallery."
+
+[node name="RoofHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(5780, 430)
+text = "Broken roofs ahead! Dash between them. The lower courts lead back up."
+
+[node name="HallHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(9140, 430)
+text = "The balcony passes above both guards. Choose where to drop, and watch their windups."
+
+[node name="SanctumHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(11520, 430)
+text = "A brute waits atop these steps. Dodge his swing, then strike during recovery."
+
+[node name="BossHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(13630, 430)
+text = "Light the last diya! Swaminathan waits beyond. Knock out his active heads to expose his core."
+duration = 5.0

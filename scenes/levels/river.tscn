@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3]
+[gd_scene load_steps=65 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/draft_level.gd" id="Script"]
 
@@ -10,6 +10,10 @@
 [ext_resource type="Script" path="res://scripts/levels/world_skin.gd" id="world_skin"]
 
 [ext_resource type="PackedScene" path="res://scenes/enemies/flying_enemy.tscn" id="flying_enemy"]
+
+[ext_resource type="PackedScene" path="res://scenes/companions/robin_hint.tscn" id="robin_hint"]
+
+[ext_resource type="Script" path="res://scripts/levels/bridge_planks.gd" id="bridge_planks"]
 
 [sub_resource type="RectangleShape2D" id="Bank"]
 size = Vector2(560, 24)
@@ -75,7 +79,7 @@ size = Vector2(130, 24)
 size = Vector2(130, 24)
 
 [sub_resource type="RectangleShape2D" id="BridgeDeck"]
-size = Vector2(370, 24)
+size = Vector2(110, 24)
 
 [sub_resource type="RectangleShape2D" id="BridgeGap1"]
 size = Vector2(210, 24)
@@ -183,8 +187,8 @@ size = Vector2(64, 160)
 script = ExtResource("Script")
 level_id = "river"
 course_width = 14400
-sections = PackedStringArray("FERRY LANDING / use the landing room to dash past a windup", "STONE FORDS / upper combat stones or the lower recovery dock", "GHAT COURTYARD / step climb, brute duel or balcony bypass", "BROKEN BRIDGE / close on the shooter; low flyer is lash reachable", "AQUEDUCT / crates stop shots; jump over cover to close the distance", "TEMPLE PROCESSION / recover at the last diya before the palace")
-section_starts = PackedInt32Array(0, 2820, 5600, 8100, 9990, 12560)
+sections = PackedStringArray("FERRY LANDING / use the landing room to dash past a windup", "STONE FORDS / upper combat stones or the lower recovery dock", "GHAT COURTYARD / step climb, brute duel or balcony bypass", "BROKEN BRIDGE / E: pick up and place 4 planks, then jump + dash", "AQUEDUCT / crates stop shots; jump over cover to close the distance", "TEMPLE PROCESSION / recover at the last diya before the palace")
+section_starts = PackedInt32Array(0, 2820, 5600, 7900, 9990, 12560)
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 position = Vector2(160, 430)
@@ -554,24 +558,24 @@ color = Color(0.60, 0.60, 0.60, 1)
 shape = SubResource("BridgeStep2")
 
 [node name="BridgeDeck" type="StaticBody2D" parent="Terrain"]
-position = Vector2(8545.0, 362.0)
+position = Vector2(8415.0, 362.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 21
 
 [node name="Body" type="Polygon2D" parent="Terrain/BridgeDeck"]
-polygon = PackedVector2Array(-185.0, -12.0, 185.0, -12.0, 185.0, 12.0, -185.0, 12.0)
+polygon = PackedVector2Array(-55.0, -12.0, 55.0, -12.0, 55.0, 12.0, -55.0, 12.0)
 color = Color(0.34, 0.34, 0.34, 1)
 
 [node name="Edge" type="Polygon2D" parent="Terrain/BridgeDeck"]
-polygon = PackedVector2Array(-185.0, -12.0, 185.0, -12.0, 185.0, -9.0, -185.0, -9.0)
+polygon = PackedVector2Array(-55.0, -12.0, 55.0, -12.0, 55.0, -9.0, -55.0, -9.0)
 color = Color(0.60, 0.60, 0.60, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/BridgeDeck"]
 shape = SubResource("BridgeDeck")
 
 [node name="BridgeGap1" type="StaticBody2D" parent="Terrain"]
-position = Vector2(8995.0, 362.0)
+position = Vector2(9055.0, 362.0)
 collision_layer = 1
 collision_mask = 0
 metadata/route_order = 22
@@ -1278,6 +1282,22 @@ patrol_radius = 55.0
 [node name="BridgeFlyer" type="Marker2D" parent="EncounterSpawns"]
 position = Vector2(8990, 337)
 
+[node name="BridgeApproachGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(8165, 390)
+patrol_radius = 30.0
+detection_range = 140.0
+
+[node name="BridgeApproachGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(8165, 390)
+
+[node name="BridgeDeckGuard" parent="Encounters" instance=ExtResource("enemy")]
+position = Vector2(8395, 350)
+patrol_radius = 30.0
+detection_range = 160.0
+
+[node name="BridgeDeckGuard" type="Marker2D" parent="EncounterSpawns"]
+position = Vector2(8395, 350)
+
 [node name="AqueductShooter" parent="Encounters" instance=ExtResource("ground_shooter")]
 position = Vector2(10310, 430)
 patrol_radius = 55.0
@@ -1333,7 +1353,7 @@ text = "GHAT COURTYARD / upper balcony bypass"
 [node name="RouteNote3" type="Label" parent="."]
 position = Vector2(8180, 160)
 theme_override_font_sizes/font_size = 15
-text = "BROKEN BRIDGE / recovery shelves below"
+text = "BROKEN BRIDGE / build with 4 planks, then jump + dash"
 
 [node name="RouteNote4" type="Label" parent="."]
 position = Vector2(10010, 160)
@@ -1374,3 +1394,32 @@ text = "LOWER CHANNEL"
 script = ExtResource("world_skin")
 biome = "river"
 direction = "truckart"
+
+[node name="RobinHints" type="Node2D" parent="."]
+
+[node name="DockHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(1000, 430)
+text = "Broken docks ahead! Jump, then dash across. The lower dock can catch a fall."
+
+[node name="FordsHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(3020, 430)
+text = "Take the high stones, or use the lower dock. Both paths rejoin at the diya."
+
+[node name="GhatHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(5800, 430)
+text = "A brute guards the court. Bait his swing, or climb the balconies to pass above."
+
+[node name="BridgeHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(8350, 430)
+text = "Carry four planks from the lower approach. E picks one up and E at the bridge edge places it. Then jump and dash across."
+
+[node name="CoverHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(10020, 430)
+text = "Crates stop the purple bolts. Jump over cover, then dash in to reach the shooter."
+
+[node name="TempleHint" parent="RobinHints" instance=ExtResource("robin_hint")]
+position = Vector2(13520, 430)
+text = "Light this last diya before the temple climb. Dhoomketu guards the ghats; beat him to reach the palace!"
+
+[node name="BridgePlanks" type="Node2D" parent="."]
+script = ExtResource("bridge_planks")

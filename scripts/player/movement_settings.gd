@@ -13,6 +13,10 @@ extends Resource
 @export var jump_buffer_time: float = 0.12
 @export var dash_speed: float = 720.0
 @export var dash_duration: float = 0.15
+## Horizontal speed an air dash leaves Siya with; it eases back to run_speed at
+## the normal acceleration. Set a touch above dash_speed so jump + dash reach
+## matches the old gravity-suspending dash.
+@export var air_dash_exit_speed: float = 780.0
 ## Seconds after a ground dash's full duration before any dash can start again.
 ## Air dashes are limited by their single charge instead.
 @export var ground_dash_cooldown: float = 0.25

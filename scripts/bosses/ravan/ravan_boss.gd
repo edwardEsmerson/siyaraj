@@ -1,5 +1,5 @@
 extends Node2D
-## Ravan, Dashanan. One health pool: Siya can hit him anywhere, and every tenth of
+## Swaminathan, Dashanan. One health pool: Siya can hit him anywhere, and every tenth of
 ## his health lost severs his rightmost living head. Heads are fixed attack origins
 ## on the body sprite; only living heads attack. See docs/bosses/boss2-ravan.md.
 const Burst = preload("res://scripts/effects/burst.gd")
@@ -95,7 +95,7 @@ class HeadSlot:
 		return ATTACK_WORDS[attack_kind]
 
 
-@export var boss_name: String = "RAVAN"
+@export var boss_name: String = "SWAMINATHAN"
 @export var boss_title: String = "Dashanan"
 ## Each head is worth a tenth of this.
 @export var max_health: int = 80
@@ -168,7 +168,7 @@ func _ready() -> void:
 	_overlay.draw.connect(_draw_overlay)
 	add_child(_overlay)
 	_state_remaining = intro_time
-	_show_banner("RAVAN, LORD OF LANKA", intro_time + 0.5)
+	_show_banner("SWAMINATHAN, LORD OF LANKA", intro_time + 0.5)
 
 
 func phase_settings() -> Dictionary:
@@ -570,7 +570,7 @@ func _begin_death() -> void:
 	# Victory should never be followed by a stray hit.
 	for attack in get_tree().get_nodes_in_group("ravan_attacks"):
 		attack.queue_free()
-	_show_banner("RAVAN FALLS", 4.0)
+	_show_banner("SWAMINATHAN FALLS", 4.0)
 
 
 func _update_feedback(delta: float) -> void:

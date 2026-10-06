@@ -8,8 +8,8 @@ Shurpanakha is humiliated. That makes him the right gatekeeper at the end of the
 forest. He is a heavy, slow brawler with a bronze gada (mace). He also lays *ladi*, a string
 of firecrackers, which pop in a chain along the ground.
 
-Difficulty is mid-level. Both attacks have long, colour-coded tells. Each one rewards
-movement the player already knows: running, the dash, timed jumps, and punishing recovery.
+Khara is tuned as the first level boss. Both attacks have long, colour-coded tells.
+Each one rewards movement the player already knows: running, the dash, timed jumps, and punishing recovery.
 Every Khara hazard damages Siya through `take_damage`, so dash i-frames dodge the slam,
 shockwaves and ladi pops like any enemy hit.
 
@@ -46,13 +46,12 @@ in the Movement, Gada slam and Ladi fireworks inspector groups.
 | Recovery | 1.10 s (66 f) | 0.80 s (48 f) | Body turns dim blue-grey and the gada stays in the ground. Label: STUCK - STRIKE NOW |
 
 - Starts when Siya is within 105 px. Facing locks for the whole swing.
-- Hitbox: 120 x 80 px, from 4 to 124 px in front of his centre. Deals 2 damage with a
+- Hitbox: 120 x 80 px, from 4 to 124 px in front of his centre. Deals 1 damage with a
   360/-220 knockback.
 - Shockwave: on impact, a low wave (28 x 16 px) travels along the ground at 380 px/s for 1 s.
-  It deals 1 damage and stops at walls. Phase 1 sends one wave forward. Phase 2 sends one
-  each way.
+  It deals 1 damage and stops at walls. Both phases send one wave forward, leaving his back safe.
 - Counterplay: run away during the wind-up (240 px/s covers ~200 px), or dash through Khara
-  to his back. Bodies do not block, and phase 1 sends no wave behind him. Then jump the wave
+  to his back. Bodies do not block, and neither phase sends a wave behind him. Then jump the wave
   and punish during recovery.
 
 ### 2. Ladi fireworks
@@ -83,13 +82,6 @@ in the Movement, Gada slam and Ladi fireworks inspector groups.
   - Or **jump as the pop front arrives**. Pops are 18 px tall; Siya's jump apex is ~47 px,
     and she spends ~0.39 s above 18 px. A single position is dangerous for ~0.25 s.
 
-### Phase 2 pincer
-
-In phase 2, every ladi cast places a second, shorter string (10 crackers) at the wall on
-Siya's side. It bursts back toward Khara. Its fuse is 1.6 s longer, so Siya needs two
-separate jumps at least ~0.75 s apart. She can also stand behind Khara's lit end, at the
-cost of being close to his next slam.
-
 ## AI and phases
 
 States: `INTRO, IDLE, APPROACH, SLAM_WINDUP, SLAM_ACTIVE, SLAM_RECOVERY, LADI_CAST,
@@ -100,14 +92,16 @@ LADI_RECOVERY, PHASE_SHIFT, DEAD`.
    - Ladi ready and (Siya more than 210 px away, or 2 slams since the last ladi): ladi.
    - Siya within 105 px: slam.
    - Otherwise: approach.
+   - While any boss hazard remains, he waits before choosing another attack. This
+     includes the ladi fuse, pop chain and brief ash cleanup, so attacks do not overlap.
 3. **Approach**: walks toward Siya. He slams within 105 px. After 2 s of walking with the
    ladi ready, he lights a ladi instead, so kiting does not stall the fight.
 4. **Phase 2** (at 12 HP or less, once): a 1.2 s (72 f) ROAR!.
    - Cancels any pending slam wind-up, a small reward for the hit that triggers it.
-   - Resets the ladi cooldown, so he opens with the pincer.
+   - Resets the ladi cooldown, so he opens with one ladi once existing hazards finish.
    - From then on: faster walk, shorter wind-up and recovery, shorter fuse, longer string,
-     double shockwave and the pincer. Every slam chains straight into a ladi when the
-     cooldown allows.
+     with the same single forward shockwave and single ladi. Slams return to idle
+     before the next decision, rather than chaining directly into a ladi.
    - Body tint shifts red and a crown of flames flickers above his head. The health bar
      fill turns orange.
 5. **Death**: he topples and fades for 1.4 s with rolling bursts (KHARA FALLS!), then frees
@@ -136,7 +130,7 @@ LADI_RECOVERY, PHASE_SHIFT, DEAD`.
   node name) and `boss_title`.
 
 The bar shows a delayed damage chip, tick marks at `phase_thresholds` (default 0.5) and an
-enraged fill colour after a phase change. It fades out on death. Boss 2 (Ravan) uses it
+enraged fill colour after a phase change. It fades out on death. Boss 2 (Swaminathan) uses it
 too, with a separate head-indicator row (`scripts/bosses/ravan/ravan_head_indicators.gd`).
 
 ## Sprite and animation list for the artist

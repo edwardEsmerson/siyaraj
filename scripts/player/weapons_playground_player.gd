@@ -2,6 +2,8 @@ extends "res://scripts/player/player.gd"
 ## Weapon controller shared by the playground and forest. Movement impulses stay here.
 const Skyshot = preload("res://scripts/combat/skyshot_projectile.gd")
 
+signal weapon_used(animation: StringName, duration: float)
+
 const MAX_SKYSHOT_AMMO: int = 5
 @export var shot_recovery_time: float = 0.45
 @export var recoil_speed: float = 120.0
@@ -91,6 +93,7 @@ func _fire_skyshot() -> void:
 	recoil_remaining = recoil_duration
 	recoil_direction = -facing_direction
 	attack_status = "SKYSHOT: fired"
+	weapon_used.emit(&"skyshot", shot_recovery_time)
 	var projectile := Skyshot.new()
 	projectile.direction = facing_direction
 	# Start inside Siya's body, which the shot ignores. A muzzle outside the
@@ -133,6 +136,7 @@ func _release_chakri() -> void:
 	var strength := clampf(charge_time / full_charge_time, 0.0, 1.0)
 	charging = false
 	special_recovery = 0.35 + strength * 0.20
+	weapon_used.emit(&"chakri_release", special_recovery)
 	effect_kind = "chakri"
 	effect_time = 0.30
 	effect_radius = lerpf(42.0, chakri_radius, strength)

@@ -6,7 +6,7 @@ art and animation included, sorted by who should pick it up:
 - **A. You (a human):** decisions, reviews, playtests and the submission itself.
 - **B. A good LLM:** well-scoped work that follows patterns already in the repo.
 - **C. A really good LLM:** cross-cutting work that needs design judgement, touches
-  many systems, or could easily break the 25 regression suites.
+  many systems, or could easily break the 29 regression suites.
 
 Per-asset briefs, sizes and generation commands live in
 `asset-builder/Sprites_List.md` and `asset-builder/Animations-List.md`. This file
@@ -14,24 +14,22 @@ says *what* is left and *who* does it, and points there for the *how*.
 
 ## Where things stand
 
-- **Playable route:** title → forest → Khara → river → palace → Ravan → ending.
+- **Playable route:** title → forest → Khara → river → Dhoomketu → palace → Swaminathan → ending.
   Each boss is a separate showdown scene. A "TRAIL CLEARED / Enter: face Khara"
   screen leads into it, not an arena inside the level.
 - **Done:** title screen, themed pause menu, controls panel, settings (master volume
-  and fullscreen), debug-only playtest tools, Robin as a forest guide, blocked-diya
+  and fullscreen), debug-only playtest tools, Robin as a guide in all three levels, blocked-diya
   curtain transition (placeholder art), and `docs/.gdignore`.
 - **Art exists but isn't in the game.** 73 approved animation sets (195 frames)
   sit in `assets/sprites/` for Siya, Robin, Raj, all four enemies, Khara with her
-  gada, and Swaminathan. Only **Robin** is wired into gameplay. Siya, the enemies
+  gada, and Swaminathan. **Siya and Robin** are wired into gameplay. The enemies
   and both bosses still draw code placeholders.
 - **World kits:** levels and both boss arenas are dressed through `WorldSkin` in all
-  six styles (press V in a level to cycle). Merged in #15 and #19.
-- **Red suites on `main`:** `course`, `dash`, `forest`, `forest_rooms` and
-  `next_levels` fail since #17 (preserve vertical momentum during dash, `e5fff81`):
-  some dash gaps and route links are no longer reachable. Fix this first (B0).
-  The other 21 suites pass, `world_skin_check` included.
+  six styles (press V in a level to cycle). Merged in #15 and #19. Dhoomketu uses his authored placeholder arena.
+- **All 29 suites pass** again after B0 (air dashes now exit at 780 px/s and ease
+  back to run speed, restoring the jump + dash reach lost in #17).
 - **No audio plays.** There are no `AudioStreamPlayer` nodes and no buses.
-  `assets/Audio/` is gitignored, so teammates don't have the music files.
+  The catalog and `assets/Audio/` files are tracked and shared; playback remains B4.
 - **Only export preset:** "Linux smoke test".
 
 ---
@@ -48,8 +46,8 @@ says *what* is left and *who* does it, and points there for the *how*.
 - [ ] **Music licensing.** The tracks in `assets/Audio/` are from Diamond Rush and
   Prince of Persia: The Forgotten Sands, which are copyrighted. Decide whether to
   ship them, which risks a takedown on itch.io, or swap them for royalty-free/CC0
-  music. Either way, un-ignore whatever we ship so the build and teammates get it.
-- [ ] **The twist.** Ravan is renamed to Swaminathan. Is that the twist? Or does the
+  music. The files are now tracked for team work; the shipping choice remains open.
+- [ ] **The twist.** The final boss is now named Swaminathan. Is that the twist? Or does the
   Robin fight / "Nathan Robin" reveal from the proposal stay in? The answer decides
   whether C6 happens.
 - [ ] **Story beats for the comic panels:** intro, before Khara, before Swaminathan,
@@ -67,7 +65,7 @@ Open the file, judge it, then reply "fine" or "redo X".
 
 - [ ] **The full cast:** open
   `C:\Users\solan\Desktop\git repos\siyaraj\docs\art\cast_review.html` in a browser
-  and flag every animation that looks bad, as you did with Ravan. Better still, play
+  and flag every animation that looks bad, as you did with Swaminathan. Better still, play
   the F6 scene `scenes/dev/cast_preview.tscn` to judge timing.
 - [ ] **The new Swaminathan state sprites (C1, PR #26):** check
   `docs\screenshots\swaminathan_states.png`, `swaminathan_fight.png` and
@@ -96,22 +94,22 @@ Open the file, judge it, then reply "fine" or "redo X".
 
 ### Code
 
-- [ ] **B0. Make the suites green again (do this first).** Since #17, dashing keeps
+- [x] **B0. Make the suites green again (do this first).** Since #17, dashing keeps
   vertical momentum, which shortened jump + dash reach. `dash_check` (220 and 250 px
   gaps), `course_check` (times out), `forest_check`, `forest_rooms_check` and
   `next_levels_check` (route links such as `Branch5 -> BranchExit`,
   `CrownRest -> OuterBranch1`, `UpperLanding -> DashLanding`) fail. Tune the dash so
   the old reach comes back while keeping the momentum feel. Don't move level geometry
   or weaken the checks. Run only those five suites, since each one is slow.
-- [ ] **B1. Rename Ravan → Swaminathan** in all player-facing text: boss bar,
-  completion screen, `showdown_name` in `scenes/main/palace.tscn`, the playtest menu
-  and docs. Renaming files and classes (`scripts/bosses/ravan/`, `ravan_check.gd`)
-  is optional. If it's done, do it before C1 starts so the two don't conflict.
-- [ ] **B2. Robin hints for the river and palace.** Only the forest has
-  `robin_hint.tscn` areas (8). Add hints at new hazards and before each boss. See
-  `docs/robin.md`.
-- [ ] **B3. Gamepad bindings.** `project.godot` has no joypad events. Add them for
-  every named action and show them on the controls panel.
+- [x] **B1. Rename the final boss to Swaminathan** in all player-facing text:
+  boss bar, intro/defeat banners, palace completion screen, playtest menu and
+  docs. Existing `ravan` filenames and node paths remain stable for C1.
+- [x] **B2. Robin hints for the river and palace.** Six hints in each level cover
+  crossings, recovery routes, cover and encounters. Final-diya hints introduce
+  Khara in the forest and Swaminathan in the palace. See `docs/robin.md`.
+- [x] **B3. Gamepad bindings.** Every custom action has joypad bindings; menus
+  confirm with A/Cross and pause/back with Start. The shared Controls panel shows
+  keyboard and controller columns. See `docs/ui.md`.
 - [ ] **B4. Audio plumbing:** Music and SFX buses, an `Audio` autoload with
   crossfading music, and per-bus volume sliders in `settings_panel`, keeping the
   existing master volume. Then play music per level, boss, title and ending.
@@ -175,13 +173,14 @@ Open the file, judge it, then reply "fine" or "redo X".
   What's left:
   - **User review** of the 11-state sheet and the fight/sever shots.
   - Confirm the Fury-uses-living-heads rule; playtest the 80 HP pool.
-- [ ] **C2. Wire Siya's 15 animations into the player.** Drive a sprite state machine
+- [x] **C2. Wire Siya's 15 animations into the player.** Drive a sprite state machine
   from the movement and combat state: idle, run, jump (frame picked by vertical
   velocity), dash (ground and air), lash, air lash (hit on frame 2), skyshot,
   chakri charge and release, hurt (with the existing blink), death, light diya and
   victory. Keep the 24×40 collider and scale 0.5, and flip with facing. All movement,
   dash, combat and weapons suites must still pass. Hand over a short clip or
-  screenshots for review.
+  screenshots for review. Done: `docs/player_animation.md` and
+  `docs/screenshots/siya/review-sheet.png`; talk/shocked have a cutscene API.
 - [ ] **C3. Wire Khara's sprite and her separate gada.** The gada pivots on its
   handle, uses the 26 hand registrations and hides during two-handed actions and
   defeat. It has to line up with the existing slam and shockwave hitboxes and the

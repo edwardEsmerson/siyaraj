@@ -3157,3 +3157,8 @@ text = "That brute is slow but hits hard. Wait for the swing, then strike."
 script = ExtResource("world_skin")
 biome = "forest"
 direction = "truckart"
+
+[node name="BossHint" parent="RobinHints" instance=ExtResource("5_robin_hint")]
+position = Vector2(21230, 430)
+text = "Khara waits ahead! Jump her ground waves, and strike after her heavy slam."
+duration = 5.0

@@ -45,7 +45,7 @@ waived further approval checkpoints and authorized agent selection/review/keep.
   missing attachment handling and rotation.
 - **All 19 repository regression suites passed after final export**: movement,
   dash, combat, course, flying enemy, ground shooter, brute, forest, forest rooms,
-  forest encounters, weapons, weapons map, forest weapons, Khara boss, Ravan,
+  forest encounters, weapons, weapons map, forest weapons, Khara boss, Swaminathan,
   next levels, playtest menu, menus and Robin.
 - **git diff --check passed.**
 - Actual Compatibility-renderer captures reviewed at scale 0.5:
@@ -69,6 +69,6 @@ Completed requests were preserved, unfinished canceled batch reservations were
 refunded, scratch/job files remained worktree-local, and the existing shared
 ₹25,000 Vertex cap was preserved. Imagegen tool usage is outside that local ledger.
 
-Gameplay wiring, background integration, general props/UI/effects and the Ravan
+Gameplay wiring, background integration, general props/UI/effects and the Swaminathan
 code rename remain separate work. The user can assess animation feel and timing
 in the F6 scene before gameplay integration.

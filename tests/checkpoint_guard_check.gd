@@ -5,6 +5,8 @@ func wait_for_cover(guard: CanvasLayer) -> void:
 	var saw_trailing_hem: bool = false
 	for frame in range(60):
 		if guard.curtains.coverage >= 1.0:
+			# Let the tween's finished continuation perform the covered teleport.
+			await ticks(1)
 			check(saw_trailing_hem, "Closing rail must reach the middle before the curved hem catches up")
 			return
 		if guard.curtains.coverage >= 0.72:

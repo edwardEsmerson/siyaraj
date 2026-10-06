@@ -8,7 +8,7 @@ Siyaraj is a Godot 4.7.2 2D platformer using the Compatibility renderer. Open `p
 - `scenes/` contains corresponding `.tscn` scenes. `scenes/dev/` holds the dev-only sandbox (one selectable enemy, for isolated encounter work) and the weapons playground; `scenes/bosses/` holds each boss and its isolated arena; `scenes/main/movement_playground.tscn` remains for movement tuning.
 - `resources/player/default_movement.tres` stores shared movement tuning.
 - `tests/` contains physics regression scripts; `tools/` contains smoke-build helpers.
-- Bosses (Khara, Ravan) share the generic `scenes/ui/boss_health_bar.tscn`; boss-specific UI is a small add-on node, not a second bar. Boss design docs live in `docs/bosses/`.
+- Bosses (Khara, Dhoomketu, Swaminathan) share the generic `scenes/ui/boss_health_bar.tscn`; boss-specific UI is a small add-on node, not a second bar. Boss design docs live in `docs/bosses/`.
 - Robin, Siya's bird companion, is `scenes/companions/robin.tscn`. Levels place `robin_hint.tscn` areas for his tips. See `docs/robin.md`.
 - `docs/team_workflow.md` records ownership and gameplay contracts. `asset-builder/` contains local sprite tooling and reference images; current gameplay uses scene/script placeholders. Art scale: 1 game unit = 2 art px, so generated sprites and backgrounds are placed at scale 0.5 (Siya's 80px sprite fits her 24x40 collider); sizes per role are in `asset-builder/skills/siyaraj-assets/SKILL.md`.
 
@@ -29,32 +29,12 @@ On the Windows workstation, use the existing executable at
 Run all regression checks from the repository root:
 
 ```sh
-godot --headless --path . --script res://tests/movement_check.gd
-godot --headless --path . --script res://tests/dash_check.gd
-godot --headless --path . --script res://tests/combat_check.gd
-godot --headless --path . --script res://tests/course_check.gd
-godot --headless --path . --script res://tests/flying_enemy_check.gd
-godot --headless --path . --script res://tests/ground_shooter_check.gd
-godot --headless --path . --script res://tests/brute_check.gd
-godot --headless --path . --script res://tests/forest_check.gd
-godot --headless --path . --script res://tests/forest_rooms_check.gd
-godot --headless --path . --script res://tests/forest_encounters_check.gd
-godot --headless --path . --script res://tests/checkpoint_guard_check.gd
-godot --headless --path . --script res://tests/weapons_check.gd
-godot --headless --path . --script res://tests/weapons_map_check.gd
-godot --headless --path . --script res://tests/forest_weapons_check.gd
-godot --headless --path . --script res://tests/khara_boss_check.gd
-godot --headless --path . --script res://tests/ravan_check.gd
-godot --headless --path . --script res://tests/next_levels_check.gd
-godot --headless --path . --script res://tests/playtest_menu_check.gd
-godot --headless --path . --script res://tests/menus_check.gd
-godot --headless --path . --script res://tests/robin_check.gd
-godot --headless --path . --script res://tests/campaign_flow_check.gd
-godot --headless --path . --script res://tests/palace_layout_check.gd
-godot --headless --path . --script res://tests/forest_iteration_check.gd
-godot --headless --path . --script res://tests/river_design_check.gd
-godot --headless --path . --script res://tests/world_skin_check.gd
+python tools/run_checks.py
 ```
+
+Set `GODOT_BIN` to your Godot 4.7.2 executable first. The runner discovers all
+29 suites and rejects script errors even when Godot exits with code zero.
+See [the shared baseline](docs/team_baseline.md) for platform commands.
 
 `GODOT_BIN=godot ./tools/smoke_build.sh` imports resources and exports `builds/linux/siyaraj.pck`. `GODOT_BIN=godot ./tools/run_smoke_build.sh --headless --quit-after 120` launches that pack outside the editor. Substitute the executable path when needed. Standalone Linux exports require matching export templates.
 

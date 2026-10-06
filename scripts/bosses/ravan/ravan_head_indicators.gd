@@ -1,5 +1,5 @@
 extends Control
-## Ravan-only add-on drawn above the generic BossHealthBar: one pip per head, each
+## Swaminathan-only add-on drawn above the generic BossHealthBar: one pip per head, each
 ## sitting over its tenth of the bar, so the pips go dark right to left as the bar
 ## drains. Lit in its attack colour while a head attacks. Below them: the phase
 ## and the number of heads left. Health itself is shown by

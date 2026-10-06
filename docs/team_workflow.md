@@ -1,14 +1,20 @@
 # Today's workflow
 
+Use `main` as the shared starting point. See [the team baseline](team_baseline.md)
+for the branch audit, new-worktree commands and complete regression runner.
+
 ## Agreed rules
 
 - Dash moves horizontally in Siya's facing direction.
 - Dash preserves vertical momentum, with normal rise/fall gravity throughout.
+  An air dash ends at `air_dash_exit_speed` (780 px/s) and eases back to run
+  speed, which restores the reach the hover used to give. Dash before the apex
+  for the longest jumps.
 - Dash starts on the ground or in the air. One air dash, restored on landing;
   ground dashes keep the air charge and use a short cooldown instead.
 - Dash stops at solid walls. It grants i-frames for its duration plus a short
   grace: `take_damage` is ignored and enemy shots pass through. Damage sources
-  may query `is_invulnerable()`. Boss hazards (Khara and Ravan) route through
+  may query `is_invulnerable()`. Boss hazards (Khara, Dhoomketu and Swaminathan) route through
   `take_damage`, so they respect the i-frames too.
 - Dash cancels any sparkler phase; an attack pressed mid-dash swings when it ends.
 - Dash preserves chakri charge progress. Charging pauses during the dash and
@@ -140,6 +146,7 @@ playtest before integrating the sparkler attack.
   `resources/player/default_movement.tres` through the Inspector.
 - Dash suspends gravity, locks its direction, consumes one air charge, and
   restores the charge on landing. Holding Shift does not automatically dash again.
+  (Gravity during dash was later restored; see Agreed rules.)
 - Solid walls end the dash immediately. Normal dash completion returns to running
   speed; releasing movement then uses the existing deceleration.
 - Siya turns gold with an orange exhaust during dash and dims when its charge
@@ -387,12 +394,14 @@ original player scene. `forest_weapons_check.gd` validates this integration.
   There are no player, main-scene or forest changes. The full moveset is in
   `docs/bosses/boss1-khara.md`.
 - Khara has 24 health, poise (no knockback or interruption) and no contact damage.
-  - Gada slam: 0.85 s orange wind-up with a ground zone, 2 damage, then a 1.1 s
+  - Gada slam: 0.85 s orange wind-up with a ground zone, 1 damage, then a 1.1 s
     recovery. It releases a low shockwave that Siya can jump.
   - Ladi: 1.2 s fuse, then pops travel along the ground toward Siya's side.
     Yellow chevrons show the direction.
-  - Phase 2 starts at 12 health: faster, double shockwave, a second ladi from the far
-    wall, and a slam followed by a ladi.
+  - Phase 2 starts at 12 health: faster movement and slams, shorter ladi fuses
+    and longer strings. Both phases keep one forward shockwave and one ladi.
+  - Slams return to idle. Khara waits for existing hazards to finish before choosing
+    another attack, including the ladi fuse, pops and cleanup.
 - `scenes/ui/boss_health_bar.tscn` is the generic bar shared by every boss. Call
   `bind(boss)` on any node with `max_health`, `health` and `health_changed`. It
   also uses `died`, `phase_changed`, `boss_name` and `boss_title` when they exist;
@@ -400,13 +409,14 @@ original player scene. `forest_weapons_check.gd` validates this integration.
 - Hazards join the `boss_hazards` group. Ladis also join `boss_ladis`. Defeat frees them all.
 - `tests/khara_boss_check.gd` covers ladi direction, fuse safety, sequential pops,
   wall clipping, jumping a ladi, slam tell, damage, reach and recovery, shockwaves,
-  the 50% phase change, the phase 2 pincer, AI choices, real weapon damage, the health
-  bar, defeat and restart.
+  the 50% phase change, single phase 2 hazards, attack spacing, AI choices, real weapon
+  damage, the health bar, defeat and restart.
 
 Manual checkpoint: play the Khara arena with F6. Check that the orange and yellow tells
-read clearly at gameplay speed, and that the phase 2 pincer is fair with three health.
+read clearly at gameplay speed, and that dashing behind Khara stays safe in both phases
+with three health.
 
-## Boss 2 (Ravan) handoff
+## Final boss (Swaminathan) handoff
 
 - Combat owns `scenes/bosses/ravan/` and `scripts/bosses/ravan/`. The isolated
   `scenes/bosses/ravan/ravan_arena.tscn` uses the forest player with all three
@@ -415,11 +425,11 @@ read clearly at gameplay speed, and that the phase 2 pincer is fair with three h
   severs the rightmost living head for good; only living heads attack, from fixed
   origins on the body sprite. Phase changes (7 and 3 heads left) start Dashanan
   Fury pillar waves, one wave per living head.
-- Ravan follows the generic boss contract: `max_health`, `health`,
+- Swaminathan follows the generic boss contract: `max_health`, `health`,
   `health_changed`, `phase_changed` and `died`, plus `head_lost`. His
   `BossUI/HealthBar` is an instance of `scenes/ui/boss_health_bar.tscn` with a tick
   per head; `BossUI/HeadIndicators` (`ravan_head_indicators.gd`) is a small
-  Ravan-only add-on showing one pip per head over its tenth of the bar, the phase
+  Swaminathan-only add-on showing one pip per head over its tenth of the bar, the phase
   and the heads left.
 - Hazards (pillars, beams, lightning, shockwaves) and the shared enemy projectiles
   all damage Siya through `take_damage`, so dash i-frames apply.
@@ -428,5 +438,14 @@ read clearly at gameplay speed, and that the phase 2 pincer is fair with three h
   phases, Fury safe lanes with the living heads, dash i-frames, the generic boss
   bar, defeat and restart.
 
-Manual checkpoint: play the Ravan arena with F6. Check that the head pips read
+Manual checkpoint: play the Swaminathan arena with F6. Check that the head pips read
 clearly above the boss bar and that Fury lanes are fair without dashing.
+
+## Siya animation handoff (C2)
+
+`scenes/player/player.tscn` now shares the approved Siya art across every player
+variant. `player_visuals.gd` owns presentation only; movement and combat keep their
+existing authority. Weapon events emit `weapon_used`, successful diya interactions
+request a cosmetic pose, and visuals subscribe to course/boss completion. No main
+scene or movement controller changes are required. See `docs/player_animation.md`
+for timing, cutscene hooks, screenshots and the new `player_visuals_check.gd` suite.

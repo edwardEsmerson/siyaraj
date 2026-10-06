@@ -17,6 +17,8 @@ border_color = Color(0.8, 0.8, 0.8, 1)
 script = ExtResource("1_main")
 restart_delay = 0.35
 next_level = "res://scenes/main/palace.tscn"
+showdown_scene = "res://scenes/main/river_showdown.tscn"
+showdown_name = "Dhoomketu"
 completion_title = "RIVER COMPLETE"
 completion_detail = "Temple steps reached"
 completion_status = "Enter: palace / R: replay"
@@ -35,6 +37,13 @@ position = Vector2(480, 270)
 [node name="Backdrop" type="ColorRect" parent="HUD"]
 offset_right = 960.0
 offset_bottom = 116.0
+mouse_filter = 2
+color = Color(0.06, 0.06, 0.06, 0.93)
+
+[node name="StatusBackdrop" type="ColorRect" parent="HUD"]
+offset_top = 466.0
+offset_right = 960.0
+offset_bottom = 540.0
 mouse_filter = 2
 color = Color(0.06, 0.06, 0.06, 0.93)
 
