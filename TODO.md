@@ -14,11 +14,11 @@ says *what* is left and *who* does it, and points there for the *how*.
 
 ## Where things stand
 
-- **Playable route:** title → forest → Khara → river → palace → Ravan → ending.
+- **Playable route:** title → forest → Khara → river → palace → Swaminathan → ending.
   Each boss is a separate showdown scene. A "TRAIL CLEARED / Enter: face Khara"
   screen leads into it, not an arena inside the level.
 - **Done:** title screen, themed pause menu, controls panel, settings (master volume
-  and fullscreen), debug-only playtest tools, Robin as a forest guide, blocked-diya
+  and fullscreen), debug-only playtest tools, Robin as a guide in all three levels, blocked-diya
   curtain transition (placeholder art), and `docs/.gdignore`.
 - **Art exists but isn't in the game.** 73 approved animation sets (195 frames)
   sit in `assets/sprites/` for Siya, Robin, Raj, all four enemies, Khara with her
@@ -52,7 +52,7 @@ says *what* is left and *who* does it, and points there for the *how*.
   Prince of Persia: The Forgotten Sands, which are copyrighted. Decide whether to
   ship them, which risks a takedown on itch.io, or swap them for royalty-free/CC0
   music. Either way, un-ignore whatever we ship so the build and teammates get it.
-- [ ] **The twist.** Ravan is renamed to Swaminathan. Is that the twist? Or does the
+- [ ] **The twist.** The final boss is now named Swaminathan. Is that the twist? Or does the
   Robin fight / "Nathan Robin" reveal from the proposal stay in? The answer decides
   whether C6 happens.
 - [ ] **Story beats for the comic panels:** intro, before Khara, before Swaminathan,
@@ -70,9 +70,9 @@ Open the file, judge it, then reply "fine" or "redo X".
 
 - [ ] **The full cast:** open
   `C:\Users\solan\Desktop\git repos\siyaraj\docs\art\cast_review.html` in a browser
-  and flag every animation that looks bad, as you did with Ravan. Better still, play
+  and flag every animation that looks bad, as you did with Swaminathan. Better still, play
   the F6 scene `scenes/dev/cast_preview.tscn` to judge timing.
-- [ ] **The current Ravan/Swaminathan sprite is horrible.** It's already flagged and
+- [ ] **The current Swaminathan sprite is horrible.** It's already flagged and
   being replaced (C1). Don't wire the current `swaminathan` / `swaminathan-head`
   art into the fight.
 - [ ] **Every art-integration PR** from B and C must include in-engine screenshots in
@@ -106,15 +106,15 @@ Open the file, judge it, then reply "fine" or "redo X".
   `CrownRest -> OuterBranch1`, `UpperLanding -> DashLanding`) fail. Tune the dash so
   the old reach comes back while keeping the momentum feel. Don't move level geometry
   or weaken the checks. Run only those five suites, since each one is slow.
-- [ ] **B1. Rename Ravan → Swaminathan** in all player-facing text: boss bar,
-  completion screen, `showdown_name` in `scenes/main/palace.tscn`, the playtest menu
-  and docs. Renaming files and classes (`scripts/bosses/ravan/`, `ravan_check.gd`)
-  is optional. If it's done, do it before C1 starts so the two don't conflict.
-- [ ] **B2. Robin hints for the river and palace.** Only the forest has
-  `robin_hint.tscn` areas (8). Add hints at new hazards and before each boss. See
-  `docs/robin.md`.
-- [ ] **B3. Gamepad bindings.** `project.godot` has no joypad events. Add them for
-  every named action and show them on the controls panel.
+- [x] **B1. Rename the final boss to Swaminathan** in all player-facing text:
+  boss bar, intro/defeat banners, palace completion screen, playtest menu and
+  docs. Existing `ravan` filenames and node paths remain stable for C1.
+- [x] **B2. Robin hints for the river and palace.** Six hints in each level cover
+  crossings, recovery routes, cover and encounters. Final-diya hints introduce
+  Khara in the forest and Swaminathan in the palace. See `docs/robin.md`.
+- [x] **B3. Gamepad bindings.** Every custom action has joypad bindings; menus
+  confirm with A/Cross and pause/back with Start. The shared Controls panel shows
+  keyboard and controller columns. See `docs/ui.md`.
 - [ ] **B4. Audio plumbing:** Music and SFX buses, an `Audio` autoload with
   crossfading music, and per-bus volume sliders in `settings_panel`, keeping the
   existing master volume. Then play music per level, boss, title and ending.

@@ -96,7 +96,7 @@ max_health = 5
 offset_left = 32.0
 offset_top = 8.0
 theme_override_font_sizes/font_size = 22
-text = "SIYARAJ / boss 2: Ravan arena"
+text = "SIYARAJ / boss 2: Swaminathan arena"
 
 [node name="Controls" type="Label" parent="HUD"]
 offset_left = 32.0
@@ -109,7 +109,7 @@ offset_left = 32.0
 offset_top = 60.0
 theme_override_font_sizes/font_size = 13
 text = "Only a glowing head can be hurt. Knock out enough heads before they regrow
-to expose the amrit in Ravan's navel, then strike it."
+to expose the amrit in Swaminathan's navel, then strike it."
 
 [node name="HealthStatus" type="Label" parent="HUD"]
 offset_left = 32.0

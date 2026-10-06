@@ -40,7 +40,7 @@ func press(action: StringName) -> void:
 func run_checks() -> void:
 	await reset_playground()
 	check(player.is_on_floor(), "Playground player must spawn on solid ground")
-	var shot_keys := InputMap.action_get_events("skyshot")
+	var shot_keys := InputMap.action_get_events("skyshot").filter(func(event: InputEvent) -> bool: return event is InputEventKey)
 	check(shot_keys.size() == 1 and shot_keys[0] is InputEventKey and shot_keys[0].physical_keycode == KEY_L, "Skyshot must be bound to L")
 	dummy.set_physics_process(false)
 	player.position.x = dummy.position.x - 42

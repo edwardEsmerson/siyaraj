@@ -13,7 +13,7 @@ Esc pauses any level or standalone playground. Resume, go back to the last lit
 diya, restart, change settings, quit to the title, or (debug builds) return to
 level select. Time and gameplay stop while paused. The forest exit offers Enter
 to face Khara, whose victory leads to the river. River completion leads to the
-palace, whose exit offers Ravan's showdown; defeating Ravan and pressing Enter
+palace, whose exit offers Swaminathan's showdown; defeating Swaminathan and pressing Enter
 opens the ending screen. Boss death retries the fight with fresh resources.
 Terrain-only launches skip bosses. See [level iteration](level_iteration.md).
 
@@ -32,14 +32,14 @@ controllers and tuning resources:
 | Melee guard | Dev sandbox preset: chase, attack timing and protection |
 | Dev sandbox | `scenes/dev/sandbox.tscn` with the encounter and loadout chosen on its root in the inspector |
 | Khara arena | Boss 1: gada slam shockwave, ladi firecrackers and enrage (`scenes/bosses/khara_arena.tscn`) |
-| Ravan arena | Boss 2: lunging heads, regrowth, amrit window and Dashanan Fury (`scenes/bosses/ravan/ravan_arena.tscn`) |
+| Swaminathan arena | Boss 2: lunging heads, regrowth, amrit window and Dashanan Fury (`scenes/bosses/ravan/ravan_arena.tscn`) |
 | Original combat course | Traversal, combat and exit unlock |
 | Terrain sampler | Stairs, narrow tops, dash gaps and descending landings |
 | River stepping stones | Actual river route starting at the ferry checkpoint |
 | Palace gallery and roofs | Actual palace route starting below the gallery climb |
 | Canopy climb | Forest nest room, alternating branches, local diyas and return door |
 | Forest showdown | Campaign Khara fight and victory navigation |
-| Palace showdown | Campaign Ravan fight and victory navigation |
+| Palace showdown | Campaign Swaminathan fight and victory navigation |
 
 The four enemy snapshots open the one dev sandbox with that enemy preselected
 (through `Sandbox.next_encounter`, which survives R and death reloads); the

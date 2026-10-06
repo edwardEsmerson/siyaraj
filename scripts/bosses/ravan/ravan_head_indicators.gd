@@ -1,5 +1,5 @@
 extends Control
-## Ravan-only add-on drawn above the generic BossHealthBar: one pip per head,
+## Swaminathan-only add-on drawn above the generic BossHealthBar: one pip per head,
 ## the current phase, the knockout goal and an AMRIT EXPOSED cue. Core health
 ## itself is shown by `scenes/ui/boss_health_bar.tscn`.
 const RavanHead = preload("res://scripts/bosses/ravan/ravan_head.gd")

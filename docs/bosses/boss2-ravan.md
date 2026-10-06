@@ -1,22 +1,26 @@
-# Boss 2: Ravan (Dashanan)
+# Boss 2: Swaminathan (Dashanan)
 
 Play the isolated arena with F6: `scenes/bosses/ravan/ravan_arena.tscn`.
-It is not wired into level progression.
+The campaign enters the same fight through `scenes/main/palace_showdown.tscn`.
+Player-facing text uses Swaminathan; the existing `ravan` filenames and `Ravan`
+node paths remain stable for tools and future art integration.
+Rendered examples: [palace exit](../screenshots/palace-swaminathan-exit.png) and
+[boss intro and health bar](../screenshots/swaminathan-showdown.png).
 Regression check: `godot --headless --path . --script res://tests/ravan_check.gd`.
 
 ## Concept
 
-Ravan, king of Lanka, is the final major boss. He is known as Dashanan, the
-ten-headed one. In the Ramayana, his heads grow back each time Ram cuts one
-off. Vibhishan then tells Ram that Ravan keeps the amrit, the nectar of
-immortality, in his navel. Ram's arrow to the navel ends the fight.
+Swaminathan, king of Lanka, is the final major boss. He is known as Dashanan, the
+ten-headed one. His fight draws on the Ramayana's ten-headed king: severed heads
+grow back, and the amrit, the nectar of immortality, is hidden in the navel.
+An arrow to the navel ends that fight.
 
 The fight follows this story. Each of the ten heads attacks, and each can be
 knocked out. A knocked-out head grows back unless Siya knocks out enough heads
-fast enough. When that happens, Ravan staggers and his navel opens. That is the
+fast enough. When that happens, Swaminathan staggers and his navel opens. That is the
 only point where his health bar (the "core") takes damage.
 
-Ravan is stationary and stands at the centre of a 960 x 540 arena. Siya
+Swaminathan is stationary and stands at the centre of a 960 x 540 arena. Siya
 passes through his body. The project has no contact damage, so only his
 attacks hurt her.
 
@@ -35,7 +39,7 @@ attacks hurt her.
    its attack. Hits that leave it standing do not interrupt the attack.
 5. **Regrowth.** A grey ring on a knocked-out head drains toward regrowth.
    When it empties, the head flashes white and returns with full health.
-6. **Exposure.** When enough heads are knocked out at once, Ravan staggers.
+6. **Exposure.** When enough heads are knocked out at once, Swaminathan staggers.
    His navel opens and the amrit glows green. Only the navel can be damaged,
    and it is at standing sparkler and skyshot height. Knocked-out heads stay
    down while the navel is open.
@@ -82,7 +86,7 @@ applies.
 - **Spread shot** reuses `enemy_projectile.tscn`, tinted rose: 210 px/s with
   0.22 rad between shots. It fires 3 shots, or 5 in phase 3.
 
-Head layout (global coordinates in the arena; Ravan's root is at (480, 430)):
+Head layout (global coordinates in the arena; Swaminathan's root is at (480, 430)):
 the homes form an arc from x=282 to x=678, at y=250 (centre heads) to y=280
 (outer heads). The heads lunge to y=335 to 365. A jumping lash reaches every
 lunging head, and a skyshot fired at the top of a jump hits the outer heads.
@@ -101,7 +105,7 @@ and its super move are played.
 The attack itself always lasts 0.5 s. The same head never activates twice in
 a row.
 
-A phase change closes the navel and regrows all heads. Ravan roars for 1.2 s,
+A phase change closes the navel and regrows all heads. Swaminathan roars for 1.2 s,
 showing the banner `PHASE N - DASHANAN AWAKENS`, then performs Dashanan Fury.
 Phase 3 repeats Fury every 30 s of normal fighting. All values are in the
 `PHASES` table and the exports in `scripts/bosses/ravan/ravan_boss.gd`.
@@ -118,14 +122,14 @@ x=40 to x=920.
 | 1.4 s | Wave 1 telegraph (1.6 s). Eight lanes show a bright red floor stripe and a faint pillar outline. The two safe lanes glow teal with a `SAFE` label, and their heads go dark with closed eyes |
 | 3.0 s | Fire pillars cover the full height of the red lanes for 0.4 s, then a 0.3 s pause |
 | Each later wave | The safe gap moves. Telegraph is 1.0 s in phase 2 and 0.85 s in phase 3, then 0.4 s of fire and a 0.3 s pause |
-| End | 0.6 s outro. The tint fades and Ravan is spent: the navel opens for a 2.5 s bonus window |
+| End | 0.6 s outro. The tint fades and Swaminathan is spent: the navel opens for a 2.5 s bonus window |
 
 Safe gaps, in lane order:
 
 - Phase 2 (11.1 s): [4,5] → [1,2] → [4,5] → [7,8] → [5,6]
 - Phase 3 (12.1 s): [4,5] → [7,8] → [4,5] → [1,2] → [3,4] → [6,7]
 
-The first gap is under Ravan, so Siya reaches it from anywhere in the arena.
+The first gap is under Swaminathan, so Siya reaches it from anywhere in the arena.
 Each later gap moves at most three lanes, about 190 px from the middle of the
 old gap to inside the new one. That takes about 0.8 s at the 240 px/s run
 speed, within the 1.15 to 1.3 s available. `tests/ravan_check.gd` checks this
@@ -134,11 +138,11 @@ Reading the safe gap and running to it is the only answer.
 
 ## Death sequence
 
-The final navel hit removes every Ravan projectile and hazard still in the
-arena, so no stray hit can follow the win. The banner shows `RAVAN FALLS`.
+The final navel hit removes every Swaminathan projectile and hazard still in the
+arena, so no stray hit can follow the win. The banner shows `SWAMINATHAN FALLS`.
 The heads burst from the outside in, 0.18 s apart, followed by a large
 `DEFEATED` burst after 0.8 s. The body dims and the `died` signal fires.
-The arena then shows `Ravan defeated! R to replay.`
+The arena then shows `Swaminathan defeated! Enter: continue to the ending / R: replay.`
 
 ## Integration notes
 
@@ -150,18 +154,18 @@ The arena then shows `Ravan defeated! R to replay.`
 - Heads, the navel and the chest armour are StaticBody2D nodes on the enemy
   body layer (bit 4). The existing lash, skyshot and chakri therefore work
   without any changes to the player. The armour has no `take_damage`, so it
-  absorbs skyshots that hit Ravan's chest.
+  absorbs skyshots that hit Swaminathan's chest.
 - Signals: `health_changed`, `phase_changed`, `exposure_started`,
   `exposure_ended`, `fury_started`, `fury_ended` and `died`. `max_health` and
-  `health` alias `max_core_health` and `core_health`, so Ravan meets the
+  `health` alias `max_core_health` and `core_health`, so Swaminathan meets the
   generic boss contract.
 - The arena overrides the player's `max_health` to 5 on the instance only. No
   player code changes.
 - Core health uses the shared `scenes/ui/boss_health_bar.tscn` (instanced as
   `BossUI/HealthBar`, with tick marks at both phase boundaries).
-  `BossUI/HeadIndicators` (`ravan_head_indicators.gd`) adds the Ravan-only row
+  `BossUI/HeadIndicators` (`ravan_head_indicators.gd`) adds the Swaminathan-only row
   above it: one pip per head, the phase, the knockout goal and `AMRIT EXPOSED`.
-- Ground dash i-frames apply to every Ravan hazard and projectile, which makes
+- Ground dash i-frames apply to every Swaminathan hazard and projectile, which makes
   Fury and lightning easier to dodge. The safe-gap timing does not rely on it.
 
 ## Art handoff: sprites and animations

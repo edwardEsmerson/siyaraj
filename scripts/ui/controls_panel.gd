@@ -1,5 +1,5 @@
 extends PanelContainer
-## Key list read from the InputMap, so it stays right when bindings change.
+## Keyboard and controller bindings read from the InputMap.
 ## Shared by the title screen and the pause menu; emits `closed` on Back.
 
 signal closed
@@ -12,23 +12,45 @@ const ACTIONS: Array[Array] = [
 	[&"attack", "Sparkler lash"],
 	[&"skyshot", "Skyshot"],
 	[&"special", "Chakri"],
-	[&"interact", "Light diya / enter"],
-	[&"ui_cancel", "Pause"],
+	[&"interact", "Light diya"],
+	[&"ui_accept", "Confirm / continue"],
+	[&"ui_cancel", "Pause / back"],
+	[&"restart", "Restart level"],
+	[&"cycle_world_kit", "Cycle scenery (dev)"],
 ]
+
+const JOYPAD_NAMES: Dictionary = {
+	JOY_BUTTON_A: "A / Cross",
+	JOY_BUTTON_B: "B / Circle",
+	JOY_BUTTON_X: "X / Square",
+	JOY_BUTTON_Y: "Y / Triangle",
+	JOY_BUTTON_LEFT_SHOULDER: "LB / L1 (hold)",
+	JOY_BUTTON_RIGHT_SHOULDER: "RB / R1",
+	JOY_BUTTON_BACK: "View / Select",
+	JOY_BUTTON_START: "Menu / Start",
+	JOY_BUTTON_RIGHT_STICK: "Right stick click",
+	JOY_BUTTON_DPAD_LEFT: "D-pad left",
+	JOY_BUTTON_DPAD_RIGHT: "D-pad right",
+}
 
 
 func _ready() -> void:
 	var grid: GridContainer = $Column/Grid
+	for heading in ["Action", "Keyboard", "Controller"]:
+		_add_label(grid, heading, true)
 	for entry in ACTIONS:
-		var keys := Label.new()
-		keys.text = key_text(entry[0])
-		keys.theme_type_variation = &"KeyLabel"
-		keys.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-		grid.add_child(keys)
-		var action := Label.new()
-		action.text = entry[1]
-		grid.add_child(action)
+		_add_label(grid, entry[1])
+		_add_label(grid, key_text(entry[0]))
+		_add_label(grid, joypad_text(entry[0]))
 	$Column/Back.pressed.connect(closed.emit)
+
+
+func _add_label(grid: GridContainer, text: String, heading: bool = false) -> void:
+	var label := Label.new()
+	label.text = text
+	if heading:
+		label.theme_type_variation = &"KeyLabel"
+	grid.add_child(label)
 
 
 func open() -> void:
@@ -47,3 +69,19 @@ static func key_text(action: StringName) -> String:
 		if not text.is_empty() and text not in names:
 			names.append(text)
 	return " / ".join(names)
+
+
+static func joypad_text(action: StringName) -> String:
+	var names: PackedStringArray = []
+	for event in InputMap.action_get_events(action):
+		var text := ""
+		if event is InputEventJoypadButton:
+			text = JOYPAD_NAMES.get(event.button_index, event.as_text())
+		elif event is InputEventJoypadMotion:
+			if event.axis == JOY_AXIS_LEFT_X:
+				text = "Left stick %s" % ("left" if event.axis_value < 0.0 else "right")
+			else:
+				text = event.as_text()
+		if not text.is_empty() and text not in names:
+			names.append(text)
+	return " or ".join(names)

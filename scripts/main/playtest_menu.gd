@@ -14,7 +14,7 @@ const SNAPSHOTS: Array[Dictionary] = [
 	{"label": "Enemy / melee guard", "path": SANDBOX, "encounter": Sandbox.Encounter.GUARD},
 	{"label": "Dev / sandbox (inspector encounter)", "path": SANDBOX, "encounter": -1},
 	{"label": "Boss / Khara arena", "path": "res://scenes/bosses/khara_arena.tscn"},
-	{"label": "Boss / Ravan arena", "path": "res://scenes/bosses/ravan/ravan_arena.tscn"},
+	{"label": "Boss / Swaminathan arena", "path": "res://scenes/bosses/ravan/ravan_arena.tscn"},
 	{"label": "Mechanic / original combat course", "path": "res://scenes/main/main.tscn"},
 	{"label": "Terrain / sampler", "path": "res://scenes/main/terrain_sampler.tscn", "terrain": true},
 	{"label": "Terrain / river stepping stones", "path": "res://scenes/main/river.tscn", "terrain": true, "section": 1},

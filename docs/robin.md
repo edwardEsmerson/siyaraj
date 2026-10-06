@@ -26,7 +26,16 @@ Instance `scenes/companions/robin_hint.tscn` in a level and set its `text`. The
 trigger is a tall 64x480 column above the node, and its shape is local to each
 instance, so it can be resized in the editor. `point` is where Robin hovers, relative
 to the hint. The forest's hints are under `RobinHints` in `scenes/levels/forest.tscn`.
-The river and palace have no hints yet.
+The river and palace each have six hints under their own `RobinHints`: crossings,
+recovery routes, cover and encounters, then the final diya. The forest's last diya
+introduces Khara's ground waves; the palace's last diya introduces Swaminathan's
+active heads and core. Hints use action names where possible so they also make
+sense on a controller; the Controls panel lists both keyboard and gamepad inputs.
+
+Rendered examples: [river cover hint](screenshots/river-robin-hint.png) and
+[palace boss hint](screenshots/palace-robin-hint.png). The regression suite enters
+each new trigger with Siya and checks its speech, one-shot behavior and persistence
+after reloading the level.
 
 ## Art
 

@@ -17,10 +17,10 @@ border_color = Color(0.8, 0.8, 0.8, 1)
 script = ExtResource("1_main")
 restart_delay = 0.35
 showdown_scene = "res://scenes/main/palace_showdown.tscn"
-showdown_name = "Ravan"
+showdown_name = "Swaminathan"
 completion_title = "PALACE COMPLETE"
-completion_detail = "Ravan awaits in Lanka"
-completion_status = "The palace is clear. Enter: face Ravan / R: replay the palace."
+completion_detail = "Swaminathan awaits in Lanka"
+completion_status = "The palace is clear. Enter: face Swaminathan / R: replay the palace."
 
 [node name="TestCourse" parent="." instance=ExtResource("2_course")]
 

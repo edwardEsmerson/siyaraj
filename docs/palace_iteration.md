@@ -9,7 +9,7 @@ The palace keeps the 14400 px length and five existing manual E checkpoints. Nat
 | Broken roofs, 5540 to 8910 | A high lookout shows the descending roof chain. Lower recovery courts let a missed jump become a second route rather than an immediate death. A guard waits on the wide landing with space to dash through its swing. |
 | Inner hall, 8910 to 11260 | Column bases separate the guard court from the shooter's hall. A second balcony lets players cross above both fights and choose where to drop. Melee remains possible on the entire lower route. |
 | Sanctum, 11260 to 13400 | Five steps lead to a broad raised brute platform. The final roofs descend toward the throne; lower recovery ledges reconnect at the last checkpoint. |
-| Throne approach, 13400 to 14400 | An enemy-free diya pocket precedes the throne stairs and exit. Campaign integration sends the player to the existing Ravan arena after completing this approach. |
+| Throne approach, 13400 to 14400 | An enemy-free diya pocket precedes the throne stairs and exit. Campaign integration sends the player to the existing Swaminathan arena after completing this approach. |
 
 The five diya positions remain `(3060,430)`, `(5340,430)`, `(8600,430)`, `(11060,430)` and `(13600,430)`, preserving developer snapshot starts. Enemy patrol and detection ranges remain outside those pockets. No encounter requires ammo or a ready chakri. Upper routes are optional; the ordinary ground route reaches every enemy.
 

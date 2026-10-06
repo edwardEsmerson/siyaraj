@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" path="res://assets/ui/divider.png" id="2_divider"]
 
 [node name="ControlsPanel" type="PanelContainer"]
-custom_minimum_size = Vector2(340, 0)
+custom_minimum_size = Vector2(680, 0)
 script = ExtResource("1_controls")
 
 [node name="Column" type="VBoxContainer" parent="."]
@@ -26,7 +26,7 @@ stretch_mode = 3
 layout_mode = 2
 theme_override_constants/h_separation = 18
 theme_override_constants/v_separation = 4
-columns = 2
+columns = 3
 
 [node name="Back" type="Button" parent="Column"]
 layout_mode = 2

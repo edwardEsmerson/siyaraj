@@ -1,5 +1,5 @@
 extends StaticBody2D
-## The amrit in Ravan's navel. Only collides with player attacks while exposed.
+## The amrit in Swaminathan's navel. Only collides with player attacks while exposed.
 const ENEMY_BODY_LAYER: int = 4
 
 var exposed: bool = false

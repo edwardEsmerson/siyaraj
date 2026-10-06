@@ -26,6 +26,33 @@ pink `#d62876`, marigold `#ffb026`, turquoise `#3fd0c9`, cream `#fff1d6`.
 Fonts are OFL (`assets/fonts/*-OFL.txt`): Yatra One for display text, Pixelify Sans
 for everything else.
 
+## Controller controls
+
+The shared Controls panel reads keyboard and joypad events from the InputMap and
+shows Xbox / PlayStation button names. Bindings accept any connected controller.
+Menus use D-pad or left stick navigation, A/Cross to confirm, and Menu/Start to
+pause or go back. B/Circle only interacts in gameplay, so lighting a diya never
+opens the pause menu. Keyboard bindings remain available.
+
+| Action | Controller |
+| --- | --- |
+| Move | Left stick or D-pad |
+| Jump / confirm / continue | A / Cross |
+| Rocket dash | RB / R1 |
+| Sparkler lash | X / Square |
+| Skyshot | Y / Triangle |
+| Chakri | Hold and release LB / L1 |
+| Light diya / use door | B / Circle |
+| Pause / back | Menu / Start |
+| Restart level or snapshot | View / Select |
+| Cycle scenery (developer tool) | Right stick click |
+
+The left stick has a 0.2 deadzone. Controller checks in `tests/menus_check.gd`
+cover axis direction and drift, menu navigation, confirm, pause/resume and the
+interaction/pause separation. Physical controller feel still needs a playtest.
+The rendered [Controls panel](screenshots/controls-gamepad.png) fits the 960 x 540
+viewport on both the title and pause menus.
+
 ## Settings
 
 `GameSettings` (autoload, `scripts/main/game_settings.gd`) saves fullscreen and

@@ -82,7 +82,7 @@ func check_structure() -> void:
 	var bar: Control = boss.get_node("BossUI/HealthBar")
 	check(bar.boss == boss and bar.visible, "Boss health bar must bind to Ravan")
 	check(bar.get_script().resource_path == "res://scripts/ui/boss_health_bar.gd", "Ravan must use the generic BossHealthBar")
-	check(bar.max_health == 30 and bar.health == 30 and bar.name_label.text == "RAVAN, DASHANAN", "Generic bar must read Ravan's core health and title")
+	check(bar.max_health == 30 and bar.health == 30 and bar.name_label.text == "SWAMINATHAN, DASHANAN", "Generic bar must read Ravan's core health and title")
 	check(bar.phase_thresholds.size() == 2 and is_equal_approx(bar.phase_thresholds[0], 20.0 / 30.0) and is_equal_approx(bar.phase_thresholds[1], 10.0 / 30.0), "Generic bar must mark both Ravan phase boundaries")
 	var indicators: Control = boss.get_node("BossUI/HeadIndicators")
 	check(indicators.boss == boss and indicators.visible, "Head indicators must bind to Ravan")
@@ -320,6 +320,7 @@ func check_death_and_restart() -> void:
 	boss.get_node("Core").take_damage(2, Vector2.ZERO)
 	await ticks(1)
 	check(boss.state == boss.State.DYING and attacks().is_empty(), "Final navel hit must start the death sequence and clear attacks")
+	check(boss.banner.text == "SWAMINATHAN FALLS", "Defeat banner must name Swaminathan")
 	await ticks(200)
 	check(boss.state == boss.State.DEAD and events.defeated, "Death sequence must finish and emit died")
 	var bar: Control = boss.get_node("BossUI/HealthBar")
@@ -327,7 +328,7 @@ func check_death_and_restart() -> void:
 	check(not boss.get_node("BossUI/HeadIndicators").visible, "Head indicators must hide on death")
 	for slot in boss.heads:
 		check(slot.state == slot.HeadState.DESTROYED, "All ten heads must be destroyed in the death sequence")
-	check(current_scene.get_node("HUD/CombatStatus").text.contains("defeated"), "Arena must announce victory")
+	check(current_scene.get_node("HUD/CombatStatus").text.contains("Swaminathan defeated"), "Arena must announce Swaminathan's defeat")
 	var old_scene := current_scene
 	var restart := InputEventAction.new()
 	restart.action = "restart"

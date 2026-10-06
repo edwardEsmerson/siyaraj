@@ -27,7 +27,7 @@ color = Color(0.4, 0.4, 0.4, 1)
 color = Color(0.4, 0.4, 0.4, 1)
 
 [node name="Title" parent="HUD" index="0"]
-text = "SIYARAJ / palace showdown: Ravan"
+text = "SIYARAJ / palace showdown: Swaminathan"
 
 [node name="CampaignFlow" parent="." instance=ExtResource("2")]
 boss_path = NodePath("../Ravan")

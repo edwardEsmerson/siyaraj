@@ -1,5 +1,5 @@
 extends Node2D
-## Ravan, Dashanan. Ten heads take turns attacking and grow back after being
+## Swaminathan, Dashanan. Ten heads take turns attacking and grow back after being
 ## knocked out. Knocking out enough heads at once exposes the amrit in his navel,
 ## the only place he can be hurt. See docs/bosses/boss2-ravan.md.
 const Burst = preload("res://scripts/effects/burst.gd")
@@ -40,7 +40,7 @@ const FURY_OUTRO: float = 0.6
 const FURY_COLOR: Color = Color(1.0, 0.3, 0.12)
 const SAFE_COLOR: Color = Color(0.35, 1.0, 0.85)
 
-@export var boss_name: String = "RAVAN"
+@export var boss_name: String = "SWAMINATHAN"
 @export var boss_title: String = "Dashanan"
 @export var max_core_health: int = 30
 @export var phase_two_health: int = 20
@@ -110,12 +110,12 @@ func _ready() -> void:
 	# Artists drop a texture or AnimatedSprite2D into Body/Art; the placeholder hides.
 	var has_art := (body_art is Sprite2D and (body_art as Sprite2D).texture != null) or (body_art is AnimatedSprite2D and (body_art as AnimatedSprite2D).sprite_frames != null)
 	$Body/Placeholder.visible = not has_art
-	# Safe lanes draw above Ravan's body; the first gap sits right under him.
+	# Safe lanes draw above Swaminathan's body; the first gap sits right under him.
 	_lane_overlay.z_index = 4
 	_lane_overlay.draw.connect(_draw_safe_lanes)
 	add_child(_lane_overlay)
 	_state_remaining = intro_time
-	_show_banner("RAVAN, LORD OF LANKA", intro_time + 0.5)
+	_show_banner("SWAMINATHAN, LORD OF LANKA", intro_time + 0.5)
 
 
 func phase_settings() -> Dictionary:
@@ -346,7 +346,7 @@ func _end_fury() -> void:
 	current_safe_lanes = []
 	fury_waves = []
 	fury_ended.emit()
-	# Spent from the super move, Ravan briefly leaves his navel open.
+	# Spent from the super move, Swaminathan briefly leaves his navel open.
 	_begin_exposure(fury_bonus_exposure)
 
 
@@ -432,7 +432,7 @@ func _begin_death() -> void:
 	# Victory should never be followed by a stray hit.
 	for attack in get_tree().get_nodes_in_group("ravan_attacks"):
 		attack.queue_free()
-	_show_banner("RAVAN FALLS", 4.0)
+	_show_banner("SWAMINATHAN FALLS", 4.0)
 
 
 func _process_dying() -> void:

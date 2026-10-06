@@ -1,5 +1,5 @@
 extends StaticBody2D
-## One of Ravan's ten heads. Each head is its own hurtbox and art slot; the boss
+## One of Swaminathan's ten heads. Each head is its own hurtbox and art slot; the boss
 ## decides when it activates. Only a lit (active) head can be hurt.
 const Burst = preload("res://scripts/effects/burst.gd")
 
